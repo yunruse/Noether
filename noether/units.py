@@ -37,31 +37,48 @@ dimensions = {
 
 powerify = str.maketrans('-0123456789', '⁻⁰¹²³⁴⁵⁶⁷⁸⁹')
 
+# properties modifiable in repl
+
 precision = 3
+showUnits = True
 
 # used for display
 # dimension_dict: (name, unit)
 fundamental = {}
 
-class Unit:
-    __slots__ = 'factor dim symbols'.split()
+class Unit(float):
+    __slots__ = 'dim symbols'.split()
+    
     def __repr__(self):
+        # get scientific notation
         
-        # try to get best SI (derived) unit
+        exp, man = exp_mantissa(self)
+        if 0 < exp < 3:
+            num = str(round(self, precision-exp))
+            exp = None
+        else:
+            num = str(round(man, precision))
+        
+        if exp:
+            num += '×10' + str(exp).translate(powerify)
+        
+        if not showUnits:
+            return num
+
+        # get unit
         
         name, fUnit = fundamental.get(self.dim, ('', None))
+        unitsym = ''
         
         if all(i == 0 for i in self.dim):
             name = ' (unitless)'
         elif fUnit:
             # express in derived unit
             if fUnit.symbols:
-                fUnit = fUnit.symbols[0]
-            else:
-                fUnit = None
+                unitsym = fUnit.symbols[0]
             name = ' ({})'.format(name)
         
-        if fUnit is None:
+        if not unitsym:
             # express in fundamental units
             dims = []
             for i, sym in enumerate(dimensions.values()):
@@ -72,105 +89,69 @@ class Unit:
                     sym += str(v).translate(powerify)
                 dims.append(sym)
             
-            fUnit = '·'.join(dims)
+            unitsym = '·'.join(dims)
         
-        # get scientific notation
-        
-        exp, man = exp_mantissa(self.factor)
-        num = str(round(man, precision))
-        
-        if exp:
-            num += '×10' + str(exp).translate(powerify)
-        
-        return '{} {}{}'.format(num, fUnit, name)
-
-    def __float__(self):
-        return float(self.factor)
-
-    def __int__(self):
-        return int(self.factor)
-
-    @property
-    def imag(self):
-        return 0
-
-    @property
-    def real(self):
-        return float(self)
+        return '{} {}{}'.format(num, unitsym, name)
     
-    def isBaseUnit(self):
-        return self.factor == 1
-    
-    def __init__(self, dim, *symbols, _factor=1, measure=None):
-    
-        self.factor = _factor
+    def __new__(cls, dim, *symbols, _factor=1, measure=None):
+        num = dim if isinstance(dim, Unit) else _factor
         
         if isinstance(dim, Unit):
-            self.dim = dim.dim
-            self.factor = dim.factor
+            dim = dim.dim
         elif isinstance(dim, str):
-            self.dim = [0] * len(dimensions)
-            for i, d in enumerate(dimensions):
-                if d == dim:
-                    self.dim[i] = 1
-            self.dim = tuple(self.dim)
-        else:
-            self.dim = dim
-        
+            dim = tuple(int(d == dim) for d in dimensions)
+
+        self = float.__new__(cls, num)
+        self.dim = dim
         self.symbols = symbols
         if measure is not None:
             fundamental[self.dim] = (measure, self)
 
+        return self
+
     # Dimension-changing operators
 
-    def __mul__(self, other):
+    def __mul__(self, other, f=float.__mul__, k=1):
+        dim = self.dim
         if isinstance(other, Unit):
             dim = tuple(
-                self.dim[i] + other.dim[i]
+                self.dim[i] + k * other.dim[i]
                 for i in range(len(dimensions)))
-            return Unit(
-                dim,
-                _factor=self.factor*other.factor)
-        else:
-            return Unit(
-                self.dim,
-                _factor=self.factor*other)
-
-    def __rmul__(self, other):
-        return self * other
-
-    def __pow__(self, exp):
-        return Unit(
-            tuple(v*exp for v in self.dim),
-            _factor=self.factor**exp)
+        
+        return Unit(dim, _factor=f(float(self), float(other)))
 
     def __truediv__(self, other):
-        if isinstance(other, Unit):
-            dim = tuple(
-                self.dim[i] - other.dim[i]
-                for i in range(len(dimensions)))
-            return Unit(
-                dim,
-                _factor=self.factor/other.factor)
-        else:
-            return Unit(
-                self.dim, _factor=self.factor/other)
+        return self.__mul__(other, float.__truediv__, k=-1)
+
+    def __floordiv__(self, other):
+        return self.__mul__(other, float.__floordiv__, k=-1)
+
+    __rmul__ = __mul__
+
+    def __pow__(self, exp):
+        factor = float.__pow__(self, exp)
+        return Unit(
+            tuple(v*exp for v in self.dim),
+            _factor=factor)
 
     def __rtruediv__(self, other):
+        factor = float.__truediv__(float(other), float(self))
         return Unit(
             tuple(-v for v in self.dim),
-            _factor=other/self.factor)
+            _factor=factor)
+
+    # Addition
 
     def __neg__(self):
-        return Unit(self.dim, _factor=-self.factor)
+        return Unit(self.dim, _factor=float.__neg__(self))
 
     def __add__(self, other):
+        factor = float.__add__(self, other)
         if isinstance(other, Unit):
             if other.dim != self.dim:
                 raise ValueError('Inequal units!')
-            return Unit(self.dim, _factor=self.factor+other.factor)
-        else:
-            return Unit(self.dim, _factor=self.factor+other)
+        
+        return Unit(self.dim, _factor=factor)
 
     __radd__ = __add__
 
