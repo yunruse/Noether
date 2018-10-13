@@ -37,22 +37,52 @@ dimensions = {
 
 powerify = str.maketrans('-0123456789', '⁻⁰¹²³⁴⁵⁶⁷⁸⁹')
 
-_default_dim = {i: 0 for i in dimensions}
-
 precision = 3
 
-class Unit:    
+# used for display
+# dimension_dict: (name, unit)
+fundamental = {}
+
+class Unit:
     __slots__ = 'factor dim symbols'.split()
     def __repr__(self):
-        dims = [
-            dimensions[i] + str(v).translate(powerify)*(v!=1)
-            for i, v in self.dim.items()
-            if v != 0]
+        
+        # try to get best SI (derived) unit
+        
+        name, fUnit = fundamental.get(self.dim, ('', None))
+        
+        if all(i == 0 for i in self.dim):
+            name = ' (unitless)'
+        elif fUnit:
+            # express in derived unit
+            if fUnit.symbols:
+                fUnit = fUnit.symbols[0]
+            else:
+                fUnit = None
+            name = ' ({})'.format(name)
+        
+        if fUnit is None:
+            # express in fundamental units
+            dims = []
+            for i, sym in enumerate(dimensions.values()):
+                v = self.dim[i]
+                if v == 0:
+                    continue
+                elif v != 1:
+                    sym += str(v).translate(powerify)
+                dims.append(sym)
+            
+            fUnit = '·'.join(dims)
+        
+        # get scientific notation
+        
         exp, man = exp_mantissa(self.factor)
         num = str(round(man, precision))
+        
         if exp:
             num += '×10' + str(exp).translate(powerify)
-        return '{} {}'.format(num, '·'.join(dims))
+        
+        return '{} {}{}'.format(num, fUnit, name)
 
     def __float__(self):
         return float(self.factor)
@@ -71,24 +101,35 @@ class Unit:
     def isBaseUnit(self):
         return self.factor == 1
     
-    def __init__(self, dim, *symbols, _factor=1):
+    def __init__(self, dim, *symbols, _factor=1, measure=None):
+    
+        self.factor = _factor
+        
         if isinstance(dim, Unit):
             self.dim = dim.dim
             self.factor = dim.factor
+        elif isinstance(dim, str):
+            self.dim = [0] * len(dimensions)
+            for i, d in enumerate(dimensions):
+                if d == dim:
+                    self.dim[i] = 1
+            self.dim = tuple(self.dim)
         else:
-            if isinstance(dim, str):
-                dim = {**_default_dim, dim: 1}
             self.dim = dim
-            self.factor = _factor
-
+        
         self.symbols = symbols
+        if measure is not None:
+            fundamental[self.dim] = (measure, self)
 
     # Dimension-changing operators
 
     def __mul__(self, other):
         if isinstance(other, Unit):
+            dim = tuple(
+                self.dim[i] + other.dim[i]
+                for i in range(len(dimensions)))
             return Unit(
-                {i: self.dim[i] + other.dim[i] for i in self.dim},
+                dim,
                 _factor=self.factor*other.factor)
         else:
             return Unit(
@@ -100,13 +141,16 @@ class Unit:
 
     def __pow__(self, exp):
         return Unit(
-            {i: v*exp for i, v in self.dim.items()},
+            tuple(v*exp for v in self.dim),
             _factor=self.factor**exp)
 
     def __truediv__(self, other):
         if isinstance(other, Unit):
+            dim = tuple(
+                self.dim[i] - other.dim[i]
+                for i in range(len(dimensions)))
             return Unit(
-                {i: self.dim[i] - other.dim[i] for i in self.dim},
+                dim,
                 _factor=self.factor/other.factor)
         else:
             return Unit(
@@ -114,7 +158,7 @@ class Unit:
 
     def __rtruediv__(self, other):
         return Unit(
-            {i: -v for i, v in self.dim.items()},
+            tuple(-v for v in self.dim),
             _factor=other/self.factor)
 
     def __neg__(self):
@@ -137,40 +181,75 @@ class Unit:
         
 class Units:
     # Fundemental SI units
-    Ampere = Unit('current', 'A')
-    Kelvin = Unit('length', 'k')
-    Second = Unit('time', 's')
-    Meter = Metre = Unit('length', 'm')
-    Kilogram = Unit('mass', 'kg')
-    Candela = Unit('luminosity', 'cd')
-    Mole = Unit('substance', 'mol')
+    Ampere = Unit('current', 'A', measure='current')
+    Kelvin = Unit('temperature', 'k', measure='temperature')
+    Second = Unit('time', 's', measure='time')
+    Meter = Metre = Unit('length', 'm', measure='length')
+    Kilogram = Unit('mass', 'kg', measure='mass')
+    Candela = Unit('luminosity', 'cd', measure='luminosity')
+    Mole = Unit('substance', 'mol', measure='substance')
     
-    # Derives SI Units
-    Hertz = Unit(1 / Second, 'Hz')
+    # Unnamed time derivatives
+    for i, m in enumerate((
+        'speed', 'acceleration', 'snap', 'crackle', 'pop'
+        ), start=1):
+        Unit(Metre / Second**i, measure=m)
+    
+    # SI derived units
+    
+    Hertz = Unit(1 / Second, 'Hz', measure='frequency')
     Radian = Unit(Metre / Metre, 'rad')
-    Steradian = Unit(Metre*Metre / Metre*Metre, 'rad')
+    Steradian = Unit(Radian**2, 'rad')
 
-    Newton = Unit(Kilogram * Metre / Second ** 2, 'N')
-    Pascal = Unit(Newton / Metre ** 2, 'Pa')
+    Newton = Unit(
+        Kilogram * Metre / Second ** 2,
+        'N', measure='force')
+    Pascal = Unit(
+        Newton / Metre ** 2,
+        'Pa', measure='pressure')
 
-    Joule = Unit(Newton * Metre, 'J')
-    Watt = Unit(Joule / Second, 'W')
+    Joule = Unit(
+        Newton * Metre,
+        'J', measure='energy')
+    Watt = Unit(
+        Joule / Second,
+        'W', measure='power')
 
-    Coulomb = Unit(Ampere * Second, 'C')
-    Volt = Unit(Watt / Ampere, 'V')
-    Farad = Unit(Coulomb / Volt, 'F')
-    Ohm = Unit(Volt / Ampere, 'Ω')
-    Siemens = Unit(1 / Ohm, 'S')
-    Weber = Unit(Joule / Ampere, 'Wb')
-    Tesla = Unit(Weber / (Metre ** 2), 'T')
-    Henry = Unit(Ohm * Second, 'H')
+    Coulomb = Unit(
+        Ampere * Second,
+        'C', measure='charge')
+    Volt = Unit(
+        Watt / Ampere,
+        'V', measure='voltage')
+    Farad = Unit(
+        Coulomb / Volt,
+        'F', measure='capacitance')
+    Ohm = Unit(
+        Volt / Ampere,
+        'Ω', measure='resistance')
+    Siemens = Unit(
+        1 / Ohm,
+'S', measure='conductance')
+    Weber = Unit(
+        Joule / Ampere,
+        'Wb', measure='magnetic flux')
+    Tesla = Unit(
+        Weber / (Metre ** 2),
+        'T', measure='magnetic flux density')
+    Henry = Unit(
+        Ohm * Second,
+        'H', measure='inductance')
 
-    Lumen = Unit(Candela * Steradian, 'lm')
-    Lux = Unit(Lumen / Metre ** 2, 'lx')
+    Lumen = Unit(
+        Candela * Steradian,
+        'lm', measure='luminous flux')
+    Lux = Unit(Lumen / Metre ** 2, 'lx', measure='illuminance')
     Becquerel = Unit(Hertz, 'Bq')
-    Gray = Unit(Joule / Kilogram, 'Gy')
+    Gray = Unit(Joule / Kilogram, 'Gy', measure='dose')
     Sievert = Unit(Gray, 'Sv')
-    Katal = Unit(Mole / Second, 'kat')
+    Katal = Unit(
+        Mole / Second,
+        'kat', measure='catalytic activity')
 
     # Conventional SI-accepted units
     
