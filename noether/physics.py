@@ -9,7 +9,7 @@ from .trigonometry import rad, deg, TrigonometryState as _trigState
 from .helpers import clear
 from .constants import *
 
-import units
+from . import units
 
 import numpy as np
 
