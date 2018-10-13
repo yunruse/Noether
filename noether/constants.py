@@ -8,6 +8,9 @@ circle = tau * Radian
 # Physical constants
 
 c = 299_792_458 * Metre / Second
+Lightsecond = c * Second
+Lightyear = Unit(c * Year, 'ly')
+
 grav = 6.67408e-11 * (Metre / Kilogram)**2
 h = 6.626_070_040e-34 * Joule * Second
 hbar = h / tau
@@ -20,7 +23,8 @@ k_e  = 1 / (2 * tau * e_0)
 # Particle + chemical constants
 
 e = 1.60217646e-19 * Coulomb
-electronvolt = e * Volt
+eV = electronvolt = e * Volt
+eVm = eV/c**2
 
 m_e = 9.109_383_56e-31 * Kilogram
 m_p = 1.672_621_898e-27 * Kilogram
