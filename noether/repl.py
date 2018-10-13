@@ -1,5 +1,6 @@
 import sys
 import types
+import functools
 
 #% Function analysis
 
@@ -182,18 +183,26 @@ def rep(_globals, _locals):
         print(e, file=sys.stderr)
 
 # exit magic to pass through
-class ExitValue(int):
-    pass
-
-def exitter(code=0):
-    return ExitValue(code)
+class ExitValue():
+    __slots__ = 'value'.split()
+    
+    @functools.wraps(exit)
+    def __init__(self, value=0):
+        self.value = value
 
 def repl(_globals=None, _locals=None):
     _globals = _globals or globals()
     _locals = _locals or dict()
-    _locals['exit'] = exitter
+    _locals['exit'] = ExitValue
     
     while True:
         exitVal = rep(_globals, _locals)
-        if exitVal is not None:
-            return (exitVal, _globals, _locals)
+        if exitVal is None:
+            print()
+            continue
+        
+        if isinstance(exitVal.value, Exception):
+            # user wishes to view traceback
+            raise exitVal.value
+        
+        return (exitVal.value, _globals, _locals)
