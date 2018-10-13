@@ -1,6 +1,6 @@
 from math import pi
 
-from units import *
+from .units import *
 
 tau = pi * 2
 circle = tau * Radian
