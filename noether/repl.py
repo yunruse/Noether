@@ -1,4 +1,3 @@
-import physics
 import sys
 import types
 
@@ -198,9 +197,3 @@ def repl(_globals=None, _locals=None):
         exitVal = rep(_globals, _locals)
         if exitVal is not None:
             return (exitVal, _globals, _locals)
-
-if __name__ == '__main__':
-    print('Noether\n')
-    ns = dict(physics.__dict__)
-    ns['__name__'] = '__main__'
-    exitCode, g, l = repl(physics.__dict__)
