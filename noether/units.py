@@ -41,6 +41,7 @@ powerify = str.maketrans('-0123456789', '⁻⁰¹²³⁴⁵⁶⁷⁸⁹')
 
 precision = 3
 showUnits = True
+showDimension = True
 
 # used for display
 # dimension_dict: (name, unit)
@@ -48,50 +49,72 @@ fundamental = {}
 
 class Unit(float):
     __slots__ = 'dim symbols'.split()
+
+    def _measureUnit(self):
+        if all(i == 0 for i in self.dim):
+            return 'unitless', None
+        
+        measure, unit = fundamental.get(self.dim, (None, None))
+        return measure, unit
+
+    @property
+    def measure(self):
+        return self._measureUnit()[0]
+
+    @property
+    def baseUnit(self):
+        return self._measureUnit()[1]
+
+    def isBaseUnit(self):
+        return self.baseUnit() == self
+
+    def asFundamentalUnits(self):
+        dims = []
+        for i, sym in enumerate(dimensions.values()):
+            v = self.dim[i]
+            if v == 0:
+                continue
+            elif v != 1:
+                sym += str(v).translate(powerify)
+            dims.append(sym)
+        
+        return '·'.join(dims)
     
     def __repr__(self):
         # get scientific notation
         
         exp, man = exp_mantissa(self)
         if 0 < exp < 3:
+            # easily naturalised
             num = str(round(self, precision-exp))
             exp = None
         else:
             num = str(round(man, precision))
         
         if exp:
+            # unicode exponents
             num += '×10' + str(exp).translate(powerify)
         
         if not showUnits:
             return num
 
-        # get unit
+        # get units
+        measure, base_unit = self._measureUnit()
+        unit_symbol = ''
+
+        if base_unit:
+            if base_unit.symbols:
+                unit_symbol = base_unit.symbols[0]
+            if showDimension:
+                measure = ' ({})'.format(measure)
+            else:
+                measure = ''
         
-        name, fUnit = fundamental.get(self.dim, ('', None))
-        unitsym = ''
-        
-        if all(i == 0 for i in self.dim):
-            name = ' (unitless)'
-        elif fUnit:
-            # express in derived unit
-            if fUnit.symbols:
-                unitsym = fUnit.symbols[0]
-            name = ' ({})'.format(name)
-        
-        if not unitsym:
+        if not unit_symbol:
             # express in fundamental units
-            dims = []
-            for i, sym in enumerate(dimensions.values()):
-                v = self.dim[i]
-                if v == 0:
-                    continue
-                elif v != 1:
-                    sym += str(v).translate(powerify)
-                dims.append(sym)
-            
-            unitsym = '·'.join(dims)
+            unit_symbol = asFundamentalUnits(self)
         
-        return '{} {}{}'.format(num, unitsym, name)
+        return '{} {}{}'.format(num, unit_symbol, name)
     
     def __new__(cls, dim, *symbols, _factor=1, measure=None):
         num = dim if isinstance(dim, Unit) else _factor
