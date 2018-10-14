@@ -115,7 +115,7 @@ class Unit(float):
             # express in fundamental units
             unit_symbol = asFundamentalUnits(self)
         
-        return '{} {}{}'.format(num, unit_symbol, name)
+        return '{} {}{}'.format(num, unit_symbol, measure)
     
     def __new__(cls, dim, *symbols, _factor=1, measure=None):
         num = dim if isinstance(dim, Unit) else _factor
