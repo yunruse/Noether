@@ -45,7 +45,7 @@ showUnits = True
 showDimension = True
 
 # used for display
-# dimension_dict: (name, unit)
+# {dimension_tuple: (name, base_unit or None)}
 fundamental = {}
 
 class Unit(float):
@@ -55,8 +55,7 @@ class Unit(float):
         if all(i == 0 for i in self.dim):
             return 'unitless', None
         
-        measure, unit = fundamental.get(self.dim, (None, None))
-        return measure, unit
+        return fundamental.get(self.dim, (None, None))
 
     @property
     def measure(self):
@@ -126,7 +125,10 @@ class Unit(float):
         self.dim = dim
         self.symbols = symbols
         if measure is not None:
-            fundamental[self.dim] = (measure, self)
+            # do not add unit if not given a symbol,
+            # as only the name of the measure is being introduced
+            # eg speed, area, etc
+            fundamental[self.dim] = (measure, self if symbols else None)
 
         return self
 
