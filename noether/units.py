@@ -1,6 +1,7 @@
 '''Noether: International System of Units dimensionality object'''
 
 import math
+import operator
 
 prefixes = dict(
     y=-24, z=-21, a=-18, f=-15, p=-12, n=-9, μ=-6, m=-3,
@@ -163,25 +164,31 @@ class Unit(float):
             tuple(-v for v in self.dim),
             _factor=factor)
 
-    # Addition
+    # Linear operations
+    
+    __neg__ = lambda s: Unit(s.dim, _factor=-float(self))
 
-    def __neg__(self):
-        return Unit(self.dim, _factor=float.__neg__(self))
+    def __cmp(self, other, f):
+        if isinstance(other, Unit) and self.dim != other.dim:
+            raise ValueError('Inequal units {} and {}.'.format(
+                self.asFundamentalUnits(), other.asFundamentalUnits()))
 
+        return f(float(self), float(other))
+    
+    __eq__ = lambda s, o: s.__cmp(o, operator.eq)
+    __ne__ = lambda s, o: s.__cmp(o, operator.ne)
+    __lt__ = lambda s, o: s.__cmp(o, operator.lt)
+    __le__ = lambda s, o: s.__cmp(o, operator.le)
+    __ge__ = lambda s, o: s.__cmp(o, operator.ge)
+    __gt__ = lambda s, o: s.__cmp(o, operator.gt)
+    
+    __add__ = __radd__ = lambda s, o: Unit(s.dim, _factor=s.__cmp(o, operator.add))
+    __sub__ = __rsub__ = lambda s, o: Unit(s.dim, _factor=s.__cmp(o, operator.sub))
+
+
+    
     def __add__(self, other):
-        factor = float.__add__(self, other)
-        if isinstance(other, Unit):
-            if other.dim != self.dim:
-                raise ValueError('Inequal units!')
-        
-        return Unit(self.dim, _factor=factor)
-
-    __radd__ = __add__
-
-    def __sub__(self, other):
-        return self + -other
-
-    __rsub__ = __sub__
+        return Unit(self.dim, self.__cmp(other, operator.add))
         
 class Units:
     # Fundemental SI units
