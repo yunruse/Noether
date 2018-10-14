@@ -101,19 +101,16 @@ class Unit(float):
 
         # get units
         measure, base_unit = self._measureUnit()
-        unit_symbol = ''
 
-        if base_unit:
-            if base_unit.symbols:
-                unit_symbol = base_unit.symbols[0]
-            if showDimension:
-                measure = ' ({})'.format(measure)
-            else:
-                measure = ''
+        if showDimension and measure:
+            measure = ' ({})'.format(measure)
+        else:
+            measure = ''
         
-        if not unit_symbol:
-            # express in fundamental units
-            unit_symbol = asFundamentalUnits(self)
+        if base_unit:
+            unit_symbol = base_unit.symbols[0]
+        else:
+            unit_symbol = self.asFundamentalUnits()
         
         return '{} {}{}'.format(num, unit_symbol, measure)
     
