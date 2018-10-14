@@ -205,6 +205,9 @@ class Units:
         'speed', 'acceleration', 'snap', 'crackle', 'pop'
         ), start=1):
         Unit(Metre / Second**i, measure=m)
+
+    Unit(Metre**2, measure='area')
+    Unit(Metre**3, measure='volume')
     
     # SI derived units
     
