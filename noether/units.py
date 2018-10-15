@@ -10,7 +10,9 @@ prefixes = dict(
 )
 
 def exp_mantissa(num, base=10):
-    exp = math.floor(math.log(num, base))
+    if num == 0:
+        return 1, 0
+    exp = math.floor(math.log(abs(num), base))
     mantissa = num / (10 ** exp)
     return exp, mantissa
 
@@ -85,7 +87,7 @@ class Unit(float):
         # get scientific notation
         
         exp, man = exp_mantissa(self)
-        if 0 < exp < 3:
+        if -3 <= exp <= 2:
             # easily naturalised
             num = str(round(self, precision-exp))
             exp = None
