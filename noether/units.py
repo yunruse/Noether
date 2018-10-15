@@ -166,14 +166,14 @@ class Unit(float):
 
     # Linear operations
     
-    __neg__ = lambda s: Unit(s.dim, _factor=-float(self))
+    __neg__ = lambda s: Unit(s.dim, _factor=-float(s))
 
     def __cmp(self, other, f):
         if isinstance(other, Unit) and self.dim != other.dim:
             raise ValueError('Inequal units {} and {}.'.format(
                 self.asFundamentalUnits(), other.asFundamentalUnits()))
-
-        return f(float(self), float(other))
+        
+        return f(self.real, other.real)
     
     __eq__ = lambda s, o: s.__cmp(o, operator.eq)
     __ne__ = lambda s, o: s.__cmp(o, operator.ne)
@@ -184,11 +184,6 @@ class Unit(float):
     
     __add__ = __radd__ = lambda s, o: Unit(s.dim, _factor=s.__cmp(o, operator.add))
     __sub__ = __rsub__ = lambda s, o: Unit(s.dim, _factor=s.__cmp(o, operator.sub))
-
-
-    
-    def __add__(self, other):
-        return Unit(self.dim, self.__cmp(other, operator.add))
         
 class Units:
     # Fundemental SI units
