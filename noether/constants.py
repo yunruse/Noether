@@ -11,7 +11,7 @@ c = 299_792_458 * Metre / Second
 Lightsecond = c * Second
 Lightyear = Unit(c * Year, 'ly')
 
-grav = 6.67408e-11 * (Metre / Kilogram)**2
+grav = 6.67408e-11 * Newton * Metre**2 / Kilogram**2
 h = 6.626_070_040e-34 * Joule * Second
 hbar = h / tau
 
