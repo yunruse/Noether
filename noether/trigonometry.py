@@ -15,7 +15,7 @@ class TrigonometryState:
         return x if self.radians else rad(x)
     
     sin = wraps(math.sin)(lambda s, x: math.sin(s._in(x)))
-    cos = wraps(math.cos)(lambda s, x: math.cps(s._in(x)))
+    cos = wraps(math.cos)(lambda s, x: math.cos(s._in(x)))
     tan = wraps(math.tan)(lambda s, x: math.tan(s._in(x)))
     
     asin = wraps(math.asin)(lambda s, x: s._out(math.asin(x)))
