@@ -2,6 +2,7 @@
 
 import math
 import operator
+from .helpers import intify
 
 prefixes = dict(
     y=-24, z=-21, a=-18, f=-15, p=-12, n=-9, μ=-6, m=-3,
@@ -154,7 +155,7 @@ class Unit(float):
     def __pow__(self, exp):
         factor = float.__pow__(self, exp)
         return Unit(
-            tuple(v*exp for v in self.dim),
+            tuple(intify(v*exp) for v in self.dim),
             _factor=factor)
 
     def __rtruediv__(self, other):

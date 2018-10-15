@@ -10,3 +10,7 @@ class _asNamed:
 @_asNamed
 def clear():
     return '\n' * 200
+
+def intify(x):
+    i = int(x)
+    return i if x == i else x
