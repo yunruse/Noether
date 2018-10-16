@@ -203,6 +203,7 @@ class Units:
         ), start=1):
         Unit(Metre / Second**i, measure=m)
 
+    Unit(Kilogram * Metre / Second, measure='momentum')
     Unit(Metre**2, measure='area')
     Unit(Metre**3, measure='volume')
     
