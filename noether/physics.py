@@ -20,6 +20,8 @@ trig = _trigState(useRadians=True)
 for name in 'sin cos tan asin acos atan atan2'.split():
     globals()[name] = getattr(trig, name)
 
+del name
+
 #% Calculus
 
 def sqrt(x):
