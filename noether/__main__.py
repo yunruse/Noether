@@ -1,23 +1,49 @@
 import sys
 import os
+import argparse
 
 from . import physics
 from . import repl
 from .language import Noether
 
-def main(argv):
-    print('Noether\n')
+parser = argparse.ArgumentParser(
+    description='Python Physics REPL',
+)
+
+parser.add_argument(
+    'file', nargs='?',
+    help='File to execute.')
+
+parser.add_argument(
+    '-c', dest='command', type=str, default='',
+    help='program passed in as string')
+
+parser.add_argument(
+    '-i', dest='interactive', action='store_true',
+    help='enter REPL if given commands')
+
+def main(args):
     
     ns = dict(physics.__dict__)
-    
-    if len(argv):
-        fname = os.path.join(os.getcwd(), argv[0])
+    ns['__name__'] = '__main__'
+
+    doRepl = not (args.command or args.file)
+
+    if doRepl:
+        print('Noether\n')
+
+    if args.command:
+        Noether.exec(args.command, globals=ns)
+    elif args.file:
+        fname = os.path.join(os.getcwd(), args.file)
         if os.path.isfile(fname):
             with open(fname, encoding='utf8') as f:
                 code = ''.join(f.readlines())
                 Noether.exec(code, globals=ns)
+    else:
+        interactive = True
     
-    ns['__name__'] = '__main__'
-    repl.repl(ns)
+    if doRepl or args.interactive:
+        repl.repl(ns)
 
-main(sys.argv[1:])
+main(parser.parse_args())
