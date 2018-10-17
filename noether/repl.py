@@ -2,6 +2,8 @@ import sys
 import types
 import functools
 
+from .language import Noether
+
 #% Function analysis
 
 def analyse(f):
@@ -153,7 +155,7 @@ def rep(_globals, _locals):
         wasEvaluated = False
         if len(lines) == 1:
             try:
-                val = eval(lines[0], _globals, _locals)
+                val = Noether.eval(lines[0], _globals, _locals)
                 wasEvaluated = True
             except SyntaxError:
                 pass
@@ -173,8 +175,9 @@ def rep(_globals, _locals):
             else:
                 print(repr(val))
             
-        else:                
-            exec('\n'.join(lines), _globals, _locals)
+        else:
+            lines = '\n'.join(lines)
+            Noether.exec(lines, _globals, _locals)
         
     except KeyboardInterrupt:
         pass
