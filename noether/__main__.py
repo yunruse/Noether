@@ -2,7 +2,7 @@ import sys
 import os
 import argparse
 
-from . import physics
+from . import namespace
 from . import repl
 from .language import Noether
 
@@ -24,7 +24,7 @@ parser.add_argument(
 
 def main(args):
     
-    ns = dict(physics.__dict__)
+    ns = dict(namespace.__dict__)
     ns['__name__'] = '__main__'
 
     doRepl = not (args.command or args.file)
