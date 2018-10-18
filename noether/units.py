@@ -2,7 +2,7 @@
 
 import math
 import operator
-from .helpers import intify
+from .helpers import intify, sign
 
 prefixes = dict(
     y=-24, z=-21, a=-18, f=-15, p=-12, n=-9, μ=-6, m=-3,
@@ -28,6 +28,39 @@ def prefixify(num):
 
     return num, ''
 
+def scinot(num, precision=4):
+    '''Return number in scientific notation'''
+
+    # -1, 0, 1: special cases
+    if num == sign(num):
+        return str(num)
+    
+    exp, man = exp_mantissa(num)
+    
+    if -3 <= exp <= 2:
+        # easily naturalised
+        precision -= exp
+        exp = None
+        man = num
+    
+    man = intify(man)
+    
+    if man == 1:
+        num = ''
+    elif man == -1:
+        num = '-'
+    elif isinstance(man, int):
+        num = str(man)
+    else:
+        num = str(round(man, precision))
+    
+    if exp:
+        # unicode exponents
+        if abs(man) != 1:
+            num += '×'
+        num += '10' + str(exp).translate(powerify)
+
+    return num
 
 dimensions = {
     'length': 'm',
@@ -41,24 +74,50 @@ dimensions = {
 
 powerify = str.maketrans('-0123456789', '⁻⁰¹²³⁴⁵⁶⁷⁸⁹')
 
-# properties modifiable in repl
+class UnitMeta(type):
+    def _dU_get(cls):
+        return list(cls._displayUnits.values())
+    
+    def _dU_set(cls, bases):
+        cls._displayUnits.clear()
+        if not hasattr(bases, '__iter__'):
+            bases = [bases]
+        for unit in bases:
+            cls._displayUnits[unit.dim] = unit
+    
+    def _dU_del(cls):
+        cls._displayUnits.clear()
+    
+    displayUnits = property(_dU_get, _dU_set, _dU_del)
 
-precision = 3
-showUnits = True
-showDimension = True
-
-# used for display
-# {dimension_tuple: (name, base_unit or None)}
-fundamental = {}
-
-class Unit(float):
+class Unit(float, metaclass=UnitMeta):
     __slots__ = 'dim symbols'.split()
-
+    
+    precision = 3
+    showUnits = True
+    showDimension = True
+    
+    # Display dictionaries
+    
+    # Used to obtain symbol and measure.
+    # The unit is used so repr(Joule) doesn't just
+    # respond with a remarkably useless `1J (energy)`
+    # {unit.dim: (measure_name, base_unit or None}
+    displayMeasures = {}
+    
+    # Base units to display relative to.
+    # {unit.dim: Unit}
+    _displayUnits = {}
+    
     def _measureUnit(self):
         if all(i == 0 for i in self.dim):
             return 'unitless', None
         
-        return fundamental.get(self.dim, (None, None))
+        measure, base_unit = self.displayMeasures.get(
+            self.dim, (None, None))
+        
+        base_unit = self._displayUnits.get(self.dim, base_unit)
+        return measure, base_unit
 
     @property
     def measure(self):
@@ -67,9 +126,6 @@ class Unit(float):
     @property
     def baseUnit(self):
         return self._measureUnit()[1]
-
-    def isBaseUnit(self):
-        return self.baseUnit() == self
 
     def asFundamentalUnits(self):
         dims = []
@@ -84,37 +140,34 @@ class Unit(float):
         return '·'.join(dims)
     
     def __repr__(self):
-        # get scientific notation
+        num = self.real
         
-        exp, man = exp_mantissa(self)
-        if -3 <= exp <= 2:
-            # easily naturalised
-            num = str(round(self, precision-exp))
-            exp = None
-        else:
-            num = str(round(man, precision))
-        
-        if exp:
-            # unicode exponents
-            num += '×10' + str(exp).translate(powerify)
-        
-        if not showUnits:
-            return num
-
         # get units
-        measure, base_unit = self._measureUnit()
+        measure, bUnit = self._measureUnit()
+        if bUnit and bUnit != self:
+            num /= bUnit.real
 
-        if showDimension and measure:
+        if self.showDimension and measure:
             measure = ' ({})'.format(measure)
         else:
             measure = ''
         
-        if base_unit:
-            unit_symbol = base_unit.symbols[0]
+        if bUnit:
+            symbol = bUnit.symbols[0]
         else:
-            unit_symbol = self.asFundamentalUnits()
+            symbol = self.asFundamentalUnits()
+
+        if num == -1 and self.showUnits:
+            sNum = '-'
+        else:
+            sNum = scinot(num, self.precision)
+            if num != int(num):
+                sNum += ' '
         
-        return '{} {}{}'.format(num, unit_symbol, measure)
+        if not self.showUnits:
+            return sNum.strip()
+        
+        return sNum + symbol + measure
     
     def __new__(cls, dim, *symbols, _factor=1, measure=None):
         num = dim if isinstance(dim, Unit) else _factor
@@ -129,9 +182,10 @@ class Unit(float):
         self.symbols = symbols
         if measure is not None:
             # do not add unit if not given a symbol,
-            # as only the name of the measure is being introduced
+            # as only the measure name is introduced:
             # eg speed, area, etc
-            fundamental[self.dim] = (measure, self if symbols else None)
+            self.displayMeasures[self.dim] = (
+                measure, self if symbols else None)
 
         return self
 
