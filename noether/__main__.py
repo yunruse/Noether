@@ -1,21 +1,31 @@
+'''Script that carries out file and/or REPL'''
+
 import sys
 import os
 import argparse
+import threading
 
-from . import namespace
+
 from . import repl
 from .language import Noether
 
+from . import namespace as ns
+ns = ns.__dict__
+ns['__name__'] = '__main__'
 
-def main(args):
-    
-    ns = dict(namespace.__dict__)
-    ns['__name__'] = '__main__'
+def importer():
+    '''Defer numpy-importing to cheekily look faster'''
+    from . import graphing
+    ns.update(graphing.__dict__)
 
+def main(args):    
     doRepl = not (args.command or args.file)
 
     if doRepl:
-        print('Noether\n')
+        print('Noether 1.0.0\n')
+        threading.Thread(target=importer).start()
+    else:
+        importer()
 
     if args.languageChange:
         exec = Noether.exec
