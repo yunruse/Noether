@@ -1,12 +1,15 @@
 '''Custom REPL language used by Noether.'''
 
-from noether import astmod as ast
+from . import astmod as ast
+from .unit import Unit
+from .helpers import tablify
 
 def printEquation(*namevals):
     maxlen = max(len(n) for n,v in namevals)
-    for n, v in namevals:
-        spacing = ' ' * (maxlen-len(n))
-        print('{}{} = {!r}'.format(n, spacing, v))
+    if all(isinstance(v, Unit) for n, v in namevals):
+        namevals = ((n, *v._reprElements()) for n, v in namevals)
+    for line in tablify((n, '=', *v) for n, *v in namevals):
+        print(line)
 
 class Noether(ast.Language):
     
