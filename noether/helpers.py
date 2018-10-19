@@ -2,6 +2,7 @@
 
 import math
 import os
+import sys
 import functools
 
 __all__ = 'clear intify sqrt sign product tablify'.split()
@@ -23,6 +24,10 @@ def clear(isTerminal=True):
         os.system('cls')
     else:
         os.system('clear')
+
+def bell():
+    sys.stdout.write('\a')
+    sys.stdout.flush()
 
 def intify(x):
     '''Change to an int if it is equal to one.'''
