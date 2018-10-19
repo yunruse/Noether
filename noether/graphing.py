@@ -2,7 +2,12 @@ import numpy as np
 import matplotlib
 from matplotlib import pyplot as plt
 
-__all__ = 'np matplotlib plot plot_y plot_x'.split()
+from . import vector
+from .vector import Vector, Matrix
+
+__all__ = '''\
+np matplotlib plt Vector Matrix\
+plot_y plot_x'''.split()
 
 def _plot_xy(*funcs, starti=-6, endi=6, axis='x', n=2000, startj=None, endj=None):
 
