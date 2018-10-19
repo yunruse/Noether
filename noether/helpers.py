@@ -5,7 +5,7 @@ import functools
 
 __all__ = 'clear intify sqrt sign'.split()
 
-class _asNamed:
+class _callOnRepr:
     '''Nicety to allow statements to carry out functions'''
     __slots__ = 'f'
     def __init__(s, f):
@@ -14,7 +14,7 @@ class _asNamed:
     def __repr__(s):
         return s.f()
 
-@_asNamed
+@_callOnRepr
 def clear():
     return '\n' * 200
 
@@ -38,3 +38,14 @@ def sign(x):
         return -1
     else:
         return +1
+
+def product(iterable, start=1):
+    for i in iterable:
+        start *= i
+    return start
+
+def tablify(table, sep=' '):
+    table = list(table)
+    lens = [max(map(len, col)) for col in zip(*table)]
+    return (sep.join(c + ' ' * (l-len(c))
+             for c, l in zip(r, lens)) for r in table)
