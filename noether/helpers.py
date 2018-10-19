@@ -1,9 +1,10 @@
 '''Noether: general standalone math and repl niceties'''
 
 import math
+import os
 import functools
 
-__all__ = 'clear intify sqrt sign'.split()
+__all__ = 'clear intify sqrt sign product tablify'.split()
 
 class _callOnRepr:
     '''Nicety to allow statements to carry out functions'''
@@ -15,8 +16,13 @@ class _callOnRepr:
         return s.f()
 
 @_callOnRepr
-def clear():
-    return '\n' * 200
+def clear(isTerminal=True):
+    if not isTerminal:
+        print('\n' * 200)
+    elif os.name == 'nt':
+        os.system('cls')
+    else:
+        os.system('clear')
 
 def intify(x):
     '''Change to an int if it is equal to one.'''
