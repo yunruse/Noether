@@ -1,3 +1,5 @@
+'''Noether: Read-Eval-Print loop and tools'''
+
 import sys
 import types
 import functools
@@ -199,7 +201,6 @@ def repl(_globals=None, _locals=None, eval=eval, exec=exec):
     while True:
         exitVal = rep(_globals, _locals, eval, exec)
         if exitVal is None:
-            print()
             continue
         
         if isinstance(exitVal.value, Exception):
