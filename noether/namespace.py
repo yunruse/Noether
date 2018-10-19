@@ -1,30 +1,9 @@
-'''Default REPL namespace for Noether.'''
+'''Default namespace for Noether.'''
 
+from . import *
 import math
-
 from math import (
-    log, exp, floor, ceil,
-    radians as rad, degrees as deg
+    sin,  cos,  tan,  asin,  acos,  atan,
+    sinh, cosh, tanh, asinh, acosh, atanh,
+    log, exp, floor, ceil
 )
-
-from .trigonometry import rad, deg, TrigonometryState as _trigState
-
-from .helpers import *
-from .constants import *
-
-from . import units
-
-import numpy as np
-
-trig = _trigState(useRadians=True)
-for name in 'sin cos tan asin acos atan atan2'.split():
-    globals()[name] = getattr(trig, name)
-
-del name
-
-#% Calculus
-
-def differentiate(f, dx=0.0000001):
-    def df(x):
-        return (f(x+dx)-f(x))/dx
-    return df
