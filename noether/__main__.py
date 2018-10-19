@@ -17,14 +17,17 @@ def main(args):
     if doRepl:
         print('Noether\n')
 
+    if args.languageChange:
+        exec = Noether.exec
+
     if args.command:
-        Noether.exec(args.command, globals=ns)
+        exec(args.command, globals=ns)
     elif args.file:
         fname = os.path.join(os.getcwd(), args.file)
         if os.path.isfile(fname):
             with open(fname, encoding='utf8') as f:
                 code = ''.join(f.readlines())
-                Noether.exec(code, globals=ns)
+                exec(code, globals=ns)
     else:
         interactive = True
     
@@ -47,4 +50,9 @@ parser.add_argument(
 parser.add_argument(
     '-i', dest='interactive', action='store_true',
     help='enter REPL if given commands')
+
+parser.add_argument(
+    '-s', dest='languageChange', action='store_false',
+    help="suppress Noether's syntax changes")
+
 main(parser.parse_args())
