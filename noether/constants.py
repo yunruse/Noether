@@ -1,6 +1,10 @@
+'''Noether: Mathematical and scientific constants'''
+
 from math import pi
 
-from .units import *
+from .scale import *
+from .unit import Unit
+from .unitCatalogue import *
 
 tau = pi * 2
 circle = tau * Radian
@@ -30,8 +34,8 @@ n_a = 6.022_140_857e23 / Mole
 
 # Naturalised units
 eV = Unit(e * Volt, 'eV')
-MeV = Unit(M*eV, 'MeV')
-MeVc = Unit(M * eV / c, 'MeVc⁻¹')
+MeV = Unit(prefix.M * eV, 'MeV')
+MeVc = Unit(MeV / c, 'MeVc⁻¹')
 MeVc2 = Unit(MeVc/c, 'MeVc⁻²')
 
 # Adopted values
