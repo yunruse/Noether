@@ -2,8 +2,6 @@ import sys
 import types
 import functools
 
-from .language import Noether
-
 #% Function analysis
 
 def analyse(f):
@@ -148,14 +146,14 @@ def push_history(namespace, val):
 
 #% REPL loops
 
-def rep(_globals, _locals):
+def rep(_globals, _locals, eval=eval, exec=exec):
     try:
         lines = get_input()
 
         wasEvaluated = False
         if len(lines) == 1:
             try:
-                val = Noether.eval(lines[0], _globals, _locals)
+                val = eval(lines[0], _globals, _locals)
                 wasEvaluated = True
             except SyntaxError:
                 pass
@@ -177,7 +175,7 @@ def rep(_globals, _locals):
             
         else:
             lines = '\n'.join(lines)
-            Noether.exec(lines, _globals, _locals)
+            exec(lines, _globals, _locals)
         
     except KeyboardInterrupt:
         pass
@@ -193,13 +191,13 @@ class ExitValue():
     def __init__(self, value=0):
         self.value = value
 
-def repl(_globals=None, _locals=None):
+def repl(_globals=None, _locals=None, eval=eval, exec=exec):
     _globals = _globals or globals()
     _locals = _locals or dict()
     _locals['exit'] = ExitValue
     
     while True:
-        exitVal = rep(_globals, _locals)
+        exitVal = rep(_globals, _locals, eval, exec)
         if exitVal is None:
             print()
             continue
