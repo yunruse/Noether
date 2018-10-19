@@ -6,21 +6,6 @@ from . import namespace
 from . import repl
 from .language import Noether
 
-parser = argparse.ArgumentParser(
-    description='Python Physics REPL',
-)
-
-parser.add_argument(
-    'file', nargs='?',
-    help='File to execute.')
-
-parser.add_argument(
-    '-c', dest='command', type=str, default='',
-    help='program passed in as string')
-
-parser.add_argument(
-    '-i', dest='interactive', action='store_true',
-    help='enter REPL if given commands')
 
 def main(args):
     
@@ -46,4 +31,20 @@ def main(args):
     if doRepl or args.interactive:
         repl.repl(ns)
 
+
+parser = argparse.ArgumentParser(
+    description='Python Physics REPL',
+)
+
+parser.add_argument(
+    'file', nargs='?',
+    help='File to execute.')
+
+parser.add_argument(
+    '-c', dest='command', type=str, default='',
+    help='program passed in as string')
+
+parser.add_argument(
+    '-i', dest='interactive', action='store_true',
+    help='enter REPL if given commands')
 main(parser.parse_args())
