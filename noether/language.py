@@ -1,6 +1,6 @@
 '''Custom REPL language used by Noether.'''
 
-from . import astmod as ast
+import astley as ast
 from .unit import Unit
 from .helpers import tablify
 
@@ -11,7 +11,7 @@ def printEquation(*namevals):
     for line in tablify((n, '=', *v) for n, *v in namevals):
         print(line)
 
-class Noether(ast.Language):
+class Noether(ast.NodeTransformer):
     
     modified = True
 

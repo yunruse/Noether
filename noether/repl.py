@@ -4,7 +4,7 @@ import sys
 import functools
 import linecache
 
-from .analysis import repr_mod, repr_exception
+from .repr import repr_mod, repr_exception
 
 #% I/O niceties
     
