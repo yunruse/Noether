@@ -37,8 +37,8 @@ def repr_function(f):
     
     args = astley.funcSignature(f)
     returned = f.__annotations__.get('return', object).__name__
-
-    name = c.co_name
+    
+    name = f.__name__
     if name == '<lambda>':
         name = 'f'
     
