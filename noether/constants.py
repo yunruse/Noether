@@ -53,7 +53,7 @@ MeVc2 = Unit(MeVc/c, 'MeVc⁻²')
 
 # Adopted values
 
-g = 9.80665
+g = Unit(9.80665 * Metre / Second ** 2, 'g')
 atom = 101325
 t = 273.15
 
