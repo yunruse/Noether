@@ -1,3 +1,4 @@
+import traceback
 import types
 
 func_like = (
@@ -101,26 +102,9 @@ def repr_function(f):
     else:
         return '{}({}) -> {}'.format(name, args, returned)
 
-def repr_exception(err, wasRaised=True):
-    lines = []
-
-    t = err.__traceback__
-    while t != None:
-        c = t.tb_frame.f_code
-
-        if c.co_filename == '<Noether>':
-            lines.clear()
-        text = f'  File {c.co_filename}, line {t.tb_lineno}, in {c.co_name}'
-        lines.append(text)
-        
-        t = t.tb_next
-
-    if wasRaised:
-        lines.insert(0, 'Traceback (most recent call last):')
-    else:
-        lines.insert(0, 'Previously-found traceback (most recent call last):')
-
-    return '\n'.join((*lines, f'{type(err).__name__}: {err.args[0]}'))
+def repr_exception(err):
+    return ''.join(traceback.format_exception(
+        type(err), err, err.__traceback__))
 
 def repr_mod(obj):
     '''Return useful representation of an object.'''
@@ -128,7 +112,7 @@ def repr_mod(obj):
         return repr_function(obj)
 
     elif isinstance(obj, Exception):
-        return repr_exception(obj, wasRaised=False)
+        return repr_exception(obj)
     
     else:
         return repr(obj)
