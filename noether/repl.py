@@ -2,6 +2,7 @@
 
 import sys
 import functools
+import linecache
 
 from .analysis import repr_mod, repr_exception
 
@@ -37,20 +38,29 @@ def push_history(namespace, val):
 
 #% REPL loops
 
-def rep(_globals, _locals, eval=eval, exec=exec):
+def rep(n, _globals, _locals, eval=eval, exec=exec):
+    lines = get_input()
+    source = '\n'.join(lines)
+    filename = '<Noether#{}>'.format(n)
+    chars = len('\n'.join(lines)) + 1
+    linecache.cache[filename] = chars, 0, lines, filename
+    
+    doEval = True
     try:
-        lines = get_input()
-
-        wasEvaluated = False
-        # do parse magic FIRST so you can raise Syntax error nicely
-        if len(lines) == 1:
-            try:
-                val = eval(lines[0], _globals, _locals)
-                wasEvaluated = True
-            except SyntaxError:
-                pass
-
-        if wasEvaluated:
+        code = compile(source, filename, 'eval')
+    except SyntaxError:
+        doEval = False
+        try:
+            code = compile(source, filename, 'exec')
+        except SyntaxError as e:
+            _globals['_e'] = e
+            print(''.join(traceback.format_exception(
+                type(e), e, e.__traceback__)), file=sys.stderr)
+            return
+    
+    try:
+        if doEval:
+            val = eval(code, _globals, _locals)
             if isinstance(val, ExitValue):
                 return val
             
@@ -59,8 +69,7 @@ def rep(_globals, _locals, eval=eval, exec=exec):
                 print(repr_mod(val))
             
         else:
-            lines = '\n'.join(lines)
-            exec(lines, _globals, _locals)
+            exec(code, _globals, _locals)
         
     except KeyboardInterrupt:
         pass
@@ -81,8 +90,10 @@ def repl(_globals=None, _locals=None, eval=eval, exec=exec):
     _locals = _locals or dict()
     _locals['exit'] = ExitValue
     
+    n = 0
     while True:
-        exitVal = rep(_globals, _locals, eval, exec)
+        n += 1
+        exitVal = rep(n, _globals, _locals, eval, exec)
         if exitVal is None:
             continue
         
