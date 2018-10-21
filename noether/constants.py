@@ -15,14 +15,25 @@ c = Unit(299_792_458 * Metre / Second, 'c')
 Lightsecond = Unit(c * Second, 'ls')
 Lightyear = Unit(c * Year, 'ly')
 
-grav = Unit(6.67408e-11 * Newton * Metre**2 / Kilogram**2, 'G')
+grav = Unit(
+    6.67408e-11 * Newton * Metre**2 / Kilogram**2,
+    measure='strength of force of gravity')
 h = Unit(6.626_070_040e-34 * Joule * Second, 'h')
 hbar = Unit(h / tau, 'ħ')
 
-mu_0 = 2 * tau * 1e-7 * Newton / Ampere ** 2
-e_0  = 1 / (mu_0 * c**2)
-z_0  = mu_0 * c
-k_e  = 1 / (2 * tau * e_0)
+mu_0 = Unit(
+    2 * tau * 1e-7 * Newton / Ampere ** 2,
+    measure='magnetic permeability')
+e_0  = Unit(
+    1 / (mu_0 * c**2),
+    measure='electric permittivity')
+z_0  = Unit(
+    mu_0 * c,
+    measure='impedance of free space')
+k_e  = Unit(
+    1 / (2 * tau * e_0),
+    measure='strength of electronmagnetism')
+
 
 # Particle + chemical constants
 e = Unit(1.60217646e-19 * Coulomb, 'e')
