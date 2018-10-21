@@ -39,6 +39,8 @@ k_e  = Unit(
 e = Unit(1.60217646e-19 * Coulomb, 'e')
 m_e = Unit(9.109_383_56e-31 * Kilogram, 'mₑ')
 
+alpha = k_e * e**2 / (hbar * c)
+
 r_e = (k_e * e**2) / (m_e * c**2)
 
 n_a = 6.022_140_857e23 / Mole
