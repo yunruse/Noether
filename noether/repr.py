@@ -26,10 +26,11 @@ def repr_function(f):
         
         doc = (getattr(f, '__doc__', None) or '').split('\n\n')[0]
         return name + '\n' + doc
-
+    
     elif not isinstance(f, types.FunctionType):
         raise TypeError('f must be function or function-like')
-
+    
+    
     # check for already-modified repr
     if '<' not in repr(f):
         return repr(f)
@@ -55,9 +56,7 @@ def repr_mod(obj):
     '''Return useful representation of an object.'''
     if isinstance(obj, func_like):
         return repr_function(obj)
-
     elif isinstance(obj, Exception):
         return repr_exception(obj)
-    
     else:
         return repr(obj)

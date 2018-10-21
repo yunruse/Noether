@@ -24,7 +24,7 @@ def _plot_xy(*funcs, starti=-6, endi=6, axis='x', n=2000, startj=None, endj=None
             axes.set_xlim(startj, endj)
         else:
             axes.set_ylim(startj, endj)
-
+    
     xlim = (starti, endi)
     ylim = (startj, endj)
     if axis == 'y':

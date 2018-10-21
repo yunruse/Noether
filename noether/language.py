@@ -14,19 +14,18 @@ def printEquation(*namevals):
 class Noether(ast.NodeTransformer):
     
     modified = True
-
+    modEqualPrint = True
+    
     @classmethod
     def _process(cls, f, code, globals=None, locals=None):
         if cls.modified:
             return super()._process(f, code, globals, locals)
         else:
             return f(code, globals, locals)
-
-    modEqualPrint = True
-
+    
     def init(self):
         self.assignments = []
-
+    
     def visit_AugAssign(self, node):
         '''Bare `a %= x` statements will print themselves.'''
         b = self.node.body
@@ -39,15 +38,14 @@ class Noether(ast.NodeTransformer):
                 targets=[name],
                 value=node.value,
             ))
-
+            
             self.assignments.append((ast.Tuple(
                 ctx=ast.load, elts=[
                     ast.Str(s=name.id),
                     ast.Name(id=name.id, ctx=ast.load),
             ])))
-
         return node
-
+    
     def finish(self):
         if self.mode == 'exec' and self.assignments:
             nodeFrom = self.assignments[0].elts[0]
@@ -58,5 +56,3 @@ class Noether(ast.NodeTransformer):
             )))
             printer.lineno = 18
             self.node.body.append(printer)
-                               
-            

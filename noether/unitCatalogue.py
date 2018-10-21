@@ -17,21 +17,19 @@ class Catalogue:
     Hertz = Unit(1 / Second, 'Hz', measure='frequency')
     Radian = Unit(Metre / Metre, 'rad')
     Steradian = Unit(Radian**2, 'rad')
-
+    
     Newton = Unit(
         Kilogram * Metre / Second ** 2,
         'N', measure='force')
     Pascal = Unit(
         Newton / Metre ** 2,
         'Pa', measure='pressure')
-
     Joule = Unit(
         Newton * Metre,
         'J', measure='energy')
     Watt = Unit(
         Joule / Second,
         'W', measure='power')
-
     Coulomb = Unit(
         Ampere * Second,
         'C', measure='charge')
@@ -46,7 +44,7 @@ class Catalogue:
         'Ω', measure='resistance')
     Siemens = Unit(
         1 / Ohm,
-'S', measure='conductance')
+        'S', measure='conductance')
     Weber = Unit(
         Joule / Ampere,
         'Wb', measure='magnetic flux')
@@ -56,7 +54,7 @@ class Catalogue:
     Henry = Unit(
         Ohm * Second,
         'H', measure='inductance')
-
+    
     Lumen = Unit(
         Candela * Steradian,
         'lm', measure='luminous flux')
@@ -74,14 +72,14 @@ class Catalogue:
         'speed', 'acceleration', 'snap', 'crackle', 'pop'
         ), start=1):
         Unit(Metre / Second**i, measure=m)
-
+    
     Unit(Kilogram * Metre / Second, measure='momentum')
     Unit(Metre**2, measure='area')
     Unit(Metre**3, measure='volume')
     
     Unit(Newton / Metre, 'Nm⁻¹',
          measure='surface tension, spring constant')
-
+    
     # Conventional SI-accepted units
     
     Gram = Unit(Kilogram / 1000, 'g')
@@ -189,7 +187,7 @@ class Catalogue:
     Ton = Unit(2240 * Pound, 't')
     
     Slug = 14.59390294 * Kilogram
-
+    
     # Conventional time units
     Week = Day * 7
     Fortnight = Week * 2

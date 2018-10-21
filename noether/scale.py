@@ -37,7 +37,7 @@ powerify = str.maketrans('-0123456789', '⁻⁰¹²³⁴⁵⁶⁷⁸⁹')
 
 def scinot(num, precision=4, unicode_exponents=True):
     '''Return number in scientific notation.'''
-
+    
     # -1, 0, 1: special cases
     if num == sign(num):
         return str(num)
@@ -70,5 +70,5 @@ def scinot(num, precision=4, unicode_exponents=True):
             num += '10' + powers.translate(powerify)
         else:
             num += '10^' + powers
-
+    
     return num

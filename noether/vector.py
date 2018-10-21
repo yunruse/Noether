@@ -13,7 +13,7 @@ def Vector(*x, dtype=None):
 
 def Matrix(*x, shape=None, dtype=None):
     '''Return a matrix. Attempts to automatically shape to square.
-
+    
     Try Matrix(1, 2, 3, 4)'''
     v = Vector(*x, dtype=dtype)
     n = len(v)
@@ -25,10 +25,10 @@ def Matrix(*x, shape=None, dtype=None):
         
     elif unknowns > 1:
         raise ValueError('More than one unknown in length')
-        
+    
     if shape:
         return v.reshape(shape)
-
+    
     if len(v.shape) == 1:
         # not already shaped: attempt to match square matrix
         a = math.sqrt(n)

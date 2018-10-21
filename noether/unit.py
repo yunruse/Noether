@@ -60,15 +60,15 @@ class Unit(float, metaclass=UnitMeta):
         
         base_unit = self._displayUnits.get(self.dim, base_unit)
         return measure, base_unit
-
+    
     @property
     def measure(self):
         return self._measureUnit()[0]
-
+    
     @property
     def baseUnit(self):
         return self._measureUnit()[1]
-
+    
     def asFundamentalUnits(self):
         dims = []
         for i, sym in enumerate(dimensions.values()):
@@ -119,7 +119,7 @@ class Unit(float, metaclass=UnitMeta):
             dim = dim.dim
         elif isinstance(dim, str):
             dim = tuple(int(d == dim) for d in dimensions)
-
+    
         self = float.__new__(cls, num)
         self.dim = dim
         self.symbols = symbols
@@ -129,11 +129,11 @@ class Unit(float, metaclass=UnitMeta):
             # eg speed, area, etc
             self.displayMeasures[self.dim] = (
                 measure, self if symbols else None)
-
+    
         return self
-
+    
     # Dimension-changing operators
-
+    
     def __mul__(self, other, f=float.__mul__, k=1):
         dim = self.dim
         if isinstance(other, Unit):
@@ -142,15 +142,15 @@ class Unit(float, metaclass=UnitMeta):
                 for i in range(len(dimensions)))
         
         return Unit(dim, _factor=f(float(self), float(other)))
-
+    
     def __truediv__(self, other):
         return self.__mul__(other, float.__truediv__, k=-1)
 
     def __floordiv__(self, other):
         return self.__mul__(other, float.__floordiv__, k=-1)
-
+    
     __rmul__ = __mul__
-
+    
     def __pow__(self, exp):
         factor = float.__pow__(self, exp)
         return Unit(
@@ -162,11 +162,11 @@ class Unit(float, metaclass=UnitMeta):
         return Unit(
             tuple(-v for v in self.dim),
             _factor=factor)
-
+    
     # Linear operations
     
-    __neg__ = lambda s: Unit(s.dim, _factor=-float(s))
-
+    __neg__ = lambda s: s * -1
+    
     def __cmp(self, other, f):
         if (not self.openLinear
             and isinstance(other, Unit)
