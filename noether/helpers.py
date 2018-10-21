@@ -7,16 +7,6 @@ import functools
 
 __all__ = 'clear intify sqrt sign product tablify'.split()
 
-class _callOnRepr:
-    '''Nicety to allow statements to carry out functions'''
-    __slots__ = 'f'
-    def __init__(s, f):
-        s.f = f
-    
-    def __repr__(s):
-        return s.f()
-
-@_callOnRepr
 def clear(isTerminal=True):
     if not isTerminal:
         print('\n' * 200)
