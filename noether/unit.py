@@ -37,6 +37,7 @@ class Unit(float, metaclass=UnitMeta):
     precision = 3
     showUnits = True
     showDimension = True
+    openLinear = False
     
     # Display dictionaries
     
@@ -167,7 +168,9 @@ class Unit(float, metaclass=UnitMeta):
     __neg__ = lambda s: Unit(s.dim, _factor=-float(s))
 
     def __cmp(self, other, f):
-        if isinstance(other, Unit) and self.dim != other.dim:
+        if (not self.openLinear
+            and isinstance(other, Unit)
+            and self.dim != other.dim):
             raise ValueError('Inequal units {} and {}.'.format(
                 self.asFundamentalUnits(), other.asFundamentalUnits()))
         
