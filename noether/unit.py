@@ -106,7 +106,7 @@ class Unit(float, metaclass=UnitMeta):
         if not self.showUnits:
             return sNum.strip()
         
-        if self.showDimension:
+        if self.showDimension and measure:
             return sNum + symbol + ' (' + measure + ')'
         else:
             return sNum + symbol

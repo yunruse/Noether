@@ -3,7 +3,7 @@
 from .helpers import sign, intify
 from math import log, floor
 
-__all__ = 'prefix exp_mantissa prefixify scinot'.split()
+__all__ = 'prefix exp_mantissa prefixify powerify scinot'.split()
 
 class prefix:
     pass
