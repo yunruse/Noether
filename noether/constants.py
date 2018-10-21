@@ -57,4 +57,4 @@ g = Unit(9.80665 * Metre / Second ** 2, 'g')
 atom = 101325
 t = 273.15
 
-natural_units = (c, e, MeV, MeVc, MeVc2, grav)
+natural_units = (e_0, c, h, e, MeV, MeVc, MeVc2, grav)
