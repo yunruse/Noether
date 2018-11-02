@@ -2,8 +2,7 @@ import numpy as np
 import matplotlib
 from matplotlib import pyplot as plt
 
-from . import vector
-from .vector import Vector, Matrix
+from .matrix import Matrix, Vector
 
 __all__ = '''\
 np matplotlib plt Vector Matrix\
@@ -42,7 +41,7 @@ def _plot_xy(*funcs, starti=-6, endi=6, axis='x', n=2000, startj=None, endj=None
     if len(funcs) > 1:
         plt.legend()
     plt.show()
-    return plot
+    return fig, axes
 
 def plot_y(*funcs, startx=-6, endx=+6, n=2000, starty=None, endy=None):
     return _plot_xy(
