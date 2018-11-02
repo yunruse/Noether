@@ -206,6 +206,7 @@ class Catalogue:
     GalacticYear = 225 * 1e9 * Year
     
     Firkin = 90 * Pound
+    Smoot = 1.67005 * Metre
 
 __all__ = []
 
