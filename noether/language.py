@@ -1,60 +1,78 @@
 '''Custom REPL language used by Noether.'''
 
-import astley as ast
+from astley import *
 from .unit import Unit
 from .helpers import tablify
 
-def printEquation(*namevals):
-    maxlen = max(len(n) for n,v in namevals)
-    if all(isinstance(v, Unit) for n, v in namevals):
-        namevals = ((n, *v._reprElements()) for n, v in namevals)
-    for line in tablify((n, '=', *v) for n, *v in namevals):
+def printEquation(*nv):
+    namevals = []
+    maxlen = []
+    for name, val in nv:
+        if isinstance(val, Unit):
+            namevals.append((name, '=', *val._reprElements()))
+        else:
+            firstline, *rest = str(val).split('\n')
+            namevals.append((name, '=', firstline))
+            for line in rest:
+                namevals.append(('', '', line))
+    for line in tablify(namevals):
         print(line)
 
-class Noether(ast.NodeTransformer):
-    
-    modified = True
+def assignFunctionID(f, r):
+    f.____noetherRepr = r
+    return f
+
+@match
+class Noether(Language):
     modEqualPrint = True
     
-    @classmethod
-    def _process(cls, f, code, globals=None, locals=None):
-        if cls.modified:
-            return super()._process(f, code, globals, locals)
-        else:
-            return f(code, globals, locals)
-    
-    def init(self):
+    def onVisitStart(self):
         self.assignments = []
+        self.funcs = dict()
     
-    def visit_AugAssign(self, node):
+    @match(kind=AugAssign, mode='exec', op=Mod, baseNode=True)
+    def ModPrint(self, node):
         '''Bare `a %= x` statements will print themselves.'''
-        b = self.node.body
-        if (
-            self.modEqualPrint and self.mode == 'exec' and
-            isinstance(node.op, ast.Mod) and node in b):
-            
-            name = node.target
-            node = ast.copy(node, ast.Assign(
-                targets=[name],
-                value=node.value,
-            ))
-            
-            self.assignments.append((ast.Tuple(
-                ctx=ast.load, elts=[
-                    ast.Str(s=name.id),
-                    ast.Name(id=name.id, ctx=ast.load),
-            ])))
+        name = node.target
+        node = copy(node, Assign(
+            [name], self.visit(node.value),
+        ))
+        
+        self.assignments.append(Tuple(
+            [Str(name.id), Name(name.id)]
+        ))
         return node
     
-    def finish(self):
+    @match(kind=Lambda)
+    def lambdaSignify(self, node):
+        F = '____nF'
+        self.locals[F] = assignFunctionID
+        
+        return copyfix(node, Name(F)(
+            node, Str(str(node))
+        ))
+    
+    @match(kind=(FunctionDef, AsyncFunctionDef))
+    def funcSignify(self, node):
+        F = '____nF'
+        self.locals[F] = assignFunctionID
+        
+        # wrap in `lambda x: F(x, str(node))`
+        # it is around these points I wish LISP was a thing here
+        node.decorator_list.insert(0, Lambda(
+            [Name('x')], Name(F)(Name('x'), Str(str(node)))
+        ))
+        return fix(node)
+    
+    def onVisitFinish(self):
         if self.mode == 'exec' and self.assignments:
+            F = '____nS'
             nodeFrom = self.assignments[0].elts[0]
-            self.locals['____nS'] = printEquation
-            printer = ast.copyfix(nodeFrom, ast.Expr(value=ast.Call(
-                func=ast.Name(ctx=ast.load, id='____nS'),
-                args=self.assignments, keywords=[]
-            )))
-            printer.lineno = 18
+            self.locals[F] = printEquation
+            
+            printer = copyfix(
+                nodeFrom, Expr(Name(F)(*self.assignments)))
+            printer.lineno += 1
             self.node.body.append(printer)
     
     @match(kind=Num, n=float)
