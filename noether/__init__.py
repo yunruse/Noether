@@ -9,6 +9,10 @@ from .helpers import *
 from .constants import *
 from .repl import repr_mod
 
+from .matrix import Matrix, Vector
+
+V = Vector
+
 #% Calculus
 
 def differentiate(f, dx=0.0000001):
