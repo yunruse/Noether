@@ -5,6 +5,8 @@ import os
 import sys
 import functools
 
+import numpy as np
+
 __all__ = 'clear intify sqrt sign product tablify'.split()
 
 def clear(isTerminal=True):
@@ -46,7 +48,10 @@ def product(iterable, start=1):
     return start
 
 def tablify(table, sep=' '):
-    table = list(table)
-    lens = [max(map(len, col)) for col in zip(*table)]
+    table = [[str(i) for i in row] for row in table]
+    lens = [0] * max(map(len, table))
+    for row in table:
+        for n, col in enumerate(row):
+            lens[n] = max(lens[n], len(col))
     return (sep.join(c + ' ' * (l-len(c))
              for c, l in zip(r, lens)) for r in table)
