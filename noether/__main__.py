@@ -5,44 +5,50 @@ import os
 import argparse
 import threading
 
+from astley import Python
 
 from . import repl
 from .language import Noether
 
 from . import namespace as ns
+
 ns = ns.__dict__
 ns['__name__'] = '__main__'
 
 def importer():
-    '''Defer numpy-importing to cheekily look faster'''
+    '''Defer matplotlib-importing to cheekily look faster'''
     from . import graphing
     ns.update(graphing.__dict__)
 
-def main(args):    
+def main(args):
     doRepl = not (args.command or args.file)
-
+    
     if doRepl:
         print('Noether 1.0.0\n')
         threading.Thread(target=importer).start()
     else:
         importer()
-
-    if args.languageChange:
-        exec = Noether.exec
-
+    
+    lang = Noether if args.languageChange else Python
+    ns.update(dict(
+        exec=lang.staticExec,
+        eval=lang.staticEval,
+        compile=lang.staticCompile,
+    ))
+    
     if args.command:
-        exec(args.command, globals=ns)
+        exec_(args.command, globals=ns)
     elif args.file:
         fname = os.path.join(os.getcwd(), args.file)
         if os.path.isfile(fname):
             with open(fname, encoding='utf8') as f:
                 code = ''.join(f.readlines())
-                exec(code, globals=ns)
+                exec_(code, globals=ns)
     else:
         interactive = True
     
     if doRepl or args.interactive:
-        repl.repl(ns)
+        repl.repl(lang, globals=ns, locals=dict())
 
 
 parser = argparse.ArgumentParser(
