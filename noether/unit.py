@@ -146,6 +146,16 @@ class Unit(float, metaclass=UnitMeta):
     
     # Dimension-changing operators
     
+    @property
+    def invUnit(self):
+        return Unit(
+            tuple(-i for i in self.dim),
+            _factor=float(self))
+    
+    @property
+    def inv(self):
+        return 1 / self
+    
     def __mul__(self, other, f=float.__mul__, k=1):
         dim = self.dim
         un = self.delta
