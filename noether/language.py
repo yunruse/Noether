@@ -56,3 +56,7 @@ class Noether(ast.NodeTransformer):
             )))
             printer.lineno = 18
             self.node.body.append(printer)
+    
+    @match(kind=Num, n=float)
+    def alwaysUnit(self, node):
+        return copyfix(node, Name('Unit')(node))
