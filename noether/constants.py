@@ -45,6 +45,8 @@ r_e = (k_e * e**2) / (m_e * c**2)
 
 n_a = 6.022_140_857e23 / Mole
 
+rydberg = (m_e * e**4) / (8 * e_0**2 * h**3 * c)
+
 # Naturalised units
 eV = Unit(e * Volt, 'eV')
 MeV = Unit(prefix.M * eV, 'MeV')
