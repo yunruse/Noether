@@ -60,3 +60,12 @@ class Noether(ast.NodeTransformer):
     @match(kind=Num, n=float)
     def alwaysUnit(self, node):
         return copyfix(node, Name('Unit')(node))
+    
+    @match(kind=BinOp, op=Add)
+    def plusMinus(self, node):
+        if not (isinstance(node.right, UnaryOp) and
+            isinstance(node.right.op, USub)):
+            return node
+        'Unit'
+        return copyfix(node, Name('Unit')(
+            node.left, delta=node.right.operand))
