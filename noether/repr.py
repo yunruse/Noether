@@ -13,6 +13,9 @@ func_like = (
 def repr_function(f):
     '''Describe function input in a helpful manner'''
     
+    if hasattr(f, '____noetherRepr'):
+        return f.____noetherRepr
+    
     if isinstance(f, func_like) and not isinstance(f, types.FunctionType):
         name = 'builtin ' + f.__name__
         
