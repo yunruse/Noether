@@ -5,6 +5,7 @@ import operator
 
 from .helpers import intify, sign, product
 from .scale import *
+from .matrix import Matrix
 
 dimensions = {
     'length': 'm',
