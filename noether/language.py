@@ -47,10 +47,9 @@ class Noether(Language):
     def lambdaSignify(self, node):
         F = '____nF'
         self.locals[F] = assignFunctionID
+        code = Str(node.asPython())
         
-        return copyfix(node, Name(F)(
-            node, Str(str(node))
-        ))
+        return copyfix(node, Name(F)(node, code))
     
     @match(kind=(FunctionDef, AsyncFunctionDef))
     def funcSignify(self, node):
@@ -59,10 +58,11 @@ class Noether(Language):
         
         # wrap in `lambda x: F(x, str(node))`
         # it is around these points I wish LISP was a thing here
-        node.decorator_list.insert(0, Lambda(
-            [Name('x')], Name(F)(Name('x'), Str(str(node)))
-        ))
-        return fix(node)
+        code = Str(node.asPython())
+        node.decorator_list.insert(0, copyfix(node, Lambda(
+            [Name('x')], Name(F)(Name('x'), code)
+        )))
+        return node
     
     def onVisitFinish(self):
         if self.mode == 'exec' and self.assignments:
