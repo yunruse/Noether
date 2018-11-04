@@ -24,7 +24,7 @@ def main(args):
     doRepl = not (args.command or args.file)
     
     if doRepl:
-        print('Noether 1.0.0\n')
+        print('Noether (dev)\n')
         threading.Thread(target=importer).start()
     else:
         importer()
