@@ -232,7 +232,7 @@ class Unit(float, metaclass=UnitMeta):
             if float(self) == 0 or fo == 0:
                 e = 0
             else:
-                e = self.epsilon * other.epsilon
+                e = self.epsilon + other.epsilon
         else:
             e = self.epsilon
         
