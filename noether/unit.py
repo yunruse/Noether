@@ -221,6 +221,8 @@ class Unit(float, metaclass=UnitMeta):
         return 1 / self
     
     def __mul__(self, other, f=float.__mul__, k=1):
+        if other is 1:
+            return self
         dim = self.dim
         fo = float(other)
         
@@ -283,13 +285,13 @@ class Unit(float, metaclass=UnitMeta):
         self.__cmp(other)
         odelta = other.delta if isinstance(other, Unit) else 0
         return Unit(
-            op(float(self), other),
+            op(float(self), float(other)),
             _dim = self.dim,
             _delta = op(float(self.delta), odelta)
         )
     
     def __sub__(self, other):
-        self.__add__(other, operator.sub)
+        return self.__add__(other, operator.sub)
     
     __radd__ = __add__
     __rsub__ = __sub__
