@@ -33,78 +33,59 @@ class UnitMeta(type):
     
     displayUnits = property(_dU_get, _dU_set, _dU_del)
 
+_emptyDim = (0, 0, 0, 0, 0, 0, 0)
+
 class Unit(float, metaclass=UnitMeta):
-    __slots__ = 'dim _delta _epsilon symbols'.split()
+    __slots__ = 'dim _delta _epsilon'.split()
     
-    def __new__(cls, value, *symbols,
-                _delta=None, _epsilon=None, _factor=1, measure=None):
-        
-        num = _factor
-        dim = (0, 0, 0, 0, 0, 0, 0)
+    def __new__(cls, value=1, **kw):
         
         if isinstance(value, Unit):
-            dim = value.dim
-            if _delta is None:
-                _delta = value._delta
-            if _epsilon is None:
-                _epsilon = value._epsilon
-        elif isinstance(value, str):
-            dim = tuple(int(d == value) for d in dimensions)
-        elif isinstance(value, (int, float)):
-            num = value
-        elif isinstance(value, tuple):
-            dim = value
+            d = kw.setdefault
+            d('_dim', value.dim)
+            d('_delta', value._delta)
+            d('_epsilon', value._epsilon)
+            value = float(value)
     
-        self = float.__new__(cls, num)
-        self.dim = dim
-        self._delta = None
-        self._epsilon = None
-        if _delta is not None:
-            self._delta = abs(_delta)
-        elif _epsilon is not None:
-            self._epsilon = abs(_epsilon)
-        else:
-            self._delta = 0
+        self = float.__new__(cls, value)
         
-        self.symbols = symbols
-        if measure is not None:
-            # do not add unit if not given a symbol,
-            # as only the measure name is introduced:
-            # eg speed, area, etc
-            self.displayMeasures[self.dim] = (
-                measure, self if symbols else None)
+        dim = kw.get('_dim', (0, 0, 0, 0, 0, 0, 0))
+        if isinstance(dim, str):
+            dim = tuple(int(d == dim) for d in dimensions)
+        self.dim = dim
+        
+        self._delta = kw.get('_delta', None)
+        self._epsilon = kw.get('_epsilon', None)
     
         return self
     
-    @property
-    def epsilon(self):
-        if self._epsilon is not None:
-            return self._epsilon
-        d, f = self._delta, float(self)
-        if d == 0 or f == 0:
-            return 0
-        else:
-            return d / f
+    # Delta / epsilon (absolute / relative uncertainties)
     
-    @epsilon.setter
-    def _set_epsilon(self, n):
-        self._epsilon = n
-        self._delta = None
-    
-    @property
-    def delta(self):
+    def _d_get(self):
         if self._delta is not None:
             return self._delta
-        e, f = self._epsilon, float(self)
+        e, f = self._epsilon or 0, float(self)
         if e == 0 or f == 0:
             return 0
         else:
             return e * f
-    
-    @epsilon.setter
-    def _set_delta(self, n):
-        self._delta = n
+    def _d_set(self, d):
+        self._delta = abs(d)
         self._epsilon = None
+    delta = property(_d_get, _d_set, lambda s: s._d_set(0))
+    
+    def _e_get(self):
+        if self._epsilon is not None:
+            return self._epsilon
+        d, f = self._delta or 0, float(self)
+        if d == 0 or f == 0:
+            return 0
+        else:
+            return d / f
+    def _e_set(self, e):
+        self._epsilon = abs(e)
+        self._delta = None
+    epsilon = property(_e_get, _e_set, lambda s: s._e_set(0))
     
     precision = 3
     showUnits = True
@@ -249,15 +230,13 @@ class Unit(float, metaclass=UnitMeta):
                 dim[i] + k * other.dim[i]
                 for i in range(len(dimensions)))
             if float(self) == 0 or fo == 0:
-                _e = 0
+                e = 0
             else:
-                _e = self.epsilon * other.epsilon
+                e = self.epsilon * other.epsilon
         else:
-            _e = self.epsilon
+            e = self.epsilon
         
-        return Unit(
-            dim, _epsilon=_e,
-            _factor=f(self, fo))
+        return Unit(f(self, fo), _dim=dim, _epsilon=e)
     
     __call__ = __mul__
     __rmul__ = __mul__
@@ -270,16 +249,17 @@ class Unit(float, metaclass=UnitMeta):
     
     def __pow__(self, exp):
         return Unit(
-            tuple(intify(v*exp) for v in self.dim),
+            float(self) ** exp,
+            _dim = tuple(intify(v*exp) for v in self.dim),
             _epsilon = self.epsilon * abs(exp),
-            _factor = float(self) ** exp
         )
 
     def __rtruediv__(self, other):
         factor = float.__truediv__(float(other), float(self))
         return Unit(
-            tuple(-v for v in self.dim),
-            _factor=factor)
+            float.__truediv__(float(other), float(self)),
+            _dim = tuple(-v for v in self.dim),
+        )
     
     # Linear operations
     
@@ -308,9 +288,10 @@ class Unit(float, metaclass=UnitMeta):
         self.__cmp(other)
         odelta = other.delta if isinstance(other, Unit) else 0
         return Unit(
-            self.dim,
-            _delta  = op(float(self.delta), odelta),
-            _factor = op(float(self), other))
+            op(float(self), other),
+            _dim = self.dim,
+            _delta = op(float(self.delta), odelta)
+        )
     
     def __sub__(self, other):
         self.__add__(other, operator.sub)
@@ -345,3 +326,16 @@ class Unit(float, metaclass=UnitMeta):
         return Matrix(self) | other
     def __or__(self, other):
         return other | Matrix(self)
+
+class BaseUnit(Unit):
+    __slots__ = Unit.__slots__ + ['symbols']
+    
+    def __new__(cls, value, *symbols, m=None, **kw):
+        self = Unit.__new__(cls, value, **kw)
+        self.symbols = symbols
+        
+        if m is not None:
+            self.displayMeasures[self.dim] = (
+                m, self if symbols else None)
+        return self
+    

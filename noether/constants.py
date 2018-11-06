@@ -3,7 +3,7 @@
 from math import pi
 
 from .scale import *
-from .unit import Unit
+from .unit import Unit, BaseUnit as U
 from .unitCatalogue import *
 
 tau = pi * 2
@@ -11,33 +11,33 @@ circle = tau * Radian
 
 # Physical constants
 
-c = Unit(299_792_458 * Metre / Second, 'c')
-Lightsecond = Unit(c * Second, 'ls')
-Lightyear = Unit(c * Year, 'ly')
+c = U(299_792_458 * Metre / Second, 'c')
+Lightsecond = U(c * Second, 'ls')
+Lightyear = U(c * Year, 'ly')
 
-grav = Unit(
+grav = U(
     6.67408e-11 * Newton * Metre**2 / Kilogram**2,
-    measure='strength of force of gravity')
-h = Unit(6.626_070_040e-34 * Joule * Second, 'h')
-hbar = Unit(h / tau, 'ħ')
+    m='strength of force of gravity')
+h = U(6.626_070_040e-34 * Joule * Second, 'h')
+hbar = U(h / tau, 'ħ')
 
-mu_0 = Unit(
+mu_0 = U(
     2 * tau * 1e-7 * Newton / Ampere ** 2,
-    measure='magnetic permeability')
-e_0  = Unit(
+    m='magnetic permeability')
+e_0  = U(
     1 / (mu_0 * c**2),
-    measure='electric permittivity')
-z_0  = Unit(
+    m='electric permittivity')
+z_0  = U(
     mu_0 * c,
-    measure='impedance of free space')
-k_e  = Unit(
+    m='impedance of free space')
+k_e  = U(
     1 / (2 * tau * e_0),
-    measure='strength of electronmagnetism')
+    m='strength of electronmagnetism')
 
 
 # Particle + chemical constants
-e = Unit(1.60217646e-19 * Coulomb, 'e')
-m_e = Unit(9.109_383_56e-31 * Kilogram, 'mₑ')
+e = U(1.60217646e-19 * Coulomb, 'e')
+m_e = U(9.109_383_56e-31 * Kilogram, 'mₑ')
 
 alpha = k_e * e**2 / (hbar * c)
 
@@ -48,14 +48,14 @@ n_a = 6.022_140_857e23 / Mole
 rydberg = (m_e * e**4) / (8 * e_0**2 * h**3 * c)
 
 # Naturalised units
-eV = Unit(e * Volt, 'eV')
-MeV = Unit(prefix.M * eV, 'MeV')
-MeVc = Unit(MeV / c, 'MeVc⁻¹')
-MeVc2 = Unit(MeVc/c, 'MeVc⁻²')
+eV = U(e * Volt, 'eV')
+MeV = U(prefix.M * eV, 'MeV')
+MeVc = U(MeV / c, 'MeVc⁻¹')
+MeVc2 = U(MeVc/c, 'MeVc⁻²')
 
 # Adopted values
 
-g = Unit(9.80665 * Metre / Second ** 2, 'g')
+g = U(9.80665 * Metre / Second ** 2, 'g')
 atom = 101325
 t = 273.15
 

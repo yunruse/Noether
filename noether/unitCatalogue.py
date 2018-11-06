@@ -1,128 +1,133 @@
 '''Noether: SI, SI-derived and SI-compatible units'''
 
-from .unit import *
+from .unit import BaseUnit as U
+from math import pi
+
+BU = lambda q, sym: U(1, sym, _dim=q, m=q)
 
 class Catalogue:
     # Fundemental SI units
-    Ampere = Unit('current', 'A', measure='current')
-    Kelvin = Unit('temperature', 'k', measure='temperature')
-    Second = Unit('time', 's', measure='time')
-    Meter = Metre = Unit('length', 'm', measure='length')
-    Kilogram = Unit('mass', 'kg', measure='mass')
-    Candela = Unit('luminosity', 'cd', measure='luminosity')
-    Mole = Unit('substance', 'mol', measure='substance')
+    Ampere = BU('current', 'A')
+    Kelvin = BU('temperature', 'k')
+    Second = BU('time', 's')
+    Meter = Metre = BU('length', 'm')
+    Kilogram = BU('mass', 'kg')
+    Candela = BU('luminosity', 'cd')
+    Mole = BU('substance', 'mol')
     
     # SI derived units
     
-    Hertz = Unit(1 / Second, 'Hz', measure='frequency')
-    Radian = Unit(Metre / Metre, 'rad')
-    Steradian = Unit(Radian**2, 'rad')
+    Hertz = U(1 / Second, 'Hz', m='frequency')
+    Radian = U(Metre / Metre, 'rad')
+    Steradian = U(Radian**2, 'rad')
     
-    Newton = Unit(
+    Newton = U(
         Kilogram * Metre / Second ** 2,
-        'N', measure='force')
-    Pascal = Unit(
+        'N', m='force')
+    Pascal = U(
         Newton / Metre ** 2,
-        'Pa', measure='pressure')
-    Joule = Unit(
+        'Pa', m='pressure')
+    Joule = U(
         Newton * Metre,
-        'J', measure='energy')
-    Watt = Unit(
+        'J', m='energy')
+    Watt = U(
         Joule / Second,
-        'W', measure='power')
-    Coulomb = Unit(
+        'W', m='power')
+    Coulomb = U(
         Ampere * Second,
-        'C', measure='charge')
-    Volt = Unit(
+        'C', m='charge')
+    Volt = U(
         Watt / Ampere,
-        'V', measure='voltage')
-    Farad = Unit(
+        'V', m='voltage')
+    Farad = U(
         Coulomb / Volt,
-        'F', measure='capacitance')
-    Ohm = Unit(
+        'F', m='capacitance')
+    Ohm = U(
         Volt / Ampere,
-        'Ω', measure='resistance')
-    Siemens = Unit(
+        'Ω', m='resistance')
+    Siemens = U(
         1 / Ohm,
-        'S', measure='conductance')
-    Weber = Unit(
+        'S', m='conductance')
+    Weber = U(
         Joule / Ampere,
-        'Wb', measure='magnetic flux')
-    Tesla = Unit(
+        'Wb', m='magnetic flux')
+    Tesla = U(
         Weber / (Metre ** 2),
-        'T', measure='magnetic flux density')
-    Henry = Unit(
+        'T', m='magnetic flux density')
+    Henry = U(
         Ohm * Second,
-        'H', measure='inductance')
+        'H', m='inductance')
     
-    Lumen = Unit(
+    Lumen = U(
         Candela * Steradian,
-        'lm', measure='luminous flux')
-    Lux = Unit(Lumen / Metre ** 2, 'lx', measure='illuminance')
-    Becquerel = Unit(Hertz, 'Bq')
-    Gray = Unit(Joule / Kilogram, 'Gy', measure='dose')
-    Sievert = Unit(Gray, 'Sv')
-    Katal = Unit(
+        'lm', m='luminous flux')
+    Lux = U(Lumen / Metre ** 2, 'lx', m='illuminance')
+    Becquerel = U(Hertz, 'Bq')
+    Gray = U(Joule / Kilogram, 'Gy', m='dose')
+    Sievert = U(Gray, 'Sv')
+    Katal = U(
         Mole / Second,
-        'kat', measure='catalytic activity')
+        'kat', m='catalytic activity')
     
     # Unnamed derivative measures
     
     for i, m in enumerate((
         'speed', 'acceleration', 'snap', 'crackle', 'pop'
         ), start=1):
-        Unit(Metre / Second**i, measure=m)
+        U(Metre / Second**i, m=m)
     
-    Unit(Kilogram * Metre / Second, measure='momentum')
-    Unit(Metre**2, measure='area')
-    Unit(Metre**3, measure='volume')
+    del i, m
     
-    Unit(Newton / Metre, 'Nm⁻¹',
-         measure='surface tension, spring constant')
+    U(Kilogram * Metre / Second, m='momentum')
+    U(Metre**2, m='area')
+    U(Metre**3, m='volume')
+    
+    U(Newton / Metre, 'Nm⁻¹',
+         m='surface tension, spring constant')
     
     # Conventional SI-accepted units
     
-    Gram = Unit(Kilogram / 1000, 'g')
-    Centimetre = Unit(Metre * 0.01, 'cm')
-    Kilometre = Unit(Metre * 1000, 'km')
+    Gram = U(Kilogram / 1000, 'g')
+    Centimetre = U(Metre * 0.01, 'cm')
+    Kilometre = U(Metre * 1000, 'km')
     
-    Minute = Unit(Second * 60, 'min')
-    Hour = Unit(Minute * 60, 'h')
-    Day = Unit(Hour * 24, 'd')
+    Minute = U(Second * 60, 'min')
+    Hour = U(Minute * 60, 'h')
+    Day = U(Hour * 24, 'd')
     
-    Degree = Unit(Radian * math.pi / 180, '°')
-    RadialMinute = Unit(Degree / 60, '′')
-    RadialSecond = Unit(Degree / 3600, '″')
+    Degree = U(Radian * pi / 180, '°')
+    RadialMinute = U(Degree / 60, '′')
+    RadialSecond = U(Degree / 3600, '″')
     
-    Acre = Unit(100 * Metre ** 2, 'a')
-    Hectare = Unit(100 * Acre, 'ha')
-    Litre = Unit((Metre/10)**3, 'L')
-    Tonne = Unit(Kilogram * 1000, 't')
+    Acre = U(100 * Metre ** 2, 'a')
+    Hectare = U(100 * Acre, 'ha')
+    Litre = U((Metre/10)**3, 'L')
+    Tonne = U(Kilogram * 1000, 't')
     
     # Scientific units
     
-    Parsec = Unit(3.0857e16 * Metre, 'pc')
-    AU = Unit(1.495_878_707e11 * Metre, 'AU')
+    Parsec = U(3.0857e16 * Metre, 'pc')
+    AU = U(1.495_878_707e11 * Metre, 'AU')
     
-    u = Dalton = Unit(
+    u = Dalton = U(
         1.660_538_86e-27 * Kilogram, 'u')
     
     # Commonly-used metric variants
     
-    Angstrom = Unit(Metre * 1e-10, 'Å')
-    Are = Unit((10*Metre)**2, 'a')
-    Barn = Unit(1e-28 * Metre **2, 'b')
+    Angstrom = U(Metre * 1e-10, 'Å')
+    Are = U((10*Metre)**2, 'a')
+    Barn = U(1e-28 * Metre **2, 'b')
     
-    Bar = Unit(1e5 * Pascal, 'bar')
-    Millibar = Unit(100 * Pascal, 'mbar')
-    Atmosphere = Unit(101_325 * Pascal, 'atm')
-    Torr = Unit(Atmosphere / 760, 'Torr')
+    Bar = U(1e5 * Pascal, 'bar')
+    Millibar = U(100 * Pascal, 'mbar')
+    Atmosphere = U(101_325 * Pascal, 'atm')
+    Torr = U(Atmosphere / 760, 'Torr')
     
-    MillimetreMercury = mmHg = Unit(
+    MillimetreMercury = mmHg = U(
         133.322_387_415 * Pascal, 'mmHg')
         
-    Calorie = Unit(4.814 * Joule, 'cal')
-    Kilocalorie = Unit(Calorie * 1000, 'kCal')
+    Calorie = U(4.814 * Joule, 'cal')
+    Kilocalorie = U(Calorie * 1000, 'kCal')
     
     # Older CGS units
     
@@ -138,19 +143,19 @@ class Catalogue:
     
     kmph = Kilometre / Hour
     
-    NauticalMile = Unit(
+    NauticalMile = U(
         1852 * Meter, 'M', 'NM', 'nmi')
-    Knot = Unit(NauticalMile / Hour, 'kt', 'kn')
+    Knot = U(NauticalMile / Hour, 'kt', 'kn')
     
     # Imperial length and area
     
-    Inch = Unit(Centimetre * 127/50, 'in')
-    Foot = Unit(Inch * 12, 'ft')
-    Yard = Unit(3 * Foot, 'yd')
-    Chain = Unit(22 * Yard, 'ch')
-    Furlong = Unit(10 * Chain, 'fur')
-    Mile = Unit(8 * Furlong, 'mi')
-    League = Unit(3 * Mile, 'lea')
+    Inch = U(Centimetre * 127/50, 'in')
+    Foot = U(Inch * 12, 'ft')
+    Yard = U(3 * Foot, 'yd')
+    Chain = U(22 * Yard, 'ch')
+    Furlong = U(10 * Chain, 'fur')
+    Mile = U(8 * Furlong, 'mi')
+    League = U(3 * Mile, 'lea')
     
     Link = 7.92 * Inch
     Rod = 25 * Link   
@@ -163,35 +168,35 @@ class Catalogue:
     
     # Imperial volume
     
-    FluidOunce = Unit(
+    FluidOunce = U(
         28.4130625 * Litre / 1000, 'fl oz')
     
-    Gill = Unit(FluidOunce * 5, 'gi')
-    Pint = Unit(Gill * 4, 'pt')
-    Quart = Unit(2 * Pint, 'qt')
-    Gallon = Unit(4 * Quart, 'gal')
+    Gill = U(FluidOunce * 5, 'gi')
+    Pint = U(Gill * 4, 'pt')
+    Quart = U(2 * Pint, 'qt')
+    Gallon = U(4 * Quart, 'gal')
     Peck = 2 * Gallon
     Bushel = 4 * Peck
     
     # Imperial weight
     
-    Pound = Unit(453.59237 * Gram, 'lb')
+    Pound = U(453.59237 * Gram, 'lb')
     
-    Ounce = Unit(Pound / 16, 'oz')
-    Drachm = Unit(Pound / 256, 'dr')
-    Grain = Unit(Pound / 7000, 'gr')
+    Ounce = U(Pound / 16, 'oz')
+    Drachm = U(Pound / 256, 'dr')
+    Grain = U(Pound / 7000, 'gr')
     
-    Stone = Unit(14 * Pound, 'st')
-    Quarter = Unit(2 * Stone, 'qr', 'qtr')
-    Hundredweight = Unit(4 * Quarter, 'cwt')
-    Ton = Unit(2240 * Pound, 't')
+    Stone = U(14 * Pound, 'st')
+    Quarter = U(2 * Stone, 'qr', 'qtr')
+    Hundredweight = U(4 * Quarter, 'cwt')
+    Ton = U(2240 * Pound, 't')
     
     Slug = 14.59390294 * Kilogram
     
     # Conventional time units
     Week = Day * 7
     Fortnight = Week * 2
-    Year = Unit(Day * 365.25, 'yr')
+    Year = U(Day * 365.25, 'yr')
     
     # Unusual units
     
@@ -209,9 +214,27 @@ class Catalogue:
     Smoot = 1.67005 * Metre
 
 __all__ = []
+table = []
 
 for name in dir(Catalogue):
     if '__' in name:
         continue
-    globals()[name] = getattr(Catalogue, name)
+    
+    # Append name to symbols
+    unit = getattr(Catalogue, name)
+    if isinstance(unit, U):
+        unit.symbols += (name, )
+    else:
+        unit = U(unit, name)
+    
+    globals()[name] = unit
     __all__.append(name)
+    
+    sym, m = unit._symbolMeasure()
+    sNum = unit._numerical()
+    m = str(m).replace('None', 'unknown').replace('unitless', '')
+    table.append([name, sNum, sym, m])
+
+table.sort(key=lambda q: q[3])
+from .helpers import tablify
+print('\n'.join(tablify(table)))
