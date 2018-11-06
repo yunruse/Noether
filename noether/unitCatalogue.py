@@ -230,11 +230,14 @@ for name in dir(Catalogue):
     globals()[name] = unit
     __all__.append(name)
     
+    # Table of symbols
     sym, m = unit._symbolMeasure()
     sNum = unit._numerical()
     m = str(m).replace('None', 'unknown').replace('unitless', '')
     table.append([name, sNum, sym, m])
 
 table.sort(key=lambda q: q[3])
-from .helpers import tablify
-print('\n'.join(tablify(table)))
+
+if __name__ == '__main__':
+    from .helpers import tablify
+    print('\n'.join(tablify(table)))
