@@ -255,11 +255,7 @@ class Unit(float, metaclass=UnitMeta):
         )
 
     def __rtruediv__(self, other):
-        factor = float.__truediv__(float(other), float(self))
-        return Unit(
-            float.__truediv__(float(other), float(self)),
-            _dim = tuple(-v for v in self.dim),
-        )
+        return other * self ** -1
     
     # Linear operations
     
