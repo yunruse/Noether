@@ -34,12 +34,83 @@ class UnitMeta(type):
     displayUnits = property(_dU_get, _dU_set, _dU_del)
 
 class Unit(float, metaclass=UnitMeta):
-    __slots__ = 'dim delta symbols'.split()
+    __slots__ = 'dim _delta _epsilon symbols'.split()
+    
+    def __new__(cls, value, *symbols,
+                _delta=None, _epsilon=None, _factor=1, measure=None):
+        
+        num = _factor
+        dim = (0, 0, 0, 0, 0, 0, 0)
+        
+        if isinstance(value, Unit):
+            dim = value.dim
+            if _delta is None:
+                _delta = value._delta
+            if _epsilon is None:
+                _epsilon = value._epsilon
+        elif isinstance(value, str):
+            dim = tuple(int(d == value) for d in dimensions)
+        elif isinstance(value, (int, float)):
+            num = value
+        elif isinstance(value, tuple):
+            dim = value
+    
+        self = float.__new__(cls, num)
+        self.dim = dim
+        self._delta = None
+        self._epsilon = None
+        if _delta is not None:
+            self._delta = abs(_delta)
+        elif _epsilon is not None:
+            self._epsilon = abs(_epsilon)
+        else:
+            self._delta = 0
+        
+        self.symbols = symbols
+        if measure is not None:
+            # do not add unit if not given a symbol,
+            # as only the measure name is introduced:
+            # eg speed, area, etc
+            self.displayMeasures[self.dim] = (
+                measure, self if symbols else None)
+    
+        return self
+    
+    @property
+    def epsilon(self):
+        if self._epsilon is not None:
+            return self._epsilon
+        d, f = self._delta, float(self)
+        if d == 0 or f == 0:
+            return 0
+        else:
+            return d / f
+    
+    @epsilon.setter
+    def _set_epsilon(self, n):
+        self._epsilon = n
+        self._delta = None
+    
+    @property
+    def delta(self):
+        if self._delta is not None:
+            return self._delta
+        e, f = self._epsilon, float(self)
+        if e == 0 or f == 0:
+            return 0
+        else:
+            return e * f
+    
+    @epsilon.setter
+    def _set_delta(self, n):
+        self._delta = n
+        self._epsilon = None
     
     precision = 3
     showUnits = True
     showDimension = True
     openLinear = False
+    unicodeExponent = True
     
     # Display dictionaries
     
@@ -83,7 +154,7 @@ class Unit(float, metaclass=UnitMeta):
         
         return '·'.join(dims)
     
-    def _reprElements(self):
+    def _symbolMeasure(self):
         num = self.real
         measure, bUnit = self._measureUnit()
         if bUnit and bUnit != self:
@@ -93,25 +164,62 @@ class Unit(float, metaclass=UnitMeta):
             symbol = bUnit.symbols[0]
         else:
             symbol = self.asFundamentalUnits()
-
-        sNum = scinot(num, self.precision)
-        if num != int(num):
-            sNum += ' '
         
-        if self.delta:
-            sDelta = scinot(self.delta, self.precision)
+        return symbol, measure
+    
+    def _numerical(self, symbol=False):
+        n, d = float(self), self.delta
+        eN, mN = exp_mantissa(n)
+        eD, mD = exp_mantissa(d)
+        
+        if d:
+            exp = max(eN, eD)
+            dExp = abs(eN - eD)
+            
+            fuzzy = (dExp < 4 and not (
+                -3 < exp < 2))
+            if fuzzy:
+                Q = 10 ** exp
+                n /= Q
+                d /= Q
+        else:
+            exp = eN
+            fuzzy = not (-3 < eN < 2)
+            if fuzzy:
+                n = mN
+        
+        n, d = intify(n), intify(d)
+        if exp and fuzzy:
+            if self.unicodeExponent:
+                sExp = '×10' + str(exp).translate(powerify)
+            else:
+                sExp = '×10^' + str(exp)
+        else:
+            sExp = ''
+        
+        if fuzzy:
+            sNum = str(round(n, self.precision))
+            sDelta = str(round(d, self.precision))
+        else:
+            sNum = scinot(n, self.precision, self.unicodeExponent)
+            sDelta = scinot(d, self.precision, self.unicodeExponent)
+        
+        if d:
             sNum += ' ± ' + sDelta
+            if symbol or sExp:
+                sNum = '(' + sNum + ')'
         
-        return sNum, symbol, measure
+        return sNum + sExp
     
     def __str__(self):
-        sNum, symbol, measure = self._reprElements()
-        
-        if sNum == -1 and self.showUnits:
-            sNum = '-'
+        symbol, measure = self._symbolMeasure()
+        sNum = self._numerical(symbol)
         
         if not self.showUnits:
             return sNum.strip()
+        
+        if sNum == '-1':
+            sNum = '-'
         
         if self.showDimension and measure:
             return sNum + symbol + ' (' + measure + ')'
@@ -119,31 +227,6 @@ class Unit(float, metaclass=UnitMeta):
             return sNum + symbol
     
     __repr__ = __str__
-    
-    def __new__(cls, value, *symbols,
-                delta=None, _factor=1, measure=None):
-        
-        num = value if isinstance(value, (int, float)) else _factor
-        dim = (0, 0, 0, 0, 0, 0, 0)
-        
-        if isinstance(value, Unit):
-            dim = value.dim
-            delta = value.delta if delta is None else delta
-        elif isinstance(value, str):
-            dim = tuple(int(d == value) for d in dimensions)
-    
-        self = float.__new__(cls, num)
-        self.dim = dim
-        self.delta = 0 if delta is None else abs(delta)
-        self.symbols = symbols
-        if measure is not None:
-            # do not add unit if not given a symbol,
-            # as only the measure name is introduced:
-            # eg speed, area, etc
-            self.displayMeasures[self.dim] = (
-                measure, self if symbols else None)
-    
-        return self
     
     # Dimension-changing operators
     
@@ -159,24 +242,25 @@ class Unit(float, metaclass=UnitMeta):
     
     def __mul__(self, other, f=float.__mul__, k=1):
         dim = self.dim
-        un = self.delta
+        fo = float(other)
         
         if isinstance(other, Unit):
             dim = tuple(
                 dim[i] + k * other.dim[i]
                 for i in range(len(dimensions)))
-            if float(self) == 0 or float(other) == 0:
-                un = 0
+            if float(self) == 0 or fo == 0:
+                _e = 0
             else:
-                pun = un / float(self)
-                pun += other.delta / float(other)
-                pun += (un / float(self))
-                un = other * pun
+                _e = self.epsilon * other.epsilon
         else:
-            un *= other
+            _e = self.epsilon
         
-        return Unit(dim, delta=un,
-                    _factor=f(self, float(other)))
+        return Unit(
+            dim, _epsilon=_e,
+            _factor=f(self, fo))
+    
+    __call__ = __mul__
+    __rmul__ = __mul__
     
     def __truediv__(self, other):
         return self.__mul__(other, float.__truediv__, k=-1)
@@ -184,13 +268,12 @@ class Unit(float, metaclass=UnitMeta):
     def __floordiv__(self, other):
         return self.__mul__(other, float.__floordiv__, k=-1)
     
-    __rmul__ = __mul__
-    
     def __pow__(self, exp):
         return Unit(
             tuple(intify(v*exp) for v in self.dim),
-            delta = self.delta * abs(exp),
-            _factor = float(self)**exp)
+            _epsilon = self.epsilon * abs(exp),
+            _factor = float(self) ** exp
+        )
 
     def __rtruediv__(self, other):
         factor = float.__truediv__(float(other), float(self))
@@ -226,7 +309,7 @@ class Unit(float, metaclass=UnitMeta):
         odelta = other.delta if isinstance(other, Unit) else 0
         return Unit(
             self.dim,
-            delta   = op(float(self.delta), odelta),
+            _delta  = op(float(self.delta), odelta),
             _factor = op(float(self), other))
     
     def __sub__(self, other):

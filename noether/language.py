@@ -51,7 +51,8 @@ class Noether(Language):
         
         return copyfix(node, Name(F)(node, code))
     
-    @match(kind=(FunctionDef, AsyncFunctionDef))
+    # for some reason this causes errors
+    #@match(kind=(FunctionDef, AsyncFunctionDef))
     def funcSignify(self, node):
         F = '____nF'
         self.locals[F] = assignFunctionID
@@ -80,10 +81,30 @@ class Noether(Language):
         return copyfix(node, Name('Unit')(node))
     
     @match(kind=BinOp, op=Add)
+    def delta(self, node):
+        '''a +- b == Unit(a, _delta=b)'''
+        r = node.right
+        if isinstance(r, UnaryOp) and isinstance(r.op, USub):
+            return copyfix(node, Name('Unit')(
+                node.left, _delta=node.right.operand))
+        return node
+    
+    @match(kind=BinOp, op=Mod)
+    def epsilon(self, node):
+        '''a %+- b == Unit(a, _epsilon=b)'''
+        r = node.right
+        if isinstance(r, UnaryOp) and isinstance(r.op, UAdd):
+            q = r.operand
+            if isinstance(q, UnaryOp) and isinstance(q.op, USub):
+                e = q.operand / 100
+                return copyfix(node, Name('Unit')(
+                    node.left, _epsilon=e))
+        return node
+    
+    @match(kind=UnaryOp, op=UAdd)
     def plusMinus(self, node):
-        if not (isinstance(node.right, UnaryOp) and
-            isinstance(node.right.op, USub)):
-            return node
-        'Unit'
-        return copyfix(node, Name('Unit')(
-            node.left, delta=node.right.operand))
+        o = node.operand
+        if isinstance(o, UnaryOp) and isinstance(o.op, USub):
+            return copyfix(node, Name('Unit')(
+                Num(0), _delta=o.operand))
+        return node
