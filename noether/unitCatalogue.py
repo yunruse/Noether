@@ -231,10 +231,10 @@ for name in dir(Catalogue):
     __all__.append(name)
     
     # Table of symbols
-    sym, m = unit._symbolMeasure()
-    sNum = unit._numerical()
-    m = str(m).replace('None', 'unknown').replace('unitless', '')
-    table.append([name, sNum, sym, m])
+    measure = str(unit.measure
+        ).replace('None', 'unknown'
+        ).replace('unitless', '')
+    table.append([name, unit.numberString(), unit.symbol, measure])
 
 table.sort(key=lambda q: q[3])
 

@@ -17,6 +17,8 @@ dimensions = {
     'substance': 'mol'
 }
 
+_emptyDim = (0, 0, 0, 0, 0, 0, 0)
+
 class UnitMeta(type):
     def _dU_get(cls):
         return list(cls._displayUnits.values())
@@ -32,8 +34,6 @@ class UnitMeta(type):
         cls._displayUnits.clear()
     
     displayUnits = property(_dU_get, _dU_set, _dU_del)
-
-_emptyDim = (0, 0, 0, 0, 0, 0, 0)
 
 class Unit(float, metaclass=UnitMeta):
     __slots__ = 'dim _delta _epsilon'.split()
@@ -93,35 +93,26 @@ class Unit(float, metaclass=UnitMeta):
     openLinear = False
     unicodeExponent = True
     
-    # Display dictionaries
-    
-    # Used to obtain symbol and measure.
-    # The unit is used so repr(Joule) doesn't just
-    # respond with a remarkably useless `1J (energy)`
-    # {unit.dim: (measure_name, base_unit or None}
-    displayMeasures = {}
-    
-    # Base units to display relative to.
-    # {unit.dim: Unit}
-    _displayUnits = {}
-    
-    def _measureUnit(self):
-        if all(i == 0 for i in self.dim):
-            return 'unitless', None
-        
-        measure, base_unit = self.displayMeasures.get(
-            self.dim, (None, None))
-        
-        base_unit = self._displayUnits.get(self.dim, base_unit)
-        return measure, base_unit
+    # {dim: str}, eg {(1, 0, 1...): 'pressure'}
+    _displayMeasures = {}
     
     @property
     def measure(self):
-        return self._measureUnit()[0]
+        if all(i == 0 for i in self.dim):
+            return 'unitless'
+        
+        return self._displayMeasures.get(self.dim, None)
+    
+    # Any units set as a measure (i.e. base SI units)
+    # are stored here for display:
+    # {dim: Unit}
+    _baseDisplayUnits = {}
+    _displayUnits = {}
     
     @property
-    def baseUnit(self):
-        return self._measureUnit()[1]
+    def displayUnit(self):
+        return self._displayUnits.get(self.dim,
+            self._baseDisplayUnits.get(self.dim, None))
     
     def asFundamentalUnits(self):
         dims = []
@@ -135,21 +126,27 @@ class Unit(float, metaclass=UnitMeta):
         
         return '·'.join(dims)
     
-    def _symbolMeasure(self):
-        num = self.real
-        measure, bUnit = self._measureUnit()
-        if bUnit and bUnit != self:
-            num /= bUnit.real
-        
-        if bUnit:
-            symbol = bUnit.symbols[0]
-        else:
-            symbol = self.asFundamentalUnits()
-        
-        return symbol, measure
+    @property
+    def symbol(self):
+        if self.displayUnit:
+            return self.displayUnit.symbols[0]
     
-    def _numerical(self, symbol=False):
-        n, d = float(self), self.delta
+    def numberString(self, parens=False, useDisplayUnit=True):
+        '''
+        Return display form of number and uncertainty.
+        
+        Will attempt to simplify for display.
+        
+        Specify parens=True to guarantee parentheses - otherwise
+        will only provide if there is a common factor to the number
+        and uncertainty.        
+        '''
+        
+        display = self
+        if self.displayUnit and useDisplayUnit:
+            display = self / self.displayUnit
+        
+        n, d = float(display), display.delta
         eN, mN = exp_mantissa(n)
         eD, mD = exp_mantissa(d)
         
@@ -187,14 +184,14 @@ class Unit(float, metaclass=UnitMeta):
         
         if d:
             sNum += ' ± ' + sDelta
-            if symbol or sExp:
+            if parens or sExp:
                 sNum = '(' + sNum + ')'
         
         return sNum + sExp
     
     def __str__(self):
-        symbol, measure = self._symbolMeasure()
-        sNum = self._numerical(symbol)
+        
+        sNum = self.numberString(parens=self.symbol)
         
         if not self.showUnits:
             return sNum.strip()
@@ -202,10 +199,12 @@ class Unit(float, metaclass=UnitMeta):
         if sNum == '-1':
             sNum = '-'
         
-        if self.showDimension and measure:
-            return sNum + symbol + ' (' + measure + ')'
-        else:
-            return sNum + symbol
+        sNum += self.symbol or self.asFundamentalUnits()
+        
+        if self.showDimension and self.measure:
+            sNum += ' (' + self.measure + ')'
+        
+        return sNum
     
     __repr__ = __str__
     
@@ -331,7 +330,8 @@ class BaseUnit(Unit):
         self.symbols = symbols
         
         if m is not None:
-            self.displayMeasures[self.dim] = (
-                m, self if symbols else None)
+            self._displayMeasures[self.dim] = m
+            if symbols:
+                self._baseDisplayUnits[self.dim] = self
         return self
     

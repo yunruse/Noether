@@ -13,7 +13,7 @@ def test():
     success = True
     for num, delta, rep in tests:
         a = Unit(num, _delta=delta)
-        result = a._numerical(False)
+        result = a.numberString(parens=False)
         if result != rep:
             success = False
             print('{} != {}'.format(
