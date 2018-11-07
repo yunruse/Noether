@@ -4,7 +4,7 @@ import math
 import operator
 
 from .helpers import intify, sign, product
-from .scale import *
+from .scale import powerify, exp_mantissa, scinot
 from .matrix import Matrix
 
 dimensions = {
@@ -37,7 +37,7 @@ class UnitMeta(type):
 
 class Unit(float, metaclass=UnitMeta):
     __slots__ = 'dim _delta _epsilon'.split()
-    
+
     def __new__(cls, value=1, **kw):
         
         if isinstance(value, Unit):
@@ -46,7 +46,7 @@ class Unit(float, metaclass=UnitMeta):
             d('_delta', value._delta)
             d('_epsilon', value._epsilon)
             value = float(value)
-    
+
         self = float.__new__(cls, value)
         
         dim = kw.get('_dim', (0, 0, 0, 0, 0, 0, 0))
@@ -148,7 +148,7 @@ class Unit(float, metaclass=UnitMeta):
         
         n, d = float(display), display.delta
         eN, mN = exp_mantissa(n)
-        eD, mD = exp_mantissa(d)
+        eD, _ = exp_mantissa(d)
         
         if d:
             exp = max(eN, eD)
@@ -321,7 +321,7 @@ class Unit(float, metaclass=UnitMeta):
     
     def __or__(self, other):
         return Matrix(self) | other
-    def __or__(self, other):
+    def __ror__(self, other):
         return other | Matrix(self)
 
 class BaseUnit(Unit):
