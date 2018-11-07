@@ -37,15 +37,13 @@ def main(args):
     ))
     
     if args.command:
-        exec_(args.command, globals=ns)
+        lang.staticExec(args.command, globals=ns)
     elif args.file:
         fname = os.path.join(os.getcwd(), args.file)
         if os.path.isfile(fname):
             with open(fname, encoding='utf8') as f:
                 code = ''.join(f.readlines())
-                exec_(code, globals=ns)
-    else:
-        interactive = True
+                lang.staticExec(code, globals=ns)
     
     if doRepl or args.interactive:
         repl.repl(lang, globals=ns, locals=dict())
