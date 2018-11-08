@@ -19,7 +19,7 @@ def exp_mantissa(num, base=10):
     if num == 0:
         return 1, 0
     # log(1e3, 10) = 2.99...
-    exp = floor(round(log(abs(num), base), 12)
+    exp = floor(round(log(abs(num), base), 12))
     mantissa = num / (base ** exp)
     return exp, mantissa
 
@@ -69,7 +69,7 @@ def scinot(num, precision=4, unicode_exponents=True, lower=-2, upper=3):
             num += '10^' + str(exp)
     return num
 
-def numberString(number, delta=0, parens=False, precision=2, unicode_exponent=False, lower=-2, upper=3):
+def numberString(number, delta=0, parens=False, precision=2, unicode_exponent=False, lower=-2, upper=4):
     '''
     Format a number and uncertainty.
     
@@ -102,9 +102,9 @@ def numberString(number, delta=0, parens=False, precision=2, unicode_exponent=Fa
     
     sNum = ''
     if number:
-        sNum += scinot(number, precision, unicode_exponent, lower=-2, upper=3)
+        sNum += scinot(number, precision, unicode_exponent, lower, upper)
     if delta:
-        sNum += ' ± ' + scinot(delta, precision, unicode_exponent, lower=-2, upper=3)
+        sNum += ' ± ' + scinot(delta, precision, unicode_exponent, lower, upper)
     
     sNum = sNum.strip() or '0'
     if parens or sExp:
