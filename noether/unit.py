@@ -1,4 +1,4 @@
-'''Noether: International System of Units dimensionality object'''
+"""Noether: International System of Units dimensionality object"""
 
 import operator
 
@@ -6,8 +6,9 @@ from .helpers import intify
 from .scale import numberString, superscript
 from .matrix import Matrix
 
+
 class Dimension(tuple):
-    fundamental = 'A K m s Kg Cd mol rad'.split()
+    fundamental = "A K m s Kg Cd mol rad".split()
 
     def __new__(cls, name_or_tuple=None):
         if isinstance(name_or_tuple, tuple):
@@ -15,17 +16,16 @@ class Dimension(tuple):
         elif isinstance(name_or_tuple, str):
             val = cls._names.get(name_or_tuple)
         elif isinstance(name_or_tuple, int):
-            val = tuple(name_or_tuple == i+1 for i in range(8))
+            val = tuple(name_or_tuple == i + 1 for i in range(8))
         else:
             val = tuple([0] * 8)
         return tuple.__new__(Dimension, val)
-    
+
     _names = {}
     name = property(
-        lambda s: s._names.get(s, None),
-        _names.__setitem__, _names.__delitem__
+        lambda s: s._names.get(s, None), _names.__setitem__, _names.__delitem__
     )
-    
+
     def asFundamentalUnits(self):
         dims = []
         for sym, exp in zip(self.fundamental, self):
@@ -35,78 +35,100 @@ class Dimension(tuple):
                 if Unit.unicodeExponent:
                     sym += str(exp).translate(superscript)
                 else:
-                    sym += '^' + str(exp)
+                    sym += "^" + str(exp)
             dims.append(sym)
-        
-        return '·'.join(dims)
-    
+
+        return "·".join(dims)
+
     __str__ = asFundamentalUnits
 
-
     def __repr__(self):
-        return 'Dimension({!r})'.format(
-            self._names.get(
-                self, tuple(self) if self else None)
+        return "Dimension({!r})".format(
+            self._names.get(self, tuple(self) if self else None)
         )
-    
+
     def __bool__(self):
-        return not all (i == 0 for i in self)
-    
+        return not all(i == 0 for i in self)
+
     def _checkType(self, other):
+        """Check and attempt to match other unit to Dimension"""
+        if isinstance(other, (float, int)):
+            return Dimension()
         if isinstance(other, Dimension):
             return other
         elif isinstance(other, Unit):
             return other.dim
         else:
-            raise TypeError('Cannot operate on Dimension with {}'.format(
-                type(other).__name__
-            ))
+            raise TypeError(
+                "Cannot operate on Dimension with {}".format(type(other).__name__)
+            )
 
     def __mul__(self, other):
         other = self._checkType(other)
         return Dimension(tuple(u + v for (u, v) in zip(self, other)))
-    
+
     def __pow__(self, exp):
         if isinstance(exp, (int, float)):
             return Dimension(tuple(intify(v * exp) for v in self))
         else:
-            raise TypeError('Cannot raise dimension to non-real exponent')
+            raise TypeError("Cannot raise dimension to non-real exponent")
 
     def __truediv__(self, other):
         other = self._checkType(other)
         return Dimension(tuple(u - v for (u, v) in zip(self, other)))
 
     def __rtruediv__(self, exp):
-        if isinstance(exp, (int, float)):
-            return Dimension(tuple(-v for v in self))
-        else:
-            other = self._checkType(exp)
-            return Dimension(tuple(u - v for (u, v) in zip(other, self)))
+        return self._checkType(exp) / self
 
     __floordiv__ = __truediv__
     __rfloordiv__ = __rtruediv__
     __rmul__ = __mul__
     __pos__ = __neg__ = lambda s: s
-    __sub__ = __rsub__ = __add__ = __radd__ = _checkType
+
+    def _checkLinear(self, other):
+        other = self._checkType(other)
+        if self == other:
+            return self
+        else:
+            raise ValueError(
+                """
+Cannot linearly operate on inequal dimensions {} and {}
+""".format(
+                    self, other
+                )
+            )
+
+    __sub__ = __rsub__ = __add__ = __radd__ = _checkLinear
+
 
 class UnitMeta(type):
+    """Metaclass of shared Unit properties"""
+
     def _dU_get(cls):
         return list(cls._displayUnits.values())
-    
+
     def _dU_set(cls, bases):
         cls._displayUnits.clear()
-        if not hasattr(bases, '__iter__'):
+        if not hasattr(bases, "__iter__"):
             bases = [bases]
         for unit in bases:
             cls._displayUnits[unit.dim] = unit
-    
+
     def _dU_del(cls):
         cls._displayUnits.clear()
-    
+
     displayUnits = property(_dU_get, _dU_set, _dU_del)
 
+
 class Unit(float, metaclass=UnitMeta):
-    __slots__ = 'dim _delta _epsilon'.split()
+
+    precision = 3
+    showUnits = True
+    showDimension = True
+    openLinear = False
+    unicodeExponent = True
+
+    __slots__ = "dim _delta _epsilon".split()
 
     def __new__(cls, value=1, **kw):
         self = float.__new__(cls, value)
@@ -115,15 +137,15 @@ class Unit(float, metaclass=UnitMeta):
             dim, delta, eps = value.dim, value._delta, value._epsilon
         else:
             dim, delta, eps = None, None, None
-        
-        self.dim = Dimension(kw.get('_dim', dim))
-        self._delta = kw.get('_delta', delta)
-        self._epsilon = kw.get('_epsilon', eps)
-    
+
+        self.dim = Dimension(kw.get("_dim", dim))
+        self._delta = kw.get("_delta", delta)
+        self._epsilon = kw.get("_epsilon", eps)
+
         return self
-    
+
     # Delta / epsilon (absolute / relative uncertainties)
-    
+
     def _d_get(self):
         if self._delta is not None:
             return self._delta
@@ -132,11 +154,13 @@ class Unit(float, metaclass=UnitMeta):
             return 0
         else:
             return abs(e * f)
+
     def _d_set(self, d):
         self._delta = abs(d)
         self._epsilon = None
+
     delta = property(_d_get, _d_set, lambda s: s._d_set(0))
-    
+
     def _e_get(self):
         if self._epsilon is not None:
             return self._epsilon
@@ -145,74 +169,72 @@ class Unit(float, metaclass=UnitMeta):
             return 0
         else:
             return abs(d / f)
+
     def _e_set(self, e):
         self._epsilon = abs(e)
         self._delta = None
+
     epsilon = property(_e_get, _e_set, lambda s: s._e_set(0))
-    
-    precision = 3
-    showUnits = True
-    showDimension = True
-    openLinear = False
-    unicodeExponent = True
-    
+
     # Any units set as a measure (i.e. base SI units)
     # are stored here for display:
     # {dim: Unit}
     _baseDisplayUnits = {}
     _displayUnits = {}
-    
+
     @property
     def displayUnit(self):
-        return self._displayUnits.get(self.dim,
-            self._baseDisplayUnits.get(self.dim, None))
-    
+        return self._displayUnits.get(
+            self.dim, self._baseDisplayUnits.get(self.dim, None)
+        )
+
     @property
     def symbol(self):
         if self.displayUnit:
             return self.displayUnit.symbols[0]
-    
+
     def numberString(self, useDisplayUnit=False):
-        display = (self / self.displayUnit
-            if useDisplayUnit and self.displayUnit
-            else self)
-        
+        display = self
+        if useDisplayUnit and self.displayUnit:
+            display /= self.displayUnit
+
         useParens = bool(self.symbol)
         return numberString(
-            float(display), display.delta, useParens,
-            self.precision, self.unicodeExponent)
+            float(display),
+            display.delta,
+            useParens,
+            self.precision,
+            self.unicodeExponent,
+        )
 
-    
     def __str__(self):
         sNum = self.numberString(useDisplayUnit=True)
-        
+
         if not self.showUnits:
             return sNum.strip()
-        
-        if sNum == '-1':
-            sNum = '-'
-        
+
+        if sNum == "-1":
+            sNum = "-"
+
         sNum += self.symbol or self.dim.asFundamentalUnits()
-        
+
         if self.showDimension and self.dim.name:
-            sNum += ' ({})'.format(self.dim.name)
-        
+            sNum += " ({})".format(self.dim.name)
+
         return sNum
-    
+
     __repr__ = __str__
-    
+
     # Dimension-changing operators
-    
+
     @property
     def invUnit(self):
-        return Unit(
-            tuple(-i for i in self.dim),
-            _factor=float(self))
-    
+        return Unit(tuple(-i for i in self.dim), _factor=float(self))
+
     @property
     def inv(self):
         return 1 / self
-    
+
     def __mul__(self, other, f=operator.mul):
         if other is 1:
             return self
@@ -225,9 +247,9 @@ class Unit(float, metaclass=UnitMeta):
         else:
             dim = self.dim
             e = self.epsilon
-        
+
         return Unit(f(float(self), float(other)), _dim=dim, _epsilon=e)
-    
+
     __call__ = __mul__
     __rmul__ = __mul__
     __truediv__ = lambda s, o: s.__mul__(o, operator.truediv)
@@ -235,26 +257,21 @@ class Unit(float, metaclass=UnitMeta):
 
     def __pow__(self, exp):
         return Unit(
-            float(self) ** exp,
-            _dim = self.dim ** exp,
-            _epsilon = self.epsilon * abs(exp),
+            float(self) ** exp, _dim=self.dim ** exp, _epsilon=self.epsilon * abs(exp)
         )
 
     def __rtruediv__(self, other):
         return other * self ** -1
-    
+
     # Linear operations
-    
+
     __neg__ = lambda s: s * -1
-    
+
     def __cmp(self, other):
         # Linear helper
-        if (not self.openLinear
-            and isinstance(other, Unit)
-            and self.dim != other.dim):
-            raise ValueError('Inequal units {} and {}.'.format(
-                self.dim, other.dim))
-        
+        if not self.openLinear and isinstance(other, Unit) and self.dim != other.dim:
+            raise ValueError("Inequal units {} and {}.".format(self.dim, other.dim))
+
         # Return limits of uncertainty
         sl = float(self) - self.delta
         su = float(self) + self.delta
@@ -264,7 +281,7 @@ class Unit(float, metaclass=UnitMeta):
         else:
             ol, ou = other, other
         return sl, su, ol, ou
-    
+
     def __add__(self, other, op=operator.add):
         if isinstance(other, Dimension):
             return other._checkType(self)
@@ -273,52 +290,55 @@ class Unit(float, metaclass=UnitMeta):
         odelta = other.delta if isinstance(other, Unit) else 0
         return Unit(
             op(float(self), float(other)),
-            _dim = self.dim,
-            _delta = op(float(self.delta), odelta)
+            _dim=self.dim,
+            _delta=op(float(self.delta), odelta),
         )
-    
+
     def __sub__(self, other):
         return self.__add__(other, operator.sub)
-    
+
     __radd__ = __add__
     __rsub__ = __sub__
-    
+
     # comparison operators require range-checking
-    
+
     def __eq__(self, other):
         sl, su, ol, ou = self.__cmp(other)
-        return ((sl <= ol <= su) or (sl <= ou <= su) or
-                (ol <= sl <= ou) or (ol <= su <= ou))
-    
+        return (
+            (sl <= ol <= su) or (sl <= ou <= su) or (ol <= sl <= ou) or (ol <= su <= ou)
+        )
+
     def __ne__(self, other):
         sl, su, ol, ou = self.__cmp(other)
         return sl <= ou or ol <= su
-    
-    #__lt__ = lambda s, o: s.__cmp(o, operator.lt)
-    #__le__ = lambda s, o: s.__cmp(o, operator.le)
-    #__ge__ = lambda s, o: s.__cmp(o, operator.ge)
-    #__gt__ = lambda s, o: s.__cmp(o, operator.gt)
-    
+
+    # __lt__ = lambda s, o: s.__cmp(o, operator.lt)
+    # __le__ = lambda s, o: s.__cmp(o, operator.le)
+    # __ge__ = lambda s, o: s.__cmp(o, operator.ge)
+    # __gt__ = lambda s, o: s.__cmp(o, operator.gt)
+
     # Matrix operators
-    
+
     def __and__(self, other):
         return Matrix(self) & other
+
     def __rand__(self, other):
         return other & Matrix(self)
-    
+
     def __or__(self, other):
         return Matrix(self) | other
+
     def __ror__(self, other):
         return other | Matrix(self)
 
+
 class BaseUnit(Unit):
-    __slots__ = Unit.__slots__ + ['symbols']
-    
+    __slots__ = Unit.__slots__ + ["symbols"]
+
     def __new__(cls, value, *symbols, isDisplay=False, **kw):
         self = Unit.__new__(cls, value, **kw)
         self.symbols = symbols
-        
+
         if symbols and isDisplay:
             self._baseDisplayUnits[self.dim] = self
         return self
-    
