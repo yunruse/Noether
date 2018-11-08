@@ -18,17 +18,17 @@ Lightyear = BaseUnit(c * Year, 'ly')
 h = BaseUnit(6.626_070_040e-34 * Joule * Second, 'h')
 hbar = BaseUnit(h / tau, 'ħ')
 
-Permeability = Force / Current ** 2
+Permeability = Force / Current**2
 mu_0 = BaseUnit(2 * tau * 1e-7 * Newton / Ampere ** 2)
 
-Permittivity = 1 / (Permeability * Speed **2)
-e_0  = BaseUnit(1 / (mu_0 * c**2))
+Permittivity = 1 / (Permeability * Speed**2)
+e_0 = BaseUnit(1 / (mu_0 * c**2))
 
 Impedance = Permeability * Speed
-z_0  = BaseUnit(mu_0 * c)
+z_0 = BaseUnit(mu_0 * c)
 
 grav = BaseUnit(6.67408e-11 * Newton * Metre**2 / Kilogram**2)
-k_e  = BaseUnit(1 / (2 * tau * e_0))
+k_e = BaseUnit(1 / (2 * tau * e_0))
 
 
 # Particle + chemical constants
