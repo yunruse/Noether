@@ -20,8 +20,14 @@ def importer():
     from . import graphing
     ns.update(graphing.__dict__)
 
+def test():
+    from unittest import TextTestRunner
+    os.sys.path.append(os.path.abspath('..'))
+    from tests import suite
+    TextTestRunner(verbosity=1).run(suite)
+
 def main(args):
-    doRepl = not (args.command or args.file)
+    doRepl = not (args.command or args.file or args.doTest)
     
     if doRepl:
         print('Noether (dev)\n')
@@ -35,6 +41,10 @@ def main(args):
         eval=lang.staticEval,
         compile=lang.staticCompile,
     ))
+    
+    print(sys.argv, args)
+    if args.doTest:
+        test()
     
     if args.command:
         lang.staticExec(args.command, globals=ns)
@@ -68,5 +78,9 @@ parser.add_argument(
 parser.add_argument(
     '-s', dest='languageChange', action='store_false',
     help="suppress Noether's syntax changes")
+
+parser.add_argument(
+    '--test', dest='doTest', action='store_true',
+    help="run unit tests")
 
 main(parser.parse_args())
