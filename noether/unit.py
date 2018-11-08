@@ -1,9 +1,8 @@
 '''Noether: International System of Units dimensionality object'''
 
-import math
 import operator
 
-from .helpers import intify, sign, product
+from .helpers import intify
 from .scale import numberString, superscript
 from .matrix import Matrix
 
