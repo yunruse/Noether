@@ -52,32 +52,43 @@ class Dimension(tuple):
     
     def __bool__(self):
         return not all (i == 0 for i in self)
+    
+    def _checkType(self, other):
+        if isinstance(other, Dimension):
+            return other
+        elif isinstance(other, Unit):
+            return other.dim
+        else:
+            raise TypeError('Cannot operate on Dimension with {}'.format(
+                type(other).__name__
+            ))
 
     def __mul__(self, other):
-        if isinstance(other, Dimension):
-            return Dimension(tuple(u + v for (u, v) in zip(self, other)))
-        else:
-            return NotImplemented
-
-    def __truediv__(self, other):
-        if isinstance(other, Dimension):
-            return Dimension(tuple(u - v for (u, v) in zip(self, other)))
-        else:
-            return NotImplemented
+        other = self._checkType(other)
+        return Dimension(tuple(u + v for (u, v) in zip(self, other)))
     
-    __floordiv__ = __truediv__
-
     def __pow__(self, exp):
         if isinstance(exp, (int, float)):
             return Dimension(tuple(intify(v * exp) for v in self))
         else:
-            return NotImplemented
+            raise TypeError('Cannot raise dimension to non-real exponent')
+
+    def __truediv__(self, other):
+        other = self._checkType(other)
+        return Dimension(tuple(u - v for (u, v) in zip(self, other)))
 
     def __rtruediv__(self, exp):
-        if exp == 1:
+        if isinstance(exp, (int, float)):
             return Dimension(tuple(-v for v in self))
         else:
-            return NotImplemented
+            other = self._checkType(exp)
+            return Dimension(tuple(u - v for (u, v) in zip(other, self)))
+
+    __floordiv__ = __truediv__
+    __rfloordiv__ = __rtruediv__
+    __rmul__ = __mul__
+    __pos__ = __neg__ = lambda s: s
+    __sub__ = __rsub__ = __add__ = __radd__ = _checkType
 
 class UnitMeta(type):
     def _dU_get(cls):
