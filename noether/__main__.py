@@ -42,7 +42,6 @@ def main(args):
         compile=lang.staticCompile,
     ))
     
-    print(sys.argv, args)
     if args.doTest:
         test()
     

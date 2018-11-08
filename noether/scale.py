@@ -79,9 +79,6 @@ def numberString(number, delta=0, parens=False, precision=2, unicode_exponent=Fa
     '''
     eN, _ = exp_mantissa(number)
     eD, _ = exp_mantissa(delta)
-    print(number, eN)
-    print(delta, eD)
-
     sharedExp = 0
     
     if delta:
