@@ -18,7 +18,8 @@ def exp_mantissa(num, base=10):
     '''Returns e, m such that x = m×10^e'''
     if num == 0:
         return 1, 0
-    exp = floor(log(abs(num), base))
+    # log(1e3, 10) = 2.99...
+    exp = floor(round(log(abs(num), base), 12)
     mantissa = num / (base ** exp)
     return exp, mantissa
 
