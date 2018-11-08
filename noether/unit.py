@@ -4,7 +4,7 @@ import math
 import operator
 
 from .helpers import intify, sign, product
-from .scale import numberString
+from .scale import numberString, superscript
 from .matrix import Matrix
 
 dimensions = {
@@ -121,7 +121,10 @@ class Unit(float, metaclass=UnitMeta):
             if v == 0:
                 continue
             elif v != 1:
-                sym += str(v).translate(powerify)
+                if self.unicodeExponent:
+                    sym += str(v).translate(superscript)
+                else:
+                    sym += '^' + str(v)
             dims.append(sym)
         
         return '·'.join(dims)
@@ -131,7 +134,7 @@ class Unit(float, metaclass=UnitMeta):
         if self.displayUnit:
             return self.displayUnit.symbols[0]
     
-    def numberString(self, parens=False, useDisplayUnit=False):
+    def numberString(self, useDisplayUnit=False):
         display = (self / self.displayUnit
             if useDisplayUnit and self.displayUnit
             else self)
@@ -142,7 +145,7 @@ class Unit(float, metaclass=UnitMeta):
 
     
     def __str__(self):
-        sNum = self.numberString(parens=self.symbol, useDisplayUnit=True)
+        sNum = self.numberString(useDisplayUnit=True)
         
         if not self.showUnits:
             return sNum.strip()
