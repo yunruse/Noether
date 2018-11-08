@@ -217,7 +217,9 @@ class Unit(float, metaclass=UnitMeta):
     def __mul__(self, other, f=operator.mul):
         if other is 1:
             return self
-        
+
+        if isinstance(other, Dimension):
+            return f(self.dim, other)
         if isinstance(other, Unit):
             dim = f(self.dim, other.dim)
             e = self.epsilon + other.epsilon
@@ -265,6 +267,9 @@ class Unit(float, metaclass=UnitMeta):
         return sl, su, ol, ou
     
     def __add__(self, other, op=operator.add):
+        if isinstance(other, Dimension):
+            return other._checkType(self)
+
         self.__cmp(other)
         odelta = other.delta if isinstance(other, Unit) else 0
         return Unit(
