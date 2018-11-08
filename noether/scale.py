@@ -69,13 +69,12 @@ def scinot(num, precision=4, unicode_exponents=True, lower=-2, upper=3):
             num += '10^' + str(exp)
     return num
 
-def numberString(number, delta=0, parens=False, precision=2, unicode_exponent=False, lower=-2, upper=4):
+def numberString(number, delta=0, asUnit=False, precision=2, unicode_exponent=False, lower=-2, upper=4):
     '''
     Format a number and uncertainty.
     
-    Specify parens=True to guarantee parentheses - otherwise
-    will only provide if there is a common factor to the number
-    and uncertainty.        
+    Specify asUnit=True to ensure the result is valid in multiplication,
+    and specify `lower` and `upper` for naturalisation limits.
     '''
     eN, _ = exp_mantissa(number)
     eD, _ = exp_mantissa(delta)
@@ -104,7 +103,7 @@ def numberString(number, delta=0, parens=False, precision=2, unicode_exponent=Fa
         sNum += ' ± ' + scinot(delta, precision, unicode_exponent, lower, upper)
     
     sNum = sNum.strip() or '0'
-    if parens or sExp:
+    if sExp or (number and delta and asUnit):
         sNum = '(' + sNum + ')' + sExp
     
     return sNum
