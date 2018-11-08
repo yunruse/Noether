@@ -1,87 +1,97 @@
 '''Noether: SI, SI-derived and SI-compatible units'''
 
-from .unit import BaseUnit, Unit
+from .unit import BaseUnit, Unit, Dimension
 from math import pi
 
 U = BaseUnit
-BU = lambda q, sym: U(1, sym, _dim=q, m=q)
+BU = lambda dim, sym: U(1, sym, isDisplay=True, _dim=dim)
 
-# Fundemental SI units
-Ampere = BU('current', 'A')
-Kelvin = BU('temperature', 'k')
-Second = BU('time', 's')
-Meter = Metre = BU('length', 'm')
-Kilogram = BU('mass', 'kg')
-Candela = BU('luminosity', 'cd')
-Mole = BU('substance', 'mol')
+# Fundamental measures, units
+Current     = Dimension(1)
+Temperature = Dimension(2)
+Distance    = Dimension(3)
+Time        = Dimension(4)
+Mass        = Dimension(5)
+Luminosity  = Dimension(6)
+Substance   = Dimension(7)
+Angle       = Dimension(8)
 
-# SI derived units
+Length = Distance
 
-Hertz = U(1 / Second, 'Hz', m='frequency')
-Radian = U(Metre / Metre, 'rad')
-Steradian = U(Radian**2, 'rad')
+Ampere = BU(Current, 'A')
+Kelvin = BU(Temperature, 'k')
+Meter = Metre = BU(Distance, 'm')
+Second = BU(Time, 's')
+Kilogram = BU(Mass, 'kg')
+Candela = BU(Luminosity, 'cd')
+Mole = BU(Substance, 'mol')
 
-Newton = U(
-    Kilogram * Metre / Second ** 2,
-    'N', m='force')
-Pascal = U(
-    Newton / Metre ** 2,
-    'Pa', m='pressure')
-Joule = U(
-    Newton * Metre,
-    'J', m='energy')
-Watt = U(
-    Joule / Second,
-    'W', m='power')
-Coulomb = U(
-    Ampere * Second,
-    'C', m='charge')
-Volt = U(
-    Watt / Ampere,
-    'V', m='voltage')
-Farad = U(
-    Coulomb / Volt,
-    'F', m='capacitance')
-Ohm = U(
-    Volt / Ampere,
-    'Ω', m='resistance')
-Siemens = U(
-    1 / Ohm,
-    'S', m='conductance')
-Weber = U(
-    Joule / Ampere,
-    'Wb', m='magnetic flux')
-Tesla = U(
-    Weber / (Metre ** 2),
-    'T', m='magnetic flux density')
-Henry = U(
-    Ohm * Second,
-    'H', m='inductance')
+# SI Derived units
+Frequency = Time ** -1
+Hertz = BU(Frequency, 'Hz')
 
-Lumen = U(
-    Candela * Steradian,
-    'lm', m='luminous flux')
-Lux = U(Lumen / Metre ** 2, 'lx', m='illuminance')
+Radian = BU(Angle, 'rad')
+Steradian = BU(Angle ** 2, 'sterad')
+
+Area = Distance ** 2
+Volume = Distance ** 3
+
+Velocity = Speed = Distance / Time
+Acceleration = Speed / Time
+Jerk = Acceleration / Time
+
+Momentum = Mass * Speed
+
+Force = Mass * Acceleration
+Newton = BU(Force, 'N')
+
+Pressure = Force / Area
+Pascal = BU(Pressure, 'Pa')
+
+Energy = Force * Distance
+Joule = BU(Energy, 'J')
+
+Power = Energy / Time
+Watt = BU(Power, 'W')
+
+Charge = Current * Time
+Coulomb = BU(Charge, 'C')
+
+Voltage = Power / Current
+Volt = BU(Voltage, 'V')
+
+Capacitance = Charge / Voltage
+Farad = BU(Capacitance, 'F')
+
+Resistance = Voltage / Current
+Ohm = BU(Resistance, 'Ω')
+
+Conductance = Resistance ** -1
+Siemens = BU(Conductance, 'S')
+
+MagneticFlux = Energy / Current
+Weber = BU(MagneticFlux, 'Wb')
+
+MagneticFluxDensity = MagneticFlux / Area
+Tesla = BU(MagneticFluxDensity, 'T')
+
+Inductance = Resistance * Time
+Henry = BU(Inductance, 'H')
+
+Lumen = BU(Luminosity * Angle ** 2, 'lum')
+
+Illuminance = Luminosity / Area
+Lux = BU(Illuminance, 'lx')
+
 Becquerel = U(Hertz, 'Bq')
-Gray = U(Joule / Kilogram, 'Gy', m='dose')
-Sievert = U(Gray, 'Sv')
-Katal = U(
-    Mole / Second,
-    'kat', m='catalytic activity')
+Dose = Energy / Mass
+Gray = BU(Dose, 'Gy')
+Sievert = BU(Dose, 'Sv')
 
-# Unnamed derivative measures
+CatalyticActivity = Substance / Time
+Katal = BU(CatalyticActivity, 'kat')
 
-for i, m in enumerate((
-    'speed', 'acceleration', 'snap', 'crackle', 'pop'
-    ), start=1):
-    U(Metre / Second**i, m=m)
-
-U(Kilogram * Metre / Second, m='momentum')
-U(Metre**2, m='area')
-U(Metre**3, m='volume')
-
-U(Newton / Metre, 'Nm⁻¹',
-        m='surface tension, spring constant')
+SurfaceTension = Force / Distance
 
 # Conventional SI-accepted units
 
@@ -211,13 +221,16 @@ GalacticYear = 225 * 1e9 * Year
 Firkin = 90 * Pound
 Smoot = 1.67005 * Metre
 
+# Name transmogrification
+
 __all__ = []
 
 units = dict(globals()).items()
 
 for name, unit in units:
-    # Append name to list of symbols, then add to __all__
-    if isinstance(unit, BaseUnit):
+    if isinstance(unit, Dimension):
+        unit.name = name
+    elif isinstance(unit, BaseUnit):
         unit.symbols += (name, )
     elif isinstance(unit, Unit):
         globals()[name] = U(unit, name)
