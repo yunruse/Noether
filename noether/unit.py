@@ -4,7 +4,7 @@ import math
 import operator
 
 from .helpers import intify, sign, product
-from .scale import powerify, exp_mantissa, scinot
+from .scale import numberString
 from .matrix import Matrix
 
 dimensions = {
@@ -131,67 +131,18 @@ class Unit(float, metaclass=UnitMeta):
         if self.displayUnit:
             return self.displayUnit.symbols[0]
     
-    def numberString(self, parens=False, useDisplayUnit=True):
-        '''
-        Return display form of number and uncertainty.
-        
-        Will attempt to simplify for display.
-        
-        Specify parens=True to guarantee parentheses - otherwise
-        will only provide if there is a common factor to the number
-        and uncertainty.        
-        '''
-        
-        display = self
-        if self.displayUnit and useDisplayUnit:
-            display = self / self.displayUnit
-        
-        n, d = float(display), display.delta
-        eN, mN = exp_mantissa(n)
-        eD, _ = exp_mantissa(d)
-        
-        if d:
-            exp = max(eN, eD)
-            dExp = abs(eN - eD)
-            
-            fuzzy = (dExp < 4 and not (
-                -3 < exp < 2))
-            if fuzzy:
-                Q = 10 ** exp
-                n /= Q
-                d /= Q
-        else:
-            exp = eN
-            fuzzy = not (-3 < eN < 2)
-            if fuzzy:
-                n = mN
-        
-        n, d = intify(n), intify(d)
-        if exp and fuzzy:
-            if self.unicodeExponent:
-                sExp = '×10' + str(exp).translate(powerify)
-            else:
-                sExp = '×10^' + str(exp)
-        else:
-            sExp = ''
-        
-        if fuzzy:
-            sNum = str(round(n, self.precision))
-            sDelta = str(round(d, self.precision))
-        else:
-            sNum = scinot(n, self.precision, self.unicodeExponent)
-            sDelta = scinot(d, self.precision, self.unicodeExponent)
-        
-        if d:
-            sNum += ' ± ' + sDelta
-            if parens or sExp:
-                sNum = '(' + sNum + ')'
-        
-        return sNum + sExp
+    def numberString(self, parens=False, useDisplayUnit=False):
+        display = (self / self.displayUnit
+            if useDisplayUnit and self.displayUnit
+            else self)
+        useParens = bool(self.symbol)
+        return numberString(
+            float(display), display.delta, useParens,
+            self.precision, self.unicodeExponent)
+
     
     def __str__(self):
-        
-        sNum = self.numberString(parens=self.symbol)
+        sNum = self.numberString(parens=self.symbol, useDisplayUnit=True)
         
         if not self.showUnits:
             return sNum.strip()

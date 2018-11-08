@@ -3,7 +3,7 @@
 from .helpers import sign, intify
 from math import log, floor
 
-__all__ = 'prefix exp_mantissa prefixify powerify scinot'.split()
+__all__ = 'prefix exp_mantissa prefixify scinot numberString'.split()
 
 class prefix:
     pass
@@ -33,42 +33,80 @@ def prefixify(num):
     else:
         return num, ''
 
-powerify = str.maketrans('-0123456789', '⁻⁰¹²³⁴⁵⁶⁷⁸⁹')
+superscript = str.maketrans('-0123456789', '⁻⁰¹²³⁴⁵⁶⁷⁸⁹')
 
-def scinot(num, precision=4, unicode_exponents=True):
-    '''Return number in scientific notation.'''
+def scinot(num, precision=4, unicode_exponents=True, lower=-2, upper=3):
+    '''Return number in scientific notation.
     
-    # -1, 0, 1: special cases
-    if num == sign(num):
-        return str(num)
+    If the exponent of 10 is in the range of `lower` and `upper`, will simply round.'''
     
     exp, man = exp_mantissa(num)
     
-    if -3 <= exp <= 2:
-        # easily naturalised
-        precision -= exp
-        exp = None
-        man = num
+    # try avoiding exponent for small exponents if provided
+    if lower is not None and upper is not None:
+        if lower < exp < upper:
+            precision -= exp
+            exp = None
+            man = num
     
     man = intify(man)
     
-    if man == 1:
+    if exp and man == 1:
         num = ''
-    elif man == -1:
+    elif exp and man == -1:
         num = '-'
-    elif isinstance(man, int):
-        num = str(man)
     else:
-        num = str(round(man, precision))
+        num = str(intify(round(man, precision)))
     
     if exp:
-        # unicode exponents
+        # special case of 10^n, -10^n
         if abs(man) != 1:
             num += '×'
-        powers = str(exp)
         if unicode_exponents:
-            num += '10' + powers.translate(powerify)
+            num += '10' + str(exp).translate(superscript)
         else:
-            num += '10^' + powers
-    
+            num += '10^' + str(exp)
     return num
+
+def numberString(number, delta=0, parens=False, precision=2, unicode_exponent=False, lower=-2, upper=3):
+    '''
+    Format a number and uncertainty.
+    
+    Specify parens=True to guarantee parentheses - otherwise
+    will only provide if there is a common factor to the number
+    and uncertainty.        
+    '''
+    eN, _ = exp_mantissa(number)
+    eD, _ = exp_mantissa(delta)
+    print(number, eN)
+    print(delta, eD)
+
+    sharedExp = 0
+    
+    if delta:
+        exponentsDiffer = abs(eN - eD) < 4
+        humanN = lower < eN < upper
+        humanD = lower < eD < upper
+        
+        if not (exponentsDiffer or humanN or humanD):
+            sharedExp = max(eN, eD)
+
+    if sharedExp:
+        sharedFactor = 10 ** sharedExp
+        number /= sharedFactor
+        delta /= sharedFactor
+        sExp = scinot(sharedFactor, 1, unicode_exponent, lower=None, upper=None)
+    else:
+        sExp = ''
+    
+    sNum = ''
+    if number:
+        sNum += scinot(number, precision, unicode_exponent, lower=-2, upper=3)
+    if delta:
+        sNum += ' ± ' + scinot(delta, precision, unicode_exponent, lower=-2, upper=3)
+    
+    sNum = sNum.strip() or '0'
+    if parens or sExp:
+        sNum = '(' + sNum + ')' + sExp
+    
+    return sNum
