@@ -2,9 +2,12 @@
 
 from math import pi
 
-from .scale import *
+from .scale import prefix
 from .unit import Unit, BaseUnit as U
-from .unitCatalogue import *
+from .unitCatalogue import (
+    Kilogram, Metre, Second, Ampere, Mole, Radian,
+    Year, Newton, Joule, Coulomb, Volt,
+)
 
 tau = pi * 2
 circle = tau * Radian
