@@ -5,7 +5,7 @@ from matplotlib import pyplot as plt
 from .matrix import Matrix, Vector
 
 __all__ = '''\
-np matplotlib plt Vector Matrix\
+np matplotlib plt Vector Matrix \
 plot_y plot_x'''.split()
 
 def _plot_xy(*funcs, starti=-6, endi=6, axis='x', n=2000, startj=None, endj=None):
