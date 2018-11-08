@@ -230,8 +230,8 @@ class Unit(float, metaclass=UnitMeta):
     __call__ = __mul__
     __rmul__ = __mul__
     __truediv__ = lambda s, o: s.__mul__(o, operator.truediv)
-    __floordiv__ = lambda s, o: s.__mul__(o, operator.truediv)
-    
+    __floordiv__ = lambda s, o: s.__mul__(o, operator.floordiv)
+
     def __pow__(self, exp):
         return Unit(
             float(self) ** exp,
