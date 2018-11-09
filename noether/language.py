@@ -83,8 +83,21 @@ class Noether(Language):
     def delta(self, node):
         """a +- b == Unit(a, _delta=b)"""
         r = node.right
+
+        delta = None
         if isinstance(r, UnaryOp) and isinstance(r.op, USub):
-            return copyfix(node, Name("Unit")(node.left, _delta=node.right.operand))
+            delta = r.operand
+        elif (
+            isinstance(r, BinOp)
+            and isinstance(r.left, UnaryOp)
+            and isinstance(r.left.op, USub)
+        ):
+            # a +- b/2 == a + (-b)/2
+            r.left = copy(r.left, r.left.operand)
+            delta = r
+
+        if delta:
+            return copyfix(node, Name("Unit")(node.left, _delta=delta))
         return node
 
     @match(kind=BinOp, op=Mod)
