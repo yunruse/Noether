@@ -15,7 +15,7 @@ ns = ns.__dict__
 ns["__name__"] = "__main__"
 
 
-def importer():
+def post_run_import():
     """Defer matplotlib-importing to cheekily look faster"""
     from . import graphing
 
@@ -36,9 +36,9 @@ def main(args):
 
     if doRepl:
         print("Noether (dev)\n")
-        threading.Thread(target=importer).start()
+        threading.Thread(target=post_run_import).start()
     else:
-        importer()
+        post_run_import()
 
     lang = Noether if args.languageChange else Python
     ns.update(
