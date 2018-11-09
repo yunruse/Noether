@@ -6,9 +6,9 @@ import math
 import cmath
 import numpy as np
 
-from math import (
-    sin,  cos,  tan,  asin,  acos,  atan,
-    sinh, cosh, tanh, asinh, acosh, atanh,
+from numpy import (
+    sin,  cos,  tan,  arcsin,  arccos,  arctan,
+    sinh, cosh, tanh, arcsinh, arccosh, arctanh,
     log, exp, floor, ceil
 ) # noqa: F401
 from . import *
