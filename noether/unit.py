@@ -91,12 +91,9 @@ class Dimension(tuple):
             return self
         else:
             raise ValueError(
-                """
-Cannot linearly operate on inequal dimensions {} and {}
-""".format(
+                "Cannot linearly operate on inequal dimensions {} and {}".format(
                     self, other
-                )
-            )
+            ))
 
     __sub__ = __rsub__ = __add__ = __radd__ = _checkLinear
 
