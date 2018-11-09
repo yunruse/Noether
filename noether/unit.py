@@ -190,6 +190,10 @@ class Unit(float, metaclass=UnitMeta):
         if self.displayUnit:
             return self.displayUnit.symbols[0]
 
+    def value(self):
+        '''Returns the number(s) without dimension.'''
+        return Unit(float(self), _delta=self._delta, _epsilon=self._epsilon)
+
     def numberString(self, useDisplayUnit=False):
         display = self
         if useDisplayUnit and self.displayUnit:
