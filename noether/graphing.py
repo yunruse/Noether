@@ -56,21 +56,26 @@ def plot_xy(*funcs, axis="x", jmin=None, jmax=None, axisLines=True):
     if not (jmin and jmax):
         jmin = min(0 if k.hasAsymptote else min(k.data) for k in results)
         jmax = max(0 if k.hasAsymptote else max(k.data) for k in results)
-        if any(k.hasAsymptote for k in results):
-            jmin = min(jmin * 1.5, -6)
-            jmax = max(jmax * 1.5, 6)
+        asym = any(k.hasAsymptote for k in results)
+        reach = 1.5 if asym else 1.1
+        c, d = (jmax + jmin) / 2, (jmax - jmin) / 2
+        jmin = c - (d * reach)
+        jmax = c + (d * reach)
+        if asym:
+            jmin = min(jmin, -6)
+            jmax = max(jmax, 6)
 
     ylim = jmin, jmax
 
     if axis == "y":
         xlim, ylim = ylim, xlim
-        axes.set_xlim()
-    else:
-        axes.set_ylim(*ylim)
+    axes.set_xlim(*xlim)
+    axes.set_ylim(*ylim)
 
     if axisLines:
-        axes.plot(xlim, [0, 0], "gray", lw=0.5)
-        axes.plot([0, 0], ylim, "gray", lw=0.5)
+        inf = 1e17
+        axes.plot([-inf, inf], [0, 0], "gray", lw=0.5)
+        axes.plot([0, 0], [-inf, inf], "gray", lw=0.5)
 
     for k in results:
         y = k.data
