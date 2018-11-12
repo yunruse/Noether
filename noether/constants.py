@@ -57,3 +57,12 @@ g = BaseUnit(9.80665 * Metre / Second ** 2, "g")
 t = 273.15 * Kelvin
 
 natural_units = (e_0, c, h, e, MeV, MeVc, MeVc2, grav)
+
+# Symbols
+
+π = pi
+τ = tau
+ħ = hbar
+α = alpha
+μ = mu_0
+ε = e_0
