@@ -29,15 +29,13 @@ class Noether(Language):
         self.assignments = []
         self.funcs = dict()
 
-    @match(kind=AugAssign, mode="exec", op=Mod, baseNode=True)
+    @match(kind=AugAssign, op=Mod, mode="exec", baseNode=True)
     def ModPrint(self, node):
         """Bare `a %= x` statements will print themselves."""
         name = node.target
         node = copy(node, Assign([name], self.visit(node.value)))
 
-        self.assignments.append(Tuple([Str(name.id), Name(name.id)]))
-        return node
-
+        self.assignments.append((name.id, Name(name.id)))
         return node
 
     def onVisitFinish(self):
@@ -46,13 +44,13 @@ class Noether(Language):
             nodeFrom = self.assignments[0].elts[0]
             self.locals[F] = printEquation
 
-            printer = copyfix(nodeFrom, Expr(Name(F)(*self.assignments)))
+            printer = copy(nodeFrom, Expr(Name(F)(*self.assignments)))
             printer.lineno += 1
             self.node.body.append(printer)
 
     @match(kind=Num, n=float)
     def alwaysUnit(self, node):
-        return copyfix(node, Name("Unit")(node))
+        return copy(node, Name("Unit")(node))
 
     @match(kind=BinOp, op=Add)
     def delta(self, node):
