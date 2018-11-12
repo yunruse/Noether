@@ -24,6 +24,8 @@ def has_asymptote(a):
 _gr = namedtuple("GraphResult", "data label hasAsymptote")
 def GraphResult(data, domain, hasInputSpace):
     label = getattr(data, "__name__", None)
+    if label == '<lambda>':
+        label = None
     if callable(data):
         data = np.vectorize(data)(domain)
     elif not hasInputSpace:
@@ -34,7 +36,7 @@ def GraphResult(data, domain, hasInputSpace):
     return _gr(data, label, asym)
 
 
-def plot_xy(*funcs, axis="x", jmin=None, jmax=None, axisLines=True):
+def plot_xy(*funcs, axis="x", jmin=None, jmax=None, axisLines=True, title=None):
     """Plot a variable amount of functions or data in Cartesian space.
 
     If the first value provided is an array, it will be consumed as the
@@ -83,8 +85,14 @@ def plot_xy(*funcs, axis="x", jmin=None, jmax=None, axisLines=True):
             x, y = y, x
         axes.plot(x, y, label=k.label)
 
+    if title:
+        axes.set_title(title)
+
     if len(funcs) > 1:
         plt.legend()
+    elif not title and hasattr(funcs[0], '__name__'):
+        axes.set_title(funcs[0].__name__)
+
     plt.show()
     return fig, axes
 
