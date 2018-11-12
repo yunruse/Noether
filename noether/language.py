@@ -21,11 +21,6 @@ def printEquation(*nv):
         print(line)
 
 
-def assignFunctionID(f, r):
-    f.____noetherRepr = r
-    return f
-
-
 @match
 class Noether(Language):
     modEqualPrint = True
@@ -43,26 +38,6 @@ class Noether(Language):
         self.assignments.append(Tuple([Str(name.id), Name(name.id)]))
         return node
 
-    @match(kind=Lambda)
-    def lambdaSignify(self, node):
-        F = "____nF"
-        self.locals[F] = assignFunctionID
-        code = Str(node.asPython())
-
-        return copyfix(node, Name(F)(node, code))
-
-    # for some reason this causes errors
-    # @match(kind=(FunctionDef, AsyncFunctionDef))
-    def funcSignify(self, node):
-        F = "____nF"
-        self.locals[F] = assignFunctionID
-
-        # wrap in `lambda x: F(x, str(node))`
-        # it is around these points I wish LISP was a thing here
-        code = Str(node.asPython())
-        node.decorator_list.insert(
-            0, copyfix(node, Lambda([Name("x")], Name(F)(Name("x"), code)))
-        )
         return node
 
     def onVisitFinish(self):
