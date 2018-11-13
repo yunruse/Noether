@@ -70,7 +70,7 @@ class Noether(Language):
             delta = r
 
         if delta:
-            return copyfix(node, Name("Unit")(node.left, _delta=delta))
+            return copy(node, Name("Unit")(node.left, _delta=delta))
         return node
 
     @match(kind=BinOp, op=Mod)
@@ -81,12 +81,12 @@ class Noether(Language):
             q = r.operand
             if isinstance(q, UnaryOp) and isinstance(q.op, USub):
                 e = q.operand / 100
-                return copyfix(node, Name("Unit")(node.left, _epsilon=e))
+                return copy(node, Name("Unit")(node.left, _epsilon=e))
         return node
 
     @match(kind=UnaryOp, op=UAdd)
     def plusMinus(self, node):
         o = node.operand
         if isinstance(o, UnaryOp) and isinstance(o.op, USub):
-            return copyfix(node, Name("Unit")(Num(0), _delta=o.operand))
+            return copy(node, Name("Unit")(Num(0), _delta=o.operand))
         return node
