@@ -52,6 +52,14 @@ class Noether(Language):
     def alwaysUnit(self, node):
         return copy(node, Name("Unit")(node))
 
+    @match(kind=BinOp, op=Div)
+    def fraction(self, node):
+        """a /+ b == Fraction(a, b)"""
+        r = node.right
+        if isinstance(r, UnaryOp) and isinstance(r.op, UAdd):
+            return copy(node, Name("Fraction")(node.left, r.operand))
+        return node
+
     @match(kind=BinOp, op=Add)
     def delta(self, node):
         """a +- b == Unit(a, _delta=b)"""
