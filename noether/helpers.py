@@ -4,8 +4,9 @@ import math
 import os
 import sys
 import functools
+import fractions
 
-__all__ = "clear intify sqrt sign product tablify".split()
+__all__ = "clear intify Fraction sqrt sign product tablify".split()
 
 
 def clear(isTerminal=True):
@@ -27,10 +28,12 @@ def intify(x):
     i = int(x)
     return i if x == i else x
 
+Fraction = fractions.Fraction
+
 
 @functools.wraps(math.sqrt)
 def sqrt(x):
-    # redefined to be nice of
+    # redefined to be nicer for certain expressions
     return x ** 0.5
 
 
