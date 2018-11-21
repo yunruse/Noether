@@ -9,7 +9,7 @@ import sys
 
 import numpy as np
 import matplotlib  # noqa: F401
-from matplotlib import pyplot as plt
+from matplotlib import animation, pyplot as plt
 import astley
 
 from .matrix import Matrix, Vector  # noqa: F401
@@ -20,26 +20,78 @@ np matplotlib plt Vector Matrix \
 plot_y plot_x""".split()
 
 
-def has_asymptote(a):
-    """Heuristic to determine if an array has a (vertical) asymptote."""
-    return np.std(a[1:] - a[:-1]) > np.std(a)
+def limit_heuristic(a):
+    """Heuristic to determine if an array has a plottable limit."""
+    return np.std(a[1:] - a[:-1]) < np.std(a)
 
 
-_gr = namedtuple("GraphResult", "data label hasAsymptote")
+_gr = namedtuple("GraphResult", "data label hasLimits isTimeFunc")
 def GraphResult(data, domain, hasInputSpace):
     label = getattr(data, "__name__", None)
     if label == '<lambda>':
         label = None
+
+    isTimeFunc = False
     if callable(data):
-        data = np.vectorize(data)(domain)
+        try:
+            data(1)
+            data = data(domain)
+        except TypeError:
+            data(1, 2) # Functions should be one or two arguments
+            isTimeFunc = True
+
     elif not hasInputSpace:
-        raise ValueError("Cannot plot output array without a domain")
+        raise ValueError("Cannot plot function without input domain")
 
-    asym = has_asymptote(data)
-    return _gr(data, label, asym)
+    hasLimits = not isTimeFunc and limit_heuristic(data)
+    return _gr(data, label, hasLimits, isTimeFunc)
+
+class Animation:
+    line_args = [
+        dict(lw=2),
+    ]
+
+    def animate(self, fig=None, axes=None, frames=10_000, blit=False, repeat=True):
+        if fig is None and axes is None:
+            fig, axes = plt.subplots()
+
+        self.frames = frames
+
+        self.fig = fig
+        self.axes = axes
+        self.lines = tuple(axes.plot([], [], **kw)[0] for kw in self.line_args)
+
+        self.anim = animation.FuncAnimation(
+            fig, frames=self.data,
+            func=(lambda data: self.onFrame(data) or self.lines),
+            init_func=(lambda: self.onStart() or self.lines),
+            blit=blit, repeat=repeat, interval=1
+        )
+
+        return self
+
+    lines = tuple()
+    axes = None
+    fig = None
+    anim = None
+
+    def onStart(self):
+        pass
+
+    def data(self, t=0):
+        for frame in range(self.frames):
+            t += 1
+            yield t
+
+    def onFrame(self, data):
+        return self.lines
 
 
-def plot_xy(*funcs, axis="x", jmin=None, jmax=None, axisLines=True, title=None):
+def plot_xy(
+    *funcs, axis="x", jmin=None, jmax=None,
+    axisLines=True, title=None,
+    dt=0.01, frames=10_000
+):
     """Plot a variable amount of functions or data in Cartesian space.
 
     If the first value provided is an array, it will be consumed as the
@@ -53,22 +105,38 @@ def plot_xy(*funcs, axis="x", jmin=None, jmax=None, axisLines=True, title=None):
     else:
         x = np.linspace(-6, 6, 2000)
 
-    results = [GraphResult(f, x, hasInputSpace) for f in funcs]
+    dynamics, bounded, unbounded = [], [], []
+    for f in funcs:
+        g = GraphResult(f, x, hasInputSpace)
+        l = dynamics if g.isTimeFunc else bounded if g.hasLimits else unbounded
+        l.append(g)
 
     fig, axes = plt.subplots()
 
+    if title:
+        axes.set_title(title)
+
+    if len(funcs) > 1:
+        plt.legend()
+    elif not title and hasattr(funcs[0], '__name__'):
+        axes.set_title(funcs[0].__name__)
+
+    # Determine range if not provided
+
     xlim = min(x), max(x)
-    if not (jmin and jmax):
-        jmin = min(0 if k.hasAsymptote else min(k.data) for k in results)
-        jmax = max(0 if k.hasAsymptote else max(k.data) for k in results)
-        asym = any(k.hasAsymptote for k in results)
-        reach = 1.5 if asym else 1.1
+    if not bounded:
+        jmin = jmin or -6
+        jmax = jmax or 6
+
+    elif not (jmin and jmax):
+        mins, maxs = zip(*[
+            (min(k.data), max(k.data)) for k in bounded if k.hasLimits
+        ])
+        jmin, jmax = min(mins), max(maxs)
+        reach = 1.1 if unbounded else 1.5
         c, d = (jmax + jmin) / 2, (jmax - jmin) / 2
         jmin = c - (d * reach)
         jmax = c + (d * reach)
-        if asym:
-            jmin = min(jmin, -6)
-            jmax = max(jmax, 6)
 
     ylim = jmin, jmax
 
@@ -82,19 +150,30 @@ def plot_xy(*funcs, axis="x", jmin=None, jmax=None, axisLines=True, title=None):
         axes.plot([-inf, inf], [0, 0], "gray", lw=0.5)
         axes.plot([0, 0], [-inf, inf], "gray", lw=0.5)
 
-    for k in results:
+    for k in bounded + unbounded:
         y = k.data
         if axis == "y":
             x, y = y, x
         axes.plot(x, y, label=k.label)
 
-    if title:
-        axes.set_title(title)
+    if dynamics:
+        class newAnim(Animation):
+            line_args = [{}] * len(dynamics)
 
-    if len(funcs) > 1:
-        plt.legend()
-    elif not title and hasattr(funcs[0], '__name__'):
-        axes.set_title(funcs[0].__name__)
+            def data(self, t=0):
+                for i in range(frames):
+                    t += dt
+                    yield t
+
+            def onFrame(self, t):
+                for line, k in zip(self.lines, dynamics):
+                    f_t = np.vectorize(lambda x: k.data(x, t))
+                    if axis == 'x':
+                        line.set_data(x, f_t(x))
+                    else:
+                        line.set_data(f_t(x), x)
+
+        anim = newAnim().animate(fig, axes, frames=10_000, blit=True, repeat=True)
 
     plt.show()
     return fig, axes
