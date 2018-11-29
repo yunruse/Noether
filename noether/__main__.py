@@ -9,24 +9,13 @@ from astley import Python
 from . import repl
 from .language import Noether
 
-from . import namespace as ns
-
-ns = ns.__dict__
-ns["__name__"] = "__main__"
-
-
-def post_run_import():
-    """Defer matplotlib-importing to cheekily look faster"""
-    from . import graphing
-
-    ns.update(graphing.__dict__)
-
+import noether
 
 def test():
     from unittest import TextTestRunner
 
     os.sys.path.append(os.path.abspath(".."))
-    from tests import suite
+    from ..tests import suite
 
     TextTestRunner(verbosity=1).run(suite)
 
@@ -36,11 +25,9 @@ def main(args):
 
     if doRepl:
         print("Noether (dev)\n")
-        threading.Thread(target=post_run_import).start()
-    else:
-        post_run_import()
 
     lang = Noether if args.languageChange else Python
+    ns = noether.__dict__
     ns.update(
         dict(exec=lang.staticExec, eval=lang.staticEval, compile=lang.staticCompile)
     )

@@ -1,8 +1,5 @@
 """Noether: module for ease-of-use graphing"""
 
-# Used as namespace in Noether REPL:
-# pylint: disable=F0401, W0611
-
 import argparse
 from collections import namedtuple
 import sys
@@ -13,11 +10,11 @@ from matplotlib import animation, pyplot as plt
 import astley
 
 from .matrix import Matrix, Vector  # noqa: F401
-from . import namespace
+import noether
 
 __all__ = """\
 np matplotlib plt Vector Matrix \
-plot_y plot_x""".split()
+plot""".split()
 
 
 def limit_heuristic(a):
@@ -87,7 +84,7 @@ class Animation:
         return self.lines
 
 
-def plot_xy(
+def plot(
     *funcs, axis="x", jmin=None, jmax=None,
     axisLines=True, title=None,
     dt=0.01, frames=10_000
@@ -190,7 +187,7 @@ def main(ns):
     funcs = []
     for expression in ns.function:
         node = astley.parse(expression, mode='eval').body
-        func = astley.Lambda(signature, node).eval(namespace.__dict__)
+        func = astley.Lambda(signature, node).eval(noether.__dict__)
         func.__name__ = expression.replace('**', '^').replace('*', '·')
         funcs.append(func)
 
@@ -198,7 +195,7 @@ def main(ns):
         repr(i) if ' ' in i else i for i in sys.argv[1:]
     )
 
-    plot_xy(
+    plot(
         np.linspace(ns.start, ns.end, ns.count), *funcs,
         axis=axis, jmin=ns.min, jmax=ns.max, axisLines=ns.axisLines,
         title=title

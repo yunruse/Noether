@@ -5,10 +5,22 @@ __copyright__ = "Copyright 2018 Mia yun Ruse"
 __status__ = "Prototype"
 __email__ = "s-noether@yunru.se"
 
+# Extras here are used in namespace
+
+import math
+import cmath
+import numpy as np
+
+from numpy import (
+    sin,  cos,  tan,  arcsin,  arccos,  arctan,
+    sinh, cosh, tanh, arcsinh, arccosh, arctanh,
+    log, exp, floor, ceil
+) # noqa: F401
 from .helpers import *  # noqa: F401, F403
 from .constants import *  # noqa: F401, F403
-from .repl import repr_mod  # noqa: F401
 
+from .graphing import plot
+from .repl import repr_mod  # noqa: F401
 from .matrix import Matrix, Vector  # noqa: F401
 
 V = Vector
