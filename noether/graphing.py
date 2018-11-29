@@ -171,9 +171,11 @@ def plot(
                         line.set_data(f_t(x), x)
 
         anim = newAnim().animate(fig, axes, frames=10_000, blit=True, repeat=True)
+    else:
+        anim = None
 
     plt.show()
-    return fig, axes
+    return fig, axes, anim
 
 # TODO: polar
 
