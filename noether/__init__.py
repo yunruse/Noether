@@ -16,6 +16,9 @@ from numpy import (
     sinh, cosh, tanh, arcsinh, arccosh, arctanh,
     log, exp, floor, ceil
 ) # noqa: F401
+
+from . import particles, taylor
+
 from .helpers import *  # noqa: F401, F403
 from .constants import *  # noqa: F401, F403
 
