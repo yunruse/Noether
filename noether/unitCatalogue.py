@@ -41,6 +41,7 @@ Acceleration = Speed / Time
 Jerk = Acceleration / Time
 
 Momentum = Mass * Speed
+AngularMomentum = Length * Momentum
 
 Force = Mass * Acceleration
 Newton = BU(Force, "N")
@@ -65,6 +66,7 @@ Farad = BU(Capacitance, "F")
 
 Resistance = Voltage / Current
 Ohm = BU(Resistance, "Ω")
+Resistivity = Resistance / Length
 
 Conductance = Resistance ** -1
 Siemens = BU(Conductance, "S")
@@ -91,7 +93,16 @@ Sievert = BU(Dose, "Sv")
 CatalyticActivity = Substance / Time
 Katal = BU(CatalyticActivity, "kat")
 
+# Useful dimensions to know
+
 SurfaceTension = Force / Distance
+Density = Mass / Volume
+
+ThermalDiffusivity = Distance**2 / Time
+ThermalConductance = Power / Temperature
+ThermalResistance = Temperature / Power
+ThermalInsulance = Temperature * Area / Power
+ThermalAdmittance = Power / Temperature / Area
 
 # Conventional SI-accepted units
 
@@ -116,6 +127,7 @@ Tonne = U(Kilogram * 1000, "t")
 
 Parsec = U(3.0857e16 * Metre, "pc")
 AU = U(1.495_878_707e11 * Metre, "AU")
+SolarMass = U(1.98802e30 * Kilogram, "Msol")
 
 u = Dalton = U(1.660_538_86e-27 * Kilogram, "u")
 
@@ -129,7 +141,6 @@ Bar = U(1e5 * Pascal, "bar")
 Millibar = U(100 * Pascal, "mbar")
 Atmosphere = U(101_325 * Pascal, "atm")
 Torr = U(Atmosphere / 760, "Torr")
-
 MillimetreMercury = mmHg = U(133.322_387_415 * Pascal, "mmHg")
 
 Calorie = U(4.814 * Joule, "cal")
@@ -144,13 +155,6 @@ Barye = Gram / (Centimetre * Second ** 2)
 Poise = Gram / (Centimetre * Second)
 Stokes = Centimetre ** 2 / Second
 Kayser = 1 / Centimetre
-
-# Speed
-
-kmph = Kilometre / Hour
-
-NauticalMile = U(1852 * Meter, "M", "NM", "nmi")
-Knot = U(NauticalMile / Hour, "kt", "kn")
 
 # Imperial length and area
 
@@ -168,8 +172,6 @@ Rod = 25 * Link
 Perch = Rod ** 2
 Rood = Furlong * Rod
 Acre = Furlong * Chain
-
-mph = Mile / Hour
 
 # Imperial volume
 
@@ -196,6 +198,15 @@ Hundredweight = U(4 * Quarter, "cwt")
 Ton = U(2240 * Pound, "t")
 
 Slug = 14.593_902_94 * Kilogram
+
+# Speeds
+
+mps = Metre / Second
+mph = Mile / Hour
+kmph = Kilometre / Hour
+
+NauticalMile = U(1852 * Meter, "M", "NM", "nmi")
+Knot = U(NauticalMile / Hour, "kt", "kn")
 
 # Conventional time units
 Week = Day * 7
