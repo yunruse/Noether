@@ -7,7 +7,6 @@ import sys
 import numpy as np
 import matplotlib  # noqa: F401
 from matplotlib import animation, pyplot as plt
-import astley
 
 from .matrix import Matrix, Vector  # noqa: F401
 import noether
@@ -180,6 +179,8 @@ def plot(
 # TODO: polar
 
 def main(ns):
+    import astley
+    
     if ns.axis is not None:
         axis = ns.axis
     else:

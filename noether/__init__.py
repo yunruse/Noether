@@ -17,13 +17,12 @@ from numpy import (
     log, exp, floor, ceil
 ) # noqa: F401
 
-from . import particles, taylor
+from . import particles
 
 from .helpers import *  # noqa: F401, F403
 from .constants import *  # noqa: F401, F403
 
 from .graphing import plot
-from .repl import repr_mod  # noqa: F401
 from .matrix import Matrix, Vector  # noqa: F401
 
 V = Vector
