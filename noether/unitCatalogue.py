@@ -27,6 +27,7 @@ Candela = BU(Luminosity, "cd")
 Mole = BU(Substance, "mol")
 
 # SI Derived units
+
 Frequency = Time ** -1
 Hertz = BU(Frequency, "Hz")
 
@@ -35,6 +36,8 @@ Steradian = BU(Angle ** 2, "sterad")
 
 Area = Distance ** 2
 Volume = Distance ** 3
+
+# Linear dynamics
 
 Velocity = Speed = Distance / Time
 Acceleration = Speed / Time
@@ -45,6 +48,8 @@ AngularMomentum = Length * Momentum
 
 Force = Mass * Acceleration
 Newton = BU(Force, "N")
+
+# Energy
 
 Pressure = Force / Area
 Pascal = BU(Pressure, "Pa")
@@ -57,6 +62,8 @@ Watt = BU(Power, "W")
 
 Charge = Current * Time
 Coulomb = BU(Charge, "C")
+
+# Electromagnetic
 
 Voltage = Power / Current
 Volt = BU(Voltage, "V")
@@ -80,6 +87,8 @@ Tesla = BU(MagneticFluxDensity, "T")
 Inductance = Resistance * Time
 Henry = BU(Inductance, "H")
 
+# Radiation
+
 Lumen = BU(Luminosity * Angle ** 2, "lum")
 
 Illuminance = Luminosity / Area
@@ -93,7 +102,7 @@ Sievert = BU(Dose, "Sv")
 CatalyticActivity = Substance / Time
 Katal = BU(CatalyticActivity, "kat")
 
-# Useful dimensions to know
+# Material
 
 SurfaceTension = Force / Distance
 Density = Mass / Volume
