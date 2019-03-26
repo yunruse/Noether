@@ -236,7 +236,7 @@ units = dict(globals()).items()
 
 for name, unit in units:
     if isinstance(unit, Dimension):
-        unit.name = name
+        Dimension._names[unit] = name
     elif isinstance(unit, BaseUnit):
         unit.symbols += (name,)
     elif isinstance(unit, Unit):

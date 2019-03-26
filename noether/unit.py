@@ -21,9 +21,10 @@ class Dimension(tuple):
             val = tuple([0] * 8)
         return tuple.__new__(Dimension, val)
 
+    # Names: a dictionary of Dimension to Name
     _names = {}
     name = property(
-        lambda s: s._names.get(s, None), _names.__setitem__, _names.__delitem__
+        lambda s: s._names.get(s, None)
     )
 
     def asFundamentalUnits(self):
