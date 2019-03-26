@@ -49,6 +49,14 @@ AngularMomentum = Length * Momentum
 Force = Mass * Acceleration
 Newton = BU(Force, "N")
 
+# Rotational dynamics
+RadialVelocity = Angle / Time
+RadialAcceleration = RadialVelocity / Time
+RadialJerk = RadialAcceleration / Time
+
+Inertia = Mass * RadialVelocity
+Torque = Inertia * RadialAcceleration
+
 # Energy
 
 Pressure = Force / Area
