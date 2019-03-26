@@ -11,7 +11,7 @@ from .unitCatalogue import *
 # Trigonometry
 
 tau = pi * 2
-circle = tau * Radian
+turn = cirle = tau * Radian
 
 # Quantum
 
