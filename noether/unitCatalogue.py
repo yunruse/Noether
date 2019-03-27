@@ -251,10 +251,11 @@ __all__ = []
 units = dict(globals()).items()
 
 for name, unit in units:
+    displayName = name.replace('_', ' ')
     if isinstance(unit, Dimension):
-        Dimension._names[unit] = name
+        Dimension._names[unit] = displayName
     elif isinstance(unit, BaseUnit):
-        unit.symbols += (name,)
+        unit.symbols += (displayName,)
     elif isinstance(unit, Unit):
         globals()[name] = U(unit, name)
     else:
