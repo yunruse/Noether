@@ -8,7 +8,8 @@ from .matrix import Matrix
 
 
 class Dimension(tuple):
-    fundamental = "A K m s Kg Cd mol rad".split()
+    fundamental = "A K m s Kg Cd mol rad B".split()
+    N_DIMENSIONS = len(fundamental)
 
     def __new__(cls, name_or_tuple=None):
         if isinstance(name_or_tuple, tuple):
@@ -16,16 +17,14 @@ class Dimension(tuple):
         elif isinstance(name_or_tuple, str):
             val = cls._names.get(name_or_tuple)
         elif isinstance(name_or_tuple, int):
-            val = tuple(name_or_tuple == i + 1 for i in range(8))
+            val = tuple(name_or_tuple == i + 1 for i in range(cls.N_DIMENSIONS))
         else:
-            val = tuple([0] * 8)
+            val = tuple([0] * cls.N_DIMENSIONS)
         return tuple.__new__(Dimension, val)
 
     # Names: a dictionary of Dimension to Name
     _names = {}
-    name = property(
-        lambda s: s._names.get(s, None)
-    )
+    name = property(lambda s: s._names.get(s, None))
 
     def asFundamentalUnits(self):
         dims = []

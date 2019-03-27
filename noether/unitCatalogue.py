@@ -1,4 +1,4 @@
-"""Noether: SI, SI-derived and SI-compatible units"""
+"""noether: si, si-derived and si-compatible units"""
 
 from .unit import BaseUnit, Unit, Dimension
 from math import pi
@@ -6,246 +6,245 @@ from math import pi
 U = BaseUnit
 BU = lambda dim, sym: U(1, sym, isDisplay=True, _dim=dim)
 
-# Fundamental measures, units
-Current = Dimension(1)
-Temperature = Dimension(2)
-Distance = Dimension(3)
-Time = Dimension(4)
-Mass = Dimension(5)
-Luminosity = Dimension(6)
-Substance = Dimension(7)
-Angle = Dimension(8)
+# fundamental measures, units
+current = Dimension(1)
+temperature = Dimension(2)
+length = distance = Dimension(3)
+time = Dimension(4)
+mass = Dimension(5)
+luminosity = Dimension(6)
+substance = Dimension(7)
+angle = Dimension(8)
+data = Dimension(9)
 
-Length = Distance
+amp = ampere = BU(current, "A")
+kelvin = BU(temperature, "k")
+meter = metre = BU(distance, "m")
+second = BU(time, "s")
+kilogram = BU(mass, "kg")
+candela = BU(luminosity, "cd")
+mole = BU(substance, "mol")
+byte = BU(data, "b")
 
-Ampere = BU(Current, "A")
-Kelvin = BU(Temperature, "k")
-Meter = Metre = BU(Distance, "m")
-Second = BU(Time, "s")
-Kilogram = BU(Mass, "kg")
-Candela = BU(Luminosity, "cd")
-Mole = BU(Substance, "mol")
+# SI derived units
+frequency = time ** -1
+hertz = BU(frequency, "Hz")
 
-# SI Derived units
+radian = BU(angle, "rad")
+steradian = BU(angle ** 2, "sterad")
 
-Frequency = Time ** -1
-Hertz = BU(Frequency, "Hz")
+area = distance ** 2
+volume = distance ** 3
 
-Radian = BU(Angle, "rad")
-Steradian = BU(Angle ** 2, "sterad")
+# linear dynamics
 
-Area = Distance ** 2
-Volume = Distance ** 3
+velocity = speed = distance / time
+acceleration = speed / time
+jerk = acceleration / time
 
-# Linear dynamics
+momentum = mass * speed
+angular_momentum = length * momentum
 
-Velocity = Speed = Distance / Time
-Acceleration = Speed / Time
-Jerk = Acceleration / Time
+force = mass * acceleration
+newton = BU(force, "N")
 
-Momentum = Mass * Speed
-AngularMomentum = Length * Momentum
+# rotational dynamics
+angular_velocity = angle / time
+angular_acceleration = angular_velocity / time
+angular_jerk = angular_acceleration / time
 
-Force = Mass * Acceleration
-Newton = BU(Force, "N")
+inertia = mass * angular_velocity
+torque = inertia * angular_acceleration
 
-# Rotational dynamics
-RadialVelocity = Angle / Time
-RadialAcceleration = RadialVelocity / Time
-RadialJerk = RadialAcceleration / Time
+# energy
 
-Inertia = Mass * RadialVelocity
-Torque = Inertia * RadialAcceleration
+pressure = force / area
+pascal = BU(pressure, "Pa")
 
-# Energy
+energy = force * distance
+joule = BU(energy, "J")
 
-Pressure = Force / Area
-Pascal = BU(Pressure, "Pa")
+power = energy / time
+watt = BU(power, "W")
 
-Energy = Force * Distance
-Joule = BU(Energy, "J")
+charge = current * time
+coulomb = BU(charge, "C")
 
-Power = Energy / Time
-Watt = BU(Power, "W")
+# electromagnetic
 
-Charge = Current * Time
-Coulomb = BU(Charge, "C")
+voltage = power / current
+volt = BU(voltage, "V")
 
-# Electromagnetic
+capacitance = charge / voltage
+farad = BU(capacitance, "F")
 
-Voltage = Power / Current
-Volt = BU(Voltage, "V")
+resistance = voltage / current
+ohm = BU(resistance, "Ω")
+resistivity = resistance / length
 
-Capacitance = Charge / Voltage
-Farad = BU(Capacitance, "F")
+conductance = resistance ** -1
+siemens = BU(conductance, "S")
 
-Resistance = Voltage / Current
-Ohm = BU(Resistance, "Ω")
-Resistivity = Resistance / Length
+magneticflux = energy / current
+weber = BU(magneticflux, "Wb")
 
-Conductance = Resistance ** -1
-Siemens = BU(Conductance, "S")
+magneticfluxdensity = magneticflux / area
+tesla = BU(magneticfluxdensity, "T")
 
-MagneticFlux = Energy / Current
-Weber = BU(MagneticFlux, "Wb")
+inductance = resistance * time
+henry = BU(inductance, "H")
 
-MagneticFluxDensity = MagneticFlux / Area
-Tesla = BU(MagneticFluxDensity, "T")
+# radiation
 
-Inductance = Resistance * Time
-Henry = BU(Inductance, "H")
+lumen = BU(luminosity * angle ** 2, "lum")
 
-# Radiation
+illuminance = luminosity / area
+lux = BU(illuminance, "Lx")
 
-Lumen = BU(Luminosity * Angle ** 2, "lum")
+becquerel = U(hertz, "Bq")
+dose = energy / mass
+gray = BU(dose, "Gy")
+sievert = BU(dose, "Sv")
 
-Illuminance = Luminosity / Area
-Lux = BU(Illuminance, "lx")
+catalyticactivity = substance / time
+katal = BU(catalyticactivity, "kat")
 
-Becquerel = U(Hertz, "Bq")
-Dose = Energy / Mass
-Gray = BU(Dose, "Gy")
-Sievert = BU(Dose, "Sv")
+# material
 
-CatalyticActivity = Substance / Time
-Katal = BU(CatalyticActivity, "kat")
+surfacetension = force / distance
+density = mass / volume
 
-# Material
+thermaldiffusivity = distance**2 / time
+thermalconductance = power / temperature
+thermalresistance = temperature / power
+thermalinsulance = temperature * area / power
+thermaladmittance = power / temperature / area
 
-SurfaceTension = Force / Distance
-Density = Mass / Volume
+# conventional si-accepted units
 
-ThermalDiffusivity = Distance**2 / Time
-ThermalConductance = Power / Temperature
-ThermalResistance = Temperature / Power
-ThermalInsulance = Temperature * Area / Power
-ThermalAdmittance = Power / Temperature / Area
+gram = U(kilogram / 1000, "g")
+centimetre = U(metre * 0.01, "cm")
+kilometre = U(metre * 1000, "km")
 
-# Conventional SI-accepted units
+minute = U(second * 60, "min")
+hour = U(minute * 60, "h")
+day = U(hour * 24, "d")
 
-Gram = U(Kilogram / 1000, "g")
-Centimetre = U(Metre * 0.01, "cm")
-Kilometre = U(Metre * 1000, "km")
+degree = U(radian * pi / 180, "°")
+angular_minute = U(degree / 60, "′")
+angular_second = U(degree / 3600, "″")
 
-Minute = U(Second * 60, "min")
-Hour = U(Minute * 60, "h")
-Day = U(Hour * 24, "d")
+acre = U(100 * metre ** 2, "a")
+hectare = U(100 * acre, "ha")
+litre = U((metre / 10) ** 3, "l")
+tonne = U(kilogram * 1000, "t")
 
-Degree = U(Radian * pi / 180, "°")
-RadialMinute = U(Degree / 60, "′")
-RadialSecond = U(Degree / 3600, "″")
+# scientific units
 
-Acre = U(100 * Metre ** 2, "a")
-Hectare = U(100 * Acre, "ha")
-Litre = U((Metre / 10) ** 3, "L")
-Tonne = U(Kilogram * 1000, "t")
+parsec = U(3.0857e16 * metre, "pc")
+au = U(1.495_878_707e11 * metre, "au")
+solar_mass = U(1.98802e30 * kilogram, "msol")
 
-# Scientific units
+dalton = U(1.660_538_86e-27 * kilogram, "u")
 
-Parsec = U(3.0857e16 * Metre, "pc")
-AU = U(1.495_878_707e11 * Metre, "AU")
-SolarMass = U(1.98802e30 * Kilogram, "Msol")
+# commonly-used metric variants
 
-u = Dalton = U(1.660_538_86e-27 * Kilogram, "u")
+angstrom = U(metre * 1e-10, "å")
+are = U((10 * metre) ** 2, "a")
+barn = U(1e-28 * metre ** 2, "b")
 
-# Commonly-used metric variants
+bar = U(1e5 * pascal, "bar")
+millibar = U(100 * pascal, "mbar")
+atmosphere = U(101_325 * pascal, "atm")
+torr = U(atmosphere / 760, "torr")
+millimetre_mercury = mmhg = U(133.322_387_415 * pascal, "mmhg")
 
-Angstrom = U(Metre * 1e-10, "Å")
-Are = U((10 * Metre) ** 2, "a")
-Barn = U(1e-28 * Metre ** 2, "b")
+calorie = U(4.814 * joule, "cal")
+kilocalorie = U(calorie * 1000, "kcal")
 
-Bar = U(1e5 * Pascal, "bar")
-Millibar = U(100 * Pascal, "mbar")
-Atmosphere = U(101_325 * Pascal, "atm")
-Torr = U(Atmosphere / 760, "Torr")
-MillimetreMercury = mmHg = U(133.322_387_415 * Pascal, "mmHg")
+# older cgs units
 
-Calorie = U(4.814 * Joule, "cal")
-Kilocalorie = U(Calorie * 1000, "kCal")
+gal = centimetre / second ** 2
+dyne = gram * gal
+erg = dyne * centimetre
+barye = gram / (centimetre * second ** 2)
+poise = gram / (centimetre * second)
+stokes = centimetre ** 2 / second
+kayser = 1 / centimetre
 
-# Older CGS units
+# imperial length and area
 
-Gal = Centimetre / Second ** 2
-Dyne = Gram * Gal
-Erg = Dyne * Centimetre
-Barye = Gram / (Centimetre * Second ** 2)
-Poise = Gram / (Centimetre * Second)
-Stokes = Centimetre ** 2 / Second
-Kayser = 1 / Centimetre
+inch = U(centimetre * 127 / 50, "in")
+foot = U(inch * 12, "ft")
+yard = U(3 * foot, "yd")
+chain = U(22 * yard, "ch")
+furlong = U(10 * chain, "fur")
+mile = U(8 * furlong, "mi")
+league = U(3 * mile, "lea")
 
-# Imperial length and area
+link = 7.92 * inch
+rod = 25 * link
 
-Inch = U(Centimetre * 127 / 50, "in")
-Foot = U(Inch * 12, "ft")
-Yard = U(3 * Foot, "yd")
-Chain = U(22 * Yard, "ch")
-Furlong = U(10 * Chain, "fur")
-Mile = U(8 * Furlong, "mi")
-League = U(3 * Mile, "lea")
+perch = rod ** 2
+rood = furlong * rod
+acre = furlong * chain
 
-Link = 7.92 * Inch
-Rod = 25 * Link
+# imperial volume
 
-Perch = Rod ** 2
-Rood = Furlong * Rod
-Acre = Furlong * Chain
+fluid_ounce = U(28.413_062_5 * litre / 1000, "fl oz")
 
-# Imperial volume
+gill = U(fluid_ounce * 5, "gi")
+pint = U(gill * 4, "pt")
+quart = U(2 * pint, "qt")
+gallon = U(4 * quart, "gal")
+peck = 2 * gallon
+bushel = 4 * peck
 
-FluidOunce = U(28.413_062_5 * Litre / 1000, "fl oz")
+# imperial weight
 
-Gill = U(FluidOunce * 5, "gi")
-Pint = U(Gill * 4, "pt")
-Quart = U(2 * Pint, "qt")
-Gallon = U(4 * Quart, "gal")
-Peck = 2 * Gallon
-Bushel = 4 * Peck
+pound = U(453.59237 * gram, "lb")
 
-# Imperial weight
+ounce = U(pound / 16, "oz")
+drachm = U(pound / 256, "dr")
+grain = U(pound / 7000, "gr")
 
-Pound = U(453.59237 * Gram, "lb")
+stone = U(14 * pound, "st")
+quarter = U(2 * stone, "qr", "qtr")
+hundredweight = U(4 * quarter, "cwt")
+ton = U(2240 * pound, "t")
 
-Ounce = U(Pound / 16, "oz")
-Drachm = U(Pound / 256, "dr")
-Grain = U(Pound / 7000, "gr")
+slug = 14.593_902_94 * kilogram
 
-Stone = U(14 * Pound, "st")
-Quarter = U(2 * Stone, "qr", "qtr")
-Hundredweight = U(4 * Quarter, "cwt")
-Ton = U(2240 * Pound, "t")
+# speeds
 
-Slug = 14.593_902_94 * Kilogram
+mps = metre / second
+mph = mile / hour
+kmph = kilometre / hour
 
-# Speeds
+nauticalmile = U(1852 * metre, "nm", "NM", "nmi")
+knot = U(nauticalmile / hour, "kt", "kn")
 
-mps = Metre / Second
-mph = Mile / Hour
-kmph = Kilometre / Hour
+# conventional time units
+week = day * 7
+fortnight = week * 2
+year = U(day * 365.25, "yr")
 
-NauticalMile = U(1852 * Meter, "M", "NM", "nmi")
-Knot = U(NauticalMile / Hour, "kt", "kn")
+# unusual units
 
-# Conventional time units
-Week = Day * 7
-Fortnight = Week * 2
-Year = U(Day * 365.25, "yr")
+hand = 4 * inch
+horse = 8 * foot
+footballpitch = 105 * 68 * metre ** 2
 
-# Unusual units
+wales = 20799 * kilometre ** 2
 
-Hand = 4 * Inch
-Horse = 8 * Foot
-FootballPitch = 105 * 68 * Metre ** 2
+dogyear = year / 7
+sol = 88775 * second
+galacticyear = 225 * 1e9 * year
 
-Wales = 20799 * Kilometre ** 2
+firkin = 90 * pound
+smoot = 1.67005 * metre
 
-DogYear = Year / 7
-Sol = 88775 * Second
-GalacticYear = 225 * 1e9 * Year
-
-Firkin = 90 * Pound
-Smoot = 1.67005 * Metre
-
-# Name transmogrification
+# name transmogrification
 
 __all__ = []
 
@@ -264,14 +263,14 @@ for name, unit in units:
     __all__.append(name)
 
 if __name__ == "__main__":
-    # Display a table of symbols
+    # display a table of symbols
 
     table = []
     for name in __all__:
         unit = globals()[name]
 
-        measure = str(unit.measure).replace("None", "unknown").replace("unitless", "")
-        table.append([name, unit.numberString(), unit.symbol, measure])
+        measure = str(unit.measure).replace("none", "unknown").replace("unitless", "")
+        table.append([name, unit.numberstring(), unit.symbol, measure])
 
     from .helpers import tablify
 

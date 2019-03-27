@@ -2,7 +2,7 @@ from dataclasses import dataclass, field
 import fractions
 
 from .unit import Unit
-from .unitCatalogue import Coulomb
+from .unitCatalogue import coulomb
 from .constants import e, m_e, MeVc2
 
 I = fractions.Fraction(1)
@@ -13,7 +13,7 @@ __all__ = 'Particle u d s c t b e p n'.split()
 class Particle:
     symbols: list = field(default_factory=list)
     mass: Unit = 0 * MeVc2
-    charge: Unit = 0 * Coulomb
+    charge: Unit = 0 * coulomb
 
     angular_momentum: float = 0
     baryon: float = 0
