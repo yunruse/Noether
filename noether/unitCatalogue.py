@@ -7,15 +7,15 @@ U = BaseUnit
 BU = lambda dim, sym: U(1, sym, isDisplay=True, _dim=dim)
 
 # fundamental measures, units
-current = Dimension(1)
-temperature = Dimension(2)
-length = distance = Dimension(3)
-time = Dimension(4)
-mass = Dimension(5)
-luminosity = Dimension(6)
-substance = Dimension(7)
-angle = Dimension(8)
-data = Dimension(9)
+luminosity = Dimension(1)
+angle = Dimension(2)
+data = Dimension(3)
+current = Dimension(4)
+temperature = Dimension(5)
+length = distance = Dimension(6)
+time = Dimension(7)
+mass = Dimension(8)
+substance = Dimension(9)
 
 amp = ampere = BU(current, "A")
 kelvin = BU(temperature, "k")
@@ -138,6 +138,7 @@ acre = U(100 * metre ** 2, "a")
 hectare = U(100 * acre, "ha")
 litre = U((metre / 10) ** 3, "l")
 tonne = U(kilogram * 1000, "t")
+data_rate = data / time
 
 # scientific units
 

@@ -8,7 +8,7 @@ from .matrix import Matrix
 
 
 class Dimension(tuple):
-    fundamental = "A K m s Kg Cd mol rad B".split()
+    fundamental = "Cd rad B A K m s mol Kg".split()
     N_DIMENSIONS = len(fundamental)
 
     def __new__(cls, name_or_tuple=None):
