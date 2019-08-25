@@ -84,7 +84,8 @@ data_rate = data / time
 pixel_count = Dimension.new(3.2, "pixel_count", "P")
 pixel = U(pixel_count, SI=True)
 
-pixel_fill_Rate = pixel_count / time
+pixel_fill_rate = pixel_count / time
+image_density = pixel_count / data
 
 # derivatives and integrals of time
 
