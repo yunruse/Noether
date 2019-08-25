@@ -387,3 +387,6 @@ class BaseUnit(Unit):
         if symbols and isDisplay:
             self._baseDisplayUnits[self.dim] = self
         return self
+    
+    def __repr__(self):
+        return (self.names + self.symbols + ('<unnamed unit>', ))[0]
