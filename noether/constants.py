@@ -63,7 +63,7 @@ MeVc2 = BaseUnit(MeVc / c, "MeVc⁻²")
 
 # Adopted values
 
-g = BaseUnit(9.80665 * metre / second ** 2, "g")
+g = gee / kilogram
 t = 273.15 * kelvin
 
 natural_units = (e_0, c, h, e, MeV, MeVc, MeVc2, grav)
