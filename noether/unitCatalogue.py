@@ -62,25 +62,6 @@ angle = Dimension.new(3.2, "angle", "rad")
 radian = U(angle, "rad", SI=True)
 steradian = U(angle**2, "sterad", SI=True)
 
-# data & IEC prefixes
-
-data = Dimension.new(3.5, "data", "B")
-
-byte = U(data, "B", SI=True, IEC=True)
-bit = U(byte / 8, "b", SI=True, IEC=True)
-
-data_rate = data / time
-bps = U(bit / second, 'bps', SI=True, IEC=True)
-
-Unit.displayUnits = (bps, )
-
-# image size
-pixel_count = Dimension.new(3.4, "pixel_count", "P")
-pixel = U(pixel_count, SI=True)
-
-pixel_fill_rate = pixel_count / time
-image_density = pixel_count / data
-
 # derivatives and integrals of time
 
 velocity = speed = distance / time
@@ -315,6 +296,28 @@ galacticyear = 225 * 1e9 * year
 
 firkin = 90 * pound
 smoot = 1.67005 * metre
+
+# data & IEC prefixes
+
+data = Dimension.new(3.5, "data", "B")
+
+byte = U(data, "B", SI=True, IEC=True)
+bit = U(byte / 8, "b", SI=True, IEC=True)
+
+data_rate = data / time
+bps = U(bit / second, 'bps', SI=True, IEC=True)
+
+Unit.displayUnits = (bps, )
+
+# image size
+pixel_count = Dimension.new(3.4, "pixel_count", "P")
+pixel = U(pixel_count, SI=True)
+
+pixel_fill_rate = pixel_count / time
+image_density = pixel_count / data
+image_quality = pixel_count / length
+
+ppi = U(pixel / inch, 'ppi')
 
 # name transmogrification
 
