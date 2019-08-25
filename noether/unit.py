@@ -380,6 +380,9 @@ class BaseUnit(Unit):
     __slots__ = Unit.__slots__ + ["symbols", "names"]
 
     def __new__(cls, value, *a, symbols=None, names=None, isDisplay=False, **kw):
+        if isinstance(value, Dimension):
+            kw['_dim'] = value
+            value = 1
         self = Unit.__new__(cls, value, **kw)
         self.symbols = symbols or tuple()
         self.symbols += a
