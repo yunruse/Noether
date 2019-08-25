@@ -66,15 +66,15 @@ steradian = U(angle**2, "sterad", SI=True)
 
 # data & IEC prefixes
 
-data = Dimension.new(3.5, "data", "b")
+data = Dimension.new(3.5, "data", "B")
 
-bit = U(data, "b", SI=True, IEC=True)
-byte = U(bit * 8, "B", SI=True, IEC=True)
-
-Unit.display(byte)
+byte = U(data, "B", SI=True, IEC=True)
+bit = U(byte / 8, "b", SI=True, IEC=True)
 
 data_rate = data / time
-bps = U(data_rate, 'bps', SI=True, IEC=True)
+bps = U(bit / second, 'bps', SI=True, IEC=True)
+
+Unit.displayUnits = (bps, )
 
 # image size
 pixel_count = Dimension.new(3.4, "pixel_count", "P")
