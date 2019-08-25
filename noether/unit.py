@@ -108,7 +108,7 @@ class Dimension(dict):
         other = self._cmp(other)
         names = set(self.keys()).union(set(other.keys()))
         return Dimension(
-            {n: self.get(n, 0) + op * self.get(n, 0)
+            {n: self.get(n, 0) + op * other.get(n, 0)
              for n in names})
 
     def __truediv__(self, other):
