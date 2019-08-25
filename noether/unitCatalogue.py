@@ -71,6 +71,8 @@ data = Dimension.new(3.5, "data", "b")
 bit = U(data, "b", SI=True, IEC=True)
 byte = U(bit * 8, "B", SI=True, IEC=True)
 
+Unit.display(byte)
+
 kibibyte = byte * 2**10
 mebibyte = byte * 2**20
 gibibyte = byte * 2**30
