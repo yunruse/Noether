@@ -10,12 +10,46 @@ class prefix:
     pass
 
 
-_prefixes = {}
+#yapf: disable
+prefix_SI = (
+    ("yocto", "y",  1e-24),
+    ("zepto", "z",  1e-21),
+    ("atto",  "a",  1e-18),
+    ("femto", "f",  1e-15),
+    ("pico",  "p",  1e-12),
+    ("nano",  "n",  1e-9),
+    ("micro", "µ",  1e-6),
+    ("milli", "m",  1e-3),
+    ("centi", "c",  1e-2),
+    ("deci",  "d",  1e-1),
 
-for exp, sym in enumerate("yzafpnμm kMGTPEZY", -8):
-    if exp:
-        _prefixes[sym] = exp
-        setattr(prefix, sym, 10 ** (exp * 3))
+    ("deca",  "da", 1e1),
+    ("hecto", "h",  1e2),
+    ("kilo",  "k",  1e3),
+    ("mega",  "M",  1e6),
+    ("giga",  "G",  1e9),
+    ("tera",  "T",  1e12),
+    ("peta",  "P",  1e15),
+    ("exa",   "E",  1e18),
+    ("zetta", "Z",  1e21),
+    ("yotta", "Y",  1e24),
+)
+prefix_IEC = (
+    ("kibi",  "Ki", 2**10),
+    ("mebi",  "Mi", 2**20),
+    ("gibi",  "Gi", 2**30),
+    ("tebi",  "Ti", 2**40),
+    ("pebi",  "Pi", 2**50),
+    ("exbi",  "Ei", 2**60),
+    ("zebi",  "Zi", 2**70),
+    ("yobi",  "Yi", 2**80),
+)
+
+#yapf: enable
+
+for name, symbol, factor in prefix_SI + prefix_IEC:
+    for i in (name, symbol):
+        setattr(prefix, i, factor)
 
 
 def exp_mantissa(num, base=10):
@@ -24,7 +58,7 @@ def exp_mantissa(num, base=10):
         return 1, 0
     # log(1e3, 10) = 2.99...
     exp = floor(round(log(abs(num), base), 12))
-    mantissa = num / (base ** exp)
+    mantissa = num / (base**exp)
     return exp, mantissa
 
 
@@ -33,9 +67,9 @@ def prefixify(num):
     if not isinstance(num, (float, int)):
         return num, ""
     exp, mantissa = exp_mantissa(num, 10)
-    for prefix, pExp in _prefixes.items():
+    for _, prefix, pExp in _prefixes.items():
         if -2 < exp - pExp < 3:
-            return mantissa * 10 ** exp, prefix
+            return mantissa * 10**exp, prefix
     else:
         return num, ""
 
@@ -78,13 +112,13 @@ def scinot(num, precision=4, unicode_exponents=True, lower=-2, upper=3):
 
 
 def numberString(
-    number,
-    delta=0,
-    asUnit=False,
-    precision=2,
-    unicode_exponent=False,
-    lower=-2,
-    upper=4,
+        number,
+        delta=0,
+        asUnit=False,
+        precision=2,
+        unicode_exponent=False,
+        lower=-2,
+        upper=4,
 ):
     """
     Format a number and uncertainty.
@@ -105,10 +139,14 @@ def numberString(
             sharedExp = max(eN, eD)
 
     if sharedExp:
-        sharedFactor = 10 ** sharedExp
+        sharedFactor = 10**sharedExp
         number /= sharedFactor
         delta /= sharedFactor
-        sExp = scinot(sharedFactor, 1, unicode_exponent, lower=None, upper=None)
+        sExp = scinot(sharedFactor,
+                      1,
+                      unicode_exponent,
+                      lower=None,
+                      upper=None)
     else:
         sExp = ""
 
@@ -116,7 +154,8 @@ def numberString(
     if number:
         sNum += scinot(number, precision, unicode_exponent, lower, upper)
     if delta:
-        sNum += " ± " + scinot(delta, precision, unicode_exponent, lower, upper)
+        sNum += " ± " + scinot(delta, precision, unicode_exponent, lower,
+                               upper)
 
     sNum = sNum.strip() or "0"
     if sExp or (number and delta and asUnit):
