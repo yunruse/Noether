@@ -66,7 +66,7 @@ steradian = U(angle**2, "sterad", SI=True)
 
 # data & IEC prefixes
 
-data = Dimension.new(3.2, "data", "b")
+data = Dimension.new(3.5, "data", "b")
 
 bit = U(data, "b", SI=True, IEC=True)
 byte = U(bit * 8, "B", SI=True, IEC=True)
@@ -83,7 +83,7 @@ yobibyte = byte * 2**80
 data_rate = data / time
 
 # image size
-pixel_count = Dimension.new(3.2, "pixel_count", "P")
+pixel_count = Dimension.new(3.4, "pixel_count", "P")
 pixel = U(pixel_count, SI=True)
 
 pixel_fill_rate = pixel_count / time
