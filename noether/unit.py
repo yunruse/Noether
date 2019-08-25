@@ -379,9 +379,10 @@ class Unit(float, metaclass=UnitMeta):
 class BaseUnit(Unit):
     __slots__ = Unit.__slots__ + ["symbols", "names"]
 
-    def __new__(cls, value, symbols=None, names=None, isDisplay=False, **kw):
+    def __new__(cls, value, *a, symbols=None, names=None, isDisplay=False, **kw):
         self = Unit.__new__(cls, value, **kw)
         self.symbols = symbols or tuple()
+        self.symbols += a
         self.names = names or tuple()
 
         if symbols and isDisplay:

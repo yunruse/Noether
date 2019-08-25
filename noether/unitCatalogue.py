@@ -16,9 +16,9 @@ prefixable_IEC = set()
 
 def U(value, *symbols, SI=False, IEC=False):
     if isinstance(value, Dimension):
-        unit = BaseUnit(1, symbols, isDisplay=True, _dim=value)
+        unit = BaseUnit(1, *symbols, isDisplay=True, _dim=value)
     else:
-        unit = BaseUnit(value, symbols)
+        unit = BaseUnit(value, *symbols)
     if SI:
         prefixable_SI.add(unit)
     if IEC:
