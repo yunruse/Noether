@@ -337,8 +337,10 @@ for name, unit in units:
 
     __all__.append(name)
 
-_prefix = ((prefixable_SI, prefix_SI), (prefixable_IEC, prefix_IEC))
-for units, prefixes in _prefix:
+for units, prefixes in (
+    (prefixable_SI, prefix_SI),
+    (prefixable_IEC, prefix_IEC)
+):
     for unit in units:
         for pName, pSym, pFactor in prefixes:
             for names, prefix in ((unit.names, pName), (unit.symbols, pSym)):
