@@ -73,15 +73,6 @@ byte = U(bit * 8, "B", SI=True, IEC=True)
 
 Unit.display(byte)
 
-kibibyte = byte * 2**10
-mebibyte = byte * 2**20
-gibibyte = byte * 2**30
-tebibyte = byte * 2**40
-pebibyte = byte * 2**50
-exbibyte = byte * 2**60
-zebibyte = byte * 2**70
-yobibyte = byte * 2**80
-
 data_rate = data / time
 
 # image size
