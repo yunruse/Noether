@@ -36,7 +36,7 @@ def base_units():
         (3, "temperature", "k", True, "kelvin"),
         (4, "mass", "kg", False, "kilogram"),
         (5, "substance", "mol", True, "mole"),
-        (6, "length", "m", True, "meter", "metre"),
+        (6, "length", "m", True, "metre", "meter"),
         (7, "time", "s", True, "second")
     )
     # yapf: enable
