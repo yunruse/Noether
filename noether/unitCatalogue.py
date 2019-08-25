@@ -28,27 +28,29 @@ def U(value, *symbols, SI=False, IEC=False):
 
 # SI units
 
-# yapf: disable
-_BASE_UNITS = (
-    (1, "luminosity", "cd", True, "candela"),
-    (2, "current", "A", True, "amp", "ampere"),
-    (3, "temperature", "k", True, "kelvin"),
-    (4, "mass", "kg", False, "kilogram"),
-    (5, "substance", "mol", True, "mole"),
-    (6, "length", "m", True, "meter", "metre"),
-    (7, "time", "s", True, "second")
-)
-# yapf: enable
+def base_units():
+    # yapf: disable
+    _BASE_UNITS = (
+        (1, "luminosity", "cd", True, "candela"),
+        (2, "current", "A", True, "amp", "ampere"),
+        (3, "temperature", "k", True, "kelvin"),
+        (4, "mass", "kg", False, "kilogram"),
+        (5, "substance", "mol", True, "mole"),
+        (6, "length", "m", True, "meter", "metre"),
+        (7, "time", "s", True, "second")
+    )
+    # yapf: enable
 
-for u in _BASE_UNITS:
-    display_order, name, symbol, SI, *units = u
-    dim = Dimension.new(display_order, name, symbol)
-    globals()[name] = dim
-    unit = U(dim, symbol, SI=SI)
-    for name in units:
-        globals()[name] = unit
-del u
+    for u in _BASE_UNITS:
+        display_order, name, symbol, SI, *units = u
+        dim = Dimension.new(display_order, name, symbol)
+        globals()[name] = dim
+        unit = U(dim, symbol, SI=SI)
+        for name in units:
+            globals()[name] = unit
 
+base_units()
+del base_units
 distance = length
 
 # SI derived units
