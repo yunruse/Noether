@@ -139,13 +139,17 @@ class UnitMeta(type):
 
     def _dU_set(cls, bases):
         cls._displayUnits.clear()
-        if not hasattr(bases, "__iter__"):
-            bases = [bases]
+        if isinstance(bases, dict):
+            bases = bases.values()
+        
         for unit in bases:
             cls._displayUnits[unit.dim] = unit
 
     def _dU_del(cls):
         cls._displayUnits.clear()
+    
+    def display(cls, unit):
+        cls._displayUnits[unit.dim] = unit
 
     displayUnits = property(_dU_get, _dU_set, _dU_del)
 
