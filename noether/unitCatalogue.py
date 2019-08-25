@@ -74,6 +74,7 @@ byte = U(bit * 8, "B", SI=True, IEC=True)
 Unit.display(byte)
 
 data_rate = data / time
+bps = U(data_rate, 'bps', SI=True, IEC=True)
 
 # image size
 pixel_count = Dimension.new(3.4, "pixel_count", "P")
