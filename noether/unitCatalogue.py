@@ -153,6 +153,8 @@ dalton = U(1.660_538_86e-27 * kilogram, "u")
 angstrom = U(metre * 1e-10, "å")
 are = U((10 * metre) ** 2, "a")
 barn = U(1e-28 * metre ** 2, "b")
+g = 9.980665 * metre / second**2
+gee = g * kilogram
 
 bar = U(1e5 * pascal, "bar")
 millibar = U(100 * pascal, "mbar")
@@ -215,6 +217,14 @@ hundredweight = U(4 * quarter, "cwt")
 ton = U(2240 * pound, "t")
 
 slug = 14.593_902_94 * kilogram
+
+# imperial insanity
+
+poundforce = U(gee * pound, "lbf")
+poundfoot = poundforce * foot
+
+poundal = pound * foot / second**2
+psi = pound / inch**2
 
 # speeds
 
