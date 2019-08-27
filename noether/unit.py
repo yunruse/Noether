@@ -131,7 +131,7 @@ class Unit(float, metaclass=UnitMeta):
         sNum += self.symbol or self.dim.asFundamentalUnits()
 
         if self.showDimension and self.dim.name:
-            sNum += " ({})".format(self.dim.name)
+            sNum += " <{}>".format(self.dim.name)
 
         return sNum
 
