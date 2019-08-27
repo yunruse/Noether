@@ -14,9 +14,9 @@ prefixable_SI = set()
 prefixable_IEC = set()
 
 
-def U(value, *symbols, SI=False, IEC=False):
-    isDisplay = isinstance(value, Dimension)
-    unit = BaseUnit(value, *symbols, isDisplay=isDisplay)
+def U(value, *symbols, display=None, SI=False, IEC=False):
+    display = SI if display is None else display
+    unit = BaseUnit(value, *symbols, isDisplay=display)
     if SI:
         prefixable_SI.add(unit)
     if IEC:
@@ -195,12 +195,12 @@ barn = U(1e-28 * metre**2, "b")
 g = 9.980665 * metre / second**2
 gee = g * kilogram
 
-bar = U(1e5 * pascal, "bar", SI=True)
-atmosphere = U(101_325 * pascal, "atm")
+bar = U(1e5 * pascal, "bar", SI=True, display=False)
+atmosphere = U(101_325 * pascal, "atm", display=False)
 torr = U(atmosphere / 760, "torr")
 metre_mercury = meter_mercury = U(133_322.387_415 * pascal, "mhg", SI=True)
 
-calorie = U(4.814 * joule, "cal", SI=True)
+calorie = U(4.814 * joule, "cal", SI=True, display=False)
 kilocalorie = kcal = U(calorie * 1000, "kcal")
 
 # older cgs units
@@ -318,6 +318,7 @@ image_density = pixel_count / data
 image_quality = pixel_count / length
 
 ppi = U(pixel / inch, 'ppi')
+Unit.display(ppi)
 
 # name transmogrification
 
