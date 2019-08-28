@@ -135,7 +135,8 @@ class Unit(float, metaclass=UnitMeta):
 
         return sNum
 
-    __repr__ = __str__
+    def __repr__(self):
+        return str(self)
 
     # Dimension-changing operators
 
