@@ -54,6 +54,7 @@ distance = length
 # SI derived units
 frequency = time**-1
 hertz = U(frequency, "Hz", SI=True)
+bpm = U(hertz / 60, "bmp")
 
 area = length**2
 volume = length**3
