@@ -125,10 +125,10 @@ conductance = resistance**-1
 siemens = U(conductance, "S", SI=True)
 
 magnetic_flux = energy / current
-weber = U(magneticflux, "Wb", SI=True)
+weber = U(magnetic_flux, "Wb", SI=True)
 
 magnetic_flux_density = magnetic_flux / area
-tesla = U(magneticfluxdensity, "T", SI=True)
+tesla = U(magnetic_flux_density, "T", SI=True)
 
 inductance = resistance * time
 henry = U(inductance, "H", SI=True)
