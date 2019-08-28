@@ -4,6 +4,8 @@ import bisect
 from collections import namedtuple
 
 from .helpers import intify
+from .scale import superscript
+from .unit import Unit
 
 _BaseDimension = namedtuple("_BaseDimension", "order name display_unit".split())
 

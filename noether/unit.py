@@ -4,7 +4,7 @@ import operator
 
 from .scale import numberString, superscript
 from .matrix import Matrix
-from .dimension import Dimension
+#from .dimension import Dimension : Import loop
 
 __all__ = 'Unit BaseUnit Dimension'.split()
 
@@ -270,3 +270,7 @@ class BaseUnit(Unit):
     
     def __repr__(self):
         return (self.names + self.symbols + ('<unnamed unit>', ))[0]
+
+# Avoid name-mangling
+
+from .dimension import Dimension
