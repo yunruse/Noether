@@ -124,10 +124,10 @@ resistivity = resistance / length
 conductance = resistance**-1
 siemens = U(conductance, "S", SI=True)
 
-magneticflux = energy / current
+magnetic_flux = energy / current
 weber = U(magneticflux, "Wb", SI=True)
 
-magneticfluxdensity = magneticflux / area
+magnetic_flux_density = magnetic_flux / area
 tesla = U(magneticfluxdensity, "T", SI=True)
 
 inductance = resistance * time
@@ -148,19 +148,19 @@ dose = energy / mass
 gray = U(dose, "Gy")
 sievert = U(dose, "Sv")
 
-catalyticactivity = substance / time
-katal = U(catalyticactivity, "kat")
+catalytic_activity = substance / time
+katal = U(catalytic_activity, "kat")
 
 # material
 
-surfacetension = force / length
+surface_tension = force / length
 density = mass / volume
 
-thermaldiffusivity = distance**2 / time
-thermalconductance = power / temperature
-thermalresistance = temperature / power
-thermalinsulance = temperature * area / power
-thermaladmittance = power / temperature / area
+thermal_diffusivity = distance**2 / time
+thermal_conductance = power / temperature
+thermal_resistance = temperature / power
+thermal_insulance = temperature * area / power
+thermal_admittance = power / temperature / area
 
 # conventional si-accepted units
 
