@@ -158,6 +158,7 @@ density = mass / volume
 
 thermal_diffusivity = distance**2 / time
 thermal_conductance = power / temperature
+thermal_conductivity = thermal_conductance / length
 thermal_resistance = temperature / power
 thermal_insulance = temperature * area / power
 thermal_admittance = power / temperature / area
