@@ -31,7 +31,7 @@ def base_units():
     _BASE_UNITS = (
         (1, "luminosity", "cd", True, "candela"),
         (2, "current", "A", True, "amp", "ampere"),
-        (3, "temperature", "k", True, "kelvin"),
+        (3, "temperature", "K", True, "kelvin"),
         (4, "mass", "kg", False, "kilogram"),
         (5, "substance", "mol", True, "mole"),
         (6, "length", "m", True, "metre", "meter"),
