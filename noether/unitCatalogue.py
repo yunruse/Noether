@@ -143,6 +143,10 @@ lumen = U(luminosity * angle**2, "lum", SI=True)
 illuminance = luminosity / area
 lux = U(illuminance, "Lx", SI=True)
 
+irradiance = power / area
+intensity = power / area
+heat_flux = power / area
+
 becquerel = U(hertz, "Bq")
 dose = energy / mass
 gray = U(dose, "Gy")
