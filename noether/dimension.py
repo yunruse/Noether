@@ -61,12 +61,18 @@ class Dimension(dict):
     _names = dict()
 
     @property
-    def name(self):
+    def names(self):
         if len(self) == 1:
             dim = list(self.keys())[0]
             if self[dim] == 1 and dim in self._dimensions_map:
                 return dim
-        return self._names.get(self, None)
+        return self._names.get(self, list())
+    
+    def addName(self, name):
+        name = name.replace('_', ' ')
+        if self not in self._names:
+            self._names[self] = list()
+        self._names[self].append(name)
     
     # Reproduction
 

@@ -130,13 +130,16 @@ class Unit(float, metaclass=UnitMeta):
 
         sNum += self.symbol or self.dim.asFundamentalUnits()
 
-        if self.showDimension and self.dim.name:
-            sNum += " <{}>".format(self.dim.name)
-
-        return sNum
+        return sNum + self._strDim()
 
     def __repr__(self):
         return str(self)
+    
+    def _strDim(self):
+        if self.showDimension and self.dim.names:
+            return " <{}>".format(', '.join(self.dim.names))
+        else:
+            return ""
 
     # Dimension-changing operators
 
@@ -182,10 +185,10 @@ class Unit(float, metaclass=UnitMeta):
 
     def __cmp(self, other):
         # Linear helper
-        if not self.openLinear and isinstance(other,
-                                              Unit) and self.dim != other.dim:
-            raise ValueError("Inequal units {} and {}.".format(
-                self.dim, other.dim))
+        if not self.openLinear:
+            if isinstance(other, Unit) and self.dim != other.dim:
+                raise ValueError("Inequal units {} and {}.".format(
+                    self.dim, other.dim))
 
         # Return limits of uncertainty
         sl = float(self) - self.delta
@@ -270,7 +273,7 @@ class BaseUnit(Unit):
         return self
     
     def __repr__(self):
-        return (self.names + self.symbols + ('<unnamed unit>', ))[0]
+        return (self.names + self.symbols + ('<unnamed unit>', ))[0] + self._strDim()
 
 # Avoid name-mangling
 

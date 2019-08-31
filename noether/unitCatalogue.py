@@ -331,7 +331,7 @@ units = dict(globals()).items()
 for name, unit in units:
     displayName = name.replace("_", " ")
     if isinstance(unit, Dimension):
-        Dimension._names[unit] = displayName
+        unit.addName(name)
     elif isinstance(unit, BaseUnit):
         unit.names += (displayName, )
     elif isinstance(unit, Unit):
