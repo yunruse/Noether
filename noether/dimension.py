@@ -55,6 +55,8 @@ class Dimension(dict):
         raise TypeError('{!r} object does not support item deletion'.format(type(self).__name__))
     def __hash__(self):
         return hash(tuple(sorted(self.items())))
+    
+    # Name registry (such that generated Dimensions map)
 
     _names = dict()
 
@@ -65,6 +67,8 @@ class Dimension(dict):
             if self[dim] == 1 and dim in self._dimensions_map:
                 return dim
         return self._names.get(self, None)
+    
+    # Reproduction
 
     def asFundamentalUnits(self):
         dims = []
@@ -86,9 +90,17 @@ class Dimension(dict):
     def __repr__(self):
         return "Dimension({})".format(", ".join(
             "{}={}".format(k, v) for k, v in self.items()))
+    
+    # Operations
 
     def __bool__(self):
         return not all(i == 0 for i in self.values())
+
+    def __pow__(self, exp):
+        if isinstance(exp, (int, float)):
+            return Dimension({k: intify(v * exp) for k, v in self.items()})
+        else:
+            raise TypeError("Cannot raise dimension to non-real exponent")
 
     def _cmp(self, other):
         """Check and attempt to match other unit to Dimension"""
@@ -101,12 +113,6 @@ class Dimension(dict):
         else:
             raise TypeError("Cannot operate on Dimension with {}".format(
                 type(other).__name__))
-
-    def __pow__(self, exp):
-        if isinstance(exp, (int, float)):
-            return Dimension({k: intify(v * exp) for k, v in self.items()})
-        else:
-            raise TypeError("Cannot raise dimension to non-real exponent")
 
     def __mul__(self, other, op=+1):
         other = self._cmp(other)
@@ -130,7 +136,7 @@ class Dimension(dict):
             return self
         else:
             raise ValueError(
-                "Cannot linearly operate on inequal dimensions {} and {}".
+                "Cannot add or subtract inequal dimensions {} and {}".
                 format(self, other))
 
     __sub__ = __rsub__ = __add__ = __radd__ = _checkLinear
