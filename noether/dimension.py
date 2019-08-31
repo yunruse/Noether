@@ -46,8 +46,13 @@ class Dimension(dict):
     @classmethod
     def new(cls, order, name, display_unit):
         return cls(_BaseDimension(order, name, display_unit))
-        
-
+    
+    # Immutability   
+    
+    def __setitem__(self, name, value):
+        raise TypeError('{!r} object does not support item assignment'.format(type(self).__name__))
+    def __delitem__(self, name):
+        raise TypeError('{!r} object does not support item deletion'.format(type(self).__name__))
     def __hash__(self):
         return hash(tuple(sorted(self.items())))
 
