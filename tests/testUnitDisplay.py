@@ -17,8 +17,8 @@ class UnitDisplayTest(TestCase):
     )
 
     def test_equality(self):
-        for num, delta, desired in self.equalityTests:
+        for num, stddev, desired in self.equalityTests:
             actual = numberString(
-                num, delta, asUnit=False, precision=3, unicode_exponent=False
+                num, stddev, asUnit=False, precision=3, unicode_exponent=False
             )
             self.assertEqual(desired, actual)

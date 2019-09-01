@@ -38,11 +38,11 @@ class Unit(float, metaclass=UnitMeta):
     openLinear = False
     unicodeExponent = True
 
-    __slots__ = "dim _delta".split()
+    __slots__ = "dim _stddev".split()
 
-    def __new__(cls, value=1, delta=None, dim=None):
+    def __new__(cls, value=1, stddev=None, dim=None):
         '''
-        Extension to float with a Dimension and a uncertainty `delta`.
+        Extension to float with a dimension and standard deviation.
 
         Will propagate properties via standard operations, but will act
         like a float (and disregard properties) to functions designed
@@ -53,30 +53,41 @@ class Unit(float, metaclass=UnitMeta):
 
         if isinstance(value, Unit):
             self.dim = value.dim
-            self._delta = value._delta
+            self._stddev = value._stddev
         else:
             self.dim = Dimension()
-            self._delta = 0
+            self._stddev = 0
 
         if dim is not None:
             self.dim = Dimension(dim)
-        if delta is not None:
-            self.delta = delta
+        if stddev is not None:
+            self.stddev = stddev
 
         return self
 
-    # Delta / epsilon (absolute / relative uncertainties)
+    # Standard deviation
 
-    def _d_set(self, d):
-        self._delta = abs(d)
+    def _stddev_set(self, v):
+        self._stddev = abs(v)
 
-    delta = property(lambda s: s._delta, _d_set, lambda s: s._d_set(0))
+    stddev = property(lambda s: s._stddev, _stddev_set, lambda s: s._stddev_set(0))
+    delta = stddev
 
-    def _e_set(self, e):
-        self._delta = abs(e * float(self))
+    def _stdratio_set(self, v):
+        self.stddev = v * float(self)
+    stddevratio = property(
+        lambda s: abs(s._stddev / float(s)),
+        _stdratio_set,
+        lambda s: s._stddev_set(0))
+    epsilon = stddevratio
 
-    epsilon = property(lambda s: abs(s._delta / float(s)), _e_set,
-                       lambda s: s._e_set(0))
+    def _variance_set(self, v):
+        self.stddev = v ** 2
+    variance = property(
+        lambda s: s._stddev ** 0.5,
+        _variance_set,
+        lambda s: s._stddev_set(0)
+    )
 
     # This class-shared variable is used for display units
     # {dim: Unit}
@@ -105,7 +116,7 @@ class Unit(float, metaclass=UnitMeta):
         useParens = bool(self.symbol)
         return numberString(
             float(display),
-            display.delta,
+            display.stddev,
             useParens,
             self.precision,
             self.unicodeExponent,
@@ -143,31 +154,31 @@ class Unit(float, metaclass=UnitMeta):
     def inv(self):
         return 1 / self
 
-    def __mul__(self, other, op=operator.mul, expOp=operator.add):
+    def __geometric(self, other, op=operator.mul):
 
         new = Unit(
             op(float(self), float(other)),
             dim=self.dim,
-            delta=self.delta
+            stddev=self.stddev
         )
 
         if isinstance(other, Dimension):
             raise TypeError('Unclear result of operator on Dimension and Unit. Use Unit.dim, or Unit(dim).')
         elif isinstance(other, Unit):
             new.dim = op(self.dim, other.dim)
-            new.epsilon = expOp(self.epsilon, other.epsilon)
+            new.epsilon = (self.epsilon**2 + other.epsilon**2) ** 0.5
         else:
             new.epsilon = self.epsilon
 
         return new
     
-    __rmul__ = __mul__
-    __truediv__ = lambda s, o: s.__mul__(o, operator.truediv, operator.sub)
-    __floordiv__ = lambda s, o: s.__mul__(o, operator.floordiv, operator.sub)
+    __rmul__ = __mul__ = lambda s, o: s.__geometric(o, operator.mul)
+    __truediv__ = lambda s, o: s.__geometric(o, operator.truediv)
+    __floordiv__ = lambda s, o: s.__geometric(o, operator.floordiv)
 
-    def __call__(self, value, delta=None):
-        if delta and not isinstance(value, Unit):
-            value = Unit(value, delta)
+    def __call__(self, value, stddev=None):
+        if stddev and not isinstance(value, Unit):
+            value = Unit(value, stddev)
         return self * value
 
     def __pow__(self, exp):
@@ -189,6 +200,7 @@ class Unit(float, metaclass=UnitMeta):
                     self.dim, other.dim))
 
         # Return limits of uncertainty
+        # TODO: Extract this into a separate Range object - this is not standard deviation
         sl = float(self) - self.delta
         su = float(self) + self.delta
         if isinstance(other, Unit):
@@ -198,23 +210,22 @@ class Unit(float, metaclass=UnitMeta):
             ol, ou = other, other
         return sl, su, ol, ou
 
-    def __add__(self, other, op=operator.add):
+    def __linear(self, other, op=operator.add):
         if isinstance(other, Dimension):
             return other._checkType(self)
 
         self.__linear_compare(other)
-        odelta = other.delta if isinstance(other, Unit) else 0
+        stddev = self.stddev
+        if isinstance(other, Unit):
+            stddev = (stddev**2 + other.stddev**2) ** 0.5
         return Unit(
             op(float(self), float(other)),
             dim=self.dim,
-            delta=op(float(self.delta), odelta),
+            stddev=stddev
         )
-
-    def __sub__(self, other):
-        return self.__add__(other, operator.sub)
-
-    __radd__ = __add__
-    __rsub__ = __sub__
+    
+    __add__ = __radd__ = lambda s, o: s.__linear(o, operator.add)
+    __sub__ = __rsub__ = lambda s, o: s.__linear(o, operator.sub)
 
     # comparison operators require range-checking
 
