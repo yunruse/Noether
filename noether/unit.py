@@ -38,53 +38,45 @@ class Unit(float, metaclass=UnitMeta):
     openLinear = False
     unicodeExponent = True
 
-    __slots__ = "dim _delta _epsilon".split()
+    __slots__ = "dim _delta".split()
 
-    def __new__(cls, value=1, **kw):
+    def __new__(cls, value=1, delta=None, dim=None):
+        '''
+        Extension to float with a Dimension and a uncertainty `delta`.
+
+        Will propagate properties via standard operations, but will act
+        like a float (and disregard properties) to functions designed
+        to operate on numerics. Ensure Unit-aware functions are used
+        if required.
+        '''
         self = float.__new__(cls, value)
 
         if isinstance(value, Unit):
-            dim, delta, eps = value.dim, value._delta, value._epsilon
+            self.dim = value.dim
+            self._delta = value._delta
         else:
-            dim, delta, eps = None, None, None
+            self.dim = Dimension()
+            self._delta = 0
 
-        self.dim = Dimension(kw.get("_dim", dim))
-        self._delta = kw.get("_delta", delta)
-        self._epsilon = kw.get("_epsilon", eps)
+        if dim is not None:
+            self.dim = Dimension(dim)
+        if delta is not None:
+            self.delta = delta
 
         return self
 
     # Delta / epsilon (absolute / relative uncertainties)
 
-    def _d_get(self):
-        if self._delta is not None:
-            return self._delta
-        e, f = self._epsilon or 0, float(self)
-        if e == 0 or f == 0:
-            return 0
-        else:
-            return abs(e * f)
-
     def _d_set(self, d):
         self._delta = abs(d)
-        self._epsilon = None
 
-    delta = property(_d_get, _d_set, lambda s: s._d_set(0))
-
-    def _e_get(self):
-        if self._epsilon is not None:
-            return self._epsilon
-        d, f = self._delta or 0, float(self)
-        if d == 0 or f == 0:
-            return 0
-        else:
-            return abs(d / f)
+    delta = property(lambda s: s._delta, _d_set, lambda s: s._d_set(0))
 
     def _e_set(self, e):
-        self._epsilon = abs(e)
-        self._delta = None
+        self._delta = abs(e * float(self))
 
-    epsilon = property(_e_get, _e_set, lambda s: s._e_set(0))
+    epsilon = property(lambda s: abs(s._delta / float(s)), _e_set,
+                       lambda s: s._e_set(0))
 
     # This class-shared variable is used for display units
     # {dim: Unit}
@@ -103,7 +95,7 @@ class Unit(float, metaclass=UnitMeta):
 
     def value(self):
         '''Returns the number(s) without dimension.'''
-        return Unit(float(self), _delta=self._delta, _epsilon=self._epsilon)
+        return Unit(self, dim=Dimension())
 
     def numberString(self, useDisplayUnit=False):
         display = self
@@ -151,30 +143,31 @@ class Unit(float, metaclass=UnitMeta):
     def inv(self):
         return 1 / self
 
-    def __mul__(self, other, f=operator.mul):
-        if other is 1:
-            return self
+    def __mul__(self, other, op=operator.mul, expOp=operator.add):
+
+        new = Unit(
+            op(float(self), float(other)),
+            dim=self.dim,
+            delta=self.delta
+        )
 
         if isinstance(other, Dimension):
-            return f(self.dim, other)
-        if isinstance(other, Unit):
-            dim = f(self.dim, other.dim)
-            e = self.epsilon + other.epsilon
-        else:
-            dim = self.dim
-            e = self.epsilon
+            raise TypeError('Unclear result of operator on Dimension and Unit. Use Unit.dim, or Unit(dim).')
+        elif isinstance(other, Unit):
+            new.dim = op(self.dim, other.dim)
+            new.epsilon = expOp(self.epsilon, other.epsilon)
 
-        return Unit(f(float(self), float(other)), _dim=dim, _epsilon=e)
+        return new
 
     __call__ = __mul__
     __rmul__ = __mul__
-    __truediv__ = lambda s, o: s.__mul__(o, operator.truediv)
-    __floordiv__ = lambda s, o: s.__mul__(o, operator.floordiv)
+    __truediv__ = lambda s, o: s.__mul__(o, operator.truediv, operator.sub)
+    __floordiv__ = lambda s, o: s.__mul__(o, operator.floordiv, operator.sub)
 
     def __pow__(self, exp):
-        return Unit(float(self)**exp,
-                    _dim=self.dim**exp,
-                    _epsilon=self.epsilon * abs(exp))
+        new = Unit(float(self)**exp, dim=self.dim**exp)
+        new.epsilon = self.epsilon * exp
+        return new
 
     def __rtruediv__(self, other):
         return other * self**-1
@@ -183,8 +176,7 @@ class Unit(float, metaclass=UnitMeta):
 
     __neg__ = lambda s: s * -1
 
-    def __cmp(self, other):
-        # Linear helper
+    def __linear_compare(self, other):
         if not self.openLinear:
             if isinstance(other, Unit) and self.dim != other.dim:
                 raise ValueError("Inequal units {} and {}.".format(
@@ -204,12 +196,12 @@ class Unit(float, metaclass=UnitMeta):
         if isinstance(other, Dimension):
             return other._checkType(self)
 
-        self.__cmp(other)
+        self.__linear_compare(other)
         odelta = other.delta if isinstance(other, Unit) else 0
         return Unit(
             op(float(self), float(other)),
-            _dim=self.dim,
-            _delta=op(float(self.delta), odelta),
+            dim=self.dim,
+            delta=op(float(self.delta), odelta),
         )
 
     def __sub__(self, other):
@@ -261,7 +253,7 @@ class BaseUnit(Unit):
 
     def __new__(cls, value, *a, symbols=None, names=None, isDisplay=False, **kw):
         if isinstance(value, Dimension):
-            kw['_dim'] = value
+            kw['dim'] = value
             value = 1
         self = Unit.__new__(cls, value, **kw)
         self.symbols = symbols or tuple()
