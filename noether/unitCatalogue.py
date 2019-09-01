@@ -49,6 +49,9 @@ def base_units():
 
 base_units()
 del base_units
+
+dimensionless = Dimension()
+
 distance = length
 
 # SI derived units
