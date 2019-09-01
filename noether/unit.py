@@ -156,6 +156,8 @@ class Unit(float, metaclass=UnitMeta):
         elif isinstance(other, Unit):
             new.dim = op(self.dim, other.dim)
             new.epsilon = expOp(self.epsilon, other.epsilon)
+        else:
+            new.epsilon = self.epsilon
 
         return new
 
