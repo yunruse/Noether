@@ -160,11 +160,15 @@ class Unit(float, metaclass=UnitMeta):
             new.epsilon = self.epsilon
 
         return new
-
-    __call__ = __mul__
+    
     __rmul__ = __mul__
     __truediv__ = lambda s, o: s.__mul__(o, operator.truediv, operator.sub)
     __floordiv__ = lambda s, o: s.__mul__(o, operator.floordiv, operator.sub)
+
+    def __call__(self, value, delta=None):
+        if delta and not isinstance(value, Unit):
+            value = Unit(value, delta)
+        return self * value
 
     def __pow__(self, exp):
         new = Unit(float(self)**exp, dim=self.dim**exp)
