@@ -10,6 +10,19 @@ Currently features:
 - An extensive catalogue of scientific units
 - Basic graphing (requires [Astley])
 
+- Create `Unit`s for display or calculation
+- Create `Dimension`s to check for conservation
+
+On the cards for future features:
+
+- More mature SI presentation (eg decomposing to Joules or Newtons, not base units)
+- More extensive maths suite for error propagation
+- Mature calculus API
+- Linting to verify measure annotations
+- Optional linting for symbols to warn that, eg, `E` is not in Joules
+- Leveraging [Astley] for more pronounced introspection, algebraic manipulation
+- Support for vecotrs and tensors via NumPy
+
 [Astley]: https://github.com/yunruse/astley
 
 ## Installation and use
