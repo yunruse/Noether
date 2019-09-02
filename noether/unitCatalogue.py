@@ -8,7 +8,7 @@ Be warned that the egregious use of globals WILL frustrate your linter.
 
 from .unit import Unit, Measure, Dimension
 from .scale import prefix_SI, prefix_IEC
-from math import pi
+from math import pi, log
 
 prefixable_SI = set()
 prefixable_IEC = set()
@@ -311,7 +311,10 @@ smoot = 1.67005 * metre
 data = Dimension.new(3.5, "data", "B")
 
 byte = U(data, "B", SI=True, IEC=True)
-bit = U(byte / 8, "b", SI=True, IEC=True)
+bit = shannon = U(byte / 8, "b", SI=True, IEC=True)
+nat = U(bit / log(2), 'nat', SI=True)
+trit = nat * log(3)
+hartley = ban = dit = U(nat * log(10), 'Hart')
 
 data_rate = data / time
 bps = U(bit / second, 'bps', SI=True, IEC=True)
