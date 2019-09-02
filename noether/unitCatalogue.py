@@ -170,15 +170,28 @@ katal = U(catalytic_activity, "kat")
 
 # material
 
-surface_tension = force / length
 density = mass / volume
+area_density = mass / area
+specific_volume = volume / mass
 
-thermal_diffusivity = distance**2 / time
+specific_energy = energy / mass
+molar_energy = energy / substance
+
+heat_capacity = entropy = energy / temperature
+specific_heat_capacity = heat_capacity / mass
+molar_heat_capacity = heat_capacity / substance
+
+surface_tension = force / length
+viscosity = pressure * time
+
+# thermal
+
 thermal_conductance = power / temperature
-thermal_conductivity = thermal_conductance / length
+thermal_conductivity = thermal_conductance * length / area
 thermal_resistance = temperature / power
-thermal_insulance = temperature * area / power
-thermal_admittance = power / temperature / area
+thermal_resistivity = thermal_resistance * length / area
+
+met = 58.2 * watt / metre ** 2
 
 # conventional si-accepted units
 
