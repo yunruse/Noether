@@ -278,7 +278,12 @@ class Unit(Measure):
         return self
     
     def __repr__(self):
-        return (self.names + self.symbols + ('<unnamed unit>', ))[0] + self._strDim()
+        if self.names:
+            return self.names[0] + self._strDim()
+        elif self.symbols:
+            return self.symbols[0] + self._strDim()
+        else:
+            return Measure.__repr__(self)
 
 # Avoid name-mangling
 
