@@ -88,7 +88,7 @@ absounce = abserk * time
 momentum = mass * speed
 angular_momentum = length * momentum
 
-force = mass * acceleration
+force = weight = mass * acceleration
 newton = U(force, "N", SI=True)
 
 angular_velocity = angle / time
@@ -109,10 +109,10 @@ joule = U(energy, "J", SI=True)
 power = energy / time
 watt = U(power, "W", SI=True)
 
+# electricity
+
 charge = current * time
 coulomb = U(charge, "C", SI=True)
-
-# electromagnetic
 
 voltage = power / current
 volt = U(voltage, "V", SI=True)
@@ -127,17 +127,27 @@ resistivity = resistance / length
 conductance = resistance**-1
 siemens = U(conductance, "S", SI=True)
 
+inductance = resistance * time
+henry = U(inductance, "H", SI=True)
+reluctance = 1 / inductance
+
+capicitive_reactance = capacitance * angular_velocity
+inductive_reactance = inductance * angular_velocity
+
+permeability = inductance * length / area
+permittivity = capacitance * length / area
+
+# magnetism
+
 magnetic_flux = energy / current
 weber = U(magnetic_flux, "Wb", SI=True)
 
 magnetic_flux_density = magnetic_flux / area
 tesla = U(magnetic_flux_density, "T", SI=True)
 
-inductance = resistance * time
-henry = U(inductance, "H", SI=True)
+magnetic_moment = current * area
 
-capicitive_reactance = capacitance * angular_velocity
-inductive_reactance = inductance * angular_velocity
+magnetisation = magnetic_moment / volume
 
 # radiation
 
