@@ -103,7 +103,7 @@ torque = inertia * angular_acceleration
 pressure = force / area
 pascal = U(pressure, "Pa", SI=True)
 
-energy = force * distance
+energy = torque = force * distance
 joule = U(energy, "J", SI=True)
 
 power = energy / time
@@ -165,8 +165,12 @@ dose = energy / mass
 gray = U(dose, "Gy")
 sievert = U(dose, "Sv")
 
+# chemistry
+
 catalytic_activity = substance / time
 katal = U(catalytic_activity, "kat")
+
+reaction_rate = substance / (volume * time)
 
 # material
 
