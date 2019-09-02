@@ -1,7 +1,7 @@
 from dataclasses import dataclass, field
 import fractions
 
-from .unit import Measure
+from .measure import Measure
 from .unitCatalogue import coulomb
 from .constants import e, m_e, MeVc2
 

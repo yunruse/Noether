@@ -6,7 +6,7 @@ Contains SI, SI-derived, SI-compatible, IEC, imperial, and many obscure units.
 Be warned that the egregious use of globals WILL frustrate your linter.
 """
 
-from .unit import Unit, Measure, Dimension
+from .measure import Unit, Measure, Dimension
 from .scale import prefix_SI, prefix_IEC
 from math import pi, log
 

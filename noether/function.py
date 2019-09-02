@@ -1,4 +1,4 @@
-from .unit import Measure 
+from .measure import Measure 
 
 class Function:
     '''Base class for rich functions that support Measures.'''
