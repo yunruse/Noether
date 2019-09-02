@@ -1,13 +1,13 @@
-from .unit import Unit
+from .unit import Measure 
 
 class Function:
-    '''Base class for rich functions that support Units.'''
+    '''Base class for rich functions that support Measures.'''
 
 APPROXIMATE_INTEGRAL_SLICES = 100
 APPROXIMATE_DIFFERENTIAL_EPSILON = 1e-9
 
 class UnaryFunction(Function):
-    '''Single-input function that supports Unit and certain algebra.'''
+    '''Single-input function that supports Measure and certain algebra.'''
 
     @staticmethod
     def function(value):
@@ -32,6 +32,7 @@ class UnaryFunction(Function):
         '''Definite or indefinite integral via given function or approximation.'''
         I = self.integral(x)
         if I == NotImplemented:
+            raise NotImplementedError("Todo: trapezoid method")
             # Attempt approximate integration
             if to is None:
                 x, to = 0, x
@@ -60,9 +61,9 @@ class UnaryFunction(Function):
     
     def __new__(self, x):
         dim = self.output_dimension
-        if isinstance(x, Unit):
+        if isinstance(x, Measure):
             value = self.function(float(x))
-            new = Unit(value)
+            new = Measure(value)
             if dim:
                 new.dim = dim
             else:
@@ -72,6 +73,6 @@ class UnaryFunction(Function):
         else:
             value = self.function(x)
             if dim:
-                return Unit(value, dim=dim)
+                return Measure(value, dim=dim)
             else:
                 return value

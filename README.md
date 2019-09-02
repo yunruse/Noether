@@ -2,11 +2,12 @@
 
 Noether is a library supporting units of measure, amongst other things, and can be used as an advanced scientific calculator.
 
-It features:
+Noether is currently in development, so its API is subject to change, and some features may be incomplete or undocumented.
 
-- Dynamic units with an extensive catalogue for ease of use
-- Ability to arbitrarily create units or dimensions of measure
-- Automatic dimensional analysis
+Currently features:
+
+- The `Measure`, a measure which automatically propagates dimension and uncertainty
+- An extensive catalogue of scientific units
 - Basic graphing (requires [Astley])
 
 [Astley]: https://github.com/yunruse/astley
@@ -46,14 +47,16 @@ Noether has a thorough SI-based unit system allowing for advanced unit compositi
 
 ```python
 >>> gibibyte / second
-8.59×10⁹bps (data rate)
+8.59×10⁹bps <data rate>
 >>> 12 * pixel / mm
-304.8ppi (image quality)
+304.8ppi <image quality>
+>>> (joule / kilogram / kelvin) * Measure(12, 2)
+12 ± 2K⁻¹·m²·s⁻² <specific heat capacity>
 ```
 
 You may define and display units as such:
 ```
->>> FF = BaseUnit(furlong / fortnight, 'ff')
+>>> FF = Unit(furlong / fortnight, 'ff')
 >>> 3 * FF
 4.989×10⁻⁴ m·s⁻¹ (speed)
 >>> Unit.display(FF)
@@ -64,7 +67,7 @@ You may define and display units as such:
 If you need to measure something obscure, you can define a dimension:
 ```
 >>> health = Dimension.new(3.2, 'health', 'a')
->>> apple = BaseUnit(health, names=['apple'], symbols=['a'])
+>>> apple = Unit(health, names=['apple'], symbols=['a'])
 >>> apple / day
 1.157×10⁻⁵a·s⁻¹
 ```

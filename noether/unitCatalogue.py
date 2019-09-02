@@ -6,7 +6,7 @@ Contains SI, SI-derived, SI-compatible, IEC, imperial, and many obscure units.
 Be warned that the egregious use of globals WILL frustrate your linter.
 """
 
-from .unit import BaseUnit, Unit, Dimension
+from .unit import Unit, Measure, Dimension
 from .scale import prefix_SI, prefix_IEC
 from math import pi
 
@@ -16,7 +16,7 @@ prefixable_IEC = set()
 
 def U(value, *symbols, display=None, SI=False, IEC=False):
     display = SI if display is None else display
-    unit = BaseUnit(value, *symbols, isDisplay=display)
+    unit = Unit(value, *symbols, isDisplay=display)
     if SI:
         prefixable_SI.add(unit)
     if IEC:
@@ -316,7 +316,7 @@ bit = U(byte / 8, "b", SI=True, IEC=True)
 data_rate = data / time
 bps = U(bit / second, 'bps', SI=True, IEC=True)
 
-Unit.displayUnits = (bps, )
+Measure.display(bps)
 
 # image size
 pixel_count = Dimension.new(3.4, "pixel_count", "P")
@@ -327,7 +327,7 @@ image_density = pixel_count / data
 image_quality = pixel_count / length
 
 ppi = U(pixel / inch, 'ppi')
-Unit.display(ppi)
+Measure.display(ppi)
 
 # name transmogrification
 
@@ -339,9 +339,9 @@ for name, unit in units:
     displayName = name.replace("_", " ")
     if isinstance(unit, Dimension):
         unit.addName(name)
-    elif isinstance(unit, BaseUnit):
-        unit.names += (displayName, )
     elif isinstance(unit, Unit):
+        unit.names += (displayName, )
+    elif isinstance(unit, Measure):
         globals()[name] = unit = U(unit, name)
     else:
         continue

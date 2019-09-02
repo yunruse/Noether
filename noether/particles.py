@@ -1,7 +1,7 @@
 from dataclasses import dataclass, field
 import fractions
 
-from .unit import Unit
+from .unit import Measure
 from .unitCatalogue import coulomb
 from .constants import e, m_e, MeVc2
 
@@ -12,8 +12,8 @@ __all__ = 'Particle u d s c t b e p n'.split()
 @dataclass
 class Particle:
     symbols: list = field(default_factory=list)
-    mass: Unit = 0 * MeVc2
-    charge: Unit = 0 * coulomb
+    mass: Measure = 0 * MeVc2
+    charge: Measure = 0 * coulomb
 
     angular_momentum: float = 0
     baryon: float = 0

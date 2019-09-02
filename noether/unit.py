@@ -6,10 +6,10 @@ from .scale import numberString, superscript
 from .matrix import Matrix
 #from .dimension import Dimension : Import loop
 
-__all__ = 'Unit BaseUnit Dimension'.split()
+__all__ = 'Measure Unit Dimension'.split()
 
-class UnitMeta(type):
-    """Metaclass of shared Unit properties"""
+class MeasureMeta(type):
+    """Metaclass of shared Measure properties"""
     def _dU_get(cls):
         return list(cls._displayUnits.values())
 
@@ -30,7 +30,7 @@ class UnitMeta(type):
     displayUnits = property(_dU_get, _dU_set, _dU_del)
 
 
-class Unit(float, metaclass=UnitMeta):
+class Measure(float, metaclass=MeasureMeta):
 
     precision = 3
     showUnits = True
@@ -46,12 +46,12 @@ class Unit(float, metaclass=UnitMeta):
 
         Will propagate properties via standard operations, but will act
         like a float (and disregard properties) to functions designed
-        to operate on numerics. Ensure Unit-aware functions are used
+        to operate on numerics. Ensure Measure-aware functions are used
         if required.
         '''
         self = float.__new__(cls, value)
 
-        if isinstance(value, Unit):
+        if isinstance(value, Measure):
             self.dim = value.dim
             self._stddev = value._stddev
         else:
@@ -106,7 +106,7 @@ class Unit(float, metaclass=UnitMeta):
 
     def value(self):
         '''Returns the number(s) without dimension.'''
-        return Unit(self, dim=Dimension())
+        return Measure(self, dim=Dimension())
 
     def numberString(self, useDisplayUnit=False):
         display = self
@@ -147,24 +147,20 @@ class Unit(float, metaclass=UnitMeta):
     # Dimension-changing operators
 
     @property
-    def invUnit(self):
-        return Unit(tuple(-i for i in self.dim), _factor=float(self))
-
-    @property
     def inv(self):
         return 1 / self
 
     def __geometric(self, other, op=operator.mul):
 
-        new = Unit(
+        new = Measure(
             op(float(self), float(other)),
             dim=self.dim,
             stddev=self.stddev
         )
 
         if isinstance(other, Dimension):
-            raise TypeError('Unclear result of operator on Dimension and Unit. Use Unit.dim, or Unit(dim).')
-        elif isinstance(other, Unit):
+            raise TypeError('Unclear result of operator on Dimension and Measure. Use Measure.dim, or Measure(dim).')
+        elif isinstance(other, Measure):
             new.dim = op(self.dim, other.dim)
             new.epsilon = (self.epsilon**2 + other.epsilon**2) ** 0.5
         else:
@@ -177,12 +173,12 @@ class Unit(float, metaclass=UnitMeta):
     __floordiv__ = lambda s, o: s.__geometric(o, operator.floordiv)
 
     def __call__(self, value, stddev=None):
-        if stddev and not isinstance(value, Unit):
-            value = Unit(value, stddev)
+        if stddev and not isinstance(value, Measure):
+            value = Measure(value, stddev)
         return self * value
 
     def __pow__(self, exp):
-        new = Unit(float(self)**exp, dim=self.dim**exp)
+        new = Measure(float(self)**exp, dim=self.dim**exp)
         new.epsilon = self.epsilon * exp
         return new
 
@@ -195,15 +191,15 @@ class Unit(float, metaclass=UnitMeta):
 
     def __linear_compare(self, other):
         if not self.openLinear:
-            if isinstance(other, Unit) and self.dim != other.dim:
-                raise ValueError("Inequal units {} and {}.".format(
+            if isinstance(other, Measure) and self.dim != other.dim:
+                raise ValueError("Incompatible dimensions {} and {}.".format(
                     self.dim, other.dim))
 
         # Return limits of uncertainty
         # TODO: Extract this into a separate Range object - this is not standard deviation
         sl = float(self) - self.delta
         su = float(self) + self.delta
-        if isinstance(other, Unit):
+        if isinstance(other, Measure):
             ol = float(other) - other.delta
             ou = float(other) + other.delta
         else:
@@ -216,9 +212,9 @@ class Unit(float, metaclass=UnitMeta):
 
         self.__linear_compare(other)
         stddev = self.stddev
-        if isinstance(other, Unit):
+        if isinstance(other, Measure):
             stddev = (stddev**2 + other.stddev**2) ** 0.5
-        return Unit(
+        return Measure(
             op(float(self), float(other)),
             dim=self.dim,
             stddev=stddev
@@ -230,7 +226,7 @@ class Unit(float, metaclass=UnitMeta):
     # comparison operators require range-checking
 
     def __eq__(self, other):
-        if isinstance(other, Unit):
+        if isinstance(other, Measure):
             if other.dim != self.dim:
                 return False
             sl, su, ol, ou = self.__cmp(other)
@@ -265,14 +261,14 @@ class Unit(float, metaclass=UnitMeta):
         return other | Matrix(self)
 
 
-class BaseUnit(Unit):
-    __slots__ = Unit.__slots__ + ["symbols", "names"]
+class Unit(Measure):
+    __slots__ = Measure.__slots__ + ["symbols", "names"]
 
     def __new__(cls, value, *a, symbols=None, names=None, isDisplay=False, **kw):
         if isinstance(value, Dimension):
             kw['dim'] = value
             value = 1
-        self = Unit.__new__(cls, value, **kw)
+        self = Measure.__new__(cls, value, **kw)
         self.symbols = symbols or tuple()
         self.symbols += a
         self.names = names or tuple()
