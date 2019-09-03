@@ -179,6 +179,10 @@ area_density = mass / area
 density = mass / volume
 specific_volume = volume / mass
 
+number_density = 1 / volume
+# CODATA: uncertainty (15)
+amagat = U(2.686_7811 / metre**3, 'Am', SI=True)
+
 specific_energy = energy / mass
 molar_energy = energy / substance
 
