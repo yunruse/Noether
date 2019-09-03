@@ -174,8 +174,9 @@ reaction_rate = substance / (volume * time)
 
 # material
 
-density = mass / volume
+linear_density = mass / length
 area_density = mass / area
+density = mass / volume
 specific_volume = volume / mass
 
 specific_energy = energy / mass
