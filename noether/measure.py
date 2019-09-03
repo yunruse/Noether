@@ -76,7 +76,7 @@ class Measure(float, metaclass=MeasureMeta):
     def _stdratio_set(self, v):
         self.stddev = v * float(self)
     stddevratio = property(
-        lambda s: abs(s._stddev / float(s)),
+        lambda s: abs(s._stddev / float(s)) if float(s) else 0,
         _stdratio_set,
         lambda s: s._stddev_set(0))
     epsilon = stddevratio
