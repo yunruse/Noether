@@ -21,7 +21,7 @@
                 "-c",
                 "\"\""
             ],
-            "console": "none"
+            "console": "internalConsole"
         },
         {
             "name": "Open file",
