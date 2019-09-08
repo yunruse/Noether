@@ -244,6 +244,9 @@ metre_mercury = meter_mercury = U(133_322.387_415 * pascal, "mhg", SI=True)
 calorie = U(4.814 * joule, "cal", SI=True, display=False)
 kilocalorie = kcal = U(calorie * 1000, "kcal")
 
+body_mass_index = mass / area
+bmi = U(kilogram / meter**2, " BMI")
+
 # older cgs units
 
 cm = meter / 100
