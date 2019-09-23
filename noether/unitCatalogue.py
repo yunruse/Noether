@@ -229,6 +229,9 @@ dalton = U(1.660_538_86e-27 * kilogram, "u")
 
 # commonly-used metric variants
 
+watt_hour = U(watt * hour, 'Wh', SI=True)
+amp_hour = ampere_hour = U(ampere * hour, 'Ah', SI=True)
+
 angstrom = U(metre * 1e-10, "å")
 are = U((10 * metre)**2, "a")
 barn = U(1e-28 * metre**2, "b")
