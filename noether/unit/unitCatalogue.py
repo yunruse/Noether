@@ -277,6 +277,9 @@ barn = U(1e-28 * metre**2, "b")
 g = 9.980665 * metre / second**2
 gee = g * kilogram
 
+c = Unit(299_792_458 * metre / second, "c")
+lightsecond = U(c * second, "ls", SI=True)
+
 bar = U(1e5 * pascal, "bar", SI=True, display=False)
 atmosphere = U(101_325 * pascal, "atm", display=False)
 torr = U(atmosphere / 760, "torr")
@@ -300,6 +303,7 @@ knot = U(nauticalmile / hour, "kt", "kn")
 week = day * 7
 fortnight = week * 2
 year = U(day * 365.25, "yr")
+lightyear = U(c * year, "ly", SI=True)
 
 # older cgs units
 

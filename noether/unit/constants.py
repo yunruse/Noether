@@ -20,15 +20,8 @@ hbar = Unit(h / tau, "ħ")
 
 # Electromagnetic
 
-c = Unit(299_792_458 * metre / second, "c")
-lightsecond = Unit(c * second, "ls")
-lightyear = Unit(c * year, "ly")
-
 mu_0 = Unit(2 * tau * 1e-7 * newton / ampere ** 2)  # permeability
-
 e_0 = Unit(1 / (mu_0 * c ** 2))  # permittiviity
-
-# impedance
 z_0 = Unit(mu_0 * c)  # impedance
 
 # Other fields
