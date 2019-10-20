@@ -1,9 +1,9 @@
 from dataclasses import dataclass, field
 import fractions
 
-from .measure import Measure
-from .unitCatalogue import coulomb
-from .constants import e, m_e, MeVc2
+from .unit.measure import Measure
+from .unit.unitCatalogue import coulomb
+from .unit.constants import e, m_e, MeVc2
 
 I = fractions.Fraction(1)
 
