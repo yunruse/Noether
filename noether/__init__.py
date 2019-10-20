@@ -26,5 +26,3 @@ from .unit import *  # noqa: F401, F403
 
 from .graphing import plot
 from .matrix import Matrix, Vector  # noqa: F401
-
-V = Vector
