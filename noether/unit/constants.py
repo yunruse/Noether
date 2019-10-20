@@ -21,8 +21,8 @@ hbar = Unit(h / tau, "ħ")
 # Electromagnetic
 
 c = Unit(299_792_458 * metre / second, "c")
-Lightsecond = Unit(c * second, "ls")
-Lightyear = Unit(c * year, "ly")
+lightsecond = Unit(c * second, "ls")
+lightyear = Unit(c * year, "ly")
 
 mu_0 = Unit(2 * tau * 1e-7 * newton / ampere ** 2)  # permeability
 
