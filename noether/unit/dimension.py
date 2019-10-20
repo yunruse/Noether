@@ -3,7 +3,7 @@
 import bisect
 from collections import namedtuple
 
-from .helpers import intify
+from ..helpers import intify
 from .scale import superscript
 from .measure import Unit
 

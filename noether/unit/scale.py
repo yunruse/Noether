@@ -1,6 +1,6 @@
 """Noether: Scaling of numbers (a×10^b)"""
 
-from .helpers import intify
+from ..helpers import intify
 from math import log, floor
 
 __all__ = "prefix exp_mantissa prefixify scinot numberString".split()

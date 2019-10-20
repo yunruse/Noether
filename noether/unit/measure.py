@@ -3,7 +3,8 @@
 import operator
 
 from .scale import numberString, superscript
-from .matrix import Matrix
+# For matrix convenience
+from ..matrix import Matrix
 #from .dimension import Dimension : Import loop
 
 __all__ = 'Measure Unit Dimension'.split()
