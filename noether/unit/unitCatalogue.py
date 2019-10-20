@@ -347,6 +347,10 @@ gallon = U(4 * quart, "gal")
 peck = 2 * gallon
 bushel = 4 * peck
 
+# fuel efficiency
+
+vehicle_efficiency = distance / volume
+
 # imperial weight
 
 pound = U(453.59237 * gram, "lb")
