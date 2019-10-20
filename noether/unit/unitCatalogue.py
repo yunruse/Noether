@@ -241,9 +241,6 @@ pixel_fill_rate = pixel_count / time
 image_density = pixel_count / data
 image_quality = pixel_count / length
 
-ppi = U(pixel / inch, 'ppi')
-Measure.display(ppi)
-
 # conventional si-accepted units
 
 gram = U(kilogram / 1000, "g", SI=True)
@@ -293,7 +290,6 @@ bmi = U(kilogram / meter**2, " BMI")
 # velocity / speed
 
 mps = metre / second
-mph = mile / hour
 kmph = meter * 1000 / hour
 
 nauticalmile = U(1852 * metre, "nm", "NM", "nmi")
@@ -315,11 +311,13 @@ barye = gram / gal
 poise = gram / (cm * second)
 stokes = cm**2 / second
 kayser = 1 / cm
-inch = U(cm * 127 / 50, "in")
-
-del cm
 
 # imperial length and area
+
+inch = U(cm * 127 / 50, "in")
+
+ppi = U(pixel / inch, 'ppi')
+Measure.display(ppi)
 
 foot = U(inch * 12, "ft")
 yard = U(3 * foot, "yd")
@@ -327,6 +325,8 @@ chain = U(22 * yard, "ch")
 furlong = U(10 * chain, "fur")
 mile = U(8 * furlong, "mi")
 league = U(3 * mile, "lea")
+
+mph = mile / hour
 
 link = 7.92 * inch
 rod = 25 * link
