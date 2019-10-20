@@ -259,6 +259,11 @@ hectare = U(100 * acre, "ha")
 litre = U((metre / 10)**3, "l", SI=True)
 tonne = ton = U(kilogram * 1000, "t", SI=True)
 
+# various dimensions
+
+fluid_velocity = volume / time
+vehicle_efficiency = distance / volume
+
 # commonly-used metric variants
 
 parsec = U(3.0857e16 * metre, "pc")
@@ -351,9 +356,6 @@ gallon = U(4 * quart, "gal")
 peck = 2 * gallon
 bushel = 4 * peck
 
-# fuel efficiency
-
-vehicle_efficiency = distance / volume
 
 # imperial weight
 
