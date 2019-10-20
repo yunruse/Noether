@@ -1,7 +1,14 @@
-"""Noether: Physics calculator"""
+"""
+Noether: Physics calculator.
+
+Noether attempts to function as the go-to scientific calculator for Python.
+It holds almost every unit and constant defined by SI and CODATA, with a
+rich dimensional system allowing for physical computation to be
+easily verifiable.
+"""
 
 __author__ = "Mia yun Ruse"
-__copyright__ = "Copyright 2018 Mia yun Ruse"
+__copyright__ = "Copyright 2018-2019 Mia yun Ruse"
 __status__ = "Prototype"
 __email__ = "s-noether@yunru.se"
 
