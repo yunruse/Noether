@@ -151,6 +151,7 @@ inductive_reactance = inductance * angular_velocity
 
 permeability = inductance * length / area
 permittivity = capacitance * length / area
+impedance = permeability * speed
 
 # magnetism
 

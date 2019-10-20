@@ -24,14 +24,12 @@ c = Unit(299_792_458 * metre / second, "c")
 Lightsecond = Unit(c * second, "ls")
 Lightyear = Unit(c * year, "ly")
 
-Permeability = force / current ** 2
-mu_0 = Unit(2 * tau * 1e-7 * newton / ampere ** 2)
+mu_0 = Unit(2 * tau * 1e-7 * newton / ampere ** 2)  # permeability
 
-Permittivity = 1 / (Permeability * speed ** 2)
-e_0 = Unit(1 / (mu_0 * c ** 2))
+e_0 = Unit(1 / (mu_0 * c ** 2))  # permittiviity
 
-Impedance = Permeability * speed
-z_0 = Unit(mu_0 * c)
+# impedance
+z_0 = Unit(mu_0 * c)  # impedance
 
 # Other fields
 grav = Unit(6.674_08e-11 * newton * metre ** 2 / kilogram ** 2)
