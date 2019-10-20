@@ -1,7 +1,23 @@
 """
-noether: Catalogue of as many units and dimensions as are known.
+noether: Catalogue of units and dimensions
 
-Contains SI, SI-derived, SI-compatible, IEC, imperial, and many obscure units.
+This document intends to catalogue _every_ unit and dimension that is
+known, so this is an absurdly long file.
+Regardless, it is defined in Python, and designed, if one skims the
+header and footer sections, to be as readable as possible.
+
+Contains units and dimensions in the following order:
+- HEADER: Unit shorthand, base SI units
+- Basic SI derivations
+- Derivatives and integrals of time with distance
+- Dynamics, energy, electricity, magnetism, radiation
+- Chemical, material, thermal properties
+- Data and image units
+- Commonly-used human and scientific units
+- CGS units
+- Imperial units
+- Unusual units
+- FOOTER: Variable names are analysed and inserted for display.
 
 Be warned that the egregious use of globals WILL frustrate your linter.
 """
@@ -12,7 +28,6 @@ from math import pi, log
 
 prefixable_SI = set()
 prefixable_IEC = set()
-
 
 def U(value, *symbols, display=None, SI=False, IEC=False):
     display = SI if display is None else display
@@ -165,14 +180,14 @@ dose = energy / mass
 gray = U(dose, "Gy")
 sievert = U(dose, "Sv")
 
-# chemistry
+# chemical properties
 
 catalytic_activity = substance / time
 katal = U(catalytic_activity, "kat")
 
 reaction_rate = substance / (volume * time)
 
-# material
+# material properties
 
 linear_density = mass / length
 area_density = mass / area
@@ -193,7 +208,7 @@ molar_heat_capacity = heat_capacity / substance
 surface_tension = force / length
 viscosity = pressure * time
 
-# thermal
+# thermal properties
 
 thermal_conductance = power / temperature
 thermal_conductivity = thermal_conductance * length / area
@@ -201,6 +216,33 @@ thermal_resistance = temperature / power
 thermal_resistivity = thermal_resistance * length / area
 
 met = 58.2 * watt / metre ** 2
+
+# data & IEC prefixes
+
+data = Dimension.new(3.5, "data", "B")
+
+byte = U(data, "B", SI=True, IEC=True)
+bit = shannon = U(byte / 8, "b", SI=True, IEC=True)
+nat = U(bit / log(2), 'nat', SI=True)
+trit = nat * log(3)
+hartley = ban = dit = U(nat * log(10), 'Hart')
+
+data_rate = data / time
+bps = U(bit / second, 'bps', SI=True, IEC=True)
+
+Measure.display(bps)
+
+# image size
+
+pixel_count = Dimension.new(3.4, "pixel_count", "P")
+pixel = U(pixel_count, SI=True)
+
+pixel_fill_rate = pixel_count / time
+image_density = pixel_count / data
+image_quality = pixel_count / length
+
+ppi = U(pixel / inch, 'ppi')
+Measure.display(ppi)
 
 # conventional si-accepted units
 
@@ -219,15 +261,13 @@ hectare = U(100 * acre, "ha")
 litre = U((metre / 10)**3, "l", SI=True)
 tonne = ton = U(kilogram * 1000, "t", SI=True)
 
-# scientific units
+# commonly-used metric variants
 
 parsec = U(3.0857e16 * metre, "pc")
 au = U(1.495_878_707e11 * metre, "au")
 solar_mass = U(1.98802e30 * kilogram, "msol")
 
 dalton = U(1.660_538_86e-27 * kilogram, "u")
-
-# commonly-used metric variants
 
 watt_hour = U(watt * hour, 'Wh', SI=True)
 amp_hour = ampere_hour = U(ampere * hour, 'Ah', SI=True)
@@ -249,6 +289,20 @@ kilocalorie = kcal = U(calorie * 1000, "kcal")
 
 body_mass_index = mass / area
 bmi = U(kilogram / meter**2, " BMI")
+
+# velocity / speed
+
+mps = metre / second
+mph = mile / hour
+kmph = meter * 1000 / hour
+
+nauticalmile = U(1852 * metre, "nm", "NM", "nmi")
+knot = U(nauticalmile / hour, "kt", "kn")
+
+# conventional time units
+week = day * 7
+fortnight = week * 2
+year = U(day * 365.25, "yr")
 
 # older cgs units
 
@@ -307,27 +361,13 @@ ton = U(2240 * pound, "t")
 
 slug = 14.593_902_94 * kilogram
 
-# imperial insanity
+# imperial miscellanea
 
 poundforce = U(gee * pound, "lbf")
 poundfoot = poundforce * foot
 
 poundal = pound * foot / second**2
 psi = pound / inch**2
-
-# speeds
-
-mps = metre / second
-mph = mile / hour
-kmph = meter * 1000 / hour
-
-nauticalmile = U(1852 * metre, "nm", "NM", "nmi")
-knot = U(nauticalmile / hour, "kt", "kn")
-
-# conventional time units
-week = day * 7
-fortnight = week * 2
-year = U(day * 365.25, "yr")
 
 # unusual units
 
@@ -343,32 +383,6 @@ galacticyear = 225 * 1e9 * year
 
 firkin = 90 * pound
 smoot = 1.67005 * metre
-
-# data & IEC prefixes
-
-data = Dimension.new(3.5, "data", "B")
-
-byte = U(data, "B", SI=True, IEC=True)
-bit = shannon = U(byte / 8, "b", SI=True, IEC=True)
-nat = U(bit / log(2), 'nat', SI=True)
-trit = nat * log(3)
-hartley = ban = dit = U(nat * log(10), 'Hart')
-
-data_rate = data / time
-bps = U(bit / second, 'bps', SI=True, IEC=True)
-
-Measure.display(bps)
-
-# image size
-pixel_count = Dimension.new(3.4, "pixel_count", "P")
-pixel = U(pixel_count, SI=True)
-
-pixel_fill_rate = pixel_count / time
-image_density = pixel_count / data
-image_quality = pixel_count / length
-
-ppi = U(pixel / inch, 'ppi')
-Measure.display(ppi)
 
 # name transmogrification
 
@@ -388,6 +402,8 @@ for name, unit in units:
         continue
 
     __all__.append(name)
+
+# Assign prefixes
 
 for units, prefixes in (
     (prefixable_SI, prefix_SI),
