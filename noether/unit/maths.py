@@ -2,7 +2,7 @@
 
 import math
 
-from .unitCatalogue import angle, dimensionless
+from .catalogue import angle, dimensionless
 from .function import UnaryFunction
 
 class _trig_in(UnaryFunction):

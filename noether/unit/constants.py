@@ -6,7 +6,7 @@ from math import pi
 
 from .scale import prefix
 from .measure import Measure, Unit, Dimension  # noqa: F401
-from .unitCatalogue import *
+from .catalogue import *
 
 # Trigonometry
 

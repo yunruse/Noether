@@ -2,7 +2,7 @@ from dataclasses import dataclass, field
 import fractions
 
 from .unit.measure import Measure
-from .unit.unitCatalogue import coulomb
+from .unit.catalogue import coulomb
 from .unit.constants import e, m_e, MeVc2
 
 I = fractions.Fraction(1)
