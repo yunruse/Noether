@@ -10,7 +10,7 @@ from .conventional import (
     second, hour
 )
 
-# Attic Greek
+# Attic Greek ~ 0 BCE
 
 pous = metre * 0.30856
 
@@ -20,7 +20,7 @@ palestra = dichas / 2
 condylos = palestra / 2
 daktylos = condylos / 2
 
-cubit = pous * 2
+greek_cubit = pous * 2
 bema = pous * 5
 orguia = bema * 2.4
 akaina = orguia * 1.5
@@ -29,7 +29,7 @@ plethron = amma * (1+(2/3))
 stadion = plethron * 6
 mile = stadion * 7.5
 
-# Roman
+# Roman ~ 0 CE
 
 digitus = metre * 0.0184
 palmus = digitus * 4
@@ -44,12 +44,12 @@ pes = palmus * 4
 cubitus = palmus * 6
 actus = decempeda * 12
 
-# Old Dutch
+# Old Dutch, as taken in Amsterdam
 
 voet = metre * 0.2830594
 
 duim = voet / 12
 lijne = duim / 12
 
-elle = voet * 2.5
+elle = voet * 2.5  # distance from armpit to tip of fingers
 roede = voet * 13
