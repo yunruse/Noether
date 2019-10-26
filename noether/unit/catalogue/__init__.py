@@ -15,6 +15,7 @@ from .si import *
 from .conventional import *
 from .cgs import *
 from .imperial import *
+from .historical import *
 from .scientific import *
 from .data import *
 
