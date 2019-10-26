@@ -7,7 +7,7 @@ from .si import watt, joule, pascal
 from .conventional import year
 
 angstrom = U(metre * 1e-10, "å")
-parsec = U(3.0857e16 * metre, "pc")
+parsec = U(3.0857e16 * metre, "pc", SI=True)
 au = U(1.495_878_707e11 * metre, "au")
 
 are = U((10 * metre)**2, "a")
