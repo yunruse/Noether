@@ -77,7 +77,7 @@ magnetisation = magnetic_moment / volume
 
 # radiation
 
-lumennnn = luminosity * angle**2
+luminous_flux = luminosity * angle**2
 illuminance = luminosity / area
 dose = energy / mass
 

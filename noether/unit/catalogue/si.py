@@ -35,7 +35,7 @@ tesla = U(magnetic_flux_density, "T", SI=True)
 
 # radiation
 
-lumen = U(lumennnn, "lum", SI=True)
+lumen = U(luminous_flux, "lum", SI=True)
 lux = U(illuminance, "Lx", SI=True)
 gray = U(dose, "Gy", SI=True)
 #sievert = U(dose, "Sv", SI=True)
