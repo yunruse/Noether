@@ -44,6 +44,7 @@ gray = U(dose, "Gy", SI=True)
 
 # material properties
 
+cumec = U(flow)
 katal = U(catalytic_activity, "kat")
 
 # thermal properties
