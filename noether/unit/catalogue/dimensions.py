@@ -85,7 +85,7 @@ irradiance = intensity = heat_flux = power / area
 
 # material properties
 
-number_density = 1 / volume
+flow = fluid_velocity = volume / time
 catalytic_activity = substance / time
 
 linear_density = mass / length
@@ -93,6 +93,7 @@ area_density = mass / area
 density = mass / volume
 specific_volume = volume / mass
 
+number_density = 1 / volume
 reaction_rate = substance / (volume * time)
 
 specific_energy = energy / mass
@@ -109,5 +110,4 @@ viscosity = pressure * time
 # various dimensions
 
 body_mass_index = mass / area
-fluid_velocity = volume / time
 vehicle_efficiency = distance / volume
