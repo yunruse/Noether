@@ -5,5 +5,6 @@ from .maths import (
     asin, acos, atan
 )
 
-from ..helpers import *  # noqa: F401, F403
+from ..helpers import *
+from .catalogue import *
 from .constants import *  # noqa: F401, F403
