@@ -18,6 +18,7 @@ from .imperial import *
 from .historical import *
 from .scientific import *
 from .data import *
+from .unusual import *
 
 # Name transmogrification
 
