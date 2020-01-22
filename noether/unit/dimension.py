@@ -87,11 +87,24 @@ class Dimension(dict):
 
         return "·".join(dims)
 
-    __str__ = asFundamentalUnits
+    def __str__(self):
+        # TODO: return actual E-T-M etc units
+        return self.asFundamentalUnits()
 
     def __repr__(self):
-        return "Dimension({})".format(", ".join(
-            "{}={}".format(k, v) for k, v in self.items()))
+        exponents = sorted(list(self.items()), key=lambda q: (q[1] < 0, abs(q[1])))
+        string = '1' if exponents[0][1] < 0 else ''
+        for dim, exp in exponents:
+            if string:
+                string += ' / ' if exp < 0 else ' * '
+            aexp = abs(exp)
+            if aexp == 1/2:
+                string += 'sqrt('+dim+')'
+                continue
+            string += dim
+            if aexp != 1:
+                string += '**' + str(aexp)
+        return string
     
     # Operations
 
