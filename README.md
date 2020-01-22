@@ -97,7 +97,7 @@ Currently pre-release.
 
 ## Legal
 
-Copyright (c) Mia Dobson (yunru.se) 2019.
+Copyright (c) Mia yun Ruse (yunru.se) 2019.
 
 This work is licensed under a [Creative Commons Attribution 4.0](cc) International
 license. In non-legal terms: do whatever you like, but credit me.
