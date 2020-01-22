@@ -130,8 +130,6 @@ class Measure(float, metaclass=MeasureMeta):
         if not self.showUnits:
             return sNum.strip()
 
-        if sNum == "-1":
-            sNum = "-"
         sNum += self.symbol or self.dim.as_fundamental(as_units=True)
 
         return sNum + self._opt_dimension_name()
