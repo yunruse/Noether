@@ -20,13 +20,6 @@ class Dimension(dict):
 
         if isinstance(value, dict):
             value = value
-        elif isinstance(value, _BaseDimension):
-            name = value.name
-            # register dimension for display
-            bisect.insort_left(self._dimensions_display, value)
-            self._dimensions_map[name] = value
-            value = {name: 1}
-
         elif isinstance(value, Unit):
             value = value.dim
         
@@ -45,7 +38,10 @@ class Dimension(dict):
 
     @classmethod
     def new(cls, order, name, display_unit):
-        return cls(_BaseDimension(order, name, display_unit))
+        base = _BaseDimension(order, name, display_unit)
+        bisect.insort_left(cls._dimensions_display, base)
+        cls._dimensions_map[name] = base
+        return cls({name: 1})
     
     # Immutability   
     
