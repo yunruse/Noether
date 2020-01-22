@@ -7,7 +7,7 @@ from .fundamental import (
 
 # data & IEC prefixes
 
-data = Dimension.new(3.5, "data", "B")
+data = Dimension.new(3.5, "data", "D", "B")
 
 byte = U(data, "B", SI=True, IEC=True)
 bit = shannon = U(byte / 8, "b", SI=True, IEC=True)
@@ -22,7 +22,7 @@ Measure.display(bps)
 
 # image size
 
-pixel_count = Dimension.new(3.4, "pixel_count", "P")
+pixel_count = Dimension.new(3.4, "pixel_count", "P", "P")
 pixel = U(pixel_count, SI=True)
 
 pixel_fill_rate = pixel_count / time

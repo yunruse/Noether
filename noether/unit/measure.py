@@ -32,6 +32,7 @@ class MeasureMeta(type):
 
 
 class Measure(float, metaclass=MeasureMeta):
+    # TODO: allow for int Measures with metaclasses
 
     precision = 3
     showUnits = True
@@ -131,15 +132,15 @@ class Measure(float, metaclass=MeasureMeta):
 
         if sNum == "-1":
             sNum = "-"
+        sNum += self.symbol or self.dim.as_fundamental(as_units=True)
 
-        sNum += self.symbol or self.dim.asFundamentalUnits()
+        return sNum + self._opt_dimension_name()
 
-        return sNum + self._strDim()
 
     def __repr__(self):
         return str(self)
     
-    def _strDim(self):
+    def _opt_dimension_name(self):
         if self.showDimension and self.dim.names:
             return " <{}>".format(', '.join(self.dim.names))
         else:

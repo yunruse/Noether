@@ -3,14 +3,15 @@ Fundamental units and unit defining helpers from which all other units derive.
 """
 
 BASE_UNITS = (
-    (1, "luminosity", "cd", True, "candela"),
-    (2, "current", "A", True, "amp", "ampere"),
-    (3, "temperature", "K", True, "kelvin"),
-    (4, "mass", "kg", False, "kilogram"),
-    (5, "substance", "mol", True, "mole"),
-    (6, "length", "m", True, "metre", "meter"),
-    (7, "time", "s", True, "second")
+    (1, "luminosity",  "J", "cd",  True,  "candela"),
+    (2, "current",     "I", "A",   True,  "amp", "ampere"),
+    (3, "temperature", "Θ", "K",   True,  "kelvin"),
+    (4, "mass",        "M", "kg",  False, "kilogram"),
+    (5, "substance",   "N", "mol", True, "mole"),
+    (6, "length",      "L", "m",   True, "metre", "meter"),
+    (7, "time",        "T", "s", True, "second")
 )
+
 
 from ..measure import Unit, Measure, Dimension
 from ..scale import prefix_SI, prefix_IEC
@@ -29,10 +30,10 @@ def U(value, *symbols, display=None, SI=False, IEC=False):
 
 # SI units
 
-for display_order, name, symbol, SI, *units in BASE_UNITS:
-    dim = Dimension.new(display_order, name, symbol)
+for display_order, name, dim_sym, unit_sym, SI, *units in BASE_UNITS:
+    dim = Dimension.new(display_order, name, dim_sym, unit_sym)
     globals()[name] = dim
-    unit = U(dim, symbol, SI=SI)
+    unit = U(dim, unit_sym, SI=SI)
     for name in units:
         globals()[name] = unit
 

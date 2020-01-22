@@ -34,7 +34,7 @@ absounce = abserk * time
 # rotation
 
 frequency = time**-1
-angle = Dimension.new(3.2, "angle", "rad")
+angle = Dimension.new(3.2, "angle", "φ", "rad")
 
 # dynamics
 

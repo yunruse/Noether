@@ -7,7 +7,7 @@ from ..helpers import intify
 from .scale import superscript
 from .measure import Unit
 
-_BaseDimension = namedtuple("_BaseDimension", "order name display_unit".split())
+_BaseDimension = namedtuple("_BaseDimension", "order name symbol display_unit".split())
 
 
 class Dimension(dict):
@@ -37,8 +37,8 @@ class Dimension(dict):
         dict.__init__(self, dims)
 
     @classmethod
-    def new(cls, order, name, display_unit):
-        base = _BaseDimension(order, name, display_unit)
+    def new(cls, order, name, symbol, display_unit):
+        base = _BaseDimension(order, name, symbol, display_unit)
         bisect.insort_left(cls._dimensions_display, base)
         cls._dimensions_map[name] = base
         return cls({name: 1})
@@ -68,9 +68,10 @@ class Dimension(dict):
     
     # Reproduction
 
-    def asFundamentalUnits(self):
+    def as_fundamental(self, as_units=True):
         dims = []
-        for _, name, sym in self._dimensions_display:
+        for _, name, dim_sym, unit_sym in self._dimensions_display:
+            sym = unit_sym if as_units else dim_sym
             exp = self.get(name, 0)
             if exp == 0:
                 continue
@@ -84,8 +85,7 @@ class Dimension(dict):
         return "·".join(dims)
 
     def __str__(self):
-        # TODO: return actual E-T-M etc units
-        return self.asFundamentalUnits()
+        return self.as_fundamental(as_units=False)
 
     def __repr__(self):
         exponents = sorted(list(self.items()), key=lambda q: (q[1] < 0, abs(q[1])))
