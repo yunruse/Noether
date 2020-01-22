@@ -136,6 +136,8 @@ class Measure(float, metaclass=MeasureMeta):
 
         return sNum + self._opt_dimension_name()
 
+    def __format__(self, spec):
+        return float.__format__(self, spec) + self.dim.as_fundamental(as_units=True)
 
     def __repr__(self):
         return str(self)
