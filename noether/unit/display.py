@@ -6,7 +6,7 @@ SUPERSCRIPT = str.maketrans(
 )
 
 NONBREAKING = {
-    0x20: 0xAO     # SPACE
+    0x20: 0xA0,    # SPACE
     0x2009: 0x202F # THIN SPACE
 }
 
