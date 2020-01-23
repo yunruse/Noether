@@ -6,7 +6,7 @@ Noether is a library designed to compliment `numpy`, `matplotlib` and `scipy` by
 
 - An extensive catalogue of scientific units and statistical distributions
 - Automatic propagation of dimension and uncertainty for unit-rich work
-- Basic graphing (requires [Astley])
+- Basic graphing (currently requires [Astley])
 - Basic support for propagating statistical error
 
 Custom objects that can be made to extend Noether:
@@ -15,25 +15,11 @@ Custom objects that can be made to extend Noether:
 - `Dimension`: to check conservation or for display
 - `Distribution`: to generate rich statistical distributions
 
-On the cards for future features:
-
-- More mature SI presentation when a named unit is not found (eg in terms of Joules or Newtons)
-- More extensive maths suite for propagating errors
-- Linting to verify measure annotations
-- Optional linting for symbols to warn that, eg, `E` is not in Joules
-- Support for vecotrs and tensors via NumPy
-
-On the cards for features relying on [Astley], which allows code (and therefore formulae) to be treated as objects:
-
-- Automatic translation of MathJax/LaTeX notation to Python+Noether and vice versa
-- More pronounced introspection
-- Algebraic manipulation (eg analytic calculus, simplifying functions)
-
 [Astley]: https://github.com/yunruse/astley
 
 ## Installation and use
 
-Noether is currently in development, so there is no package to install. It currently requires scipy for a few odd functions, but it may remove this requirement before release to lower install size.
+Noether is currently in development, so there is no package to install. It currently requires scipy for a few odd functions, but that will likely be removed much later in development.
 
 ```bash
 pip install numpy matplotlib scipy
@@ -59,6 +45,10 @@ from noether import *
 ```
 
 at the head of your script.
+
+## Development
+
+Noether has infrequent development, so it has a rather small test suite and incomplete API. T
 
 ## Units
 
