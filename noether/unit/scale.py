@@ -1,6 +1,8 @@
 """Noether: Scaling of numbers (a×10^b)"""
 
 from ..helpers import intify
+from ..display import translate_if, SUPERSCRIPT
+
 from math import log, floor
 
 __all__ = "prefix exp_mantissa prefixify scinot numberString".split()
@@ -47,6 +49,7 @@ prefix_IEC = (
 
 #yapf: enable
 
+# TODO: this is hacky
 for name, symbol, factor in prefix_SI + prefix_IEC:
     for i in (name, symbol):
         setattr(prefix, i, factor)
@@ -72,9 +75,6 @@ def prefixify(num):
             return mantissa * 10**exp, prefix
     else:
         return num, ""
-
-
-superscript = str.maketrans("-0123456789", "⁻⁰¹²³⁴⁵⁶⁷⁸⁹")
 
 
 def scinot(num, precision=4, unicode_exponents=True, lower=-2, upper=3):
@@ -104,10 +104,8 @@ def scinot(num, precision=4, unicode_exponents=True, lower=-2, upper=3):
         # special case of 10^n, -10^n
         if abs(man) != 1:
             num += "×"
-        if unicode_exponents:
-            num += "10" + str(exp).translate(superscript)
-        else:
-            num += "10^" + str(exp)
+        num += '10' + '^' * (not unicode_exponents)
+        num += translate_by_if(exp, SUPERSCRIPT, unicode_exponents)
     return num
 
 
