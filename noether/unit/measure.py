@@ -2,7 +2,7 @@
 
 import operator
 
-from .scale import numberString, superscript
+from .scale import numberString
 # For matrix convenience
 from ..matrix import Matrix
 #from .dimension import Dimension : Import loop
@@ -111,14 +111,13 @@ class Measure(float, metaclass=MeasureMeta):
         return Measure(self, dim=Dimension())
 
     def numberString(self, useDisplayUnit=False):
-        display = self
         if useDisplayUnit and self.displayUnit:
             display /= self.displayUnit
 
         useParens = bool(self.symbol)
         return numberString(
-            float(display),
-            display.stddev,
+            float(self),
+            self.stddev,
             useParens,
             self.precision,
             self.unicodeExponent,

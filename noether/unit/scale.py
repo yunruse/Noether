@@ -1,7 +1,7 @@
 """Noether: Scaling of numbers (a×10^b)"""
 
 from ..helpers import intify
-from ..display import translate_if, SUPERSCRIPT
+from .display import translate_by_if, SUPERSCRIPT
 
 from math import log, floor
 
@@ -104,8 +104,8 @@ def scinot(num, precision=4, unicode_exponents=True, lower=-2, upper=3):
         # special case of 10^n, -10^n
         if abs(man) != 1:
             num += "×"
-        num += '10' + '^' * (not unicode_exponents)
-        num += translate_by_if(exp, SUPERSCRIPT, unicode_exponents)
+        num += '10'
+        num += translate_by_if(exp, SUPERSCRIPT, unicode_exponents, prefix='^')
     return num
 
 
