@@ -10,5 +10,5 @@ NONBREAKING = {
     0x2009: 0x202F # THIN SPACE
 }
 
-def translate_by_if(obj, mapping: dict, condition: bool):
-    return str(obj).translate(mapping) if condition else str(obj)
+def translate_by_if(obj, mapping: dict, condition: bool, prefix: str = ''):
+    return str(obj).translate(mapping) if condition else prefix + str(obj)
