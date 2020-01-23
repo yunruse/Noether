@@ -54,13 +54,16 @@ for name, symbol, factor in prefix_SI + prefix_IEC:
     for i in (name, symbol):
         setattr(prefix, i, factor)
 
+FLOATING_POINT_ERROR_ON_LOG_TENXPONENTS = 12
 
 def exp_mantissa(num, base=10):
-    """Returns e, m such that x = m×10^e"""
+    """Returns e, m such that x = mb^e"""
     if num == 0:
         return 1, 0
-    # log(1e3, 10) = 2.99...
-    exp = floor(round(log(abs(num), base), 12))
+    # avoid floating point error eg log(1e3, 10) = 2.99...
+    exp = log(abs(num), base)
+    exp = round(exp, FLOATING_POINT_ERROR_ON_LOG_TENXPONENTS)
+    exp = floor(exp) # 1 <= mantissa < 10
     mantissa = num / (base**exp)
     return exp, mantissa
 
