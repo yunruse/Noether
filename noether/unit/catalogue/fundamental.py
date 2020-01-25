@@ -20,8 +20,7 @@ prefixable_SI = set()
 prefixable_IEC = set()
 
 def U(value, *symbols, display=None, SI=False, IEC=False):
-    display = SI if display is None else display
-    unit = Unit(value, *symbols, isDisplay=display)
+    unit = Unit(value, *symbols, is_display=display)
     if SI:
         prefixable_SI.add(unit)
     if IEC:

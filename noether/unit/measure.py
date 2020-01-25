@@ -10,7 +10,7 @@ from ..matrix import Matrix
 __all__ = 'Measure Unit Dimension'.split()
 
 class MeasureMeta(type):
-    """Metaclass of shared Measure properties"""
+    """Metaclass of class-shared properties for display."""
     def _dU_get(cls):
         return list(cls._display_units.values())
 
@@ -32,13 +32,23 @@ class MeasureMeta(type):
 
 
 class Measure(float, metaclass=MeasureMeta):
-    # TODO: allow for int Measures with metaclasses
+    """
+    A physical measurement.
+    Represented by a float with dimension and uncertainty.
+    """
+
+    # TODO: allow for int Measures..?
 
     precision = 3
     show_units = True
     show_dimension = True
     open_linear = False
     unicode_exponent = True
+
+    # These class-shared variable are used for display units
+    # {dim: Unit}
+    _base_display_units = {}
+    _display_units = {}
 
     __slots__ = "dim _stddev".split()
 
@@ -91,15 +101,10 @@ class Measure(float, metaclass=MeasureMeta):
         lambda s: s._stddev_set(0)
     )
 
-    # This class-shared variable is used for display units
-    # {dim: Unit}
-    _basedisplay_units = {}
-    _display_units = {}
-
     @property
     def display_unit(self):
         return self._display_units.get(
-            self.dim, self._basedisplay_units.get(self.dim, None))
+            self.dim, self._base_display_units.get(self.dim, None))
 
     @property
     def symbol(self):
@@ -111,12 +116,13 @@ class Measure(float, metaclass=MeasureMeta):
         return Measure(self, dim=Dimension())
 
     def number_string(self, use_display_unit=False):
+        display = self
         if use_display_unit and self.display_unit:
             display /= self.display_unit
 
         as_unit = bool(self.symbol)
         return number_string(
-            float(self), self.stddev,
+            float(display), display.stddev,
             self.precision, as_unit,
             self.unicode_exponent
         )
@@ -267,7 +273,7 @@ class Measure(float, metaclass=MeasureMeta):
 class Unit(Measure):
     __slots__ = Measure.__slots__ + ["symbols", "names"]
 
-    def __new__(cls, value, *a, symbols=None, names=None, isDisplay=False, **kw):
+    def __new__(cls, value, *a, symbols=None, names=None, is_display=False, **kw):
         if isinstance(value, Dimension):
             kw['dim'] = value
             value = 1
@@ -276,8 +282,8 @@ class Unit(Measure):
         self.symbols += a
         self.names = names or tuple()
 
-        if symbols and isDisplay:
-            self._basedisplay_units[self.dim] = self
+        if self.symbols and is_display:
+            self._base_display_units[self.dim] = self
         return self
     
     def __repr__(self):
