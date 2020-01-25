@@ -1,8 +1,8 @@
 from unittest import TestCase
-from noether.scale import number_string
+from noether.unit.scale import number_string
 
 
-class UnitDisplayTest(TestCase):
+class number_plus_minus(TestCase):
     equalityTests = (
         (0, 0, "0"),
         (20, 0, "20"),
