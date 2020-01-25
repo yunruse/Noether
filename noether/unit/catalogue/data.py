@@ -16,9 +16,7 @@ trit = nat * log(3)
 hartley = ban = dit = U(nat * log(10), 'Hart')
 
 data_rate = data / time
-bps = U(bit / second, 'bps', SI=True, IEC=True)
-
-Measure.display(bps)
+bps = U(bit / second, 'bps', display=True, SI=True, IEC=True)
 
 # image size
 
@@ -30,4 +28,3 @@ image_density = pixel_count / data
 image_quality = pixel_count / length
 
 ppi = U(pixel / inch, 'ppi')
-Measure.display(ppi)
