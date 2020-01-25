@@ -25,8 +25,13 @@ class MeasureMeta(type):
     def _dU_del(cls):
         cls._display_units.clear()
     
-    def display(cls, unit):
-        cls._display_units[unit.dim] = unit
+    def display(cls, *units):
+        '''Registers unit for display, or, if given none, reverts all.'''
+        if units:
+            for u in units:
+                cls._display_units[u.dim] = u
+        else:
+            cls._display_units.clear()
 
     display_units = property(_dU_get, _dU_set, _dU_del)
 
