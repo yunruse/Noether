@@ -280,9 +280,9 @@ class Unit(Measure):
     
     def __repr__(self):
         if self.names:
-            return self.names[0] + self._strDim()
+            return self.names[0] + self._opt_dimension_name()
         elif self.symbols:
-            return self.symbols[0] + self._strDim()
+            return self.symbols[0] + self._opt_dimension_name()
         else:
             return Measure.__repr__(self)
 
