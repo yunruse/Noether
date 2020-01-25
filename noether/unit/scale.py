@@ -5,7 +5,7 @@ from .display import translate_by_if, SUPERSCRIPT
 
 from math import log, floor
 
-__all__ = "prefix exp_mantissa prefixify scinot numberString".split()
+__all__ = "prefix exp_mantissa prefixify scinot number_string".split()
 
 
 class prefix:
@@ -112,7 +112,7 @@ def scinot(num, precision=4, unicode_exponents=True, lower=-2, upper=3):
     return num
 
 
-def numberString(
+def number_string(
         number,
         delta=0,
         asUnit=False,

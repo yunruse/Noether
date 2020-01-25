@@ -2,7 +2,7 @@
 
 import operator
 
-from .scale import numberString
+from .scale import number_string
 # For matrix convenience
 from ..matrix import Matrix
 #from .dimension import Dimension : Import loop
@@ -12,23 +12,23 @@ __all__ = 'Measure Unit Dimension'.split()
 class MeasureMeta(type):
     """Metaclass of shared Measure properties"""
     def _dU_get(cls):
-        return list(cls._displayUnits.values())
+        return list(cls._display_units.values())
 
     def _dU_set(cls, bases):
-        cls._displayUnits.clear()
+        cls._display_units.clear()
         if isinstance(bases, dict):
             bases = bases.values()
         
         for unit in bases:
-            cls._displayUnits[unit.dim] = unit
+            cls._display_units[unit.dim] = unit
 
     def _dU_del(cls):
-        cls._displayUnits.clear()
+        cls._display_units.clear()
     
     def display(cls, unit):
-        cls._displayUnits[unit.dim] = unit
+        cls._display_units[unit.dim] = unit
 
-    displayUnits = property(_dU_get, _dU_set, _dU_del)
+    display_units = property(_dU_get, _dU_set, _dU_del)
 
 
 class Measure(float, metaclass=MeasureMeta):
@@ -93,29 +93,29 @@ class Measure(float, metaclass=MeasureMeta):
 
     # This class-shared variable is used for display units
     # {dim: Unit}
-    _baseDisplayUnits = {}
-    _displayUnits = {}
+    _basedisplay_units = {}
+    _display_units = {}
 
     @property
-    def displayUnit(self):
-        return self._displayUnits.get(
-            self.dim, self._baseDisplayUnits.get(self.dim, None))
+    def display_unit(self):
+        return self._display_units.get(
+            self.dim, self._basedisplay_units.get(self.dim, None))
 
     @property
     def symbol(self):
-        if self.displayUnit:
-            return self.displayUnit.symbols[0]
+        if self.display_unit:
+            return self.display_unit.symbols[0]
 
     def value(self):
         '''Returns the number(s) without dimension.'''
         return Measure(self, dim=Dimension())
 
-    def numberString(self, useDisplayUnit=False):
-        if useDisplayUnit and self.displayUnit:
-            display /= self.displayUnit
+    def number_string(self, usedisplay_unit=False):
+        if usedisplay_unit and self.display_unit:
+            display /= self.display_unit
 
         useParens = bool(self.symbol)
-        return numberString(
+        return number_string(
             float(self),
             self.stddev,
             useParens,
@@ -124,7 +124,7 @@ class Measure(float, metaclass=MeasureMeta):
         )
 
     def __str__(self):
-        sNum = self.numberString(useDisplayUnit=True)
+        sNum = self.number_string(usedisplay_unit=True)
 
         if not self.showUnits:
             return sNum.strip()
@@ -275,7 +275,7 @@ class Unit(Measure):
         self.names = names or tuple()
 
         if symbols and isDisplay:
-            self._baseDisplayUnits[self.dim] = self
+            self._basedisplay_units[self.dim] = self
         return self
     
     def __repr__(self):

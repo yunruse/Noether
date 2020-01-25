@@ -139,7 +139,7 @@ class Dimension(dict):
     __rmul__ = __mul__
     __pos__ = __neg__ = lambda s: s
 
-    def _checkLinear(self, other):
+    def check_linear(self, other):
         other = self._cmp(other)
         if self == other:
             return self
@@ -148,4 +148,4 @@ class Dimension(dict):
                 "Cannot add or subtract inequal dimensions {} and {}".
                 format(self, other))
 
-    __sub__ = __rsub__ = __add__ = __radd__ = _checkLinear
+    __sub__ = __rsub__ = __add__ = __radd__ = check_linear

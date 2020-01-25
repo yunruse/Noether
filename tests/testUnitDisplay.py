@@ -1,5 +1,5 @@
 from unittest import TestCase
-from noether.scale import numberString
+from noether.scale import number_string
 
 
 class UnitDisplayTest(TestCase):
@@ -18,7 +18,7 @@ class UnitDisplayTest(TestCase):
 
     def test_equality(self):
         for num, stddev, desired in self.equalityTests:
-            actual = numberString(
+            actual = number_string(
                 num, stddev, asUnit=False, precision=3, unicode_exponent=False
             )
             self.assertEqual(desired, actual)
