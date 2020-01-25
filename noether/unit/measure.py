@@ -2,7 +2,7 @@
 
 import operator
 
-from .scale import number_string
+from .display import number_string
 # For matrix convenience
 from ..matrix import Matrix
 #from .dimension import Dimension : Import loop
@@ -35,10 +35,10 @@ class Measure(float, metaclass=MeasureMeta):
     # TODO: allow for int Measures with metaclasses
 
     precision = 3
-    showUnits = True
-    showDimension = True
-    openLinear = False
-    unicodeExponent = True
+    show_units = True
+    show_dimension = True
+    open_linear = False
+    unicode_exponent = True
 
     __slots__ = "dim _stddev".split()
 
@@ -110,37 +110,39 @@ class Measure(float, metaclass=MeasureMeta):
         '''Returns the number(s) without dimension.'''
         return Measure(self, dim=Dimension())
 
-    def number_string(self, usedisplay_unit=False):
-        if usedisplay_unit and self.display_unit:
+    def number_string(self, use_display_unit=False):
+        if use_display_unit and self.display_unit:
             display /= self.display_unit
 
-        useParens = bool(self.symbol)
+        as_unit = bool(self.symbol)
         return number_string(
-            float(self),
-            self.stddev,
-            useParens,
-            self.precision,
-            self.unicodeExponent,
+            float(self), self.stddev,
+            self.precision, as_unit,
+            self.unicode_exponent
         )
 
     def __str__(self):
-        sNum = self.number_string(usedisplay_unit=True)
+        s = self.number_string(use_display_unit=True)
 
-        if not self.showUnits:
-            return sNum.strip()
+        if not self.show_units:
+            return s.strip()
 
-        sNum += self.symbol or self.dim.as_fundamental(as_units=True)
+        s += self.symbol or self.dim.as_fundamental(as_units=True)
 
-        return sNum + self._opt_dimension_name()
+        return s + self._opt_dimension_name()
 
     def __format__(self, spec):
-        return float.__format__(self, spec) + self.dim.as_fundamental(as_units=True)
+        return number_string(
+            float(self), self.stddev,
+            unicode_exponent=self.unicode_exponent,
+            formatter=lambda x: format(x, spec)
+        ) + self.dim.as_fundamental(as_units=True)
 
     def __repr__(self):
         return str(self)
     
     def _opt_dimension_name(self):
-        if self.showDimension and self.dim.names:
+        if self.show_dimension and self.dim.names:
             return " <{}>".format(', '.join(self.dim.names))
         else:
             return ""
@@ -191,7 +193,7 @@ class Measure(float, metaclass=MeasureMeta):
     __neg__ = lambda s: s * -1
 
     def __linear_compare(self, other):
-        if not self.openLinear:
+        if not self.open_linear:
             if isinstance(other, Measure) and self.dim != other.dim:
                 raise ValueError("Incompatible dimensions {} and {}.".format(
                     self.dim, other.dim))

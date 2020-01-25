@@ -1,6 +1,6 @@
 from unittest import TestCase
-from noether.unit.scale import number_string
 
+from noether.unit.display import number_string
 
 class number_plus_minus(TestCase):
     equalityTests = (
@@ -13,12 +13,11 @@ class number_plus_minus(TestCase):
         (2e6, 1e6, "(2 ± 1)×10^6"),
         (2, 1, "2 ± 1"),
         (2, 800000, "2 ± 8×10^5"),
-        (0),
     )
 
     def test_equality(self):
         for num, stddev, desired in self.equalityTests:
             actual = number_string(
-                num, stddev, asUnit=False, precision=3, unicode_exponent=False
+                num, stddev, decimals=3, as_unit=False, unicode_exponent=False
             )
             self.assertEqual(desired, actual)

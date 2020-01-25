@@ -4,7 +4,7 @@ import bisect
 from collections import namedtuple
 
 from ..helpers import intify
-from .scale import translate_by_if, SUPERSCRIPT
+from .display import superscript
 from .measure import Unit
 
 _BaseDimension = namedtuple("_BaseDimension", "order name symbol display_unit".split())
@@ -76,8 +76,7 @@ class Dimension(dict):
             if exp == 0:
                 continue
             elif exp != 1:
-                sym += translate_by_if(
-                    exp, SUPERSCRIPT, Unit.unicodeExponent, prefix='^')
+                sym += superscript(exp, Unit.unicode_exponent)
             dims.append(sym)
 
         return "·".join(dims)
