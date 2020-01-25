@@ -9,7 +9,7 @@ BASE_UNITS = (
     (4, "mass",        "M", "kg",  False, "kilogram"),
     (5, "substance",   "N", "mol", True, "mole"),
     (6, "length",      "L", "m",   True, "metre", "meter"),
-    (7, "time",        "T", "s", True, "second")
+    (7, "time",        "T", "s",   True, "second")
 )
 
 
@@ -36,6 +36,8 @@ for display_order, name, dim_sym, unit_sym, SI, *units in BASE_UNITS:
     unit = U(dim, unit_sym, SI=SI)
     for name in units:
         globals()[name] = unit
+
+del dim, unit
 
 dimensionless = Dimension()
 
