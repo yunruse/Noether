@@ -133,7 +133,7 @@ class Boson(Particle):
 photon      = H_0 = Boson(mass= eV(0,       1e-18 ), spin=1)
 gluon       = g   = Boson(mass=MeV(0,       20    ), spin=1)
 w_boson_p   = w_p = Boson(mass=GeV(80.379,  0.012 ), spin=1, charge=-Q)
-w_boson_m   = w_m = -w_m
+w_boson_m   = w_m = -w_p
 z_boson     = Z   = Boson(mass=GeV(91.1876, 0.0021), spin=1)
 higgs_boson = H_0 = Boson(mass=GeV(125_100, 140   ), spin=0)
 
