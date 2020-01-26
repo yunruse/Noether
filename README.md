@@ -83,7 +83,7 @@ If you need to measure something obscure, you can define a dimension:
 
 ## Update log
 
-Currently pre-release.
+- **Alpha 1** (2020-01-26): Made many improvements to display of units. The global `display` was added, alongside a wide range of particles. A test suite begins development.
 
 ## Legal
 
