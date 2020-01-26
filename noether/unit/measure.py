@@ -15,12 +15,8 @@ class MeasureMeta(type):
         return list(cls._display_units.values())
 
     def _dU_set(cls, bases):
-        cls._display_units.clear()
-        if isinstance(bases, dict):
-            bases = bases.values()
-        
-        for unit in bases:
-            cls._display_units[unit.dim] = unit
+        cls.display()
+        cls.display(*bases)
 
     def _dU_del(cls):
         cls._display_units.clear()
@@ -29,6 +25,8 @@ class MeasureMeta(type):
         '''Registers unit for display, or, if given none, reverts all.'''
         if units:
             for u in units:
+                if not isinstance(u, Unit):
+                    u = u / float(u)
                 cls._display_units[u.dim] = u
         else:
             cls._display_units.clear()
@@ -106,15 +104,22 @@ class Measure(float, metaclass=MeasureMeta):
         lambda s: s._stddev_set(0)
     )
 
+    # Display
+
     @property
     def display_unit(self):
         return self._display_units.get(
             self.dim, self._base_display_units.get(self.dim, None))
 
+    def as_fundamental(self):
+        return self.dim.as_fundamental(as_units=True)
+
     @property
     def symbol(self):
         if self.display_unit:
-            return self.display_unit.symbols[0]
+            if isinstance(self, Unit):
+                return self.display_unit.symbols[0]
+        return self.as_fundamental()
 
     def value(self):
         '''Returns the number(s) without dimension.'''
@@ -131,23 +136,19 @@ class Measure(float, metaclass=MeasureMeta):
             self.precision, as_unit,
             self.unicode_exponent
         )
-
+    
     def __str__(self):
         s = self.number_string(use_display_unit=True)
-
-        if not self.show_units:
-            return s.strip()
-
-        s += self.symbol or self.dim.as_fundamental(as_units=True)
-
-        return s + self._opt_dimension_name()
+        if self.show_units:
+            s += self.symbol + self._opt_dimension_name()
+        return s
 
     def __format__(self, spec):
         return number_string(
             float(self), self.stddev,
             unicode_exponent=self.unicode_exponent,
             formatter=lambda x: format(x, spec)
-        ) + self.dim.as_fundamental(as_units=True)
+        ) + self.symbol
 
     def __repr__(self):
         return str(self)
