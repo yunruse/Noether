@@ -12,8 +12,11 @@ _BaseDimension = namedtuple("_BaseDimension", "order name symbol display_unit".s
 
 class Dimension(dict):
     """Dimension of a unit. Inherently immutible."""
-    _dimensions_display = list()
+    _dimensions_display = list() # self-ordering
     _dimensions_map = dict()
+    
+    # Name registry (such that generated Dimensions map)
+    _names = dict()
 
     def __init__(self, value=None, **kw):
         value = value or dict()
@@ -51,10 +54,6 @@ class Dimension(dict):
         raise TypeError('{!r} object does not support item deletion'.format(type(self).__name__))
     def __hash__(self):
         return hash(tuple(sorted(self.items())))
-    
-    # Name registry (such that generated Dimensions map)
-
-    _names = dict()
 
     @property
     def names(self):
@@ -85,6 +84,8 @@ class Dimension(dict):
         return self.as_fundamental(as_units=False)
 
     def __repr__(self):
+        if not self:
+            return 'dimensionless'
         exponents = sorted(list(self.items()), key=lambda q: (q[1] < 0, abs(q[1])))
         string = '1' if exponents[0][1] < 0 else ''
         for dim, exp in exponents:
