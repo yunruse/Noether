@@ -292,12 +292,12 @@ class Unit(Measure):
         return self
     
     def __repr__(self):
-        if self.names:
-            return self.names[0] + self._opt_dimension_name()
-        elif self.symbols:
-            return self.symbols[0] + self._opt_dimension_name()
-        else:
-            return Measure.__repr__(self)
+        if self == self.display_unit:
+            if self.names:
+                return self.names[0] + self._opt_dimension_name()
+            elif self.symbols:
+                return self.symbols[0] + self._opt_dimension_name()
+        return Measure.__repr__(self)
 
 # Avoid name-mangling
 
