@@ -243,12 +243,12 @@ class Measure(float, metaclass=MeasureMeta):
         if isinstance(other, Measure):
             if other.dim != self.dim:
                 return False
-            sl, su, ol, ou = self.__cmp(other)
+            sl, su, ol, ou = self.__linear_compare(other)
             return ((sl <= ol <= su) or (sl <= ou <= su) or (ol <= sl <= ou)
                     or (ol <= su <= ou))
 
     def __ne__(self, other):
-        sl, su, ol, ou = self.__cmp(other)
+        sl, su, ol, ou = self.__linear_compare(other)
         return sl <= ou or ol <= su
 
     # __lt__ = lambda s, o: s.__cmp(o, operator.lt)
