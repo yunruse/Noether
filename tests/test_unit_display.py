@@ -1,8 +1,8 @@
 from unittest import TestCase
 
-from noether.unit.display import number_string
+from noether import *
 
-class number_plus_minus(TestCase):
+class test_unit_display(TestCase):
     equalityTests = (
         (0, 0, "0"),
         (20, 0, "20"),
@@ -15,9 +15,17 @@ class number_plus_minus(TestCase):
         (2, 800000, "2 ± 8×10^5"),
     )
 
-    def test_equality(self):
+    def test_plus_minus(self):
+        '''Test for desired behaviour for numbers with uncertainties '''
         for num, stddev, desired in self.equalityTests:
-            actual = number_string(
+            actual = display.number_string(
                 num, stddev, decimals=3, as_unit=False, unicode_exponent=False
             )
             self.assertEqual(desired, actual)
+
+class test_measure(TestCase):
+    def test_dimension_repr_evals(self):
+        '''Assert eval(repr(dim)) == dim'''
+        for dim, names in Dimension._names.items():
+            for n in names:
+                self.assertEqual(dim, eval(repr(dim)))
