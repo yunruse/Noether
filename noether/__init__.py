@@ -32,6 +32,7 @@ from . import (
 
 from .unit import *  # noqa: F401, F403
 from .statistics import *
+from .particles import *
 
 from .graphing import plot
 from .matrix import Matrix, Vector  # noqa: F401
