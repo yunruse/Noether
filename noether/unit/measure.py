@@ -117,8 +117,7 @@ class Measure(float, metaclass=MeasureMeta):
     @property
     def symbol(self):
         if self.display_unit:
-            if isinstance(self, Unit):
-                return self.display_unit.symbols[0]
+            return self.display_unit.symbols[0]
         return self.as_fundamental()
 
     def value(self):
