@@ -97,6 +97,7 @@ number_density = 1 / volume
 reaction_rate = substance / (volume * time)
 
 specific_energy = energy / mass
+energy_density = energy / mass
 molar_energy = energy / substance
 
 heat_capacity = entropy = energy / temperature
