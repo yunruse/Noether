@@ -1,4 +1,6 @@
-"""Noether: module for ease-of-use graphing"""
+"""
+Noether (+matplotlib): easy graphing
+"""
 
 import argparse
 from collections import namedtuple
