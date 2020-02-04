@@ -276,6 +276,7 @@ class Measure(float, metaclass=MeasureMeta):
 
 
 class Unit(Measure):
+    # TODO: formalise this so 'symbol' and 'name' are clearer
     __slots__ = Measure.__slots__ + ["symbols", "names"]
 
     def __new__(cls, value, *a, symbols=None, names=None, is_display=False, **kw):
