@@ -63,5 +63,8 @@ t = 273.15 * kelvin
 natural_units = (e_0, c, h, e, MeV, MeVc, MeVc2, grav)
 
 # estimations of body surface area
-du_bois_index = 0.007184 / weight**F(17/40) * height**F(29/40)
-mosteller_index = sqrt(1/3600) / (weight * height) ** F(1/2)
+
+# Sardinha et al, 2006. https://doi.org/10.1088/0967-3334/27/11/01 
+du_bois_index = 0.007184 / kilogram**F(17/40) * cm**F(29/40)
+# Mosteller, 1987. https://doi.org/10.1056/NEJM198710223171717
+mosteller_index = sqrt(1/3600) / (kilogram*cm) ** F(1/2)

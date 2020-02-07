@@ -1,9 +1,7 @@
 '''
 A category of fundamental and other subatomic particles.
 
-Data source:
-M. Tanabashi et al (Particle Data Group), 2019
-https://doi.org/10.1103/physrevd.98.030001
+Tanabashi et al, 2019. https://doi.org/10.1103/physrevd.98.030001
 
 '''
 
