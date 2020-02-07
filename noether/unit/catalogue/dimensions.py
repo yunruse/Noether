@@ -109,7 +109,9 @@ surface_tension = force / length
 viscosity = pressure * time
 
 
-# various dimensions
+# medical dimensions
+height = length
+body_mass_index = weight / height**2
 
-body_mass_index = mass / area
+# miscellaneous
 vehicle_efficiency = distance / volume

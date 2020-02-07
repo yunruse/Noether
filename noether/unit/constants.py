@@ -2,6 +2,9 @@
 
 # pylint: disable=W0401,W0614,W0611,C0103
 
+# TODO: move this to `catalogue` folder
+from fractions import Fraction as F
+
 from math import pi
 
 from .scale import prefix
@@ -58,3 +61,7 @@ g = gee / kilogram
 t = 273.15 * kelvin
 
 natural_units = (e_0, c, h, e, MeV, MeVc, MeVc2, grav)
+
+# estimations of body surface area
+du_bois_index = 0.007184 / weight**F(17/40) * height**F(29/40)
+mosteller_index = sqrt(1/3600) / (weight * height) ** F(1/2)
