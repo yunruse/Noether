@@ -85,6 +85,7 @@ If you need to measure something obscure, you can define a dimension:
 
 - **Alpha 2** (2020-??-??):
   Added `ContinuedFraction` (and `Fraction` with shortcut).
+  Made special tweaks so `python -m noether` lazy-loads at fast pace.
 
 - **Alpha 1** (2020-01-26):
   Made many improvements to display of units.
