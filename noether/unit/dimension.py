@@ -74,6 +74,7 @@ class Dimension(dict):
             if exp == 0:
                 continue
             elif exp != 1:
+                # TODO TODO TODO: this DESPERATELY needs to be a settings module somewhere
                 sym += superscript(exp, Unit.unicode_exponent)
             dims.append(sym)
 
@@ -148,3 +149,6 @@ class Dimension(dict):
                 format(self, other))
 
     __sub__ = __rsub__ = __add__ = __radd__ = check_linear
+
+# avoid import-loop
+from .unit import Unit
