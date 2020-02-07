@@ -4,8 +4,7 @@ import bisect
 from collections import namedtuple
 
 from ..helpers import intify
-from .display import superscript
-from .measure import Unit
+from ..display import superscript
 
 _BaseDimension = namedtuple("_BaseDimension", "order name symbol display_unit".split())
 

@@ -9,6 +9,8 @@ The submodule is defined in sectioned files only for convenience –
 do not directly import from them.
 """
 
+from .. import Dimension, Measure, Unit
+
 from .fundamental import *
 from .dimensions import *
 from .si import *
@@ -19,6 +21,7 @@ from .historical import *
 from .scientific import *
 from .data import *
 from .unusual import *
+from .systems import *
 
 # Name transmogrification
 
@@ -51,5 +54,5 @@ for units, prefixes in (
                 for name in names:
                     name = prefix + name.replace(" ", "_")
                     if name not in globals():
-                        globals()[name] = unit * pFactor
+                        globals()[name] = Unit(unit * pFactor, name)
                         __all__.append(name)

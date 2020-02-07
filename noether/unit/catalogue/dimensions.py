@@ -94,6 +94,7 @@ density = mass / volume
 specific_volume = volume / mass
 
 number_density = 1 / volume
+probability_density = 1 / volume
 reaction_rate = substance / (volume * time)
 
 specific_energy = energy / mass
