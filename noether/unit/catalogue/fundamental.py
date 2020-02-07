@@ -13,7 +13,9 @@ BASE_UNITS = (
 )
 
 
-from ..measure import Unit, Measure, Dimension
+from ..dimension import Dimension
+from ..measure import Measure
+from ..unit import Unit
 from ..scale import prefix_SI, prefix_IEC
 
 prefixable_SI = set()

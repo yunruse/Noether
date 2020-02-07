@@ -1,4 +1,10 @@
-# Extras here are used in namespace
+'''
+Unit-intelligent module of Noether.
+'''
+
+from .dimension import Dimension
+from .measure import Measure
+from .unit import Unit
 
 from .maths import (
     sin, cos, tan,

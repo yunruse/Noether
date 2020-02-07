@@ -9,6 +9,8 @@ The submodule is defined in sectioned files only for convenience –
 do not directly import from them.
 """
 
+from .. import Dimension, Measure, Unit
+
 from .fundamental import *
 from .dimensions import *
 from .si import *

@@ -1,7 +1,7 @@
 """Noether: Scaling of numbers (a×10^b)"""
 
 from ..helpers import intify, exp_mantissa
-from .display import superscript
+from ..display import superscript
 
 __all__ = "prefix prefixify".split()
 
