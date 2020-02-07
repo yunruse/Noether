@@ -1,5 +1,5 @@
 '''
-Unit-intelligent module of Noether.
+Unit-intelligent module of Noether, featuring an extensive catalogue.
 '''
 
 from .dimension import Dimension

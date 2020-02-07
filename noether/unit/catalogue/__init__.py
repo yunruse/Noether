@@ -1,12 +1,12 @@
 """
 noether: Catalogue of units and dimensions
 
-This module intends to catalogue _every_ unit and dimension that is
-possibly known or ever has been known.
+This module intends to catalogue every unit, dimension and physical constant
+that should ever be useful in calculation.
+
 It is explicitly coded in Python, as opposed to a config file,
 so as to be as legible in how it expresses relations to other units.
-The submodule is defined in sectioned files only for convenience –
-do not directly import from them.
+The submodule is defined in sectioned files for convenience.
 """
 
 from .. import Dimension, Measure, Unit

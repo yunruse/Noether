@@ -7,7 +7,7 @@ from ..helpers import intify
 from ..display import superscript
 
 _BaseDimension = namedtuple("_BaseDimension", "order name symbol display_unit".split())
-
+# TODO: enforce Fraction, rather than float, on dimension exponent
 
 class Dimension(dict):
     """Dimension of a unit. Inherently immutible."""
