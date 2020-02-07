@@ -7,7 +7,7 @@ from .measure import Measure
 # - whatever the user does display() on
 # This layered system will not only clean up code, but make it much more interchangeable.
 
-class System:
+class UnitSystem:
     _mapping: dict
     fundamental: bool = False
     '''
