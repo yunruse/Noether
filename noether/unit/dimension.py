@@ -148,6 +148,3 @@ class Dimension(dict):
                 format(self, other))
 
     __sub__ = __rsub__ = __add__ = __radd__ = check_linear
-
-# fix import-dependencies
-from .unit import Unit
