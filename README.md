@@ -1,8 +1,8 @@
-# Noether
+# Noether (in development: Alpha 2)
 
-**Noether is currently in development, so its API is subject to change, and some features may be incomplete or undocumented.**
+**Noether is currently in alpha. The developer makes no promise that the API will remain consistent, or even documented.**
 
-Noether is a library designed to compliment `numpy`, `matplotlib` and `scipy` by providing a rich category of real-world values from CODATA, SI and more. It provides, for your convenience:
+Noether is a library designed to provide physical constants and measurements. It is intended to compliment `numpy`, `matplotlib` and `scipy`. Its features include:
 
 - An extensive catalogue of scientific units and statistical distributions
 - Automatic propagation of dimension and uncertainty for unit-rich work
@@ -46,10 +46,6 @@ from noether import *
 
 at the head of your script.
 
-## Development
-
-Noether has infrequent development, so it has a rather small test suite and incomplete API. T
-
 ## Units
 
 Noether has a thorough SI-based unit system allowing for advanced unit composition and dimensional analysis.
@@ -91,11 +87,28 @@ If you need to measure something obscure, you can define a dimension:
   The global `display` was added, alongside a wide range of particles.
   A test suite begins development.
 
-## Legal
+## Thank you!
 
-Copyright (c) Mia yun Ruse (yunru.se) 2019-2020.
+Noether is in early development. Please consider supporting me on [Patreon].
+
+Any and all feedback, from scientist to schoolchild, is well-appreciated.
+This project is large, and somehow wants to appeal to every single person who
+would ever use a calculator, so it'll never be perfect :)
+
+[Patreon]: https://patreon.com/yunruse
+
+## Legal (and academical)
+
+Copyright (c) Mia yun Ruse ([yunru.se]) 2018–2020.
+All scientific data shown remains in the public domain, and is cited where relevant.
 
 This work is licensed under a [Creative Commons Attribution 4.0](cc) International
-license. In non-legal terms: do whatever you like, but don't forget to credit me :)
+license. In non-legal terms: do whatever you like, including science! But if you
+want to redistribute this project (derived or not), please credit me, or shoot me a
+message and I'll see what I can do.
 
+If for some strange reason you find this useful in a scientific paper
+– aah, it's not fully tested yet! – please throw me a reference and an email.
+
+[yunru.se]: https://yunru.se/
 [cc]: https://creativecommons.org/licenses/by/4.0/
