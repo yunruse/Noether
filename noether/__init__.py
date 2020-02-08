@@ -32,13 +32,13 @@ from math import (
 ) # noqa: F401
 
 from .unit import *  # noqa: F401, F403
+from .unit.catalogue import *
 
 from .statistics import *
 from .particles import *
 
 from . import (
     particles,
-    unit
 )
 
 

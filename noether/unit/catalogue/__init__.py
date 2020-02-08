@@ -1,5 +1,5 @@
 """
-noether: Catalogue of units and dimensions
+noether.unit.catalogue: Catalogue of constants, units and dimensions
 
 This module intends to catalogue every unit, dimension and physical constant
 that should ever be useful in calculation.
@@ -11,6 +11,7 @@ The submodule is defined in sectioned files for convenience.
 
 from .. import Dimension, Measure, Unit
 
+from .constants import *
 from .fundamental import *
 from .dimensions import *
 from .si import *

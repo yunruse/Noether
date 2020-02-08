@@ -1,15 +1,19 @@
 """Noether: Mathematical and scientific constants"""
 
-# pylint: disable=W0401,W0614,W0611,C0103
-
-# TODO: move this to `catalogue` folder
 from fractions import Fraction as F
 
 from math import pi
 
-from .scale import prefix
-from .unit import Unit
-from .catalogue import *
+from ...helpers import sqrt
+
+from ..scale import prefix
+from ..unit import Unit
+
+from .fundamental import ampere, kelvin, kilogram, metre, mole, second
+from .si import coulomb, joule, newton, radian, volt
+from .scientific import c, gee
+from .conventional import cm
+
 
 # Trigonometry
 

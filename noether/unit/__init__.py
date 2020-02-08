@@ -1,5 +1,5 @@
 '''
-Unit-intelligent module of Noether, featuring an extensive catalogue.
+noether.unit: Unit-intelligent module with extensive catalogue
 '''
 
 from .dimension import Dimension
@@ -13,5 +13,3 @@ from .maths import (
 )
 
 from ..helpers import *
-from .catalogue import *
-from .constants import *  # noqa: F401, F403

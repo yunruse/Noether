@@ -9,8 +9,7 @@ from dataclasses import dataclass, field
 from fractions import Fraction
 
 from .unit.measure import Measure
-from .unit.catalogue import mass, charge, dalton
-from .unit.constants import e as Q, MeVc2
+from .unit.catalogue import mass, charge, dalton, MeVc2, e as Q
 
 MeV = MeVc2
 eV = MeVc2 / 1e6
