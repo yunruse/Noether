@@ -51,7 +51,7 @@ def sqrt(x):
 def sign(x):
     """Return the mathematical sign of the particle."""
     if x.imag:
-        return x / sqrt(x.image ** 2 + x.real ** 2)
+        return x / sqrt(x.imag ** 2 + x.real ** 2)
     return 0 if x == 0 else -1 if x < 0 else 1
 
 def product(iterable, start=1):

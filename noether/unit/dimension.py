@@ -2,6 +2,7 @@
 
 import bisect
 from collections import namedtuple
+from numbers import Number, Real
 
 from ..helpers import intify
 from ..display import superscript
@@ -106,14 +107,14 @@ class Dimension(dict):
         return not all(i == 0 for i in self.values())
 
     def __pow__(self, exp):
-        if isinstance(exp, (int, float)):
+        if isinstance(exp, Real):
             return Dimension({k: intify(v * exp) for k, v in self.items()})
         else:
             raise TypeError("Cannot raise dimension to non-real exponent")
 
     def _cmp(self, other):
         """Check and attempt to match other unit to Dimension"""
-        if isinstance(other, (float, int)):
+        if isinstance(other, Number):
             return Dimension()
         if isinstance(other, Dimension):
             return other
