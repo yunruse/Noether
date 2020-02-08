@@ -184,6 +184,7 @@ class Measure(float, metaclass=MeasureMeta):
 
         return new
     
+    # TODO: automatic conversion when units match certain relations (eg MeV, MeV/c, MeV/c^2)
     __rmul__ = __mul__ = lambda s, o: s.__geometric(o, operator.mul)
     __truediv__ = lambda s, o: s.__geometric(o, operator.truediv)
     __floordiv__ = lambda s, o: s.__geometric(o, operator.floordiv)
