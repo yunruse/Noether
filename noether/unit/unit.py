@@ -1,4 +1,5 @@
 from .measure import Measure
+from .dimension import Dimension
 
 class Unit(Measure):
     '''
@@ -27,6 +28,3 @@ class Unit(Measure):
             elif self.symbols:
                 return self.symbols[0] + self._opt_dimension_name()
         return Measure.__repr__(self)
-
-# Avoid name-mangling
-from .dimension import Dimension
