@@ -25,10 +25,9 @@ class MeasureMeta(type):
     
     def display(cls, *units):
         '''Registers unit for display, or, if given none, reverts all.'''
+        # TODO: this desperately needs changing about!
         if units:
             for u in units:
-                if not isinstance(u, Unit):
-                    u = u / float(u)
                 cls._display_units[u.dim] = u
         else:
             cls._display_units.clear()
@@ -175,7 +174,7 @@ class Measure(float, metaclass=MeasureMeta):
         )
 
         if isinstance(other, Dimension):
-            raise TypeError('Unclear result of operator on Dimension and Measure. Use Measure.dim, or Measure(dim).')
+            raise TypeError('Ambiguous operation Dimension and Measure. Resolve with Dimension(measure) or Measure(dim).')
         elif isinstance(other, Measure):
             new.dim = op(self.dim, other.dim)
             new.epsilon = (self.epsilon**2 + other.epsilon**2) ** 0.5
