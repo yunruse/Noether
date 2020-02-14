@@ -28,9 +28,9 @@ class UnaryFunction(Function):
     output_dimension = None
     
     @classmethod
-    def integrate(self, x, to=None):
+    def integrate(cls, x, to=None):
         '''Definite or indefinite integral via given function or approximation.'''
-        I = self.integral(x)
+        I = cls.integral(x)
         if I == NotImplemented:
             raise NotImplementedError("Todo: trapezoid method")
             # Attempt approximate integration
@@ -47,31 +47,31 @@ class UnaryFunction(Function):
             if to is None:
                 return I
             else:
-                return self.integral(to) - I
+                return cls.integral(to) - I
         
     @classmethod
-    def differentiate(self, x):
-        d = self.differential(x)
+    def differentiate(cls, x):
+        d = cls.differential(x)
         if d == NotImplemented:
             x1 = float(x - APPROXIMATE_DIFFERENTIAL_EPSILON/2)
             x2 = float(x + APPROXIMATE_DIFFERENTIAL_EPSILON/2)
-            return (self.function(x2) - self.function(x1)) / APPROXIMATE_DIFFERENTIAL_EPSILON
+            return (cls.function(x2) - cls.function(x1)) / APPROXIMATE_DIFFERENTIAL_EPSILON
         else:
             return d
     
-    def __new__(self, x):
-        dim = self.output_dimension
+    def __new__(cls, x):
+        dim = cls.output_dimension
         if isinstance(x, Measure):
-            value = self.function(float(x))
+            value = cls.function(float(x))
             new = Measure(value)
-            if dim:
+            if dim is not None:
                 new.dim = dim
             else:
                 new.dim = x.dim
             return new
 
         else:
-            value = self.function(x)
+            value = cls.function(x)
             if dim:
                 return Measure(value, dim=dim)
             else:
