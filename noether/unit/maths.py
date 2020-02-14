@@ -5,37 +5,36 @@ import math
 from .catalogue import angle, dimensionless
 from .function import UnaryFunction
 
-class _trig_in(UnaryFunction):
+class TrigFunc(UnaryFunction):
     input_dimension = angle
     output_dimension = dimensionless
 
-class _trig_out(UnaryFunction):
+class InvTrigFunc(UnaryFunction):
     input_dimension = dimensionless
     output_dimension = angle
 
-# TODO: figure out algebra via Astley to have these support true calculus
-# such that 'differential = -cos' and 'sec = 1 / cos' are possible
+# TODO: utilise Astley such that `1 / sin` simply works
 
-class sin(_trig_in):
+class sin(TrigFunc):
     integral = lambda x: -math.cos(x)
     function = math.sin
     differential = math.cos
 
-class cos(_trig_in):
+class cos(TrigFunc):
     integral = math.sin
     function = math.cos
     differential = lambda x: -math.sin(x)
 
-class tan(_trig_in):
+class tan(TrigFunc):
     function = math.tan
     differential = lambda x: math.cos(x)**-2
     integral = lambda x: -math.log(math.cos(x))
 
-class asin(_trig_out):
+class asin(InvTrigFunc):
     function = math.asin
 
-class acos(_trig_out):
+class acos(InvTrigFunc):
     function = math.acos
 
-class atan(_trig_out):
+class atan(InvTrigFunc):
     function = math.atan
