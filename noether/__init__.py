@@ -24,7 +24,6 @@ from math import (
 
 from .unit import *  # noqa: F401, F403
 
-from .statistics import *
 from .particles import *
 
 from . import (
@@ -33,5 +32,3 @@ from . import (
 )
 
 from .unit import *  # noqa: F401, F403
-from .statistics import *
-from .particles import *
