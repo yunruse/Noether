@@ -119,9 +119,9 @@ strain = length / length
 # medical dimensions
 
 height = length
-body_mass_index = weight / height**2
 width = breadth = length
 depth = length
+body_mass_index = mass / height**2
 
 # miscellaneous
 
