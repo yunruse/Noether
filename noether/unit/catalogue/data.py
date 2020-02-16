@@ -25,7 +25,7 @@ bps = U(bit / second, 'bps', display=True, SI=True, IEC=True)
 
 # image size
 
-pixel_count = Dimension.new(3.4, "pixel_count", "P", "P")
+pixel_count = Dimension.new(3.4, "pixel_count", "P", "pix")
 pixel = U(pixel_count, SI=True)
 
 pixel_fill_rate = pixel_count / time
