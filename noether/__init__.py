@@ -21,8 +21,6 @@ __email__ = "s-noether@yunru.se"
 
 import math
 import cmath
-import numpy as np
-from matplotlib import pyplot as plt
 
 from math import (
     sinh, cosh, tanh,
@@ -34,17 +32,10 @@ from math import (
 from .unit import *  # noqa: F401, F403
 from .unit.catalogue import *
 
-from .statistics import *
 from .particles import *
 
 from . import (
     particles,
 )
 
-
 from .unit import *  # noqa: F401, F403
-from .statistics import *
-from .particles import *
-
-from .graphing import plot
-from .matrix import Matrix, Vector  # noqa: F401

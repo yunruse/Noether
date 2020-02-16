@@ -3,8 +3,6 @@
 import operator
 
 from ..display import number_string
-# For matrix convenience
-from ..matrix import Matrix
 #from .dimension import Dimension : Import loop
 
 from .dimension import Dimension
@@ -262,16 +260,22 @@ class Measure(float, metaclass=MeasureMeta):
         '''Not useful for direct equality comparison.'''
         return hash((float(self), self.dim))
 
-    # Matrix operators
+    # Matrix operators for user convenience.
+    # Import explicitly, as they are only used for user convenience;
+    # otherwise numpy would be loaded, slowing down startup
 
     def __and__(self, other):
+        from ..matrix import Matrix
         return Matrix(self) & other
 
     def __rand__(self, other):
+        from ..matrix import Matrix
         return other & Matrix(self)
 
     def __or__(self, other):
+        from ..matrix import Matrix
         return Matrix(self) | other
 
     def __ror__(self, other):
+        from ..matrix import Matrix
         return other | Matrix(self)
