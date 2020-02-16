@@ -109,11 +109,20 @@ molar_heat_capacity = heat_capacity / substance
 
 surface_tension = force / length
 viscosity = pressure * time
+kinematic_viscosity = viscosity / density
+
+# TODO: clear up moduli
+bulk_modulus = volume * pressure / volume
+strain = length / length
 
 
 # medical dimensions
+
 height = length
 body_mass_index = weight / height**2
+width = breadth = length
+depth = length
 
 # miscellaneous
+
 vehicle_efficiency = distance / volume
