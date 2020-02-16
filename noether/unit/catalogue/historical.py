@@ -1,4 +1,5 @@
-"""Historic units according to François Cardarelli.
+"""
+Historic units.
 
 Cardarelli, François (1998). Scientific Unit Conversion.
 """
@@ -7,7 +8,7 @@ from .fundamental import U
 from .conventional import (
     cm, metre, litre,
     gram, kilogram,
-    second, hour
+    second, hour, hectare
 )
 
 # Attic Greek ~ 0 BCE
@@ -53,3 +54,29 @@ lijne = duim / 12
 
 elle = voet * 2.5  # distance from armpit to tip of fingers
 roede = voet * 13
+
+morgen = hectare * 0.856_532
+
+# French
+
+french_point = truchet = cm * 0.0188
+ligne = french_point * 12
+pouce = ligne * 12
+pied = french_foot = pouce * 12
+toise = pied * 6
+perche = pied * 22
+arpent = perche * 10
+vergee = vergée = 25 * perche**2
+
+pinte = litre * 0.9521
+
+quade = pinte * 2
+velte = quade * 4
+quartaut = velte * 9
+feuillete = quartaut * 2
+muid = feuillete * 2
+
+chopine = pinte / 2
+demiard = chopine / 2
+posson = demiard / 2
+roquille = posson / 4
