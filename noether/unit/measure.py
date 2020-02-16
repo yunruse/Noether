@@ -279,3 +279,5 @@ class Measure(float, metaclass=MeasureMeta):
     def __ror__(self, other):
         from ..matrix import Matrix
         return other | Matrix(self)
+
+    # TODO: have @ display in a unit, eg `x @ mile&inch`

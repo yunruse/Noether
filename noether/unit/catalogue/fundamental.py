@@ -21,6 +21,7 @@ from ..scale import prefix_SI, prefix_IEC
 prefixable_SI = set()
 prefixable_IEC = set()
 
+# TODO: fix `SI` name and disallow, say, 'picopixel'
 def U(value, *symbols, display=None, SI=False, IEC=False):
     unit = Unit(value, *symbols, is_display=display)
     if SI:
