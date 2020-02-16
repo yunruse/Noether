@@ -262,7 +262,7 @@ class Measure(float, metaclass=MeasureMeta):
 
     # Matrix operators for user convenience.
     # Import explicitly, as they are only used for user convenience;
-    # otherwis numpy would be loaded, slowing down startup
+    # otherwise numpy would be loaded, slowing down startup
 
     def __and__(self, other):
         from ..matrix import Matrix
