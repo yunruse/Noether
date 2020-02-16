@@ -1,3 +1,7 @@
+"""
+Traditional imperial units.
+"""
+
 from .fundamental import U
 from .conventional import (
     cm, metre, litre,

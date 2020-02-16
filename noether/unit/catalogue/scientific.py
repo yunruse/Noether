@@ -1,4 +1,6 @@
-"""Scientific units."""
+"""
+Units typical to scientific contexts.
+"""
 
 from .fundamental import (
     U, metre, second, kilogram
@@ -32,6 +34,6 @@ atmosphere = U(101_325 * pascal, "atm", display=False)
 torr = U(atmosphere / 760, "torr")
 metre_mercury = meter_mercury = U(133_322.387_415 * pascal, "mhg", SI=True)
 
-bmi = U(kilogram / metre**2, " BMI")
+bmi = U(kilogram / metre**2, "BMI")
 amagat = U(2.686_7811 / metre**3, 'Am', SI=True)
 met = U(58.2 * watt / metre ** 2, 'met')

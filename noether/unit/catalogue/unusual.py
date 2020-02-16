@@ -1,3 +1,7 @@
+"""
+Unusual or humorous units.
+"""
+
 from .si import *
 from .conventional import *
 from .imperial import *
