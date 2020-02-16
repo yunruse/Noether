@@ -51,43 +51,49 @@ at the head of your script.
 Noether has a thorough SI-based unit system allowing for advanced unit composition and dimensional analysis.
 
 ```python
->>> gibibyte / second
-8.59×10⁹bps <data rate>
->>> 12 * pixel / mm
+>>> 0.5 * gibibyte / second
+4.295×10⁹bps <data rate>
+>>> a = 12 * pixel / mm
+>>> a
+1.2×10⁴pix·m⁻¹ <image quality>
+>>> display(ppi)
+>>> a
 304.8ppi <image quality>
->>> (joule / kilogram / kelvin) * Measure(12, 2)
+>>> (joule / kilogram / kelvin)(12, 2)
 12 ± 2K⁻¹·m²·s⁻² <specific heat capacity>
+>>> e / electron.mass
+(2.187×10¹¹ ± 1649)A·kg⁻¹·s
 ```
 
-You may define and display units as such:
+You may, of course, define your own units on the fly:
 ```
 >>> FF = Unit(furlong / fortnight, 'ff')
->>> 3 * FF
-4.989×10⁻⁴ m·s⁻¹ (speed)
->>> Unit.display(FF)
->>> 3 * FF
-3ff (speed)
+>>> display(FF)
+>>> c
+1.803×10¹² <velocity, speed>
 ```
 
-If you need to measure something obscure, you can define a dimension:
+If you need to measure something rather new, you can define a dimension:
+
 ```
->>> health = Dimension.new(3.2, 'health', 'a')
->>> apple = Unit(health, names=['apple'], symbols=['a'])
+>>> health = Dimension.new(3.2, 'health', 'H', 'a')
+>>> apple = Unit(health)
 >>> apple / day
 1.157×10⁻⁵a·s⁻¹
 ```
 
 ## Update log
 
-- **Alpha 2** (2020-??-??):
-  Added `ContinuedFraction` (and `Fraction` with shortcut).
-  Added `UnitSystem` for quality of life (eg `display(imperial)`).
-  Made special tweaks so `python -m noether` lazy-loads at fast pace.
+ - **Alpha 2** (2020-02-16):
+   - Many bugfixes and units added.
+   - Added `noether.fraction` with `ContinuedFraction` (and `Fraction` with shortcut).
+   - Introduced basics of `UnitSystem` for quality of life (eg `display(imperial)`).
+   - Made special tweaks so `python -m noether` lazy-loads at fast pace.
 
-- **Alpha 1** (2020-01-26):
-  Made many improvements to display of units.
-  The global `display` was added, alongside a wide range of particles.
-  A test suite begins development.
+ - **Alpha 1** (2020-01-26):
+   - Made many improvements to display of units.
+   - The global `display` was added, alongside a wide range of particles.
+   - A test suite begins development.
 
 ## Thank you!
 
