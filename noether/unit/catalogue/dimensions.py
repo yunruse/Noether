@@ -52,6 +52,8 @@ angular_jerk = angular_acceleration / time
 inertia = mass * angular_velocity
 torque = inertia * angular_acceleration
 
+gravitational_gradient = acceleration / distance
+
 # electromagnetism
 
 charge = current * time
