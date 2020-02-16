@@ -3,10 +3,6 @@ noether.unit.catalogue: Catalogue of constants, units and dimensions
 
 This module intends to catalogue every unit, dimension and physical constant
 that should ever be useful in calculation.
-
-It is explicitly coded in Python, as opposed to a config file,
-so as to be as legible in how it expresses relations to other units.
-The submodule is defined in sectioned files for convenience.
 """
 
 from .. import Dimension, Measure, Unit
@@ -14,15 +10,18 @@ from .. import Dimension, Measure, Unit
 from .constants import *
 from .fundamental import *
 from .dimensions import *
+
 from .si import *
+from .data import *
+
 from .conventional import *
+from .scientific import *
+
 from .cgs import *
 from .imperial import *
 from .historical import *
-from .scientific import *
-from .data import *
+
 from .unusual import *
-from .systems import *
 
 # Name transmogrification
 
