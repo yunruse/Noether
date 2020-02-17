@@ -126,3 +126,4 @@ body_mass_index = mass / height**2
 # miscellaneous
 
 vehicle_efficiency = distance / volume
+einstein_coefficient_b = volume / energy / time
