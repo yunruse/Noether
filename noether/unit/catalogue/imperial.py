@@ -8,7 +8,7 @@ from .conventional import (
     gram, kilogram,
     second, hour
 )
-from .scientific import gee
+from .scientific import g
 
 # length and area
 
@@ -61,8 +61,8 @@ slug = 14.593_902_94 * kilogram
 
 # miscellanea
 
-poundforce = U(gee * pound, "lbf")
+poundforce = U(g * pound, "lbf")
 poundfoot = poundforce * foot
 
 poundal = pound * foot / second**2
-psi = pound / inch**2
+psi = poundforce / inch**2
