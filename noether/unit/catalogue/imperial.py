@@ -6,7 +6,7 @@ from .fundamental import U
 from .conventional import (
     cm, metre, litre,
     gram, kilogram,
-    second, hour
+    second, minute, hour
 )
 from .scientific import g
 
@@ -66,3 +66,5 @@ poundfoot = poundforce * foot
 
 poundal = pound * foot / second**2
 psi = poundforce / inch**2
+
+horsepower = U(33_000 * foot * poundforce / minute, "hp")
