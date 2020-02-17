@@ -14,7 +14,7 @@ from .scientific import g
 
 inch = U(cm * 127 / 50, "in")
 
-foot = U(inch * 12, "ft")
+foot = feet = U(inch * 12, "ft")
 yard = U(3 * foot, "yd")
 chain = U(22 * yard, "ch")
 furlong = U(10 * chain, "fur")
