@@ -39,3 +39,5 @@ from . import (
 )
 
 from .unit import *  # noqa: F401, F403
+
+display = Unit.display
