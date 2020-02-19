@@ -23,6 +23,12 @@ bpm = U(hertz / 60, "bpm")
 degree = U(radian * pi / 180, "°")
 angular_minute = U(degree / 60, "′")
 angular_second = U(degree / 3600, "″")
+gradian = U(radian * pi / 200, "gon")
+
+turn = U(radian / 2*pi, "turn")
+deg = degree
+rad = radian
+grad = gradian
 
 acre = U(100 * metre**2, "a")
 hectare = U(100 * acre, "ha")
