@@ -1,5 +1,5 @@
 """
-Unusual or humorous units.
+Unusual, absurd or humorous units.
 """
 
 from .si import *
@@ -8,9 +8,18 @@ from .imperial import *
 from .scientific import *
 from .data import *
 
+# typographic
+pica = inch / 6
+# TODO: more typography! maybe a "point" unit?
+
+# human activity
+
+cord = 128 * foot**3
+
 hand = 4 * inch
 horse = 8 * foot
 
+# humorous
 potrzebie = metre * 2.263347539605392
 ngogn = 1000 * potrzebie**3
 smoot = metre * 1.67005
