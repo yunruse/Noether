@@ -50,3 +50,14 @@ solar_mass = U(1.98802e30 * kilogram, "msol")
 # currently using Hubble Space Telescope.
 # Friedman et al, 2019. https://doi.org/10.3847/1538-4357/ab2f73
 hubble = (mps / parsec / 1000)(69.8, 1.9)
+
+# Photometric units, some outdated
+fresnel = (1 / second)(1e12)
+
+nit = U(candela / metre**2, 'nt')
+stilb = U(candela / cm**2, 'sb')
+apostilb = blondel = U(nit / pi, 'asb')
+lambert = U(stilb / pi, 'L')
+skot = U(apostilb / 1000, 'sk')
+bril = U(skot / 10_000, 'bril')
+footlambert = U(candela / foot**2 / pi, 'fl')
