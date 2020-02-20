@@ -26,7 +26,7 @@ angular_second = U(degree / 3600, "″")
 gradian = U(radian * pi / 200, "gon")
 
 circle = turn = U(radian * 2*pi, "turn")
-sphere = U(steradian * 4*pi, "sphere")
+sphere = spat = U(steradian * 4*pi, "sp")
 
 deg = degree
 rad = radian
