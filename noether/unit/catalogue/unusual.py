@@ -19,6 +19,8 @@ cord = 128 * foot**3
 hand = 4 * inch
 horse = 8 * foot
 
+brass = square = 100 * foot**2  # Also 100 cubic feet in India
+twenty_foot_equivalent_unit = teu = foot(20) * foot(8) * foot(8.5)
 beard_second = angstrom * 100
 beard_inch = inch / (beard_second/second)
 
@@ -27,9 +29,21 @@ football_pitch = metre(105, 5) * metre(68, 4)  # legal FIFA definition
 american_football_field = foot(360) * foot(160)
 canadian_football_field = yard(65) * yard(110)
 
-wales = 20799e6 * metre**2
 amazon_river = cumec * 216000
 banana_equivalent_dose = 78e-9 * gray
+dog_year = year / 7
+
+washington_dc = 159e6 * metre**2
+isle_of_wight = 380e6 * metre**2
+
+## Journalist favourites
+# theguardian.com/media/mind-your-language/2010/may/17/mind-your-language-david-marsh
+wales = U(20_799e6 * metre**2, "SoW")
+belgium = U(30_528e6 * metre**2, "SoB")
+olympic_swimming_pool = U(metre(50) * metre(25) * metre(2), "OSP")
+double_decker_bus = U(foot(27.5), "DDB")  # Based on AEC Routemaster in London.
+
+## General space
 
 # general space
 sol = second(53 * 67 * 25 + 0.244)
@@ -46,7 +60,6 @@ yoda = kilogram(5600) * g(0.9) * metre(1.4) / second(3.6)  # XKCD
 new_york_second = planck_second = 3.39125e-44 * second
 
 # general units
-dogyear = year / 7
 mickey = pixel
 blit = pixel / 20
 tick = second / 20
