@@ -4,7 +4,7 @@ from math import pi
 from .fundamental import (
     U, kilogram, metre, second, ampere
 )
-from .si import hertz, radian, watt
+from .si import hertz, radian, steradian, watt
 
 gram = U(kilogram / 1000, "g", SI=True)
 cm = metre / 100
@@ -25,10 +25,13 @@ angular_minute = U(degree / 60, "′")
 angular_second = U(degree / 3600, "″")
 gradian = U(radian * pi / 200, "gon")
 
-turn = U(radian / 2*pi, "turn")
+circle = turn = U(radian * 2*pi, "turn")
+sphere = U(steradian * 4*pi, "sphere")
+
 deg = degree
 rad = radian
 grad = gradian
+sterad = steradian
 
 acre = U(100 * metre**2, "a")
 hectare = U(100 * acre, "ha")
