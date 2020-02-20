@@ -24,7 +24,10 @@ warhol = U(minute * 15, SI=True)
 beard_second = angstrom * 100
 beard_inch = inch / (beard_second/second)
 
-football_pitch = 105 * 68 * metre**2
+football_pitch = metre(105, 5) * metre(68, 4)  # legal FIFA definition
+american_football_field = foot(360) * foot(160)
+canadian_football_field = yard(65) * yard(110)
+
 wales = 20799e6 * metre**2
 dogyear = year / 7
 amazon_river = cumec * 216000
