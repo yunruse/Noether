@@ -86,6 +86,8 @@ dose = energy / mass
 
 irradiance = intensity = heat_flux = power / area
 
+emission_coefficient = length / time**3 * solid_angle
+
 # material properties
 
 flow = fluid_velocity = volume / time
