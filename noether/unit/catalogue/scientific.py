@@ -3,9 +3,9 @@ Units typical to scientific contexts.
 """
 
 from .fundamental import (
-    U, metre, second, kilogram
+    U, metre, second, kilogram, candela
 )
-from .si import watt, joule, pascal
+from .si import watt, joule, pascal, cumec
 from .conventional import cm, year
 
 mps = metre / second
@@ -17,17 +17,17 @@ gee = g * kilogram
 # human
 calorie = U(4.814 * joule, "cal", SI=True, display=False)
 kilocalorie = kcal = U(calorie * 1000, "kcal")
+langley = (calorie / cm**2)(41840)
 
 bar = U(1e5 * pascal, "bar", SI=True, display=False)
 atmosphere = atm = U(101_325 * pascal, "atm", display=False)
 technical_atmosphere = U(kilogram*g/cm**2, "at", SI=True)
 torr = U(atmosphere / 760, "torr")
 metre_mercury = meter_mercury = U(133_322.387_415 * pascal, "mhg", SI=True)
-
-kilogram_force = kilopond = U(kilogram * g, "kp")
+sverdrup = U(cumec * 1e6, "Sv")
+amagat = U(2.686_7811 / metre**3, 'Am', SI=True)
 
 bmi = U(kilogram / metre**2, "BMI")
-amagat = U(2.686_7811 / metre**3, 'Am', SI=True)
 met = U(58.2 * watt / metre ** 2, 'met')
 
 # small-scale
