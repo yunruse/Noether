@@ -1,4 +1,6 @@
-"""CGS system of units."""
+"""
+Centimetre-gram-second (metric) system of units.
+"""
 
 from .fundamental import U
 from .conventional import cm, gram, second

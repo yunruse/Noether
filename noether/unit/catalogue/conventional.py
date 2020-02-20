@@ -6,8 +6,7 @@ from .fundamental import (
 )
 from .si import hertz, radian, steradian, watt
 
-gram = U(kilogram / 1000, "g", SI=True)
-cm = metre / 100
+## Conventional units
 
 minute = U(second * 60, "min")
 hour = U(minute * 60, "h")
@@ -16,9 +15,19 @@ week = day * 7
 fortnight = week * 2
 year = U(day * 365.25, "yr")
 
+cm = metre / 100
 kmph = metre * 1000 / hour
 
+acre = U(100 * metre**2, "a")
+hectare = U(100 * acre, "ha")
+litre = U((metre / 10)**3, "l", SI=True)
+
+gram = U(kilogram / 1000, "g", SI=True)
+tonne = ton = U(kilogram * 1000, "t", SI=True)
+
 bpm = U(hertz / 60, "bpm")
+
+## Angles
 
 degree = U(radian * pi / 180, "°")
 angular_minute = U(degree / 60, "′")
@@ -33,10 +42,7 @@ rad = radian
 grad = gradian
 sterad = steradian
 
-acre = U(100 * metre**2, "a")
-hectare = U(100 * acre, "ha")
-litre = U((metre / 10)**3, "l", SI=True)
-tonne = ton = U(kilogram * 1000, "t", SI=True)
+## Electricity
 
 watt_hour = U(watt * hour, 'Wh', SI=True)
 amp_hour = ampere_hour = U(ampere * hour, 'Ah', SI=True)

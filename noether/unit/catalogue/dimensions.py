@@ -14,7 +14,7 @@ from .fundamental import (
 # TODO: differentiate Dimension and Physical Quantity
 # (for when symbols overlap!!)
 
-# spacetime
+## Spacetime
 
 area = length**2
 volume = length**3
@@ -34,13 +34,13 @@ abseleration = absity * time
 abserk = abseleration * time
 absounce = abserk * time
 
-# rotation
+## Angle
 
 frequency = time**-1
 angle = Dimension.new(3.2, "angle", "φ", "rad")
 solid_angle = angle**2
 
-# dynamics
+## Dynamics
 
 force = weight = mass * acceleration
 pressure = force / area
@@ -58,7 +58,7 @@ torque = inertia * angular_acceleration
 
 gravitational_gradient = acceleration / distance
 
-# electromagnetism
+## Electromagnetism
 
 charge = current * time
 voltage = power / current
@@ -81,7 +81,7 @@ impedance = permeability * speed
 magnetic_moment = current * area
 magnetisation = magnetic_moment / volume
 
-# photometry
+## Photometry
 
 luminous_intensity = luminosity
 luminous_flux = luminous_power = luminosity * angle**2
@@ -100,7 +100,7 @@ irradiance = intensity = heat_flux = power / area
 
 emission_coefficient = length / time**3 * solid_angle
 
-# material properties
+## Material properties
 
 flow = fluid_velocity = volume / time
 catalytic_activity = substance / time
@@ -131,14 +131,14 @@ bulk_modulus = volume * pressure / volume
 strain = length / length
 
 
-# medical dimensions
+## Medical dimensions
 
 height = length
 width = breadth = length
 depth = length
 body_mass_index = mass / height**2
 
-# miscellaneous
+## Miscellaneous
 
 vehicle_efficiency = distance / volume
 einstein_coefficient_b = volume / energy / time

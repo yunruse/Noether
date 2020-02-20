@@ -8,7 +8,7 @@ from .fundamental import (
 from .conventional import cm
 from .imperial import inch
 
-# data & IEC prefixes
+## Data
 
 data = Dimension.new(3.5, "data", "D", "B")
 areal_density = data / length**2 
@@ -26,7 +26,7 @@ base_pair = bp = U(bit * 2, "bp", SI=True)
 data_rate = data / time
 bps = U(bit / second, 'bps', display=True, SI=True, IEC=True)
 
-# image size
+## Pixels and printing
 
 pixel_count = Dimension.new(3.4, "pixel_count", "P", "pix")
 pixel = dot = U(pixel_count, SI=True)

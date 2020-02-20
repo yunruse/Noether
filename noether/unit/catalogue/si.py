@@ -9,21 +9,22 @@ from .fundamental import U, Dimension
 from .dimensions import *
 
 SI = lambda x, y: U(x, y, display=True, SI=True)
-# rotation
+
+## Rotation
 
 hertz = SI(frequency, "Hz")
 radian = SI(angle, "rad")
 
 steradian = SI(solid_angle, "sterad")
 
-# dynamics
+## Dynamics
 
 newton = SI(force, "N")
 pascal = SI(pressure, "Pa")
 joule = SI(energy, "J")
 watt = SI(power, "W")
 
-# electromagnetism
+## Electromagnetism
 
 coulomb = SI(charge, "C")
 volt = SI(voltage, "V")
@@ -34,7 +35,7 @@ henry = SI(inductance, "H")
 weber = SI(magnetic_flux, "Wb")
 tesla = SI(magnetic_flux_density, "T")
 
-# radiation
+## Radiation
 
 lumen = SI(luminous_flux, "lum")
 lux = SI(illuminance, "Lx")
@@ -42,12 +43,12 @@ gray = SI(dose, "Gy")
 sievert = SI(dose, "Sv")
 becquerel = SI(hertz, "Bq")
 
-# material properties
+## Material properties
 
 cumec = U(flow)
 katal = SI(catalytic_activity, "kat")
 
-# thermal properties
+## Thermal properties
 
 thermal_conductance = power / temperature
 thermal_conductivity = thermal_conductance * length / area

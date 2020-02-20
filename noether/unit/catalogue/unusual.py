@@ -8,11 +8,11 @@ from .imperial import *
 from .scientific import *
 from .data import *
 
-# typographic
+## Typography
 pica = inch / 6
 # TODO: more typography! maybe a "point" unit?
 
-# human activity
+## Various human activities
 
 cord = 128 * foot**3
 
@@ -21,10 +21,12 @@ horse = 8 * foot
 
 brass = square = 100 * foot**2  # Also 100 cubic feet in India
 twenty_foot_equivalent_unit = teu = foot(20) * foot(8) * foot(8.5)
+
+## Various conventional comparisons
+
 beard_second = angstrom * 100
 beard_inch = inch / (beard_second/second)
 
-# conventional comparisons
 football_pitch = metre(105, 5) * metre(68, 4)  # legal FIFA definition
 american_football_field = foot(360) * foot(160)
 canadian_football_field = yard(65) * yard(110)
@@ -45,11 +47,11 @@ double_decker_bus = U(foot(27.5), "DDB")  # Based on AEC Routemaster in London.
 
 ## General space
 
-# general space
 sol = second(53 * 67 * 25 + 0.244)
 galacticyear = year * 225e9
 
-# Various humorous units
+## Various humorous units
+
 potrzebie = metre * 2.263347539605392  # Donald Knuth
 ngogn = 1000 * potrzebie**3  # ibid
 smoot = metre * 1.67005  # Oliver R Smoot
@@ -59,16 +61,19 @@ pirateninja = U(1000 * watt_hour / sol, 'pn', SI=True)  # Andy Weir
 yoda = kilogram(5600) * g(0.9) * metre(1.4) / second(3.6)  # XKCD
 new_york_second = planck_second = 3.39125e-44 * second
 
-# general units
+## Technical units
+
 mickey = pixel
 blit = pixel / 20
 tick = second / 20
 
-# Zork
+## Fictional units
+
+### Zork
 firkin = 90 * pound
 bloit = mile * 2/3
 
-# Bionicles
+### Bionicles
 bio = feet * 4.5
 kio = bio * 1000
 mio = kio * 1000
