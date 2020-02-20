@@ -5,6 +5,7 @@ Cardarelli, François (1998). Scientific Unit Conversion.
 """
 
 from .fundamental import U
+from .si import newton, watt
 from .conventional import (
     cm, metre, litre,
     gram, kilogram,
@@ -80,3 +81,11 @@ chopine = pinte / 2
 demiard = chopine / 2
 posson = demiard / 2
 roquille = posson / 4
+
+poncelet = U(watt * 980.665, "p")
+
+#  Metre-tonne-second units
+
+stère = stere = ster = U(metre**3, "st")
+sthène = sthéne = sthene = funal = U(newton * 1000, "sn", SI=True)
+pièze = pieze = U(sthène / metre**2, "pz")
