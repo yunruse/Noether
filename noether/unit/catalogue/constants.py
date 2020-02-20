@@ -14,26 +14,20 @@ from .si import coulomb, joule, newton, radian, volt
 from .scientific import c, gee
 from .conventional import cm
 
-
-# Trigonometry
-
-tau = pi * 2
-turn = cirle = tau * radian
-
 # Quantum
 
 h = Unit(6.626_070_15e-34 * joule * second, "h")
-hbar = Unit(h / tau, "ħ")
+hbar = Unit(h /(pi*2), "ħ")
 
 # Electromagnetic
 
-mu_0 = Unit(2 * tau * 1e-7 * newton / ampere ** 2)  # permeability
+mu_0 = Unit(4 * pi * 1e-7 * newton / ampere ** 2)  # permeability
 e_0 = Unit(1 / (mu_0 * c ** 2))  # permittiviity
 z_0 = Unit(mu_0 * c)  # impedance
 
 # Other fields
 grav = Unit(6.674_08e-11 * newton * metre ** 2 / kilogram ** 2)
-k_e = Unit(1 / (2 * tau * e_0))
+k_e = Unit(1 / (4 * pi * e_0))
 
 # Material
 
