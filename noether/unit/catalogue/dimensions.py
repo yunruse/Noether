@@ -11,6 +11,9 @@ from .fundamental import (
     current, luminosity, substance, temperature
 )
 
+# TODO: differentiate Dimension and Physical Quantity
+# (for when symbols overlap!!)
+
 # spacetime
 
 area = length**2
@@ -78,10 +81,19 @@ impedance = permeability * speed
 magnetic_moment = current * area
 magnetisation = magnetic_moment / volume
 
-# radiation
+# photometry
 
-luminous_flux = luminosity * angle**2
-illuminance = luminosity / area
+luminous_intensity = luminosity
+luminous_flux = luminous_power = luminosity * angle**2
+
+luminous_energy = luminous_flux * time
+luminance = luminosity / area
+illuminance = luminous_exitance = luminous_emittance = luminous_flux / area
+
+luminous_exposure = illuminance * time
+luminous_energy_density = luminous_energy / volume
+luminous_efficiacy = luminosity / power
+
 dose = energy / mass
 
 irradiance = intensity = heat_flux = power / area
@@ -129,3 +141,4 @@ body_mass_index = mass / height**2
 # miscellaneous
 
 vehicle_efficiency = distance / volume
+einstein_coefficient_b = volume / energy / time

@@ -6,7 +6,7 @@ from .fundamental import U
 from .conventional import (
     cm, metre, litre,
     gram, kilogram,
-    second, hour
+    second, minute, hour
 )
 from .scientific import g
 
@@ -14,7 +14,7 @@ from .scientific import g
 
 inch = U(cm * 127 / 50, "in")
 
-foot = U(inch * 12, "ft")
+foot = feet = U(inch * 12, "ft")
 yard = U(3 * foot, "yd")
 chain = U(22 * yard, "ch")
 furlong = U(10 * chain, "fur")
@@ -66,3 +66,5 @@ poundfoot = poundforce * foot
 
 poundal = pound * foot / second**2
 psi = poundforce / inch**2
+
+horsepower = U(33_000 * foot * poundforce / minute, "hp")

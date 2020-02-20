@@ -26,7 +26,7 @@ e_0 = Unit(1 / (mu_0 * c ** 2))  # permittiviity
 z_0 = Unit(mu_0 * c)  # impedance
 
 # Other fields
-grav = Unit(6.674_08e-11 * newton * metre ** 2 / kilogram ** 2)
+G = grav = (newton * metre**2 / kilogram**2)(6.674_30e-11, 0.00015e-11)
 k_e = Unit(1 / (4 * pi * e_0))
 
 # Material
