@@ -2,7 +2,8 @@
 Traditional imperial units.
 """
 
-from .fundamental import U
+from math import pi
+from .fundamental import U, candela
 from .conventional import (
     cm, metre, litre,
     gram, kilogram,
@@ -68,3 +69,5 @@ poundal = pound * foot / second**2
 psi = poundforce / inch**2
 
 horsepower = U(33_000 * foot * poundforce / minute, "hp")
+
+footlambert = U(candela / foot**2 / pi, 'fl')

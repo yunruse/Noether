@@ -2,6 +2,7 @@
 Units typical to scientific contexts.
 """
 
+from math import pi
 from .fundamental import (
     U, metre, second, kilogram, candela
 )
@@ -60,4 +61,3 @@ apostilb = blondel = U(nit / pi, 'asb')
 lambert = U(stilb / pi, 'L')
 skot = U(apostilb / 1000, 'sk')
 bril = U(skot / 10_000, 'bril')
-footlambert = U(candela / foot**2 / pi, 'fl')
