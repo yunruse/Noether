@@ -39,9 +39,8 @@ tesla = SI(magnetic_flux_density, "T")
 lumen = SI(luminous_flux, "lum")
 lux = SI(illuminance, "Lx")
 gray = SI(dose, "Gy")
-#sievert = SI(dose, "Sv")
-
-#becquerel = SI(hertz, "Bq")
+sievert = SI(dose, "Sv")
+becquerel = SI(hertz, "Bq")
 
 # material properties
 
