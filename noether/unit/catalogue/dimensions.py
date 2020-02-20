@@ -35,6 +35,7 @@ absounce = abserk * time
 
 frequency = time**-1
 angle = Dimension.new(3.2, "angle", "φ", "rad")
+solid_angle = angle**2
 
 # dynamics
 

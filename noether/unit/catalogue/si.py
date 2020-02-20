@@ -14,7 +14,7 @@ SI = lambda x, y: U(x, y, display=True, SI=True)
 hertz = SI(frequency, "Hz")
 radian = SI(angle, "rad")
 
-steradian = SI(angle**2, "sterad")
+steradian = SI(solid_angle, "sterad")
 
 # dynamics
 
