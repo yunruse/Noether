@@ -6,7 +6,7 @@ from .fundamental import (
     U, metre, second, kilogram
 )
 from .si import watt, joule, pascal
-from .conventional import year
+from .conventional import cm, year
 
 mps = metre / second
 c = U(299_792_458 * metre / second, "c")
@@ -19,7 +19,8 @@ calorie = U(4.814 * joule, "cal", SI=True, display=False)
 kilocalorie = kcal = U(calorie * 1000, "kcal")
 
 bar = U(1e5 * pascal, "bar", SI=True, display=False)
-atmosphere = U(101_325 * pascal, "atm", display=False)
+atmosphere = atm = U(101_325 * pascal, "atm", display=False)
+technical_atmosphere = U(kilogram*g/cm**2, "at", SI=True)
 torr = U(atmosphere / 760, "torr")
 metre_mercury = meter_mercury = U(133_322.387_415 * pascal, "mhg", SI=True)
 
