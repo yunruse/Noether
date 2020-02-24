@@ -97,10 +97,6 @@ Updates are released to the `master` branch every couple of weeks. They are not 
 
 This project is large, and I want it to appeal to anybody who has ever measured anything. I'd love one day to adapt it into a mobile app so it could make everyone's life that little bit easier. So, that said, please send feedback!
 
-Oh, and while you're here – Noether is in early development. Please consider supporting me on [Patreon] :)
-
-[Patreon]: https://patreon.com/yunruse
-
 ## Legal (and academical)
 
 Copyright (c) Mia yun Ruse ([yunru.se]) 2018–2020.
