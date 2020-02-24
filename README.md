@@ -1,14 +1,29 @@
 # Noether (in development: Alpha 1.1)
 
-Noether is a library designed to provide physical constants and measurements. It is intended to compliment `numpy`, `matplotlib` and `scipy` with features such as:
+## The problem: million-dollar errors are easy to make
 
-- An extensive catalogue of scientific units and statistical distributions
-- Automatic propagation of dimension and uncertainty for unit-rich work
-- Basic graphing (currently requires [Astley])
-- Basic support for propagating statistical error
+[We're](example1) [all](example2) [human](example3). Whether you're a layman, a student or a NASA senior, it's immensely easy to make simple mistakes, especially when working with physical measurements. A good programming language will shout at you if you try to add a list to a number, so why shouldn't it stop you adding a metre to a minute? Enter Noether.
+
+[example1]: https://medium.com/predict/a-328-million-dollar-conversion-error-f6d525c85fd2
+[example2]: https://www.pri.org/stories/2012-02-23/new-clues-emerge-centuries-old-swedish-shipwreck
+[example3]: https://www.bbc.co.uk/news/magazine-27509559
+
+```bash
+git clone https://github.com/yunruse/noether && cd noether && python3.7 -im noether
+```
+
+You can use Noether as a calculator or in simulations (though at the moment it's not exactly performant). Noether is intended to compliment `numpy`, `matplotlib` and `scipy` with
+
+- A disturbingly extensive and constantly-updated catalogue of scientific units, measurements and constants
+- Automatic unit conversion, and propagation of dimension and statistical error
+
+In the pipeline:
+
+- Advanced support for more sophisticated statistical errors 
+- Treat functions like code with [ASTley], and automagically graph them in a REPL
+- Use [Astley]'s code analysis with Numba to ensure both code safety and performance 
 
 [Astley]: https://github.com/yunruse/astley
-
 
 ## Units
 
@@ -80,9 +95,9 @@ Updates are released to the `master` branch every couple of weeks. They are not 
 
 ## Thank you!
 
-From schoolchild to scientist, all feedback is appreciated. This project is large, and somehow wants to appeal to every single person who would ever use a calculator, so it'll never be perfect :)
+This project is large, and I want it to appeal to anybody who has ever measured anything. I'd love one day to adapt it into a mobile app so it could make everyone's life that little bit easier. So, that said, please send feedback!
 
-Oh, and while you're here – Noether is in early development. Please consider supporting me on [Patreon].
+Oh, and while you're here – Noether is in early development. Please consider supporting me on [Patreon] :)
 
 [Patreon]: https://patreon.com/yunruse
 
