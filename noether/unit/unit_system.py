@@ -1,7 +1,8 @@
 from .dimension import Dimension
 from .measure import Measure
 
-# TODO: This MUST be used, eventually, so that Unit.display follows the order of:
+# TODO: add unit display layer system
+# This MUST be used, eventually, so that Unit.display follows the order of:
 # - fundamental SI units
 # - SI derived units
 # - whatever the user does display() on
@@ -39,7 +40,7 @@ class UnitSystem:
             dim = dim.dim
         if not isinstance(dim, Dimension):
             raise TypeError('System can only be indexed by dimension.')
-        # TODO: derived units eg metre**2
+        # TODO: display derived units eg inch**2
         return self._mapping.get(dim)
     
     def __repr__(self):

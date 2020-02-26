@@ -5,12 +5,9 @@ from ..display import superscript
 
 __all__ = "prefix prefixify".split()
 
-
 class prefix:
     pass
 
-
-#yapf: disable
 prefix_SI = (
     ("yocto", "y",  1e-24),
     ("zepto", "z",  1e-21),
@@ -45,14 +42,13 @@ prefix_IEC = (
     ("yobi",  "Yi", 2**80),
 )
 
-#yapf: enable
-
-# TODO: this is hacky
+# TODO: fix prefix namespace
 for name, symbol, factor in prefix_SI + prefix_IEC:
     for i in (name, symbol):
         setattr(prefix, i, factor)
 
 def prefixify(num):
+    # TODO: fix prefixify
     """Returns a number and any fitting SI prefix."""
     if not isinstance(num, (float, int)):
         return num, ""
