@@ -82,6 +82,10 @@ git clone https://github.com/yunruse/astley
 
 Updates are released to the `master` branch every couple of weeks. They are not guaranteed to have a sturdy, documented and tested API just yet, but each release should be pretty dang stable.
 
+Every single change I plan to make can be found on my [kanban board]. Thanks to internet magic, this appears live, exactly as I see and edit. If you have a feature suggestion, drop me an issue on GitHub. Bug fixes will stay in GitHub: they're much more important than features.
+
+[kanban board]: https://www.notion.so/714348466a284bd1b0d1942c81688579
+
  - **Alpha 1.1** (2020-02-16):
    - Many bugfixes and units added.
    - Added `noether.fraction` with `ContinuedFraction` (and `Fraction` with shortcut).
