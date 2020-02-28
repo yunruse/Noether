@@ -23,7 +23,7 @@ class MeasureMeta(type):
     
     def display(cls, *units):
         '''Registers unit for display, or, if given none, reverts all.'''
-        # TODO: this desperately needs changing about!
+        # TODO: desperately change display mechanism
         if units:
             for u in units:
                 cls._display_units[u.dim] = u
@@ -210,7 +210,7 @@ class Measure(float, metaclass=MeasureMeta):
                     self.dim, other.dim))
 
         # Return limits of uncertainty
-        # TODO: Extract this into a separate Range object - this is not standard deviation
+        # TODO: extract uncertainty behaviour into various Uncertain classes
         sl = float(self) - self.delta
         su = float(self) + self.delta
         if isinstance(other, Measure):
