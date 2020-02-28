@@ -30,6 +30,10 @@ bmi = U(kilogram / metre**2, "BMI")
 met = U(58.2 * watt / metre ** 2, 'met')
 
 # small-scale
+
+# TODO: have "micron", "kilogram" etc understood as SI units but with prefixes
+micron = U(metre ** 1e-6, "µm")
+
 angstrom = U(metre * 1e-10, "å")
 
 are = U((10 * metre)**2, "a")
