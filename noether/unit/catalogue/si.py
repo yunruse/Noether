@@ -11,6 +11,7 @@ from .dimensions import *
 SI = lambda x, y: U(x, y, display=True, SI=True)
 # rotation
 
+becquerel = SI(frequency, "Bq")
 hertz = SI(frequency, "Hz")
 radian = SI(angle, "rad")
 
@@ -39,9 +40,7 @@ tesla = SI(magnetic_flux_density, "T")
 lumen = SI(luminous_flux, "lum")
 lux = SI(illuminance, "Lx")
 gray = SI(dose, "Gy")
-#sievert = SI(dose, "Sv")
-
-#becquerel = SI(hertz, "Bq")
+sievert = SI(dose, "Sv")
 
 # material properties
 
