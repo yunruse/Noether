@@ -2,11 +2,8 @@
 
 ## The problem: million-dollar errors are easy to make
 
-[We're](example1) [all](example2) [human](example3). Whether you're a layman, a student or a NASA senior, it's immensely easy to make simple mistakes, especially when working with physical measurements. A good programming language will shout at you if you try to add a list to a number, so why shouldn't it stop you adding a metre to a minute? Enter Noether.
-
-[example1]: https://medium.com/predict/a-328-million-dollar-conversion-error-f6d525c85fd2
-[example2]: https://www.pri.org/stories/2012-02-23/new-clues-emerge-centuries-old-swedish-shipwreck
-[example3]: https://www.bbc.co.uk/news/magazine-27509559
+[We're](https://medium.com/predict/a-328-million-dollar-conversion-error-f6d525c85fd2) [all](https://www.pri.org/stories/2012-02-23/new-clues-emerge-centuries-old-swedish-shipwreck) [human](https://www.bbc.co.uk/news/magazine-27509559).
+Whether you're a layman, a student or a NASA senior, it's immensely easy to make simple mistakes, especially when working with physical measurements. A good programming language will shout at you if you try to add a list to a number, so why shouldn't it stop you adding a metre to a minute? Enter Noether.
 
 ```bash
 git clone https://github.com/yunruse/noether && cd noether && python3.7 -im noether
