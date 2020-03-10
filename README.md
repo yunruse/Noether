@@ -96,7 +96,7 @@ Every single change I plan to make can be found on my [kanban board]. Thanks to 
 
 ## Thank you!
 
-This project is large, and I want it to appeal to anybody who has ever measured anything. I'd love one day to adapt it into a mobile app so it could make everyone's life that little bit easier. So, that said, please send feedback!
+This project has a decently large scope, and I want it to appeal to anybody who has ever needed to measure anything. Your feedback, no matter how small, means a lot to me!
 
 ## Legal (and academical)
 
