@@ -36,7 +36,13 @@ metre_mercury = meter_mercury = U(133_322.387_415 * pascal, "mhg", SI=True)
 sverdrup = U(cumec * 1e6, "Sv")
 amagat = U(2.686_7811 / metre**3, 'Am', SI=True)
 
-## Nanoscale
+bmi = U(kilogram / metre**2, "BMI")
+met = U(58.2 * watt / metre ** 2, 'met')
+
+# small-scale
+
+# TODO: have "micron", "kilogram" etc understood as SI units but with prefixes
+micron = U(metre * 1e-6, "µm")
 
 angstrom = U(metre * 1e-10, "å")
 
