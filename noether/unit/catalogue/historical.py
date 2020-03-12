@@ -5,13 +5,14 @@ Cardarelli, François (1998). Scientific Unit Conversion.
 """
 
 from .fundamental import U
+from .si import newton, watt
 from .conventional import (
     cm, metre, litre,
     gram, kilogram,
     second, hour, hectare
 )
 
-# Attic Greek ~ 0 BCE
+## Attic Greek ~ 0 BCE
 
 pous = metre * 0.30856
 
@@ -30,7 +31,7 @@ plethron = amma * (1+(2/3))
 stadion = plethron * 6
 mile = stadion * 7.5
 
-# Roman ~ 0 CE
+## Roman ~ 0 CE
 
 digitus = metre * 0.0184
 palmus = digitus * 4
@@ -45,7 +46,7 @@ pes = palmus * 4
 cubitus = palmus * 6
 actus = decempeda * 12
 
-# Old Dutch, as taken in Amsterdam
+## Old Dutch, as taken in Amsterdam
 
 voet = metre * 0.2830594
 
@@ -57,7 +58,7 @@ roede = voet * 13
 
 morgen = hectare * 0.856_532
 
-# French
+## French
 
 french_point = truchet = cm * 0.0188
 ligne = french_point * 12
@@ -80,3 +81,11 @@ chopine = pinte / 2
 demiard = chopine / 2
 posson = demiard / 2
 roquille = posson / 4
+
+poncelet = U(watt * 980.665, "p")
+
+## Metre-tonne-second units
+
+stère = stere = ster = U(metre**3, "st")
+sthène = sthéne = sthene = funal = U(newton * 1000, "sn", SI=True)
+pièze = pieze = U(sthène / metre**2, "pz")

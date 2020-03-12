@@ -2,7 +2,8 @@
 Traditional imperial units.
 """
 
-from .fundamental import U
+from math import pi
+from .fundamental import U, candela
 from .conventional import (
     cm, metre, litre,
     gram, kilogram,
@@ -10,7 +11,7 @@ from .conventional import (
 )
 from .scientific import g
 
-# length and area
+## Length
 
 inch = U(cm * 127 / 50, "in")
 
@@ -21,19 +22,21 @@ furlong = U(10 * chain, "fur")
 mile = U(8 * furlong, "mi")
 league = U(3 * mile, "lea")
 
-mph = mile / hour
-
-nauticalmile = U(1852 * metre, "nm", "NM", "nmi")
-knot = U(nauticalmile / hour, "kt", "kn")
-
 link = 7.92 * inch
 rod = 25 * link
+
+nauticalmile = U(1852 * metre, "nm", "NM", "nmi")
+
+mph = mile / hour
+knot = U(nauticalmile / hour, "kt", "kn")
+
+## Area
 
 perch = rod**2
 rood = furlong * rod
 acre = furlong * chain
 
-# volume
+## Volume
 
 fluid_ounce = U(28.413_062_5 * litre / 1000, "fl oz")
 
@@ -44,7 +47,7 @@ gallon = U(4 * quart, "gal")
 peck = 2 * gallon
 bushel = 4 * peck
 
-# weight
+# Mass
 
 pound = U(453.59237 * gram, "lb")
 
@@ -59,7 +62,7 @@ ton = U(2240 * pound, "t")
 
 slug = 14.593_902_94 * kilogram
 
-# miscellanea
+# Miscellaneous
 
 poundforce = U(g * pound, "lbf")
 poundfoot = poundforce * foot
@@ -68,3 +71,4 @@ poundal = pound * foot / second**2
 psi = poundforce / inch**2
 
 horsepower = U(33_000 * foot * poundforce / minute, "hp")
+footlambert = U(candela / foot**2 / pi, 'fl')

@@ -3,6 +3,20 @@ noether.unit.catalogue: Catalogue of constants, units and dimensions
 
 This module intends to catalogue every unit, dimension and physical constant
 that should ever be useful in calculation.
+
+Said units are categorised by file, then section `##`,
+and rarely with subsection `###`.
+
+Units are provided in their original name, with a _ in place of a
+space for variable names. They are named in English, with all
+common spelling variants, with the exception of historical units.
+
+Some conventional shorthands are provided; there does not yet
+exist a common rule as to what is a "common rule".
+
+Metric (but not necessarily SI) units defined in this catalogue
+have also been given their prefixed equivalents. This naturally
+does not automatically apply to custom-defined units.
 """
 
 from .. import Dimension, Measure, Unit

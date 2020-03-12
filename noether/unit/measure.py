@@ -9,6 +9,8 @@ from .dimension import Dimension
 
 __all__ = ('Measure', )
 
+# TODO: emit Warning (or else use display unit!) if adding bare number
+
 class MeasureMeta(type):
     """Metaclass of class-shared properties for display."""
     def _dU_get(cls):

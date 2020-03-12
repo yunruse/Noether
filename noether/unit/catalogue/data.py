@@ -1,11 +1,14 @@
 from math import log
+
 from ..measure import Dimension, Measure
-from .imperial import inch
+
 from .fundamental import (
     U, time, length, second
 )
+from .conventional import cm
+from .imperial import inch
 
-# data & IEC prefixes
+## Data
 
 data = Dimension.new(3.5, "data", "D", "B")
 areal_density = data / length**2 
@@ -23,13 +26,14 @@ base_pair = bp = U(bit * 2, "bp", SI=True)
 data_rate = data / time
 bps = U(bit / second, 'bps', display=True, SI=True, IEC=True)
 
-# image size
+## Pixels and printing
 
 pixel_count = Dimension.new(3.4, "pixel_count", "P", "pix")
-pixel = U(pixel_count, SI=True)
+pixel = dot = U(pixel_count, SI=True)
 
 pixel_fill_rate = pixel_count / time
 image_density = pixel_count / data
 image_quality = pixel_count / length
 
-ppi = U(pixel / inch, 'ppi')
+ppi = dpi = U(pixel / inch, 'ppi')
+dpcm = U(pixel / cm, "dpcm")

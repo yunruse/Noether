@@ -1,9 +1,10 @@
-"""CGS system of units."""
+"""
+Centimetre-gram-second (metric) system of units.
+"""
 
 from .fundamental import U
 from .conventional import cm, gram, second
 
-# TODO: change `SI=` for clarity?
 gal = galileo = U(cm / second**2, 'Gal', SI=True)
 dyne = U(gram * gal, 'dyn', SI=True)
 erg = U(dyne * cm, 'erg', SI=True)
