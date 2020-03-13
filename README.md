@@ -18,7 +18,7 @@ In the pipeline:
 
 - Advanced support for more sophisticated statistical errors 
 - Treat functions like code with [ASTley], and automagically graph them in a REPL
-- Use [Astley]'s code analysis with Numba to ensure both code safety and performance 
+- Use ASTley's code analysis with Numba to ensure both code safety and performance 
 
 [Astley]: https://github.com/yunruse/astley
 
