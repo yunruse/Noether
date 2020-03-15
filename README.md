@@ -1,30 +1,28 @@
 # Noether (in development: Alpha 1.1)
 
-## The problem: million-dollar errors are easy to make
+## The problem: programs don't understand physical measurements.
 
-[We're](https://medium.com/predict/a-328-million-dollar-conversion-error-f6d525c85fd2) [all](https://www.pri.org/stories/2012-02-23/new-clues-emerge-centuries-old-swedish-shipwreck) [human](https://www.bbc.co.uk/news/magazine-27509559).
-Whether you're a layman, a student or a NASA senior, it's immensely easy to make simple mistakes, especially when working with physical measurements. A good programming language will shout at you if you try to add a list to a number, so why shouldn't it stop you adding a metre to a minute? Enter Noether.
+We're all human, and even the best of us skip over the little things. The calculator wasn't an essential invention at first, but it's rather nice to worry about far more important things than making sure the arithmetic is correct. But this is where scientific programming seems to have stopped; very few pieces of scientific software mark physical measurements as anything other than a number. This is far from a nicety: NASA famously lost *328 million dollars* because [feet and metres were mistaken](https://medium.com/predict/a-328-million-dollar-conversion-error-f6d525c85fd2).
+
+Whether you're a layman, a student, or a NASA programmer, Noether should make working with numbers a lot more pleasant:
+
+- Work with measurements, not numbers: Noether will stop you adding a metre to a minute, automagically recognise a force over a length is an energy, tell you (in the REPL) info about the measurement, and so on.
+- Work in whatever unit system you and your colleagues like – units naturally interoperate.
+- It propagates uncertainty – meaning you don't have to be so uncertain you propagated it right yourself.
+- Save your effort typing and trawling Wikipedia: physical constants, units and definitions are defined and kept up to date with SI, CODATA, and other authoritative sources, so you don't have to be.
 
 ```bash
 git clone https://github.com/yunruse/noether && cd noether && python3.7 -im noether
 ```
 
-You can use Noether as a calculator or in simulations (though at the moment it's not exactly performant). Noether is intended to compliment `numpy`, `matplotlib` and `scipy` with
+You can use Noether as a calculator or in simulations. Noether is intended to compliment `numpy`, `matplotlib` and `scipy`; while it is yet in early stages, it is fully intended to integrate with these packages, and, handling code analysis with my own [ASTley], work with [Numba] or somesuch to ensure machine code (or even GPU) speed up is still compatible and feature rich.
 
-- A disturbingly extensive and constantly-updated catalogue of scientific units, measurements and constants
-- Automatic unit conversion, and propagation of dimension and statistical error
-
-In the pipeline:
-
-- Advanced support for more sophisticated statistical errors 
-- Treat functions like code with [ASTley], and automagically graph them in a REPL
-- Use ASTley's code analysis with Numba to ensure both code safety and performance 
-
-[Astley]: https://github.com/yunruse/astley
+[ASTley]: https://github.com/yunruse/astley
+[Numba]: http://numba.pydata.org/
 
 ## Units
 
-BMI, bushel and byte; eotvos, erg and electronvolt; parsec, plethron and potrzebie. Noether has (almost) every unit known, with a thorough unit system allowing for automatic dimensional analysis.
+Noether has almost every unit known: BMI, bushel and byte; eotvos, erg and electronvolt; parsec, plethron and potrzebie.
 
 ```python
 >>> 0.5 * gibibyte / second
