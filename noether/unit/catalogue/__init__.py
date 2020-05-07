@@ -59,12 +59,9 @@ for name, unit in units:
 
 # Assign prefixes
 
-for units, prefixes in (
-    (prefixable_SI, prefix_SI),
-    (prefixable_IEC, prefix_IEC)
-):
+for units, ps in prefixes.values():
     for unit in units:
-        for pName, pSym, pFactor in prefixes:
+        for pName, pSym, pFactor in ps:
             for names, prefix in ((unit.names, pName), (unit.symbols, pSym)):
                 for name in names:
                     name = prefix + name.replace(" ", "_")
