@@ -7,8 +7,8 @@ from collections import namedtuple
 ConfigEntry = namedtuple("ConfigEntry", "name kind default description".split())
 
 CONF_DIR = os.path.expanduser('~/.config/noether')
+conf_new = not os.path.exists(CONF_DIR)
 os.makedirs(CONF_DIR, exist_ok=True)
-conf_new = not os.path.isdir(CONF_DIR)
 
 def process_path(path):
     if not os.path.isabs(path):
@@ -67,3 +67,5 @@ class Config(dict):
         object.__setattr__(self, "dirty", False)
 
 conf = Config()
+if not conf_new:
+    conf.load()

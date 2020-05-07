@@ -46,11 +46,10 @@ from .unit import *  # noqa: F401, F403
 display = Unit.display
 
 if conf_new:
-    conf.save("default")
+    conf.save()
     print("""\
-It appears that you are using Noether for the first time.
-The file .config/noether/default.conf (in your user folder) has
-been created, but you can toy with noe.conf and then use
-noe.conf.save() to save your changes.
+Welcome to Noether! Just so you know, the config file
+~/.config/noether/default.conf has been created. You can toy
+about with noe.conf and then use noe.conf.save(), though.
 """)
 del conf_new
