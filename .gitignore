@@ -8,3 +8,9 @@ __pycache__/
 test.bat
 todo.txt
 dev-info.py
+
+# Build
+
+build/
+dist/
+noether.egg-info
