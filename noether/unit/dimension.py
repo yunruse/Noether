@@ -4,6 +4,7 @@ import bisect
 from collections import namedtuple
 from numbers import Number, Real
 
+from ..conf import conf
 from ..helpers import intify
 from ..display import superscript
 
@@ -80,7 +81,7 @@ class Dimension(dict):
             if exp == 0:
                 continue
             elif exp != 1:
-                sym += superscript(exp, Unit.unicode_exponent)
+                sym += superscript(exp, conf.unicode_exponent)
             dims.append(sym)
 
         return "·".join(dims)

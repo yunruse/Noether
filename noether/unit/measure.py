@@ -59,7 +59,6 @@ class Measure(float, metaclass=MeasureMeta):
 
     # TODO: allow for int Measures..?
 
-    precision = 3
     show_units = True
     show_dimension = True
 
