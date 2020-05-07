@@ -37,3 +37,11 @@ image_quality = pixel_count / length
 
 ppi = dpi = U(pixel / inch, 'ppi')
 dpcm = U(pixel / cm, "dpcm")
+
+res_480p  =          pixel(720)  * pixel(480)
+res_550p  = res_1K = pixel(960)  * pixel(550)
+res_720p  =          pixel(1280) * pixel(720)
+res_1080p = res_2K = pixel(1920) * pixel(1080)
+res_1440p =          pixel(2560) * pixel(1440)
+res_2160p = res_4K = pixel(2880) * pixel(2160)
+res_4320p = res_8K = pixel(7680) * pixel(4320)
