@@ -8,6 +8,7 @@ __pycache__/
 test.bat
 todo.txt
 dev-info.py
+venv/
 
 # Build
 
