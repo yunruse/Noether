@@ -41,6 +41,16 @@ conf.register(
     "Allow any addition, even between incompatible units (eg metre and second)"
 )
 
+conf.register(
+    "measure_precision", int, 3,
+    "The maximum amount of decimal places to display when using repr(Measure)."
+)
+
+conf.register(
+    "unicode_exponent", bool, True,
+    "Use Unicode superscripts instead of the ^ when displaying units."
+)
+
 class Measure(float, metaclass=MeasureMeta):
     """
     A physical measurement.
@@ -52,7 +62,6 @@ class Measure(float, metaclass=MeasureMeta):
     precision = 3
     show_units = True
     show_dimension = True
-    unicode_exponent = True
 
     # These class-shared variable are used for display units
     # {dim: Unit}
@@ -138,8 +147,8 @@ class Measure(float, metaclass=MeasureMeta):
         as_unit = bool(self.symbol)
         return number_string(
             float(display), display.stddev,
-            self.precision, as_unit,
-            self.unicode_exponent
+            conf.measure_precision, as_unit,
+            conf.unicode_exponent
         )
     
     def __str__(self):
@@ -151,7 +160,7 @@ class Measure(float, metaclass=MeasureMeta):
     def __format__(self, spec):
         return number_string(
             float(self), self.stddev,
-            unicode_exponent=self.unicode_exponent,
+            unicode_exponent=conf.unicode_exponent,
             formatter=lambda x: format(x, spec)
         ) + self.symbol
 
