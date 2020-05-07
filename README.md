@@ -1,4 +1,4 @@
-# Noether (in development: Alpha 1.1)
+# Noether (in development: Alpha 0.1.2)
 
 ## The problem: programs don't understand physical measurements.
 
@@ -12,7 +12,7 @@ Whether you're a layman, a student, or a NASA programmer, Noether should make wo
 - Save your effort typing and trawling Wikipedia: physical constants, units and definitions are defined and kept up to date with SI, CODATA, and other authoritative sources, so you don't have to be.
 
 ```bash
-git clone https://github.com/yunruse/noether && cd noether && python3.7 -im noether
+pip install noether&& python3.7 -im noether
 ```
 
 You can use Noether as a calculator or in simulations. Noether is intended to compliment `numpy`, `matplotlib` and `scipy`; while it is yet in early stages, it is fully intended to integrate with these packages, and, handling code analysis with my own [ASTley], work with [Numba] or somesuch to ensure machine code (or even GPU) speed up is still compatible and feature rich.
@@ -47,7 +47,7 @@ You may, of course, define your own units and dimensions on the fly:
 >>> c
 1.803×10¹²ff <velocity, speed>
 
->>> health = Dimension.new(3.2, 'health', 'H', 'a')
+>>> health = Dimension.new('health', dimsym='H', unitsym='a')
 >>> apple = Unit(health)
 >>> apple / day
 1.157×10⁻⁵a·s⁻¹
@@ -55,17 +55,16 @@ You may, of course, define your own units and dimensions on the fly:
 
 ## Installation and use
 
-Noether currently requires Python 3.7 or above. It's not yet on PyPI, but it's easy to jump into a quick calculator-like instance quick:
+Noether currently requires Python 3.7 or above. It's easy to jump into a quick calculator-like instance quick:
 
 ```bash
-git clone https://github.com/yunruse/noether
-cd noether
+pip install noether
 python -im noether
 ```
 
-This simply runs `import noether` and `from noether import *`. Documentation assumes the latter has been done; it makes for a neater experience.
+This simply runs `import noether as noe` and `from noether import *`. We'll assume the latter has been done; it makes for a neater experience when working with units.
 
-Some yet-undocumented submodules may require `astley`,  `numpy`, `matplotlib` and `scipy` to use:
+Some yet-undocumented submodules may happen to require `astley`,  `numpy`, `matplotlib` and `scipy` to use:
 
 ```bash
 pip install numpy matplotlib
@@ -81,13 +80,17 @@ Every single change I plan to make can be found on my [kanban board]. Thanks to 
 
 [kanban board]: https://www.notion.so/714348466a284bd1b0d1942c81688579
 
- - **Alpha 1.1** (2020-02-16):
+ - **Alpha 0.1.2** (2020-05-07):
+   - Added basic config support.
+   - This is the first PyPI release.
+
+ - **Alpha 0.1.1** (2020-02-16):
    - Many bugfixes and units added.
    - Added `noether.fraction` with `ContinuedFraction` (and `Fraction` with shortcut).
    - Introduced basic backend for `UnitSystem` for quality of life (eg `display(imperial)`).
    - Made special tweaks so `python -m noether` lazy-loads at fast pace.
 
- - **Alpha 1** (2020-01-26):
+ - **Alpha 0.1** (2020-01-26):
    - Made many improvements to display of units.
    - The global `display` was added, alongside a wide range of particles.
    - A test suite begins development.

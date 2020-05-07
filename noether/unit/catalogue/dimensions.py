@@ -37,7 +37,7 @@ absounce = abserk * time
 ## Angle
 
 frequency = time**-1
-angle = Dimension.new(3.2, "angle", "φ", "rad")
+angle = Dimension.new("angle", dimsym="φ", unitsym="rad", order=200)
 solid_angle = angle**2
 
 ## Dynamics

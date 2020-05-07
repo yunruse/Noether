@@ -6,7 +6,6 @@ from math import pi
 
 from ...helpers import sqrt
 
-from ..scale import prefix
 from ..unit import Unit
 
 from .fundamental import ampere, kelvin, kilogram, metre, mole, second
@@ -49,7 +48,7 @@ rydberg = (m_e * e ** 4) / (8 * e_0 ** 2 * h ** 3 * c)
 ## Naturalised units
 
 eV = Unit(e * volt, "eV")
-MeV = Unit(prefix.M * eV, "MeV")
+MeV = Unit(1e6 * eV, "MeV")
 MeVc = Unit(MeV / c, "MeVc⁻¹")
 MeVc2 = Unit(MeVc / c, "MeVc⁻²")
 

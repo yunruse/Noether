@@ -2,6 +2,8 @@
 
 import operator
 
+from ..conf import conf
+
 from ..display import number_string
 #from .dimension import Dimension : Import loop
 
@@ -25,7 +27,7 @@ class MeasureMeta(type):
     
     def display(cls, *units):
         '''Registers unit for display, or, if given none, reverts all.'''
-        # TODO: this desperately needs changing about!
+        # TODO: desperately change display mechanism
         if units:
             for u in units:
                 cls._display_units[u.dim] = u
@@ -34,6 +36,20 @@ class MeasureMeta(type):
 
     display_units = property(_dU_get, _dU_set, _dU_del)
 
+conf.register(
+    "measure_openlinear", bool, False,
+    "Allow any addition, even between incompatible units (eg metre and second)"
+)
+
+conf.register(
+    "measure_precision", int, 3,
+    "The maximum amount of decimal places to display when using repr(Measure)."
+)
+
+conf.register(
+    "unicode_exponent", bool, True,
+    "Use Unicode superscripts instead of the ^ when displaying units."
+)
 
 class Measure(float, metaclass=MeasureMeta):
     """
@@ -43,11 +59,8 @@ class Measure(float, metaclass=MeasureMeta):
 
     # TODO: allow for int Measures..?
 
-    precision = 3
     show_units = True
     show_dimension = True
-    open_linear = False
-    unicode_exponent = True
 
     # These class-shared variable are used for display units
     # {dim: Unit}
@@ -133,8 +146,8 @@ class Measure(float, metaclass=MeasureMeta):
         as_unit = bool(self.symbol)
         return number_string(
             float(display), display.stddev,
-            self.precision, as_unit,
-            self.unicode_exponent
+            conf.measure_precision, as_unit,
+            conf.unicode_exponent
         )
     
     def __str__(self):
@@ -146,7 +159,7 @@ class Measure(float, metaclass=MeasureMeta):
     def __format__(self, spec):
         return number_string(
             float(self), self.stddev,
-            unicode_exponent=self.unicode_exponent,
+            unicode_exponent=conf.unicode_exponent,
             formatter=lambda x: format(x, spec)
         ) + self.symbol
 
@@ -206,13 +219,13 @@ class Measure(float, metaclass=MeasureMeta):
     __neg__ = lambda s: s * -1
 
     def __linear_compare(self, other):
-        if not self.open_linear:
+        if not conf.measure_openlinear:
             if isinstance(other, Measure) and self.dim != other.dim:
                 raise ValueError("Incompatible dimensions {} and {}.".format(
                     self.dim, other.dim))
 
         # Return limits of uncertainty
-        # TODO: Extract this into a separate Range object - this is not standard deviation
+        # TODO: extract uncertainty behaviour into various Uncertain classes
         sl = float(self) - self.delta
         su = float(self) + self.delta
         if isinstance(other, Measure):

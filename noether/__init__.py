@@ -19,6 +19,8 @@ __copyright__ = "Copyright 2018-2020 Mia yun Ruse"
 __status__ = "Alpha 2"
 __email__ = "s-noether@yunru.se"
 
+from .conf import conf, conf_new
+
 import math
 import cmath
 
@@ -30,6 +32,7 @@ from math import (
 ) # noqa: F401
 
 from .unit import *  # noqa: F401, F403
+from .unit import catalogue
 from .unit.catalogue import *
 
 from .particles import *
@@ -41,3 +44,12 @@ from . import (
 from .unit import *  # noqa: F401, F403
 
 display = Unit.display
+
+if conf_new:
+    conf.save()
+    print("""\
+Welcome to Noether! Just so you know, the config file
+~/.config/noether/default.conf has been created. You can toy
+about with noe.conf and then use noe.conf.save(), though.
+""")
+del conf_new

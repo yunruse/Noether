@@ -7,6 +7,7 @@ from .conventional import *
 from .imperial import *
 from .scientific import *
 from .data import *
+from .planck import planck
 
 ## Typography
 pica = inch / 6

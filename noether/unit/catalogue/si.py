@@ -12,6 +12,7 @@ SI = lambda x, y: U(x, y, display=True, SI=True)
 
 ## Rotation
 
+becquerel = SI(frequency, "Bq")
 hertz = SI(frequency, "Hz")
 radian = SI(angle, "rad")
 
@@ -41,7 +42,6 @@ lumen = SI(luminous_flux, "lum")
 lux = SI(illuminance, "Lx")
 gray = SI(dose, "Gy")
 sievert = SI(dose, "Sv")
-becquerel = SI(hertz, "Bq")
 
 ## Material properties
 
