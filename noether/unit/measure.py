@@ -2,6 +2,8 @@
 
 import operator
 
+from ..conf import conf
+
 from ..display import number_string
 #from .dimension import Dimension : Import loop
 
@@ -34,6 +36,10 @@ class MeasureMeta(type):
 
     display_units = property(_dU_get, _dU_set, _dU_del)
 
+conf.register(
+    "measure_openlinear", bool, False,
+    "Allow any addition, even between incompatible units (eg metre and second)"
+)
 
 class Measure(float, metaclass=MeasureMeta):
     """
@@ -46,7 +52,6 @@ class Measure(float, metaclass=MeasureMeta):
     precision = 3
     show_units = True
     show_dimension = True
-    open_linear = False
     unicode_exponent = True
 
     # These class-shared variable are used for display units
@@ -206,7 +211,7 @@ class Measure(float, metaclass=MeasureMeta):
     __neg__ = lambda s: s * -1
 
     def __linear_compare(self, other):
-        if not self.open_linear:
+        if not conf.measure_openlinear:
             if isinstance(other, Measure) and self.dim != other.dim:
                 raise ValueError("Incompatible dimensions {} and {}.".format(
                     self.dim, other.dim))
