@@ -40,8 +40,13 @@ class Dimension(dict):
         dict.__init__(self, dims)
 
     @classmethod
-    def new(cls, order, name, symbol, display_unit):
-        base = _BaseDimension(order, name, symbol, display_unit)
+    def new(cls, name, dimsym, unitsym, order=500):
+        """
+        Generate a new dimension.
+
+        Requires a name, dimension symbol and fundamental unit symbol.
+        """
+        base = _BaseDimension(order, name, dimsym, unitsym)
         bisect.insort_left(cls._dimensions_display, base)
         cls._dimensions_map[name] = base
         return cls({name: 1})

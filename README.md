@@ -49,7 +49,7 @@ You may, of course, define your own units and dimensions on the fly:
 >>> c
 1.803×10¹²ff <velocity, speed>
 
->>> health = Dimension.new(3.2, 'health', 'H', 'a')
+>>> health = Dimension.new('health', dimsym='H', unitsym='a')
 >>> apple = Unit(health)
 >>> apple / day
 1.157×10⁻⁵a·s⁻¹

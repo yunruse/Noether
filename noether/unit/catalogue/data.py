@@ -10,7 +10,7 @@ from .imperial import inch
 
 ## Data
 
-data = Dimension.new(3.5, "data", "D", "B")
+data = Dimension.new("data", dimsym="D", unitsym="B", order=500)
 areal_density = data / length**2 
 
 byte = U(data, "B", SI=True, pIEC=True)
@@ -28,7 +28,7 @@ bps = U(bit / second, 'bps', display=True, SI=True, pIEC=True)
 
 ## Pixels and printing
 
-pixel_count = Dimension.new(3.4, "pixel_count", "P", "pix")
+pixel_count = Dimension.new("pixel_count", dimsym="P", unitsym="pix", order=400)
 pixel = dot = U(pixel_count, pSIb=True)
 
 pixel_fill_rate = pixel_count / time

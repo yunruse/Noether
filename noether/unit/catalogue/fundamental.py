@@ -3,13 +3,13 @@ Fundamental units and unit-defining helpers from which all other units derive.
 """
 
 BASE_UNITS = (
-    (1, "luminosity",  "J", "cd",  True,  "candela"),
-    (2, "current",     "I", "A",   True,  "amp", "ampere"),
-    (3, "temperature", "Θ", "K",   True,  "kelvin"),
-    (4, "mass",        "M", "kg",  False, "kilogram"),
-    (5, "substance",   "N", "mol", True, "mole"),
-    (6, "length",      "L", "m",   True, "metre", "meter"),
-    (7, "time",        "T", "s",   True, "second")
+    (-3, "luminosity",  "J", "cd",  True,  "candela"),
+    (-2, "current",     "I", "A",   True,  "amp", "ampere"),
+    (-1, "temperature", "Θ", "K",   True,  "kelvin"),
+    ( 1, "mass",        "M", "kg",  False, "kilogram"),
+    ( 2, "substance",   "N", "mol", True, "mole"),
+    ( 3, "length",      "L", "m",   True, "metre", "meter"),
+    ( 4, "time",        "T", "s",   True, "second")
 )
 
 prefixes = {
@@ -70,8 +70,8 @@ def U(
 
 # SI units
 
-for display_order, name, dim_sym, unit_sym, SI, *units in BASE_UNITS:
-    dim = Dimension.new(display_order, name, dim_sym, unit_sym)
+for order, name, dim_sym, unit_sym, SI, *units in BASE_UNITS:
+    dim = Dimension.new(name, dim_sym, unit_sym, order=order*1000)
     globals()[name] = dim
     unit = U(dim, unit_sym, SI=SI)
     for name in units:
