@@ -34,7 +34,7 @@ class Config(dict):
         names = list(sorted(self.keys()))
         longest = max(map(len, names))
         for name in names:
-            s += f" - {name.rjust(longest)}: {self.info[name].type.__name__} = {repr(self[name])}\n"
+            s += f" - {(name + ':').ljust(longest+1)} {self.info[name].type.__name__} = {repr(self[name])}\n"
         return s.strip()
     
     def __contains__(self, name):
