@@ -19,6 +19,7 @@ have also been given their prefixed equivalents. This naturally
 does not automatically apply to custom-defined units.
 """
 
+from ...conf import conf
 from .. import Dimension, Measure, Unit
 
 from .constants import *
@@ -32,11 +33,21 @@ from .conventional import *
 from .scientific import *
 from .planck import planck, planck_g, planck_lh
 
-from .cgs import *
-from .imperial import *
-from .historical import *
+conf.register("unit_cgs", bool, True, "Enable various units in the namespace")
+if conf.unit_cgs:
+    from .cgs import *
 
-from .unusual import *
+conf.register("unit_imperial", bool, True)
+if conf.unit_imperial:
+    from .imperial import *
+
+conf.register("unit_historical", bool, True)
+if conf.unit_historical:
+    from .historical import *
+
+conf.register("unit_unusual", bool, True)
+if conf.unit_unusual:
+    from .unusual import *
 
 # Name transmogrification
 
