@@ -22,7 +22,7 @@ class Config(dict):
         object.__setattr__(self, "info", {})
         object.__setattr__(self, "dirty", False)
     
-    def register(self, name, kind=object, default=None, description=None):
+    def register(self, name, kind=object, default=None, description=""):
         """
         Register a config variable.
         """
@@ -62,10 +62,12 @@ class Config(dict):
         """Save the current config."""
         s = ""
         for name in sorted(self.info.keys()):
-            if rich:
-                for l in self.info[name].description.split('\n'):
+            desc = self.info[name].description
+            if rich and desc:
+                s += "\n"
+                for l in desc.split('\n'):
                     s += f"# {l}\n"
-            s += toml.dumps({name: self[name]}) + '\n'
+            s += toml.dumps({name: self[name]})
         with open(process_path(path), "w") as f:
             f.write(s)
         object.__setattr__(self, "dirty", False)
