@@ -53,6 +53,12 @@ conf.register(
 conf.register("info_dimension", bool, True, """\
 Show dimension name(s) for units and measures.""")
 
+conf.register("info_spectrum", bool, True, """\
+Show EM spectrum names (eg UV-B, Wifi) for frequencies.""")
+
+conf.register("info_spectrum_all", bool, True, """\
+Extend EM spectrum names to energy and wavelength.""")
+
 class Measure(float, metaclass=MeasureMeta):
     """
     A physical measurement.
@@ -157,14 +163,27 @@ class Measure(float, metaclass=MeasureMeta):
         if self.show_units:
             s += self.symbol
 
-        opt = []
+        info = ""
         if conf.info_dimension and self.dim.names:
-            opt += self.dim.names
+            info = " <" + ", ".join(self.dim.names) + ">"
 
-        if opt:
-            s += f" <{', '.join(opt)}>"
+        # must be imported inline due to namespace bootstrapping
+        from .catalogue import frequency, length, c, energy, h
+        from .spectrum import spectrum_names
 
-        return s
+        if conf.info_spectrum:
+            dim, wavelength = "", self
+            if self.dim == frequency:
+                dim, wavelength = "frequency", c / self
+            elif conf.info_spectrum_all:
+                if self.dim == energy:
+                    dim, wavelength = "energy", h*c / self
+                elif self.dim == length:
+                    dim, wavelength = "wavelength", self
+            if dim:
+                info = f" <{dim}: {', '.join(spectrum_names(wavelength))}>"
+
+        return s + info
 
     def __format__(self, spec):
         return number_string(
