@@ -5,7 +5,6 @@ import operator
 from ..conf import conf
 
 from ..display import number_string
-#from .dimension import Dimension : Import loop
 
 from .dimension import Dimension
 
@@ -50,6 +49,9 @@ conf.register(
     "unicode_exponent", bool, True,
     "Use Unicode superscripts instead of the ^ when displaying units."
 )
+
+conf.register("info_dimension", bool, True, """\
+Show dimension name(s) for units and measures.""")
 
 class Measure(float, metaclass=MeasureMeta):
     """
@@ -153,7 +155,15 @@ class Measure(float, metaclass=MeasureMeta):
     def __str__(self):
         s = self.number_string(use_display_unit=True)
         if self.show_units:
-            s += self.symbol + self._opt_dimension_name()
+            s += self.symbol
+
+        opt = []
+        if conf.info_dimension and self.dim.names:
+            opt += self.dim.names
+
+        if opt:
+            s += f" <{', '.join(opt)}>"
+
         return s
 
     def __format__(self, spec):
@@ -165,12 +175,6 @@ class Measure(float, metaclass=MeasureMeta):
 
     def __repr__(self):
         return str(self)
-    
-    def _opt_dimension_name(self):
-        if self.show_dimension and self.dim.names:
-            return " <{}>".format(', '.join(self.dim.names))
-        else:
-            return ""
 
     # Dimension-changing operators
 

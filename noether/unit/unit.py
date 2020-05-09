@@ -1,3 +1,4 @@
+from ..conf import conf
 from .measure import Measure
 from .dimension import Dimension
 
@@ -23,8 +24,11 @@ class Unit(Measure):
     
     def __repr__(self):
         if self == self.display_unit:
+            info = ""
+            if conf.info_dimension and self.dim.names:
+                info = f" <{', '.join(self.dim.names)}>"
             if self.names:
-                return self.names[0] + self._opt_dimension_name()
+                return self.names[0] + info
             elif self.symbols:
-                return self.symbols[0] + self._opt_dimension_name()
+                return self.symbols[0] + info
         return Measure.__repr__(self)
