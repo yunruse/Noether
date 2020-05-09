@@ -43,7 +43,7 @@ class Config(dict):
     def __getattr__(self, name):
         try:
             return dict.__getitem__(self, name)
-        except NameError:
+        except KeyError:
             return self.info[name].default
     
     def __setattr__(self, name, value):
