@@ -23,11 +23,11 @@ class Config(dict):
         object.__setattr__(self, "info", {})
         object.__setattr__(self, "dirty", False)
     
-    def register(self, name, kind=object, default=None, description=""):
+    def register(self, name, kind=object, default=None, description="", at_import=False):
         """
         Register a config variable.
         """
-        self.info[name] = ConfigEntry(name, kind, default, description)
+        self.info[name] = ConfigEntry(name, kind, default, description, at_import)
         self[name] = default
 
     def __repr__(self):
