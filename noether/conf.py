@@ -4,10 +4,10 @@ import toml
 
 from collections import namedtuple
 
-ConfigEntry = namedtuple("ConfigEntry", "name kind default description".split())
+ConfigEntry = namedtuple("ConfigEntry", "name type default description".split())
 
 CONF_DIR = os.path.expanduser('~/.config/noether')
-conf_new = not os.path.exists(CONF_DIR)
+conf_new = not os.path.exists(os.path.join(CONF_DIR, "default.conf"))
 os.makedirs(CONF_DIR, exist_ok=True)
 
 def process_path(path):
@@ -22,7 +22,7 @@ class Config(dict):
         object.__setattr__(self, "info", {})
         object.__setattr__(self, "dirty", False)
     
-    def register(self, name, kind=object, default=None, description=None):
+    def register(self, name, kind=object, default=None, description=""):
         """
         Register a config variable.
         """
@@ -34,7 +34,7 @@ class Config(dict):
         names = list(sorted(self.keys()))
         longest = max(map(len, names))
         for name in names:
-            s += f" - {name.ljust(longest)}: {repr(self[name])}\n"
+            s += f" - {(name + ':').ljust(longest+1)} {self.info[name].type.__name__} = {repr(self[name])}\n"
         return s.strip()
     
     def __contains__(self, name):
@@ -43,21 +43,33 @@ class Config(dict):
     def __getattr__(self, name):
         try:
             return dict.__getitem__(self, name)
-        except NameError:
+        except KeyError:
             return self.info[name].default
     
     def __setattr__(self, name, value):
-        dict.__setitem__(self, name, value)
-        object.__setattr__(self, "dirty", True)
+        typ = self.info[name].type
+        if isinstance(value, typ):
+            dict.__setitem__(self, name, value)
+            object.__setattr__(self, "dirty", True)
+        else:
+            raise TypeError(f"conf.{name} must be {typ.__name__}, not {type(value).__name__}")
     
     def __delattr__(self, name):
         dict.__setitem__(self, name, self.info[name].default)
         object.__setattr__(self, "dirty", True)
     
-    def save(self, path="default.conf", rich=False):
-        """Save the current config"""
+    def save(self, path="default.conf", rich=True):
+        """Save the current config."""
+        s = ""
+        for name in sorted(self.info.keys()):
+            desc = self.info[name].description
+            if rich and desc:
+                s += "\n"
+                for l in desc.split('\n'):
+                    s += f"# {l}\n"
+            s += toml.dumps({name: self[name]})
         with open(process_path(path), "w") as f:
-            toml.dump(self, f)
+            f.write(s)
         object.__setattr__(self, "dirty", False)
 
     def load(self, path="default.conf"):

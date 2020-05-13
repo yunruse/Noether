@@ -35,20 +35,16 @@ class MeasureMeta(type):
 
     display_units = property(_dU_get, _dU_set, _dU_del)
 
-conf.register(
-    "measure_openlinear", bool, False,
-    "Allow any addition, even between incompatible units (eg metre and second)"
-)
+conf.register("measure_openlinear", bool, False, """\
+Allow any addition, even between incompatible units
+(eg metre and second)""")
 
-conf.register(
-    "measure_precision", int, 3,
-    "The maximum amount of decimal places to display when using repr(Measure)."
-)
+conf.register("measure_precision", int, 3, """\
+The maximum amount of decimal places to display
+when using repr(Measure).""")
 
-conf.register(
-    "unicode_exponent", bool, True,
-    "Use Unicode superscripts instead of the ^ when displaying units."
-)
+conf.register("unicode_exponent", bool, True, """\
+Use Unicode superscripts eg xⁿ instead of x^n.""")
 
 conf.register("info_dimension", bool, True, """\
 Show dimension name(s) for units and measures.""")
