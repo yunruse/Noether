@@ -3,8 +3,9 @@ import os
 import toml
 
 from collections import namedtuple
+from warnings import warn
 
-ConfigEntry = namedtuple("ConfigEntry", "name type default description".split())
+ConfigEntry = namedtuple("ConfigEntry", "name type default description at_import".split())
 
 CONF_DIR = os.path.expanduser('~/.config/noether')
 conf_new = not os.path.exists(os.path.join(CONF_DIR, "default.conf"))
@@ -34,7 +35,7 @@ class Config(dict):
         names = list(sorted(self.keys()))
         longest = max(map(len, names))
         for name in names:
-            s += f" - {(name + ':').ljust(longest+1)} {self.info[name].type.__name__} = {repr(self[name])}\n"
+            s += f" - {name.ljust(longest+1)} = {repr(self[name])}\n"
         return s.strip()
     
     def __contains__(self, name):
@@ -48,20 +49,29 @@ class Config(dict):
     
     def __setattr__(self, name, value):
         typ = self.info[name].type
-        if isinstance(value, typ):
-            dict.__setitem__(self, name, value)
-            object.__setattr__(self, "dirty", True)
-        else:
+        if not isinstance(value, typ):
             raise TypeError(f"conf.{name} must be {typ.__name__}, not {type(value).__name__}")
+        dict.__setitem__(self, name, value)
+        object.__setattr__(self, "dirty", True)
+        if self.info[name].at_import:
+            msg = f"'{name}' is only evaluated when noether is imported; "
+            msg += "do noe.conf.save() and sys.reload(noe) to see effects."
+            warn(msg, RuntimeWarning, stacklevel=2)
     
     def __delattr__(self, name):
         dict.__setitem__(self, name, self.info[name].default)
         object.__setattr__(self, "dirty", True)
     
     def save(self, path="default.conf", rich=True):
-        """Save the current config."""
+        """
+        Save the current config as a TOML file.
+        
+        If rich is kept as True, config descriptions are added as TOML comments.
+        """
         s = ""
+        # alphabetical sort important
         for name in sorted(self.info.keys()):
+            # add comments hackily by tricking TOML with a dict
             desc = self.info[name].description
             if rich and desc:
                 s += "\n"

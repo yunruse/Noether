@@ -33,21 +33,13 @@ from .conventional import *
 from .scientific import *
 from .planck import planck, planck_g, planck_lh
 
-conf.register("unit_cgs", bool, True, "Enable various units in the namespace")
-if conf.unit_cgs:
-    from .cgs import *
 
-conf.register("unit_imperial", bool, True)
-if conf.unit_imperial:
-    from .imperial import *
-
-conf.register("unit_historical", bool, True)
-if conf.unit_historical:
-    from .historical import *
-
-conf.register("unit_unusual", bool, True)
-if conf.unit_unusual:
-    from .unusual import *
+for i in 'cgs imperial historical unusual'.split():
+    conf.register(
+        f"unit_{i}", bool, True, f"Enable import of {i} in the namespace.",
+        at_import=True)
+    exec(f'if conf.unit_{i}: from .{i} import *')
+del i
 
 # Name transmogrification
 
