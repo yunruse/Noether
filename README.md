@@ -1,30 +1,32 @@
 # Noether (in development: Alpha 0.1.2)
 
-## The problem: programs don't understand physical measurements.
+## The problem: computers don't understand physical measurements
 
-We're all human, and even the best of us skip over the little things. The calculator wasn't an essential invention at first, but it's rather nice to worry about far more important things than making sure the arithmetic is correct. But this is where scientific programming seems to have stopped; very few pieces of scientific software mark physical measurements as anything other than a number. This is far from a nicety: NASA famously lost *328 million dollars* because [feet and metres were mistaken](https://medium.com/predict/a-328-million-dollar-conversion-error-f6d525c85fd2).
+A calculator does the little things. They weren't essential, at first, but it's rather nice to not have to do the conversion in your head when you can instead start worrying about the topic at hand. Why not extend this to units? This is far from a nicety: NASA famously lost *328 million dollars* because [feet and metres were mistaken](https://medium.com/predict/a-328-million-dollar-conversion-error-f6d525c85fd2). 
 
 Whether you're a layman, a student, or a NASA programmer, Noether should make working with numbers a lot more pleasant:
 
-- Work with measurements, not numbers: Noether will stop you adding a metre to a minute, automagically recognise a force over a length is an energy, tell you (in the REPL) info about the measurement, and so on.
+- Work with measurements, not numbers: Noether automagically handles unit conversions and operations.
 - Work in whatever unit system you and your colleagues like – units naturally interoperate.
 - It propagates uncertainty – meaning you don't have to be so uncertain you propagated it right yourself.
-- Save your effort typing and trawling Wikipedia: physical constants, units and definitions are defined and kept up to date with SI, CODATA, and other authoritative sources, so you don't have to be.
+- Save your effort typing and trawling Wikipedia: physical constants, units and definitions are defined and kept up to date with ISO, SI, CODATA, and other authoritative sources, so you don't have to be.
+
+You can use Noether like a calculator or import it for projects. Noether is intended to compliment `numpy` and `matplotlib`; while it is yet in early stages, it will inevitably be integrated smoothly with these.
+
+Dig right in straight away:
 
 ```bash
-pip install noether&& python3.7 -im noether
+pip install noether
+python3.7 -im noether
 ```
-
-You can use Noether as a calculator or in simulations. Noether is intended to compliment `numpy`, `matplotlib` and `scipy`; while it is yet in early stages, it is fully intended to integrate with these packages, and, handling code analysis with my own [ASTley], work with [Numba] or somesuch to ensure machine code (or even GPU) speed up is still compatible and feature rich.
-
-[ASTley]: https://github.com/yunruse/astley
-[Numba]: http://numba.pydata.org/
 
 ## Units
 
-Noether has almost every unit known: BMI, bushel and byte; eotvos, erg and electronvolt; parsec, plethron and potrzebie.
+(From here on out we'll assume you did `python -im noether`, which does `import noether as noe` and provides a bundle of constants in the namespace.)
 
-```python
+Noether has almost every unit known: BMI, bushel and byte; eotvos, erg and electronvolt; parsec, plethron and potrzebie. It makes the bold assumption you know how to use it, so the REPL is a lot more informative:
+
+```
 >>> 0.5 * gibibyte / second
 4.295×10⁹bps <data rate>
 >>> a = 12 * pixel / mm
@@ -53,58 +55,22 @@ You may, of course, define your own units and dimensions on the fly:
 1.157×10⁻⁵a·s⁻¹
 ```
 
-## Installation and use
+## Updates and development
 
-Noether currently requires Python 3.7 or above. It's easy to jump into a quick calculator-like instance quick:
+Updates are released to the `master` branch (and PyPI, and the release log!) every so often. They are not guaranteed to have a sturdy, documented and tested API just yet, but each release should be pretty stable. 
 
-```bash
-pip install noether
-python -im noether
-```
+If running from source, Noether requires `pip install toml`.
 
-This simply runs `import noether as noe` and `from noether import *`. We'll assume the latter has been done; it makes for a neater experience when working with units.
-
-Some yet-undocumented submodules may happen to require `astley`,  `numpy`, `matplotlib` and `scipy` to use:
-
-```bash
-pip install numpy matplotlib
-git clone https://github.com/yunruse/astley
-# modify your PATH as needed
-```
-
-## Update log
-
-Updates are released to the `master` branch every couple of weeks. They are not guaranteed to have a sturdy, documented and tested API just yet, but each release should be pretty dang stable.
-
-Every single change I plan to make can be found on my [kanban board]. Thanks to internet magic, this appears live, exactly as I see and edit. If you have a feature suggestion, drop me an issue on GitHub. Bug fixes will stay in GitHub: they're much more important than features.
+Every single change I plan to make can be found on my [kanban board]. Thanks to internet magic, this appears live, exactly as I see and edit. If you have a feature suggestion, drop me an issue on GitHub. Issues will stay in GitHub: they're much more important than features.
 
 [kanban board]: https://www.notion.so/714348466a284bd1b0d1942c81688579
 
- - **Alpha 0.1.2** (2020-05-07):
-   - Added basic config support.
-   - This is the first PyPI release.
-
- - **Alpha 0.1.1** (2020-02-16):
-   - Many bugfixes and units added.
-   - Added `noether.fraction` with `ContinuedFraction` (and `Fraction` with shortcut).
-   - Introduced basic backend for `UnitSystem` for quality of life (eg `display(imperial)`).
-   - Made special tweaks so `python -m noether` lazy-loads at fast pace.
-
- - **Alpha 0.1** (2020-01-26):
-   - Made many improvements to display of units.
-   - The global `display` was added, alongside a wide range of particles.
-   - A test suite begins development.
-
-## Thank you!
-
-This project has a decently large scope, and I want it to appeal to anybody who has ever needed to measure anything. Your feedback, no matter how small, means a lot to me!
-
-## Legal (and academical)
+## Legal
 
 Copyright (c) Mia yun Ruse ([yunru.se]) 2018–2020.
-All scientific data shown remains in the public domain, and is cited where relevant.
 
-This work is licensed under a [Creative Commons Attribution 4.0](cc) International
+With the exception of scientific data, which is cited where relevant,
+Noether is licensed under a [Creative Commons Attribution 4.0](cc) International
 license. In non-legal terms: do whatever you like, including science! But if you
 want to redistribute this project (derived or not), please credit me, or shoot me a
 message and I'll see what I can do.
