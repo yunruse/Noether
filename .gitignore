@@ -9,6 +9,7 @@ test.bat
 todo.txt
 dev-info.py
 venv/
+pypi_tokens.txt
 
 # Build
 
