@@ -236,6 +236,7 @@ class Measure(float, metaclass=MeasureMeta):
     # Linear operations
 
     __neg__ = lambda s: s * -1
+    __pos__ = lambda s: s
 
     def __linear_compare(self, other):
         if not conf.measure_openlinear:
