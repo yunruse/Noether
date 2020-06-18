@@ -39,6 +39,9 @@ conf.register("measure_openlinear", bool, False, """\
 Allow any addition, even between incompatible units
 (eg metre and second)""")
 
+conf.register("measure_barenumber", bool, False, """\
+Allow addition of bare numbers (eg float, int) to units""")
+
 conf.register("measure_precision", int, 3, """\
 The maximum amount of decimal places to display
 when using repr(Measure).""")
@@ -206,7 +209,9 @@ class Measure(float, metaclass=MeasureMeta):
         )
 
         if isinstance(other, Dimension):
-            raise TypeError('Ambiguous operation Dimension and Measure. Resolve with Dimension(measure) or Measure(dim).')
+            raise TypeError(
+                "Ambiguous operation Dimension and Measure." +
+                "Resolve with Dimension(measure) or Measure(dim).")
         elif isinstance(other, Measure):
             new.dim = op(self.dim, other.dim)
             new.epsilon = (self.epsilon**2 + other.epsilon**2) ** 0.5
@@ -240,9 +245,17 @@ class Measure(float, metaclass=MeasureMeta):
 
     def __linear_compare(self, other):
         if not conf.measure_openlinear:
-            if isinstance(other, Measure) and self.dim != other.dim:
-                raise ValueError("Incompatible dimensions {} and {}.".format(
-                    self.dim, other.dim))
+            if isinstance(other, Measure):
+                if self.dim != other.dim:
+                    raise ValueError(
+                        "Dimensions {} and {}".format(self.dim, other.dim) +
+                        "may not be added. Try enabling conf.measure_openlinear.")
+
+            elif not conf.measure_barenumber:
+                print(self, other)
+                raise ValueError(
+                    "A unit and a bare number may not be added. " +
+                    "Try enabling conf.measure_barenumber.")
 
         # Return limits of uncertainty
         # TODO: extract uncertainty behaviour into various Uncertain classes
