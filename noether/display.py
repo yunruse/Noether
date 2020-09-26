@@ -1,6 +1,8 @@
 from .helpers import exp_mantissa, intify
 
-dict_invert = lambda d: dict(map(reversed, list(d.items()) ))
+
+def dict_invert(d): return dict(map(reversed, list(d.items())))
+
 
 SUPERSCRIPT = str.maketrans(
     "-0123456789",
@@ -9,11 +11,13 @@ SUPERSCRIPT = str.maketrans(
 
 NONBREAKING = {
     0x20: 0xA0,  # SPACE
-    0x2009: 0x202F # THIN SPACE
+    0x2009: 0x202F  # THIN SPACE
 }
+
 
 def superscript(number, unicode: bool = False):
     return str(number).translate(SUPERSCRIPT) if unicode else '^' + str(number)
+
 
 def _scinot(number, dec, uni, lo, hi):
     exp, man = exp_mantissa(number)
@@ -32,8 +36,9 @@ def _scinot(number, dec, uni, lo, hi):
             return "-" + num
         else:
             num = "×" + num
-    
+
     return str(intify(round(man, dec))) + num
+
 
 def number_string(
     number: float,
@@ -41,7 +46,7 @@ def number_string(
     decimals: int = 2,
     as_unit: bool = False,
     unicode_exponent: bool = False,
-    formatter = None,
+    formatter=None,
     natural_leading_zeros: int = 2,
     natural_digits: int = 4,
 ):
@@ -52,8 +57,9 @@ def number_string(
         exp_num, _ = exp_mantissa(number)
         exp_pm, _ = exp_mantissa(plus_minus)
         exps_differ = abs(exp_num - exp_pm) > natural_digits
-        is_human = lambda x: -natural_leading_zeros < x < natural_digits
-        sharing_unwieldy = exps_differ or is_human(exp_num) and is_human(exp_num)
+        def is_human(x): return -natural_leading_zeros < x < natural_digits
+        sharing_unwieldy = exps_differ or is_human(
+            exp_num) and is_human(exp_num)
         if not sharing_unwieldy:
             exp_shared = min(exp_num, exp_pm)
             number /= 10**exp_shared
@@ -62,10 +68,12 @@ def number_string(
 
     s = ""
     if not callable(formatter):
-        formatter = lambda x: _scinot(
+        def formatter(x): return _scinot(
             x, decimals, unicode_exponent, -natural_leading_zeros, natural_digits)
-    if number:     s +=         formatter(number)
-    if plus_minus: s += " ± " + formatter(plus_minus)
+    if number:
+        s += formatter(number)
+    if plus_minus:
+        s += " ± " + formatter(plus_minus)
     s = s.strip() or "0"
     if s_exp or as_unit and number and plus_minus:
         s = "(" + s + ")" + s_exp

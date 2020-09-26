@@ -8,14 +8,16 @@ from ..conf import conf
 from ..helpers import intify
 from ..display import superscript
 
-_BaseDimension = namedtuple("_BaseDimension", "order name symbol display_unit".split())
+_BaseDimension = namedtuple(
+    "_BaseDimension", "order name symbol display_unit".split())
 # TODO: enforce Fraction, rather than float, on dimension exponent
+
 
 class Dimension(dict):
     """Dimension of a unit. Inherently immutible."""
-    _dimensions_display = list() # self-ordering
+    _dimensions_display = list()  # self-ordering
     _dimensions_map = dict()
-    
+
     # Name registry (such that generated Dimensions map)
     _names = dict()
 
@@ -26,10 +28,10 @@ class Dimension(dict):
             value = value
         elif isinstance(value, Unit):
             value = value.dim
-        
+
         value.update(kw)
         dims = value.copy()
-        
+
         for name, exp in value.items():
             if not exp:
                 del dims[name]
@@ -51,26 +53,30 @@ class Dimension(dict):
         bisect.insort_left(cls._dimensions_display, base)
         cls._dimensions_map[name] = base
         return cls({name: 1})
-    
-    # Immutability   
-    
+
+    # Immutability
+
     def __setitem__(self, name, value):
-        raise TypeError('{!r} object does not support item assignment'.format(type(self).__name__))
+        raise TypeError(
+            '{!r} object does not support item assignment'.format(type(self).__name__))
+
     def __delitem__(self, name):
-        raise TypeError('{!r} object does not support item deletion'.format(type(self).__name__))
+        raise TypeError(
+            '{!r} object does not support item deletion'.format(type(self).__name__))
+
     def __hash__(self):
         return hash(tuple(sorted(self.items())))
 
     @property
     def names(self):
         return self._names.get(self, list())
-    
+
     def addName(self, name):
         name = name.replace('_', ' ')
         if self not in self._names:
             self._names[self] = list()
         self._names[self].append(name)
-    
+
     # Reproduction
 
     def as_fundamental(self, as_units=True):
@@ -92,7 +98,8 @@ class Dimension(dict):
     def __repr__(self):
         if not self:
             return 'dimensionless'
-        exponents = sorted(list(self.items()), key=lambda q: (q[1] < 0, abs(q[1])))
+        exponents = sorted(list(self.items()),
+                           key=lambda q: (q[1] < 0, abs(q[1])))
         string = '1' if exponents[0][1] < 0 else ''
         for dim, exp in exponents:
             if string:
@@ -105,7 +112,7 @@ class Dimension(dict):
             if aexp != 1:
                 string += '**' + str(aexp)
         return string
-    
+
     # Operations
 
     def __bool__(self):
@@ -156,5 +163,6 @@ class Dimension(dict):
 
     __sub__ = __rsub__ = __add__ = __radd__ = check_linear
 
+
 # avoid import-loop
-from .unit import Unit
+from .unit import Unit  # noqa

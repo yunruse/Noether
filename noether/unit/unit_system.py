@@ -8,6 +8,7 @@ from .measure import Measure
 # - whatever the user does display() on
 # This layered system will not only clean up code, but make it much more interchangeable.
 
+
 class UnitSystem:
     _mapping: dict
     fundamental: bool = False
@@ -26,14 +27,14 @@ class UnitSystem:
     a fundamental dimension (eg the metre) will be used for dimensions
     without an explicitly-named unit (eg area: metre**2)
     '''
-    
+
     def __len__(self):
         return len(self._mapping)
 
     def __iter__(self):
         for unit in self._mapping.values():
             yield unit
-    
+
     def __getitem__(self, dim: Dimension):
         if isinstance(dim, Measure):
             # this isn't official API, but will fix user blunders
@@ -42,7 +43,7 @@ class UnitSystem:
             raise TypeError('System can only be indexed by dimension.')
         # TODO: display derived units eg inch**2
         return self._mapping.get(dim)
-    
+
     def __repr__(self):
         return '{}({})'.format(
             type(self).__name__,
@@ -52,7 +53,7 @@ class UnitSystem:
     def __init__(self, *units, fundamental=False):
         self._mapping = {u.dim: u for u in units}
         self.fundamental = fundamental
-    
+
     def use(self, unit):
         mapping = {u.dim: u for u in self}
         mapping[unit.dim] = unit

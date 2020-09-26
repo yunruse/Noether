@@ -24,6 +24,8 @@ def limit_heuristic(a):
 
 
 _gr = namedtuple("GraphResult", "data label hasLimits isTimeFunc")
+
+
 def GraphResult(data, domain, hasInputSpace):
     label = getattr(data, "__name__", None)
     if label == '<lambda>':
@@ -35,7 +37,7 @@ def GraphResult(data, domain, hasInputSpace):
             data(1)
             data = data(domain)
         except TypeError:
-            data(1, 2) # Functions should be one or two arguments
+            data(1, 2)  # Functions should be one or two arguments
             isTimeFunc = True
 
     elif not hasInputSpace:
@@ -43,6 +45,7 @@ def GraphResult(data, domain, hasInputSpace):
 
     hasLimits = not isTimeFunc and limit_heuristic(data)
     return _gr(data, label, hasLimits, isTimeFunc)
+
 
 class Animation:
     line_args = [
@@ -180,9 +183,10 @@ def plot(
 
 # TODO: polar
 
+
 def main(ns):
     import astley
-    
+
     if ns.axis is not None:
         axis = ns.axis
     else:
@@ -205,6 +209,7 @@ def main(ns):
         axis=axis, jmin=ns.min, jmax=ns.max, axisLines=ns.axisLines,
         title=title
     )
+
 
 parser = argparse.ArgumentParser(
     "noether.graphing", description="Noether quick f(x)/f(y) grapher"

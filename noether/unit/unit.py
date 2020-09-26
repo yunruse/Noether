@@ -2,6 +2,7 @@ from ..conf import conf
 from .measure import DisplayMeasure
 from .dimension import Dimension
 
+
 class Unit(DisplayMeasure):
     '''
     Special kind of unit with a symbol.
@@ -21,7 +22,7 @@ class Unit(DisplayMeasure):
         if self.symbols and is_display:
             self._base_display_units[self.dim] = self
         return self
-    
+
     def __repr__(self):
         if self == self.display_unit():
             info = ""

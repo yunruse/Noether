@@ -29,7 +29,7 @@ from math import (
     asinh, acosh, atanh,
     log, exp,
     floor, ceil
-) # noqa: F401
+)
 
 from .unit import *  # noqa: F401, F403
 from .unit import catalogue

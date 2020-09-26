@@ -47,6 +47,7 @@ SPECTRUM = {
     "HF": (1e10, 1e11)
 }
 
+
 def spectrum_names(wavelength):
     names = []
     wavelength = float(wavelength) * 1e9
