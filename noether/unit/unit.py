@@ -23,7 +23,7 @@ class Unit(DisplayMeasure):
         return self
     
     def __repr__(self):
-        if self == self.display_unit:
+        if self == self.display_unit():
             info = ""
             if conf.info_dimension and self.dim.names:
                 info = f" <{', '.join(self.dim.names)}>"

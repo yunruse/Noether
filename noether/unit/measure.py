@@ -12,6 +12,7 @@ __all__ = ('Measure', )
 
 # TODO: emit Warning (or else use display unit!) if adding bare number
 
+
 class MeasureMeta(type):
     """Metaclass of class-shared properties for display."""
     def _dU_get(cls):
@@ -23,7 +24,7 @@ class MeasureMeta(type):
 
     def _dU_del(cls):
         cls._display_units.clear()
-    
+
     def display(cls, *units):
         '''Registers unit for display, or, if given none, reverts all.'''
         # TODO: desperately change display mechanism
@@ -36,6 +37,7 @@ class MeasureMeta(type):
             cls._display_units.clear()
 
     display_units = property(_dU_get, _dU_set, _dU_del)
+
 
 conf.register("measure_openlinear", bool, False, """\
 Allow any addition, even between incompatible units
@@ -59,6 +61,7 @@ Show EM spectrum names (eg UV-B, Wifi) for frequencies.""")
 
 conf.register("info_spectrum_all", bool, True, """\
 Extend EM spectrum names to energy and wavelength.""")
+
 
 class Measure(float, metaclass=MeasureMeta):
     """
@@ -108,7 +111,8 @@ class Measure(float, metaclass=MeasureMeta):
     def _stddev_set(self, v):
         self._stddev = abs(v)
 
-    stddev = property(lambda s: s._stddev, _stddev_set, lambda s: s._stddev_set(0))
+    stddev = property(lambda s: s._stddev, _stddev_set,
+                      lambda s: s._stddev_set(0))
     delta = stddev
 
     def _stdratio_set(self, v):
@@ -129,7 +133,6 @@ class Measure(float, metaclass=MeasureMeta):
 
     # Display
 
-    @property
     def display_unit(self):
         return self._display_units.get(
             self.dim, self._base_display_units.get(self.dim, None))
@@ -137,9 +140,8 @@ class Measure(float, metaclass=MeasureMeta):
     def as_fundamental(self):
         return self.dim.as_fundamental(as_units=True)
 
-    @property
     def symbol(self):
-        du = self.display_unit
+        du = self.display_unit()
         if du and du.symbols:
             return du.symbols[0]
         return self.as_fundamental()
@@ -150,8 +152,9 @@ class Measure(float, metaclass=MeasureMeta):
 
     def number_string(self, use_display_unit=False):
         display = self
-        if use_display_unit and self.display_unit:
-            display /= self.display_unit
+        du = self.display_unit()
+        if use_display_unit and du:
+            display = display / du
 
         as_unit = bool(self.symbol)
         return number_string(
@@ -159,11 +162,11 @@ class Measure(float, metaclass=MeasureMeta):
             conf.measure_precision, as_unit,
             conf.unicode_exponent
         )
-    
+
     def __str__(self):
         s = self.number_string(use_display_unit=True)
         if self.show_units:
-            s += self.symbol
+            s += self.symbol()
 
         info = ""
         if conf.info_dimension and self.dim.names:
@@ -192,7 +195,7 @@ class Measure(float, metaclass=MeasureMeta):
             float(self), self.stddev,
             unicode_exponent=conf.unicode_exponent,
             formatter=lambda x: format(x, spec)
-        ) + self.symbol
+        ) + self.symbol()
 
     def __repr__(self):
         return str(self)
@@ -222,11 +225,11 @@ class Measure(float, metaclass=MeasureMeta):
             new.epsilon = self.epsilon
 
         return new
-    
+
     # TODO: automatic conversion when units match certain relations (eg MeV, MeV/c, MeV/c^2)
     __rmul__ = __mul__ = lambda s, o: s.__geometric(o, operator.mul)
-    __truediv__ = lambda s, o: s.__geometric(o, operator.truediv)
-    __floordiv__ = lambda s, o: s.__geometric(o, operator.floordiv)
+    def __truediv__(s, o): return s.__geometric(o, operator.truediv)
+    def __floordiv__(s, o): return s.__geometric(o, operator.floordiv)
 
     def __call__(self, value, stddev=None):
         if stddev and not isinstance(value, Measure):
@@ -243,9 +246,9 @@ class Measure(float, metaclass=MeasureMeta):
 
     # Linear operations
 
-    __neg__ = lambda s: s * -1
-    __pos__ = lambda s: s
-    __abs__ = lambda s: s if s > 0 else -s
+    def __neg__(s): return s * -1
+    def __pos__(s): return s
+    def __abs__(s): return s if s > 0 else -s
 
     def __linear_compare(self, other):
         if not conf.measure_openlinear:
@@ -285,7 +288,7 @@ class Measure(float, metaclass=MeasureMeta):
             dim=self.dim,
             stddev=stddev
         )
-    
+
     __add__ = __radd__ = lambda s, o: s.__linear(o, operator.add)
     __sub__ = __rsub__ = lambda s, o: s.__linear(o, operator.sub)
 
@@ -333,6 +336,7 @@ class Measure(float, metaclass=MeasureMeta):
         return other | Matrix(self)
 
     # TODO: have @ display in a unit, eg `x @ mile&inch`
+
 
 class DisplayMeasure(Measure):
     """
