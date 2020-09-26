@@ -1,6 +1,8 @@
 from unittest import TestCase
 
-from noether import *
+from noether import Dimension
+from noether.display import number_string
+
 
 class test_unit_display(TestCase):
     equalityTests = (
@@ -16,12 +18,13 @@ class test_unit_display(TestCase):
     )
 
     def test_plus_minus(self):
-        '''Test for desired behaviour for numbers with uncertainties '''
+        '''Test for desired behaviour for numbers with uncertainties ''' q
         for num, stddev, desired in self.equalityTests:
-            actual = display.number_string(
+            actual = number_string(
                 num, stddev, decimals=3, as_unit=False, unicode_exponent=False
             )
             self.assertEqual(desired, actual)
+
 
 class test_measure(TestCase):
     def test_dimension_repr_evals(self):
