@@ -29,6 +29,8 @@ class MeasureMeta(type):
         # TODO: desperately change display mechanism
         if units:
             for u in units:
+                if not isinstance(u, DisplayMeasure):
+                    raise TypeError("display() requires units")
                 cls._display_units[u.dim] = u
         else:
             cls._display_units.clear()
@@ -137,8 +139,9 @@ class Measure(float, metaclass=MeasureMeta):
 
     @property
     def symbol(self):
-        if self.display_unit:
-            return self.display_unit.symbols[0]
+        du = self.display_unit
+        if du and du.symbols:
+            return du.symbols[0]
         return self.as_fundamental()
 
     def value(self):
@@ -330,3 +333,8 @@ class Measure(float, metaclass=MeasureMeta):
         return other | Matrix(self)
 
     # TODO: have @ display in a unit, eg `x @ mile&inch`
+
+class DisplayMeasure(Measure):
+    """
+    Superclass of measure that may be passed to display().
+    """
