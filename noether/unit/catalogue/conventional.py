@@ -6,7 +6,7 @@ from .fundamental import (
 )
 from .si import hertz, radian, steradian, watt
 
-## Conventional units
+# # Conventional units
 
 minute = U(second * 60, "min")
 hour = U(minute * 60, "h")
@@ -27,7 +27,7 @@ tonne = ton = U(kilogram * 1000, "t", SI=True)
 
 bpm = U(hertz / 60, "bpm")
 
-## Angles
+# # Angles
 
 degree = U(radian * pi / 180, "°")
 angular_minute = U(degree / 60, "′")
@@ -42,7 +42,7 @@ rad = radian
 grad = gradian
 sterad = steradian
 
-## Electricity
+# # Electricity
 
 watt_hour = U(watt * hour, 'Wh', SI=True)
 amp_hour = ampere_hour = U(ampere * hour, 'Ah', SI=True)
