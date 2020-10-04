@@ -256,7 +256,7 @@ class Measure(float, metaclass=MeasureMeta):
                 if self.dim != other.dim:
                     raise ValueError(
                         "Dimensions {} and {}".format(self.dim, other.dim) +
-                        "may not be linearly compared. Try enabling conf.measure_openlinear.")
+                        " may not be linearly compared. Try enabling conf.measure_openlinear.")
 
             elif not conf.measure_barenumber:
                 print(self, other)
