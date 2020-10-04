@@ -1,6 +1,6 @@
 
 import os
-import toml
+import nestedtext as conf_provider
 
 from collections import namedtuple
 from warnings import warn
@@ -36,11 +36,12 @@ class Config(dict):
         self[name] = default
 
     def __repr__(self):
-        s = "Noether config:\n"
+        s = "# Current noether config:\n"
         names = list(sorted(self.keys()))
         longest = max(map(len, names))
         for name in names:
-            s += f" - {name.ljust(longest+1)} = {repr(self[name])}\n"
+            n = name + ':'
+            s += f"{n.ljust(longest+1)} {repr(self[name])}\n"
         return s.strip()
 
     def __contains__(self, name):
@@ -83,7 +84,7 @@ class Config(dict):
                 s += "\n"
                 for l in desc.split('\n'):
                     s += f"# {l}\n"
-            s += toml.dumps({name: self[name]})
+            s += conf_provider.dumps({name: self[name]})
         with open(process_path(path), "w") as f:
             f.write(s)
         object.__setattr__(self, "dirty", False)
@@ -91,7 +92,9 @@ class Config(dict):
     def load(self, path="default.conf"):
         self.clear()
         with open(process_path(path)) as f:
-            self.update(toml.load(f))
+            config = conf_provider.load(f)
+            if config is not None:
+                self.update(config)
         object.__setattr__(self, "dirty", False)
 
 

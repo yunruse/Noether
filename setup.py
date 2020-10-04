@@ -27,5 +27,5 @@ setuptools.setup(
     ],
     keywords="physics unit measure constant measurement uncertainty",
     python_requires='>=3.6',
-    install_requires=["toml>=0.10.0"],
+    install_requires=["nestedtext>=1.0.0"],
 )
