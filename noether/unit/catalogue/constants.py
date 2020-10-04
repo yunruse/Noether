@@ -9,7 +9,7 @@ from ...helpers import sqrt
 from ..unit import Unit
 
 from .fundamental import ampere, kelvin, kilogram, metre, mole, second
-from .si import coulomb, joule, newton, radian, volt
+from .si import SI, coulomb, joule, newton, radian, volt
 from .scientific import c, gee
 from .conventional import cm
 
@@ -47,7 +47,7 @@ rydberg = (m_e * e ** 4) / (8 * e_0 ** 2 * h ** 3 * c)
 
 # # Naturalised units
 
-eV = Unit(e * volt, "eV")
+eV = SI(e * volt, "eV")
 MeV = Unit(1e6 * eV, "MeV")
 MeVc = Unit(MeV / c, "MeVc⁻¹")
 MeVc2 = Unit(MeVc / c, "MeVc⁻²")
