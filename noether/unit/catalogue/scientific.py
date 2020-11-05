@@ -34,6 +34,12 @@ amagat = U(2.686_7811 / metre**3, 'Am', SI=True)
 bmi = U(kilogram / metre**2, "BMI")
 met = U(58.2 * watt / metre ** 2, 'met')
 
+# # Hartree atomic units
+# where hbar = a_0 = m_e = e = 1
+
+hartree = U(joule * 4.359_744_722_2071e-18, "E_h")
+bohr = a_0 = U(hbar / m_e / c / alpha, 'a_0')
+
 # # Small-scale
 
 # TODO: have "micron", "kilogram" etc understood as SI units but with prefixes
