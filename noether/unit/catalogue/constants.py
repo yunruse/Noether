@@ -39,7 +39,7 @@ R = n_a * k_B
 # # Atomic
 
 e = Unit(1.602_176_634e-19 * coulomb, "e")
-m_e = Unit(9.109_383_56e-31 * kilogram, "mₑ")
+m_e = Unit(9.109_383_56e-31 * kilogram, "m_e")
 
 alpha = k_e * e ** 2 / (hbar * c)
 
