@@ -16,7 +16,7 @@ not present, no matter how petty.
 
 __author__ = "Mia yun Ruse"
 __copyright__ = "Copyright 2018-2020 Mia yun Ruse"
-__status__ = "Alpha 2"
+__status__ = "Alpha 0.1.3"
 __email__ = "s-noether@yunru.se"
 
 from .conf import conf, conf_new

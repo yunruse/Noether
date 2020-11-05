@@ -1,4 +1,4 @@
-# Noether (in development: Alpha 0.1.2)
+# Noether (in development: Alpha 0.1.3)
 
 ## The problem: computers don't understand physical measurements
 
@@ -57,13 +57,11 @@ You may, of course, define your own units and dimensions on the fly:
 
 ## Updates and development
 
-Updates are released to the `master` branch (and PyPI, and the release log!) every so often. They are not guaranteed to have a sturdy, documented and tested API just yet, but each release should be pretty stable. 
+Updates are released to the `master` branch (and PyPI) every so often. They are not guaranteed to have a sturdy, documented and tested API just yet, but each release should be pretty stable.
 
 If running from source, Noether requires `pip install toml`.
 
-Every single change I plan to make can be found on my [kanban board]. Thanks to internet magic, this appears live, exactly as I see and edit. If you have a feature suggestion, drop me an issue on GitHub. Issues will stay in GitHub: they're much more important than features.
-
-[kanban board]: https://www.notion.so/714348466a284bd1b0d1942c81688579
+Currently (as of September 2020) Noether is in a hiatus. It will be updated with scientific units and fixes as I discover them, but no major systematic changes will be made. I have ideas, but they will need a lot more refactoring than I can spare. Please feel free to raise issues or feature requests on GitHub, though, and I'll be more than happy to get working on them.
 
 ## Legal
 
