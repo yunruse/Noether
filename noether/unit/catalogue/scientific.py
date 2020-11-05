@@ -8,16 +8,11 @@ from .fundamental import (
 )
 from .si import watt, joule, pascal, cumec
 from .conventional import cm, year
-
-# # Common
-
-mps = metre / second
-c = U(299_792_458 * metre / second, "c")
-
-g = 9.980665 * metre / second**2
-gee = g * kilogram
+from .constants import alpha, c, hbar, m_e, g
 
 # # Human
+
+mps = metre / second
 
 calorie = U(4.814 * joule, "cal", SI=True, display=False)
 kilocalorie = kcal = U(calorie * 1000, "kcal")

@@ -10,7 +10,6 @@ from ..unit import Unit
 
 from .fundamental import ampere, kelvin, kilogram, metre, mole, second
 from .si import SI, coulomb, joule, newton, radian, volt
-from .scientific import c, gee
 from .conventional import cm
 
 # # Quantum
@@ -19,6 +18,8 @@ h = Unit(6.626_070_15e-34 * joule * second, "h")
 hbar = Unit(h / (pi*2), "ħ")
 
 # # Electromagnetic
+
+c = Unit(299_792_458 * metre / second, "c")
 
 mu_0 = Unit(4 * pi * 1e-7 * newton / ampere ** 2)  # permeability
 e_0 = Unit(1 / (mu_0 * c ** 2))  # permittiviity
@@ -54,7 +55,8 @@ MeVc2 = Unit(MeVc / c, "MeVc⁻²")
 
 # # Adopted values
 
-g = gee / kilogram
+g = 9.980665 * metre / second**2
+gee = g * kilogram
 t = 273.15 * kelvin
 
 natural_units = (e_0, c, h, e, MeV, MeVc, MeVc2, grav)
