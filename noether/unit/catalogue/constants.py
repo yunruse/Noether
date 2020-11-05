@@ -31,10 +31,10 @@ k_e = Unit(1 / (4 * pi * e_0))
 
 # # Material
 
-n_a = 6.022_140_76e23 / mole
+N_a = 6.022_140_76e23 / mole
 
 k_B = Unit(1.380649e-23 * joule / kelvin, 'k_b')
-R = n_a * k_B
+R = N_a * k_B
 
 # # Atomic
 
