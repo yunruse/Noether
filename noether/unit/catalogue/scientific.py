@@ -4,11 +4,11 @@ Units typical to scientific contexts.
 
 from math import pi
 from .fundamental import (
-    U, metre, second, kilogram, candela
+    U, metre, second, kilogram, candela, mole
 )
 from .si import watt, joule, pascal, cumec
 from .conventional import cm, year
-from .constants import alpha, c, hbar, m_e, g
+from .constants import alpha, c, h, hbar, m_e, g, N_a
 
 # # Human
 
@@ -60,6 +60,7 @@ lightsecond = U(c * second, "ls", SI=True)
 lightyear = U(c * year, "ly", SI=True)
 
 solar_mass = U(1.98802e30 * kilogram, "msol")
+
 # this one's quite controversial.
 # currently using Hubble Space Telescope.
 # Friedman et al, 2019. https://doi.org/10.3847/1538-4357/ab2f73
@@ -74,3 +75,6 @@ apostilb = blondel = U(nit / pi, 'asb')
 lambert = U(stilb / pi, 'L')
 skot = U(apostilb / 1000, 'sk')
 bril = U(skot / 10_000, 'bril')
+
+# # Other outdated
+einstein = U(N_a * mole * h, 'E')
