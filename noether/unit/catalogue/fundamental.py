@@ -72,7 +72,7 @@ prefixes = {
 conf.register("prefix_fun", bool, False, """\
 Enable historical or other nonstandard SI prefixes""")
 
-conf.register("prefix_IEC", bool, False, """\
+conf.register("prefix_IEC", bool, True, """\
 Enable binary data prefixes (eg mebibyte = 1024^2 byte)""")
 
 from ..dimension import Dimension
