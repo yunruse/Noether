@@ -65,7 +65,7 @@ Currently (as of September 2020) Noether is in a hiatus. It will be updated with
 
 ## Legal
 
-Copyright (c) Mia yun Ruse ([yunru.se]) 2018–2020.
+Copyright (c) Mia yun Ruse ([yunru.se]) 2018–2021.
 
 With the exception of scientific data, which is cited where relevant,
 Noether is licensed under a [Creative Commons Attribution 4.0](cc) International
