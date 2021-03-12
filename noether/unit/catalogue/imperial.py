@@ -49,9 +49,9 @@ bushel = 4 * peck
 
 # Mass
 
-pound = U(453.59237 * gram, "lb")
+lb = pound = U(453.59237 * gram, "lb")
 
-ounce = U(pound / 16, "oz")
+oz = ounce = U(pound / 16, "oz")
 drachm = U(pound / 256, "dr")
 grain = U(pound / 7000, "gr")
 
