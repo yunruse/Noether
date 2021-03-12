@@ -61,6 +61,10 @@ t = 273.15 * kelvin
 
 natural_units = (e_0, c, h, e, MeV, MeVc, MeVc2, grav)
 
+# Materials
+
+water_density = 0.9998395 * kilogram / metre**2
+
 # # Estimations of body surface area
 
 # Sardinha et al, 2006. https://doi.org/10.1088/0967-3334/27/11/01
