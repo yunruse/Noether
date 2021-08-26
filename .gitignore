@@ -17,3 +17,5 @@ pypi_tokens.txt
 build/
 dist/
 noether.egg-info
+
+**/.DS_Store
