@@ -1,6 +1,8 @@
-"""
-Noether (+matplotlib): easy graphing
-"""
+'''
+Noether addon: Graphing
+
+Requires matplotlib, and astley if ran as a module.
+'''
 
 import argparse
 from collections import namedtuple

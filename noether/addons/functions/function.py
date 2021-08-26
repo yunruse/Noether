@@ -1,4 +1,4 @@
-from ..unit.measure import Measure
+from ...unit.measure import Measure
 
 
 class Function:

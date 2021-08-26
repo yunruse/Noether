@@ -1,4 +1,10 @@
-"""Noether: Useful numpy bindings"""
+'''
+Noether addon: Numpy bindings providing matrices and vectors
+
+Create matrices with & and |.
+
+Currently not very clever, though. Needs work.
+'''
 
 import math
 

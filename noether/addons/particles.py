@@ -1,12 +1,11 @@
 '''
-A category of fundamental and other subatomic particles.
+Noether extension: Fundamental and other subatomic particles.
 
 Tanabashi et al, 2019. https://doi.org/10.1103/physrevd.98.030001
-
 '''
 
 from dataclasses import dataclass, field
-from fractions import Fraction  # maybe .fraction.Fraction?
+from fractions import Fraction
 
 from ..unit.measure import Measure
 from ..unit.catalogue import mass, charge, dalton, MeVc2, e as Q

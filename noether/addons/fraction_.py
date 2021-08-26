@@ -1,3 +1,12 @@
+'''
+Noether addon: Fractions
+
+I'm going to be honest, I don't know what this does.
+It seems to extend fractions, but I legitimately don't know how.
+Might need some work.
+'''
+
+
 import fractions
 import numbers
 from abc import ABC, abstractmethod

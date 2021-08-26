@@ -1,8 +1,6 @@
-'''Math functions that support Units.'''
-
 import math
 
-from ..unit.catalogue import angle, dimensionless
+from ...unit.catalogue import angle, dimensionless
 from .function import UnaryFunction
 
 
