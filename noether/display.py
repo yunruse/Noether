@@ -1,9 +1,6 @@
 from .helpers import exp_mantissa, intify
 
 
-def dict_invert(d): return dict(map(reversed, list(d.items())))
-
-
 SUPERSCRIPT = str.maketrans(
     "-0123456789",
     "⁻⁰¹²³⁴⁵⁶⁷⁸⁹"
