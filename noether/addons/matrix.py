@@ -5,6 +5,14 @@ import math
 import numpy as np
 
 from ..helpers import product
+from .. import Measure
+
+# Nice syntax extensions.
+
+Measure.__and__ = lambda self, other: Matrix(self) & other
+Measure.__or__ = lambda self, other: Matrix(self) | other
+Measure.__rand__ = lambda self, other: other & Matrix(self)
+Measure.__ror__ = lambda self, other: other | Matrix(self)
 
 
 class Matrix(np.ndarray):

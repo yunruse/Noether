@@ -321,26 +321,6 @@ class Measure(float, metaclass=MeasureMeta):
         '''Not useful for direct equality comparison.'''
         return hash((float(self), self.dim))
 
-    # Matrix operators for user convenience.
-    # Import explicitly, as they are only used for user convenience;
-    # otherwise numpy would be loaded, slowing down startup
-
-    def __and__(self, other):
-        from ..matrix import Matrix
-        return Matrix(self) & other
-
-    def __rand__(self, other):
-        from ..matrix import Matrix
-        return other & Matrix(self)
-
-    def __or__(self, other):
-        from ..matrix import Matrix
-        return Matrix(self) | other
-
-    def __ror__(self, other):
-        from ..matrix import Matrix
-        return other | Matrix(self)
-
     # TODO: have @ display in a unit, eg `x @ mile&inch`
 
 
