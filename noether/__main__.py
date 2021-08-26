@@ -1,6 +1,7 @@
 # Run Noether with `python -im` for interactive console.
 import noether
 from . import *
+noe = noether
 
 # TODO: if given text, output what it evaluates to
 # TODO: set up syntax so, eg `4kg` -> `kg(4)`
