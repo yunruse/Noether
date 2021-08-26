@@ -1,3 +1,9 @@
+'''
+Light spectrum.
+
+This is used in Measure repr, if configured.
+'''
+
 SPECTRUM = {
     # ISO 21348. spacewx.com/pdf/SET_21348_2004.pdf
     # tag: (A, B) such that A <= λ < B
