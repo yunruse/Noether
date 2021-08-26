@@ -4,14 +4,14 @@ import math
 import os
 import sys
 import functools
-import fractions
 
-__all__ = "clear intify Fraction sqrt sign product tablify".split()
+__all__ = "clear intify sqrt sign product tablify".split()
 
 # display
 
 
 def clear(isTerminal=True):
+    '''Clear a terminal screen.'''
     if not isTerminal:
         print("\n" * 200)
     elif os.name == "nt":
@@ -21,6 +21,7 @@ def clear(isTerminal=True):
 
 
 def bell():
+    '''Give a bell to a terminal.'''
     sys.stdout.write("\a")
     sys.stdout.flush()
 
@@ -28,7 +29,11 @@ def bell():
 
 
 def intify(x):
-    """Change to an int if it is equal to one."""
+    '''
+    Convert to integer type iff the unit is an integer.
+
+    Useful in repr and other display stuff.
+    '''
     i = int(x)
     return i if x == i else x
 
@@ -46,9 +51,6 @@ def exp_mantissa(num, base=10):
     exp = math.floor(exp)  # 1 <= mantissa < 10
     mantissa = num / (base**exp)
     return exp, mantissa
-
-
-Fraction = fractions.Fraction
 
 
 @functools.wraps(math.sqrt)
