@@ -19,7 +19,7 @@ __copyright__ = "Copyright 2018-2021 Mia yun Ruse"
 __status__ = "Alpha 0.1.3"
 __email__ = "mia@yunru.se"
 
-from .conf import conf, conf_new
+from .conf import conf, conf_exists
 
 import math
 import cmath
@@ -39,11 +39,11 @@ from .unit import *  # noqa: F401, F403
 
 display = Unit.display
 
-if conf_new:
+if not conf_exists:
     conf.save()
     print("""\
 Welcome to Noether! Just so you know, the config file
 ~/.config/noether/default.conf has been created. You can toy
 about with noe.conf and then use noe.conf.save(), though.
 """)
-del conf_new
+del conf_exists

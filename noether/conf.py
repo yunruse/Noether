@@ -9,7 +9,7 @@ ConfigEntry = namedtuple(
     "ConfigEntry", "name type default description at_import".split())
 
 CONF_DIR = os.path.expanduser('~/.config/noether')
-conf_new = not os.path.exists(os.path.join(CONF_DIR, "default.conf"))
+conf_exists = os.path.exists(os.path.join(CONF_DIR, "default.conf"))
 os.makedirs(CONF_DIR, exist_ok=True)
 
 
@@ -99,5 +99,5 @@ class Config(dict):
 
 
 conf = Config()
-if not conf_new:
+if conf_exists:
     conf.load()
