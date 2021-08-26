@@ -167,7 +167,6 @@ class Fraction(fractions.Fraction, GenericFraction):
     This class implements rational numbers, and can form continued fractions.
     >>> Fraction(1)
     1
-    >>> Fraction
     '''
     factors = property(lambda x: (x.numerator, x.denominator))
 
@@ -177,6 +176,3 @@ class Fraction(fractions.Fraction, GenericFraction):
                 numerator, denominator, *factors, repeat=repeat, _normalize=_normalize)
         else:
             return fractions.Fraction.__new__(cls, numerator, denominator, _normalize=_normalize)
-
-
-e = Fraction(lambda i: 2 if i == 0 else 2*(1+i//3) if i % 3 == 2 else 1)

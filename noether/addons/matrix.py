@@ -4,7 +4,7 @@ import math
 
 import numpy as np
 
-from .helpers import product
+from ..helpers import product
 
 
 class Matrix(np.ndarray):

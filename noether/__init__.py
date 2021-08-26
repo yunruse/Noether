@@ -35,10 +35,6 @@ from .unit import *  # noqa: F401, F403
 from .unit import catalogue
 from .unit.catalogue import *
 
-from . import (
-    particles,
-)
-
 from .unit import *  # noqa: F401, F403
 
 display = Unit.display
