@@ -33,6 +33,13 @@ from .conventional import *
 from .scientific import *
 from .planck import planck, planck_g, planck_lh
 
+# TODO: add "ambiguous units" which only work in REPL
+# (eg `g` is either `gram` or `gravity`)
+# TODO: disallow cross-dimensional comparisons
+# TODO: let REPL (via default settings ofc)
+# automatically allow mass-volume operations
+# with a given warning "assuming water density"
+
 
 for i in 'cgs imperial historical unusual'.split():
     conf.register(

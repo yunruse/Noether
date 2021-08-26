@@ -18,4 +18,6 @@ class ChainedUnit(DisplayUnit):
     recommended. It can be used to instantiate a measurement,
     or to display other units.
     """
-    __slots__ = Unit.__slots__ + ""
+    __slots__ = Unit.__slots__ + tuple()
+
+    # a & b & c  =  (a & b) & c

@@ -61,6 +61,13 @@ t = 273.15 * kelvin
 
 natural_units = (e_0, c, h, e, MeV, MeVc, MeVc2, grav)
 
+# Useful constants
+# TODO: get these to import??
+
+percent = 1/100
+permille = 1/1_000
+ppm = 1/1_000_000
+
 # Materials
 
 water_density = 0.9998395 * kilogram / metre**2
@@ -71,3 +78,5 @@ water_density = 0.9998395 * kilogram / metre**2
 du_bois_index = 0.007184 / kilogram**F(17/40) * cm**F(29/40)
 # Mosteller, 1987. https://doi.org/10.1056/NEJM198710223171717
 mosteller_index = sqrt(1/3600) / (kilogram*cm) ** F(1/2)
+
+del F
