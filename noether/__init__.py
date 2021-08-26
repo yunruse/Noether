@@ -43,7 +43,9 @@ if not conf_exists:
     conf.save()
     print("""\
 Welcome to Noether! Just so you know, the config file
-~/.config/noether/default.conf has been created. You can toy
-about with noe.conf and then use noe.conf.save(), though.
+~/.config/noether/default.conf has been created.
+Check config with noether.conf, make changes,
+and then save with noether.conf.save().
+Cheerio!
 """)
 del conf_exists
