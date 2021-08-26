@@ -1,3 +1,9 @@
+'''
+Unit systems.
+
+Currently not in production.
+'''
+
 from .dimension import Dimension
 from .measure import Measure
 

@@ -1,8 +1,12 @@
-"""
+'''
 ChainedUnit, allowing for the `&` operator to link units together.
-"""
+
+Currently not in production.
+'''
 
 from .unit import Unit
+
+DisplayUnit = Unit  # ? what was the intent here?
 
 
 class ChainedUnit(DisplayUnit):
