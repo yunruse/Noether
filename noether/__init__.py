@@ -35,8 +35,6 @@ from .unit import *  # noqa: F401, F403
 from .unit import catalogue
 from .unit.catalogue import *
 
-from .particles import *
-
 from . import (
     particles,
 )
