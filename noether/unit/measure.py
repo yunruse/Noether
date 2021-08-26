@@ -26,8 +26,14 @@ class MeasureMeta(type):
         cls._display_units.clear()
 
     def display(cls, *units):
-        '''Registers unit for display, or, if given none, reverts all.'''
+        '''
+        Registers unit for display, or, if given none, reverts all.
+
+        Accepts any number of units as arguments, or a single list or tuple of units.
+        '''
         # TODO: desperately change display mechanism
+        if len(units) == 1 and isinstance(units[0], (list, tuple)):
+            units = units[0]
         if units:
             for u in units:
                 if not isinstance(u, DisplayMeasure):
