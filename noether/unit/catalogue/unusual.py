@@ -13,6 +13,12 @@ from .planck import planck
 pica = inch / 6
 # TODO: more typography! maybe a "point" unit?
 
+
+# # ISO 2848
+
+metric_foot = U(30*cm, "mf")
+metric_inch = U(0.4e-3 * metre, "mi")
+
 # # Various human activities
 
 cord = 128 * foot**3
