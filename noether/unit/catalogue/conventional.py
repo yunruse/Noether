@@ -44,5 +44,5 @@ sterad = steradian
 
 # # Electricity
 
-watt_hour = U(watt * hour, 'Wh', SI=True)
-amp_hour = ampere_hour = U(ampere * hour, 'Ah', SI=True)
+watt_hour = Wh = U(watt * hour, 'Wh', SI=True)
+amp_hour = ampere_hour = Ah = U(ampere * hour, 'Ah', SI=True)
