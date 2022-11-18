@@ -17,6 +17,8 @@ BASE_UNITS = (
 prefixes = {
     # "tag": [units], (prefixes)
     "SI_small": ([], (
+        ("quecto", "y",  1e-30),
+        ("ronto", "y",  1e-27),
         ("yocto", "y",  1e-24),
         ("zepto", "z",  1e-21),
         ("atto",  "a",  1e-18),
@@ -35,6 +37,8 @@ prefixes = {
         ("exa",   "E",  1e18),
         ("zetta", "Z",  1e21),
         ("yotta", "Y",  1e24),
+        ("ronna", "R",  1e27),
+        ("quetta", "Q",  1e30),
     )),
     "SI_rest": ([], (
         # not used for scaling, but added to any SI units
