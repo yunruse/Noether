@@ -85,12 +85,10 @@ Currently (as of August 2021) Noether is in **semi-hiatus**: when I find myself 
 
 ## Legal
 
-Copyright (c) Mia yun Ruse ([yunru.se]) 2018–2021.
+Copyright (c) 2018–2022 Mia yun Ruse ([yunru.se]).
 
-With the exception of scientific data, which is cited where relevant,
-Noether is licensed under a [Creative Commons Attribution 4.0](cc) International
-license. In non-legal terms: do whatever you like, including science! But if you
-redistribute or fork Noether, you must credit me.
+With the exception of scientific data, which are cited, Noether is licensed under a [Creative Commons Attribution 4.0](cc) International license. In non-legal terms: do whatever you like, including science!
+But if you redistribute or fork Noether, you must credit me.
 
 [yunru.se]: https://yunru.se/
 [cc]: https://creativecommons.org/licenses/by/4.0/
