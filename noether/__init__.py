@@ -15,7 +15,7 @@ not present, no matter how petty.
 """
 
 __author__ = "Mia yun Ruse"
-__copyright__ = "Copyright 2018-2021 Mia yun Ruse"
+__copyright__ = "Copyright (c) 2018-2022 Mia yun Ruse (yunru.se)"
 __status__ = "Alpha 0.1.3"
 __email__ = "mia@yunru.se"
 
