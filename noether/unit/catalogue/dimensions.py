@@ -7,6 +7,7 @@ corresponding SI units defined in si.py.
 
 from .fundamental import (
     U, Dimension,
+    dimensionless,
     distance, time, length, mass,
     current, luminosity, substance, temperature
 )
@@ -128,7 +129,10 @@ kinematic_viscosity = viscosity / density
 
 # TODO: clear up moduli
 bulk_modulus = volume * pressure / volume
-strain = length / length
+
+proportion = dimensionless
+strain = dimensionless
+reynolds_number = dimensionless
 
 
 # # Medical dimensions
