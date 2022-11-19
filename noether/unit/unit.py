@@ -1,3 +1,4 @@
+from typing import Tuple
 from ..conf import conf
 from .measure import DisplayMeasure
 from .dimension import Dimension
@@ -9,6 +10,9 @@ class Unit(DisplayMeasure):
     Vital for display and conversion.
     '''
     __slots__ = DisplayMeasure.__slots__ + ["symbols", "names"]
+
+    names: Tuple[str]
+    symbols: Tuple[str]
 
     def __new__(cls, value, *a, symbols=None, names=None, is_display=False, **kw):
         if isinstance(value, Dimension):
