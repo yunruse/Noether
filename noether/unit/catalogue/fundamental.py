@@ -2,6 +2,7 @@
 Fundamental units and unit-defining helpers from which all other units derive.
 """
 
+from typing import Dict, List, Tuple
 from ...conf import conf
 
 BASE_UNITS = (
@@ -14,8 +15,14 @@ BASE_UNITS = (
     ( 4, "time",        "T", "s",   True, "second")
 )
 
+_prefix = Tuple[str, str, float]
+prefixes: Dict[str, Tuple[
+    List[Unit], List[_prefix]]
+]
 prefixes = {
-    # "tag": [units], (prefixes)
+    "no_prefix": ([], (
+        ("", "", 1),
+    )),
     "SI_small": ([], (
         ("quecto", "y",  1e-30),
         ("ronto", "y",  1e-27),
@@ -85,27 +92,38 @@ from ..unit import Unit
 
 units_SI = set()
 
+
 def U(
         value, *symbols, display=None,
-        SI=False, pSIs=False, pSIb=False, pIEC=False):
+        si=False, si_large=False, iec=False
+    ):
     unit = Unit(value, *symbols, is_display=display)
-    if SI:
+
+    prefixes["no_prefix"][0].append(unit)
+
+    if si:
         units_SI.add(unit)
+        si_large = True
+
+        prefixes["SI_small"][0].append(unit)
         prefixes["SI_rest"][0].append(unit)
         if conf.prefix_fun:
             prefixes["SI_fun"][0].append(unit)
-        pSIs = pSIb = True
-    for b, tag in (pIEC and conf.prefix_IEC, "IEC"), (pSIs, "SI_small"), (pSIb, "SI_large"):
-        if b:
-            prefixes[tag][0].append(unit)
+
+    if si_large:
+        prefixes["SI_large"][0].append(unit)
+
+    if iec and conf.prefix_IEC:
+        prefixes["IEC"][0].append(unit)
     return unit
 
 # SI units
 
-for order, name, dim_sym, unit_sym, SI, *units in BASE_UNITS:
+
+for order, name, dim_sym, unit_sym, si, *units in BASE_UNITS:
     dim = Dimension.new(name, dim_sym, unit_sym, order=order*1000)
     globals()[name] = dim
-    unit = U(dim, unit_sym, SI=SI)
+    unit = U(dim, unit_sym, si=si)
     for name in units:
         globals()[name] = unit
 

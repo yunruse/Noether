@@ -14,7 +14,7 @@ from .constants import alpha, c, h, hbar, m_e, g, N_a
 
 mps = metre / second
 
-calorie = U(4.814 * joule, "cal", SI=True, display=False)
+calorie = U(4.814 * joule, "cal", si=True, display=False)
 kilocalorie = kcal = U(calorie * 1000, "kcal")
 langley = (calorie / cm**2)(41840)
 
@@ -23,13 +23,13 @@ met = U(58.2 * watt / metre ** 2, 'met')
 
 # # Atmospheric
 
-bar = U(1e5 * pascal, "bar", SI=True, display=False)
+bar = U(1e5 * pascal, "bar", si=True, display=False)
 atmosphere = atm = U(101_325 * pascal, "atm", display=False)
-technical_atmosphere = U(kilogram*g/cm**2, "at", SI=True)
+technical_atmosphere = U(kilogram*g/cm**2, "at", si=True)
 torr = U(atmosphere / 760, "torr")
-metre_mercury = meter_mercury = U(133_322.387_415 * pascal, "mhg", SI=True)
+metre_mercury = meter_mercury = U(133_322.387_415 * pascal, "mhg", si=True)
 sverdrup = U(cumec * 1e6, "Sv")
-amagat = U(2.686_7811 / metre**3, 'Am', SI=True)
+amagat = U(2.686_7811 / metre**3, 'Am', si=True)
 
 bmi = U(kilogram / metre**2, "BMI")
 met = U(58.2 * watt / metre ** 2, 'met')
@@ -53,11 +53,11 @@ barn = U(1e-28 * metre**2, "b")
 dalton = U(1.660_538_86e-27 * kilogram, "u")
 
 # # Astronomical
-parsec = U(3.0857e16 * metre, "pc", SI=True)
+parsec = U(3.0857e16 * metre, "pc", si=True)
 au = U(1.495_878_707e11 * metre, "au")
 
-lightsecond = U(c * second, "ls", SI=True)
-lightyear = U(c * year, "ly", SI=True)
+lightsecond = U(c * second, "ls", si=True)
+lightyear = U(c * year, "ly", si=True)
 
 solar_mass = U(1.98802e30 * kilogram, "msol")
 

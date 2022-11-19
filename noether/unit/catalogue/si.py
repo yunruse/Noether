@@ -9,7 +9,7 @@ from .fundamental import U, Dimension
 from .dimensions import *
 
 
-def SI(x, y): return U(x, y, display=True, SI=True)
+def SI(x, y): return U(x, y, display=True, si=True)
 
 # # Rotation
 

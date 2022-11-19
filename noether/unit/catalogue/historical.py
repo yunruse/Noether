@@ -87,5 +87,5 @@ poncelet = U(watt * 980.665, "p")
 # # Metre-tonne-second units
 
 stère = stere = ster = U(metre**3, "st")
-sthène = sthéne = sthene = funal = U(newton * 1000, "sn", SI=True)
+sthène = sthéne = sthene = funal = U(newton * 1000, "sn", si=True)
 pièze = pieze = U(sthène / metre**2, "pz")

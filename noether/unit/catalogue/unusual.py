@@ -63,8 +63,8 @@ potrzebie = metre * 2.263347539605392  # Donald Knuth
 ngogn = 1000 * potrzebie**3  # ibid
 smoot = metre * 1.67005  # Oliver R Smoot
 sheppey = mile * 7/8  # The Meaning of Liff
-warhol = U(minute * 15, SI=True)  # Andy Warhol
-pirateninja = U(1000 * watt_hour / sol, 'pn', SI=True)  # Andy Weir
+warhol = U(minute * 15, si=True)  # Andy Warhol
+pirateninja = U(1000 * watt_hour / sol, 'pn', si=True)  # Andy Weir
 yoda = kilogram(5600) * g(0.9) * metre(1.4) / second(3.6)  # XKCD
 new_york_second = planck_second = 3.39125e-44 * second
 

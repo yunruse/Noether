@@ -13,17 +13,17 @@ hour = U(minute * 60, "h")
 day = U(hour * 24, "d")
 week = day * 7
 fortnight = week * 2
-year = U(day * 365.25, "yr")
+year = U(day * 365.25, "yr", "ya", si_large=True)
 
 cm = metre / 100
 kmph = metre * 1000 / hour
 
 acre = U(100 * metre**2, "a")
 hectare = U(100 * acre, "ha")
-litre = U((metre / 10)**3, "l", SI=True)
+litre = U((metre / 10)**3, "l", si=True)
 
-gram = U(kilogram / 1000, "g", SI=True)
-tonne = ton = U(kilogram * 1000, "t", SI=True)
+gram = U(kilogram / 1000, "g", si=True)
+tonne = ton = U(kilogram * 1000, "t", si=True)
 
 bpm = U(hertz / 60, "bpm")
 
@@ -44,5 +44,5 @@ sterad = steradian
 
 # # Electricity
 
-watt_hour = Wh = U(watt * hour, 'Wh', SI=True)
-amp_hour = ampere_hour = Ah = U(ampere * hour, 'Ah', SI=True)
+watt_hour = Wh = U(watt * hour, 'Wh', si=True)
+amp_hour = ampere_hour = Ah = U(ampere * hour, 'Ah', si=True)

@@ -13,24 +13,24 @@ from .imperial import inch
 data = Dimension.new("data", dimsym="D", unitsym="B", order=500)
 areal_density = data / length**2
 
-byte = U(data, "B", SI=True, pIEC=True)
-bit = shannon = U(byte / 8, "b", SI=True, pIEC=True)
+byte = U(data, "B", si_large=True, iec=True)
+bit = shannon = U(byte / 8, "b", si_large=True, iec=True)
 
-nat = U(bit / log(2), 'nat', SI=True)
+nat = U(bit / log(2), 'nat', si=True)
 trit = nat * log(3)
 hartley = ban = dit = U(nat * log(10), 'Hart')
 
 mutation_rate = 1 / data
-base_pair = bp = U(bit * 2, "bp", SI=True)
+base_pair = bp = U(bit * 2, "bp", si=True)
 
 data_rate = data / time
-bps = U(bit / second, 'bps', display=True, SI=True, pIEC=True)
+bps = U(bit / second, 'bps', display=True, si_large=True, iec=True)
 
 # # Pixels and printing
 
 pixel_count = Dimension.new(
     "pixel_count", dimsym="P", unitsym="pix", order=400)
-pixel = dot = U(pixel_count, pSIb=True)
+pixel = dot = U(pixel_count, si_large=True)
 
 pixel_fill_rate = pixel_count / time
 image_density = pixel_count / data
