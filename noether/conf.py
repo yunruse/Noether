@@ -1,9 +1,15 @@
-
 import os
-import nestedtext as conf_provider
-
 from collections import namedtuple
 from warnings import warn
+
+try:
+    import nestedtext as conf_provider
+except ImportError:
+    conf_provider = None
+
+_CONF_PROVIDER = "nestedtext"
+
+
 
 ConfigEntry = namedtuple(
     "ConfigEntry", "name type default description at_import".split())
@@ -71,10 +77,13 @@ class Config(dict):
 
     def save(self, path="default.conf", rich=True):
         """
-        Save the current config as a TOML file.
+        Save the current config.
 
-        If rich is kept as True, config descriptions are added as TOML comments.
+        If rich is kept as True, config descriptions are added as comments.
         """
+        if conf_provider is None:
+            warn(f"cannot save: {_CONF_PROVIDER!r} was not found!", RuntimeWarning, 2)
+            return
         s = ""
         # alphabetical sort important
         for name in sorted(self.info.keys()):
@@ -90,6 +99,9 @@ class Config(dict):
         object.__setattr__(self, "dirty", False)
 
     def load(self, path="default.conf"):
+        if conf_provider is None:
+            warn(f"cannot load: {_CONF_PROVIDER!r} was not found!", RuntimeWarning, 2)
+            return
         self.clear()
         with open(process_path(path)) as f:
             config = conf_provider.load(f)
