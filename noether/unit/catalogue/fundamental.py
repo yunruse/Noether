@@ -5,6 +5,10 @@ Fundamental units and unit-defining helpers from which all other units derive.
 from typing import Dict, List, Tuple
 from ...conf import conf
 
+from ..dimension import Dimension
+from ..measure import Measure
+from ..unit import Unit
+
 BASE_UNITS = (
     (-3, "luminosity",  "J", "cd",  True,  "candela"),
     (-2, "current",     "I", "A",   True,  "amp", "ampere"),
@@ -85,10 +89,6 @@ Enable historical or other nonstandard SI prefixes""")
 
 conf.register("prefix_IEC", bool, True, """\
 Enable binary data prefixes (eg mebibyte = 1024^2 byte)""")
-
-from ..dimension import Dimension
-from ..measure import Measure
-from ..unit import Unit
 
 units_SI = set()
 
