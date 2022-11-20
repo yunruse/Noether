@@ -8,7 +8,7 @@ corresponding SI units defined in si.py.
 from .fundamental import (
     U, Dimension,
     dimensionless,
-    distance, time, length, mass,
+    time, length, mass,
     current, luminosity, substance, temperature
 )
 
@@ -20,7 +20,7 @@ from .fundamental import (
 area = length**2
 volume = length**3
 
-velocity = speed = distance / time
+velocity = speed = length / time
 acceleration = speed / time
 jerk = acceleration / time
 jounce = snap = jerk / time
@@ -29,7 +29,7 @@ pop = crackle / time
 lock = pop / time
 drop = pop / time
 
-absement = distance * time
+absement = length * time
 absity = absement * time
 abseleration = absity * time
 abserk = abseleration * time
@@ -45,7 +45,7 @@ solid_angle = angle**2
 
 force = weight = mass * acceleration
 pressure = force / area
-energy = force * distance
+energy = force * length
 power = energy / time
 
 momentum = mass * speed
@@ -57,7 +57,7 @@ angular_jerk = angular_acceleration / time
 inertia = mass * angular_velocity
 torque = inertia * angular_acceleration
 
-gravitational_gradient = acceleration / distance
+gravitational_gradient = acceleration / length
 
 # # Electromagnetism
 
@@ -137,6 +137,7 @@ reynolds_number = dimensionless
 
 # # Medical dimensions
 
+distance = length
 height = length
 width = breadth = length
 depth = length

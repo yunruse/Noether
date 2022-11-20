@@ -130,5 +130,3 @@ for order, name, dim_sym, unit_sym, si, *units in BASE_UNITS:
 del dim, unit
 
 dimensionless = Dimension()
-
-distance = length
