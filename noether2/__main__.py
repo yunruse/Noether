@@ -1,8 +1,8 @@
 # Run Noether with `python -im` for interactive console.
-import noether
-from noether.conf import conf_exists
+import noether2
+from noether2.conf import conf_exists
 from . import *
-noe = noether
+noe = noether2
 
 if not conf_exists:
     print('\n')

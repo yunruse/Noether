@@ -1,7 +1,7 @@
 from unittest import TestCase
 
-from noether import Dimension
-from noether.display import number_string
+from noether2 import Dimension
+from noether2.display import number_string
 
 
 class test_unit_display(TestCase):

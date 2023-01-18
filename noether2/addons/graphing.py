@@ -13,7 +13,7 @@ import matplotlib  # noqa: F401
 from matplotlib import animation, pyplot as plt
 
 from .matrix import Matrix, Vector  # noqa: F401
-import noether
+import noether2
 
 __all__ = """\
 np matplotlib plt Vector Matrix \
@@ -198,7 +198,7 @@ def main(ns):
     funcs = []
     for expression in ns.function:
         node = astley.parse(expression, mode='eval').body
-        func = astley.Lambda(signature, node).eval(noether.__dict__)
+        func = astley.Lambda(signature, node).eval(noether2.__dict__)
         func.__name__ = expression.replace('**', '^').replace('*', '·')
         funcs.append(func)
 
