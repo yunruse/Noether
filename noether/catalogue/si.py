@@ -1,9 +1,8 @@
-from ..core.fundamental import *
 from ..core import Unit
-
 from ..core.prefixes import SI
 from ..core.DisplaySet import display as I
 
+from ..core.fundamental import *
 from .dimensions import *
 
 becquerel = I(Unit(frequency, 'becquerel', "Bq", SI))
