@@ -1,5 +1,6 @@
 # 0.2
 - Total rewrite of core code!
+- Unit testing added
 - Improved REPL
     - Support for `rich` API. The `python -im noether` REPL automatically uses it.
 - `Measure` is now type-generic and frozen.
