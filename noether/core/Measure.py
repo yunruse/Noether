@@ -177,8 +177,10 @@ class Measure(NoetherRepr, Generic[T]):
         if isinstance(other, Measure):
             value = op(self.value, other.value)
             dim = op(self.dim, other.dim)
-            if self.epsilon is not None and other.epsilon is not None:
-                stddev = value * (self.epsilon**2 + other.epsilon**2)**0.5
+            if self.epsilon is not None or other.epsilon is not None:
+                se = self.epsilon or 0
+                oe = other.epsilon or 0
+                stddev = value * (se**2 + oe**2)**0.5
         elif isinstance(other, Dimension):
             dim = op(self.dim, other)
         else:
