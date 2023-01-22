@@ -4,6 +4,9 @@ Functions for transforming various numbers into strings.
 Handles Unicode.
 '''
 
+from math import log10
+from decimal import Decimal
+from numbers import Real
 from .config import Config, conf
 
 Config.register("display_unicode_symbols", True, '''\
@@ -35,6 +38,34 @@ def superscript(number):
     if conf.get('display_unicode_exponent'):
         return str(number).translate(SUPERSCRIPT)
     return f'**{number}'
+
+
+def _to_decimal(number: Real):
+    if isinstance(number, float):
+        return Decimal(str(number))
+    return Decimal(number)
+
+
+def uncertainty(number: Decimal, stddev: Decimal):
+    '''Display'''
+    a = _to_decimal(number)
+    b = _to_decimal(stddev)
+
+    if not (0 < b < 1):
+        return f'{a}({b})'
+
+    ai, af = str(a).split('.', 1)
+    bi, bf = str(b).split('.', 1)
+    assert bi == '0'
+
+    ad = len(af)
+    bd = len(bf)
+    az = bd - ad
+    bz = -1 - b.adjusted()
+    bf = bf[bz:]
+    af += '0'*az
+
+    return f'{ai}.{af}({bf})'
 
 
 class NoetherRepr:
