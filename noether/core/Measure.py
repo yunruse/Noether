@@ -22,6 +22,9 @@ When comparing a Measure, compare on the uncertainty.
 For == this means 'do the ranges overlap';
 for < it means 'do the ranges not overlap'.""")
 
+Config.register("measure_uncertainty_shorthand", False, """\
+Display e.g. 0.15(2) instead of 0.15 ± 0.02.""")
+
 T = TypeVar('T', int, float, Real)
 
 
@@ -119,16 +122,6 @@ class Measure(NoetherRepr, Generic[T]):
     # |__/ |_)|__/|\__| \/
     #         |        _/
 
-    # TODO: units!
-
-    def __str__(self):
-        s = str(self.value)
-        if self.stddev is not None:
-            pm = plus_minus_symbol()
-            s = f'{s} {pm} {self.stddev}'
-
-        return s
-
     def __repr_code__(self):
         chunks = [repr(self.value)]
         if self.stddev is not None:
@@ -146,7 +139,11 @@ class Measure(NoetherRepr, Generic[T]):
 
     def canonical_value(self):
         if self.stddev is not None:
-            return uncertainty(self.value, self.stddev)
+            if conf.get('measure_uncertainty_shorthand'):
+                return uncertainty(self.value, self.stddev)
+            else:
+                pm = plus_minus_symbol()
+                return f'{self.value} {pm} {self.stddev}'
         if isinstance(self.value, float) and self.value.is_integer():
             return repr(int(self.value))
         return repr(self.value)
@@ -156,6 +153,8 @@ class Measure(NoetherRepr, Generic[T]):
         d = self.dim.canonical_name()
         v = self.canonical_value()
         return f'{v} {s} <{d}>'
+
+    __str__ = __noether__
 
     def __rich__(self):
         s = self._symbol()
