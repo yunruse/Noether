@@ -147,6 +147,8 @@ class Measure(NoetherRepr, Generic[T]):
     def canonical_value(self):
         if self.stddev is not None:
             return uncertainty(self.value, self.stddev)
+        if isinstance(self.value, float) and self.value.is_integer():
+            return repr(int(self.value))
         return repr(self.value)
 
     def __noether__(self):
