@@ -142,6 +142,9 @@ class Measure(NoetherRepr, Generic[T]):
         if units:
             return units[-1].symbols[0]
 
+        return self.dim.as_fundamental(
+            display=lambda x: display.dimension_symbol[x])
+
     def _display_values(self):
         # this is overridden in MeasureRelative
         return self.value, self.stddev

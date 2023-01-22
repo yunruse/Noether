@@ -1,6 +1,7 @@
 from dataclasses import dataclass
 from fractions import Fraction
 from numbers import Number
+from typing import Callable
 
 from ..helpers import ImmutableDict, reorder_dict_by_values
 from ..errors import DimensionError
@@ -62,14 +63,15 @@ class Dimension(ImmutableDict):
     def __hash__(self):
         return hash(tuple(sorted(self.items())))
 
-    # Display
-
     def is_fundamental(self):
         return self.values() == [1]
 
-    def as_fundamental(self):
+    def as_fundamental(
+        self, /,
+        display: Callable[[str], str] = lambda x: x
+    ):
         if not self:
-            return 'dimensionless'
+            return display('dimensionless')
         exponents = list(self.items())
         exponents.sort(key=lambda q: (q[1] < 0, self._names[q[0]].order))
 
@@ -81,7 +83,7 @@ class Dimension(ImmutableDict):
                 symbol = '/'
                 exp = -exp
 
-            string += f' {symbol} {name}'
+            string += f' {symbol} {display(name)}'
             if exp != 1:
                 string += '**'
                 string += f'({exp})' if use_brackets else f'{exp}'

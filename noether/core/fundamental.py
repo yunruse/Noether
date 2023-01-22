@@ -8,32 +8,13 @@ from .Unit import Unit
 from .prefixes import SI
 from .DisplaySet import display as I
 
-BASE_UNITS = [
-    # display_order, name, dimension symbol,
-    #   is base for prefixes, unit symbol, unit names
-    (-3, "luminosity",  "J",
-        True, "cd", ["candela"]),
-    (-2, "current", "I",
-        True, "A", ["amp", "ampere"]),
-    (-1, "temperature", "Θ",
-        True, "K", ["kelvin"]),
-    (1, "mass", "M",
-        False, "kg", ["kilogram"]),
-    (2, "substance", "N",
-        True, "mol", ["mole"]),
-    (3, "length", "L",
-        True, "m", ["metre", "meter"]),
-    (4, "time", "T",
-        True, "s", ["second"]),
-]
-
-luminosity = Dimension.new('luminosity', 'J', -7)
-current = Dimension.new('current', 'I', -6)
-temperature = Dimension.new('temperature', 'Θ', -5)
-mass = Dimension.new('mass', 'M', -4)
-substance = Dimension.new('substance', 'N', -3)
-length = Dimension.new('length', 'L', -2)
-time = Dimension.new('time', 'T', -1)
+luminosity = I(Dimension.new('luminosity', 'J', -7), 'luminosity')
+current = I(Dimension.new('current', 'I', -6), 'current')
+temperature = I(Dimension.new('temperature', 'Θ', -5), 'temperature')
+mass = I(Dimension.new('mass', 'M', -4), 'mass')
+substance = I(Dimension.new('substance', 'N', -3), 'substance')
+length = I(Dimension.new('length', 'L', -2), 'length')
+time = I(Dimension.new('time', 'T', -1), 'time')
 
 candela = I(Unit(
     Measure(dim=luminosity), 'candela', 'cd', SI))
