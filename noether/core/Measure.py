@@ -2,13 +2,18 @@
 from dataclasses import dataclass
 from functools import total_ordering
 import operator
-from typing import Optional, TypeVar, Generic
+from typing import Optional, TypeVar, Generic, TYPE_CHECKING
 from numbers import Real
 
 from ..errors import DimensionError
 from .config import Config, conf
 from .display import NoetherRepr, canonical_number
 from .Dimension import Dimension, dimensionless
+
+if TYPE_CHECKING:
+    from .Unit import Unit
+    from .MeasureRelative import MeasureRelative
+
 
 Config.register("measure_openlinear", False, """\
 Allow any addition, even between incompatible units
@@ -137,10 +142,14 @@ class Measure(NoetherRepr, Generic[T]):
         if units:
             return units[-1].symbols[0]
 
+    def _display_values(self):
+        # this is overridden in MeasureRelative
+        return self.value, self.stddev
+
     def __noether__(self):
         s = self._symbol()
         d = self.dim.canonical_name()
-        v = canonical_number(self.value, self.stddev)
+        v = canonical_number(*self._display_values())
         return f'{v} {s} <{d}>'
 
     __str__ = __noether__
@@ -148,7 +157,7 @@ class Measure(NoetherRepr, Generic[T]):
     def __rich__(self):
         s = self._symbol()
         d = self.dim.canonical_name()
-        v = canonical_number(self.value, self.stddev)
+        v = canonical_number(*self._display_values())
         return f'{v} [red]{s}[/] <[grey italic]{d}[/]>'
 
     #  /~~\                   |     '
@@ -268,4 +277,23 @@ class Measure(NoetherRepr, Generic[T]):
                 return s_max < o_min
             return self.value < other.value
 
-    # TODO: rest :)
+    #  /~~       |               |~~\ '      |
+    # |  |   |(~~|~/~\|/~\ /~\   |   ||(~|~~\|/~~|\  /
+    #  \__\_/|_) | \_/|   |   |  |__/ |_)|__/|\__| \/
+    #                                    |        _/
+
+    def __matmul__(self, unit: 'Unit'):
+        from .Unit import Unit
+
+        if not isinstance(unit, Unit):
+            raise TypeError('Can only use @ (display relative to) on a Unit.')
+        if self.dim != unit.dim and not conf.get('measure_openlinear'):
+            raise DimensionError(
+                f"{self.dim!r} and {unit.dim!r}"
+                " are incompatible dimensions."
+                " Enable conf.measure_openlinear to suppress this.")
+        return MeasureRelative(self, unit)
+
+
+# Avoid import loops
+from .MeasureRelative import MeasureRelative  # noqa

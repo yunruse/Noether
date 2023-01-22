@@ -8,6 +8,7 @@
     - Typing supports any `Real` subclass, eg `int`, `float`, `Fraction`.
     - `stddev` is `None` by default rather than zero.
     - You can use `.cast(T)` to cast to a type.
+    - You can use `measure @ unit` for quick display in that unit.
 
 - Config handler changed to `toml`.
     - Now loads from `${XDG_CONFIG_HOME:-~/.config}/noether/default.toml`.
