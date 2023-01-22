@@ -71,7 +71,7 @@ class Dimension(ImmutableDict):
         if not self:
             return 'dimensionless'
         exponents = list(self.items())
-        exponents.sort(key=lambda q: (q[1] < 0, abs(q[1])))
+        exponents.sort(key=lambda q: (q[1] < 0, self._names[q[0]].order))
 
         string = '1'
         for name, exp in exponents:
