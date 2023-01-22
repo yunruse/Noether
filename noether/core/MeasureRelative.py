@@ -20,10 +20,5 @@ class MeasureRelative(Measure):
         Measure.__init__(self, measure)
         object.__setattr__(self, 'unit', unit)
 
-    def _symbol(self):
-        return self.unit.symbols[0]
-
-    def _display_values(self):
-        return (
-            self.value / self.unit.value,
-            None if self.stddev is None else self.stddev / self.unit.value)
+    def display_unit(self):
+        return self.unit

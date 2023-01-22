@@ -136,32 +136,34 @@ class Measure(NoetherRepr, Generic[T]):
 
         return 'Measure({})'.format(', '.join(chunks))
 
-    def _symbol(self):
-        from .DisplaySet import display  # noqa
+    def display_unit(self):
+        from .DisplaySet import display
         units = display.units.get(self.dim, [])
         if units:
-            return units[-1].symbols[0]
+            return units[-1]
+        return self  # fallback
 
-        return self.dim.as_fundamental(
+    @staticmethod
+    def _display_measure(measure: 'Measure'):
+        # Fallback if no unit found
+
+        from .DisplaySet import display  # noqa
+        v = canonical_number(measure.value, measure.stddev)
+        s = measure.dim.as_fundamental(
             display=lambda x: display.dimension_symbol[x])
-
-    def _display_values(self):
-        # this is overridden in MeasureRelative
-        return self.value, self.stddev
+        return f'{v} {s}'
 
     def __noether__(self):
-        s = self._symbol()
+        v = self.display_unit()._display_measure(self)
         d = self.dim.canonical_name()
-        v = canonical_number(*self._display_values())
-        return f'{v} {s} <{d}>'
+        return f'{v} <{d}>'
 
     __str__ = __noether__
 
     def __rich__(self):
-        s = self._symbol()
+        v = self.display_unit()._display_measure(self)
         d = self.dim.canonical_name()
-        v = canonical_number(*self._display_values())
-        return f'{v} [red]{s}[/] <[grey italic]{d}[/]>'
+        return f'{v} <[grey italic]{d}[/]>'
 
     #  /~~\                   |     '
     # |  __/~//~\|/~\ /~\ /~/~|~|/~\|/~~

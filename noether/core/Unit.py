@@ -4,6 +4,7 @@ Unit - a subclass of Measure which has its own name(s) and symbol(s).
 Used in turn to display Measure.
 '''
 
+from .display import canonical_number
 from .prefixes import Prefix
 from .Dimension import Dimension
 from .Measure import Measure
@@ -51,3 +52,12 @@ class Unit(Measure):
 
     def __rich__(self):
         return f'[bold]{self.names[0]}[/] ([italic]{self.dim.canonical_name()}[/])'
+
+    def _display_measure(self, measure: Measure):
+        val = measure.value / self.value
+        stddev = None
+        if measure.stddev is not None:
+            stddev = measure.stddev / self.value
+
+        v = canonical_number(val, stddev)
+        return f'{v} {self.symbols[0]}'
