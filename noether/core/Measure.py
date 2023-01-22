@@ -7,7 +7,7 @@ from numbers import Real
 
 from ..errors import DimensionError
 from .config import Config, conf
-from .display import plus_minus_symbol, NoetherRepr, uncertainty
+from .display import NoetherRepr, canonical_number
 from .Dimension import Dimension, dimensionless
 
 Config.register("measure_openlinear", False, """\
@@ -137,21 +137,10 @@ class Measure(NoetherRepr, Generic[T]):
         if units:
             return units[-1].symbols[0]
 
-    def canonical_value(self):
-        if self.stddev is not None:
-            if conf.get('measure_uncertainty_shorthand'):
-                return uncertainty(self.value, self.stddev)
-            else:
-                pm = plus_minus_symbol()
-                return f'{self.value} {pm} {self.stddev}'
-        if isinstance(self.value, float) and self.value.is_integer():
-            return repr(int(self.value))
-        return repr(self.value)
-
     def __noether__(self):
         s = self._symbol()
         d = self.dim.canonical_name()
-        v = self.canonical_value()
+        v = canonical_number(self.value, self.stddev)
         return f'{v} {s} <{d}>'
 
     __str__ = __noether__
@@ -159,7 +148,7 @@ class Measure(NoetherRepr, Generic[T]):
     def __rich__(self):
         s = self._symbol()
         d = self.dim.canonical_name()
-        v = self.canonical_value()
+        v = canonical_number(self.value, self.stddev)
         return f'{v} [red]{s}[/] <[grey italic]{d}[/]>'
 
     #  /~~\                   |     '

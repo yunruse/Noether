@@ -68,6 +68,18 @@ def uncertainty(number: Decimal, stddev: Decimal):
     return f'{ai}.{af}({bf})'
 
 
+def canonical_number(number, stddev):
+    if stddev is not None:
+        if conf.get('measure_uncertainty_shorthand'):
+            return uncertainty(number, stddev)
+        else:
+            pm = plus_minus_symbol()
+            return f'{number} {pm} {stddev}'
+    if isinstance(number, float) and number.is_integer():
+        return repr(int(number))
+    return repr(number)
+
+
 class NoetherRepr:
     def __repr_code__(self):
         return str(self)
