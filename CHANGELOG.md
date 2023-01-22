@@ -1,0 +1,13 @@
+# 0.2
+- Total rewrite of core code!
+- Improved REPL
+    - Support for `rich` API. The `python -im noether` REPL automatically uses it.
+- `Measure` is now type-generic and frozen.
+    - Typing supports any `Real` subclass, eg `int`, `float`, `Fraction`, `Decimal`.
+    - `stddev` is `None` by default rather than zero.
+    - You can use `.cast(T)` to cast to a type.
+- Config handler changed to `toml`.
+    - Now loads from `${XDG_CONFIG_HOME:-~/.config}/noether/default.toml`.
+    - Does not automatically create a config file to avoid filespam.
+    - `measure_compare_uncertainty` is now disabled by default.
+    - `display_repr_code` will use a more Pythonic `repr` showing how to generate an object.
