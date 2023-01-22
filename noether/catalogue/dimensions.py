@@ -67,7 +67,8 @@ conductance = I(resistance**-1, 'conductance')
 resistivity = I(resistance / length, 'resistivity')
 reluctance = I(1 / inductance, 'reluctance')
 
-capicitive_reactance = I(capacitance * angular_velocity, 'capicitive_reactance')
+capicitive_reactance = I(
+    capacitance * angular_velocity, 'capicitive_reactance')
 inductive_reactance = I(inductance * angular_velocity, 'inductive_reactance')
 
 permeability = I(inductance * length / area, 'permeability')
@@ -83,21 +84,25 @@ luminous_flux = luminous_power = I(luminosity * angle**2, 'luminous_power')
 
 luminous_energy = I(luminous_flux * time, 'luminous_energy')
 luminance = I(luminosity / area, 'luminance')
-illuminance = luminous_exitance = luminous_emittance = I(luminous_flux / area, 'luminous_emittance')
+illuminance = luminous_exitance = luminous_emittance = I(
+    luminous_flux / area, 'illuminance', 'luminous_exitance', 'luminous_emittance')
 
 luminous_exposure = I(illuminance * time, 'luminous_exposure')
-luminous_energy_density = I(luminous_energy / volume, 'luminous_energy_density')
+luminous_energy_density = I(
+    luminous_energy / volume, 'luminous_energy_density')
 luminous_efficiacy = I(luminosity / power, 'luminous_efficiacy')
 
 dose = I(energy / mass, 'dose')
 
-irradiance = intensity = heat_flux = I(power / area, 'heat_flux')
+irradiance = intensity = heat_flux = I(
+    power / area, 'irradiance', 'intensity', 'heat_flux')
 
-emission_coefficient = I(length / time**3 * solid_angle, 'emission_coefficient')
+emission_coefficient = I(
+    length / time**3 * solid_angle, 'emission_coefficient')
 
 # % Material properties
 
-flow = fluid_velocity = I(volume / time, 'fluid_velocity')
+flow = fluid_velocity = I(volume / time, 'fluid_velocity', 'flow')
 catalytic_activity = I(substance / time, 'catalytic_activity')
 
 linear_density = I(mass / length, 'linear_density')
@@ -124,6 +129,7 @@ kinematic_viscosity = I(viscosity / density, 'kinematic_viscosity')
 # TODO: clear up moduli
 bulk_modulus = I(volume * pressure / volume, 'bulk_modulus')
 
+I(dimensionless, 'dimensionless')
 proportion = I(dimensionless, 'proportion')
 strain = I(dimensionless, 'strain')
 reynolds_number = I(dimensionless, 'reynolds_number')
@@ -131,16 +137,16 @@ reynolds_number = I(dimensionless, 'reynolds_number')
 # % Thermal properties
 
 thermal_conductance = I(power / temperature, 'thermal_conductance')
-thermal_conductivity = I(thermal_conductance * length / area, 'thermal_conductivity')
+thermal_conductivity = I(thermal_conductance *
+                         length / area, 'thermal_conductivity')
 thermal_resistance = I(temperature / power, 'thermal_resistance')
-thermal_resistivity = I(thermal_resistance * length / area, 'thermal_resistivity')
+thermal_resistivity = I(thermal_resistance * length /
+                        area, 'thermal_resistivity')
 
 # % Miscellaneous
 
-distance = I(length, 'distance')
-height = I(length, 'height')
-width = breadth = I(length, 'breadth')
-depth = I(length, 'depth')
+length = distance = height = I(length, 'length', 'distance', 'height')
+width = breadth = depth = I(length, 'width', 'breadth', 'depth')
 body_mass_index = I(mass / height**2, 'body_mass_index')
 
 vehicle_efficiency = I(distance / volume, 'vehicle_efficiency')
