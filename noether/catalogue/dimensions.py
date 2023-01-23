@@ -37,7 +37,7 @@ frequency = I(time**-1, 'frequency')
 
 # % Dynamics
 
-force = weight = I(mass * acceleration, 'weight')
+force = weight = I(mass * acceleration, 'force', 'weight')
 pressure = I(force / area, 'pressure')
 energy = I(force * length, 'energy')
 power = I(energy / time, 'power')
@@ -135,6 +135,9 @@ strain = I(dimensionless, 'strain')
 reynolds_number = I(dimensionless, 'reynolds_number')
 
 # % Thermal properties
+
+gravity = I(acceleration * area / mass, 'gravity')
+gravitational_parameter = I(gravity * mass, 'gravitational_parameter')
 
 thermal_conductance = I(power / temperature, 'thermal_conductance')
 thermal_conductivity = I(thermal_conductance *
