@@ -42,28 +42,28 @@ class PrefixSet(list[Prefix]):
 
 
 SI_small = PrefixSet('SI_small', [
-    ("quecto", "y", '1e-30'),
-    ("ronto", "y", '1e-27'),
-    ("yocto", "y", '1e-24'),
-    ("zepto", "z", '1e-21'),
-    ("atto",  "a", '1e-18'),
-    ("femto", "f", '1e-15'),
-    ("pico",  "p", '1e-12'),
-    ("nano",  "n", '1e-9'),
-    ("micro", "µ", '1e-6'),
     ("milli", "m", '1e-3'),
+    ("micro", "µ", '1e-6'),  # GCWM 11
+    ("nano",  "n", '1e-9'),  # GCWM 11
+    ("pico",  "p", '1e-12'),  # GCWM 11
+    ("femto", "f", '1e-15'),  # GCWM 12
+    ("atto",  "a", '1e-18'),  # GCWM 12
+    ("zepto", "z", '1e-21'),  # GCWM 19
+    ("yocto", "y", '1e-24'),  # GCWM 19
+    ("ronto", "y", '1e-27'),  # GCWM 26
+    ("quecto", "y", '1e-30'),  # GCWM 26
 ])
 SI_large = PrefixSet('SI_large', [
     ("kilo",  "k", '1e3'),
-    ("mega",  "M", '1e6'),
-    ("giga",  "G", '1e9'),
-    ("tera",  "T", '1e12'),
-    ("peta",  "P", '1e15'),
-    ("exa",   "E", '1e18'),
-    ("zetta", "Z", '1e21'),
-    ("yotta", "Y", '1e24'),
-    ("ronna", "R", '1e27'),
-    ("quetta", "Q", '1e30'),
+    ("mega",  "M", '1e6'),  # GCWM 11
+    ("giga",  "G", '1e9'),  # GCWM 11
+    ("tera",  "T", '1e12'),  # GCWM 11
+    ("peta",  "P", '1e15'),  # GCWM 15
+    ("exa",   "E", '1e18'),  # GCWM 15
+    ("zetta", "Z", '1e21'),  # GCWM 19
+    ("yotta", "Y", '1e24'),  # GCWM 19
+    ("ronna", "R", '1e27'),  # GCWM 26
+    ("quetta", "Q", '1e30'),  # GCWM 26
 ])
 SI_conventional = PrefixSet('SI_conventional', [
     ("centi", "c", '1e-2'),
@@ -91,6 +91,8 @@ IEC = PrefixSet('IEC', [
     ("exbi", "Ei", _2**60),
     ("zebi", "Zi", _2**70),
     ("yobi", "Yi", _2**80),
+    # ("robi", "Ri", _2**90),
+    # ("quebi", "Qi", _2**100),
 ])
 
 SI = SI_large + SI_small + SI_conventional
