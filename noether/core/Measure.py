@@ -299,6 +299,10 @@ class Measure(NoetherRepr, Generic[T]):
                 " Enable conf.measure_openlinear to suppress this.")
         return MeasureRelative(self, unit)
 
+    def __and__(self, unit: 'Unit'):
+        from .ChainedUnit import ChainedUnit
+        return ChainedUnit(self, unit)
+
 
 # Avoid import loops
 from .MeasureRelative import MeasureRelative  # noqa

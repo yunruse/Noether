@@ -22,3 +22,7 @@ class MeasureRelative(Measure):
 
     def display_unit(self):
         return self.unit
+
+    def __and__(self, other: 'Unit'):
+        # @ binds tighter than &, so correct for this
+        return MeasureRelative(self, self.unit & other)
