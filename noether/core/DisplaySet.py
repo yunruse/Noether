@@ -26,7 +26,7 @@ class DisplaySet:
 
             if value.symbols:
                 for n in self.dimension_names.get(value.dim, []):
-                    self.dimension_symbol[n] = value.symbols[0]
+                    self.dimension_symbol[n] = value.symbol
 
         return value
 

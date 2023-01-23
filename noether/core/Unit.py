@@ -36,6 +36,14 @@ class Unit(Measure):
             setattr(k, (v, ) if isinstance(v, str) else v or [])
         setattr('prefixes', prefixes or [])
 
+    @property
+    def symbol(self):
+        return self.symbols[0]
+
+    @property
+    def name(self):
+        return self.names[0]
+
     def __repr_code__(self):
         chunks = [Measure.__repr__(self)]
         for i in self.names, self.symbols:
@@ -48,10 +56,10 @@ class Unit(Measure):
         return 'Unit({})'.format(', '.join(chunks))
 
     def __str__(self):
-        return f'{self.names[0]} ({self.dim!r})'
+        return f'{self.name} ({self.dim!r})'
 
     def __rich__(self):
-        return f'[bold]{self.names[0]}[/] ([italic]{self.dim.canonical_name()}[/])'
+        return f'[bold]{self.name}[/] ([italic]{self.dim.canonical_name()}[/])'
 
     def _display_measure(self, measure: Measure):
         val = measure.value / self.value
@@ -60,4 +68,4 @@ class Unit(Measure):
             stddev = measure.stddev / self.value
 
         v = canonical_number(val, stddev)
-        return f'{v} {self.symbols[0]}'
+        return f'{v} {self.symbol}'
