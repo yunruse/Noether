@@ -142,15 +142,17 @@ class Measure(NoetherRepr, Generic[T]):
         if units:
             return units[-1]
         return self  # fallback
+    
+    def as_fundamental(self):
+        from .DisplaySet import display  # noqa
+        return self.dim.as_fundamental(
+            display=lambda x: display.dimension_symbol[x])
 
     @staticmethod
     def _display_measure(measure: 'Measure'):
         # Fallback if no unit found
-
-        from .DisplaySet import display  # noqa
         v = canonical_number(measure.value, measure.stddev)
-        s = measure.dim.as_fundamental(
-            display=lambda x: display.dimension_symbol[x])
+        s = measure.as_fundamental()
         return f'{v} {s}'
 
     def __noether__(self):

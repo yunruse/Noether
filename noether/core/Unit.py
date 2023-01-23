@@ -38,11 +38,19 @@ class Unit(Measure):
 
     @property
     def symbol(self):
-        return self.symbols[0]
+        if self.symbols:
+            return self.symbols[0]
+        if self.names:
+            return self.names[0]
+        return self.as_fundamental()
 
     @property
     def name(self):
-        return self.names[0]
+        if self.names:
+            return self.names[0]
+        if self.symbols:
+            return self.symbols[0]
+        return self.as_fundamental()
 
     def __repr_code__(self):
         chunks = [Measure.__repr__(self)]
