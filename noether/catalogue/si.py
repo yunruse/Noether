@@ -1,5 +1,5 @@
 from ..core import Unit
-from ..core.prefixes import SI
+from ..core.prefixes import SI, SI_small
 from ..core.DisplaySet import display as I
 
 from ..core.fundamental import *
@@ -7,9 +7,9 @@ from .dimensions import *
 
 becquerel = I(Unit(frequency, 'becquerel', "Bq", SI))
 hertz = I(Unit(frequency, 'hertz', "Hz", SI))
-radian = I(Unit(angle, 'radian', "rad", SI))
 
-steradian = I(Unit(solid_angle, 'steradian', "sterad", SI))
+rad = radian = I(Unit(angle, 'radian', "rad", SI_small))
+sterad = steradian = I(Unit(solid_angle, 'steradian', "sterad", SI))
 
 # # Dynamics
 
