@@ -37,6 +37,7 @@ class ChainedUnit(Unit):
                 dv = value / unit.value
             else:
                 dv, value = divmod(value, unit.value)
-            chunks.append(f'{dv} {unit.symbol}')
+            if dv:
+                chunks.append(f'{dv} {unit.symbol}')
 
         return ' + '.join(chunks)
