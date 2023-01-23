@@ -11,7 +11,7 @@ class DisplaySet:
     def __init__(self):
         self.units = dict()
         self.dimension_names = dict()
-        self.dimension_symbol = dict()
+        self.dimension_symbol = dict(dimensionless='')
 
     def register(self, value: Unit | Dimension, *names: list[str]):
         if isinstance(value, Dimension):
