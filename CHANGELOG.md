@@ -1,14 +1,14 @@
 # 0.2
-- Total rewrite of core code!
-- Unit testing added
-- Improved REPL
-    - Support for `rich` API. The `python -im noether` REPL automatically uses it.
+- Unit testing added.
 
-- `Measure` is now type-generic and frozen.
-    - Typing supports any `Real` subclass, eg `int`, `float`, `Fraction`.
-    - `stddev` is `None` by default rather than zero.
-    - You can use `.cast(T)` to cast to a type.
+- Improved display mechanisms
     - You can use `measure @ unit` for quick display in that unit.
+    - You can chain units with `&`. For example, `meter(2.4) @ meter & cm`.
+    - Support for `rich` API (automatic in `python -im noether`)
+
+- Total rewrite of core code!
+    - `Measure` is now frozen, and is generic to its underlying value, which can be any `Real` subclass. `Measure.cast(T)` can be used to cast to a type.
+    - `Measure.stddev` is `None` by default rather than zero.
 
 - Config handler changed to `toml`.
     - Now loads from `${XDG_CONFIG_HOME:-~/.config}/noether/default.toml`.
