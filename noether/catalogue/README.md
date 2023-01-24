@@ -1,6 +1,8 @@
 # Noether: Unit catalogue
 With the exception of the base SI units and dimensions, all units and dimensions are defined in this catalogue.
 
+This is *very much a work in progress!*
+
 Logical subsections of files use `# %` comments.
 
 Wherever a unit or constant is measured and explicitly defined by a standard, its source is provided (and whether it is *fixed* by definition):

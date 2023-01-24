@@ -1,3 +1,7 @@
+'''
+Conventional SI-compatible units.
+'''
+
 from ..core import Unit
 from ..core.prefixes import SI, SI_large, SI_small
 from ..core.DisplaySet import display as I
@@ -7,6 +11,10 @@ from noether.core.config import Config, conf
 from math import pi
 from .si import radian, steradian, watt
 from ..core.fundamental import meter, second, ampere, kilogram
+
+percent = Unit(1/100, 'percent', '%')
+permille = Unit(1/1000, 'permille', '‰')
+ppm = parts_per_million = Unit(1/1_000_000, 'parts_per_million', 'ppm')
 
 # % Spacetime
 
@@ -28,16 +36,15 @@ if conf.get('human_time'):
 cm = Unit(meter * 0.01, ['centimeter', 'centimetre'], 'cm')
 kmph = Unit(meter*100 / hour, None, "kmph")
 
-acre = Unit(100 * meter**2, "acre", "a")
-hectare = Unit(100 * acre, "hectare", "ha")
+are = Unit(100 * meter**2, "are", "a")
+hectare = Unit(100 * are, "hectare", "ha")
 litre = liter = Unit((meter/10) ** 3, ["liter", "litre"], "l", SI)
 
 ton = tonne = Unit(kilogram*1000, ["ton", "tonne"], "t", SI_large)
 
 bpm = Unit(1 / minute, "beats per minute", "bpm")
 
-# % angles
-
+# % Angles
 
 deg = degree = Unit(radian * pi / 180, "degree", ["°", "deg"])
 arcminute = arcmin = Unit(degree / 60, "arcminute", ["′", "arcmin"])
