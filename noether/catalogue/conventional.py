@@ -18,7 +18,7 @@ ppm = parts_per_million = Unit(1/1_000_000, 'parts_per_million', 'ppm')
 
 # % Spacetime
 
-minute = Unit(second*60, 'minute', ['min', 'm'])
+minute = Unit(second*60, 'minute', ['min'])
 hour = Unit(minute * 60, 'hour', ['hr', 'h'])
 day = Unit(hour * 24, "day", "d")
 week = Unit(day * 7, "week", "w")
