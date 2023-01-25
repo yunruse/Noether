@@ -75,6 +75,11 @@
             "description": "Unit symbols (take prefix.symbol)",
             "type": "array",
             "items": {"type": "string"}
+          },
+          "prefixes": {
+            "description": "Named prefix sets in use.",
+            "type": "array",
+            "items": {"type": "string"}
           }
         }
       }

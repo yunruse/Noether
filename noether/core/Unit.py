@@ -79,6 +79,8 @@ class Unit(Measure):
         }
         if self.stddev is None:
             del json['stddev']
+        if self.prefixes:
+            json['prefixes'] = self.prefixes.name.split(' + ')
         return json
 
     def _display_measure(self, measure: Measure):

@@ -2042,6 +2042,11 @@
    ],
    "symbols": [
     "amp"
+   ],
+   "prefixes": [
+    "SI_large",
+    "SI_small",
+    "SI_conventional"
    ]
   },
   {
@@ -2108,6 +2113,9 @@
    "symbols": [
     "\u2033",
     "arcsec"
+   ],
+   "prefixes": [
+    "SI_small"
    ]
   },
   {
@@ -2185,6 +2193,11 @@
    ],
    "symbols": [
     "bar"
+   ],
+   "prefixes": [
+    "SI_large",
+    "SI_small",
+    "SI_conventional"
    ]
   },
   {
@@ -2213,6 +2226,11 @@
    ],
    "symbols": [
     "b"
+   ],
+   "prefixes": [
+    "SI_large",
+    "SI_small",
+    "SI_conventional"
    ]
   },
   {
@@ -2251,6 +2269,11 @@
    ],
    "symbols": [
     "bp"
+   ],
+   "prefixes": [
+    "SI_large",
+    "SI_small",
+    "SI_conventional"
    ]
   },
   {
@@ -2281,6 +2304,11 @@
    ],
    "symbols": [
     "Bq"
+   ],
+   "prefixes": [
+    "SI_large",
+    "SI_small",
+    "SI_conventional"
    ]
   },
   {
@@ -2296,6 +2324,10 @@
    ],
    "symbols": [
     "b"
+   ],
+   "prefixes": [
+    "SI_large",
+    "IEC"
    ]
   },
   {
@@ -2371,6 +2403,10 @@
    ],
    "symbols": [
     "B"
+   ],
+   "prefixes": [
+    "SI_large",
+    "IEC"
    ]
   },
   {
@@ -2441,6 +2477,11 @@
    ],
    "symbols": [
     "cd"
+   ],
+   "prefixes": [
+    "SI_large",
+    "SI_small",
+    "SI_conventional"
    ]
   },
   {
@@ -2491,6 +2532,11 @@
    ],
    "symbols": [
     "C"
+   ],
+   "prefixes": [
+    "SI_large",
+    "SI_small",
+    "SI_conventional"
    ]
   },
   {
@@ -2521,7 +2567,12 @@
    "names": [
     "cumec"
    ],
-   "symbols": []
+   "symbols": [],
+   "prefixes": [
+    "SI_large",
+    "SI_small",
+    "SI_conventional"
+   ]
   },
   {
    "value": 86400,
@@ -2692,6 +2743,11 @@
    ],
    "symbols": [
     "eV"
+   ],
+   "prefixes": [
+    "SI_large",
+    "SI_small",
+    "SI_conventional"
    ]
   },
   {
@@ -2753,6 +2809,11 @@
    ],
    "symbols": [
     "F"
+   ],
+   "prefixes": [
+    "SI_large",
+    "SI_small",
+    "SI_conventional"
    ]
   },
   {
@@ -2915,6 +2976,11 @@
    ],
    "symbols": [
     "g"
+   ],
+   "prefixes": [
+    "SI_large",
+    "SI_small",
+    "SI_conventional"
    ]
   },
   {
@@ -2934,6 +3000,11 @@
    ],
    "symbols": [
     "Gy"
+   ],
+   "prefixes": [
+    "SI_large",
+    "SI_small",
+    "SI_conventional"
    ]
   },
   {
@@ -3055,6 +3126,11 @@
    ],
    "symbols": [
     "H"
+   ],
+   "prefixes": [
+    "SI_large",
+    "SI_small",
+    "SI_conventional"
    ]
   },
   {
@@ -3120,6 +3196,11 @@
    ],
    "symbols": [
     "J"
+   ],
+   "prefixes": [
+    "SI_large",
+    "SI_small",
+    "SI_conventional"
    ]
   },
   {
@@ -3166,6 +3247,11 @@
    ],
    "symbols": [
     "kat"
+   ],
+   "prefixes": [
+    "SI_large",
+    "SI_small",
+    "SI_conventional"
    ]
   },
   {
@@ -3196,6 +3282,11 @@
    ],
    "symbols": [
     "K"
+   ],
+   "prefixes": [
+    "SI_large",
+    "SI_small",
+    "SI_conventional"
    ]
   },
   {
@@ -3319,6 +3410,11 @@
    ],
    "symbols": [
     "ls"
+   ],
+   "prefixes": [
+    "SI_large",
+    "SI_small",
+    "SI_conventional"
    ]
   },
   {
@@ -3334,6 +3430,11 @@
    ],
    "symbols": [
     "ly"
+   ],
+   "prefixes": [
+    "SI_large",
+    "SI_small",
+    "SI_conventional"
    ]
   },
   {
@@ -3363,6 +3464,11 @@
    ],
    "symbols": [
     "l"
+   ],
+   "prefixes": [
+    "SI_large",
+    "SI_small",
+    "SI_conventional"
    ]
   },
   {
@@ -3397,6 +3503,11 @@
    ],
    "symbols": [
     "lum"
+   ],
+   "prefixes": [
+    "SI_large",
+    "SI_small",
+    "SI_conventional"
    ]
   },
   {
@@ -3420,6 +3531,11 @@
    ],
    "symbols": [
     "Lx"
+   ],
+   "prefixes": [
+    "SI_large",
+    "SI_small",
+    "SI_conventional"
    ]
   },
   {
@@ -3455,6 +3571,11 @@
    ],
    "symbols": [
     "m"
+   ],
+   "prefixes": [
+    "SI_large",
+    "SI_small",
+    "SI_conventional"
    ]
   },
   {
@@ -3478,6 +3599,11 @@
    ],
    "symbols": [
     "mHg"
+   ],
+   "prefixes": [
+    "SI_large",
+    "SI_small",
+    "SI_conventional"
    ]
   },
   {
@@ -3523,6 +3649,11 @@
    ],
    "symbols": [
     "mol"
+   ],
+   "prefixes": [
+    "SI_large",
+    "SI_small",
+    "SI_conventional"
    ]
   },
   {
@@ -3586,6 +3717,11 @@
    ],
    "symbols": [
     "N"
+   ],
+   "prefixes": [
+    "SI_large",
+    "SI_small",
+    "SI_conventional"
    ]
   },
   {
@@ -3645,6 +3781,11 @@
    ],
    "symbols": [
     "\u03a9"
+   ],
+   "prefixes": [
+    "SI_large",
+    "SI_small",
+    "SI_conventional"
    ]
   },
   {
@@ -3660,6 +3801,11 @@
    ],
    "symbols": [
     "pc"
+   ],
+   "prefixes": [
+    "SI_large",
+    "SI_small",
+    "SI_conventional"
    ]
   },
   {
@@ -3693,6 +3839,11 @@
    ],
    "symbols": [
     "Pa"
+   ],
+   "prefixes": [
+    "SI_large",
+    "SI_small",
+    "SI_conventional"
    ]
   },
   {
@@ -3810,6 +3961,9 @@
    ],
    "symbols": [
     "pix"
+   ],
+   "prefixes": [
+    "SI_large"
    ]
   },
   {
@@ -3893,6 +4047,9 @@
    ],
    "symbols": [
     "rad"
+   ],
+   "prefixes": [
+    "SI_small"
    ]
   },
   {
@@ -3948,6 +4105,11 @@
    ],
    "symbols": [
     "s"
+   ],
+   "prefixes": [
+    "SI_large",
+    "SI_small",
+    "SI_conventional"
    ]
   },
   {
@@ -3975,6 +4137,11 @@
    ],
    "symbols": [
     "S"
+   ],
+   "prefixes": [
+    "SI_large",
+    "SI_small",
+    "SI_conventional"
    ]
   },
   {
@@ -4043,6 +4210,11 @@
    ],
    "symbols": [
     "sterad"
+   ],
+   "prefixes": [
+    "SI_large",
+    "SI_small",
+    "SI_conventional"
    ]
   },
   {
@@ -4146,6 +4318,11 @@
    ],
    "symbols": [
     "T"
+   ],
+   "prefixes": [
+    "SI_large",
+    "SI_small",
+    "SI_conventional"
    ]
   },
   {
@@ -4177,6 +4354,9 @@
    ],
    "symbols": [
     "t"
+   ],
+   "prefixes": [
+    "SI_large"
    ]
   },
   {
@@ -4245,6 +4425,11 @@
    ],
    "symbols": [
     "V"
+   ],
+   "prefixes": [
+    "SI_large",
+    "SI_small",
+    "SI_conventional"
    ]
   },
   {
@@ -4268,6 +4453,11 @@
    ],
    "symbols": [
     "W"
+   ],
+   "prefixes": [
+    "SI_large",
+    "SI_small",
+    "SI_conventional"
    ]
   },
   {
@@ -4291,6 +4481,11 @@
    ],
    "symbols": [
     "Wh"
+   ],
+   "prefixes": [
+    "SI_large",
+    "SI_small",
+    "SI_conventional"
    ]
   },
   {
@@ -4318,6 +4513,11 @@
    ],
    "symbols": [
     "Wb"
+   ],
+   "prefixes": [
+    "SI_large",
+    "SI_small",
+    "SI_conventional"
    ]
   },
   {
@@ -4364,6 +4564,9 @@
    "symbols": [
     "yr",
     "ya"
+   ],
+   "prefixes": [
+    "SI_large"
    ]
   },
   {

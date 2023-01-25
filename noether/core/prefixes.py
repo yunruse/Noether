@@ -44,6 +44,11 @@ class PrefixSet(list[Prefix]):
                 prefix = Prefix(*prefix)
             self.append(prefix)
 
+    def __add__(self, other: 'PrefixSet'):
+        return PrefixSet(
+            f'{self.name} + {other.name}',
+            list(self) + list(other))
+
     def __repr__(self):
         return self.name
 
@@ -106,7 +111,6 @@ IEC = PrefixSet('IEC', [
 SI = SI_large + SI_small + SI_conventional
 if conf.get('prefix_fun'):
     SI = SI + SI_fun
-SI = PrefixSet('SI', SI)
 
 if not conf.get('prefix_IEC'):
     IEC.clear()
