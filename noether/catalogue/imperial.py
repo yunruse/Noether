@@ -7,6 +7,7 @@ from fractions import Fraction
 from ..core import Unit
 from ..core.config import Config, conf
 
+from noether.core.fundamental import gram
 from .conventional import cm, liter
 
 
@@ -62,3 +63,11 @@ dram = Unit(fluid_ounce / 8, "dram", "dr")
 
 hogshead = Unit(0, "hogshead", "hhd")  # TODO
 butt = Unit(hogshead * 2, "butt")  # y'all nerds
+
+
+# % Mass
+
+pound = lb = Unit(453.59237 * gram, "pound", "lb")
+
+oz = ounce = Unit(pound / 16, "ounce", "oz")
+grain = Unit(pound / 7000, "grain", "gr")

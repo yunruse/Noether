@@ -1043,6 +1043,12 @@ names = [ "gon",]
 symbols = []
 
 [[units]]
+value = 6.479891000000001e-5
+dimension = [ [ "mass", 1.0,],]
+names = [ "grain",]
+symbols = [ "gr",]
+
+[[units]]
 value = 0.001
 dimension = [ [ "mass", 1.0,],]
 names = [ "gram",]
@@ -1306,6 +1312,12 @@ symbols = [ "Ω",]
 prefixes = [ "SI_large", "SI_small", "SI_conventional",]
 
 [[units]]
+value = 0.028349523125
+dimension = [ [ "mass", 1.0,],]
+names = [ "ounce",]
+symbols = [ "oz",]
+
+[[units]]
 value = 3.085677581491367e+16
 dimension = [ [ "length", 1.0,],]
 names = [ "parsec",]
@@ -1391,6 +1403,12 @@ value = 0.1
 dimension = [ [ "length", -1.0,], [ "mass", 1.0,], [ "time", -1.0,],]
 names = [ "poise",]
 symbols = [ "P",]
+
+[[units]]
+value = 0.45359237
+dimension = [ [ "mass", 1.0,],]
+names = [ "pound",]
+symbols = [ "lb",]
 
 [[units]]
 value = 39.370078740157474
