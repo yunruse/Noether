@@ -1176,6 +1176,12 @@ names = []
 symbols = [ "kmph",]
 
 [[units]]
+value = 0.5144444444444445
+dimension = [ [ "length", 1.0,], [ "time", -1.0,],]
+names = [ "knot",]
+symbols = [ "kn", "kt",]
+
+[[units]]
 value = 3183.098861837907
 dimension = [ [ "length", -2.0,], [ "luminosity", 1.0,],]
 names = [ "lambert",]
@@ -1267,6 +1273,12 @@ names = [ "mile",]
 symbols = [ "mi",]
 
 [[units]]
+value = 0.44704
+dimension = [ [ "length", 1.0,], [ "time", -1.0,],]
+names = [ "miles_per_hour",]
+symbols = [ "mph",]
+
+[[units]]
 value = 60
 dimension = [ [ "time", 1.0,],]
 names = [ "minute",]
@@ -1290,6 +1302,12 @@ value = 1.4426950408889634
 dimension = [ [ "data", 1.0,],]
 names = [ "nat",]
 symbols = []
+
+[[units]]
+value = 1852
+dimension = [ [ "length", 1.0,],]
+names = [ "nautical_mile",]
+symbols = [ "nmi",]
 
 [[units]]
 value = 1

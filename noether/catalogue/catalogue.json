@@ -3376,6 +3376,26 @@
    ]
   },
   {
+   "value": 0.5144444444444445,
+   "dimension": [
+    [
+     "length",
+     1.0
+    ],
+    [
+     "time",
+     -1.0
+    ]
+   ],
+   "names": [
+    "knot"
+   ],
+   "symbols": [
+    "kn",
+    "kt"
+   ]
+  },
+  {
    "value": 3183.098861837907,
    "dimension": [
     [
@@ -3653,6 +3673,25 @@
    ]
   },
   {
+   "value": 0.44704,
+   "dimension": [
+    [
+     "length",
+     1.0
+    ],
+    [
+     "time",
+     -1.0
+    ]
+   ],
+   "names": [
+    "miles_per_hour"
+   ],
+   "symbols": [
+    "mph"
+   ]
+  },
+  {
    "value": 60,
    "dimension": [
     [
@@ -3726,6 +3765,21 @@
     "nat"
    ],
    "symbols": []
+  },
+  {
+   "value": 1852,
+   "dimension": [
+    [
+     "length",
+     1.0
+    ]
+   ],
+   "names": [
+    "nautical_mile"
+   ],
+   "symbols": [
+    "nmi"
+   ]
   },
   {
    "value": 1,

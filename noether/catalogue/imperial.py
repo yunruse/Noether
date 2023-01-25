@@ -7,8 +7,8 @@ from fractions import Fraction
 from ..core import Unit
 from ..core.config import Config, conf
 
-from noether.core.fundamental import gram
-from .conventional import cm, liter
+from noether.core.fundamental import gram, meter
+from .conventional import cm, liter, hour
 
 Config.register('units_country', 'us', '''\
 The country to define imperial units (and other niceties) from. (Use the ISO 3166 code.)
@@ -34,6 +34,13 @@ furlong = Unit(chain * 10, "furlong", "fur")
 mile = Unit(furlong * 8, "mile", "mi")
 league = Unit(mile * 3, "league", "lea")
 # TODO: maritime units, Gunter's survey units
+
+# % Speed
+
+nautical_mile = Unit(meter * 1852, "nautical_mile", "nmi")
+
+mph = miles_per_hour = Unit(mile / hour, "miles_per_hour", "mph")
+knot = Unit(nautical_mile / hour, "knot", ["kn", "kt"])
 
 
 # % Area
