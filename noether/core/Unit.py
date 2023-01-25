@@ -70,13 +70,16 @@ class Unit(Measure):
         return f'[bold]{self.name}[/] ([italic]{self.dim.canonical_name()}[/])'
 
     def __json__(self):
-        return {
+        json = {
             'value': self.value,
-            'stdev': self.stddev,
+            'stddev': self.stddev,
             'dimension': self.dim._json_dim(),
             'names': self.names,
             'symbols': self.symbols,
         }
+        if self.stddev is None:
+            del json['stddev']
+        return json
 
     def _display_measure(self, measure: Measure):
         val = measure.value / self.value

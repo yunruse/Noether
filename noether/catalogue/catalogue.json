@@ -1954,7 +1954,6 @@
  "units": [
   {
    "value": 1.0,
-   "stddev": null,
    "dimension": [
     [
      "length",
@@ -1998,7 +1997,6 @@
   },
   {
    "value": 0.001940277777777778,
-   "stddev": null,
    "dimension": [
     [
      "length",
@@ -2014,7 +2012,6 @@
   },
   {
    "value": 3600,
-   "stddev": null,
    "dimension": [
     [
      "current",
@@ -2034,7 +2031,6 @@
   },
   {
    "value": 1,
-   "stddev": null,
    "dimension": [
     [
      "current",
@@ -2050,7 +2046,6 @@
   },
   {
    "value": 1e-10,
-   "stddev": null,
    "dimension": [
     [
      "length",
@@ -2066,7 +2061,6 @@
   },
   {
    "value": 0.3183098861837907,
-   "stddev": null,
    "dimension": [
     [
      "length",
@@ -2086,7 +2080,6 @@
   },
   {
    "value": 0.0002908882086657216,
-   "stddev": null,
    "dimension": [
     [
      "angle",
@@ -2103,7 +2096,6 @@
   },
   {
    "value": 4.84813681109536e-06,
-   "stddev": null,
    "dimension": [
     [
      "angle",
@@ -2120,7 +2112,6 @@
   },
   {
    "value": 100,
-   "stddev": null,
    "dimension": [
     [
      "length",
@@ -2136,7 +2127,6 @@
   },
   {
    "value": 149597870700,
-   "stddev": null,
    "dimension": [
     [
      "length",
@@ -2152,7 +2142,6 @@
   },
   {
    "value": 101325,
-   "stddev": null,
    "dimension": [
     [
      "length",
@@ -2177,7 +2166,6 @@
   },
   {
    "value": 100000.0,
-   "stddev": null,
    "dimension": [
     [
      "length",
@@ -2201,7 +2189,6 @@
   },
   {
    "value": 2.54e-05,
-   "stddev": null,
    "dimension": [
     [
      "length",
@@ -2215,7 +2202,6 @@
   },
   {
    "value": 1e-28,
-   "stddev": null,
    "dimension": [
     [
      "length",
@@ -2231,7 +2217,6 @@
   },
   {
    "value": 0.1,
-   "stddev": null,
    "dimension": [
     [
      "length",
@@ -2255,7 +2240,6 @@
   },
   {
    "value": 2,
-   "stddev": null,
    "dimension": [
     [
      "data",
@@ -2271,7 +2255,6 @@
   },
   {
    "value": 0.016666666666666666,
-   "stddev": null,
    "dimension": [
     [
      "time",
@@ -2287,7 +2270,6 @@
   },
   {
    "value": 1,
-   "stddev": null,
    "dimension": [
     [
      "time",
@@ -2303,7 +2285,6 @@
   },
   {
    "value": 1,
-   "stddev": null,
    "dimension": [
     [
      "data",
@@ -2335,7 +2316,6 @@
   },
   {
    "value": 1.380649e-23,
-   "stddev": null,
    "dimension": [
     [
      "length",
@@ -2363,7 +2343,6 @@
   },
   {
    "value": 3.183098861837907e-08,
-   "stddev": null,
    "dimension": [
     [
      "length",
@@ -2381,7 +2360,6 @@
   },
   {
    "value": 8,
-   "stddev": null,
    "dimension": [
     [
      "data",
@@ -2397,7 +2375,6 @@
   },
   {
    "value": 299792458.0,
-   "stddev": null,
    "dimension": [
     [
      "length",
@@ -2417,7 +2394,6 @@
   },
   {
    "value": 785800.0,
-   "stddev": null,
    "dimension": [
     [
      "length",
@@ -2431,7 +2407,6 @@
   },
   {
    "value": 4.814,
-   "stddev": null,
    "dimension": [
     [
      "length",
@@ -2455,7 +2430,6 @@
   },
   {
    "value": 1,
-   "stddev": null,
    "dimension": [
     [
      "luminosity",
@@ -2471,7 +2445,6 @@
   },
   {
    "value": 0.01,
-   "stddev": null,
    "dimension": [
     [
      "length",
@@ -2488,7 +2461,6 @@
   },
   {
    "value": 20.1168,
-   "stddev": null,
    "dimension": [
     [
      "length",
@@ -2504,7 +2476,6 @@
   },
   {
    "value": 1,
-   "stddev": null,
    "dimension": [
     [
      "current",
@@ -2524,7 +2495,6 @@
   },
   {
    "value": 3930.395625,
-   "stddev": null,
    "dimension": [
     [
      "length",
@@ -2538,7 +2508,6 @@
   },
   {
    "value": 1,
-   "stddev": null,
    "dimension": [
     [
      "length",
@@ -2556,7 +2525,6 @@
   },
   {
    "value": 86400,
-   "stddev": null,
    "dimension": [
     [
      "time",
@@ -2572,7 +2540,6 @@
   },
   {
    "value": 0.017453292519943295,
-   "stddev": null,
    "dimension": [
     [
      "angle",
@@ -2589,7 +2556,6 @@
   },
   {
    "value": 100.0,
-   "stddev": null,
    "dimension": [
     [
      "length",
@@ -2607,7 +2573,6 @@
   },
   {
    "value": 3.6966911953125014e-06,
-   "stddev": null,
    "dimension": [
     [
      "length",
@@ -2623,7 +2588,6 @@
   },
   {
    "value": 1e-05,
-   "stddev": null,
    "dimension": [
     [
      "length",
@@ -2647,7 +2611,6 @@
   },
   {
    "value": 8.854187817620389e-12,
-   "stddev": null,
    "dimension": [
     [
      "current",
@@ -2675,7 +2638,6 @@
   },
   {
    "value": 1.602176634e-19,
-   "stddev": null,
    "dimension": [
     [
      "current",
@@ -2711,7 +2673,6 @@
   },
   {
    "value": 1.602176634e-19,
-   "stddev": null,
    "dimension": [
     [
      "length",
@@ -2735,7 +2696,6 @@
   },
   {
    "value": 0.0001763888888888889,
-   "stddev": null,
    "dimension": [
     [
      "length",
@@ -2749,7 +2709,6 @@
   },
   {
    "value": 1e-05,
-   "stddev": null,
    "dimension": [
     [
      "length",
@@ -2771,7 +2730,6 @@
   },
   {
    "value": 1,
-   "stddev": null,
    "dimension": [
     [
      "current",
@@ -2799,7 +2757,6 @@
   },
   {
    "value": 0.007297352565305213,
-   "stddev": null,
    "dimension": [],
    "names": [
     "fine_structure_constant",
@@ -2810,8 +2767,7 @@
    ]
   },
   {
-   "value": 2.957352956250001e-05,
-   "stddev": null,
+   "value": 4.735510416666668e-05,
    "dimension": [
     [
      "length",
@@ -2826,8 +2782,7 @@
    ]
   },
   {
-   "value": 4.735510416666668e-05,
-   "stddev": null,
+   "value": 2.957352956250001e-05,
    "dimension": [
     [
      "length",
@@ -2843,7 +2798,6 @@
   },
   {
    "value": 0.3048,
-   "stddev": null,
    "dimension": [
     [
      "length",
@@ -2860,7 +2814,6 @@
   },
   {
    "value": 1000000000000.0,
-   "stddev": null,
    "dimension": [
     [
      "time",
@@ -2874,7 +2827,6 @@
   },
   {
    "value": 201.168,
-   "stddev": null,
    "dimension": [
     [
      "length",
@@ -2890,7 +2842,6 @@
   },
   {
    "value": 0.01,
-   "stddev": null,
    "dimension": [
     [
      "length",
@@ -2910,7 +2861,6 @@
   },
   {
    "value": 0.004546090000000002,
-   "stddev": null,
    "dimension": [
     [
      "length",
@@ -2926,7 +2876,6 @@
   },
   {
    "value": 0.0037854117840000014,
-   "stddev": null,
    "dimension": [
     [
      "length",
@@ -2942,7 +2891,6 @@
   },
   {
    "value": 0.015707963267948967,
-   "stddev": null,
    "dimension": [
     [
      "angle",
@@ -2956,7 +2904,6 @@
   },
   {
    "value": 0.001,
-   "stddev": null,
    "dimension": [
     [
      "mass",
@@ -2972,7 +2919,6 @@
   },
   {
    "value": 1,
-   "stddev": null,
    "dimension": [
     [
      "length",
@@ -2992,7 +2938,6 @@
   },
   {
    "value": 0.10160000000000001,
-   "stddev": null,
    "dimension": [
     [
      "length",
@@ -3008,7 +2953,6 @@
   },
   {
    "value": 3.3219280948873626,
-   "stddev": null,
    "dimension": [
     [
      "data",
@@ -3050,7 +2994,6 @@
   },
   {
    "value": 1.0545718176461565e-34,
-   "stddev": null,
    "dimension": [
     [
      "length",
@@ -3074,7 +3017,6 @@
   },
   {
    "value": 10000,
-   "stddev": null,
    "dimension": [
     [
      "length",
@@ -3090,7 +3032,6 @@
   },
   {
    "value": 1,
-   "stddev": null,
    "dimension": [
     [
      "current",
@@ -3118,7 +3059,6 @@
   },
   {
    "value": 0,
-   "stddev": null,
    "dimension": [],
    "names": [
     "hogshead"
@@ -3129,7 +3069,6 @@
   },
   {
    "value": 3600,
-   "stddev": null,
    "dimension": [
     [
      "time",
@@ -3146,7 +3085,6 @@
   },
   {
    "value": 0.025400000000000002,
-   "stddev": null,
    "dimension": [
     [
      "length",
@@ -3163,7 +3101,6 @@
   },
   {
    "value": 1,
-   "stddev": null,
    "dimension": [
     [
      "length",
@@ -3187,7 +3124,6 @@
   },
   {
    "value": 8987551787.368177,
-   "stddev": null,
    "dimension": [
     [
      "current",
@@ -3215,7 +3151,6 @@
   },
   {
    "value": 1,
-   "stddev": null,
    "dimension": [
     [
      "substance",
@@ -3235,7 +3170,6 @@
   },
   {
    "value": 100.0,
-   "stddev": null,
    "dimension": [
     [
      "length",
@@ -3251,7 +3185,6 @@
   },
   {
    "value": 1,
-   "stddev": null,
    "dimension": [
     [
      "temperature",
@@ -3267,7 +3200,6 @@
   },
   {
    "value": 4814.0,
-   "stddev": null,
    "dimension": [
     [
      "length",
@@ -3291,7 +3223,6 @@
   },
   {
    "value": 1,
-   "stddev": null,
    "dimension": [
     [
      "mass",
@@ -3307,7 +3238,6 @@
   },
   {
    "value": 0.027777777777777776,
-   "stddev": null,
    "dimension": [
     [
      "length",
@@ -3325,7 +3255,6 @@
   },
   {
    "value": 3183.098861837907,
-   "stddev": null,
    "dimension": [
     [
      "length",
@@ -3345,7 +3274,6 @@
   },
   {
    "value": 48140.0,
-   "stddev": null,
    "dimension": [
     [
      "mass",
@@ -3365,7 +3293,6 @@
   },
   {
    "value": 4828.032,
-   "stddev": null,
    "dimension": [
     [
      "length",
@@ -3381,7 +3308,6 @@
   },
   {
    "value": 299792458.0,
-   "stddev": null,
    "dimension": [
     [
      "length",
@@ -3397,7 +3323,6 @@
   },
   {
    "value": 9460730472580800.0,
-   "stddev": null,
    "dimension": [
     [
      "length",
@@ -3413,7 +3338,6 @@
   },
   {
    "value": 0.0010000000000000002,
-   "stddev": null,
    "dimension": [
     [
      "length",
@@ -3430,7 +3354,6 @@
   },
   {
    "value": 2.686780111e+25,
-   "stddev": null,
    "dimension": [
     [
      "length",
@@ -3446,7 +3369,6 @@
   },
   {
    "value": 1,
-   "stddev": null,
    "dimension": [
     [
      "angle",
@@ -3466,7 +3388,6 @@
   },
   {
    "value": 1,
-   "stddev": null,
    "dimension": [
     [
      "angle",
@@ -3490,7 +3411,6 @@
   },
   {
    "value": 0.004511040000000001,
-   "stddev": null,
    "dimension": [
     [
      "length",
@@ -3502,7 +3422,6 @@
   },
   {
    "value": 0.004217517642175176,
-   "stddev": null,
    "dimension": [
     [
      "length",
@@ -3514,7 +3433,6 @@
   },
   {
    "value": 38.2,
-   "stddev": null,
    "dimension": [
     [
      "mass",
@@ -3534,7 +3452,6 @@
   },
   {
    "value": 1,
-   "stddev": null,
    "dimension": [
     [
      "length",
@@ -3551,7 +3468,6 @@
   },
   {
    "value": 133322.387415,
-   "stddev": null,
    "dimension": [
     [
      "length",
@@ -3575,7 +3491,6 @@
   },
   {
    "value": 1609.344,
-   "stddev": null,
    "dimension": [
     [
      "length",
@@ -3591,7 +3506,6 @@
   },
   {
    "value": 60,
-   "stddev": null,
    "dimension": [
     [
      "time",
@@ -3607,7 +3521,6 @@
   },
   {
    "value": 1,
-   "stddev": null,
    "dimension": [
     [
      "substance",
@@ -3623,7 +3536,6 @@
   },
   {
    "value": 1.2566370614359173e-06,
-   "stddev": null,
    "dimension": [
     [
      "current",
@@ -3651,7 +3563,6 @@
   },
   {
    "value": 1.4426950408889634,
-   "stddev": null,
    "dimension": [
     [
      "data",
@@ -3665,7 +3576,6 @@
   },
   {
    "value": 1,
-   "stddev": null,
    "dimension": [
     [
      "length",
@@ -3689,7 +3599,6 @@
   },
   {
    "value": 4,
-   "stddev": null,
    "dimension": [
     [
      "data",
@@ -3703,7 +3612,6 @@
   },
   {
    "value": 1.0,
-   "stddev": null,
    "dimension": [
     [
      "length",
@@ -3723,7 +3631,6 @@
   },
   {
    "value": 1,
-   "stddev": null,
    "dimension": [
     [
      "current",
@@ -3751,7 +3658,6 @@
   },
   {
    "value": 3.085677581491367e+16,
-   "stddev": null,
    "dimension": [
     [
      "length",
@@ -3767,7 +3673,6 @@
   },
   {
    "value": 1e-06,
-   "stddev": null,
    "dimension": [],
    "names": [
     "parts_per_million"
@@ -3778,7 +3683,6 @@
   },
   {
    "value": 1,
-   "stddev": null,
    "dimension": [
     [
      "length",
@@ -3802,7 +3706,6 @@
   },
   {
    "value": 0.01,
-   "stddev": null,
    "dimension": [],
    "names": [
     "percent"
@@ -3813,7 +3716,6 @@
   },
   {
    "value": 0.001,
-   "stddev": null,
    "dimension": [],
    "names": [
     "permille"
@@ -3824,7 +3726,6 @@
   },
   {
    "value": 0.004233333333333334,
-   "stddev": null,
    "dimension": [
     [
      "length",
@@ -3838,7 +3739,6 @@
   },
   {
    "value": 0.2786,
-   "stddev": null,
    "dimension": [
     [
      "length",
@@ -3852,7 +3752,6 @@
   },
   {
    "value": 0.0005682612500000002,
-   "stddev": null,
    "dimension": [
     [
      "length",
@@ -3868,7 +3767,6 @@
   },
   {
    "value": 0.0004731764730000002,
-   "stddev": null,
    "dimension": [
     [
      "length",
@@ -3884,7 +3782,6 @@
   },
   {
    "value": 1,
-   "stddev": null,
    "dimension": [
     [
      "pixel_count",
@@ -3900,7 +3797,6 @@
   },
   {
    "value": 0.0003527777777777778,
-   "stddev": null,
    "dimension": [
     [
      "length",
@@ -3916,7 +3812,6 @@
   },
   {
    "value": 0.1,
-   "stddev": null,
    "dimension": [
     [
      "length",
@@ -3940,7 +3835,6 @@
   },
   {
    "value": 39.370078740157474,
-   "stddev": null,
    "dimension": [
     [
      "length",
@@ -3958,7 +3852,6 @@
   },
   {
    "value": 0.0019347222222222222,
-   "stddev": null,
    "dimension": [
     [
      "length",
@@ -3972,7 +3865,6 @@
   },
   {
    "value": 0.023216666666666667,
-   "stddev": null,
    "dimension": [
     [
      "length",
@@ -3986,7 +3878,6 @@
   },
   {
    "value": 1,
-   "stddev": null,
    "dimension": [
     [
      "angle",
@@ -4042,7 +3933,6 @@
   },
   {
    "value": 1,
-   "stddev": null,
    "dimension": [
     [
      "time",
@@ -4058,7 +3948,6 @@
   },
   {
    "value": 1,
-   "stddev": null,
    "dimension": [
     [
      "current",
@@ -4086,7 +3975,6 @@
   },
   {
    "value": 0.0003183098861837907,
-   "stddev": null,
    "dimension": [
     [
      "length",
@@ -4106,7 +3994,6 @@
   },
   {
    "value": 12.566370614359172,
-   "stddev": null,
    "dimension": [
     [
      "angle",
@@ -4122,7 +4009,6 @@
   },
   {
    "value": 9.980665,
-   "stddev": null,
    "dimension": [
     [
      "length",
@@ -4142,7 +4028,6 @@
   },
   {
    "value": 1,
-   "stddev": null,
    "dimension": [
     [
      "angle",
@@ -4158,7 +4043,6 @@
   },
   {
    "value": 10000.0,
-   "stddev": null,
    "dimension": [
     [
      "length",
@@ -4178,7 +4062,6 @@
   },
   {
    "value": 0.0001,
-   "stddev": null,
    "dimension": [
     [
      "length",
@@ -4198,7 +4081,6 @@
   },
   {
    "value": 1000000.0,
-   "stddev": null,
    "dimension": [
     [
      "length",
@@ -4218,7 +4100,6 @@
   },
   {
    "value": 99806.65,
-   "stddev": null,
    "dimension": [
     [
      "length",
@@ -4242,7 +4123,6 @@
   },
   {
    "value": 1,
-   "stddev": null,
    "dimension": [
     [
      "current",
@@ -4266,7 +4146,6 @@
   },
   {
    "value": 0.001024,
-   "stddev": null,
    "dimension": [
     [
      "time",
@@ -4282,7 +4161,6 @@
   },
   {
    "value": 1000,
-   "stddev": null,
    "dimension": [
     [
      "mass",
@@ -4299,7 +4177,6 @@
   },
   {
    "value": 1.5849625007211563,
-   "stddev": null,
    "dimension": [
     [
      "data",
@@ -4313,7 +4190,6 @@
   },
   {
    "value": 6.283185307179586,
-   "stddev": null,
    "dimension": [
     [
      "angle",
@@ -4329,7 +4205,6 @@
   },
   {
    "value": 1.763888888888889e-05,
-   "stddev": null,
    "dimension": [
     [
      "length",
@@ -4343,7 +4218,6 @@
   },
   {
    "value": 1,
-   "stddev": null,
    "dimension": [
     [
      "current",
@@ -4371,7 +4245,6 @@
   },
   {
    "value": 1,
-   "stddev": null,
    "dimension": [
     [
      "length",
@@ -4395,7 +4268,6 @@
   },
   {
    "value": 3600,
-   "stddev": null,
    "dimension": [
     [
      "length",
@@ -4419,7 +4291,6 @@
   },
   {
    "value": 1,
-   "stddev": null,
    "dimension": [
     [
      "current",
@@ -4447,7 +4318,6 @@
   },
   {
    "value": 604800,
-   "stddev": null,
    "dimension": [
     [
      "time",
@@ -4463,7 +4333,6 @@
   },
   {
    "value": 0.9144000000000001,
-   "stddev": null,
    "dimension": [
     [
      "length",
@@ -4479,7 +4348,6 @@
   },
   {
    "value": 31557600.0,
-   "stddev": null,
    "dimension": [
     [
      "time",
@@ -4496,7 +4364,6 @@
   },
   {
    "value": 376.73031346177066,
-   "stddev": null,
    "dimension": [
     [
      "current",
