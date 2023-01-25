@@ -2,7 +2,7 @@
 from dataclasses import dataclass
 from functools import total_ordering
 import operator
-from typing import Optional, TypeVar, Generic, TYPE_CHECKING
+from typing import Optional, TypeVar, ClassVar, Generic, Generator, TYPE_CHECKING
 from numbers import Real
 
 from ..errors import DimensionError
@@ -31,6 +31,20 @@ Config.register("measure_uncertainty_shorthand", False, """\
 Display e.g. 0.15(2) instead of 0.15 ± 0.02.""")
 
 T = TypeVar('T', int, float, Real)
+
+
+class MeasureInfo:
+    '''Handler for display of Measures.'''
+    @classmethod
+    def info(cls, measure: 'Measure') -> Generator[str, None, None]:
+        return NotImplemented
+
+    @classmethod
+    def should_display(cls, measure: 'Measure') -> bool:
+        return True
+
+    enabled_by_default: ClassVar[bool] = True
+    style: ClassVar[str] = 'purple italic'
 
 
 @dataclass(
@@ -127,6 +141,32 @@ class Measure(NoetherRepr, Generic[T]):
     # |__/ |_)|__/|\__| \/
     #         |        _/
 
+    info_handlers: ClassVar[list[type[MeasureInfo]]] = list()
+
+    @classmethod
+    def Info(cls, handler: type[MeasureInfo]):
+        '''Wrapper for classes which implement MeasureInfo interface.'''
+        if not issubclass(handler, MeasureInfo):
+            raise TypeError(
+                'Measure information handlers should derive from MeasureInfo.')
+        if not handler.__name__.startswith('info_'):
+            raise TypeError(
+                'MeasureInfo classes must be prefixed with `info_`.')
+
+        cls.info_handlers.append(handler)
+
+        Config.register(handler.__name__,
+                        handler.enabled_by_default,
+                        handler.__doc__)
+
+        return handler
+
+    def _info(self):
+        for handler in self.info_handlers:
+            if conf.get(handler.__name__) and handler.should_display(self):
+                for i in handler.info(self):
+                    yield i, handler.style
+
     def __repr_code__(self):
         chunks = [repr(self.value)]
         if self.stddev is not None:
@@ -142,7 +182,7 @@ class Measure(NoetherRepr, Generic[T]):
         if units:
             return units[-1]
         return self  # fallback
-    
+
     def as_fundamental(self):
         from .DisplaySet import display  # noqa
         return self.dim.as_fundamental(
@@ -151,21 +191,25 @@ class Measure(NoetherRepr, Generic[T]):
     @staticmethod
     def _display_measure(measure: 'Measure'):
         # Fallback if no unit found
-        v = canonical_number(measure.value, measure.stddev)
+        n = canonical_number(measure.value, measure.stddev)
         s = measure.as_fundamental()
-        return f'{v} {s}'
+        return f'{n} {s}'
 
     def __noether__(self):
         v = self.display_unit()._display_measure(self)
-        d = self.dim.canonical_name()
-        return f'{v} <{d}>'
+        info = ', '.join(i for i, _ in self._info())
+        if info:
+            info = '  # ' + info
+        return f"{v}{info}"
 
     __str__ = __noether__
 
     def __rich__(self):
         v = self.display_unit()._display_measure(self)
-        d = self.dim.canonical_name()
-        return f'{v} <[grey italic]{d}[/]>'
+        info = ', '.join(f'[{style}]{i}[/]' for i, style in self._info())
+        if info:
+            info = '  [green italic]#[/] ' + info
+        return f"{v}{info}"
 
     #  /~~\                   |     '
     # |  __/~//~\|/~\ /~\ /~/~|~|/~\|/~~
@@ -304,6 +348,16 @@ class Measure(NoetherRepr, Generic[T]):
     def __and__(self, unit: 'Unit'):
         from .ChainedUnit import ChainedUnit
         return ChainedUnit(self, unit)
+
+
+@Measure.Info
+class info_dimension(MeasureInfo):
+    '''Display the dimension of a unit.'''
+    style = 'green italic'
+
+    @classmethod
+    def info(self, measure: Measure):
+        yield measure.dim.canonical_name()
 
 
 # Avoid import loops
