@@ -11,6 +11,7 @@ dev-info.py
 venv/
 pypi_tokens.txt
 *.code-workspace
+catalogue_count.*
 
 # Build
 
