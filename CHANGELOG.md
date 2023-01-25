@@ -1,4 +1,4 @@
-# 0.2
+# 1.0
 - Unit testing added.
 
 - Improved display mechanisms
