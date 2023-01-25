@@ -53,7 +53,7 @@ pint_us = Unit(gallon_us / 8, "pint_us", "pt")
 pint = pint_us if _USE_US_UNITS else pint_uk
 
 fluid_ounce_uk = floz_uk = Unit(pint_uk / 12, "fluid_ounce_uk", "fl oz")
-fluid_ounce_us = floz_us = Unit(pint_us / 16, "fluid_ounce_uk", "fl oz")
+fluid_ounce_us = floz_us = Unit(pint_us / 16, "fluid_ounce_us", "fl oz")
 fluid_ounce = floz = floz_us if _USE_US_UNITS else floz_uk
 
 

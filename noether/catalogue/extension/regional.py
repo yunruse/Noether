@@ -16,8 +16,8 @@ from ..conventional import hectare
 pie = pies = Unit(meter(0.2786), "pies")
 
 pulgada = Unit(pie / 12, "pulgada")
-linea = Unit(pulgada / 12, "pulgada")
-punto = Unit(pie / 12, "pulgada")
+linea = Unit(pulgada / 12, "linea")
+punto = Unit(pie / 12, "punto")
 
 # Taken by its Puerto Rican value.
 spanish_acre = cuerda = Unit(meter(3_930.395_625), 'cuerda')

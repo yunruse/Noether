@@ -9,8 +9,8 @@ from ..imperial import inch
 pica = Unit(inch / 6, "pica")  # as defined by PostScript
 cicero = Unit(inch / 6, "cicero")
 
-pica_american = Unit(inch * 400/2409)  # as used in TeX
-pica_french = Unit(inch * 0.1776)
+pica_american = Unit(inch * 400/2409, "pica_american")  # as used in TeX
+pica_french = Unit(inch * 0.1776, "pica_french")
 point = Unit(inch / 72, "point", "pt")  # DTP point - this one varies a lot!
 
 agate = ruby = Unit(point * 5.5, "agate", "ruby")
