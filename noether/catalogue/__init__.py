@@ -1,3 +1,5 @@
+from . import info
+
 from .dimensions import *
 from ..core.prefixes import *
 from .si import *
