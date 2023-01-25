@@ -33,8 +33,11 @@ if conf.get('units_human_time'):
     I(human_time)
 
 
-cm = Unit(meter * 0.01, ['centimeter', 'centimetre'], 'cm')
-kmph = Unit(meter*100 / hour, None, "kmph")
+cm = centimeter = centimetre = Unit(
+    meter * 0.01, ['centimeter', 'centimetre'], 'cm')
+km = kilometer = kilometre = Unit(
+    meter * 1000, ['kilometer', 'kilometre'], 'km')
+kmph = Unit(km / hour, None, "kmph")
 
 are = Unit(100 * meter**2, "are", "a")
 hectare = Unit(100 * are, "hectare", "ha")
