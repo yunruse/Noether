@@ -7,6 +7,7 @@ import toml
 from datetime import datetime
 from unittest import TestCase
 
+from matplotlib import pyplot
 import matplotlib.dates as mdates
 
 from noether import catalogue
@@ -24,24 +25,29 @@ class auto_catalogue(TestCase):
             toml.dump(cat, f)
 
     def test_count_units(self):
-        N = len(set(catalogue.units.values()))
-        FMT = '%Y-%m-%d %H:%M'
-        now = datetime.now().strftime(FMT)
-        with open('catalogue_count.csv', 'a') as f:
-            f.write(f'{now}, {N}\n')
+        FMT = '%Y-%m-%d'
 
-        from matplotlib import pyplot
         with open('catalogue_count.csv') as f:
-            data = [
-                (datetime.strptime(date, FMT), float(N))
-                for date, N in csv.reader(f)]
-            print(data)
-            pyplot.plot(*zip(*data))
-            pyplot.title('Catalogue count')
+            data = [(date, int(N)) for date, N in csv.reader(f)]
 
-            fig, ax = pyplot.gcf(), pyplot.gca()
-            ax.xaxis.set_major_formatter(mdates.DateFormatter('%m-%d %H:%M'))
-            pyplot.xticks(rotation=90)
-            fig.tight_layout()
+        now = datetime.now().strftime(FMT)
+        N = len(set(catalogue.units.values()))
+        if data[-1][0] == now:
+            data[-1] = [now, N]
+        else:
+            data.append([now, N])
 
-            pyplot.savefig('catalogue_count.png')
+        with open('catalogue_count.csv', 'w') as f:
+            for date, N in data:
+                f.write(f'{date},{N}\n')
+
+        # graph
+        pyplot.plot(*zip(*data))
+        pyplot.title('Catalogue count')
+
+        fig, ax = pyplot.gcf(), pyplot.gca()
+        ax.xaxis.set_major_formatter(mdates.DateFormatter('%m-%d %H:%M'))
+        pyplot.xticks(rotation=90)
+        fig.tight_layout()
+
+        pyplot.savefig('catalogue_count.png')
