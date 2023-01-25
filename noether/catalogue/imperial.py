@@ -10,13 +10,10 @@ from ..core.config import Config, conf
 from noether.core.fundamental import gram
 from .conventional import cm, liter
 
-
-Config.register('units_imperial_country', 'us', '''\
-Either `us` or `uk`, used to define imperial units.
-(Both are available with the _us and _uk suffixes.)
+Config.register('units_country', 'us', '''\
+The country to define imperial units (and other niceties) from. (Use the ISO 3166 code.)
 ''')
-
-_USE_US_UNITS = conf.get('units_imperial_country').lower() == 'us'
+_USE_US_UNITS = conf.get('units_country').lower() == 'us'
 
 
 # % Length
