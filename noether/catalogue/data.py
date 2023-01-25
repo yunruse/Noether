@@ -18,7 +18,7 @@ time_unit = Unit(second(1024e-6), "time_unit", "TU")
 
 # % Data
 
-data = I(Dimension.new("data", "D"), "data")
+data = Dimension.new("data", "D")
 linear_density = I(data / length, 'linear_density')
 areal_density = I(data / length**2, 'areal_density')
 volumetric_density = I(data / length**3, 'volumetric_density')
@@ -39,7 +39,7 @@ dit = Unit(nat * log(10), ['hartley', 'ban', 'dit'], 'dit')
 
 # % Pixels
 
-pixel_count = I(Dimension.new('pixel_count', 'P'), 'pixel_count')
+pixel_count = Dimension.new('pixel_count', 'P')
 pixel_fill_rate = I(pixel_count / time, 'pixel_fill_rate')
 image_quality = I(pixel_count / length, 'image_quality')
 resolution = I(pixel_count ** 2, 'resolution')

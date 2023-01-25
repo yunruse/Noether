@@ -8,13 +8,13 @@ from .Unit import Unit
 from .prefixes import SI
 from .DisplaySet import display as I
 
-luminosity = I(Dimension.new('luminosity', 'J', -7), 'luminosity')
-current = I(Dimension.new('current', 'I', -6), 'current')
-temperature = I(Dimension.new('temperature', 'Θ', -5), 'temperature')
-mass = I(Dimension.new('mass', 'M', -4), 'mass')
-substance = I(Dimension.new('substance', 'N', -3), 'substance')
-length = I(Dimension.new('length', 'L', -2), 'length')
-time = I(Dimension.new('time', 'T', -1), 'time')
+luminosity = Dimension.new('luminosity', 'J', -7)
+current = Dimension.new('current', 'I', -6)
+temperature = Dimension.new('temperature', 'Θ', -5)
+mass = Dimension.new('mass', 'M', -4)
+substance = Dimension.new('substance', 'N', -3)
+length = Dimension.new('length', 'L', -2)
+time = Dimension.new('time', 'T', -1)
 
 candela = I(Unit(
     Measure(dim=luminosity), 'candela', 'cd', SI))

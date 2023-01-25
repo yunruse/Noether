@@ -39,7 +39,9 @@ class Dimension(ImmutableDict):
         '''
         cls._names[name] = DimInfo(order, symbol)
         reorder_dict_by_values(cls._names)
-        return cls({name: Fraction(1)})
+        self = cls({name: Fraction(1)})
+        display.register(self, name)
+        return self
 
     def __init__(self, value=None, **kw):
         if value is None:

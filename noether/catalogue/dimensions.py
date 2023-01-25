@@ -31,7 +31,7 @@ Config.register('dimension_angle', True, '''\
 Register angles as their own dimension, rather than dimensionless.''')
 
 if conf.get('dimension_angle'):
-    angle = I(Dimension.new("angle", "φ", 200), "angle")
+    angle = Dimension.new("angle", "φ", 200)
 else:
     angle = dimensionless
 solid_angle = I(angle**2, 'solid_angle')
