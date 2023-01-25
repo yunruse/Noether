@@ -93,7 +93,7 @@ class Dimension(ImmutableDict):
         string = self.as_fundamental()
         names = display.dimension_names.get(self, [])
         if names:
-            string += ' ({})'.format(', '.join(names))
+            string += '  # {}'.format(', '.join(names))
         return string
 
     def canonical_name(self):

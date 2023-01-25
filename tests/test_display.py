@@ -9,9 +9,9 @@ from noether.core.display import uncertainty
 
 class test_unit_display(TestCase):
     dimension_display = (
-        (time, 'time'),
-        (time / length, 'time / length'),
-        (time / length**2, 'time / length**2'),
+        (time, 'time  # time'),
+        (length / time, 'length / time  # speed'),
+        (length / time**2, 'length / time**2  # acceleration'),
         (time / length**0.5, 'time * length**(-1/2)'),
         ((time * length) ** 0.5, 'length**(1/2) * time**(1/2)'),
     )
