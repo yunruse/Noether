@@ -2,7 +2,7 @@ from ..core import Dimension, Unit
 from ..core.prefixes import PrefixSet, Prefix
 from ..core.config import Config, conf
 
-Config.register('catalogue_all_prefixes', False, help='''
+Config.register('units_all_prefixes', False, help='''
 Allow fetching any unit with any prefix (e.g. gibimeter).''')
 
 
@@ -55,7 +55,7 @@ class Catalogue:
                 continue
             unit = self.units[unit_name]
             if not prefix in unit.prefixes:
-                if not conf.get('catalogue_all_prefixes'):
+                if not conf.get('units_all_prefixes'):
                     continue
             return prefix.value * unit
 

@@ -10,12 +10,12 @@ from ..core.config import Config, conf
 from .conventional import cm, liter
 
 
-Config.register('imperial_country', 'us', '''\
+Config.register('units_imperial_country', 'us', '''\
 Either `us` or `uk`, used to define imperial units.
 (Both are available with the _us and _uk suffixes.)
 ''')
 
-_USE_US_UNITS = conf.get('imperial_country').lower() == 'us'
+_USE_US_UNITS = conf.get('units_imperial_country').lower() == 'us'
 
 
 # % Length

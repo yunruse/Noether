@@ -27,9 +27,9 @@ year = Unit(day * 365.25, "year", ["yr", "ya"], SI_large)
 
 human_time = year & day & hour & minute & second
 
-Config.register('human_time', True, '''\
+Config.register('units_human_time', True, '''\
 Display time by default in human_time (years, weeks, days, etc).''')
-if conf.get('human_time'):
+if conf.get('units_human_time'):
     I(human_time)
 
 

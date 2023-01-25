@@ -11,8 +11,7 @@ import tomllib
 
 from ..helpers import get_dot_config
 
-CONF_DIR = get_dot_config() / 'noether'
-CONF_FILE = CONF_DIR / 'default.toml'
+CONF_FILE = get_dot_config() / 'noether.toml'
 
 
 @dataclass
@@ -99,30 +98,47 @@ class Config(dict):
 
     # % IO
 
-    def __str__(self):
+    def categories(self):
+        cats: dict[str, list[str]] = dict()
+        for name in sorted(self.info.keys()):
+            cat, name = name.split('_', 1)
+            cats.setdefault(cat, [])
+            cats[cat].append(name)
+        return cats
+
+    def __str__(self, help=True):
         self.get_defaults()
 
         string = ""
-        for k, v in sorted(self.items()):
-            desc = self.info[k].help.strip()
-            if help:
-                string += "\n\n"
-                for l in desc.split('\n'):
-                    string += f'# {l}\n'
-            v = json.dumps(v)
-            string += f'{k} = {v}'
+        for cat_name, names in self.categories().items():
+            string += f"\n\n[{cat_name}]"
+
+            for name in names:
+                fullname = f'{cat_name}_{name}'
+                value = self.get(fullname)
+                desc = self.info[fullname].help.strip()
+                if help:
+                    string += "\n"
+                    for l in desc.split('\n'):
+                        string += f'# {l}\n'
+                value = json.dumps(value)
+                string += f'{name} = {value}'
 
         return string.strip()
 
     def save(self, path: Path = CONF_FILE, help=True):
         os.makedirs(path.parent, exist_ok=True)
         with open(path, 'w') as f:
-            f.write(str(self))
+            f.write(self.__str__(help))
 
     def load(self, path: Path = CONF_FILE):
         with open(path, 'rb') as f:
             new = tomllib.load(f)
-            self.update(new)
+
+        for cat_name, cat in new.items():
+            for name, value in cat.items():
+                fullname = f'{cat_name}_{name}'
+                self[fullname] = value
 
 
 conf = Config()
