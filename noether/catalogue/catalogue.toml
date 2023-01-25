@@ -1164,7 +1164,13 @@ names = [ "kilogram",]
 symbols = [ "kg",]
 
 [[units]]
-value = 0.027777777777777776
+value = 1000
+dimension = [ [ "length", 1.0,],]
+names = [ "kilometer", "kilometre",]
+symbols = [ "km",]
+
+[[units]]
+value = 0.2777777777777778
 dimension = [ [ "length", 1.0,], [ "time", -1.0,],]
 names = []
 symbols = [ "kmph",]
