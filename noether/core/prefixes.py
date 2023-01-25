@@ -20,6 +20,13 @@ class Prefix:
     symbol: str
     value: float
 
+    def __json__(self):
+        return {
+            'prefix': self.prefix,
+            'symbol': self.symbol,
+            'value': self.value
+        }
+
 
 class PrefixSet(list[Prefix]):
     __slots__ = ('name', )
@@ -39,6 +46,9 @@ class PrefixSet(list[Prefix]):
 
     def __repr__(self):
         return self.name
+
+    def __json__(self):
+        return {'name': self.name, 'prefixes': [p.__json__() for p in self]}
 
 
 SI_small = PrefixSet('SI_small', [

@@ -69,6 +69,15 @@ class Unit(Measure):
     def __rich__(self):
         return f'[bold]{self.name}[/] ([italic]{self.dim.canonical_name()}[/])'
 
+    def __json__(self):
+        return {
+            'value': self.value,
+            'stdev': self.stddev,
+            'dimension': self.dim._json_dim(),
+            'names': self.names,
+            'symbols': self.symbols,
+        }
+
     def _display_measure(self, measure: Measure):
         val = measure.value / self.value
         stddev = None

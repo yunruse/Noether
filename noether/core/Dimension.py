@@ -89,6 +89,15 @@ class Dimension(ImmutableDict):
                 string += f'({exp})' if use_brackets else f'{exp}'
         return string.removeprefix('1 * ')
 
+    def _json_dim(self):
+        return [[name, float(exp)] for name, exp in self.items()]
+
+    def __json__(self):
+        return {
+            'names': list(set(display.dimension_names.get(self, []))),
+            'dimension': self._json_dim(),
+        }
+
     def __repr__(self):
         string = self.as_fundamental()
         names = display.dimension_names.get(self, [])
