@@ -1,0 +1,98 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "Output of Noether's auto-generated catalogue. Watch out for floating point error!",
+  "type": "object",
+  "properties": {
+
+    "dimensions": {
+      "description": "Named dimensions.",
+      "type": "array",
+      "items": {
+        "required": ["names", "dimension"],
+        "properties": {
+          "names": {
+            "description": "Names a dimension may take.",
+            "type": "array",
+            "items": {"type": "string"}
+          },
+          "dimension": {"$ref": "#/$defs/dimension"}
+        }
+      }
+    },
+
+    "prefix_sets": {
+      "description": "Named sets of prefixes.",
+      "type": "array",
+      "items": { "properties": {
+          "name": {
+            "description": "The prefix name. (Used in Unit).",
+            "type": "string"
+          },
+          "prefixes": {
+            "type": "array",
+            "items": {
+              "required": ["prefix", "symbol", "value"],
+              "properties": {
+                "prefix": {
+                  "type": "string",
+                  "description": "Prefix for unit names."
+                },
+                "symbol": {
+                  "type": "string",
+                  "description": "Prefix for unit symbols."
+                },
+                "value": {
+                  "type": "number",
+                  "description": "Multiplier for prefix."
+                }
+              }
+            }
+          }
+      }}
+    },
+
+    "units": {
+      "description": "Units. (May take prefixes.)",
+      "type": "array",
+      "items": {
+        "required": ["value", "dimension", "names", "symbols"],
+        "properties": {
+          "value": {
+            "type": "number",
+            "description": "Value in base dimensions."
+          },
+          "stddev": {
+            "type": "number",
+            "description": "Value in base dimensions."
+          },
+          "dimension": {"$ref": "#/$defs/dimension"},
+          "names": {
+            "description": "Unit names (take prefix.prefix)",
+            "type": "array",
+            "items": {"type": "string"}
+          },
+          "symbols": {
+            "description": "Unit symbols (take prefix.symbol)",
+            "type": "array",
+            "items": {"type": "string"}
+          }
+        }
+      }
+    }
+
+  },
+
+  "$defs": {
+    "dimension": {
+      "description": "Dimension (used in dimensions and units).",
+      "type": "array",
+      "items": {
+        "type": "array",
+        "prefixItems": [
+          {"type": "string", "description": "Dimension"},
+          {"type": "number", "description": "Exponent"}
+        ]
+      }
+    }
+  }
+}
