@@ -1,1 +1,1 @@
-from . import spectrum
+from . import spectrum, comparison

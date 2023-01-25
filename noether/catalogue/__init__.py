@@ -1,4 +1,3 @@
-from . import info
 
 from .dimensions import *
 from ..core.prefixes import *
@@ -19,6 +18,7 @@ Provide historical, cgs, obscure and regional units. Disabling these may provide
 if conf.get('catalogue_extended'):
     from .extension import *
 
+from . import info  # noqa
 from ._cataloguer import Catalogue  # noqa
 
 catalogue = Catalogue(locals())
