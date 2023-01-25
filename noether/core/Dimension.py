@@ -90,11 +90,11 @@ class Dimension(ImmutableDict):
         return string.removeprefix('1 * ')
 
     def _json_dim(self):
-        return [[name, float(exp)] for name, exp in self.items()]
+        return sorted([name, float(exp)] for name, exp in self.items())
 
     def __json__(self):
         return {
-            'names': list(set(display.dimension_names.get(self, []))),
+            'names': sorted(set(display.dimension_names.get(self, []))),
             'dimension': self._json_dim(),
         }
 

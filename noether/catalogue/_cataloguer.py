@@ -95,7 +95,25 @@ class Catalogue:
 
     def __json__(self):
         return {
-            'dimensions': [dim.__json__() for dim in set(self.dimensions.values())],
-            'prefix_sets': [ps.__json__() for ps in self.prefix_sets.values()],
-            'units': [unit.__json__() for unit in set(self.units.values())]
+            'dimensions': [
+                dim.__json__() for dim in
+                sorted(
+                    set(self.dimensions.values()),
+                    key=lambda d: d.canonical_name()
+                )
+            ],
+            'prefix_sets': [
+                ps.__json__() for ps in
+                sorted(
+                    self.prefix_sets.values(),
+                    key=lambda p: p.name,
+                )
+            ],
+            'units': [
+                unit.__json__() for unit in
+                sorted(
+                    set(self.units.values()),
+                    key=lambda u: u.name
+                )
+            ]
         }

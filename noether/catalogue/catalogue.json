@@ -1,0 +1,4527 @@
+{
+ "dimensions": [
+  {
+   "names": [
+    "abseleration"
+   ],
+   "dimension": [
+    [
+     "length",
+     1.0
+    ],
+    [
+     "time",
+     3.0
+    ]
+   ]
+  },
+  {
+   "names": [
+    "absement"
+   ],
+   "dimension": [
+    [
+     "length",
+     1.0
+    ],
+    [
+     "time",
+     1.0
+    ]
+   ]
+  },
+  {
+   "names": [
+    "abserk"
+   ],
+   "dimension": [
+    [
+     "length",
+     1.0
+    ],
+    [
+     "time",
+     4.0
+    ]
+   ]
+  },
+  {
+   "names": [
+    "absity"
+   ],
+   "dimension": [
+    [
+     "length",
+     1.0
+    ],
+    [
+     "time",
+     2.0
+    ]
+   ]
+  },
+  {
+   "names": [
+    "absounce"
+   ],
+   "dimension": [
+    [
+     "length",
+     1.0
+    ],
+    [
+     "time",
+     5.0
+    ]
+   ]
+  },
+  {
+   "names": [
+    "acceleration"
+   ],
+   "dimension": [
+    [
+     "length",
+     1.0
+    ],
+    [
+     "time",
+     -2.0
+    ]
+   ]
+  },
+  {
+   "names": [
+    "angle"
+   ],
+   "dimension": [
+    [
+     "angle",
+     1.0
+    ]
+   ]
+  },
+  {
+   "names": [
+    "angular_acceleration"
+   ],
+   "dimension": [
+    [
+     "angle",
+     1.0
+    ],
+    [
+     "time",
+     -2.0
+    ]
+   ]
+  },
+  {
+   "names": [
+    "angular_jerk"
+   ],
+   "dimension": [
+    [
+     "angle",
+     1.0
+    ],
+    [
+     "time",
+     -3.0
+    ]
+   ]
+  },
+  {
+   "names": [
+    "angular_momentum"
+   ],
+   "dimension": [
+    [
+     "length",
+     2.0
+    ],
+    [
+     "mass",
+     1.0
+    ],
+    [
+     "time",
+     -1.0
+    ]
+   ]
+  },
+  {
+   "names": [
+    "angular_velocity"
+   ],
+   "dimension": [
+    [
+     "angle",
+     1.0
+    ],
+    [
+     "time",
+     -1.0
+    ]
+   ]
+  },
+  {
+   "names": [
+    "area"
+   ],
+   "dimension": [
+    [
+     "length",
+     2.0
+    ]
+   ]
+  },
+  {
+   "names": [
+    "area_density",
+    "body_mass_index"
+   ],
+   "dimension": [
+    [
+     "length",
+     -2.0
+    ],
+    [
+     "mass",
+     1.0
+    ]
+   ]
+  },
+  {
+   "names": [
+    "areal_density"
+   ],
+   "dimension": [
+    [
+     "data",
+     1.0
+    ],
+    [
+     "length",
+     -2.0
+    ]
+   ]
+  },
+  {
+   "names": [
+    "capacitance"
+   ],
+   "dimension": [
+    [
+     "current",
+     2.0
+    ],
+    [
+     "length",
+     -2.0
+    ],
+    [
+     "mass",
+     -1.0
+    ],
+    [
+     "time",
+     4.0
+    ]
+   ]
+  },
+  {
+   "names": [
+    "capicitive_reactance"
+   ],
+   "dimension": [
+    [
+     "angle",
+     1.0
+    ],
+    [
+     "current",
+     2.0
+    ],
+    [
+     "length",
+     -2.0
+    ],
+    [
+     "mass",
+     -1.0
+    ],
+    [
+     "time",
+     3.0
+    ]
+   ]
+  },
+  {
+   "names": [
+    "catalytic_activity"
+   ],
+   "dimension": [
+    [
+     "substance",
+     1.0
+    ],
+    [
+     "time",
+     -1.0
+    ]
+   ]
+  },
+  {
+   "names": [
+    "charge"
+   ],
+   "dimension": [
+    [
+     "current",
+     1.0
+    ],
+    [
+     "time",
+     1.0
+    ]
+   ]
+  },
+  {
+   "names": [
+    "conductance"
+   ],
+   "dimension": [
+    [
+     "current",
+     2.0
+    ],
+    [
+     "length",
+     -2.0
+    ],
+    [
+     "mass",
+     -1.0
+    ],
+    [
+     "time",
+     3.0
+    ]
+   ]
+  },
+  {
+   "names": [
+    "crackle"
+   ],
+   "dimension": [
+    [
+     "length",
+     1.0
+    ],
+    [
+     "time",
+     -5.0
+    ]
+   ]
+  },
+  {
+   "names": [
+    "current"
+   ],
+   "dimension": [
+    [
+     "current",
+     1.0
+    ]
+   ]
+  },
+  {
+   "names": [
+    "data"
+   ],
+   "dimension": [
+    [
+     "data",
+     1.0
+    ]
+   ]
+  },
+  {
+   "names": [
+    "data_rate"
+   ],
+   "dimension": [
+    [
+     "data",
+     1.0
+    ],
+    [
+     "time",
+     -1.0
+    ]
+   ]
+  },
+  {
+   "names": [
+    "density"
+   ],
+   "dimension": [
+    [
+     "length",
+     -3.0
+    ],
+    [
+     "mass",
+     1.0
+    ]
+   ]
+  },
+  {
+   "names": [
+    "dimensionless",
+    "proportion",
+    "reynolds_number",
+    "strain"
+   ],
+   "dimension": []
+  },
+  {
+   "names": [
+    "dose",
+    "specific_energy"
+   ],
+   "dimension": [
+    [
+     "length",
+     2.0
+    ],
+    [
+     "time",
+     -2.0
+    ]
+   ]
+  },
+  {
+   "names": [
+    "einstein_coefficient_b"
+   ],
+   "dimension": [
+    [
+     "length",
+     1.0
+    ],
+    [
+     "mass",
+     -1.0
+    ],
+    [
+     "time",
+     1.0
+    ]
+   ]
+  },
+  {
+   "names": [
+    "emission_coefficient"
+   ],
+   "dimension": [
+    [
+     "angle",
+     2.0
+    ],
+    [
+     "length",
+     1.0
+    ],
+    [
+     "time",
+     -3.0
+    ]
+   ]
+  },
+  {
+   "names": [
+    "energy"
+   ],
+   "dimension": [
+    [
+     "length",
+     2.0
+    ],
+    [
+     "mass",
+     1.0
+    ],
+    [
+     "time",
+     -2.0
+    ]
+   ]
+  },
+  {
+   "names": [
+    "entropy"
+   ],
+   "dimension": [
+    [
+     "length",
+     2.0
+    ],
+    [
+     "mass",
+     1.0
+    ],
+    [
+     "temperature",
+     -1.0
+    ],
+    [
+     "time",
+     -2.0
+    ]
+   ]
+  },
+  {
+   "names": [
+    "flow",
+    "fluid_velocity"
+   ],
+   "dimension": [
+    [
+     "length",
+     3.0
+    ],
+    [
+     "time",
+     -1.0
+    ]
+   ]
+  },
+  {
+   "names": [
+    "force",
+    "weight"
+   ],
+   "dimension": [
+    [
+     "length",
+     1.0
+    ],
+    [
+     "mass",
+     1.0
+    ],
+    [
+     "time",
+     -2.0
+    ]
+   ]
+  },
+  {
+   "names": [
+    "frequency"
+   ],
+   "dimension": [
+    [
+     "time",
+     -1.0
+    ]
+   ]
+  },
+  {
+   "names": [
+    "gravitational_gradient"
+   ],
+   "dimension": [
+    [
+     "time",
+     -2.0
+    ]
+   ]
+  },
+  {
+   "names": [
+    "gravitational_parameter"
+   ],
+   "dimension": [
+    [
+     "length",
+     3.0
+    ],
+    [
+     "time",
+     -2.0
+    ]
+   ]
+  },
+  {
+   "names": [
+    "gravity"
+   ],
+   "dimension": [
+    [
+     "length",
+     3.0
+    ],
+    [
+     "mass",
+     -1.0
+    ],
+    [
+     "time",
+     -2.0
+    ]
+   ]
+  },
+  {
+   "names": [
+    "illuminance",
+    "luminous_emittance",
+    "luminous_exitance"
+   ],
+   "dimension": [
+    [
+     "angle",
+     2.0
+    ],
+    [
+     "length",
+     -2.0
+    ],
+    [
+     "luminosity",
+     1.0
+    ]
+   ]
+  },
+  {
+   "names": [
+    "image_density"
+   ],
+   "dimension": [
+    [
+     "data",
+     -1.0
+    ],
+    [
+     "pixel_count",
+     2.0
+    ]
+   ]
+  },
+  {
+   "names": [
+    "image_quality"
+   ],
+   "dimension": [
+    [
+     "length",
+     -1.0
+    ],
+    [
+     "pixel_count",
+     1.0
+    ]
+   ]
+  },
+  {
+   "names": [
+    "inductance"
+   ],
+   "dimension": [
+    [
+     "current",
+     -2.0
+    ],
+    [
+     "length",
+     2.0
+    ],
+    [
+     "mass",
+     1.0
+    ],
+    [
+     "time",
+     -2.0
+    ]
+   ]
+  },
+  {
+   "names": [
+    "inductive_reactance"
+   ],
+   "dimension": [
+    [
+     "angle",
+     1.0
+    ],
+    [
+     "current",
+     -2.0
+    ],
+    [
+     "length",
+     2.0
+    ],
+    [
+     "mass",
+     1.0
+    ],
+    [
+     "time",
+     -3.0
+    ]
+   ]
+  },
+  {
+   "names": [
+    "inertia"
+   ],
+   "dimension": [
+    [
+     "angle",
+     1.0
+    ],
+    [
+     "mass",
+     1.0
+    ],
+    [
+     "time",
+     -1.0
+    ]
+   ]
+  },
+  {
+   "names": [
+    "heat_flux",
+    "intensity",
+    "irradiance"
+   ],
+   "dimension": [
+    [
+     "mass",
+     1.0
+    ],
+    [
+     "time",
+     -3.0
+    ]
+   ]
+  },
+  {
+   "names": [
+    "jerk"
+   ],
+   "dimension": [
+    [
+     "length",
+     1.0
+    ],
+    [
+     "time",
+     -3.0
+    ]
+   ]
+  },
+  {
+   "names": [
+    "jounce",
+    "snap"
+   ],
+   "dimension": [
+    [
+     "length",
+     1.0
+    ],
+    [
+     "time",
+     -4.0
+    ]
+   ]
+  },
+  {
+   "names": [
+    "kinematic_viscosity"
+   ],
+   "dimension": [
+    [
+     "length",
+     2.0
+    ],
+    [
+     "time",
+     -1.0
+    ]
+   ]
+  },
+  {
+   "names": [
+    "breadth",
+    "depth",
+    "distance",
+    "height",
+    "length",
+    "width"
+   ],
+   "dimension": [
+    [
+     "length",
+     1.0
+    ]
+   ]
+  },
+  {
+   "names": [
+    "linear_density"
+   ],
+   "dimension": [
+    [
+     "data",
+     1.0
+    ],
+    [
+     "length",
+     -1.0
+    ]
+   ]
+  },
+  {
+   "names": [
+    "luminance"
+   ],
+   "dimension": [
+    [
+     "length",
+     -2.0
+    ],
+    [
+     "luminosity",
+     1.0
+    ]
+   ]
+  },
+  {
+   "names": [
+    "luminosity",
+    "luminous_intensity"
+   ],
+   "dimension": [
+    [
+     "luminosity",
+     1.0
+    ]
+   ]
+  },
+  {
+   "names": [
+    "luminous_efficiacy"
+   ],
+   "dimension": [
+    [
+     "length",
+     -2.0
+    ],
+    [
+     "luminosity",
+     1.0
+    ],
+    [
+     "mass",
+     -1.0
+    ],
+    [
+     "time",
+     3.0
+    ]
+   ]
+  },
+  {
+   "names": [
+    "luminous_energy"
+   ],
+   "dimension": [
+    [
+     "angle",
+     2.0
+    ],
+    [
+     "luminosity",
+     1.0
+    ],
+    [
+     "time",
+     1.0
+    ]
+   ]
+  },
+  {
+   "names": [
+    "luminous_energy_density"
+   ],
+   "dimension": [
+    [
+     "angle",
+     2.0
+    ],
+    [
+     "length",
+     -3.0
+    ],
+    [
+     "luminosity",
+     1.0
+    ],
+    [
+     "time",
+     1.0
+    ]
+   ]
+  },
+  {
+   "names": [
+    "luminous_exposure"
+   ],
+   "dimension": [
+    [
+     "angle",
+     2.0
+    ],
+    [
+     "length",
+     -2.0
+    ],
+    [
+     "luminosity",
+     1.0
+    ],
+    [
+     "time",
+     1.0
+    ]
+   ]
+  },
+  {
+   "names": [
+    "luminous_power"
+   ],
+   "dimension": [
+    [
+     "angle",
+     2.0
+    ],
+    [
+     "luminosity",
+     1.0
+    ]
+   ]
+  },
+  {
+   "names": [
+    "magnetic_flux"
+   ],
+   "dimension": [
+    [
+     "current",
+     -1.0
+    ],
+    [
+     "length",
+     2.0
+    ],
+    [
+     "mass",
+     1.0
+    ],
+    [
+     "time",
+     -2.0
+    ]
+   ]
+  },
+  {
+   "names": [
+    "magnetic_flux_density"
+   ],
+   "dimension": [
+    [
+     "current",
+     -1.0
+    ],
+    [
+     "mass",
+     1.0
+    ],
+    [
+     "time",
+     -2.0
+    ]
+   ]
+  },
+  {
+   "names": [
+    "magnetic_moment"
+   ],
+   "dimension": [
+    [
+     "current",
+     1.0
+    ],
+    [
+     "length",
+     2.0
+    ]
+   ]
+  },
+  {
+   "names": [
+    "magnetisation"
+   ],
+   "dimension": [
+    [
+     "current",
+     1.0
+    ],
+    [
+     "length",
+     -1.0
+    ]
+   ]
+  },
+  {
+   "names": [
+    "mass"
+   ],
+   "dimension": [
+    [
+     "mass",
+     1.0
+    ]
+   ]
+  },
+  {
+   "names": [
+    "molar_energy"
+   ],
+   "dimension": [
+    [
+     "length",
+     2.0
+    ],
+    [
+     "mass",
+     1.0
+    ],
+    [
+     "substance",
+     -1.0
+    ],
+    [
+     "time",
+     -2.0
+    ]
+   ]
+  },
+  {
+   "names": [
+    "molar_heat_capacity"
+   ],
+   "dimension": [
+    [
+     "length",
+     2.0
+    ],
+    [
+     "mass",
+     1.0
+    ],
+    [
+     "substance",
+     -1.0
+    ],
+    [
+     "temperature",
+     -1.0
+    ],
+    [
+     "time",
+     -2.0
+    ]
+   ]
+  },
+  {
+   "names": [
+    "momentum"
+   ],
+   "dimension": [
+    [
+     "length",
+     1.0
+    ],
+    [
+     "mass",
+     1.0
+    ],
+    [
+     "time",
+     -1.0
+    ]
+   ]
+  },
+  {
+   "names": [
+    "mutation_rate"
+   ],
+   "dimension": [
+    [
+     "data",
+     -1.0
+    ]
+   ]
+  },
+  {
+   "names": [
+    "number_density",
+    "probability_density"
+   ],
+   "dimension": [
+    [
+     "length",
+     -3.0
+    ]
+   ]
+  },
+  {
+   "names": [
+    "permeability"
+   ],
+   "dimension": [
+    [
+     "current",
+     -2.0
+    ],
+    [
+     "length",
+     1.0
+    ],
+    [
+     "mass",
+     1.0
+    ],
+    [
+     "time",
+     -2.0
+    ]
+   ]
+  },
+  {
+   "names": [
+    "permittivity"
+   ],
+   "dimension": [
+    [
+     "current",
+     2.0
+    ],
+    [
+     "length",
+     -3.0
+    ],
+    [
+     "mass",
+     -1.0
+    ],
+    [
+     "time",
+     4.0
+    ]
+   ]
+  },
+  {
+   "names": [
+    "pixel_count"
+   ],
+   "dimension": [
+    [
+     "pixel_count",
+     1.0
+    ]
+   ]
+  },
+  {
+   "names": [
+    "pixel_fill_rate"
+   ],
+   "dimension": [
+    [
+     "pixel_count",
+     1.0
+    ],
+    [
+     "time",
+     -1.0
+    ]
+   ]
+  },
+  {
+   "names": [
+    "pop"
+   ],
+   "dimension": [
+    [
+     "length",
+     1.0
+    ],
+    [
+     "time",
+     -6.0
+    ]
+   ]
+  },
+  {
+   "names": [
+    "power"
+   ],
+   "dimension": [
+    [
+     "length",
+     2.0
+    ],
+    [
+     "mass",
+     1.0
+    ],
+    [
+     "time",
+     -3.0
+    ]
+   ]
+  },
+  {
+   "names": [
+    "bulk_modulus",
+    "energy_density",
+    "pressure"
+   ],
+   "dimension": [
+    [
+     "length",
+     -1.0
+    ],
+    [
+     "mass",
+     1.0
+    ],
+    [
+     "time",
+     -2.0
+    ]
+   ]
+  },
+  {
+   "names": [
+    "reaction_rate"
+   ],
+   "dimension": [
+    [
+     "length",
+     -3.0
+    ],
+    [
+     "substance",
+     1.0
+    ],
+    [
+     "time",
+     -1.0
+    ]
+   ]
+  },
+  {
+   "names": [
+    "reluctance"
+   ],
+   "dimension": [
+    [
+     "current",
+     2.0
+    ],
+    [
+     "length",
+     -2.0
+    ],
+    [
+     "mass",
+     -1.0
+    ],
+    [
+     "time",
+     2.0
+    ]
+   ]
+  },
+  {
+   "names": [
+    "impedance",
+    "resistance"
+   ],
+   "dimension": [
+    [
+     "current",
+     -2.0
+    ],
+    [
+     "length",
+     2.0
+    ],
+    [
+     "mass",
+     1.0
+    ],
+    [
+     "time",
+     -3.0
+    ]
+   ]
+  },
+  {
+   "names": [
+    "resistivity"
+   ],
+   "dimension": [
+    [
+     "current",
+     -2.0
+    ],
+    [
+     "length",
+     1.0
+    ],
+    [
+     "mass",
+     1.0
+    ],
+    [
+     "time",
+     -3.0
+    ]
+   ]
+  },
+  {
+   "names": [
+    "resolution"
+   ],
+   "dimension": [
+    [
+     "pixel_count",
+     2.0
+    ]
+   ]
+  },
+  {
+   "names": [
+    "solid_angle"
+   ],
+   "dimension": [
+    [
+     "angle",
+     2.0
+    ]
+   ]
+  },
+  {
+   "names": [
+    "specific_heat_capacity"
+   ],
+   "dimension": [
+    [
+     "length",
+     2.0
+    ],
+    [
+     "temperature",
+     -1.0
+    ],
+    [
+     "time",
+     -2.0
+    ]
+   ]
+  },
+  {
+   "names": [
+    "specific_volume"
+   ],
+   "dimension": [
+    [
+     "length",
+     3.0
+    ],
+    [
+     "mass",
+     -1.0
+    ]
+   ]
+  },
+  {
+   "names": [
+    "speed"
+   ],
+   "dimension": [
+    [
+     "length",
+     1.0
+    ],
+    [
+     "time",
+     -1.0
+    ]
+   ]
+  },
+  {
+   "names": [
+    "substance"
+   ],
+   "dimension": [
+    [
+     "substance",
+     1.0
+    ]
+   ]
+  },
+  {
+   "names": [
+    "surface_tension"
+   ],
+   "dimension": [
+    [
+     "mass",
+     1.0
+    ],
+    [
+     "time",
+     -2.0
+    ]
+   ]
+  },
+  {
+   "names": [
+    "temperature"
+   ],
+   "dimension": [
+    [
+     "temperature",
+     1.0
+    ]
+   ]
+  },
+  {
+   "names": [
+    "thermal_conductance"
+   ],
+   "dimension": [
+    [
+     "length",
+     2.0
+    ],
+    [
+     "mass",
+     1.0
+    ],
+    [
+     "temperature",
+     -1.0
+    ],
+    [
+     "time",
+     -3.0
+    ]
+   ]
+  },
+  {
+   "names": [
+    "thermal_conductivity"
+   ],
+   "dimension": [
+    [
+     "length",
+     1.0
+    ],
+    [
+     "mass",
+     1.0
+    ],
+    [
+     "temperature",
+     -1.0
+    ],
+    [
+     "time",
+     -3.0
+    ]
+   ]
+  },
+  {
+   "names": [
+    "thermal_resistance"
+   ],
+   "dimension": [
+    [
+     "length",
+     -2.0
+    ],
+    [
+     "mass",
+     -1.0
+    ],
+    [
+     "temperature",
+     1.0
+    ],
+    [
+     "time",
+     3.0
+    ]
+   ]
+  },
+  {
+   "names": [
+    "thermal_resistivity"
+   ],
+   "dimension": [
+    [
+     "length",
+     -3.0
+    ],
+    [
+     "mass",
+     -1.0
+    ],
+    [
+     "temperature",
+     1.0
+    ],
+    [
+     "time",
+     3.0
+    ]
+   ]
+  },
+  {
+   "names": [
+    "time"
+   ],
+   "dimension": [
+    [
+     "time",
+     1.0
+    ]
+   ]
+  },
+  {
+   "names": [
+    "torque"
+   ],
+   "dimension": [
+    [
+     "angle",
+     2.0
+    ],
+    [
+     "mass",
+     1.0
+    ],
+    [
+     "time",
+     -3.0
+    ]
+   ]
+  },
+  {
+   "names": [
+    "vehicle_efficiency"
+   ],
+   "dimension": [
+    [
+     "length",
+     -2.0
+    ]
+   ]
+  },
+  {
+   "names": [
+    "viscosity"
+   ],
+   "dimension": [
+    [
+     "length",
+     -1.0
+    ],
+    [
+     "mass",
+     1.0
+    ],
+    [
+     "time",
+     -1.0
+    ]
+   ]
+  },
+  {
+   "names": [
+    "voltage"
+   ],
+   "dimension": [
+    [
+     "current",
+     -1.0
+    ],
+    [
+     "length",
+     2.0
+    ],
+    [
+     "mass",
+     1.0
+    ],
+    [
+     "time",
+     -3.0
+    ]
+   ]
+  },
+  {
+   "names": [
+    "volume"
+   ],
+   "dimension": [
+    [
+     "length",
+     3.0
+    ]
+   ]
+  },
+  {
+   "names": [
+    "volumetric_density"
+   ],
+   "dimension": [
+    [
+     "data",
+     1.0
+    ],
+    [
+     "length",
+     -3.0
+    ]
+   ]
+  }
+ ],
+ "prefix_sets": [
+  {
+   "name": "IEC",
+   "prefixes": [
+    {
+     "prefix": "kibi",
+     "symbol": "Ki",
+     "value": 1024
+    },
+    {
+     "prefix": "mebi",
+     "symbol": "Mi",
+     "value": 1048576
+    },
+    {
+     "prefix": "gibi",
+     "symbol": "Gi",
+     "value": 1073741824
+    },
+    {
+     "prefix": "tebi",
+     "symbol": "Ti",
+     "value": 1099511627776
+    },
+    {
+     "prefix": "pebi",
+     "symbol": "Pi",
+     "value": 1125899906842624
+    },
+    {
+     "prefix": "exbi",
+     "symbol": "Ei",
+     "value": 1152921504606846976
+    },
+    {
+     "prefix": "zebi",
+     "symbol": "Zi",
+     "value": 1180591620717411303424
+    },
+    {
+     "prefix": "yobi",
+     "symbol": "Yi",
+     "value": 1208925819614629174706176
+    }
+   ]
+  },
+  {
+   "name": "SI_conventional",
+   "prefixes": [
+    {
+     "prefix": "centi",
+     "symbol": "c",
+     "value": 0.01
+    },
+    {
+     "prefix": "deci",
+     "symbol": "d",
+     "value": 0.1
+    },
+    {
+     "prefix": "deca",
+     "symbol": "da",
+     "value": 10.0
+    },
+    {
+     "prefix": "hecto",
+     "symbol": "h",
+     "value": 100.0
+    }
+   ]
+  },
+  {
+   "name": "SI_fun",
+   "prefixes": [
+    {
+     "prefix": "micri",
+     "symbol": "mc",
+     "value": 1e-14
+    },
+    {
+     "prefix": "dimi",
+     "symbol": "dm",
+     "value": 0.0001
+    },
+    {
+     "prefix": "hebdo",
+     "symbol": "H",
+     "value": 10000000.0
+    },
+    {
+     "prefix": "hella",
+     "symbol": "ha",
+     "value": 1e+27
+    }
+   ]
+  },
+  {
+   "name": "SI_large",
+   "prefixes": [
+    {
+     "prefix": "kilo",
+     "symbol": "k",
+     "value": 1000.0
+    },
+    {
+     "prefix": "mega",
+     "symbol": "M",
+     "value": 1000000.0
+    },
+    {
+     "prefix": "giga",
+     "symbol": "G",
+     "value": 1000000000.0
+    },
+    {
+     "prefix": "tera",
+     "symbol": "T",
+     "value": 1000000000000.0
+    },
+    {
+     "prefix": "peta",
+     "symbol": "P",
+     "value": 1000000000000000.0
+    },
+    {
+     "prefix": "exa",
+     "symbol": "E",
+     "value": 1e+18
+    },
+    {
+     "prefix": "zetta",
+     "symbol": "Z",
+     "value": 1e+21
+    },
+    {
+     "prefix": "yotta",
+     "symbol": "Y",
+     "value": 1e+24
+    },
+    {
+     "prefix": "ronna",
+     "symbol": "R",
+     "value": 1e+27
+    },
+    {
+     "prefix": "quetta",
+     "symbol": "Q",
+     "value": 1e+30
+    }
+   ]
+  },
+  {
+   "name": "SI_large + SI_small + SI_conventional",
+   "prefixes": [
+    {
+     "prefix": "kilo",
+     "symbol": "k",
+     "value": 1000.0
+    },
+    {
+     "prefix": "mega",
+     "symbol": "M",
+     "value": 1000000.0
+    },
+    {
+     "prefix": "giga",
+     "symbol": "G",
+     "value": 1000000000.0
+    },
+    {
+     "prefix": "tera",
+     "symbol": "T",
+     "value": 1000000000000.0
+    },
+    {
+     "prefix": "peta",
+     "symbol": "P",
+     "value": 1000000000000000.0
+    },
+    {
+     "prefix": "exa",
+     "symbol": "E",
+     "value": 1e+18
+    },
+    {
+     "prefix": "zetta",
+     "symbol": "Z",
+     "value": 1e+21
+    },
+    {
+     "prefix": "yotta",
+     "symbol": "Y",
+     "value": 1e+24
+    },
+    {
+     "prefix": "ronna",
+     "symbol": "R",
+     "value": 1e+27
+    },
+    {
+     "prefix": "quetta",
+     "symbol": "Q",
+     "value": 1e+30
+    },
+    {
+     "prefix": "milli",
+     "symbol": "m",
+     "value": 0.001
+    },
+    {
+     "prefix": "micro",
+     "symbol": "\u00b5",
+     "value": 1e-06
+    },
+    {
+     "prefix": "nano",
+     "symbol": "n",
+     "value": 1e-09
+    },
+    {
+     "prefix": "pico",
+     "symbol": "p",
+     "value": 1e-12
+    },
+    {
+     "prefix": "femto",
+     "symbol": "f",
+     "value": 1e-15
+    },
+    {
+     "prefix": "atto",
+     "symbol": "a",
+     "value": 1e-18
+    },
+    {
+     "prefix": "zepto",
+     "symbol": "z",
+     "value": 1e-21
+    },
+    {
+     "prefix": "yocto",
+     "symbol": "y",
+     "value": 1e-24
+    },
+    {
+     "prefix": "ronto",
+     "symbol": "y",
+     "value": 1e-27
+    },
+    {
+     "prefix": "quecto",
+     "symbol": "y",
+     "value": 1e-30
+    },
+    {
+     "prefix": "centi",
+     "symbol": "c",
+     "value": 0.01
+    },
+    {
+     "prefix": "deci",
+     "symbol": "d",
+     "value": 0.1
+    },
+    {
+     "prefix": "deca",
+     "symbol": "da",
+     "value": 10.0
+    },
+    {
+     "prefix": "hecto",
+     "symbol": "h",
+     "value": 100.0
+    }
+   ]
+  },
+  {
+   "name": "SI_small",
+   "prefixes": [
+    {
+     "prefix": "milli",
+     "symbol": "m",
+     "value": 0.001
+    },
+    {
+     "prefix": "micro",
+     "symbol": "\u00b5",
+     "value": 1e-06
+    },
+    {
+     "prefix": "nano",
+     "symbol": "n",
+     "value": 1e-09
+    },
+    {
+     "prefix": "pico",
+     "symbol": "p",
+     "value": 1e-12
+    },
+    {
+     "prefix": "femto",
+     "symbol": "f",
+     "value": 1e-15
+    },
+    {
+     "prefix": "atto",
+     "symbol": "a",
+     "value": 1e-18
+    },
+    {
+     "prefix": "zepto",
+     "symbol": "z",
+     "value": 1e-21
+    },
+    {
+     "prefix": "yocto",
+     "symbol": "y",
+     "value": 1e-24
+    },
+    {
+     "prefix": "ronto",
+     "symbol": "y",
+     "value": 1e-27
+    },
+    {
+     "prefix": "quecto",
+     "symbol": "y",
+     "value": 1e-30
+    }
+   ]
+  }
+ ],
+ "units": [
+  {
+   "value": 1.0,
+   "stddev": null,
+   "dimension": [
+    [
+     "length",
+     -2.0
+    ],
+    [
+     "mass",
+     1.0
+    ]
+   ],
+   "names": [
+    "BMI"
+   ],
+   "symbols": [
+    "BMI"
+   ]
+  },
+  {
+   "value": 6.6743e-11,
+   "stddev": 1.5e-15,
+   "dimension": [
+    [
+     "length",
+     3.0
+    ],
+    [
+     "mass",
+     -1.0
+    ],
+    [
+     "time",
+     -2.0
+    ]
+   ],
+   "names": [
+    "G"
+   ],
+   "symbols": [
+    "G"
+   ]
+  },
+  {
+   "value": 0.001940277777777778,
+   "stddev": null,
+   "dimension": [
+    [
+     "length",
+     1.0
+    ]
+   ],
+   "names": [
+    "agate"
+   ],
+   "symbols": [
+    "ruby"
+   ]
+  },
+  {
+   "value": 3600,
+   "stddev": null,
+   "dimension": [
+    [
+     "current",
+     1.0
+    ],
+    [
+     "time",
+     1.0
+    ]
+   ],
+   "names": [
+    "amp_hour"
+   ],
+   "symbols": [
+    "Ah"
+   ]
+  },
+  {
+   "value": 1,
+   "stddev": null,
+   "dimension": [
+    [
+     "current",
+     1.0
+    ]
+   ],
+   "names": [
+    "ampere"
+   ],
+   "symbols": [
+    "amp"
+   ]
+  },
+  {
+   "value": 1e-10,
+   "stddev": null,
+   "dimension": [
+    [
+     "length",
+     1.0
+    ]
+   ],
+   "names": [
+    "angstrom"
+   ],
+   "symbols": [
+    "\u00c5"
+   ]
+  },
+  {
+   "value": 0.3183098861837907,
+   "stddev": null,
+   "dimension": [
+    [
+     "length",
+     -2.0
+    ],
+    [
+     "luminosity",
+     1.0
+    ]
+   ],
+   "names": [
+    "apostlib"
+   ],
+   "symbols": [
+    "asb"
+   ]
+  },
+  {
+   "value": 0.0002908882086657216,
+   "stddev": null,
+   "dimension": [
+    [
+     "angle",
+     1.0
+    ]
+   ],
+   "names": [
+    "arcminute"
+   ],
+   "symbols": [
+    "\u2032",
+    "arcmin"
+   ]
+  },
+  {
+   "value": 4.84813681109536e-06,
+   "stddev": null,
+   "dimension": [
+    [
+     "angle",
+     1.0
+    ]
+   ],
+   "names": [
+    "arcsecond"
+   ],
+   "symbols": [
+    "\u2033",
+    "arcsec"
+   ]
+  },
+  {
+   "value": 100,
+   "stddev": null,
+   "dimension": [
+    [
+     "length",
+     2.0
+    ]
+   ],
+   "names": [
+    "are"
+   ],
+   "symbols": [
+    "a"
+   ]
+  },
+  {
+   "value": 149597870700,
+   "stddev": null,
+   "dimension": [
+    [
+     "length",
+     1.0
+    ]
+   ],
+   "names": [
+    "astronomical_unit"
+   ],
+   "symbols": [
+    "au"
+   ]
+  },
+  {
+   "value": 101325,
+   "stddev": null,
+   "dimension": [
+    [
+     "length",
+     -1.0
+    ],
+    [
+     "mass",
+     1.0
+    ],
+    [
+     "time",
+     -2.0
+    ]
+   ],
+   "names": [
+    "atmosphere"
+   ],
+   "symbols": [
+    "atm",
+    "ata"
+   ]
+  },
+  {
+   "value": 100000.0,
+   "stddev": null,
+   "dimension": [
+    [
+     "length",
+     -1.0
+    ],
+    [
+     "mass",
+     1.0
+    ],
+    [
+     "time",
+     -2.0
+    ]
+   ],
+   "names": [
+    "bar"
+   ],
+   "symbols": [
+    "bar"
+   ]
+  },
+  {
+   "value": 2.54e-05,
+   "stddev": null,
+   "dimension": [
+    [
+     "length",
+     1.0
+    ]
+   ],
+   "names": [
+    "barleycorn"
+   ],
+   "symbols": []
+  },
+  {
+   "value": 1e-28,
+   "stddev": null,
+   "dimension": [
+    [
+     "length",
+     2.0
+    ]
+   ],
+   "names": [
+    "barn"
+   ],
+   "symbols": [
+    "b"
+   ]
+  },
+  {
+   "value": 0.1,
+   "stddev": null,
+   "dimension": [
+    [
+     "length",
+     -1.0
+    ],
+    [
+     "mass",
+     1.0
+    ],
+    [
+     "time",
+     -2.0
+    ]
+   ],
+   "names": [
+    "barye"
+   ],
+   "symbols": [
+    "Ba"
+   ]
+  },
+  {
+   "value": 2,
+   "stddev": null,
+   "dimension": [
+    [
+     "data",
+     1.0
+    ]
+   ],
+   "names": [
+    "base_pair"
+   ],
+   "symbols": [
+    "bp"
+   ]
+  },
+  {
+   "value": 0.016666666666666666,
+   "stddev": null,
+   "dimension": [
+    [
+     "time",
+     -1.0
+    ]
+   ],
+   "names": [
+    "beats per minute"
+   ],
+   "symbols": [
+    "bpm"
+   ]
+  },
+  {
+   "value": 1,
+   "stddev": null,
+   "dimension": [
+    [
+     "time",
+     -1.0
+    ]
+   ],
+   "names": [
+    "becquerel"
+   ],
+   "symbols": [
+    "Bq"
+   ]
+  },
+  {
+   "value": 1,
+   "stddev": null,
+   "dimension": [
+    [
+     "data",
+     1.0
+    ]
+   ],
+   "names": [
+    "bit"
+   ],
+   "symbols": [
+    "b"
+   ]
+  },
+  {
+   "value": 5.29177210903e-11,
+   "stddev": 8e-21,
+   "dimension": [
+    [
+     "length",
+     1.0
+    ]
+   ],
+   "names": [
+    "bohr_radius"
+   ],
+   "symbols": [
+    "a_0"
+   ]
+  },
+  {
+   "value": 1.380649e-23,
+   "stddev": null,
+   "dimension": [
+    [
+     "length",
+     2.0
+    ],
+    [
+     "mass",
+     1.0
+    ],
+    [
+     "temperature",
+     -1.0
+    ],
+    [
+     "time",
+     -2.0
+    ]
+   ],
+   "names": [
+    "boltzmann_constant"
+   ],
+   "symbols": [
+    "k_b"
+   ]
+  },
+  {
+   "value": 3.183098861837907e-08,
+   "stddev": null,
+   "dimension": [
+    [
+     "length",
+     -2.0
+    ],
+    [
+     "luminosity",
+     1.0
+    ]
+   ],
+   "names": [
+    "bril"
+   ],
+   "symbols": []
+  },
+  {
+   "value": 8,
+   "stddev": null,
+   "dimension": [
+    [
+     "data",
+     1.0
+    ]
+   ],
+   "names": [
+    "byte"
+   ],
+   "symbols": [
+    "B"
+   ]
+  },
+  {
+   "value": 299792458.0,
+   "stddev": null,
+   "dimension": [
+    [
+     "length",
+     1.0
+    ],
+    [
+     "time",
+     -1.0
+    ]
+   ],
+   "names": [
+    "c"
+   ],
+   "symbols": [
+    "c"
+   ]
+  },
+  {
+   "value": 785800.0,
+   "stddev": null,
+   "dimension": [
+    [
+     "length",
+     2.0
+    ]
+   ],
+   "names": [
+    "caballer\u00eda"
+   ],
+   "symbols": []
+  },
+  {
+   "value": 4.814,
+   "stddev": null,
+   "dimension": [
+    [
+     "length",
+     2.0
+    ],
+    [
+     "mass",
+     1.0
+    ],
+    [
+     "time",
+     -2.0
+    ]
+   ],
+   "names": [
+    "calorie"
+   ],
+   "symbols": [
+    "cal"
+   ]
+  },
+  {
+   "value": 1,
+   "stddev": null,
+   "dimension": [
+    [
+     "luminosity",
+     1.0
+    ]
+   ],
+   "names": [
+    "candela"
+   ],
+   "symbols": [
+    "cd"
+   ]
+  },
+  {
+   "value": 0.01,
+   "stddev": null,
+   "dimension": [
+    [
+     "length",
+     1.0
+    ]
+   ],
+   "names": [
+    "centimeter",
+    "centimetre"
+   ],
+   "symbols": [
+    "cm"
+   ]
+  },
+  {
+   "value": 20.1168,
+   "stddev": null,
+   "dimension": [
+    [
+     "length",
+     1.0
+    ]
+   ],
+   "names": [
+    "chain"
+   ],
+   "symbols": [
+    "ch"
+   ]
+  },
+  {
+   "value": 1,
+   "stddev": null,
+   "dimension": [
+    [
+     "current",
+     1.0
+    ],
+    [
+     "time",
+     1.0
+    ]
+   ],
+   "names": [
+    "coulomb"
+   ],
+   "symbols": [
+    "C"
+   ]
+  },
+  {
+   "value": 3930.395625,
+   "stddev": null,
+   "dimension": [
+    [
+     "length",
+     1.0
+    ]
+   ],
+   "names": [
+    "cuerda"
+   ],
+   "symbols": []
+  },
+  {
+   "value": 1,
+   "stddev": null,
+   "dimension": [
+    [
+     "length",
+     3.0
+    ],
+    [
+     "time",
+     -1.0
+    ]
+   ],
+   "names": [
+    "cumec"
+   ],
+   "symbols": []
+  },
+  {
+   "value": 86400,
+   "stddev": null,
+   "dimension": [
+    [
+     "time",
+     1.0
+    ]
+   ],
+   "names": [
+    "day"
+   ],
+   "symbols": [
+    "d"
+   ]
+  },
+  {
+   "value": 0.017453292519943295,
+   "stddev": null,
+   "dimension": [
+    [
+     "angle",
+     1.0
+    ]
+   ],
+   "names": [
+    "degree"
+   ],
+   "symbols": [
+    "\u00b0",
+    "deg"
+   ]
+  },
+  {
+   "value": 100.0,
+   "stddev": null,
+   "dimension": [
+    [
+     "length",
+     -1.0
+    ],
+    [
+     "pixel_count",
+     1.0
+    ]
+   ],
+   "names": [
+    "dpcm"
+   ],
+   "symbols": []
+  },
+  {
+   "value": 3.6966911953125014e-06,
+   "stddev": null,
+   "dimension": [
+    [
+     "length",
+     3.0
+    ]
+   ],
+   "names": [
+    "dram"
+   ],
+   "symbols": [
+    "dr"
+   ]
+  },
+  {
+   "value": 1e-05,
+   "stddev": null,
+   "dimension": [
+    [
+     "length",
+     1.0
+    ],
+    [
+     "mass",
+     1.0
+    ],
+    [
+     "time",
+     -2.0
+    ]
+   ],
+   "names": [
+    "dyne"
+   ],
+   "symbols": [
+    "dyn"
+   ]
+  },
+  {
+   "value": 8.854187817620389e-12,
+   "stddev": null,
+   "dimension": [
+    [
+     "current",
+     2.0
+    ],
+    [
+     "length",
+     -3.0
+    ],
+    [
+     "mass",
+     -1.0
+    ],
+    [
+     "time",
+     4.0
+    ]
+   ],
+   "names": [
+    "e_0"
+   ],
+   "symbols": [
+    "e\u2080"
+   ]
+  },
+  {
+   "value": 1.602176634e-19,
+   "stddev": null,
+   "dimension": [
+    [
+     "current",
+     1.0
+    ],
+    [
+     "time",
+     1.0
+    ]
+   ],
+   "names": [
+    "electron_charge"
+   ],
+   "symbols": [
+    "e"
+   ]
+  },
+  {
+   "value": 9.1093837015,
+   "stddev": 2.8e-09,
+   "dimension": [
+    [
+     "mass",
+     1.0
+    ]
+   ],
+   "names": [
+    "electron_mass"
+   ],
+   "symbols": [
+    "m_e"
+   ]
+  },
+  {
+   "value": 1.602176634e-19,
+   "stddev": null,
+   "dimension": [
+    [
+     "length",
+     2.0
+    ],
+    [
+     "mass",
+     1.0
+    ],
+    [
+     "time",
+     -2.0
+    ]
+   ],
+   "names": [
+    "electronvolt"
+   ],
+   "symbols": [
+    "eV"
+   ]
+  },
+  {
+   "value": 0.0001763888888888889,
+   "stddev": null,
+   "dimension": [
+    [
+     "length",
+     1.0
+    ]
+   ],
+   "names": [
+    "en"
+   ],
+   "symbols": []
+  },
+  {
+   "value": 1e-05,
+   "stddev": null,
+   "dimension": [
+    [
+     "length",
+     1.0
+    ],
+    [
+     "mass",
+     1.0
+    ],
+    [
+     "time",
+     -1.0
+    ]
+   ],
+   "names": [
+    "erg"
+   ],
+   "symbols": []
+  },
+  {
+   "value": 1,
+   "stddev": null,
+   "dimension": [
+    [
+     "current",
+     2.0
+    ],
+    [
+     "length",
+     -2.0
+    ],
+    [
+     "mass",
+     -1.0
+    ],
+    [
+     "time",
+     4.0
+    ]
+   ],
+   "names": [
+    "farad"
+   ],
+   "symbols": [
+    "F"
+   ]
+  },
+  {
+   "value": 0.007297352565305213,
+   "stddev": null,
+   "dimension": [],
+   "names": [
+    "fine_structure_constant",
+    "alpha"
+   ],
+   "symbols": [
+    "\u03b1"
+   ]
+  },
+  {
+   "value": 2.957352956250001e-05,
+   "stddev": null,
+   "dimension": [
+    [
+     "length",
+     3.0
+    ]
+   ],
+   "names": [
+    "fluid_ounce_uk"
+   ],
+   "symbols": [
+    "fl oz"
+   ]
+  },
+  {
+   "value": 4.735510416666668e-05,
+   "stddev": null,
+   "dimension": [
+    [
+     "length",
+     3.0
+    ]
+   ],
+   "names": [
+    "fluid_ounce_uk"
+   ],
+   "symbols": [
+    "fl oz"
+   ]
+  },
+  {
+   "value": 0.3048,
+   "stddev": null,
+   "dimension": [
+    [
+     "length",
+     1.0
+    ]
+   ],
+   "names": [
+    "foot"
+   ],
+   "symbols": [
+    "ft",
+    "'"
+   ]
+  },
+  {
+   "value": 1000000000000.0,
+   "stddev": null,
+   "dimension": [
+    [
+     "time",
+     -1.0
+    ]
+   ],
+   "names": [
+    "fresnel"
+   ],
+   "symbols": []
+  },
+  {
+   "value": 201.168,
+   "stddev": null,
+   "dimension": [
+    [
+     "length",
+     1.0
+    ]
+   ],
+   "names": [
+    "furlong"
+   ],
+   "symbols": [
+    "fur"
+   ]
+  },
+  {
+   "value": 0.01,
+   "stddev": null,
+   "dimension": [
+    [
+     "length",
+     1.0
+    ],
+    [
+     "time",
+     -2.0
+    ]
+   ],
+   "names": [
+    "gal"
+   ],
+   "symbols": [
+    "Gal"
+   ]
+  },
+  {
+   "value": 0.004546090000000002,
+   "stddev": null,
+   "dimension": [
+    [
+     "length",
+     3.0
+    ]
+   ],
+   "names": [
+    "gallon_uk"
+   ],
+   "symbols": [
+    "gal"
+   ]
+  },
+  {
+   "value": 0.0037854117840000014,
+   "stddev": null,
+   "dimension": [
+    [
+     "length",
+     3.0
+    ]
+   ],
+   "names": [
+    "gallon_us"
+   ],
+   "symbols": [
+    "gal"
+   ]
+  },
+  {
+   "value": 0.015707963267948967,
+   "stddev": null,
+   "dimension": [
+    [
+     "angle",
+     1.0
+    ]
+   ],
+   "names": [
+    "gon"
+   ],
+   "symbols": []
+  },
+  {
+   "value": 0.001,
+   "stddev": null,
+   "dimension": [
+    [
+     "mass",
+     1.0
+    ]
+   ],
+   "names": [
+    "gram"
+   ],
+   "symbols": [
+    "g"
+   ]
+  },
+  {
+   "value": 1,
+   "stddev": null,
+   "dimension": [
+    [
+     "length",
+     2.0
+    ],
+    [
+     "time",
+     -2.0
+    ]
+   ],
+   "names": [
+    "gray"
+   ],
+   "symbols": [
+    "Gy"
+   ]
+  },
+  {
+   "value": 0.10160000000000001,
+   "stddev": null,
+   "dimension": [
+    [
+     "length",
+     1.0
+    ]
+   ],
+   "names": [
+    "hand"
+   ],
+   "symbols": [
+    "hh"
+   ]
+  },
+  {
+   "value": 3.3219280948873626,
+   "stddev": null,
+   "dimension": [
+    [
+     "data",
+     1.0
+    ]
+   ],
+   "names": [
+    "hartley",
+    "ban",
+    "dit"
+   ],
+   "symbols": [
+    "dit"
+   ]
+  },
+  {
+   "value": 4.3597447222071e-18,
+   "stddev": 8.5e-30,
+   "dimension": [
+    [
+     "length",
+     2.0
+    ],
+    [
+     "mass",
+     1.0
+    ],
+    [
+     "time",
+     -2.0
+    ]
+   ],
+   "names": [
+    "hartree"
+   ],
+   "symbols": [
+    "E\u2095"
+   ]
+  },
+  {
+   "value": 1.0545718176461565e-34,
+   "stddev": null,
+   "dimension": [
+    [
+     "length",
+     2.0
+    ],
+    [
+     "mass",
+     1.0
+    ],
+    [
+     "time",
+     -1.0
+    ]
+   ],
+   "names": [
+    "hbar"
+   ],
+   "symbols": [
+    "\u0127"
+   ]
+  },
+  {
+   "value": 10000,
+   "stddev": null,
+   "dimension": [
+    [
+     "length",
+     2.0
+    ]
+   ],
+   "names": [
+    "hectare"
+   ],
+   "symbols": [
+    "ha"
+   ]
+  },
+  {
+   "value": 1,
+   "stddev": null,
+   "dimension": [
+    [
+     "current",
+     -2.0
+    ],
+    [
+     "length",
+     2.0
+    ],
+    [
+     "mass",
+     1.0
+    ],
+    [
+     "time",
+     -2.0
+    ]
+   ],
+   "names": [
+    "henry"
+   ],
+   "symbols": [
+    "H"
+   ]
+  },
+  {
+   "value": 0,
+   "stddev": null,
+   "dimension": [],
+   "names": [
+    "hogshead"
+   ],
+   "symbols": [
+    "hhd"
+   ]
+  },
+  {
+   "value": 3600,
+   "stddev": null,
+   "dimension": [
+    [
+     "time",
+     1.0
+    ]
+   ],
+   "names": [
+    "hour"
+   ],
+   "symbols": [
+    "hr",
+    "h"
+   ]
+  },
+  {
+   "value": 0.025400000000000002,
+   "stddev": null,
+   "dimension": [
+    [
+     "length",
+     1.0
+    ]
+   ],
+   "names": [
+    "inch"
+   ],
+   "symbols": [
+    "in",
+    "\""
+   ]
+  },
+  {
+   "value": 1,
+   "stddev": null,
+   "dimension": [
+    [
+     "length",
+     2.0
+    ],
+    [
+     "mass",
+     1.0
+    ],
+    [
+     "time",
+     -2.0
+    ]
+   ],
+   "names": [
+    "joule"
+   ],
+   "symbols": [
+    "J"
+   ]
+  },
+  {
+   "value": 8987551787.368177,
+   "stddev": null,
+   "dimension": [
+    [
+     "current",
+     -2.0
+    ],
+    [
+     "length",
+     3.0
+    ],
+    [
+     "mass",
+     1.0
+    ],
+    [
+     "time",
+     -4.0
+    ]
+   ],
+   "names": [
+    "k_e"
+   ],
+   "symbols": [
+    "k\u2091"
+   ]
+  },
+  {
+   "value": 1,
+   "stddev": null,
+   "dimension": [
+    [
+     "substance",
+     1.0
+    ],
+    [
+     "time",
+     -1.0
+    ]
+   ],
+   "names": [
+    "katal"
+   ],
+   "symbols": [
+    "kat"
+   ]
+  },
+  {
+   "value": 100.0,
+   "stddev": null,
+   "dimension": [
+    [
+     "length",
+     -1.0
+    ]
+   ],
+   "names": [
+    "kayser"
+   ],
+   "symbols": [
+    "K"
+   ]
+  },
+  {
+   "value": 1,
+   "stddev": null,
+   "dimension": [
+    [
+     "temperature",
+     1.0
+    ]
+   ],
+   "names": [
+    "kelvin"
+   ],
+   "symbols": [
+    "K"
+   ]
+  },
+  {
+   "value": 4814.0,
+   "stddev": null,
+   "dimension": [
+    [
+     "length",
+     2.0
+    ],
+    [
+     "mass",
+     1.0
+    ],
+    [
+     "time",
+     -2.0
+    ]
+   ],
+   "names": [
+    "kilocalorie"
+   ],
+   "symbols": [
+    "kcal"
+   ]
+  },
+  {
+   "value": 1,
+   "stddev": null,
+   "dimension": [
+    [
+     "mass",
+     1.0
+    ]
+   ],
+   "names": [
+    "kilogram"
+   ],
+   "symbols": [
+    "kg"
+   ]
+  },
+  {
+   "value": 0.027777777777777776,
+   "stddev": null,
+   "dimension": [
+    [
+     "length",
+     1.0
+    ],
+    [
+     "time",
+     -1.0
+    ]
+   ],
+   "names": [],
+   "symbols": [
+    "kmph"
+   ]
+  },
+  {
+   "value": 3183.098861837907,
+   "stddev": null,
+   "dimension": [
+    [
+     "length",
+     -2.0
+    ],
+    [
+     "luminosity",
+     1.0
+    ]
+   ],
+   "names": [
+    "lambert"
+   ],
+   "symbols": [
+    "L"
+   ]
+  },
+  {
+   "value": 48140.0,
+   "stddev": null,
+   "dimension": [
+    [
+     "mass",
+     1.0
+    ],
+    [
+     "time",
+     -2.0
+    ]
+   ],
+   "names": [
+    "langley"
+   ],
+   "symbols": [
+    "Ly"
+   ]
+  },
+  {
+   "value": 4828.032,
+   "stddev": null,
+   "dimension": [
+    [
+     "length",
+     1.0
+    ]
+   ],
+   "names": [
+    "league"
+   ],
+   "symbols": [
+    "lea"
+   ]
+  },
+  {
+   "value": 299792458.0,
+   "stddev": null,
+   "dimension": [
+    [
+     "length",
+     1.0
+    ]
+   ],
+   "names": [
+    "lightsecond"
+   ],
+   "symbols": [
+    "ls"
+   ]
+  },
+  {
+   "value": 9460730472580800.0,
+   "stddev": null,
+   "dimension": [
+    [
+     "length",
+     1.0
+    ]
+   ],
+   "names": [
+    "lightyear"
+   ],
+   "symbols": [
+    "ly"
+   ]
+  },
+  {
+   "value": 0.0010000000000000002,
+   "stddev": null,
+   "dimension": [
+    [
+     "length",
+     3.0
+    ]
+   ],
+   "names": [
+    "liter",
+    "litre"
+   ],
+   "symbols": [
+    "l"
+   ]
+  },
+  {
+   "value": 2.686780111e+25,
+   "stddev": null,
+   "dimension": [
+    [
+     "length",
+     -3.0
+    ]
+   ],
+   "names": [
+    "loschmidt_constant"
+   ],
+   "symbols": [
+    "n_0"
+   ]
+  },
+  {
+   "value": 1,
+   "stddev": null,
+   "dimension": [
+    [
+     "angle",
+     2.0
+    ],
+    [
+     "luminosity",
+     1.0
+    ]
+   ],
+   "names": [
+    "lumen"
+   ],
+   "symbols": [
+    "lum"
+   ]
+  },
+  {
+   "value": 1,
+   "stddev": null,
+   "dimension": [
+    [
+     "angle",
+     2.0
+    ],
+    [
+     "length",
+     -2.0
+    ],
+    [
+     "luminosity",
+     1.0
+    ]
+   ],
+   "names": [
+    "lux"
+   ],
+   "symbols": [
+    "Lx"
+   ]
+  },
+  {
+   "value": 0.004511040000000001,
+   "stddev": null,
+   "dimension": [
+    [
+     "length",
+     1.0
+    ]
+   ],
+   "names": [],
+   "symbols": []
+  },
+  {
+   "value": 0.004217517642175176,
+   "stddev": null,
+   "dimension": [
+    [
+     "length",
+     1.0
+    ]
+   ],
+   "names": [],
+   "symbols": []
+  },
+  {
+   "value": 38.2,
+   "stddev": null,
+   "dimension": [
+    [
+     "mass",
+     1.0
+    ],
+    [
+     "time",
+     -3.0
+    ]
+   ],
+   "names": [
+    "met"
+   ],
+   "symbols": [
+    "met"
+   ]
+  },
+  {
+   "value": 1,
+   "stddev": null,
+   "dimension": [
+    [
+     "length",
+     1.0
+    ]
+   ],
+   "names": [
+    "meter",
+    "metre"
+   ],
+   "symbols": [
+    "m"
+   ]
+  },
+  {
+   "value": 133322.387415,
+   "stddev": null,
+   "dimension": [
+    [
+     "length",
+     -1.0
+    ],
+    [
+     "mass",
+     1.0
+    ],
+    [
+     "time",
+     -2.0
+    ]
+   ],
+   "names": [
+    "meter_mercury"
+   ],
+   "symbols": [
+    "mHg"
+   ]
+  },
+  {
+   "value": 1609.344,
+   "stddev": null,
+   "dimension": [
+    [
+     "length",
+     1.0
+    ]
+   ],
+   "names": [
+    "mile"
+   ],
+   "symbols": [
+    "mi"
+   ]
+  },
+  {
+   "value": 60,
+   "stddev": null,
+   "dimension": [
+    [
+     "time",
+     1.0
+    ]
+   ],
+   "names": [
+    "minute"
+   ],
+   "symbols": [
+    "min"
+   ]
+  },
+  {
+   "value": 1,
+   "stddev": null,
+   "dimension": [
+    [
+     "substance",
+     1.0
+    ]
+   ],
+   "names": [
+    "mole"
+   ],
+   "symbols": [
+    "mol"
+   ]
+  },
+  {
+   "value": 1.2566370614359173e-06,
+   "stddev": null,
+   "dimension": [
+    [
+     "current",
+     -2.0
+    ],
+    [
+     "length",
+     1.0
+    ],
+    [
+     "mass",
+     1.0
+    ],
+    [
+     "time",
+     -2.0
+    ]
+   ],
+   "names": [
+    "mu_0"
+   ],
+   "symbols": [
+    "\u03bc\u2080"
+   ]
+  },
+  {
+   "value": 1.4426950408889634,
+   "stddev": null,
+   "dimension": [
+    [
+     "data",
+     1.0
+    ]
+   ],
+   "names": [
+    "nat"
+   ],
+   "symbols": []
+  },
+  {
+   "value": 1,
+   "stddev": null,
+   "dimension": [
+    [
+     "length",
+     1.0
+    ],
+    [
+     "mass",
+     1.0
+    ],
+    [
+     "time",
+     -2.0
+    ]
+   ],
+   "names": [
+    "newton"
+   ],
+   "symbols": [
+    "N"
+   ]
+  },
+  {
+   "value": 4,
+   "stddev": null,
+   "dimension": [
+    [
+     "data",
+     1.0
+    ]
+   ],
+   "names": [
+    "nibble"
+   ],
+   "symbols": []
+  },
+  {
+   "value": 1.0,
+   "stddev": null,
+   "dimension": [
+    [
+     "length",
+     -2.0
+    ],
+    [
+     "luminosity",
+     1.0
+    ]
+   ],
+   "names": [
+    "nit"
+   ],
+   "symbols": [
+    "nit"
+   ]
+  },
+  {
+   "value": 1,
+   "stddev": null,
+   "dimension": [
+    [
+     "current",
+     -2.0
+    ],
+    [
+     "length",
+     2.0
+    ],
+    [
+     "mass",
+     1.0
+    ],
+    [
+     "time",
+     -3.0
+    ]
+   ],
+   "names": [
+    "ohm"
+   ],
+   "symbols": [
+    "\u03a9"
+   ]
+  },
+  {
+   "value": 3.085677581491367e+16,
+   "stddev": null,
+   "dimension": [
+    [
+     "length",
+     1.0
+    ]
+   ],
+   "names": [
+    "parsec"
+   ],
+   "symbols": [
+    "pc"
+   ]
+  },
+  {
+   "value": 1e-06,
+   "stddev": null,
+   "dimension": [],
+   "names": [
+    "parts_per_million"
+   ],
+   "symbols": [
+    "ppm"
+   ]
+  },
+  {
+   "value": 1,
+   "stddev": null,
+   "dimension": [
+    [
+     "length",
+     -1.0
+    ],
+    [
+     "mass",
+     1.0
+    ],
+    [
+     "time",
+     -2.0
+    ]
+   ],
+   "names": [
+    "pascal"
+   ],
+   "symbols": [
+    "Pa"
+   ]
+  },
+  {
+   "value": 0.01,
+   "stddev": null,
+   "dimension": [],
+   "names": [
+    "percent"
+   ],
+   "symbols": [
+    "%"
+   ]
+  },
+  {
+   "value": 0.001,
+   "stddev": null,
+   "dimension": [],
+   "names": [
+    "permille"
+   ],
+   "symbols": [
+    "\u2030"
+   ]
+  },
+  {
+   "value": 0.004233333333333334,
+   "stddev": null,
+   "dimension": [
+    [
+     "length",
+     1.0
+    ]
+   ],
+   "names": [
+    "pica"
+   ],
+   "symbols": []
+  },
+  {
+   "value": 0.2786,
+   "stddev": null,
+   "dimension": [
+    [
+     "length",
+     1.0
+    ]
+   ],
+   "names": [
+    "pies"
+   ],
+   "symbols": []
+  },
+  {
+   "value": 0.0005682612500000002,
+   "stddev": null,
+   "dimension": [
+    [
+     "length",
+     3.0
+    ]
+   ],
+   "names": [
+    "pint_uk"
+   ],
+   "symbols": [
+    "pt"
+   ]
+  },
+  {
+   "value": 0.0004731764730000002,
+   "stddev": null,
+   "dimension": [
+    [
+     "length",
+     3.0
+    ]
+   ],
+   "names": [
+    "pint_us"
+   ],
+   "symbols": [
+    "pt"
+   ]
+  },
+  {
+   "value": 1,
+   "stddev": null,
+   "dimension": [
+    [
+     "pixel_count",
+     1.0
+    ]
+   ],
+   "names": [
+    "pixel"
+   ],
+   "symbols": [
+    "pix"
+   ]
+  },
+  {
+   "value": 0.0003527777777777778,
+   "stddev": null,
+   "dimension": [
+    [
+     "length",
+     1.0
+    ]
+   ],
+   "names": [
+    "point"
+   ],
+   "symbols": [
+    "pt"
+   ]
+  },
+  {
+   "value": 0.1,
+   "stddev": null,
+   "dimension": [
+    [
+     "length",
+     -1.0
+    ],
+    [
+     "mass",
+     1.0
+    ],
+    [
+     "time",
+     -1.0
+    ]
+   ],
+   "names": [
+    "poise"
+   ],
+   "symbols": [
+    "P"
+   ]
+  },
+  {
+   "value": 39.370078740157474,
+   "stddev": null,
+   "dimension": [
+    [
+     "length",
+     -1.0
+    ],
+    [
+     "pixel_count",
+     1.0
+    ]
+   ],
+   "names": [
+    "ppi"
+   ],
+   "symbols": []
+  },
+  {
+   "value": 0.0019347222222222222,
+   "stddev": null,
+   "dimension": [
+    [
+     "length",
+     1.0
+    ]
+   ],
+   "names": [
+    "pulgada"
+   ],
+   "symbols": []
+  },
+  {
+   "value": 0.023216666666666667,
+   "stddev": null,
+   "dimension": [
+    [
+     "length",
+     1.0
+    ]
+   ],
+   "names": [
+    "pulgada"
+   ],
+   "symbols": []
+  },
+  {
+   "value": 1,
+   "stddev": null,
+   "dimension": [
+    [
+     "angle",
+     1.0
+    ]
+   ],
+   "names": [
+    "radian"
+   ],
+   "symbols": [
+    "rad"
+   ]
+  },
+  {
+   "value": 2.1798723611035,
+   "stddev": 4.2e-15,
+   "dimension": [
+    [
+     "length",
+     2.0
+    ],
+    [
+     "mass",
+     1.0
+    ],
+    [
+     "time",
+     -2.0
+    ]
+   ],
+   "names": [
+    "rydberg"
+   ],
+   "symbols": [
+    "Ry"
+   ]
+  },
+  {
+   "value": 10973731.56816,
+   "stddev": 2.1e-05,
+   "dimension": [
+    [
+     "length",
+     -1.0
+    ]
+   ],
+   "names": [
+    "rydberg_constant"
+   ],
+   "symbols": [
+    "R\u221e"
+   ]
+  },
+  {
+   "value": 1,
+   "stddev": null,
+   "dimension": [
+    [
+     "time",
+     1.0
+    ]
+   ],
+   "names": [
+    "second"
+   ],
+   "symbols": [
+    "s"
+   ]
+  },
+  {
+   "value": 1,
+   "stddev": null,
+   "dimension": [
+    [
+     "current",
+     2.0
+    ],
+    [
+     "length",
+     -2.0
+    ],
+    [
+     "mass",
+     -1.0
+    ],
+    [
+     "time",
+     3.0
+    ]
+   ],
+   "names": [
+    "siemens"
+   ],
+   "symbols": [
+    "S"
+   ]
+  },
+  {
+   "value": 0.0003183098861837907,
+   "stddev": null,
+   "dimension": [
+    [
+     "length",
+     -2.0
+    ],
+    [
+     "luminosity",
+     1.0
+    ]
+   ],
+   "names": [
+    "skot"
+   ],
+   "symbols": [
+    "sk"
+   ]
+  },
+  {
+   "value": 12.566370614359172,
+   "stddev": null,
+   "dimension": [
+    [
+     "angle",
+     2.0
+    ]
+   ],
+   "names": [
+    "spat"
+   ],
+   "symbols": [
+    "sp"
+   ]
+  },
+  {
+   "value": 9.980665,
+   "stddev": null,
+   "dimension": [
+    [
+     "length",
+     1.0
+    ],
+    [
+     "time",
+     -2.0
+    ]
+   ],
+   "names": [
+    "standard_gravity"
+   ],
+   "symbols": [
+    "g"
+   ]
+  },
+  {
+   "value": 1,
+   "stddev": null,
+   "dimension": [
+    [
+     "angle",
+     2.0
+    ]
+   ],
+   "names": [
+    "steradian"
+   ],
+   "symbols": [
+    "sterad"
+   ]
+  },
+  {
+   "value": 10000.0,
+   "stddev": null,
+   "dimension": [
+    [
+     "length",
+     -2.0
+    ],
+    [
+     "luminosity",
+     1.0
+    ]
+   ],
+   "names": [
+    "stilb"
+   ],
+   "symbols": [
+    "sb"
+   ]
+  },
+  {
+   "value": 0.0001,
+   "stddev": null,
+   "dimension": [
+    [
+     "length",
+     2.0
+    ],
+    [
+     "time",
+     -1.0
+    ]
+   ],
+   "names": [
+    "stokes"
+   ],
+   "symbols": [
+    "St"
+   ]
+  },
+  {
+   "value": 1000000.0,
+   "stddev": null,
+   "dimension": [
+    [
+     "length",
+     3.0
+    ],
+    [
+     "time",
+     -1.0
+    ]
+   ],
+   "names": [
+    "sverdrup"
+   ],
+   "symbols": [
+    "Sv"
+   ]
+  },
+  {
+   "value": 99806.65,
+   "stddev": null,
+   "dimension": [
+    [
+     "length",
+     -1.0
+    ],
+    [
+     "mass",
+     1.0
+    ],
+    [
+     "time",
+     -2.0
+    ]
+   ],
+   "names": [
+    "technical_atmosphere"
+   ],
+   "symbols": [
+    "at"
+   ]
+  },
+  {
+   "value": 1,
+   "stddev": null,
+   "dimension": [
+    [
+     "current",
+     -1.0
+    ],
+    [
+     "mass",
+     1.0
+    ],
+    [
+     "time",
+     -2.0
+    ]
+   ],
+   "names": [
+    "tesla"
+   ],
+   "symbols": [
+    "T"
+   ]
+  },
+  {
+   "value": 0.001024,
+   "stddev": null,
+   "dimension": [
+    [
+     "time",
+     1.0
+    ]
+   ],
+   "names": [
+    "time_unit"
+   ],
+   "symbols": [
+    "TU"
+   ]
+  },
+  {
+   "value": 1000,
+   "stddev": null,
+   "dimension": [
+    [
+     "mass",
+     1.0
+    ]
+   ],
+   "names": [
+    "ton",
+    "tonne"
+   ],
+   "symbols": [
+    "t"
+   ]
+  },
+  {
+   "value": 1.5849625007211563,
+   "stddev": null,
+   "dimension": [
+    [
+     "data",
+     1.0
+    ]
+   ],
+   "names": [
+    "trit"
+   ],
+   "symbols": []
+  },
+  {
+   "value": 6.283185307179586,
+   "stddev": null,
+   "dimension": [
+    [
+     "angle",
+     1.0
+    ]
+   ],
+   "names": [
+    "turn"
+   ],
+   "symbols": [
+    "turn"
+   ]
+  },
+  {
+   "value": 1.763888888888889e-05,
+   "stddev": null,
+   "dimension": [
+    [
+     "length",
+     1.0
+    ]
+   ],
+   "names": [
+    "twip"
+   ],
+   "symbols": []
+  },
+  {
+   "value": 1,
+   "stddev": null,
+   "dimension": [
+    [
+     "current",
+     -1.0
+    ],
+    [
+     "length",
+     2.0
+    ],
+    [
+     "mass",
+     1.0
+    ],
+    [
+     "time",
+     -3.0
+    ]
+   ],
+   "names": [
+    "volt"
+   ],
+   "symbols": [
+    "V"
+   ]
+  },
+  {
+   "value": 1,
+   "stddev": null,
+   "dimension": [
+    [
+     "length",
+     2.0
+    ],
+    [
+     "mass",
+     1.0
+    ],
+    [
+     "time",
+     -3.0
+    ]
+   ],
+   "names": [
+    "watt"
+   ],
+   "symbols": [
+    "W"
+   ]
+  },
+  {
+   "value": 3600,
+   "stddev": null,
+   "dimension": [
+    [
+     "length",
+     2.0
+    ],
+    [
+     "mass",
+     1.0
+    ],
+    [
+     "time",
+     -2.0
+    ]
+   ],
+   "names": [
+    "watt_hour"
+   ],
+   "symbols": [
+    "Wh"
+   ]
+  },
+  {
+   "value": 1,
+   "stddev": null,
+   "dimension": [
+    [
+     "current",
+     -1.0
+    ],
+    [
+     "length",
+     2.0
+    ],
+    [
+     "mass",
+     1.0
+    ],
+    [
+     "time",
+     -2.0
+    ]
+   ],
+   "names": [
+    "weber"
+   ],
+   "symbols": [
+    "Wb"
+   ]
+  },
+  {
+   "value": 604800,
+   "stddev": null,
+   "dimension": [
+    [
+     "time",
+     1.0
+    ]
+   ],
+   "names": [
+    "week"
+   ],
+   "symbols": [
+    "w"
+   ]
+  },
+  {
+   "value": 0.9144000000000001,
+   "stddev": null,
+   "dimension": [
+    [
+     "length",
+     1.0
+    ]
+   ],
+   "names": [
+    "yard"
+   ],
+   "symbols": [
+    "yd"
+   ]
+  },
+  {
+   "value": 31557600.0,
+   "stddev": null,
+   "dimension": [
+    [
+     "time",
+     1.0
+    ]
+   ],
+   "names": [
+    "year"
+   ],
+   "symbols": [
+    "yr",
+    "ya"
+   ]
+  },
+  {
+   "value": 376.73031346177066,
+   "stddev": null,
+   "dimension": [
+    [
+     "current",
+     -2.0
+    ],
+    [
+     "length",
+     2.0
+    ],
+    [
+     "mass",
+     1.0
+    ],
+    [
+     "time",
+     -3.0
+    ]
+   ],
+   "names": [
+    "z_0"
+   ],
+   "symbols": [
+    "z\u2080"
+   ]
+  }
+ ],
+ "$schema": "./catalogue.schema.json"
+}
