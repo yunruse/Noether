@@ -63,6 +63,9 @@ class Catalogue:
             f'No unit (or prefixed unit)'
             f' with name {name!r} could be found.')
 
+    def __getitem__(self, name: str):
+        return self.get(name)
+
     @property
     def all_units(self):
         units: dict[str, Unit] = {}
