@@ -7,8 +7,7 @@ from ..core.prefixes import SI
 
 from ..core.fundamental import candela, kilogram, meter, second, kelvin
 from math import pi
-from .constants import g, c
-from .si import joule, watt, pascal, cumec
+from .si import joule, watt, pascal, cumec, g, c
 from .conventional import cm, year
 
 # % Human

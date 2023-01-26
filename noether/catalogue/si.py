@@ -2,6 +2,7 @@ from ..core import Unit
 from ..core.prefixes import SI, SI_small
 from ..core.DisplaySet import display as I
 
+from math import pi
 from ..core.fundamental import *
 from .dimensions import *
 
@@ -40,3 +41,28 @@ sievert = Sv = I(Unit(dose, 'sievert', "Sv", SI))
 
 cumec = I(Unit(flow, 'cumec', None, SI))
 katal = kat = I(Unit(catalytic_activity, 'katal', "kat", SI))
+
+
+# % Constants defined as part of SI
+
+# GCWM 3
+standard_gravity = g = Unit(
+    9.980665 * meter / second**2,
+    "standard_gravity", "g")
+
+# GCWM 17
+speed_of_light = c = Unit(299_792_458 * meter / second, "c", "c")
+
+# GCWM 26 (2019 redefinition of the SI base units)
+electron_charge = e = Unit(
+    coulomb(1.602_176_634e-19), "electron_charge", "e")
+N_a = 6.022_140_76e23 / mole
+boltzmann_constant = k_B = Unit(
+    1.380649e-23 * joule / kelvin,
+    "boltzmann_constant", 'k_b')
+h = Unit(6.626_070_15e-34 * joule * second, "h", "h")
+hbar = Unit(h / (pi*2), "hbar", "ħ")
+
+
+eV = electronvolt = Unit(electron_charge * volt, "electronvolt", "eV", SI)
+gee = g * kilogram
