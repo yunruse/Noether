@@ -11,14 +11,18 @@ hertz = I(Unit(frequency, 'hertz', "Hz", SI))
 rad = radian = I(Unit(angle, 'radian', "rad", SI_small))
 sterad = steradian = I(Unit(solid_angle, 'steradian', "sterad", SI))
 
-# # Dynamics
+# % Display
+I(Unit(speed, None, 'm/s'))
+I(Unit(acceleration, None, 'm/s**2'))
+
+# % Dynamics
 
 newton = I(Unit(force, 'newton', "N", SI))
 pascal = I(Unit(pressure, 'pascal', "Pa", SI))
 joule = I(Unit(energy, 'joule', "J", SI))
 watt = I(Unit(power, 'watt', "W", SI))
 
-# # Electromagnetism
+# % Electromagnetism
 
 coulomb = I(Unit(charge, 'coulomb', "C", SI))
 volt = I(Unit(voltage, 'volt', "V", SI))
@@ -29,14 +33,14 @@ henry = I(Unit(inductance, 'henry', "H", SI))
 weber = I(Unit(magnetic_flux, 'weber', "Wb", SI))
 tesla = I(Unit(magnetic_flux_density, 'tesla', "T", SI))
 
-# # Radiation
+# % Radiation
 
 lumen = I(Unit(luminous_flux, 'lumen', "lum", SI))
 lux = I(Unit(illuminance, 'lux', "Lx", SI))
 gray = I(Unit(dose, 'gray', "Gy", SI))
 sievert = I(Unit(dose, 'sievert', "Sv", SI))
 
-# # Material properties
+# % Material properties
 
 cumec = I(Unit(flow, 'cumec', None, SI))
 katal = I(Unit(catalytic_activity, 'katal', "kat", SI))

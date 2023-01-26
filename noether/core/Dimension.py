@@ -3,6 +3,7 @@ from fractions import Fraction
 from numbers import Number
 from typing import Callable
 
+from .display import NoetherRepr
 from ..helpers import ImmutableDict, reorder_dict_by_values
 from ..errors import DimensionError
 
@@ -13,7 +14,7 @@ class DimInfo:
     symbol: str
 
 
-class Dimension(ImmutableDict):
+class Dimension(NoetherRepr, ImmutableDict):
     '''
     Dimension of a unit.
 
@@ -65,8 +66,9 @@ class Dimension(ImmutableDict):
     def __hash__(self):
         return hash(tuple(sorted(self.items())))
 
-    def is_fundamental(self):
-        return self.values() == [1]
+    def is_base_dimension(self):
+        '''True iff the dimension is a base dimension'''
+        return list(self.values()) == [Fraction(1)]
 
     def as_fundamental(
         self, /,
@@ -91,6 +93,8 @@ class Dimension(ImmutableDict):
                 string += f'({exp})' if use_brackets else f'{exp}'
         return string.removeprefix('1 * ')
 
+    __repr_code__ = as_fundamental
+
     def _json_dim(self):
         return sorted([name, float(exp)] for name, exp in self.items())
 
@@ -100,7 +104,7 @@ class Dimension(ImmutableDict):
             'dimension': self._json_dim(),
         }
 
-    def __repr__(self):
+    def __noether__(self):
         string = self.as_fundamental()
         names = display.dimension_names.get(self, [])
         if names:
@@ -114,14 +118,14 @@ class Dimension(ImmutableDict):
         return self.as_fundamental()
 
     def __rich__(self):
-        if self.is_fundamental():
-            reprs = f'[bold italic]{self.keys()[0]}[/]'
-        else:
-            reprs = f'[italic]{self.as_fundamental()}[/]'
+        if self.is_base_dimension():
+            return f'[bold italic]{list(self.keys())[0]}[/]'
+
+        reprs = self.as_fundamental()
 
         names = display.dimension_names.get(self, [])
         if names:
-            return f'[bold italic]{names[0]}[/] ({reprs})'
+            return f'[bold italic]{names[0]}[/]  [green italic]# {reprs}'
 
         return reprs
 

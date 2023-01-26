@@ -64,10 +64,16 @@ class Unit(Measure):
         return 'Unit({})'.format(', '.join(chunks))
 
     def __str__(self):
-        return f'{self.name} ({self.dim!r})'
+        return f"{self.name} # {self.dim.canonical_name()}"
 
     def __rich__(self):
-        return f'[bold]{self.name}[/] ([italic]{self.dim.canonical_name()}[/])'
+        string = (
+            f"[bold]{self.name}[/]"
+            f"[italic green]  # {self.dim.canonical_name()}[/]")
+        d = self.display_unit()
+        if d != self:
+            string += f", [italic blue]{d._display_measure(self)}"
+        return string
 
     def __json__(self):
         json = {
@@ -91,3 +97,6 @@ class Unit(Measure):
 
         v = canonical_number(val, stddev)
         return f'{v} {self.symbol}'
+
+
+from .DisplaySet import display  # noqa

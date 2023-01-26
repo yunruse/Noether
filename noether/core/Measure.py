@@ -172,7 +172,7 @@ class Measure(NoetherRepr, Generic[T]):
         if self.stddev is not None:
             chunks.append(repr(self.stddev))
         if self.dim:
-            chunks.append(repr(self.dim))
+            chunks.append(self.dim.__repr_code__())
 
         return 'Measure({})'.format(', '.join(chunks))
 

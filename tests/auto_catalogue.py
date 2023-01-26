@@ -24,7 +24,7 @@ class auto_catalogue(TestCase):
         with open('noether/catalogue/catalogue.toml', 'w') as f:
             toml.dump(cat, f)
 
-    def test_count_units(self):
+    def test_count_units(self, graph=True):
         FMT = '%Y-%m-%d'
 
         with open('catalogue_count.csv') as f:
@@ -41,7 +41,10 @@ class auto_catalogue(TestCase):
             for date, N in data:
                 f.write(f'{date},{N}\n')
 
-        # graph
+        if graph:
+            self.graph_plot(data)
+
+    def graph_plot(self, data):
         pyplot.plot(*zip(*data))
         pyplot.title('Catalogue count')
 
@@ -51,3 +54,7 @@ class auto_catalogue(TestCase):
         fig.tight_layout()
 
         pyplot.savefig('catalogue_count.png')
+
+
+if __name__ == '__main__':
+    auto_catalogue('test_count_units').test_count_units(graph=False)
