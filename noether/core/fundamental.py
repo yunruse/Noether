@@ -16,38 +16,29 @@ substance = Dimension.new('substance', 'N', -3)
 length = Dimension.new('length', 'L', -2)
 time = Dimension.new('time', 'T', -1)
 
-candela = I(Unit(
+candela = cd = I(Unit(
     Measure(dim=luminosity), 'candela', 'cd', SI))
-ampere = I(Unit(
+ampere = amp = I(Unit(
     Measure(dim=current), 'ampere', 'amp', SI))
-kelvin = I(Unit(
+kelvin = K = I(Unit(
     Measure(dim=temperature), 'kelvin', 'K', SI))
-kilogram = I(Unit(
+kilogram = kg = I(Unit(
     Measure(dim=mass), 'kilogram', 'kg'))
-mole = I(Unit(
+mole = mol = I(Unit(
     Measure(dim=substance), 'mole', 'mol', SI))
-meter = metre = I(Unit(
+meter = metre = m = I(Unit(
     Measure(dim=length), ['meter', 'metre'], 'm', SI))
-second = I(Unit(
+second = s = I(Unit(
     Measure(dim=time), 'second', 's', SI))
 
 gram = Unit(kilogram / 1000, 'gram', 'g', SI)
 
 __all__ = [
-    'luminosity',
-    'current',
-    'temperature',
-    'mass',
-    'substance',
-    'length',
-    'time',
-    'candela',
-    'ampere',
-    'kelvin',
-    'kilogram',
-    'mole',
-    'meter',
-    'metre',
-    'second',
-    'gram'
+    'luminosity', 'candela', 'cd',
+    'current', 'ampere', 'amp',
+    'temperature', 'kelvin', 'K',
+    'mass', 'kilogram', 'kg', 'gram',
+    'substance', 'mole', 'mol',
+    'length', 'meter', 'm', 'metre',
+    'time', 'second', 's',
 ]
