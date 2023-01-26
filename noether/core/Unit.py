@@ -72,6 +72,8 @@ class Unit(Measure):
             f"[italic green]  # {self.dim.canonical_name()}[/]")
         d = self.display_unit()
         if d != self:
+            if d is None:
+                d = self * 1
             string += f", [italic blue]{d._display_measure(self)}"
         return string
 

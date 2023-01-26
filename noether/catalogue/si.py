@@ -11,10 +11,6 @@ hertz = I(Unit(frequency, 'hertz', "Hz", SI))
 rad = radian = I(Unit(angle, 'radian', "rad", SI_small))
 sterad = steradian = I(Unit(solid_angle, 'steradian', "sterad", SI))
 
-# % Display
-I(Unit(speed, None, 'm/s'))
-I(Unit(acceleration, None, 'm/s**2'))
-
 # % Dynamics
 
 newton = I(Unit(force, 'newton', "N", SI))

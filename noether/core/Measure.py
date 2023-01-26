@@ -181,7 +181,6 @@ class Measure(NoetherRepr, Generic[T]):
         units = display.units.get(self.dim, [])
         if units:
             return units[-1]
-        return self  # fallback
 
     def as_fundamental(self):
         from .DisplaySet import display  # noqa
@@ -196,7 +195,7 @@ class Measure(NoetherRepr, Generic[T]):
         return f'{n} {s}'
 
     def __noether__(self):
-        v = self.display_unit()._display_measure(self)
+        v = (self.display_unit() or self)._display_measure(self)
         info = ', '.join(i for i, _ in self._info())
         if info:
             info = '  # ' + info
@@ -205,7 +204,7 @@ class Measure(NoetherRepr, Generic[T]):
     __str__ = __noether__
 
     def __rich__(self):
-        v = self.display_unit()._display_measure(self)
+        v = (self.display_unit() or self)._display_measure(self)
         info = ', '.join(f'[{style}]{i}[/]' for i, style in self._info())
         if info:
             info = '  [green italic]#[/] ' + info
