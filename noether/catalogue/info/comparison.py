@@ -75,7 +75,7 @@ class info_comparison(MeasureInfo):
 
     @ staticmethod
     def should_display(measure: Measure):
-        return measure.dim in COMPARISON_DIMENSIONS
+        return measure.value and measure.dim in COMPARISON_DIMENSIONS
 
     @ staticmethod
     def get_comparisons(
