@@ -46,6 +46,8 @@ energy = I(force * length, 'energy')
 power = I(energy / time, 'power')
 
 momentum = I(mass * speed, 'momentum')
+yank = I(force / second, 'yank')
+
 angular_momentum = I(length * momentum, 'angular_momentum')
 angular_velocity = I(angle / time, 'angular_velocity')
 angular_acceleration = I(angular_velocity / time, 'angular_acceleration')
@@ -54,7 +56,9 @@ angular_jerk = I(angular_acceleration / time, 'angular_jerk')
 inertia = I(mass * angular_velocity, 'inertia')
 torque = I(inertia * angular_acceleration, 'torque')
 
-gravitational_gradient = I(acceleration / length, 'gravitational_gradient')
+wavenumber = I(1 / length, 'wavenumber')
+frequency_drift = gravitational_gradient = I(
+    acceleration / length, 'frequency_drift', 'gravitational_gradient')
 
 # % Electromagnetism
 
@@ -67,7 +71,7 @@ magnetic_flux = I(energy / current, 'magnetic_flux')
 magnetic_flux_density = I(magnetic_flux / area, 'magnetic_flux_density')
 
 conductance = I(resistance**-1, 'conductance')
-resistivity = I(resistance / length, 'resistivity')
+resistivity = I(resistance * length, 'resistivity')
 reluctance = I(1 / inductance, 'reluctance')
 
 capicitive_reactance = I(
@@ -95,8 +99,6 @@ luminous_energy_density = I(
     luminous_energy / volume, 'luminous_energy_density')
 luminous_efficiacy = I(luminosity / power, 'luminous_efficiacy')
 
-dose = I(energy / mass, 'dose')
-
 irradiance = intensity = heat_flux = I(
     power / area, 'irradiance', 'intensity', 'heat_flux')
 
@@ -117,7 +119,7 @@ number_density = I(1 / volume, 'number_density')
 probability_density = I(1 / volume, 'probability_density')
 reaction_rate = I(substance / (volume * time), 'reaction_rate')
 
-specific_energy = I(energy / mass, 'specific_energy')
+specific_energy = dose = I(energy / mass, 'specific_energy', 'dose')
 energy_density = I(energy / volume, 'energy_density')
 molar_energy = I(energy / substance, 'molar_energy')
 
