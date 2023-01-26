@@ -18,8 +18,8 @@ time = Dimension.new('time', 'T', -1)
 
 candela = cd = I(Unit(
     Measure(dim=luminosity), 'candela', 'cd', SI))
-ampere = amp = I(Unit(
-    Measure(dim=current), 'ampere', 'amp', SI))
+ampere = A = I(Unit(
+    Measure(dim=current), 'ampere', 'A', SI))
 kelvin = K = I(Unit(
     Measure(dim=temperature), 'kelvin', 'K', SI))
 kilogram = kg = I(Unit(
@@ -35,7 +35,7 @@ gram = Unit(kilogram / 1000, 'gram', 'g', SI)
 
 __all__ = [
     'luminosity', 'candela', 'cd',
-    'current', 'ampere', 'amp',
+    'current', 'ampere', 'A',
     'temperature', 'kelvin', 'K',
     'mass', 'kilogram', 'kg', 'gram',
     'substance', 'mole', 'mol',

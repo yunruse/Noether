@@ -9,7 +9,7 @@ becquerel = Bq = Unit(frequency, 'becquerel', "Bq", SI)
 hertz = Hz = I(Unit(frequency, 'hertz', "Hz", SI))
 
 radian = rad = I(Unit(angle, 'radian', "rad", SI_small))
-steradian = seterad = I(Unit(solid_angle, 'steradian', "sterad", SI))
+steradian = sr = I(Unit(solid_angle, 'steradian', "sr", SI))
 
 # % Dynamics
 
@@ -31,7 +31,7 @@ tesla = T = I(Unit(magnetic_flux_density, 'tesla', "T", SI))
 
 # % Radiation
 
-lumen = lum = I(Unit(luminous_flux, 'lumen', "lum", SI))
+lumen = lm = I(Unit(luminous_flux, 'lumen', "lm", SI))
 lux = Lx = I(Unit(illuminance, 'lux', "Lx", SI))
 gray = Gy = I(Unit(dose, 'gray', "Gy", SI))
 sievert = Sv = I(Unit(dose, 'sievert', "Sv", SI))
