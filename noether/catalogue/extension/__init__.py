@@ -3,6 +3,6 @@ from .cgs import *
 from .typographic import *
 
 from .regional import *
-from .traditional import *
+from .ancient.biblical import *
 
 # TODO: Many, many, many others
