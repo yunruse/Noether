@@ -76,6 +76,9 @@ class Unit(Measure):
                 d = self * 1
             string += f", [italic blue]{d._display_measure(self)}"
         return string
+    
+    def _json_extras(self):
+        return {}
 
     def __json__(self):
         json = {
@@ -85,6 +88,7 @@ class Unit(Measure):
             'names': self.names,
             'symbols': self.symbols,
         }
+        json.update(self._json_extras())
         if self.stddev is None:
             del json['stddev']
         if self.prefixes:

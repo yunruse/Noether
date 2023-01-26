@@ -2,7 +2,7 @@
 Conventional SI-compatible units.
 '''
 
-from ..core import Unit
+from ..core import Unit, AffineUnit
 from ..core.prefixes import SI, SI_large, SI_small
 from ..core.DisplaySet import display as I
 
@@ -10,11 +10,13 @@ from noether.core.config import Config, conf
 
 from math import pi
 from .si import radian, steradian, watt
-from ..core.fundamental import meter, second, ampere, kilogram
+from ..core.fundamental import meter, second, ampere, kilogram, kelvin
 
 percent = Unit(1/100, 'percent', '%')
 permille = Unit(1/1000, 'permille', '‰')
 ppm = parts_per_million = Unit(1/1_000_000, 'parts_per_million', 'ppm')
+
+celsius = AffineUnit(kelvin*1, kelvin*273.15, "celsius", "ºC")
 
 # % Spacetime
 
@@ -31,7 +33,6 @@ Config.register('units_human_time', True, '''\
 Display time by default in human_time (years, weeks, days, etc).''')
 if conf.get('units_human_time'):
     I(human_time)
-
 
 cm = centimeter = centimetre = Unit(
     meter * 0.01, ['centimeter', 'centimetre'], 'cm')

@@ -4,10 +4,10 @@ Imperial units.
 
 from fractions import Fraction
 
-from ..core import Unit
+from ..core import Unit, AffineUnit
 from ..core.config import Config, conf
 
-from noether.core.fundamental import gram, meter
+from noether.core.fundamental import gram, kelvin, meter
 from .conventional import cm, liter, hour
 
 Config.register('units_country', 'us', '''\
@@ -15,10 +15,10 @@ The country to define imperial units (and other niceties) from. (Use the ISO 316
 ''')
 _USE_US_UNITS = conf.get('units_country').lower() == 'us'
 
+rankine = Unit(kelvin * 5/9, "rankine", "°R")
+fahrenheit = AffineUnit(rankine, rankine(459.67), "fahrenheit", "ºF")
 
 # % Length
-
-
 inch = Unit(cm * Fraction(127, 50), "inch", ["in", '"'])
 
 barleycorn = Unit(inch / 3, "barleycorn")
@@ -36,7 +36,6 @@ league = Unit(mile * 3, "league", "lea")
 # TODO: maritime units, Gunter's survey units
 
 # % Speed
-
 nautical_mile = Unit(meter * 1852, "nautical_mile", "nmi")
 
 mph = miles_per_hour = Unit(mile / hour, "miles_per_hour", "mph")
@@ -48,7 +47,6 @@ knot = Unit(nautical_mile / hour, "knot", ["kn", "kt"])
 # TODO: all of this nonsense
 
 # % Volume
-
 gallon_uk = Unit(liter(4.546_09), "gallon_uk", "gal")
 gallon_us = Unit(inch**3 * 231, "gallon_us", "gal")
 # gallon_us_dry = usdrygal = Unit(bushel_us / 8, "gallon_us_dry", "usdrygal"))
@@ -70,7 +68,6 @@ butt = Unit(hogshead * 2, "butt")  # y'all nerds
 
 
 # % Mass
-
 pound = lb = Unit(453.59237 * gram, "pound", "lb")
 
 oz = ounce = Unit(pound / 16, "ounce", "oz")
