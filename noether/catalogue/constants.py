@@ -3,11 +3,11 @@ Mathematical and scientific constants.
 '''
 
 from ..core import Unit
-from ..core.prefixes import SI, SI_small
+from ..core.prefixes import SI
 from ..core.DisplaySet import display as I
 
 from ..core.fundamental import ampere, kelvin, kilogram, meter, mole, second
-from .si import SI, coulomb, joule, newton, radian, volt
+from .si import SI, coulomb, joule, newton, volt
 from math import pi
 
 # % Quantum
@@ -24,6 +24,9 @@ e_0 = Unit(1 / (mu_0 * c ** 2), "e_0", "e₀")
 z_0 = Unit(mu_0 * c, "z_0", "z₀")
 
 k_e = Unit(1 / (4*pi*e_0), "k_e", "kₑ")
+wien_displacement_constant = Unit(
+    meter * kelvin * 2.897_771_955e-3,
+    "wien_displacement_constant", "b")  # CODATA 2018 (fixed by definition)
 
 # % Gravity
 G = Unit(
@@ -46,6 +49,10 @@ loschmidt_constant = n_0 = Unit(
     "loschmidt_constant", "n_0")
 
 # % Atomic
+
+atomic_mass_constant = m_u = Unit(
+    kilogram(1.660_539_066_60e-27, 5e-37),
+    "atomic_mass_constant", "m_u")  # CODATA 2018
 
 electron_charge = e = Unit(
     coulomb(1.602_176_634e-19), "electron_charge", "e")  # GCWM 26

@@ -75,3 +75,6 @@ pound = lb = Unit(453.59237 * gram, "pound", "lb")
 
 oz = ounce = Unit(pound / 16, "ounce", "oz")
 grain = Unit(pound / 7000, "grain", "gr")
+
+stone = st = Unit(pound * 14, "stone", "st")
+imperial_ton = Unit(pound * 2240, "ton", "t")

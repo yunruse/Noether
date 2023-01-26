@@ -287,6 +287,10 @@ names = [ "bulk_modulus", "energy_density", "pressure",]
 dimension = [ [ "length", -1.0,], [ "mass", 1.0,], [ "time", -2.0,],]
 
 [[dimensions]]
+names = [ "r_value",]
+dimension = [ [ "mass", -1.0,], [ "temperature", 1.0,], [ "time", 3.0,],]
+
+[[dimensions]]
 names = [ "reaction_rate",]
 dimension = [ [ "length", -3.0,], [ "substance", 1.0,], [ "time", -1.0,],]
 
@@ -710,6 +714,12 @@ names = [ "G",]
 symbols = [ "G",]
 
 [[units]]
+value = 1.0
+dimension = [ [ "mass", -1.0,], [ "temperature", 1.0,], [ "time", 3.0,],]
+names = [ "RSI",]
+symbols = []
+
+[[units]]
 value = 0.001940277777777778
 dimension = [ [ "length", 1.0,],]
 names = [ "agate",]
@@ -770,6 +780,13 @@ value = 101325
 dimension = [ [ "length", -1.0,], [ "mass", 1.0,], [ "time", -2.0,],]
 names = [ "atmosphere",]
 symbols = [ "atm", "ata",]
+
+[[units]]
+value = 1.6605390666e-27
+stddev = 5e-37
+dimension = [ [ "mass", 1.0,],]
+names = [ "atomic_mass_constant",]
+symbols = [ "m_u",]
 
 [[units]]
 value = 100000.0
@@ -886,6 +903,12 @@ value = 20.1168
 dimension = [ [ "length", 1.0,],]
 names = [ "chain",]
 symbols = [ "ch",]
+
+[[units]]
+value = 0.15500000000000003
+dimension = [ [ "mass", -1.0,], [ "temperature", 1.0,], [ "time", 3.0,],]
+names = [ "clo",]
+symbols = []
 
 [[units]]
 value = 1
@@ -1519,6 +1542,12 @@ names = [ "stokes",]
 symbols = [ "St",]
 
 [[units]]
+value = 6.35029318
+dimension = [ [ "mass", 1.0,],]
+names = [ "stone",]
+symbols = [ "st",]
+
+[[units]]
 value = 1000000.0
 dimension = [ [ "length", 3.0,], [ "time", -1.0,],]
 names = [ "sverdrup",]
@@ -1542,6 +1571,18 @@ value = 0.001024
 dimension = [ [ "time", 1.0,],]
 names = [ "time_unit",]
 symbols = [ "TU",]
+
+[[units]]
+value = 0.1
+dimension = [ [ "mass", -1.0,], [ "temperature", 1.0,], [ "time", 3.0,],]
+names = [ "tog",]
+symbols = []
+
+[[units]]
+value = 1016.0469088000001
+dimension = [ [ "mass", 1.0,],]
+names = [ "ton",]
+symbols = [ "t",]
 
 [[units]]
 value = 1000
@@ -1601,6 +1642,12 @@ value = 604800
 dimension = [ [ "time", 1.0,],]
 names = [ "week",]
 symbols = [ "w",]
+
+[[units]]
+value = 0.002897771955
+dimension = [ [ "length", 1.0,], [ "temperature", 1.0,],]
+names = [ "wien_displacement_constant",]
+symbols = [ "b",]
 
 [[units]]
 value = 0.9144000000000001

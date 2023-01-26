@@ -1222,6 +1222,25 @@
   },
   {
    "names": [
+    "r_value"
+   ],
+   "dimension": [
+    [
+     "mass",
+     -1.0
+    ],
+    [
+     "temperature",
+     1.0
+    ],
+    [
+     "time",
+     3.0
+    ]
+   ]
+  },
+  {
+   "names": [
     "reaction_rate"
    ],
    "dimension": [
@@ -1996,6 +2015,27 @@
    ]
   },
   {
+   "value": 1.0,
+   "dimension": [
+    [
+     "mass",
+     -1.0
+    ],
+    [
+     "temperature",
+     1.0
+    ],
+    [
+     "time",
+     3.0
+    ]
+   ],
+   "names": [
+    "RSI"
+   ],
+   "symbols": []
+  },
+  {
    "value": 0.001940277777777778,
    "dimension": [
     [
@@ -2170,6 +2210,22 @@
    "symbols": [
     "atm",
     "ata"
+   ]
+  },
+  {
+   "value": 1.6605390666e-27,
+   "stddev": 5e-37,
+   "dimension": [
+    [
+     "mass",
+     1.0
+    ]
+   ],
+   "names": [
+    "atomic_mass_constant"
+   ],
+   "symbols": [
+    "m_u"
    ]
   },
   {
@@ -2514,6 +2570,27 @@
    "symbols": [
     "ch"
    ]
+  },
+  {
+   "value": 0.15500000000000003,
+   "dimension": [
+    [
+     "mass",
+     -1.0
+    ],
+    [
+     "temperature",
+     1.0
+    ],
+    [
+     "time",
+     3.0
+    ]
+   ],
+   "names": [
+    "clo"
+   ],
+   "symbols": []
   },
   {
    "value": 1,
@@ -4371,6 +4448,21 @@
    ]
   },
   {
+   "value": 6.35029318,
+   "dimension": [
+    [
+     "mass",
+     1.0
+    ]
+   ],
+   "names": [
+    "stone"
+   ],
+   "symbols": [
+    "st"
+   ]
+  },
+  {
    "value": 1000000.0,
    "dimension": [
     [
@@ -4453,6 +4545,42 @@
    ],
    "symbols": [
     "TU"
+   ]
+  },
+  {
+   "value": 0.1,
+   "dimension": [
+    [
+     "mass",
+     -1.0
+    ],
+    [
+     "temperature",
+     1.0
+    ],
+    [
+     "time",
+     3.0
+    ]
+   ],
+   "names": [
+    "tog"
+   ],
+   "symbols": []
+  },
+  {
+   "value": 1016.0469088000001,
+   "dimension": [
+    [
+     "mass",
+     1.0
+    ]
+   ],
+   "names": [
+    "ton"
+   ],
+   "symbols": [
+    "t"
    ]
   },
   {
@@ -4648,6 +4776,25 @@
    ],
    "symbols": [
     "w"
+   ]
+  },
+  {
+   "value": 0.002897771955,
+   "dimension": [
+    [
+     "length",
+     1.0
+    ],
+    [
+     "temperature",
+     1.0
+    ]
+   ],
+   "names": [
+    "wien_displacement_constant"
+   ],
+   "symbols": [
+    "b"
    ]
   },
   {

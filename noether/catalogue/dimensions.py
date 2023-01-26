@@ -146,6 +146,7 @@ thermal_conductance = I(power / temperature, 'thermal_conductance')
 thermal_conductivity = I(thermal_conductance *
                          length / area, 'thermal_conductivity')
 thermal_resistance = I(temperature / power, 'thermal_resistance')
+r_value = I(thermal_resistance * area, 'r_value')
 thermal_resistivity = I(thermal_resistance * length /
                         area, 'thermal_resistivity')
 

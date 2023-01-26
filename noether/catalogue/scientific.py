@@ -3,10 +3,9 @@ Essential scientific units.
 '''
 
 from ..core import Unit
-from ..core.prefixes import SI, SI_small
-from ..core.DisplaySet import display as I
+from ..core.prefixes import SI
 
-from ..core.fundamental import candela, kilogram, meter, second
+from ..core.fundamental import candela, kilogram, meter, second, kelvin
 from math import pi
 from .constants import g, c
 from .si import joule, watt, pascal, cumec
@@ -18,10 +17,15 @@ calorie = cal = Unit(4.814 * joule, "calorie", "cal")
 kilocalorie = kcal = Unit(cal * 1000, "kilocalorie", "kcal")
 bmi = Unit(kilogram / meter**2, "BMI", "BMI")
 
-# A unit of solar irradiatoion
+# A unit of solar irradiation
 langley = Unit(cal / cm**2, "langley", "Ly")
 # Energy per surface area of average person at rest
 met = Unit(38.2 * watt / meter**2, "met", "met")
+
+# Used for insulation
+RSI = Unit(meter**2 * kelvin / watt, "RSI")
+tog = Unit(RSI * 0.1, "tog")
+clo = Unit(tog * 1.55, "clo")
 
 # % Pressure
 
