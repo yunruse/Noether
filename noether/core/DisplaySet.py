@@ -13,7 +13,7 @@ class DisplaySet:
         self.dimension_names = dict()
         self.dimension_symbol = dict(dimensionless='')
 
-    def register(self, value: Unit | Dimension, *names: list[str]):
+    def add(self, value: Unit | Dimension, *names: list[str]):
         if isinstance(value, Dimension):
             self.dimension_names.setdefault(value, [])
             for n in names:
@@ -30,9 +30,9 @@ class DisplaySet:
 
         return value
 
-    __call__ = register
+    __call__ = add
 
-    def unregister(self, value: Unit | Dimension, names: list[str]):
+    def remove(self, value: Unit | Dimension, names: list[str]):
         if isinstance(value, Dimension):
             self.dimension_names.setdefault(value, [])
             for n in names:
@@ -42,6 +42,14 @@ class DisplaySet:
             self.units.setdefault(value.dim, [])
             if value in self.units[value.dim]:
                 self.units[value.dim].remove(value)
+
+    def register(self, *units: list[Unit]):
+        for unit in units:
+            self.add(unit)
+
+    def unregister(self, *units: list[Unit]):
+        for unit in units:
+            self.remove(unit)
 
 
 display = DisplaySet()

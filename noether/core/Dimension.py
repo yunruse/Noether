@@ -41,7 +41,7 @@ class Dimension(ImmutableDict):
         cls._names[name] = DimInfo(order, symbol)
         reorder_dict_by_values(cls._names)
         self = cls({name: Fraction(1)})
-        display.register(self, name)
+        display.add(self, name)
         return self
 
     def __init__(self, value=None, **kw):
