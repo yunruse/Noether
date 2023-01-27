@@ -81,7 +81,7 @@ def canonical_number(number, stddev):
 
 
 class NoetherRepr:
-    def __repr_code__(self):
+    def repr_code(self):
         return str(self)
 
     def __noether__(self):
@@ -89,5 +89,5 @@ class NoetherRepr:
 
     def __repr__(self):
         if conf.get('display_repr_code'):
-            return self.__repr_code__()
+            return self.repr_code()
         return self.__noether__()

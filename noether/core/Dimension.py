@@ -93,7 +93,7 @@ class Dimension(NoetherRepr, ImmutableDict):
                 string += f'({exp})' if use_brackets else f'{exp}'
         return string.removeprefix('1 * ')
 
-    __repr_code__ = as_fundamental
+    repr_code = as_fundamental
 
     def _json_dim(self):
         return sorted([name, float(exp)] for name, exp in self.items())

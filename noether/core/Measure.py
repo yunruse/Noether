@@ -167,12 +167,12 @@ class Measure(NoetherRepr, Generic[T]):
                 for i in handler.info(self):
                     yield i, handler.style
 
-    def __repr_code__(self):
+    def repr_code(self):
         chunks = [repr(self.value)]
         if self.stddev is not None:
             chunks.append(repr(self.stddev))
         if self.dim:
-            chunks.append(self.dim.__repr_code__())
+            chunks.append(self.dim.repr_code())
 
         return 'Measure({})'.format(', '.join(chunks))
 
