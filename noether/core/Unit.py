@@ -4,8 +4,8 @@ Unit - a subclass of Measure which has its own name(s) and symbol(s).
 Used in turn to display Measure.
 '''
 
-from .config import conf
-from .display import canonical_number
+from ..config import conf
+from ..display import canonical_number
 from .prefixes import Prefix
 from .Dimension import Dimension
 from .Measure import Measure

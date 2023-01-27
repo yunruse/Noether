@@ -1,4 +1,4 @@
-from .config import conf
+from ..config import conf
 from .Measure import Measure
 from .Unit import Unit
 

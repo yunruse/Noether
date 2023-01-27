@@ -5,7 +5,7 @@ Imperial units.
 from fractions import Fraction
 
 from ..core import Unit, AffineUnit
-from ..core.config import Config, conf
+from ..config import Config, conf
 
 from noether.core.fundamental import gram, kelvin, meter
 from .conventional import cm, liter, hour

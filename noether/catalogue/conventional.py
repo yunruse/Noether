@@ -6,7 +6,7 @@ from ..core import Unit, AffineUnit
 from ..core.prefixes import SI, SI_large, SI_small
 from ..core.DisplaySet import display as I
 
-from noether.core.config import Config, conf
+from noether.config import Config, conf
 
 from math import pi
 from .si import radian, steradian, watt

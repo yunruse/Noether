@@ -9,7 +9,7 @@ from pathlib import Path
 from typing import Any, Optional
 import tomllib
 
-from ..helpers import get_dot_config
+from .helpers import get_dot_config
 
 CONF_FILE = get_dot_config() / 'noether.toml'
 

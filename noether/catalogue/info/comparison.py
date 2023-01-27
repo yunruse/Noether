@@ -1,7 +1,7 @@
 from math import log
 from typing import Generator
 
-from ...core.config import conf
+from ...config import conf
 from ...core.Measure import Measure, MeasureInfo
 
 from .. import angstrom, km, cm, meter, foot

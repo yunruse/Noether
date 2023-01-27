@@ -1,6 +1,6 @@
 from ..core import Dimension, Unit
 from ..core.prefixes import PrefixSet, Prefix
-from ..core.config import Config, conf
+from ..config import Config, conf
 
 Config.register('units_all_prefixes', False, help='''
 Allow fetching any unit with any prefix (e.g. gibimeter).''')

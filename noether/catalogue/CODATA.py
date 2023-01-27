@@ -3,7 +3,7 @@ Automatically-loaded CODATA fundamental physical constants.
 '''
 
 from ..core import Unit
-from ..core.config import Config, conf
+from ..config import Config, conf
 
 from ._cataloguer import Catalogue
 

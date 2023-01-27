@@ -6,7 +6,7 @@ from typing import Optional, TypeVar, ClassVar, Generic, Generator, TYPE_CHECKIN
 from numbers import Real
 
 from ..errors import DimensionError
-from .config import Config, conf
+from ..config import Config, conf
 from ..display import canonical_number
 from .Dimension import Dimension, dimensionless
 

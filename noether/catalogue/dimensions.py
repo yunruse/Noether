@@ -2,7 +2,7 @@
 Various dimensions, for display purposes.
 '''
 
-from ..core.config import Config, conf
+from ..config import Config, conf
 from ..core.Dimension import dimensionless, Dimension
 from ..core.fundamental import *
 from ..core.DisplaySet import display as I

@@ -3,7 +3,7 @@ from fractions import Fraction
 from numbers import Number
 from typing import Callable
 
-from .config import conf
+from ..config import conf
 from ..helpers import ImmutableDict, reorder_dict_by_values
 from ..errors import DimensionError
 

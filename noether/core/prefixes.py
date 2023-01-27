@@ -5,7 +5,7 @@ Prefixes a unit may take.
 from dataclasses import dataclass
 from decimal import Decimal
 
-from .config import Config, conf
+from ..config import Config, conf
 
 Config.register("prefix_fun", False, """\
 Enable historical or other nonstandard SI prefixes""")

@@ -5,7 +5,7 @@ from unittest import TestCase
 
 import noether
 from noether import time, length
-from noether.core.display import uncertainty
+from noether.display import uncertainty
 
 
 class test_unit_display(TestCase):
