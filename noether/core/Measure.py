@@ -7,7 +7,7 @@ from numbers import Real
 
 from ..errors import DimensionError
 from .config import Config, conf
-from .display import NoetherRepr, canonical_number
+from ..display import canonical_number
 from .Dimension import Dimension, dimensionless
 
 if TYPE_CHECKING:
@@ -53,7 +53,7 @@ class MeasureInfo:
     slots=True,
 )
 @total_ordering
-class Measure(NoetherRepr, Generic[T]):
+class Measure(Generic[T]):
     '''
     A measurement, with Dimension and optional uncertainty.
     '''
