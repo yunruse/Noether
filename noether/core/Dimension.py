@@ -3,6 +3,7 @@ from fractions import Fraction
 from numbers import Number
 from typing import Callable
 
+from .config import conf
 from .display import NoetherRepr
 from ..helpers import ImmutableDict, reorder_dict_by_values
 from ..errors import DimensionError
@@ -107,6 +108,11 @@ class Dimension(NoetherRepr, ImmutableDict):
         if names:
             return names[0]
         return self.as_fundamental()
+
+    def __repr__(self):
+        if conf.get('display_repr_code'):
+            return self.repr_code()
+        return self.__noether__()
 
     def repr_code(self):
         return 'Dimension({})'.format(', '.join(

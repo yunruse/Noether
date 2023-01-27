@@ -167,15 +167,6 @@ class Measure(NoetherRepr, Generic[T]):
     # |__/ |_)|__/|\__| \/
     #         |        _/
 
-    def repr_code(self):
-        chunks = [repr(self.value)]
-        if self.stddev is not None:
-            chunks.append(repr(self.stddev))
-        if self.dim:
-            chunks.append('dim=' + self.dim.repr_code())
-
-        return 'Measure({})'.format(', '.join(chunks))
-
     def display_unit(self):
         from .DisplaySet import display
         units = display.units.get(self.dim, [])
@@ -186,6 +177,20 @@ class Measure(NoetherRepr, Generic[T]):
         from .DisplaySet import display  # noqa
         return self.dim.as_fundamental(
             display=lambda x: display.dimension_symbol[x])
+
+    def __repr__(self):
+        if conf.get('display_repr_code'):
+            return self.repr_code()
+        return self.__noether__()
+
+    def repr_code(self):
+        chunks = [repr(self.value)]
+        if self.stddev is not None:
+            chunks.append(repr(self.stddev))
+        if self.dim:
+            chunks.append('dim=' + self.dim.repr_code())
+
+        return 'Measure({})'.format(', '.join(chunks))
 
     @staticmethod
     def repr_measure(measure: 'Measure'):
@@ -201,6 +206,13 @@ class Measure(NoetherRepr, Generic[T]):
             info = '  # ' + info
         return f"{v}{info}"
 
+    def __rich__(self):
+        v = (self.display_unit() or self).repr_measure(self)
+        info = ', '.join(f'[{style}]{i}[/]' for i, style in self._info())
+        if info:
+            info = '  [green italic]#[/] ' + info
+        return f"{v}{info}"
+
     @staticmethod
     def str_measure(measure: 'Measure'):
         # Fallback if no unit found
@@ -210,13 +222,6 @@ class Measure(NoetherRepr, Generic[T]):
 
     def __str__(self):
         return (self.display_unit() or self).str_measure(self)
-
-    def __rich__(self):
-        v = (self.display_unit() or self).repr_measure(self)
-        info = ', '.join(f'[{style}]{i}[/]' for i, style in self._info())
-        if info:
-            info = '  [green italic]#[/] ' + info
-        return f"{v}{info}"
 
     #  /~~\                   |     '
     # |  __/~//~\|/~\ /~\ /~/~|~|/~\|/~~

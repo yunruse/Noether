@@ -55,6 +55,12 @@ class test_unit_display(TestCase):
             'meter  # length',
             'meter'
         ),
+        (
+            'foot & inch',  # ChainedUnit
+            'ChainedUnit(foot, inch)',
+            'foot & inch  # length',
+            'foot & inch'
+        ),
     )
 
     def test_value_code_repr_str(self):

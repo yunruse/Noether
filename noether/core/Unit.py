@@ -4,6 +4,7 @@ Unit - a subclass of Measure which has its own name(s) and symbol(s).
 Used in turn to display Measure.
 '''
 
+from .config import conf
 from .display import canonical_number
 from .prefixes import Prefix
 from .Dimension import Dimension
@@ -57,6 +58,11 @@ class Unit(Measure):
     # |__/ |_)|__/|\__| \/
     #         |        _/
 
+    def __repr__(self):
+        if conf.get('display_repr_code'):
+            return self.repr_code()
+        return self.__noether__()
+
     def repr_code(self):
         chunks = [Measure.repr_code(self)]
         for i in self.names, self.symbols:
@@ -69,9 +75,6 @@ class Unit(Measure):
         if self.prefixes:
             chunks.append(repr(self.prefixes))
         return 'Unit({})'.format(', '.join(chunks))
-
-    def __str__(self):
-        return self.name
 
     def __noether__(self):
         return f"{self.name}  # {self.dim.canonical_name()}"
@@ -86,6 +89,9 @@ class Unit(Measure):
                 d = self * 1
             string += f", [italic blue]{d.repr_measure(self)}"
         return string
+
+    def __str__(self):
+        return self.name
 
     def _json_extras(self):
         return {}

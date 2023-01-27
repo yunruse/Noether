@@ -78,16 +78,3 @@ def canonical_number(number, stddev):
     if isinstance(number, float) and number.is_integer():
         return repr(int(number))
     return repr(number)
-
-
-class NoetherRepr:
-    def repr_code(self):
-        return str(self)
-
-    def __noether__(self):
-        return str(self)
-
-    def __repr__(self):
-        if conf.get('display_repr_code'):
-            return self.repr_code()
-        return self.__noether__()

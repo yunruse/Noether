@@ -1,3 +1,4 @@
+from .config import conf
 from .Measure import Measure
 from .Unit import Unit
 
@@ -16,17 +17,31 @@ class ChainedUnit(Unit):
         else:
             return ChainedUnit(*self.units, unit)
 
+    # |~~\ '      |
+    # |   ||(~|~~\|/~~|\  /
+    # |__/ |_)|__/|\__| \/
+    #         |        _/
+
     def __repr__(self):
-        return '{} ({})'.format(
-            ' & '.join([x.name for x in self.units]),
-            self.dim.canonical_name()
-        )
+        if conf.get('display_repr_code'):
+            return self.repr_code()
+        return self.__noether__()
+
+    def repr_code(self):
+        return 'ChainedUnit({})'.format(', '.join(
+            x.name for x in self.units
+        ))
+
+    def __noether__(self):
+        return f'{self}  # {self.dim.canonical_name()}'
 
     def __rich__(self):
-        return '[bold]{}[/] ([italic]{})'.format(
-            '[/] & [bold]'.join([x.name for x in self.units]),
-            self.dim.canonical_name()
-        )
+        return (
+            f'[bold]{self}[/]'
+            f'#[green italic]{self.dim.canonical_name()}')
+
+    def __str__(self):
+        return ' & '.join([x.name for x in self.units])
 
     def repr_measure(self, measure: Measure):
         # TODO: handle stddev!
