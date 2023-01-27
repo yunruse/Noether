@@ -154,7 +154,7 @@ thermal_resistivity = I(thermal_resistance * length /
 
 # % Miscellaneous
 
-length = distance = height = I(length, 'length', 'distance', 'height')
+distance = height = I(length, 'distance', 'height')
 width = breadth = depth = I(length, 'width', 'breadth', 'depth')
 body_mass_index = I(mass / height**2, 'body_mass_index')
 

@@ -136,11 +136,6 @@ class Measure(NoetherRepr, Generic[T]):
     def as_integer_ratio(self):
         return self.value.as_integer_ratio()  # type: ignore
 
-    # |~~\ '      |
-    # |   ||(~|~~\|/~~|\  /
-    # |__/ |_)|__/|\__| \/
-    #         |        _/
-
     info_handlers: ClassVar[list[type[MeasureInfo]]] = list()
 
     @classmethod
@@ -167,12 +162,17 @@ class Measure(NoetherRepr, Generic[T]):
                 for i in handler.info(self):
                     yield i, handler.style
 
+    # |~~\ '      |
+    # |   ||(~|~~\|/~~|\  /
+    # |__/ |_)|__/|\__| \/
+    #         |        _/
+
     def repr_code(self):
         chunks = [repr(self.value)]
         if self.stddev is not None:
             chunks.append(repr(self.stddev))
         if self.dim:
-            chunks.append(self.dim.repr_code())
+            chunks.append('dim=' + self.dim.repr_code())
 
         return 'Measure({})'.format(', '.join(chunks))
 
@@ -188,23 +188,31 @@ class Measure(NoetherRepr, Generic[T]):
             display=lambda x: display.dimension_symbol[x])
 
     @staticmethod
-    def _display_measure(measure: 'Measure'):
+    def repr_measure(measure: 'Measure'):
         # Fallback if no unit found
         n = canonical_number(measure.value, measure.stddev)
         s = measure.as_fundamental()
         return f'{n} {s}'
 
     def __noether__(self):
-        v = (self.display_unit() or self)._display_measure(self)
+        v = (self.display_unit() or self).repr_measure(self)
         info = ', '.join(i for i, _ in self._info())
         if info:
             info = '  # ' + info
         return f"{v}{info}"
 
-    __str__ = __noether__
+    @staticmethod
+    def str_measure(measure: 'Measure'):
+        # Fallback if no unit found
+        n = canonical_number(measure.value, measure.stddev)
+        s = measure.as_fundamental().replace(' * ', ' ')
+        return f'{n} {s}'
+
+    def __str__(self):
+        return (self.display_unit() or self).str_measure(self)
 
     def __rich__(self):
-        v = (self.display_unit() or self)._display_measure(self)
+        v = (self.display_unit() or self).repr_measure(self)
         info = ', '.join(f'[{style}]{i}[/]' for i, style in self._info())
         if info:
             info = '  [green italic]#[/] ' + info

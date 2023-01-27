@@ -3,6 +3,7 @@ Test various repr() and str() methods for objects.
 '''
 from unittest import TestCase
 
+import noether
 from noether import time, length
 from noether.core.display import uncertainty
 
@@ -34,3 +35,34 @@ class test_unit_display(TestCase):
         for a, b, c in self.uncertainty_display:
             d = uncertainty(a, b)
             self.assertEqual(c, d)
+
+    value_code_noether_str = (
+        (
+            'length',  # Dimension
+            'Dimension(length=1)',
+            'length  # length, distance, height, width, breadth, depth',
+            'length',
+        ),
+        (
+            'K * m',  # Measure
+            'Measure(1, dim=Dimension(temperature=1, length=1))',
+            '1 K * m  # temperature * length',
+            '1 K m'
+        ),
+        (
+            'meter',  # Unit
+            "Unit(Measure(1, dim=Dimension(length=1)), ['meter', 'metre'], 'm', SI_large + SI_small + SI_conventional)",
+            'meter  # length',
+            'meter'
+        ),
+    )
+
+    def test_value_code_repr_str(self):
+        for cat in noether.conf.categories()['info']:
+            noether.conf[f'info_{cat}'] = False
+        noether.conf[f'info_dimension'] = True
+        for k, c, n, s in self.value_code_noether_str:
+            val = eval(k, {}, vars(noether))
+            self.assertEqual(c, val.repr_code())
+            self.assertEqual(n, val.__noether__())
+            self.assertEqual(s, str(val))

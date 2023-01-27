@@ -52,9 +52,16 @@ class Unit(Measure):
             return self.symbols[0]
         return self.as_fundamental()
 
-    def __repr_code__(self):
-        chunks = [Measure.__repr__(self)]
+    # |~~\ '      |
+    # |   ||(~|~~\|/~~|\  /
+    # |__/ |_)|__/|\__| \/
+    #         |        _/
+
+    def repr_code(self):
+        chunks = [Measure.repr_code(self)]
         for i in self.names, self.symbols:
+            if len(i) == 0:
+                chunks.append('None')
             if len(i) == 1:
                 chunks.append(repr(i[0]))
             else:
@@ -64,7 +71,10 @@ class Unit(Measure):
         return 'Unit({})'.format(', '.join(chunks))
 
     def __str__(self):
-        return f"{self.name} # {self.dim.canonical_name()}"
+        return self.name
+
+    def __noether__(self):
+        return f"{self.name}  # {self.dim.canonical_name()}"
 
     def __rich__(self):
         string = (
@@ -74,9 +84,9 @@ class Unit(Measure):
         if d != self:
             if d is None:
                 d = self * 1
-            string += f", [italic blue]{d._display_measure(self)}"
+            string += f", [italic blue]{d.repr_measure(self)}"
         return string
-    
+
     def _json_extras(self):
         return {}
 
@@ -95,7 +105,7 @@ class Unit(Measure):
             json['prefixes'] = self.prefixes.name.split(' + ')
         return json
 
-    def _display_measure(self, measure: Measure):
+    def repr_measure(self, measure: Measure):
         val = measure.value / self.value
         stddev = None
         if measure.stddev is not None:

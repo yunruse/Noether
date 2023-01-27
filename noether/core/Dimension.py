@@ -70,17 +70,26 @@ class Dimension(NoetherRepr, ImmutableDict):
         '''True iff the dimension is a base dimension'''
         return list(self.values()) == [Fraction(1)]
 
+    def items(self):
+        exponents = list(dict.items(self))
+        # positive first, then negative
+        exponents.sort(key=lambda q: (q[1] < 0, self._names[q[0]].order))
+        return exponents
+
+    # |~~\ '      |
+    # |   ||(~|~~\|/~~|\  /
+    # |__/ |_)|__/|\__| \/
+    #         |        _/
+
     def as_fundamental(
         self, /,
         display: Callable[[str], str] = lambda x: x
     ):
         if not self:
             return display('dimensionless')
-        exponents = list(self.items())
-        exponents.sort(key=lambda q: (q[1] < 0, self._names[q[0]].order))
 
         string = '1'
-        for name, exp in exponents:
+        for name, exp in self.items():
             symbol = '*'
             use_brackets = exp.denominator != 1
             if not use_brackets and exp < 0:
@@ -93,16 +102,16 @@ class Dimension(NoetherRepr, ImmutableDict):
                 string += f'({exp})' if use_brackets else f'{exp}'
         return string.removeprefix('1 * ')
 
-    repr_code = as_fundamental
+    def canonical_name(self):
+        names = display.dimension_names.get(self, [])
+        if names:
+            return names[0]
+        return self.as_fundamental()
 
-    def _json_dim(self):
-        return sorted([name, float(exp)] for name, exp in self.items())
-
-    def __json__(self):
-        return {
-            'names': sorted(set(display.dimension_names.get(self, []))),
-            'dimension': self._json_dim(),
-        }
+    def repr_code(self):
+        return 'Dimension({})'.format(', '.join(
+            f'{k}={v}' for k, v in self.items()
+        ))
 
     def __noether__(self):
         string = self.as_fundamental()
@@ -110,12 +119,6 @@ class Dimension(NoetherRepr, ImmutableDict):
         if names:
             string += '  # {}'.format(', '.join(names))
         return string
-
-    def canonical_name(self):
-        names = display.dimension_names.get(self, [])
-        if names:
-            return names[0]
-        return self.as_fundamental()
 
     def __rich__(self):
         if self.is_base_dimension():
@@ -129,7 +132,21 @@ class Dimension(NoetherRepr, ImmutableDict):
 
         return reprs
 
-    # Operations
+    def __str__(self):
+        return self.canonical_name()
+
+    def _json_dim(self):
+        return sorted([name, float(exp)] for name, exp in self.items())
+
+    def __json__(self):
+        return {
+            'names': sorted(set(display.dimension_names.get(self, []))),
+            'dimension': self._json_dim(),
+        }
+
+    #  /~~\                   |     '
+    # |  __/~//~\|/~\ /~\ /~/~|~|/~\|/~~
+    #  \__/\/_\_/|   |   |\/_ | |   |\__
 
     def __bool__(self):
         return not all(i == 0 for i in self.values())
@@ -137,8 +154,6 @@ class Dimension(NoetherRepr, ImmutableDict):
     def __pow__(self, exp):
         exp = Fraction(exp)
         return Dimension({k: v*exp for k, v in self.items()})
-
-    # Multiplication
 
     def _extract_dimension(self, other):
         if isinstance(other, Number):
@@ -166,7 +181,9 @@ class Dimension(NoetherRepr, ImmutableDict):
     def __rtruediv__(self, other):
         return self._extract_dimension(other) / self
 
-    # Linear ops
+    # |  '
+    # |  ||/~\ /~//~~||/~\
+    # |__||   |\/_\__||
 
     def _linear_operation(self, other):
         other = self._extract_dimension(other)

@@ -28,7 +28,7 @@ class ChainedUnit(Unit):
             self.dim.canonical_name()
         )
 
-    def _display_measure(self, measure: Measure):
+    def repr_measure(self, measure: Measure):
         # TODO: handle stddev!
         value = measure.value
         chunks = []
