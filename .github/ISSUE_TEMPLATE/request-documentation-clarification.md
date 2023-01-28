@@ -3,7 +3,7 @@ name: Request documentation clarification
 about: Is something wrong or unclear in the documentation?
 title: ''
 labels: docs
-assignees: yunruse
+assignees: ''
 
 ---
 

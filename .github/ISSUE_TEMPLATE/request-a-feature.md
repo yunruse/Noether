@@ -3,7 +3,7 @@ name: Request a feature
 about: Every little helps!
 title: ''
 labels: feature
-assignees: yunruse
+assignees: ''
 
 ---
 
