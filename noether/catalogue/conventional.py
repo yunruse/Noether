@@ -26,7 +26,11 @@ hour = Unit(minute * 60, 'hour', ['hr', 'h'])
 day = Unit(hour * 24, "day", "d")
 week = Unit(day * 7, "week", "w")
 fortnight = week * 2
-year = Unit(day * 365.25, "year", ["yr", "ya"], SI_large)
+year_julian = Unit(day * 365.25,
+                   "year", ["yr", "ya"], SI_large, info="Julian calendar")
+year_gregorian = Unit(day * 365.2425,
+                      "year", ["yr", "ya"], SI_large, info="Gregorian calendar")
+year = year_gregorian
 
 human_time = year & day & hour & minute & second
 
