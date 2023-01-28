@@ -19,7 +19,7 @@ Provide historical, cgs, obscure and regional units. Disabling these may provide
 if conf.get('catalogue_extended'):
     from .extension import *
 
+from ..core.Catalogue import Catalogue  # noqa
 from . import info  # noqa
-from ._cataloguer import Catalogue  # noqa
 
 catalogue = Catalogue(locals())

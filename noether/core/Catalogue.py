@@ -1,5 +1,10 @@
-from ..core import Dimension, Unit
-from ..core.prefixes import PrefixSet, Prefix
+'''
+Catalogue of units, which may handle interpreting
+units with prefixes.
+'''
+
+from . import Dimension, Unit
+from .prefixes import PrefixSet, Prefix
 from ..config import Config, conf
 
 Config.register('units_all_prefixes', False, help='''

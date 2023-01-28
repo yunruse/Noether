@@ -1,3 +1,7 @@
+'''
+List of units used for display purposes.
+'''
+
 from .Dimension import Dimension
 from .Unit import Unit
 
@@ -21,8 +25,6 @@ class DisplaySet:
         elif isinstance(value, Unit):
             self.units.setdefault(value.dim, [])
             self.units[value.dim].append(value)
-
-            f = self.dimension_names.get(value.dim, [])
 
             if value.symbols:
                 for n in self.dimension_names.get(value.dim, []):

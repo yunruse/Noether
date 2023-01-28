@@ -5,7 +5,7 @@ Automatically-loaded CODATA fundamental physical constants.
 from ..core import Unit
 from ..config import Config, conf
 
-from ._cataloguer import Catalogue
+from ..core.Catalogue import Catalogue
 
 from . import si
 catalogue = Catalogue(vars(si))
