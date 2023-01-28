@@ -1,3 +1,5 @@
+**/.DS_Store
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
@@ -12,11 +14,10 @@ venv/
 pypi_tokens.txt
 *.code-workspace
 catalogue_count.*
+tests/VERSION
 
 # Build
 
 build/
 dist/
 noether.egg-info
-
-**/.DS_Store
