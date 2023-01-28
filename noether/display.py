@@ -1,77 +1,80 @@
-from .helpers import exp_mantissa, intify
+'''
+Functions for transforming various numbers into strings.
+
+Handles Unicode.
+'''
+
+from math import log10
+from decimal import Decimal
+from numbers import Real
+from .config import Config, conf
+
+Config.register("display_unicode_symbols", True, '''\
+Use Unicode symbols eg ± instead of +-.
+''')
+
+Config.register("display_unicode_exponent", True, '''\
+Use Unicode superscripts eg xⁿ instead of x**n.
+''')
+
+Config.register("display_repr_code", False, '''\
+Return code-like repr() instead of a more calculator-like representation.
+''')
+
+
+def plus_minus_symbol() -> str:
+    if conf.get('display_unicode_symbols'):
+        return '±'
+    return '+-'
 
 
 SUPERSCRIPT = str.maketrans(
-    "-0123456789",
-    "⁻⁰¹²³⁴⁵⁶⁷⁸⁹"
+    "0123456789-+=/()",
+    "⁰¹²³⁴⁵⁶⁷⁸⁹⁻⁺⁼ᐟ⁽⁾"
 )
 
-NONBREAKING = {
-    0x20: 0xA0,  # SPACE
-    0x2009: 0x202F  # THIN SPACE
-}
+
+def superscript(number):
+    if conf.get('display_unicode_exponent'):
+        return str(number).translate(SUPERSCRIPT)
+    return f'**{number}'
 
 
-def superscript(number, unicode: bool = False):
-    return str(number).translate(SUPERSCRIPT) if unicode else '^' + str(number)
+def _to_decimal(number: Real):
+    if isinstance(number, float):
+        return Decimal(str(number))
+    return Decimal(number)
 
 
-def _scinot(number, dec, uni, lo, hi):
-    exp, man = exp_mantissa(number)
-    if lo is not None and hi is not None and lo < exp < hi:
-        # avoid exponent for human-like values
-        dec -= exp
-        exp = None
-        man = number
+def uncertainty(number: Decimal, stddev: Decimal):
+    '''Display'''
+    a = _to_decimal(number)
+    b = _to_decimal(stddev)
 
-    num = ""
-    if exp:
-        num = "10" + superscript(exp, uni)
-        if man == 1:
-            return num
-        elif man == -1:
-            return "-" + num
+    if not (0 < b < 1):
+        return f'{a}({b})'
+
+    ai, af = str(a).split('.', 1)
+    bi, bf = str(b).split('.', 1)
+    assert bi == '0'
+
+    ad = len(af)
+    bd = len(bf)
+    az = bd - ad
+    bz = -1 - b.adjusted()
+    bf = bf[bz:]
+    af += '0'*az
+
+    return f'{ai}.{af}({bf})'
+
+
+def canonical_number(number, stddev):
+    if stddev is not None:
+        if conf.get('uncertainty_display_shorthand'):
+            return uncertainty(number, stddev)
         else:
-            num = "×" + num
-
-    return str(intify(round(man, dec))) + num
-
-
-def number_string(
-    number: float,
-    plus_minus: float = 0,
-    decimals: int = 2,
-    as_unit: bool = False,
-    unicode_exponent: bool = False,
-    formatter=None,
-    natural_leading_zeros: int = 2,
-    natural_digits: int = 4,
-):
-    """Format a number with an uncertainty"""
-
-    s_exp = ""
-    if plus_minus:
-        exp_num, _ = exp_mantissa(number)
-        exp_pm, _ = exp_mantissa(plus_minus)
-        exps_differ = abs(exp_num - exp_pm) > natural_digits
-        def is_human(x): return -natural_leading_zeros < x < natural_digits
-        sharing_unwieldy = exps_differ or is_human(
-            exp_num) and is_human(exp_num)
-        if not sharing_unwieldy:
-            exp_shared = min(exp_num, exp_pm)
-            number /= 10**exp_shared
-            plus_minus /= 10**exp_shared
-            s_exp = '×10' + superscript(exp_shared, unicode_exponent)
-
-    s = ""
-    if not callable(formatter):
-        def formatter(x): return _scinot(
-            x, decimals, unicode_exponent, -natural_leading_zeros, natural_digits)
-    if number:
-        s += formatter(number)
-    if plus_minus:
-        s += " ± " + formatter(plus_minus)
-    s = s.strip() or "0"
-    if s_exp or as_unit and number and plus_minus:
-        s = "(" + s + ")" + s_exp
-    return s
+            pm = plus_minus_symbol()
+            return f'{number} {pm} {stddev}'
+    if isinstance(number, float) and number.is_integer():
+        return repr(int(number))
+    return repr(number)

@@ -1,20 +1,24 @@
-# Run Noether with `python -im` for interactive console.
 import noether
-from noether.conf import conf_exists
-from . import *
-noe = noether
+from noether import *
 
-if not conf_exists:
-    print('\n')
-del conf_exists
+from sys import argv
 
 print('''\
 >>> import noether
->>> from noether import *
->>> noe = noether
-''')
+>>> from noether.import *''')
 
-# TODO: if given text, output what it evaluates to
-# TODO: set up syntax so, eg `4kg` -> `kg(4)`
-# TODO: a `vs` operator that outputs cmp (i.e. -1, 0 or 1)
-#       but reprs to something like "4 oz is bigger by 2%"
+if '--no-rich' not in argv:
+    try:
+        from rich import pretty, print
+    except ImportError:
+        pretty = None
+    else:
+        pretty.install()
+        print('''\
+>>> from rich import pretty, print
+>>> pretty.install()''')
+print()
+
+# TODO: fancy repl
+
+del argv

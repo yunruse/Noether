@@ -1,81 +1,36 @@
-"""Noether: general standalone math and repl niceties"""
+'''
+Helpful standalone functions.
+'''
 
-import math
 import os
-import sys
-import functools
+import pathlib
 
-__all__ = "clear intify sqrt sign product tablify".split()
-
-# display
+# Dictionary methods
 
 
-def clear(isTerminal=True):
-    '''Clear a terminal screen.'''
-    if not isTerminal:
-        print("\n" * 200)
-    elif os.name == "nt":
-        os.system("cls")
-    else:
-        os.system("clear")
+class ImmutableDict(dict):
+    def __setitem__(self, _k, _v):
+        raise AttributeError(
+            '{!r} object does not support item assignment'.format(type(self).__name__))
+
+    def __delitem__(self, _):
+        raise AttributeError(
+            '{!r} object does not support item deletion'.format(type(self).__name__))
 
 
-def bell():
-    '''Give a bell to a terminal.'''
-    sys.stdout.write("\a")
-    sys.stdout.flush()
+def reorder_dict_by_values(dictionary: dict):
+    kv = list(dictionary.items())
+    kv.sort(key=lambda kv: kv[1])
 
-# numerical
+    dictionary.clear()
+    for k, v in kv:
+        dictionary[k] = v
 
-
-def intify(x):
-    '''
-    Convert to integer type iff the unit is an integer.
-
-    Useful in repr and other display stuff.
-    '''
-    i = int(x)
-    return i if x == i else x
+# Pathing
 
 
-FLOATING_POINT_ERROR_ON_LOG_TENXPONENTS = 12
-
-
-def exp_mantissa(num, base=10):
-    """Returns e, m such that x = mb^e"""
-    if num == 0:
-        return 1, 0
-    # avoid floating point error eg log(1e3, 10) = 2.99...
-    exp = math.log(abs(num), base)
-    exp = round(exp, FLOATING_POINT_ERROR_ON_LOG_TENXPONENTS)
-    exp = math.floor(exp)  # 1 <= mantissa < 10
-    mantissa = num / (base**exp)
-    return exp, mantissa
-
-
-@functools.wraps(math.sqrt)
-def sqrt(x):
-    # redefined to be nicer for certain expressions
-    return x ** 0.5
-
-
-def sign(x):
-    """Return the mathematical sign of the particle."""
-    if x.imag:
-        return x / sqrt(x.imag ** 2 + x.real ** 2)
-    return 0 if x == 0 else -1 if x < 0 else 1
-
-
-def product(iterable, start=1):
-    for i in iterable:
-        start *= i
-    return start
-
-
-def tablify(table, sep=" "):
-    table = [[str(i) for i in row] for row in table]
-    lens = [0] * max(map(len, table))
-    for row in table:
-        for n, col in enumerate(row):
-            lens[n] = max(lens[n], len(col))
-    return (sep.join(c + " " * (l - len(c)) for c, l in zip(r, lens)) for r in table)
+def get_dot_config():
+    return pathlib.Path(
+        os.path.expanduser(
+            os.environ.get(
+                'XDG_CONFIG_HOME', '~/.config')))
