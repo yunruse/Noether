@@ -33,12 +33,12 @@ class ConfigOption:
 
 
 def ConfigProperty(option: ConfigOption):
-    def getter(self):
-        if option.name in self:
-            return self[option.name]
+    def getter(self: Config):
+        if option.name in self._config:
+            return self._config[option.name]
         return option.default
 
-    def setter(self, value):
+    def setter(self: Config, value):
         typ = option.type
         if not isinstance(value, typ):
             raise TypeError(
@@ -52,14 +52,15 @@ def ConfigProperty(option: ConfigOption):
                 ConfigWarning, stacklevel=2,
             )
 
-    def deleter(self):
-        if option.name in self:
-            del self[option.name]
+    def deleter(self: Config):
+        if option.name in self._config:
+            del self._config[option.name]
     return property(getter, setter, deleter)
 
 
 class Config(dict):
-    info: dict[str, ConfigOption] = dict()
+    _config: dict
+    options: dict[str, ConfigOption] = dict()
 
     @classmethod
     def register(
@@ -73,7 +74,7 @@ class Config(dict):
             key, default,
             typ or type(default), help
         )
-        cls.info[key] = option
+        cls.options[key] = option
         setattr(cls, key, ConfigProperty(option))
 
     def __init__(
@@ -81,34 +82,33 @@ class Config(dict):
         value: Optional[dict] = None,
         **kwargs,
     ):
-        result = {
+        self._config = {
             k: v.default
-            for k, v in self.info.items()}
-        result.update(value or {})
-        result.update(kwargs)
-        super().__init__(result)
+            for k, v in self.options.items()}
+        self._config.update(value or {})
+        self._config.update(kwargs)
 
     def __repr__(self):
         return 'Config({})'.format(', '.join(
-            f'{k}={v}' for k, v in self.items()
-            if v != self.info[k].default
+            f'{k}={v}' for k, v in self._config.items()
+            if v != self.options[k].default
         ))
 
     def get_defaults(self):
-        for k in self.info:
-            self.setdefault(k, self.info[k].default)
+        for k in self.options:
+            self.setdefault(k, self.options[k].default)
 
     def reset(self):
-        for k in self.info:
-            self[k] = self.info[k].default
+        for k in self.options:
+            self[k] = self.options[k].default
 
     # % Attributes
 
     def get(self, key: str):
-        if key in self:
-            return self[key]
-        elif key in self.info:
-            return self.info[key].default
+        if key in self._config:
+            return self._config[key]
+        elif key in self.options:
+            return self.options[key].default
         else:
             raise KeyError('Unknown config key', key)
 
@@ -116,7 +116,7 @@ class Config(dict):
 
     def categories(self):
         cats: dict[str, list[str]] = dict()
-        for name in sorted(self.info.keys()):
+        for name in sorted(self.options.keys()):
             cat, name = name.split('_', 1)
             cats.setdefault(cat, [])
             cats[cat].append(name)
@@ -132,7 +132,7 @@ class Config(dict):
             for name in names:
                 fullname = f'{cat_name}_{name}'
                 value = self.get(fullname)
-                desc = self.info[fullname].help.strip()
+                desc = self.options[fullname].help.strip()
                 if help:
                     string += "\n"
                     for l in desc.split('\n'):
@@ -147,17 +147,29 @@ class Config(dict):
         with open(path, 'w') as f:
             f.write(self.__str__(help))
 
-    def load(self, path: Path = CONF_FILE):
+    def _load(self, path: Path = CONF_FILE):
         with open(path, 'rb') as f:
             new = tomllib.load(f)
 
         for cat_name, cat in new.items():
             for name, value in cat.items():
                 fullname = f'{cat_name}_{name}'
-                if fullname in self.info:
-                    self._config[fullname] = value
+                self._config[fullname] = value
+
+    def _remove_unused_keys(self):
+        for name in list(self._config):
+            if name not in self.options:
+                warnings.warn(
+                    f"Unknown config option {name!r}.",
+                    ConfigWarning, stacklevel=4
+                )
+                del self._config[name]
+
+    def load(self, path: Path = CONF_FILE):
+        self._load(path)
+        self._remove_unused_keys()
 
 
 conf = Config()
 if CONF_FILE.is_file():
-    conf.load(CONF_FILE)
+    conf._load(CONF_FILE)
