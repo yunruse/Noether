@@ -8,6 +8,9 @@ from .. import angstrom, km, cm, meter, foot
 from .. import year, day, hour, minute, second
 from .. import c
 
+# TODO: incorporate all catalogue units to save effort
+# and then you can move some unusual units to a new `unusual.py`
+
 kmq = km**2
 
 COMPARISON_MEASURES: dict[str, tuple[str, Measure]] = {
@@ -61,23 +64,23 @@ COMPARISON_MEASURES: dict[str, tuple[str, Measure]] = {
     'the speed of sound in air': ('', meter(343) / second),
     'average human walk speed': ('', meter(1.42) / second),
     'beard growth speed': ('', angstrom(50) / second),
-
 }
 
 COMPARISON_DIMENSIONS = set(
     unit.dim for _, unit in COMPARISON_MEASURES.values())
 
 
-@ Measure.Info
+@Measure.Info
 class info_comparison(MeasureInfo):
     '''Compare measures to everyday or well-known items.'''
     style = 'underline red'
+    enabled_by_default = False  # per #17, needs some tweaks to be considered "good enough"
 
-    @ staticmethod
+    @staticmethod
     def should_display(measure: Measure):
         return measure.value and measure.dim in COMPARISON_DIMENSIONS
 
-    @ staticmethod
+    @staticmethod
     def get_comparisons(
         measure: Measure,
         country: str = None
@@ -90,12 +93,13 @@ class info_comparison(MeasureInfo):
         for name, (country, unit) in COMPARISON_MEASURES.items():
             if unit.dim != measure.dim:
                 continue
-            relative = abs(log(measure / unit))
-            if relative == 0:
-                continue
-            yield 1 - relative, name, unit
+            score = -abs(log(measure / unit))
+            # TODO: incorporate country
+            if score == 0:
+                continue  # ignore units that are identical
+            yield score, name, unit
 
-    @ classmethod
+    @classmethod
     def info(cls, measure: Measure):
         comparisons = cls.get_comparisons(
             measure, conf.get('units_country')
