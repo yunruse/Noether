@@ -22,12 +22,12 @@ Allow any addition, even between incompatible units
 Config.register("measure_barenumber", False, """\
 Allow addition and subtraction of bare numbers to units""")
 
-Config.register("measure_compare_uncertainty", False, """\
+Config.register("uncertainty_compare_range_overlap", False, """\
 When comparing a Measure, compare on the uncertainty.
 For == this means 'do the ranges overlap';
 for < it means 'do the ranges not overlap'.""")
 
-Config.register("measure_uncertainty_shorthand", False, """\
+Config.register("uncertainty_display_shorthand", False, """\
 Display e.g. 0.15(2) instead of 0.15 ± 0.02.""")
 
 T = TypeVar('T', int, float, Real)
@@ -322,7 +322,7 @@ class Measure(Generic[T]):
         if isinstance(other, Measure):
             if other.dim != self.dim:
                 return False
-            if conf.get('measure_compare_uncertainty'):
+            if conf.get('uncertainty_compare_range_overlap'):
                 s_min, s_max = self.bounds
                 o_min, o_max = other.bounds
                 return ((s_min <= o_min <= s_max) or
@@ -334,7 +334,7 @@ class Measure(Generic[T]):
     def __lt__(self, other):
         self.__lin_cmp(other)
         if isinstance(other, Measure):
-            if conf.get('measure_compare_uncertainty'):
+            if conf.get('uncertainty_compare_range_overlap'):
                 s_min, s_max = self.bounds
                 o_min, o_max = other.bounds
                 return s_max < o_min

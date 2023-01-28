@@ -70,7 +70,7 @@ def uncertainty(number: Decimal, stddev: Decimal):
 
 def canonical_number(number, stddev):
     if stddev is not None:
-        if conf.get('measure_uncertainty_shorthand'):
+        if conf.get('uncertainty_display_shorthand'):
             return uncertainty(number, stddev)
         else:
             pm = plus_minus_symbol()
