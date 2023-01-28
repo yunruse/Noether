@@ -7,7 +7,7 @@ packages = setuptools.find_packages()
 
 setuptools.setup(
     name="noether",
-    version="1.0.0",
+    version="0.2.0",
     author="Mia yun Ruse",
     author_email="mia@yunru.se",
     description="Work with physical measurements and constants",
@@ -23,6 +23,5 @@ setuptools.setup(
         "Development Status :: 3 - Alpha",
     ],
     keywords="physics unit measure constant measurement uncertainty",
-    python_requires='>=3.6',
-    install_requires=["nestedtext>=1.0.0"],
+    python_requires='>=3.11'
 )
