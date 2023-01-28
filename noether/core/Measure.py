@@ -156,16 +156,16 @@ class Measure(Generic[T]):
 
         return handler
 
+    # |~~\ '      |
+    # |   ||(~|~~\|/~~|\  /
+    # |__/ |_)|__/|\__| \/
+    #         |        _/
+
     def _info(self):
         for handler in self.info_handlers:
             if conf.get(handler.__name__) and handler.should_display(self):
                 for i in handler.info(self):
                     yield i, handler.style
-
-    # |~~\ '      |
-    # |   ||(~|~~\|/~~|\  /
-    # |__/ |_)|__/|\__| \/
-    #         |        _/
 
     def display_unit(self):
         from .DisplaySet import display
@@ -199,19 +199,20 @@ class Measure(Generic[T]):
         s = measure.as_fundamental()
         return f'{n} {s}'
 
+    def _display_element(self):
+        return (self.display_unit() or self).repr_measure(self)
+
     def __noether__(self):
-        v = (self.display_unit() or self).repr_measure(self)
         info = ', '.join(i for i, _ in self._info())
         if info:
             info = '  # ' + info
-        return f"{v}{info}"
+        return self._display_element() + info
 
     def __rich__(self):
-        v = (self.display_unit() or self).repr_measure(self)
         info = ', '.join(f'[{style}]{i}[/]' for i, style in self._info())
         if info:
             info = '  [green italic]#[/] ' + info
-        return f"{v}{info}"
+        return self._display_element() + info
 
     @staticmethod
     def str_measure(measure: 'Measure'):
@@ -364,7 +365,7 @@ class Measure(Generic[T]):
 
 @Measure.Info
 class info_dimension(MeasureInfo):
-    '''Display the dimension of a unit.'''
+    '''Display the dimension of a measure.'''
     style = 'green italic'
 
     @classmethod

@@ -80,6 +80,10 @@
             "description": "Named prefix sets in use.",
             "type": "array",
             "items": {"type": "string"}
+          },
+          "info": {
+            "description": "Additional context for disambiguation.",
+            "type": "string"
           }
         }
       }

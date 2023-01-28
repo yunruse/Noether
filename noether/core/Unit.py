@@ -8,22 +8,23 @@ from ..config import conf
 from ..display import canonical_number
 from .prefixes import Prefix
 from .Dimension import Dimension
-from .Measure import Measure
+from .Measure import Measure, MeasureInfo
 
 
 class Unit(Measure):
-    __slots__ = 'value stddiv dim symbols names prefixes'.split()
+    __slots__ = 'value stddiv dim symbols names prefixes info'.split()
 
     names: tuple[str]
-    symbols: tuple[str]
-    prefixes: set[str]
+    prefixes: list[Prefix]
+    info: str
 
     def __init__(
         self,
         measure: Measure | Dimension,
         names: list[str] | str | None = None,
         symbols: list[str] | str | None = None,
-        prefixes: list[Prefix] | None = None
+        prefixes: list[Prefix] | None = None,
+        info: str | None = None,
     ):
         if isinstance(measure, Dimension):
             measure = Measure(dim=measure)
@@ -35,7 +36,9 @@ class Unit(Measure):
 
         for k, v in ('names', names), ('symbols', symbols):
             setattr(k, (v, ) if isinstance(v, str) else v or [])
+
         setattr('prefixes', prefixes or [])
+        setattr('info', info or None)
 
     @property
     def symbol(self):
@@ -76,21 +79,10 @@ class Unit(Measure):
             chunks.append(repr(self.prefixes))
         return 'Unit({})'.format(', '.join(chunks))
 
-    def __noether__(self):
-        return f"{self.name}  # {self.dim.canonical_name()}"
-
-    def __rich__(self):
-        string = (
-            f"[bold]{self.name}[/]"
-            f"[italic green]  # {self.dim.canonical_name()}[/]")
-        d = self.display_unit()
-        if d != self:
-            if d is None:
-                d = self * 1
-            string += f", [italic blue]{d.repr_measure(self)}"
-        return string
-
     def __str__(self):
+        return self.name
+
+    def _display_element(self):
         return self.name
 
     def _json_extras(self):
@@ -109,6 +101,8 @@ class Unit(Measure):
             del json['stddev']
         if self.prefixes:
             json['prefixes'] = self.prefixes.name.split(' + ')
+        if self.info:
+            json['info'] = self.info
         return json
 
     def repr_measure(self, measure: Measure):
@@ -121,4 +115,27 @@ class Unit(Measure):
         return f'{v} {self.symbol}'
 
 
-from .DisplaySet import display  # noqa
+@Measure.Info
+class info_unit_value(MeasureInfo):
+    '''Give unit values, rather than just the bare name.'''
+    style = 'italic blue'
+
+    @classmethod
+    def info(self, measure: 'Unit') -> str:
+        if isinstance(measure, Unit):
+            d = measure.display_unit()
+            if d != measure:
+                if d is None:
+                    d = measure * 1
+                yield d.repr_measure(measure)
+
+
+@Measure.Info
+class info_unit_context(MeasureInfo):
+    '''Give additional context for units from their .info attribute.'''
+    style = 'red underline'
+
+    @classmethod
+    def info(self, measure: 'Unit') -> str:
+        if isinstance(measure, Unit) and measure.info is not None:
+            yield measure.info

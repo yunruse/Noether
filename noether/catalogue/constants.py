@@ -20,8 +20,8 @@ fine_structure_constant = alpha = Unit(
     k_e * e**2 / (hbar*c),
     ["fine_structure_constant", "alpha"], "α")
 rydberg = Ry = Unit(
-    joule(2.179_872_361_1035, 4.2e-15),  #  CODATA 2018
-    "rydberg", "Ry")
+    joule(2.179_872_361_1035, 4.2e-15),
+    "rydberg", "Ry", info="CODATA 2018")
 
 # % Miscelleneous
 t = kelvin(273.15)

@@ -12,14 +12,16 @@ from .conventional import cm, year
 
 # % Human
 
-calorie = cal = Unit(4.814 * joule, "calorie", "cal")
+calorie = cal = Unit(4.814 * joule, "calorie", "cal",
+                     info="not to be confused with the kcal")
 kilocalorie = kcal = Unit(cal * 1000, "kilocalorie", "kcal")
 bmi = Unit(kilogram / meter**2, "BMI", "BMI")
 
 # A unit of solar irradiation
 langley = Unit(cal / cm**2, "langley", "Ly")
-# Energy per surface area of average person at rest
-met = Unit(38.2 * watt / meter**2, "met", "met")
+met = Unit(
+    38.2 * watt / meter**2, "met", "met",
+    info='energy per surface area of average person at rest')
 
 # Used for insulation
 RSI = Unit(meter**2 * kelvin / watt, "RSI")
@@ -34,7 +36,8 @@ technical_atmosphere = Unit(
     kilogram * g / cm**2, "technical_atmosphere", "at")
 metre_mercury = meter_mercury = Unit(
     pascal(133_322.387_415),
-    "meter_mercury", "mHg", SI)  # Defined by convention
+    "meter_mercury", "mHg", SI,
+    info="defined by convention")
 sverdrup = Unit(cumec * 1e6, "sverdrup", "Sv")
 
 # % Hartree atomic units
@@ -55,8 +58,10 @@ barn = Unit(1e-28 * meter**2, "barn", "b", SI)
 
 # % Astronomical
 astronomical_unit = au = Unit(
-    meter(149_597_870_700),  # defined exactly by convention, 2012
-    "astronomical_unit", "au")
+    meter(149_597_870_700),
+    "astronomical_unit", "au",
+    info="conventional unit defined by the IAU in 2012"
+)
 parsec = Unit(au * 180*60*60/pi, "parsec", "pc", SI)
 
 lightsecond = Unit(c * second, "lightsecond", "ls", SI)

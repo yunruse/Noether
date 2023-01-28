@@ -63,7 +63,12 @@ def _codata(path: str):
             unit = eval(unit, {}, catalogue) if unit else one
 
             symbol = NAMED_CODATA_UNITS.get(name)
-            units[name] = Unit(unit(value, uncertainty), name, symbol)
+            units[name] = Unit(
+                unit(value, uncertainty),
+                name,
+                symbol,
+                info='CODATA 2018',
+            )
 
     return units
 

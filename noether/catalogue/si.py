@@ -48,7 +48,7 @@ katal = kat = I(Unit(catalytic_activity, 'katal', "kat", SI))
 # GCWM 3
 standard_gravity = g = Unit(
     9.980665 * meter / second**2,
-    "standard_gravity", "g")
+    "standard_gravity", "g", info="defined by convention")
 
 # GCWM 17
 speed_of_light = c = Unit(299_792_458 * meter / second, "c", "c")
