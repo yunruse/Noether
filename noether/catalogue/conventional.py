@@ -12,14 +12,15 @@ from math import pi
 from .si import radian, steradian, watt
 from ..core.fundamental import meter, second, ampere, kilogram, kelvin
 
+# % Ratio
 percent = Unit(1/100, 'percent', '%')
 permille = Unit(1/1000, 'permille', '‰')
 ppm = parts_per_million = Unit(1/1_000_000, 'parts_per_million', 'ppm')
 
+# % Temperature
 celsius = AffineUnit(kelvin*1, kelvin*273.15, "celsius", "ºC")
 
-# % Spacetime
-
+# % Time
 minute = Unit(second*60, 'minute', ['min'])
 hour = Unit(minute * 60, 'hour', ['hr', 'h'])
 day = Unit(hour * 24, "day", "d")
@@ -34,28 +35,35 @@ Display time by default in human_time (years, weeks, days, etc).''')
 if conf.get('units_human_time'):
     I(human_time)
 
+# % Distance
 cm = centimeter = centimetre = Unit(
     meter * 0.01, ['centimeter', 'centimetre'], 'cm')
 km = kilometer = kilometre = Unit(
     meter * 1000, ['kilometer', 'kilometre'], 'km')
 kmph = Unit(km / hour, None, "kmph")
 
+# % Area
 are = Unit(100 * meter**2, "are", "a")
 hectare = Unit(100 * are, "hectare", "ha")
-litre = liter = Unit((meter/10) ** 3, ["liter", "litre"], "l", SI)
 
+# % Volume
+litre = liter = L = Unit((meter/10) ** 3, ["liter", "litre"], "l", SI)
+milliliter = milliliter = ml = mL = Unit(
+    liter / 1000, ['milliliter', 'millilitre'], 'mL')
+
+# % Mass
 ton = tonne = Unit(kilogram*1000, ["ton", "tonne"], "t", SI_large)
 
+# % Frequency
 bpm = Unit(1 / minute, "beats per minute", "bpm")
 
-# % Angles
-
+# % Angle
 deg = degree = Unit(radian * pi / 180, "degree", ["°", "deg"])
 arcminute = arcmin = Unit(degree / 60, "arcminute", ["′", "arcmin"])
 arcsecond = arcsec = Unit(
     degree / 3600, "arcsecond", ["″", "arcsec"], SI_small)
-gradian = Unit(radian * pi / 200, "gon")
 
+gradian = Unit(radian * pi / 200, "gon")
 circle = turn = Unit(radian * 2*pi, "turn", "turn")
 sphere = spat = Unit(steradian * 4*pi, "spat", "sp")
 
