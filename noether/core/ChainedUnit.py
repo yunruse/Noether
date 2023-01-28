@@ -33,12 +33,14 @@ class ChainedUnit(Unit):
         ))
 
     def __noether__(self):
-        return f'{self}  # {self.dim.canonical_name()}'
+        if conf.get('info_dimension'):
+            return f'{self}  # {self.dim.canonical_name()}'
+        return str(self)
 
     def __rich__(self):
-        return (
-            f'[bold]{self}[/]'
-            f'#[green italic]{self.dim.canonical_name()}')
+        if conf.get('info_dimension'):
+            return f'{self}[green italic]  # {self.dim.canonical_name()}'
+        return str(self)
 
     def __str__(self):
         return ' & '.join([x.name for x in self.units])
