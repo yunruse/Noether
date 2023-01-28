@@ -1,0 +1,3537 @@
+[[dimensions]]
+names = [ "abseleration",]
+dimension = [ [ "length", 1.0,], [ "time", 3.0,],]
+
+[[dimensions]]
+names = [ "absement",]
+dimension = [ [ "length", 1.0,], [ "time", 1.0,],]
+
+[[dimensions]]
+names = [ "abserk",]
+dimension = [ [ "length", 1.0,], [ "time", 4.0,],]
+
+[[dimensions]]
+names = [ "absity",]
+dimension = [ [ "length", 1.0,], [ "time", 2.0,],]
+
+[[dimensions]]
+names = [ "absounce",]
+dimension = [ [ "length", 1.0,], [ "time", 5.0,],]
+
+[[dimensions]]
+names = [ "acceleration",]
+dimension = [ [ "length", 1.0,], [ "time", -2.0,],]
+
+[[dimensions]]
+names = [ "angle",]
+dimension = [ [ "angle", 1.0,],]
+
+[[dimensions]]
+names = [ "angular_acceleration",]
+dimension = [ [ "angle", 1.0,], [ "time", -2.0,],]
+
+[[dimensions]]
+names = [ "angular_jerk",]
+dimension = [ [ "angle", 1.0,], [ "time", -3.0,],]
+
+[[dimensions]]
+names = [ "angular_momentum",]
+dimension = [ [ "length", 2.0,], [ "mass", 1.0,], [ "time", -1.0,],]
+
+[[dimensions]]
+names = [ "angular_velocity",]
+dimension = [ [ "angle", 1.0,], [ "time", -1.0,],]
+
+[[dimensions]]
+names = [ "area",]
+dimension = [ [ "length", 2.0,],]
+
+[[dimensions]]
+names = [ "area_density", "body_mass_index",]
+dimension = [ [ "length", -2.0,], [ "mass", 1.0,],]
+
+[[dimensions]]
+names = [ "areal_density",]
+dimension = [ [ "data", 1.0,], [ "length", -2.0,],]
+
+[[dimensions]]
+names = [ "capacitance",]
+dimension = [ [ "current", 2.0,], [ "length", -2.0,], [ "mass", -1.0,], [ "time", 4.0,],]
+
+[[dimensions]]
+names = [ "capicitive_reactance",]
+dimension = [ [ "angle", 1.0,], [ "current", 2.0,], [ "length", -2.0,], [ "mass", -1.0,], [ "time", 3.0,],]
+
+[[dimensions]]
+names = [ "catalytic_activity",]
+dimension = [ [ "substance", 1.0,], [ "time", -1.0,],]
+
+[[dimensions]]
+names = [ "charge",]
+dimension = [ [ "current", 1.0,], [ "time", 1.0,],]
+
+[[dimensions]]
+names = [ "conductance",]
+dimension = [ [ "current", 2.0,], [ "length", -2.0,], [ "mass", -1.0,], [ "time", 3.0,],]
+
+[[dimensions]]
+names = [ "crackle",]
+dimension = [ [ "length", 1.0,], [ "time", -5.0,],]
+
+[[dimensions]]
+names = [ "current",]
+dimension = [ [ "current", 1.0,],]
+
+[[dimensions]]
+names = [ "data",]
+dimension = [ [ "data", 1.0,],]
+
+[[dimensions]]
+names = [ "data_rate",]
+dimension = [ [ "data", 1.0,], [ "time", -1.0,],]
+
+[[dimensions]]
+names = [ "density",]
+dimension = [ [ "length", -3.0,], [ "mass", 1.0,],]
+
+[[dimensions]]
+names = [ "dimensionless", "proportion", "reynolds_number", "strain",]
+dimension = []
+
+[[dimensions]]
+names = [ "einstein_coefficient_b",]
+dimension = [ [ "length", 1.0,], [ "mass", -1.0,], [ "time", 1.0,],]
+
+[[dimensions]]
+names = [ "emission_coefficient",]
+dimension = [ [ "angle", 2.0,], [ "length", 1.0,], [ "time", -3.0,],]
+
+[[dimensions]]
+names = [ "energy",]
+dimension = [ [ "length", 2.0,], [ "mass", 1.0,], [ "time", -2.0,],]
+
+[[dimensions]]
+names = [ "entropy",]
+dimension = [ [ "length", 2.0,], [ "mass", 1.0,], [ "temperature", -1.0,], [ "time", -2.0,],]
+
+[[dimensions]]
+names = [ "flow", "fluid_velocity",]
+dimension = [ [ "length", 3.0,], [ "time", -1.0,],]
+
+[[dimensions]]
+names = [ "force", "weight",]
+dimension = [ [ "length", 1.0,], [ "mass", 1.0,], [ "time", -2.0,],]
+
+[[dimensions]]
+names = [ "frequency",]
+dimension = [ [ "time", -1.0,],]
+
+[[dimensions]]
+names = [ "frequency_drift", "gravitational_gradient",]
+dimension = [ [ "time", -2.0,],]
+
+[[dimensions]]
+names = [ "gravitational_parameter",]
+dimension = [ [ "length", 3.0,], [ "time", -2.0,],]
+
+[[dimensions]]
+names = [ "gravity",]
+dimension = [ [ "length", 3.0,], [ "mass", -1.0,], [ "time", -2.0,],]
+
+[[dimensions]]
+names = [ "illuminance", "luminous_emittance", "luminous_exitance",]
+dimension = [ [ "angle", 2.0,], [ "length", -2.0,], [ "luminosity", 1.0,],]
+
+[[dimensions]]
+names = [ "image_density",]
+dimension = [ [ "data", -1.0,], [ "pixel_count", 2.0,],]
+
+[[dimensions]]
+names = [ "image_quality",]
+dimension = [ [ "length", -1.0,], [ "pixel_count", 1.0,],]
+
+[[dimensions]]
+names = [ "inductance",]
+dimension = [ [ "current", -2.0,], [ "length", 2.0,], [ "mass", 1.0,], [ "time", -2.0,],]
+
+[[dimensions]]
+names = [ "inductive_reactance",]
+dimension = [ [ "angle", 1.0,], [ "current", -2.0,], [ "length", 2.0,], [ "mass", 1.0,], [ "time", -3.0,],]
+
+[[dimensions]]
+names = [ "inertia",]
+dimension = [ [ "angle", 1.0,], [ "mass", 1.0,], [ "time", -1.0,],]
+
+[[dimensions]]
+names = [ "heat_flux", "intensity", "irradiance",]
+dimension = [ [ "mass", 1.0,], [ "time", -3.0,],]
+
+[[dimensions]]
+names = [ "jerk",]
+dimension = [ [ "length", 1.0,], [ "time", -3.0,],]
+
+[[dimensions]]
+names = [ "jounce", "snap",]
+dimension = [ [ "length", 1.0,], [ "time", -4.0,],]
+
+[[dimensions]]
+names = [ "kinematic_viscosity",]
+dimension = [ [ "length", 2.0,], [ "time", -1.0,],]
+
+[[dimensions]]
+names = [ "breadth", "depth", "distance", "height", "length", "width",]
+dimension = [ [ "length", 1.0,],]
+
+[[dimensions]]
+names = [ "linear_density",]
+dimension = [ [ "data", 1.0,], [ "length", -1.0,],]
+
+[[dimensions]]
+names = [ "luminance",]
+dimension = [ [ "length", -2.0,], [ "luminosity", 1.0,],]
+
+[[dimensions]]
+names = [ "luminosity", "luminous_intensity",]
+dimension = [ [ "luminosity", 1.0,],]
+
+[[dimensions]]
+names = [ "luminous_efficiacy",]
+dimension = [ [ "length", -2.0,], [ "luminosity", 1.0,], [ "mass", -1.0,], [ "time", 3.0,],]
+
+[[dimensions]]
+names = [ "luminous_energy",]
+dimension = [ [ "angle", 2.0,], [ "luminosity", 1.0,], [ "time", 1.0,],]
+
+[[dimensions]]
+names = [ "luminous_energy_density",]
+dimension = [ [ "angle", 2.0,], [ "length", -3.0,], [ "luminosity", 1.0,], [ "time", 1.0,],]
+
+[[dimensions]]
+names = [ "luminous_exposure",]
+dimension = [ [ "angle", 2.0,], [ "length", -2.0,], [ "luminosity", 1.0,], [ "time", 1.0,],]
+
+[[dimensions]]
+names = [ "luminous_power",]
+dimension = [ [ "angle", 2.0,], [ "luminosity", 1.0,],]
+
+[[dimensions]]
+names = [ "magnetic_flux",]
+dimension = [ [ "current", -1.0,], [ "length", 2.0,], [ "mass", 1.0,], [ "time", -2.0,],]
+
+[[dimensions]]
+names = [ "magnetic_flux_density",]
+dimension = [ [ "current", -1.0,], [ "mass", 1.0,], [ "time", -2.0,],]
+
+[[dimensions]]
+names = [ "magnetic_moment",]
+dimension = [ [ "current", 1.0,], [ "length", 2.0,],]
+
+[[dimensions]]
+names = [ "magnetisation",]
+dimension = [ [ "current", 1.0,], [ "length", -1.0,],]
+
+[[dimensions]]
+names = [ "mass",]
+dimension = [ [ "mass", 1.0,],]
+
+[[dimensions]]
+names = [ "molar_energy",]
+dimension = [ [ "length", 2.0,], [ "mass", 1.0,], [ "substance", -1.0,], [ "time", -2.0,],]
+
+[[dimensions]]
+names = [ "molar_heat_capacity",]
+dimension = [ [ "length", 2.0,], [ "mass", 1.0,], [ "substance", -1.0,], [ "temperature", -1.0,], [ "time", -2.0,],]
+
+[[dimensions]]
+names = [ "momentum",]
+dimension = [ [ "length", 1.0,], [ "mass", 1.0,], [ "time", -1.0,],]
+
+[[dimensions]]
+names = [ "mutation_rate",]
+dimension = [ [ "data", -1.0,],]
+
+[[dimensions]]
+names = [ "number_density", "probability_density",]
+dimension = [ [ "length", -3.0,],]
+
+[[dimensions]]
+names = [ "permeability",]
+dimension = [ [ "current", -2.0,], [ "length", 1.0,], [ "mass", 1.0,], [ "time", -2.0,],]
+
+[[dimensions]]
+names = [ "permittivity",]
+dimension = [ [ "current", 2.0,], [ "length", -3.0,], [ "mass", -1.0,], [ "time", 4.0,],]
+
+[[dimensions]]
+names = [ "pixel_count",]
+dimension = [ [ "pixel_count", 1.0,],]
+
+[[dimensions]]
+names = [ "pixel_fill_rate",]
+dimension = [ [ "pixel_count", 1.0,], [ "time", -1.0,],]
+
+[[dimensions]]
+names = [ "pop",]
+dimension = [ [ "length", 1.0,], [ "time", -6.0,],]
+
+[[dimensions]]
+names = [ "power",]
+dimension = [ [ "length", 2.0,], [ "mass", 1.0,], [ "time", -3.0,],]
+
+[[dimensions]]
+names = [ "bulk_modulus", "energy_density", "pressure",]
+dimension = [ [ "length", -1.0,], [ "mass", 1.0,], [ "time", -2.0,],]
+
+[[dimensions]]
+names = [ "r_value",]
+dimension = [ [ "mass", -1.0,], [ "temperature", 1.0,], [ "time", 3.0,],]
+
+[[dimensions]]
+names = [ "reaction_rate",]
+dimension = [ [ "length", -3.0,], [ "substance", 1.0,], [ "time", -1.0,],]
+
+[[dimensions]]
+names = [ "reluctance",]
+dimension = [ [ "current", 2.0,], [ "length", -2.0,], [ "mass", -1.0,], [ "time", 2.0,],]
+
+[[dimensions]]
+names = [ "impedance", "resistance",]
+dimension = [ [ "current", -2.0,], [ "length", 2.0,], [ "mass", 1.0,], [ "time", -3.0,],]
+
+[[dimensions]]
+names = [ "resistivity",]
+dimension = [ [ "current", -2.0,], [ "length", 3.0,], [ "mass", 1.0,], [ "time", -3.0,],]
+
+[[dimensions]]
+names = [ "resolution",]
+dimension = [ [ "pixel_count", 2.0,],]
+
+[[dimensions]]
+names = [ "solid_angle",]
+dimension = [ [ "angle", 2.0,],]
+
+[[dimensions]]
+names = [ "dose", "specific_energy",]
+dimension = [ [ "length", 2.0,], [ "time", -2.0,],]
+
+[[dimensions]]
+names = [ "specific_heat_capacity",]
+dimension = [ [ "length", 2.0,], [ "temperature", -1.0,], [ "time", -2.0,],]
+
+[[dimensions]]
+names = [ "specific_volume",]
+dimension = [ [ "length", 3.0,], [ "mass", -1.0,],]
+
+[[dimensions]]
+names = [ "speed",]
+dimension = [ [ "length", 1.0,], [ "time", -1.0,],]
+
+[[dimensions]]
+names = [ "substance",]
+dimension = [ [ "substance", 1.0,],]
+
+[[dimensions]]
+names = [ "surface_tension",]
+dimension = [ [ "mass", 1.0,], [ "time", -2.0,],]
+
+[[dimensions]]
+names = [ "temperature",]
+dimension = [ [ "temperature", 1.0,],]
+
+[[dimensions]]
+names = [ "thermal_conductance",]
+dimension = [ [ "length", 2.0,], [ "mass", 1.0,], [ "temperature", -1.0,], [ "time", -3.0,],]
+
+[[dimensions]]
+names = [ "thermal_conductivity",]
+dimension = [ [ "length", 1.0,], [ "mass", 1.0,], [ "temperature", -1.0,], [ "time", -3.0,],]
+
+[[dimensions]]
+names = [ "thermal_resistance",]
+dimension = [ [ "length", -2.0,], [ "mass", -1.0,], [ "temperature", 1.0,], [ "time", 3.0,],]
+
+[[dimensions]]
+names = [ "thermal_resistivity",]
+dimension = [ [ "length", -3.0,], [ "mass", -1.0,], [ "temperature", 1.0,], [ "time", 3.0,],]
+
+[[dimensions]]
+names = [ "time",]
+dimension = [ [ "time", 1.0,],]
+
+[[dimensions]]
+names = [ "torque",]
+dimension = [ [ "angle", 2.0,], [ "mass", 1.0,], [ "time", -3.0,],]
+
+[[dimensions]]
+names = [ "vehicle_efficiency",]
+dimension = [ [ "length", -2.0,],]
+
+[[dimensions]]
+names = [ "viscosity",]
+dimension = [ [ "length", -1.0,], [ "mass", 1.0,], [ "time", -1.0,],]
+
+[[dimensions]]
+names = [ "voltage",]
+dimension = [ [ "current", -1.0,], [ "length", 2.0,], [ "mass", 1.0,], [ "time", -3.0,],]
+
+[[dimensions]]
+names = [ "volume",]
+dimension = [ [ "length", 3.0,],]
+
+[[dimensions]]
+names = [ "volumetric_density",]
+dimension = [ [ "data", 1.0,], [ "length", -3.0,],]
+
+[[dimensions]]
+names = [ "wavenumber",]
+dimension = [ [ "length", -1.0,],]
+
+[[dimensions]]
+names = [ "yank",]
+dimension = [ [ "length", 1.0,], [ "mass", 1.0,], [ "time", -3.0,],]
+
+[[prefix_sets]]
+name = "IEC"
+[[prefix_sets.prefixes]]
+prefix = "kibi"
+symbol = "Ki"
+value = 1024
+
+[[prefix_sets.prefixes]]
+prefix = "mebi"
+symbol = "Mi"
+value = 1048576
+
+[[prefix_sets.prefixes]]
+prefix = "gibi"
+symbol = "Gi"
+value = 1073741824
+
+[[prefix_sets.prefixes]]
+prefix = "tebi"
+symbol = "Ti"
+value = 1099511627776
+
+[[prefix_sets.prefixes]]
+prefix = "pebi"
+symbol = "Pi"
+value = 1125899906842624
+
+[[prefix_sets.prefixes]]
+prefix = "exbi"
+symbol = "Ei"
+value = 1152921504606846976
+
+[[prefix_sets.prefixes]]
+prefix = "zebi"
+symbol = "Zi"
+value = 1180591620717411303424
+
+[[prefix_sets.prefixes]]
+prefix = "yobi"
+symbol = "Yi"
+value = 1208925819614629174706176
+
+
+[[prefix_sets]]
+name = "SI_conventional"
+[[prefix_sets.prefixes]]
+prefix = "centi"
+symbol = "c"
+value = 0.01
+
+[[prefix_sets.prefixes]]
+prefix = "deci"
+symbol = "d"
+value = 0.1
+
+[[prefix_sets.prefixes]]
+prefix = "deca"
+symbol = "da"
+value = 10.0
+
+[[prefix_sets.prefixes]]
+prefix = "hecto"
+symbol = "h"
+value = 100.0
+
+
+[[prefix_sets]]
+name = "SI_fun"
+[[prefix_sets.prefixes]]
+prefix = "micri"
+symbol = "mc"
+value = 1e-14
+
+[[prefix_sets.prefixes]]
+prefix = "dimi"
+symbol = "dm"
+value = 0.0001
+
+[[prefix_sets.prefixes]]
+prefix = "hebdo"
+symbol = "H"
+value = 10000000.0
+
+[[prefix_sets.prefixes]]
+prefix = "hella"
+symbol = "ha"
+value = 1e+27
+
+
+[[prefix_sets]]
+name = "SI_large"
+[[prefix_sets.prefixes]]
+prefix = "kilo"
+symbol = "k"
+value = 1000.0
+
+[[prefix_sets.prefixes]]
+prefix = "mega"
+symbol = "M"
+value = 1000000.0
+
+[[prefix_sets.prefixes]]
+prefix = "giga"
+symbol = "G"
+value = 1000000000.0
+
+[[prefix_sets.prefixes]]
+prefix = "tera"
+symbol = "T"
+value = 1000000000000.0
+
+[[prefix_sets.prefixes]]
+prefix = "peta"
+symbol = "P"
+value = 1000000000000000.0
+
+[[prefix_sets.prefixes]]
+prefix = "exa"
+symbol = "E"
+value = 1e+18
+
+[[prefix_sets.prefixes]]
+prefix = "zetta"
+symbol = "Z"
+value = 1e+21
+
+[[prefix_sets.prefixes]]
+prefix = "yotta"
+symbol = "Y"
+value = 1e+24
+
+[[prefix_sets.prefixes]]
+prefix = "ronna"
+symbol = "R"
+value = 1e+27
+
+[[prefix_sets.prefixes]]
+prefix = "quetta"
+symbol = "Q"
+value = 1e+30
+
+
+[[prefix_sets]]
+name = "SI_large + SI_small + SI_conventional"
+[[prefix_sets.prefixes]]
+prefix = "kilo"
+symbol = "k"
+value = 1000.0
+
+[[prefix_sets.prefixes]]
+prefix = "mega"
+symbol = "M"
+value = 1000000.0
+
+[[prefix_sets.prefixes]]
+prefix = "giga"
+symbol = "G"
+value = 1000000000.0
+
+[[prefix_sets.prefixes]]
+prefix = "tera"
+symbol = "T"
+value = 1000000000000.0
+
+[[prefix_sets.prefixes]]
+prefix = "peta"
+symbol = "P"
+value = 1000000000000000.0
+
+[[prefix_sets.prefixes]]
+prefix = "exa"
+symbol = "E"
+value = 1e+18
+
+[[prefix_sets.prefixes]]
+prefix = "zetta"
+symbol = "Z"
+value = 1e+21
+
+[[prefix_sets.prefixes]]
+prefix = "yotta"
+symbol = "Y"
+value = 1e+24
+
+[[prefix_sets.prefixes]]
+prefix = "ronna"
+symbol = "R"
+value = 1e+27
+
+[[prefix_sets.prefixes]]
+prefix = "quetta"
+symbol = "Q"
+value = 1e+30
+
+[[prefix_sets.prefixes]]
+prefix = "milli"
+symbol = "m"
+value = 0.001
+
+[[prefix_sets.prefixes]]
+prefix = "micro"
+symbol = "µ"
+value = 1e-6
+
+[[prefix_sets.prefixes]]
+prefix = "nano"
+symbol = "n"
+value = 1e-9
+
+[[prefix_sets.prefixes]]
+prefix = "pico"
+symbol = "p"
+value = 1e-12
+
+[[prefix_sets.prefixes]]
+prefix = "femto"
+symbol = "f"
+value = 1e-15
+
+[[prefix_sets.prefixes]]
+prefix = "atto"
+symbol = "a"
+value = 1e-18
+
+[[prefix_sets.prefixes]]
+prefix = "zepto"
+symbol = "z"
+value = 1e-21
+
+[[prefix_sets.prefixes]]
+prefix = "yocto"
+symbol = "y"
+value = 1e-24
+
+[[prefix_sets.prefixes]]
+prefix = "ronto"
+symbol = "y"
+value = 1e-27
+
+[[prefix_sets.prefixes]]
+prefix = "quecto"
+symbol = "y"
+value = 1e-30
+
+[[prefix_sets.prefixes]]
+prefix = "centi"
+symbol = "c"
+value = 0.01
+
+[[prefix_sets.prefixes]]
+prefix = "deci"
+symbol = "d"
+value = 0.1
+
+[[prefix_sets.prefixes]]
+prefix = "deca"
+symbol = "da"
+value = 10.0
+
+[[prefix_sets.prefixes]]
+prefix = "hecto"
+symbol = "h"
+value = 100.0
+
+
+[[prefix_sets]]
+name = "SI_small"
+[[prefix_sets.prefixes]]
+prefix = "milli"
+symbol = "m"
+value = 0.001
+
+[[prefix_sets.prefixes]]
+prefix = "micro"
+symbol = "µ"
+value = 1e-6
+
+[[prefix_sets.prefixes]]
+prefix = "nano"
+symbol = "n"
+value = 1e-9
+
+[[prefix_sets.prefixes]]
+prefix = "pico"
+symbol = "p"
+value = 1e-12
+
+[[prefix_sets.prefixes]]
+prefix = "femto"
+symbol = "f"
+value = 1e-15
+
+[[prefix_sets.prefixes]]
+prefix = "atto"
+symbol = "a"
+value = 1e-18
+
+[[prefix_sets.prefixes]]
+prefix = "zepto"
+symbol = "z"
+value = 1e-21
+
+[[prefix_sets.prefixes]]
+prefix = "yocto"
+symbol = "y"
+value = 1e-24
+
+[[prefix_sets.prefixes]]
+prefix = "ronto"
+symbol = "y"
+value = 1e-27
+
+[[prefix_sets.prefixes]]
+prefix = "quecto"
+symbol = "y"
+value = 1e-30
+
+
+[[units]]
+value = 0
+dimension = []
+names = []
+symbols = []
+info = "US, liquid"
+
+[[units]]
+value = 1.00001495e-10
+stddev = 9e-17
+dimension = [ [ "length", 1.0,],]
+names = [ "Angstrom star",]
+symbols = []
+info = "CODATA 2018"
+
+[[units]]
+value = 6.02214076e+23
+dimension = [ [ "substance", -1.0,],]
+names = [ "Avogadro constant",]
+symbols = []
+info = "CODATA 2018"
+
+[[units]]
+value = 1.0
+dimension = [ [ "length", -2.0,], [ "mass", 1.0,],]
+names = [ "BMI",]
+symbols = [ "BMI",]
+
+[[units]]
+value = 9.2740100783e-24
+stddev = 2.7999999999999995e-33
+dimension = [ [ "current", 1.0,], [ "length", 2.0,],]
+names = [ "Bohr magneton",]
+symbols = []
+info = "CODATA 2018"
+
+[[units]]
+value = 2.42631023867e-12
+stddev = 7.3e-22
+dimension = [ [ "length", 1.0,],]
+names = [ "Compton wavelength",]
+symbols = []
+info = "CODATA 2018"
+
+[[units]]
+value = 1.00207697e-13
+stddev = 2.8e-20
+dimension = [ [ "length", 1.0,],]
+names = [ "Copper x unit",]
+symbols = []
+info = "CODATA 2018"
+
+[[units]]
+value = 96485.33212
+dimension = [ [ "current", 1.0,], [ "substance", -1.0,], [ "time", 1.0,],]
+names = [ "Faraday constant",]
+symbols = []
+info = "CODATA 2018"
+
+[[units]]
+value = 454379566261215.94
+stddev = 233738613.15945634
+dimension = [ [ "length", -4.0,], [ "mass", -2.0,], [ "time", 4.0,],]
+names = [ "Fermi coupling constant",]
+symbols = []
+info = "CODATA 2018"
+
+[[units]]
+value = 483597848400000.0
+dimension = [ [ "current", 1.0,], [ "length", -2.0,], [ "mass", -1.0,], [ "time", 2.0,],]
+names = [ "Josephson constant",]
+symbols = []
+info = "CODATA 2018"
+
+[[units]]
+value = 2.651645804e+25
+dimension = [ [ "length", -3.0,],]
+names = [ "Loschmidt constant (273.15 K, 100 kPa)",]
+symbols = []
+info = "CODATA 2018"
+
+[[units]]
+value = 2.686780111e+25
+dimension = [ [ "length", -3.0,],]
+names = [ "Loschmidt constant (273.15 K, 101.325 kPa)",]
+symbols = []
+info = "CODATA 2018"
+
+[[units]]
+value = 1.00209952e-13
+stddev = 5.3e-20
+dimension = [ [ "length", 1.0,],]
+names = [ "Molybdenum x unit",]
+symbols = []
+info = "CODATA 2018"
+
+[[units]]
+value = 6.6743e-11
+stddev = 1.5e-15
+dimension = [ [ "length", 3.0,], [ "mass", -1.0,], [ "time", -2.0,],]
+names = [ "Newtonian constant of gravitation",]
+symbols = [ "G",]
+info = "CODATA 2018"
+
+[[units]]
+value = 2111100027227534.0
+stddev = 47201226455.89918
+dimension = [ [ "mass", -2.0,],]
+names = [ "Newtonian constant of gravitation over h-bar c",]
+symbols = []
+info = "CODATA 2018"
+
+[[units]]
+value = 6.62607015e-34
+dimension = [ [ "length", 2.0,], [ "mass", 1.0,], [ "time", -1.0,],]
+names = [ "Planck constant",]
+symbols = []
+info = "CODATA 2018"
+
+[[units]]
+value = 1.616255e-35
+stddev = 1.7999999999999998e-40
+dimension = [ [ "length", 1.0,],]
+names = [ "Planck length",]
+symbols = []
+info = "CODATA 2018"
+
+[[units]]
+value = 2.176434e-8
+stddev = 2.4e-13
+dimension = [ [ "mass", 1.0,],]
+names = [ "Planck mass",]
+symbols = []
+info = "CODATA 2018"
+
+[[units]]
+value = 1.416784e+32
+stddev = 1.6e+27
+dimension = [ [ "temperature", 1.0,],]
+names = [ "Planck temperature",]
+symbols = []
+info = "CODATA 2018"
+
+[[units]]
+value = 5.391247e-44
+stddev = 5.999999999999999e-49
+dimension = [ [ "time", 1.0,],]
+names = [ "Planck time",]
+symbols = []
+info = "CODATA 2018"
+
+[[units]]
+value = 1.0
+dimension = [ [ "mass", -1.0,], [ "temperature", 1.0,], [ "time", 3.0,],]
+names = [ "RSI",]
+symbols = []
+
+[[units]]
+value = 10973731.56816
+stddev = 2.1e-5
+dimension = [ [ "length", -1.0,],]
+names = [ "Rydberg constant",]
+symbols = []
+info = "CODATA 2018"
+
+[[units]]
+value = -1.15170753706
+stddev = -4.5e-10
+dimension = []
+names = [ "Sackur-Tetrode constant (1 K, 100 kPa)",]
+symbols = []
+info = "CODATA 2018"
+
+[[units]]
+value = -1.16487052358
+stddev = -4.5e-10
+dimension = []
+names = [ "Sackur-Tetrode constant (1 K, 101.325 kPa)",]
+symbols = []
+info = "CODATA 2018"
+
+[[units]]
+value = 5.670374419e-8
+dimension = [ [ "mass", 1.0,], [ "temperature", -4.0,], [ "time", -3.0,],]
+names = [ "Stefan-Boltzmann constant",]
+symbols = []
+info = "CODATA 2018"
+
+[[units]]
+value = 6.6524587321e-29
+stddev = 6e-38
+dimension = [ [ "length", 2.0,],]
+names = [ "Thomson cross section",]
+symbols = []
+info = "CODATA 2018"
+
+[[units]]
+value = 0.88153
+stddev = 0.00017
+dimension = []
+names = [ "W to Z mass ratio",]
+symbols = []
+info = "CODATA 2018"
+
+[[units]]
+value = 58789257570.0
+dimension = [ [ "temperature", -1.0,], [ "time", -1.0,],]
+names = [ "Wien frequency displacement law constant",]
+symbols = []
+info = "CODATA 2018"
+
+[[units]]
+value = 0.002897771955
+dimension = [ [ "length", 1.0,], [ "temperature", 1.0,],]
+names = [ "Wien wavelength displacement law constant",]
+symbols = []
+info = "CODATA 2018"
+
+[[units]]
+value = 4046.8564224000006
+dimension = [ [ "length", 2.0,],]
+names = [ "acre",]
+symbols = []
+
+[[units]]
+value = 0.001940277777777778
+dimension = [ [ "length", 1.0,],]
+names = [ "agate",]
+symbols = [ "ruby",]
+
+[[units]]
+value = 6.6446573357e-27
+stddev = 2e-36
+dimension = [ [ "mass", 1.0,],]
+names = [ "alpha particle mass",]
+symbols = []
+info = "CODATA 2018"
+
+[[units]]
+value = 5.9719201914e-10
+stddev = 1.8e-19
+dimension = [ [ "length", 2.0,], [ "mass", 1.0,], [ "time", -2.0,],]
+names = [ "alpha particle mass energy equivalent",]
+symbols = []
+info = "CODATA 2018"
+
+[[units]]
+value = 0.0040015061777
+stddev = 1.2e-12
+dimension = [ [ "mass", 1.0,], [ "substance", -1.0,],]
+names = [ "alpha particle molar mass",]
+symbols = []
+info = "CODATA 2018"
+
+[[units]]
+value = 4.001506179127
+stddev = 6.3e-11
+dimension = []
+names = [ "alpha particle relative atomic mass",]
+symbols = []
+info = "CODATA 2018"
+
+[[units]]
+value = 7294.29954142
+stddev = 2.4e-7
+dimension = []
+names = [ "alpha particle-electron mass ratio",]
+symbols = []
+info = "CODATA 2018"
+
+[[units]]
+value = 3.97259969009
+stddev = 2.2e-10
+dimension = []
+names = [ "alpha particle-proton mass ratio",]
+symbols = []
+info = "CODATA 2018"
+
+[[units]]
+value = 3600
+dimension = [ [ "current", 1.0,], [ "time", 1.0,],]
+names = [ "amp_hour",]
+symbols = [ "Ah",]
+
+[[units]]
+value = 1
+dimension = [ [ "current", 1.0,],]
+names = [ "ampere",]
+symbols = [ "A",]
+prefixes = [ "SI_large", "SI_small", "SI_conventional",]
+
+[[units]]
+value = 1e-10
+dimension = [ [ "length", 1.0,],]
+names = [ "angstrom",]
+symbols = [ "Å",]
+
+[[units]]
+value = 0.3183098861837907
+dimension = [ [ "length", -2.0,], [ "luminosity", 1.0,],]
+names = [ "apostlib",]
+symbols = [ "asb",]
+
+[[units]]
+value = 0.0002908882086657216
+dimension = [ [ "angle", 1.0,],]
+names = [ "arcminute",]
+symbols = [ "′", "arcmin",]
+
+[[units]]
+value = 4.84813681109536e-6
+dimension = [ [ "angle", 1.0,],]
+names = [ "arcsecond",]
+symbols = [ "″", "arcsec",]
+prefixes = [ "SI_small",]
+
+[[units]]
+value = 100
+dimension = [ [ "length", 2.0,],]
+names = [ "are",]
+symbols = [ "a",]
+
+[[units]]
+value = 149597870700
+dimension = [ [ "length", 1.0,],]
+names = [ "astronomical_unit",]
+symbols = [ "au",]
+info = "conventional unit defined by the IAU in 2012"
+
+[[units]]
+value = 1.6605390666e-27
+stddev = 5e-37
+dimension = [ [ "mass", 1.0,],]
+names = [ "atomic mass constant",]
+symbols = [ "u",]
+info = "CODATA 2018"
+
+[[units]]
+value = 1.4924180856e-10
+stddev = 4.5e-20
+dimension = [ [ "length", 2.0,], [ "mass", 1.0,], [ "time", -2.0,],]
+names = [ "atomic mass constant energy equivalent",]
+symbols = []
+info = "CODATA 2018"
+
+[[units]]
+value = 3.2063613061e-53
+stddev = 1.5000000000000003e-62
+dimension = [ [ "current", 3.0,], [ "length", -1.0,], [ "mass", -2.0,], [ "time", 7.0,],]
+names = [ "atomic unit of 1st hyperpolarizability",]
+symbols = []
+info = "CODATA 2018"
+
+[[units]]
+value = 6.2353799905e-65
+stddev = 3.8e-74
+dimension = [ [ "current", 4.0,], [ "length", -2.0,], [ "mass", -3.0,], [ "time", 10.0,],]
+names = [ "atomic unit of 2nd hyperpolarizability",]
+symbols = []
+info = "CODATA 2018"
+
+[[units]]
+value = 1.054571817e-34
+dimension = [ [ "length", 2.0,], [ "mass", 1.0,], [ "time", -1.0,],]
+names = [ "atomic unit of action",]
+symbols = []
+info = "CODATA 2018"
+
+[[units]]
+value = 1081202384570.0
+stddev = 490.0
+dimension = [ [ "current", 1.0,], [ "length", -3.0,], [ "time", 1.0,],]
+names = [ "atomic unit of charge density",]
+symbols = []
+info = "CODATA 2018"
+
+[[units]]
+value = 0.00662361823751
+stddev = 1.2999999999999998e-14
+dimension = [ [ "current", 1.0,],]
+names = [ "atomic unit of current",]
+symbols = []
+info = "CODATA 2018"
+
+[[units]]
+value = 8.4783536255e-30
+stddev = 1.2999999999999998e-39
+dimension = [ [ "current", 1.0,], [ "length", 1.0,], [ "time", 1.0,],]
+names = [ "atomic unit of electric dipole mom.",]
+symbols = []
+info = "CODATA 2018"
+
+[[units]]
+value = 514220674763.0
+stddev = 78.0
+dimension = [ [ "current", -1.0,], [ "length", 1.0,], [ "mass", 1.0,], [ "time", -3.0,],]
+names = [ "atomic unit of electric field",]
+symbols = []
+info = "CODATA 2018"
+
+[[units]]
+value = 9.7173624292e+21
+stddev = 2900000000000.0
+dimension = [ [ "current", -1.0,], [ "mass", 1.0,], [ "time", -3.0,],]
+names = [ "atomic unit of electric field gradient",]
+symbols = []
+info = "CODATA 2018"
+
+[[units]]
+value = 1.64877727436e-41
+stddev = 4.9999999999999994e-51
+dimension = [ [ "current", 2.0,], [ "mass", -1.0,], [ "time", 4.0,],]
+names = [ "atomic unit of electric polarizability",]
+symbols = []
+info = "CODATA 2018"
+
+[[units]]
+value = 27.211386245988
+stddev = 5.3e-11
+dimension = [ [ "current", -1.0,], [ "length", 2.0,], [ "mass", 1.0,], [ "time", -3.0,],]
+names = [ "atomic unit of electric potential",]
+symbols = []
+info = "CODATA 2018"
+
+[[units]]
+value = 4.4865515246e-40
+stddev = 1.4e-49
+dimension = [ [ "current", 1.0,], [ "length", 2.0,], [ "time", 1.0,],]
+names = [ "atomic unit of electric quadrupole mom.",]
+symbols = []
+info = "CODATA 2018"
+
+[[units]]
+value = 4.3597447222071e-18
+stddev = 8.5e-30
+dimension = [ [ "length", 2.0,], [ "mass", 1.0,], [ "time", -2.0,],]
+names = [ "atomic unit of energy",]
+symbols = []
+info = "CODATA 2018"
+
+[[units]]
+value = 8.2387234983e-8
+stddev = 1.2e-17
+dimension = [ [ "length", 1.0,], [ "mass", 1.0,], [ "time", -2.0,],]
+names = [ "atomic unit of force",]
+symbols = []
+info = "CODATA 2018"
+
+[[units]]
+value = 5.29177210903e-11
+stddev = 8e-21
+dimension = [ [ "length", 1.0,],]
+names = [ "atomic unit of length",]
+symbols = []
+info = "CODATA 2018"
+
+[[units]]
+value = 1.85480201566e-23
+stddev = 5.599999999999999e-33
+dimension = [ [ "current", 1.0,], [ "length", 2.0,],]
+names = [ "atomic unit of mag. dipole mom.",]
+symbols = []
+info = "CODATA 2018"
+
+[[units]]
+value = 235051.756758
+stddev = 7.1e-5
+dimension = [ [ "current", -1.0,], [ "mass", 1.0,], [ "time", -2.0,],]
+names = [ "atomic unit of mag. flux density",]
+symbols = []
+info = "CODATA 2018"
+
+[[units]]
+value = 7.8910366008e-29
+stddev = 4.8e-38
+dimension = [ [ "current", 2.0,], [ "length", 2.0,], [ "mass", -1.0,], [ "time", 2.0,],]
+names = [ "atomic unit of magnetizability",]
+symbols = []
+info = "CODATA 2018"
+
+[[units]]
+value = 9.1093837015e-31
+stddev = 2.8e-40
+dimension = [ [ "mass", 1.0,],]
+names = [ "atomic unit of mass",]
+symbols = []
+info = "CODATA 2018"
+
+[[units]]
+value = 1.9928519141e-24
+stddev = 3e-34
+dimension = [ [ "length", 1.0,], [ "mass", 1.0,], [ "time", -1.0,],]
+names = [ "atomic unit of momentum",]
+symbols = []
+info = "CODATA 2018"
+
+[[units]]
+value = 1.11265005545e-10
+stddev = 1.7e-20
+dimension = [ [ "current", 2.0,], [ "length", -3.0,], [ "mass", -1.0,], [ "time", 4.0,],]
+names = [ "atomic unit of permittivity",]
+symbols = []
+info = "CODATA 2018"
+
+[[units]]
+value = 2.4188843265857e-17
+stddev = 4.7e-29
+dimension = [ [ "time", 1.0,],]
+names = [ "atomic unit of time",]
+symbols = []
+info = "CODATA 2018"
+
+[[units]]
+value = 2187691.26364
+stddev = 0.00033
+dimension = [ [ "length", 1.0,], [ "time", -1.0,],]
+names = [ "atomic unit of velocity",]
+symbols = []
+info = "CODATA 2018"
+
+[[units]]
+value = 2.54e-5
+dimension = [ [ "length", 1.0,],]
+names = [ "barleycorn",]
+symbols = []
+
+[[units]]
+value = 1e-28
+dimension = [ [ "length", 2.0,],]
+names = [ "barn",]
+symbols = [ "b",]
+prefixes = [ "SI_large", "SI_small", "SI_conventional",]
+
+[[units]]
+value = 0.1
+dimension = [ [ "length", -1.0,], [ "mass", 1.0,], [ "time", -2.0,],]
+names = [ "barye",]
+symbols = [ "Ba",]
+
+[[units]]
+value = 2
+dimension = [ [ "data", 1.0,],]
+names = [ "base_pair",]
+symbols = [ "bp",]
+prefixes = [ "SI_large", "SI_small", "SI_conventional",]
+
+[[units]]
+value = 0.016666666666666666
+dimension = [ [ "time", -1.0,],]
+names = [ "beats per minute",]
+symbols = [ "bpm",]
+
+[[units]]
+value = 1
+dimension = [ [ "time", -1.0,],]
+names = [ "becquerel",]
+symbols = [ "Bq",]
+prefixes = [ "SI_large", "SI_small", "SI_conventional",]
+
+[[units]]
+value = 1
+dimension = [ [ "data", 1.0,],]
+names = [ "bit",]
+symbols = [ "b",]
+prefixes = [ "SI_large", "IEC",]
+
+[[units]]
+value = 1.380649e-23
+dimension = [ [ "length", 2.0,], [ "mass", 1.0,], [ "temperature", -1.0,], [ "time", -2.0,],]
+names = [ "boltzmann_constant",]
+symbols = [ "k_b",]
+
+[[units]]
+value = 3.183098861837907e-8
+dimension = [ [ "length", -2.0,], [ "luminosity", 1.0,],]
+names = [ "bril",]
+symbols = []
+
+[[units]]
+value = 0.03636872000000001
+dimension = [ [ "length", 3.0,],]
+names = [ "bushel",]
+symbols = [ "bu",]
+info = "UK"
+
+[[units]]
+value = 8
+dimension = [ [ "data", 1.0,],]
+names = [ "byte",]
+symbols = [ "B",]
+prefixes = [ "SI_large", "IEC",]
+
+[[units]]
+value = 299792458.0
+dimension = [ [ "length", 1.0,], [ "time", -1.0,],]
+names = [ "c",]
+symbols = [ "c",]
+
+[[units]]
+value = 785800.0
+dimension = [ [ "length", 2.0,],]
+names = [ "caballería",]
+symbols = []
+
+[[units]]
+value = 185.2
+dimension = [ [ "length", 1.0,],]
+names = [ "cable",]
+symbols = []
+
+[[units]]
+value = 4.814
+dimension = [ [ "length", 2.0,], [ "mass", 1.0,], [ "time", -2.0,],]
+names = [ "calorie",]
+symbols = [ "cal",]
+info = "not to be confused with the kcal"
+
+[[units]]
+value = 1
+dimension = [ [ "luminosity", 1.0,],]
+names = [ "candela",]
+symbols = [ "cd",]
+prefixes = [ "SI_large", "SI_small", "SI_conventional",]
+
+[[units]]
+value = 0.01
+dimension = [ [ "length", 1.0,],]
+names = [ "centimeter", "centimetre",]
+symbols = [ "cm",]
+
+[[units]]
+value = 20.1168
+dimension = [ [ "length", 1.0,],]
+names = [ "chain",]
+symbols = [ "ch",]
+
+[[units]]
+value = 376.730313668
+stddev = 5.7e-8
+dimension = [ [ "current", -2.0,], [ "length", 2.0,], [ "mass", 1.0,], [ "time", -3.0,],]
+names = [ "characteristic impedance of vacuum",]
+symbols = []
+info = "CODATA 2018"
+
+[[units]]
+value = 2.8179403262e-15
+stddev = 1.3e-24
+dimension = [ [ "length", 1.0,],]
+names = [ "classical electron radius",]
+symbols = []
+info = "CODATA 2018"
+
+[[units]]
+value = 0.15500000000000003
+dimension = [ [ "mass", -1.0,], [ "temperature", 1.0,], [ "time", 3.0,],]
+names = [ "clo",]
+symbols = []
+
+[[units]]
+value = 7.748091729e-5
+dimension = [ [ "current", 2.0,], [ "length", -2.0,], [ "mass", -1.0,], [ "time", 3.0,],]
+names = [ "conductance quantum",]
+symbols = []
+info = "CODATA 2018"
+
+[[units]]
+value = 483597900000000.0
+dimension = [ [ "current", 1.0,], [ "length", -2.0,], [ "mass", -1.0,], [ "time", 2.0,],]
+names = [ "conventional value of Josephson constant",]
+symbols = []
+info = "CODATA 2018"
+
+[[units]]
+value = 1.00000008887
+dimension = [ [ "current", 1.0,],]
+names = [ "conventional value of ampere-90",]
+symbols = []
+info = "CODATA 2018"
+
+[[units]]
+value = 1.00000008887
+dimension = [ [ "current", 1.0,], [ "time", 1.0,],]
+names = [ "conventional value of coulomb-90",]
+symbols = []
+info = "CODATA 2018"
+
+[[units]]
+value = 0.9999999822
+dimension = [ [ "current", 2.0,], [ "length", -2.0,], [ "mass", -1.0,], [ "time", 4.0,],]
+names = [ "conventional value of farad-90",]
+symbols = []
+info = "CODATA 2018"
+
+[[units]]
+value = 1.00000001779
+dimension = [ [ "current", -2.0,], [ "length", 2.0,], [ "mass", 1.0,], [ "time", -2.0,],]
+names = [ "conventional value of henry-90",]
+symbols = []
+info = "CODATA 2018"
+
+[[units]]
+value = 1.00000001779
+dimension = [ [ "current", -2.0,], [ "length", 2.0,], [ "mass", 1.0,], [ "time", -3.0,],]
+names = [ "conventional value of ohm-90",]
+symbols = []
+info = "CODATA 2018"
+
+[[units]]
+value = 1.00000010666
+dimension = [ [ "current", -1.0,], [ "length", 2.0,], [ "mass", 1.0,], [ "time", -3.0,],]
+names = [ "conventional value of volt-90",]
+symbols = []
+info = "CODATA 2018"
+
+[[units]]
+value = 25812.807
+dimension = [ [ "current", -2.0,], [ "length", 2.0,], [ "mass", 1.0,], [ "time", -3.0,],]
+names = [ "conventional value of von Klitzing constant",]
+symbols = []
+info = "CODATA 2018"
+
+[[units]]
+value = 1.00000019553
+dimension = [ [ "length", 2.0,], [ "mass", 1.0,], [ "time", -3.0,],]
+names = [ "conventional value of watt-90",]
+symbols = []
+info = "CODATA 2018"
+
+[[units]]
+value = 1
+dimension = [ [ "current", 1.0,], [ "time", 1.0,],]
+names = [ "coulomb",]
+symbols = [ "C",]
+prefixes = [ "SI_large", "SI_small", "SI_conventional",]
+
+[[units]]
+value = 3930.395625
+dimension = [ [ "length", 1.0,],]
+names = [ "cuerda",]
+symbols = []
+
+[[units]]
+value = 1
+dimension = [ [ "length", 3.0,], [ "time", -1.0,],]
+names = [ "cumec",]
+symbols = []
+prefixes = [ "SI_large", "SI_small", "SI_conventional",]
+
+[[units]]
+value = 86400
+dimension = [ [ "time", 1.0,],]
+names = [ "day",]
+symbols = [ "d",]
+
+[[units]]
+value = 0.017453292519943295
+dimension = [ [ "angle", 1.0,],]
+names = [ "degree",]
+symbols = [ "°", "deg",]
+
+[[units]]
+value = 0.8574382338
+stddev = 2.2e-9
+dimension = []
+names = [ "deuteron g factor",]
+symbols = []
+info = "CODATA 2018"
+
+[[units]]
+value = 4.330735094e-27
+stddev = 1.1e-35
+dimension = [ [ "current", 1.0,], [ "length", 2.0,],]
+names = [ "deuteron mag. mom.",]
+symbols = []
+info = "CODATA 2018"
+
+[[units]]
+value = 0.000466975457
+stddev = 1.2e-12
+dimension = []
+names = [ "deuteron mag. mom. to Bohr magneton ratio",]
+symbols = []
+info = "CODATA 2018"
+
+[[units]]
+value = 3.3435837724e-27
+stddev = 1e-36
+dimension = [ [ "mass", 1.0,],]
+names = [ "deuteron mass",]
+symbols = []
+info = "CODATA 2018"
+
+[[units]]
+value = 3.00506323102e-10
+stddev = 9.1e-20
+dimension = [ [ "length", 2.0,], [ "mass", 1.0,], [ "time", -2.0,],]
+names = [ "deuteron mass energy equivalent",]
+symbols = []
+info = "CODATA 2018"
+
+[[units]]
+value = 0.00201355321205
+stddev = 6.1e-13
+dimension = [ [ "mass", 1.0,], [ "substance", -1.0,],]
+names = [ "deuteron molar mass",]
+symbols = []
+info = "CODATA 2018"
+
+[[units]]
+value = 2.013553212745
+stddev = 4e-11
+dimension = []
+names = [ "deuteron relative atomic mass",]
+symbols = []
+info = "CODATA 2018"
+
+[[units]]
+value = 2.12799e-15
+stddev = 7.4e-19
+dimension = [ [ "length", 1.0,],]
+names = [ "deuteron rms charge radius",]
+symbols = []
+info = "CODATA 2018"
+
+[[units]]
+value = -0.0004664345551
+stddev = -1.2e-12
+dimension = []
+names = [ "deuteron-electron mag. mom. ratio",]
+symbols = []
+info = "CODATA 2018"
+
+[[units]]
+value = 3670.48296788
+stddev = 1.3e-7
+dimension = []
+names = [ "deuteron-electron mass ratio",]
+symbols = []
+info = "CODATA 2018"
+
+[[units]]
+value = -0.44820653
+stddev = -1.1e-7
+dimension = []
+names = [ "deuteron-neutron mag. mom. ratio",]
+symbols = []
+info = "CODATA 2018"
+
+[[units]]
+value = 0.30701220939
+stddev = 7.9e-10
+dimension = []
+names = [ "deuteron-proton mag. mom. ratio",]
+symbols = []
+info = "CODATA 2018"
+
+[[units]]
+value = 1.99900750139
+stddev = 1.1e-10
+dimension = []
+names = [ "deuteron-proton mass ratio",]
+symbols = []
+info = "CODATA 2018"
+
+[[units]]
+value = 100.0
+dimension = [ [ "length", -1.0,], [ "pixel_count", 1.0,],]
+names = [ "dpcm",]
+symbols = []
+
+[[units]]
+value = 1e-5
+dimension = [ [ "length", 1.0,], [ "mass", 1.0,], [ "time", -2.0,],]
+names = [ "dyne",]
+symbols = [ "dyn",]
+
+[[units]]
+value = 8.854187817620389e-12
+dimension = [ [ "current", 2.0,], [ "length", -3.0,], [ "mass", -1.0,], [ "time", 4.0,],]
+names = [ "e_0",]
+symbols = [ "e₀",]
+
+[[units]]
+value = -175882001076.0
+stddev = -53.0
+dimension = [ [ "current", 1.0,], [ "mass", -1.0,], [ "time", 1.0,],]
+names = [ "electron charge to mass quotient",]
+symbols = []
+info = "CODATA 2018"
+
+[[units]]
+value = -2.00231930436256
+stddev = -3.5e-13
+dimension = []
+names = [ "electron g factor",]
+symbols = []
+info = "CODATA 2018"
+
+[[units]]
+value = 176085963023.0
+stddev = 53.0
+dimension = [ [ "current", 1.0,], [ "mass", -1.0,], [ "time", 1.0,],]
+names = [ "electron gyromag. ratio",]
+symbols = []
+info = "CODATA 2018"
+
+[[units]]
+value = -9.2847647043e-24
+stddev = -2.8e-33
+dimension = [ [ "current", 1.0,], [ "length", 2.0,],]
+names = [ "electron mag. mom.",]
+symbols = []
+info = "CODATA 2018"
+
+[[units]]
+value = 0.00115965218128
+stddev = 1.7999999999999997e-13
+dimension = []
+names = [ "electron mag. mom. anomaly",]
+symbols = []
+info = "CODATA 2018"
+
+[[units]]
+value = -1.00115965218128
+stddev = -1.8e-13
+dimension = []
+names = [ "electron mag. mom. to Bohr magneton ratio",]
+symbols = []
+info = "CODATA 2018"
+
+[[units]]
+value = -1838.28197188
+stddev = -1.1e-7
+dimension = []
+names = [ "electron mag. mom. to nuclear magneton ratio",]
+symbols = []
+info = "CODATA 2018"
+
+[[units]]
+value = 8.1871057769e-14
+stddev = 2.5e-23
+dimension = [ [ "length", 2.0,], [ "mass", 1.0,], [ "time", -2.0,],]
+names = [ "electron mass energy equivalent",]
+symbols = []
+info = "CODATA 2018"
+
+[[units]]
+value = 5.4857990888e-7
+stddev = 1.7e-16
+dimension = [ [ "mass", 1.0,], [ "substance", -1.0,],]
+names = [ "electron molar mass",]
+symbols = []
+info = "CODATA 2018"
+
+[[units]]
+value = 0.000548579909065
+stddev = 1.6e-14
+dimension = []
+names = [ "electron relative atomic mass",]
+symbols = []
+info = "CODATA 2018"
+
+[[units]]
+value = 0.0001370933554787
+stddev = 4.5e-15
+dimension = []
+names = [ "electron to alpha particle mass ratio",]
+symbols = []
+info = "CODATA 2018"
+
+[[units]]
+value = 864.058257
+stddev = 1e-5
+dimension = []
+names = [ "electron to shielded helion mag. mom. ratio",]
+symbols = []
+info = "CODATA 2018"
+
+[[units]]
+value = -658.2275971
+stddev = -7.2e-6
+dimension = []
+names = [ "electron to shielded proton mag. mom. ratio",]
+symbols = []
+info = "CODATA 2018"
+
+[[units]]
+value = -2143.9234915
+stddev = -5.6e-6
+dimension = []
+names = [ "electron-deuteron mag. mom. ratio",]
+symbols = []
+info = "CODATA 2018"
+
+[[units]]
+value = 0.0002724437107462
+stddev = 9.6e-15
+dimension = []
+names = [ "electron-deuteron mass ratio",]
+symbols = []
+info = "CODATA 2018"
+
+[[units]]
+value = 0.0001819543074573
+stddev = 7.9e-15
+dimension = []
+names = [ "electron-helion mass ratio",]
+symbols = []
+info = "CODATA 2018"
+
+[[units]]
+value = 206.7669883
+stddev = 4.6e-6
+dimension = []
+names = [ "electron-muon mag. mom. ratio",]
+symbols = []
+info = "CODATA 2018"
+
+[[units]]
+value = 0.00483633169
+stddev = 1.1000000000000001e-10
+dimension = []
+names = [ "electron-muon mass ratio",]
+symbols = []
+info = "CODATA 2018"
+
+[[units]]
+value = 960.9205
+stddev = 0.00023
+dimension = []
+names = [ "electron-neutron mag. mom. ratio",]
+symbols = []
+info = "CODATA 2018"
+
+[[units]]
+value = 0.00054386734424
+stddev = 2.6e-13
+dimension = []
+names = [ "electron-neutron mass ratio",]
+symbols = []
+info = "CODATA 2018"
+
+[[units]]
+value = -658.21068789
+stddev = -2e-7
+dimension = []
+names = [ "electron-proton mag. mom. ratio",]
+symbols = []
+info = "CODATA 2018"
+
+[[units]]
+value = 0.000544617021487
+stddev = 3.3e-14
+dimension = []
+names = [ "electron-proton mass ratio",]
+symbols = []
+info = "CODATA 2018"
+
+[[units]]
+value = 0.000287585
+stddev = 1.9e-8
+dimension = []
+names = [ "electron-tau mass ratio",]
+symbols = []
+info = "CODATA 2018"
+
+[[units]]
+value = 0.0001819200062251
+stddev = 9e-15
+dimension = []
+names = [ "electron-triton mass ratio",]
+symbols = []
+info = "CODATA 2018"
+
+[[units]]
+value = 1.602176634e-19
+dimension = [ [ "current", 1.0,], [ "time", 1.0,],]
+names = [ "electron_charge",]
+symbols = [ "e",]
+
+[[units]]
+value = 1.602176634e-19
+dimension = [ [ "length", 2.0,], [ "mass", 1.0,], [ "time", -2.0,],]
+names = [ "electronvolt",]
+symbols = [ "eV",]
+prefixes = [ "SI_large", "SI_small", "SI_conventional",]
+
+[[units]]
+value = 1519267447000000.0
+dimension = [ [ "current", 1.0,], [ "length", -2.0,], [ "mass", -1.0,], [ "time", 2.0,],]
+names = [ "elementary charge over h-bar",]
+symbols = []
+info = "CODATA 2018"
+
+[[units]]
+value = 0.0001763888888888889
+dimension = [ [ "length", 1.0,],]
+names = [ "en",]
+symbols = []
+
+[[units]]
+value = 1e-5
+dimension = [ [ "length", 1.0,], [ "mass", 1.0,], [ "time", -1.0,],]
+names = [ "erg",]
+symbols = []
+
+[[units]]
+value = 1
+dimension = [ [ "current", 2.0,], [ "length", -2.0,], [ "mass", -1.0,], [ "time", 4.0,],]
+names = [ "farad",]
+symbols = [ "F",]
+prefixes = [ "SI_large", "SI_small", "SI_conventional",]
+
+[[units]]
+value = 1.852
+dimension = [ [ "length", 1.0,],]
+names = [ "fathom",]
+symbols = [ "ftm",]
+
+[[units]]
+value = 0.0072973525693
+stddev = 1.1e-12
+dimension = []
+names = [ "fine-structure constant",]
+symbols = []
+info = "CODATA 2018"
+
+[[units]]
+value = 0.007297352565305213
+dimension = []
+names = [ "fine_structure_constant", "alpha",]
+symbols = [ "α",]
+
+[[units]]
+value = 3.741771852e-16
+dimension = [ [ "length", 4.0,], [ "mass", 1.0,], [ "time", -3.0,],]
+names = [ "first radiation constant",]
+symbols = []
+info = "CODATA 2018"
+
+[[units]]
+value = 1.191042972e-16
+dimension = [ [ "angle", -2.0,], [ "length", 4.0,], [ "mass", 1.0,], [ "time", -3.0,],]
+names = [ "first radiation constant for spectral radiance",]
+symbols = []
+info = "CODATA 2018"
+
+[[units]]
+value = 2.8413062500000005e-5
+dimension = [ [ "length", 3.0,],]
+names = [ "fluid ounce",]
+symbols = [ "fl oz",]
+info = "UK"
+
+[[units]]
+value = 0.3048
+dimension = [ [ "length", 1.0,],]
+names = [ "foot",]
+symbols = [ "ft", "'",]
+
+[[units]]
+value = 1000000000000.0
+dimension = [ [ "time", -1.0,],]
+names = [ "fresnel",]
+symbols = []
+
+[[units]]
+value = 201.168
+dimension = [ [ "length", 1.0,],]
+names = [ "furlong",]
+symbols = [ "fur",]
+
+[[units]]
+value = 0.01
+dimension = [ [ "length", 1.0,], [ "time", -2.0,],]
+names = [ "gal",]
+symbols = [ "Gal",]
+
+[[units]]
+value = 0.004546090000000002
+dimension = [ [ "length", 3.0,],]
+names = [ "gallon_uk",]
+symbols = [ "gal",]
+
+[[units]]
+value = 0.0037854117840000014
+dimension = [ [ "length", 3.0,],]
+names = [ "gallon_us",]
+symbols = [ "gal",]
+
+[[units]]
+value = 0.00014206531250000003
+dimension = [ [ "length", 3.0,],]
+names = [ "gill",]
+symbols = [ "gi",]
+info = "UK"
+
+[[units]]
+value = 0.015707963267948967
+dimension = [ [ "angle", 1.0,],]
+names = [ "gon",]
+symbols = []
+
+[[units]]
+value = 6.479891000000001e-5
+dimension = [ [ "mass", 1.0,],]
+names = [ "grain",]
+symbols = [ "gr",]
+
+[[units]]
+value = 0.001
+dimension = [ [ "mass", 1.0,],]
+names = [ "gram",]
+symbols = [ "g",]
+prefixes = [ "SI_large", "SI_small", "SI_conventional",]
+
+[[units]]
+value = 1
+dimension = [ [ "length", 2.0,], [ "time", -2.0,],]
+names = [ "gray",]
+symbols = [ "Gy",]
+prefixes = [ "SI_large", "SI_small", "SI_conventional",]
+
+[[units]]
+value = 0.10160000000000001
+dimension = [ [ "length", 1.0,],]
+names = [ "hand",]
+symbols = [ "hh",]
+
+[[units]]
+value = 3.3219280948873626
+dimension = [ [ "data", 1.0,],]
+names = [ "hartley", "ban", "dit",]
+symbols = [ "dit",]
+
+[[units]]
+value = 1.0545718176461565e-34
+dimension = [ [ "length", 2.0,], [ "mass", 1.0,], [ "time", -1.0,],]
+names = [ "hbar",]
+symbols = [ "ħ",]
+
+[[units]]
+value = 10000
+dimension = [ [ "length", 2.0,],]
+names = [ "hectare",]
+symbols = [ "ha",]
+
+[[units]]
+value = -4.255250615
+stddev = -5e-8
+dimension = []
+names = [ "helion g factor",]
+symbols = []
+info = "CODATA 2018"
+
+[[units]]
+value = -1.074617532e-26
+stddev = -1.3e-34
+dimension = [ [ "current", 1.0,], [ "length", 2.0,],]
+names = [ "helion mag. mom.",]
+symbols = []
+info = "CODATA 2018"
+
+[[units]]
+value = -0.001158740958
+stddev = -1.4e-11
+dimension = []
+names = [ "helion mag. mom. to Bohr magneton ratio",]
+symbols = []
+info = "CODATA 2018"
+
+[[units]]
+value = -2.127625307
+stddev = -2.5e-8
+dimension = []
+names = [ "helion mag. mom. to nuclear magneton ratio",]
+symbols = []
+info = "CODATA 2018"
+
+[[units]]
+value = 5.0064127796e-27
+stddev = 1.5e-36
+dimension = [ [ "mass", 1.0,],]
+names = [ "helion mass",]
+symbols = []
+info = "CODATA 2018"
+
+[[units]]
+value = 4.4995394125e-10
+stddev = 1.4e-19
+dimension = [ [ "length", 2.0,], [ "mass", 1.0,], [ "time", -2.0,],]
+names = [ "helion mass energy equivalent",]
+symbols = []
+info = "CODATA 2018"
+
+[[units]]
+value = 0.00301493224613
+stddev = 9.1e-13
+dimension = [ [ "mass", 1.0,], [ "substance", -1.0,],]
+names = [ "helion molar mass",]
+symbols = []
+info = "CODATA 2018"
+
+[[units]]
+value = 3.014932247175
+stddev = 9.7e-11
+dimension = []
+names = [ "helion relative atomic mass",]
+symbols = []
+info = "CODATA 2018"
+
+[[units]]
+value = 5.996743e-5
+stddev = 1e-10
+dimension = []
+names = [ "helion shielding shift",]
+symbols = []
+info = "CODATA 2018"
+
+[[units]]
+value = 5495.88528007
+stddev = 2.4e-7
+dimension = []
+names = [ "helion-electron mass ratio",]
+symbols = []
+info = "CODATA 2018"
+
+[[units]]
+value = 2.99315267167
+stddev = 1.3e-10
+dimension = []
+names = [ "helion-proton mass ratio",]
+symbols = []
+info = "CODATA 2018"
+
+[[units]]
+value = 1
+dimension = [ [ "current", -2.0,], [ "length", 2.0,], [ "mass", 1.0,], [ "time", -2.0,],]
+names = [ "henry",]
+symbols = [ "H",]
+prefixes = [ "SI_large", "SI_small", "SI_conventional",]
+
+[[units]]
+value = 3600
+dimension = [ [ "time", 1.0,],]
+names = [ "hour",]
+symbols = [ "hr", "h",]
+
+[[units]]
+value = 9192631770.0
+dimension = [ [ "time", -1.0,],]
+names = [ "hyperfine transition frequency of Cs-133",]
+symbols = []
+info = "CODATA 2018"
+
+[[units]]
+value = 0.025400000000000002
+dimension = [ [ "length", 1.0,],]
+names = [ "inch",]
+symbols = [ "in", "\"",]
+
+[[units]]
+value = 137.035999084
+stddev = 2.1e-8
+dimension = []
+names = [ "inverse fine-structure constant",]
+symbols = []
+info = "CODATA 2018"
+
+[[units]]
+value = 12906.40372
+dimension = [ [ "current", -2.0,], [ "length", 2.0,], [ "mass", 1.0,], [ "time", -3.0,],]
+names = [ "inverse of conductance quantum",]
+symbols = []
+info = "CODATA 2018"
+
+[[units]]
+value = 1
+dimension = [ [ "length", 2.0,], [ "mass", 1.0,], [ "time", -2.0,],]
+names = [ "joule",]
+symbols = [ "J",]
+prefixes = [ "SI_large", "SI_small", "SI_conventional",]
+
+[[units]]
+value = 8987551787.368177
+dimension = [ [ "current", -2.0,], [ "length", 3.0,], [ "mass", 1.0,], [ "time", -4.0,],]
+names = [ "k_e",]
+symbols = [ "kₑ",]
+
+[[units]]
+value = 1
+dimension = [ [ "substance", 1.0,], [ "time", -1.0,],]
+names = [ "katal",]
+symbols = [ "kat",]
+prefixes = [ "SI_large", "SI_small", "SI_conventional",]
+
+[[units]]
+value = 100.0
+dimension = [ [ "length", -1.0,],]
+names = [ "kayser",]
+symbols = [ "K",]
+
+[[units]]
+value = 1
+dimension = [ [ "temperature", 1.0,],]
+names = [ "kelvin",]
+symbols = [ "K",]
+prefixes = [ "SI_large", "SI_small", "SI_conventional",]
+
+[[units]]
+value = 4814.0
+dimension = [ [ "length", 2.0,], [ "mass", 1.0,], [ "time", -2.0,],]
+names = [ "kilocalorie",]
+symbols = [ "kcal",]
+
+[[units]]
+value = 1
+dimension = [ [ "mass", 1.0,],]
+names = [ "kilogram",]
+symbols = [ "kg",]
+
+[[units]]
+value = 1000
+dimension = [ [ "length", 1.0,],]
+names = [ "kilometer", "kilometre",]
+symbols = [ "km",]
+
+[[units]]
+value = 0.2777777777777778
+dimension = [ [ "length", 1.0,], [ "time", -1.0,],]
+names = []
+symbols = [ "kmph",]
+
+[[units]]
+value = 0.5144444444444445
+dimension = [ [ "length", 1.0,], [ "time", -1.0,],]
+names = [ "knot",]
+symbols = [ "kn", "kt",]
+
+[[units]]
+value = 3183.098861837907
+dimension = [ [ "length", -2.0,], [ "luminosity", 1.0,],]
+names = [ "lambert",]
+symbols = [ "L",]
+
+[[units]]
+value = 48140.0
+dimension = [ [ "mass", 1.0,], [ "time", -2.0,],]
+names = [ "langley",]
+symbols = [ "Ly",]
+
+[[units]]
+value = 5.431020511e-10
+stddev = 8.9e-18
+dimension = [ [ "length", 1.0,],]
+names = [ "lattice parameter of silicon",]
+symbols = []
+info = "CODATA 2018"
+
+[[units]]
+value = 1.920155716e-10
+stddev = 3.2000000000000003e-18
+dimension = [ [ "length", 1.0,],]
+names = [ "lattice spacing of ideal Si (220)",]
+symbols = []
+info = "CODATA 2018"
+
+[[units]]
+value = 4828.032
+dimension = [ [ "length", 1.0,],]
+names = [ "league",]
+symbols = [ "lea",]
+
+[[units]]
+value = 299792458.0
+dimension = [ [ "length", 1.0,],]
+names = [ "lightsecond",]
+symbols = [ "ls",]
+prefixes = [ "SI_large", "SI_small", "SI_conventional",]
+
+[[units]]
+value = 9460536207068016.0
+dimension = [ [ "length", 1.0,],]
+names = [ "lightyear",]
+symbols = [ "ly",]
+prefixes = [ "SI_large", "SI_small", "SI_conventional",]
+
+[[units]]
+value = 0.0019347222222222222
+dimension = [ [ "length", 1.0,],]
+names = [ "linea",]
+symbols = []
+
+[[units]]
+value = 0.201168
+dimension = [ [ "length", 1.0,],]
+names = [ "link",]
+symbols = []
+
+[[units]]
+value = 0.0010000000000000002
+dimension = [ [ "length", 3.0,],]
+names = [ "liter", "litre",]
+symbols = [ "l",]
+prefixes = [ "SI_large", "SI_small", "SI_conventional",]
+
+[[units]]
+value = 1
+dimension = [ [ "angle", 2.0,], [ "luminosity", 1.0,],]
+names = [ "lumen",]
+symbols = [ "lm",]
+prefixes = [ "SI_large", "SI_small", "SI_conventional",]
+
+[[units]]
+value = 683.0
+dimension = [ [ "angle", 2.0,], [ "length", -2.0,], [ "luminosity", 1.0,], [ "mass", -1.0,], [ "time", 3.0,],]
+names = [ "luminous efficacy",]
+symbols = []
+info = "CODATA 2018"
+
+[[units]]
+value = 1
+dimension = [ [ "angle", 2.0,], [ "length", -2.0,], [ "luminosity", 1.0,],]
+names = [ "lux",]
+symbols = [ "Lx",]
+prefixes = [ "SI_large", "SI_small", "SI_conventional",]
+
+[[units]]
+value = 2.067833848e-15
+dimension = [ [ "current", -1.0,], [ "length", 2.0,], [ "mass", 1.0,], [ "time", -2.0,],]
+names = [ "mag. flux quantum",]
+symbols = []
+info = "CODATA 2018"
+
+[[units]]
+value = 38.2
+dimension = [ [ "mass", 1.0,], [ "time", -3.0,],]
+names = [ "met",]
+symbols = [ "met",]
+info = "energy per surface area of average person at rest"
+
+[[units]]
+value = 1
+dimension = [ [ "length", 1.0,],]
+names = [ "meter", "metre",]
+symbols = [ "m",]
+prefixes = [ "SI_large", "SI_small", "SI_conventional",]
+
+[[units]]
+value = 133322.387415
+dimension = [ [ "length", -1.0,], [ "mass", 1.0,], [ "time", -2.0,],]
+names = [ "meter_mercury",]
+symbols = [ "mHg",]
+prefixes = [ "SI_large", "SI_small", "SI_conventional",]
+info = "defined by convention"
+
+[[units]]
+value = 1609.344
+dimension = [ [ "length", 1.0,],]
+names = [ "mile",]
+symbols = [ "mi",]
+
+[[units]]
+value = 0.44704
+dimension = [ [ "length", 1.0,], [ "time", -1.0,],]
+names = [ "miles_per_hour",]
+symbols = [ "mph",]
+
+[[units]]
+value = 1.0000000000000002e-6
+dimension = [ [ "length", 3.0,],]
+names = [ "milliliter", "millilitre",]
+symbols = [ "mL",]
+
+[[units]]
+value = 60
+dimension = [ [ "time", 1.0,],]
+names = [ "minute",]
+symbols = [ "min",]
+
+[[units]]
+value = 3.990312712e-10
+dimension = [ [ "length", 2.0,], [ "mass", 1.0,], [ "substance", -1.0,], [ "time", -1.0,],]
+names = [ "molar Planck constant",]
+symbols = []
+info = "CODATA 2018"
+
+[[units]]
+value = 8.314462618
+dimension = [ [ "length", 2.0,], [ "mass", 1.0,], [ "substance", -1.0,], [ "temperature", -1.0,], [ "time", -2.0,],]
+names = [ "molar gas constant",]
+symbols = []
+info = "CODATA 2018"
+
+[[units]]
+value = 0.00099999999965
+stddev = 3e-13
+dimension = [ [ "mass", 1.0,], [ "substance", -1.0,],]
+names = [ "molar mass constant",]
+symbols = []
+info = "CODATA 2018"
+
+[[units]]
+value = 0.0119999999958
+stddev = 3.6e-12
+dimension = [ [ "mass", 1.0,], [ "substance", -1.0,],]
+names = [ "molar mass of carbon-12",]
+symbols = []
+info = "CODATA 2018"
+
+[[units]]
+value = 0.02271095464
+dimension = [ [ "length", 3.0,], [ "substance", -1.0,],]
+names = [ "molar volume of ideal gas (273.15 K, 100 kPa)",]
+symbols = []
+info = "CODATA 2018"
+
+[[units]]
+value = 0.02241396954
+dimension = [ [ "length", 3.0,], [ "substance", -1.0,],]
+names = [ "molar volume of ideal gas (273.15 K, 101.325 kPa)",]
+symbols = []
+info = "CODATA 2018"
+
+[[units]]
+value = 1.205883199e-5
+stddev = 6e-13
+dimension = [ [ "length", 3.0,], [ "substance", -1.0,],]
+names = [ "molar volume of silicon",]
+symbols = []
+info = "CODATA 2018"
+
+[[units]]
+value = 1
+dimension = [ [ "substance", 1.0,],]
+names = [ "mole",]
+symbols = [ "mol",]
+prefixes = [ "SI_large", "SI_small", "SI_conventional",]
+
+[[units]]
+value = 1.2566370614359173e-6
+dimension = [ [ "current", -2.0,], [ "length", 1.0,], [ "mass", 1.0,], [ "time", -2.0,],]
+names = [ "mu_0",]
+symbols = [ "μ₀",]
+
+[[units]]
+value = 1.17344411e-14
+stddev = 2.6e-22
+dimension = [ [ "length", 1.0,],]
+names = [ "muon Compton wavelength",]
+symbols = []
+info = "CODATA 2018"
+
+[[units]]
+value = -2.0023318418
+stddev = -1.3e-9
+dimension = []
+names = [ "muon g factor",]
+symbols = []
+info = "CODATA 2018"
+
+[[units]]
+value = -4.4904483e-26
+stddev = -1e-33
+dimension = [ [ "current", 1.0,], [ "length", 2.0,],]
+names = [ "muon mag. mom.",]
+symbols = []
+info = "CODATA 2018"
+
+[[units]]
+value = 0.00116592089
+stddev = 6.3e-10
+dimension = []
+names = [ "muon mag. mom. anomaly",]
+symbols = []
+info = "CODATA 2018"
+
+[[units]]
+value = -0.00484197047
+stddev = -1.1e-10
+dimension = []
+names = [ "muon mag. mom. to Bohr magneton ratio",]
+symbols = []
+info = "CODATA 2018"
+
+[[units]]
+value = -8.89059703
+stddev = -2e-7
+dimension = []
+names = [ "muon mag. mom. to nuclear magneton ratio",]
+symbols = []
+info = "CODATA 2018"
+
+[[units]]
+value = 1.883531627e-28
+stddev = 4.2e-36
+dimension = [ [ "mass", 1.0,],]
+names = [ "muon mass",]
+symbols = []
+info = "CODATA 2018"
+
+[[units]]
+value = 1.692833804e-11
+stddev = 3.8e-19
+dimension = [ [ "length", 2.0,], [ "mass", 1.0,], [ "time", -2.0,],]
+names = [ "muon mass energy equivalent",]
+symbols = []
+info = "CODATA 2018"
+
+[[units]]
+value = 0.0001134289259
+stddev = 2.5e-12
+dimension = [ [ "mass", 1.0,], [ "substance", -1.0,],]
+names = [ "muon molar mass",]
+symbols = []
+info = "CODATA 2018"
+
+[[units]]
+value = 206.768283
+stddev = 4.6e-6
+dimension = []
+names = [ "muon-electron mass ratio",]
+symbols = []
+info = "CODATA 2018"
+
+[[units]]
+value = 0.112454517
+stddev = 2.5e-9
+dimension = []
+names = [ "muon-neutron mass ratio",]
+symbols = []
+info = "CODATA 2018"
+
+[[units]]
+value = -3.183345142
+stddev = -7.1e-8
+dimension = []
+names = [ "muon-proton mag. mom. ratio",]
+symbols = []
+info = "CODATA 2018"
+
+[[units]]
+value = 0.1126095264
+stddev = 2.5e-9
+dimension = []
+names = [ "muon-proton mass ratio",]
+symbols = []
+info = "CODATA 2018"
+
+[[units]]
+value = 0.0594635
+stddev = 4e-6
+dimension = []
+names = [ "muon-tau mass ratio",]
+symbols = []
+info = "CODATA 2018"
+
+[[units]]
+value = 1.4426950408889634
+dimension = [ [ "data", 1.0,],]
+names = [ "nat",]
+symbols = []
+
+[[units]]
+value = 3.8615926796e-13
+stddev = 1.2e-22
+dimension = [ [ "length", 1.0,],]
+names = [ "natural unit of length",]
+symbols = []
+info = "CODATA 2018"
+
+[[units]]
+value = 2.73092453075e-22
+stddev = 8.199999999999998e-32
+dimension = [ [ "length", 1.0,], [ "mass", 1.0,], [ "time", -1.0,],]
+names = [ "natural unit of momentum",]
+symbols = []
+info = "CODATA 2018"
+
+[[units]]
+value = 1.28808866819e-21
+stddev = 3.9e-31
+dimension = [ [ "time", 1.0,],]
+names = [ "natural unit of time",]
+symbols = []
+info = "CODATA 2018"
+
+[[units]]
+value = 1852
+dimension = [ [ "length", 1.0,],]
+names = [ "nautical_mile",]
+symbols = [ "nmi",]
+
+[[units]]
+value = 1.31959090581e-15
+stddev = 7.500000000000001e-25
+dimension = [ [ "length", 1.0,],]
+names = [ "neutron Compton wavelength",]
+symbols = []
+info = "CODATA 2018"
+
+[[units]]
+value = -3.82608545
+stddev = -9e-7
+dimension = []
+names = [ "neutron g factor",]
+symbols = []
+info = "CODATA 2018"
+
+[[units]]
+value = 183247171.0
+stddev = 43.0
+dimension = [ [ "current", 1.0,], [ "mass", -1.0,], [ "time", 1.0,],]
+names = [ "neutron gyromag. ratio",]
+symbols = []
+info = "CODATA 2018"
+
+[[units]]
+value = -9.6623651e-27
+stddev = -2.3e-33
+dimension = [ [ "current", 1.0,], [ "length", 2.0,],]
+names = [ "neutron mag. mom.",]
+symbols = []
+info = "CODATA 2018"
+
+[[units]]
+value = -0.00104187563
+stddev = -2.5e-10
+dimension = []
+names = [ "neutron mag. mom. to Bohr magneton ratio",]
+symbols = []
+info = "CODATA 2018"
+
+[[units]]
+value = -1.91304273
+stddev = -4.5e-7
+dimension = []
+names = [ "neutron mag. mom. to nuclear magneton ratio",]
+symbols = []
+info = "CODATA 2018"
+
+[[units]]
+value = 1.67492749804e-27
+stddev = 9.5e-37
+dimension = [ [ "mass", 1.0,],]
+names = [ "neutron mass",]
+symbols = []
+info = "CODATA 2018"
+
+[[units]]
+value = 1.50534976287e-10
+stddev = 8.6e-20
+dimension = [ [ "length", 2.0,], [ "mass", 1.0,], [ "time", -2.0,],]
+names = [ "neutron mass energy equivalent",]
+symbols = []
+info = "CODATA 2018"
+
+[[units]]
+value = 0.0010086649156
+stddev = 5.7e-13
+dimension = [ [ "mass", 1.0,], [ "substance", -1.0,],]
+names = [ "neutron molar mass",]
+symbols = []
+info = "CODATA 2018"
+
+[[units]]
+value = 1.00866491595
+stddev = 4.9e-10
+dimension = []
+names = [ "neutron relative atomic mass",]
+symbols = []
+info = "CODATA 2018"
+
+[[units]]
+value = -0.68499694
+stddev = -1.6e-7
+dimension = []
+names = [ "neutron to shielded proton mag. mom. ratio",]
+symbols = []
+info = "CODATA 2018"
+
+[[units]]
+value = 0.00104066882
+stddev = 2.5e-10
+dimension = []
+names = [ "neutron-electron mag. mom. ratio",]
+symbols = []
+info = "CODATA 2018"
+
+[[units]]
+value = 1838.68366173
+stddev = 8.9e-7
+dimension = []
+names = [ "neutron-electron mass ratio",]
+symbols = []
+info = "CODATA 2018"
+
+[[units]]
+value = 8.89248406
+stddev = 2e-7
+dimension = []
+names = [ "neutron-muon mass ratio",]
+symbols = []
+info = "CODATA 2018"
+
+[[units]]
+value = -0.68497934
+stddev = -1.6e-7
+dimension = []
+names = [ "neutron-proton mag. mom. ratio",]
+symbols = []
+info = "CODATA 2018"
+
+[[units]]
+value = 2.30557435e-30
+stddev = 8.2e-37
+dimension = [ [ "mass", 1.0,],]
+names = [ "neutron-proton mass difference",]
+symbols = []
+info = "CODATA 2018"
+
+[[units]]
+value = 2.07214689e-13
+stddev = 7.4e-20
+dimension = [ [ "length", 2.0,], [ "mass", 1.0,], [ "time", -2.0,],]
+names = [ "neutron-proton mass difference energy equivalent",]
+symbols = []
+info = "CODATA 2018"
+
+[[units]]
+value = 1.00137841931
+stddev = 4.9e-10
+dimension = []
+names = [ "neutron-proton mass ratio",]
+symbols = []
+info = "CODATA 2018"
+
+[[units]]
+value = 0.528779
+stddev = 3.5999999999999994e-5
+dimension = []
+names = [ "neutron-tau mass ratio",]
+symbols = []
+info = "CODATA 2018"
+
+[[units]]
+value = 1
+dimension = [ [ "length", 1.0,], [ "mass", 1.0,], [ "time", -2.0,],]
+names = [ "newton",]
+symbols = [ "N",]
+prefixes = [ "SI_large", "SI_small", "SI_conventional",]
+
+[[units]]
+value = 4
+dimension = [ [ "data", 1.0,],]
+names = [ "nibble",]
+symbols = []
+
+[[units]]
+value = 1.0
+dimension = [ [ "length", -2.0,], [ "luminosity", 1.0,],]
+names = [ "nit",]
+symbols = [ "nit",]
+
+[[units]]
+value = 5.0507837461e-27
+stddev = 1.5000000000000002e-36
+dimension = [ [ "current", 1.0,], [ "length", 2.0,],]
+names = [ "nuclear magneton",]
+symbols = []
+info = "CODATA 2018"
+
+[[units]]
+value = 1
+dimension = [ [ "current", -2.0,], [ "length", 2.0,], [ "mass", 1.0,], [ "time", -3.0,],]
+names = [ "ohm",]
+symbols = [ "Ω",]
+prefixes = [ "SI_large", "SI_small", "SI_conventional",]
+
+[[units]]
+value = 0.028349523125
+dimension = [ [ "mass", 1.0,],]
+names = [ "ounce",]
+symbols = [ "oz",]
+
+[[units]]
+value = 3.085677581491367e+16
+dimension = [ [ "length", 1.0,],]
+names = [ "parsec",]
+symbols = [ "pc",]
+prefixes = [ "SI_large", "SI_small", "SI_conventional",]
+
+[[units]]
+value = 1e-6
+dimension = []
+names = [ "parts_per_million",]
+symbols = [ "ppm",]
+
+[[units]]
+value = 1
+dimension = [ [ "length", -1.0,], [ "mass", 1.0,], [ "time", -2.0,],]
+names = [ "pascal",]
+symbols = [ "Pa",]
+prefixes = [ "SI_large", "SI_small", "SI_conventional",]
+
+[[units]]
+value = 0.01
+dimension = []
+names = [ "percent",]
+symbols = [ "%",]
+
+[[units]]
+value = 25.292852640000003
+dimension = [ [ "length", 2.0,],]
+names = [ "perch", "pole",]
+symbols = []
+
+[[units]]
+value = 0.001
+dimension = []
+names = [ "permille",]
+symbols = [ "‰",]
+
+[[units]]
+value = 0.004233333333333334
+dimension = [ [ "length", 1.0,],]
+names = [ "pica",]
+symbols = []
+
+[[units]]
+value = 0.004217517642175176
+dimension = [ [ "length", 1.0,],]
+names = [ "pica_american",]
+symbols = []
+
+[[units]]
+value = 0.004511040000000001
+dimension = [ [ "length", 1.0,],]
+names = [ "pica_french",]
+symbols = []
+
+[[units]]
+value = 0.2786
+dimension = [ [ "length", 1.0,],]
+names = [ "pies",]
+symbols = []
+
+[[units]]
+value = 0.0005682612500000001
+dimension = [ [ "length", 3.0,],]
+names = [ "pint",]
+symbols = [ "pt",]
+info = "UK"
+
+[[units]]
+value = 1
+dimension = [ [ "pixel_count", 1.0,],]
+names = [ "pixel",]
+symbols = [ "pix",]
+prefixes = [ "SI_large",]
+
+[[units]]
+value = 0.0003527777777777778
+dimension = [ [ "length", 1.0,],]
+names = [ "point",]
+symbols = [ "pt",]
+
+[[units]]
+value = 0.1
+dimension = [ [ "length", -1.0,], [ "mass", 1.0,], [ "time", -1.0,],]
+names = [ "poise",]
+symbols = [ "P",]
+
+[[units]]
+value = 0.45359237
+dimension = [ [ "mass", 1.0,],]
+names = [ "pound",]
+symbols = [ "lb",]
+
+[[units]]
+value = 39.370078740157474
+dimension = [ [ "length", -1.0,], [ "pixel_count", 1.0,],]
+names = [ "ppi",]
+symbols = []
+
+[[units]]
+value = 1.32140985539e-15
+stddev = 4e-25
+dimension = [ [ "length", 1.0,],]
+names = [ "proton Compton wavelength",]
+symbols = []
+info = "CODATA 2018"
+
+[[units]]
+value = 95788331.56
+stddev = 0.029
+dimension = [ [ "current", 1.0,], [ "mass", -1.0,], [ "time", 1.0,],]
+names = [ "proton charge to mass quotient",]
+symbols = []
+info = "CODATA 2018"
+
+[[units]]
+value = 5.5856946893
+stddev = 1.6e-9
+dimension = []
+names = [ "proton g factor",]
+symbols = []
+info = "CODATA 2018"
+
+[[units]]
+value = 267522187.44
+stddev = 0.11
+dimension = [ [ "current", 1.0,], [ "mass", -1.0,], [ "time", 1.0,],]
+names = [ "proton gyromag. ratio",]
+symbols = []
+info = "CODATA 2018"
+
+[[units]]
+value = 1.41060679736e-26
+stddev = 6e-36
+dimension = [ [ "current", 1.0,], [ "length", 2.0,],]
+names = [ "proton mag. mom.",]
+symbols = []
+info = "CODATA 2018"
+
+[[units]]
+value = 0.0015210322023
+stddev = 4.6e-13
+dimension = []
+names = [ "proton mag. mom. to Bohr magneton ratio",]
+symbols = []
+info = "CODATA 2018"
+
+[[units]]
+value = 2.79284734463
+stddev = 8.2e-10
+dimension = []
+names = [ "proton mag. mom. to nuclear magneton ratio",]
+symbols = []
+info = "CODATA 2018"
+
+[[units]]
+value = 2.5689e-5
+stddev = 1.1e-8
+dimension = []
+names = [ "proton mag. shielding correction",]
+symbols = []
+info = "CODATA 2018"
+
+[[units]]
+value = 1.67262192369e-27
+stddev = 5.1e-37
+dimension = [ [ "mass", 1.0,],]
+names = [ "proton mass",]
+symbols = []
+info = "CODATA 2018"
+
+[[units]]
+value = 1.50327761598e-10
+stddev = 4.6e-20
+dimension = [ [ "length", 2.0,], [ "mass", 1.0,], [ "time", -2.0,],]
+names = [ "proton mass energy equivalent",]
+symbols = []
+info = "CODATA 2018"
+
+[[units]]
+value = 0.00100727646627
+stddev = 3.1e-13
+dimension = [ [ "mass", 1.0,], [ "substance", -1.0,],]
+names = [ "proton molar mass",]
+symbols = []
+info = "CODATA 2018"
+
+[[units]]
+value = 1.007276466621
+stddev = 5.3e-11
+dimension = []
+names = [ "proton relative atomic mass",]
+symbols = []
+info = "CODATA 2018"
+
+[[units]]
+value = 8.414e-16
+stddev = 1.9e-18
+dimension = [ [ "length", 1.0,],]
+names = [ "proton rms charge radius",]
+symbols = []
+info = "CODATA 2018"
+
+[[units]]
+value = 1836.15267343
+stddev = 1.0999999999999999e-7
+dimension = []
+names = [ "proton-electron mass ratio",]
+symbols = []
+info = "CODATA 2018"
+
+[[units]]
+value = 8.88024337
+stddev = 2e-7
+dimension = []
+names = [ "proton-muon mass ratio",]
+symbols = []
+info = "CODATA 2018"
+
+[[units]]
+value = -1.45989805
+stddev = -3.4e-7
+dimension = []
+names = [ "proton-neutron mag. mom. ratio",]
+symbols = []
+info = "CODATA 2018"
+
+[[units]]
+value = 0.99862347812
+stddev = 4.9e-10
+dimension = []
+names = [ "proton-neutron mass ratio",]
+symbols = []
+info = "CODATA 2018"
+
+[[units]]
+value = 0.528051
+stddev = 3.6e-5
+dimension = []
+names = [ "proton-tau mass ratio",]
+symbols = []
+info = "CODATA 2018"
+
+[[units]]
+value = 0.023216666666666667
+dimension = [ [ "length", 1.0,],]
+names = [ "pulgada",]
+symbols = []
+
+[[units]]
+value = 0.00036369475516
+stddev = 1.1000000000000001e-13
+dimension = [ [ "length", 2.0,], [ "time", -1.0,],]
+names = [ "quantum of circulation",]
+symbols = []
+info = "CODATA 2018"
+
+[[units]]
+value = 0.00072738951032
+stddev = 2.2000000000000002e-13
+dimension = [ [ "length", 2.0,], [ "time", -1.0,],]
+names = [ "quantum of circulation times 2",]
+symbols = []
+info = "CODATA 2018"
+
+[[units]]
+value = 0.0011365225000000002
+dimension = [ [ "length", 3.0,],]
+names = [ "quart",]
+symbols = [ "qt",]
+info = "UK"
+
+[[units]]
+value = 1
+dimension = [ [ "angle", 1.0,],]
+names = [ "radian",]
+symbols = [ "rad",]
+prefixes = [ "SI_small",]
+
+[[units]]
+value = 0.5555555555555556
+dimension = [ [ "temperature", 1.0,],]
+names = [ "rankine",]
+symbols = [ "°R",]
+
+[[units]]
+value = 1.867594306e-15
+stddev = 4.2e-23
+dimension = [ [ "length", 1.0,],]
+names = [ "reduced muon Compton wavelength",]
+symbols = []
+info = "CODATA 2018"
+
+[[units]]
+value = 2.1001941552e-16
+stddev = 1.2e-25
+dimension = [ [ "length", 1.0,],]
+names = [ "reduced neutron Compton wavelength",]
+symbols = []
+info = "CODATA 2018"
+
+[[units]]
+value = 2.10308910336e-16
+stddev = 6.4e-26
+dimension = [ [ "length", 1.0,],]
+names = [ "reduced proton Compton wavelength",]
+symbols = []
+info = "CODATA 2018"
+
+[[units]]
+value = 1.110538e-16
+stddev = 7.5e-21
+dimension = [ [ "length", 1.0,],]
+names = [ "reduced tau Compton wavelength",]
+symbols = []
+info = "CODATA 2018"
+
+[[units]]
+value = 5.0292
+dimension = [ [ "length", 1.0,],]
+names = [ "rod",]
+symbols = []
+
+[[units]]
+value = 1011.7141056000002
+dimension = [ [ "length", 2.0,],]
+names = [ "rood",]
+symbols = []
+
+[[units]]
+value = 2.1798723611035
+stddev = 4.2e-15
+dimension = [ [ "length", 2.0,], [ "mass", 1.0,], [ "time", -2.0,],]
+names = [ "rydberg",]
+symbols = [ "Ry",]
+info = "CODATA 2018"
+
+[[units]]
+value = 1
+dimension = [ [ "time", 1.0,],]
+names = [ "second",]
+symbols = [ "s",]
+prefixes = [ "SI_large", "SI_small", "SI_conventional",]
+
+[[units]]
+value = 0.01438776877
+dimension = [ [ "length", 1.0,], [ "temperature", 1.0,],]
+names = [ "second radiation constant",]
+symbols = []
+info = "CODATA 2018"
+
+[[units]]
+value = 203789456.9
+stddev = 2.4
+dimension = [ [ "current", 1.0,], [ "mass", -1.0,], [ "time", 1.0,],]
+names = [ "shielded helion gyromag. ratio",]
+symbols = []
+info = "CODATA 2018"
+
+[[units]]
+value = -1.07455309e-26
+stddev = -1.3e-34
+dimension = [ [ "current", 1.0,], [ "length", 2.0,],]
+names = [ "shielded helion mag. mom.",]
+symbols = []
+info = "CODATA 2018"
+
+[[units]]
+value = -0.001158671471
+stddev = -1.3999999999999999e-11
+dimension = []
+names = [ "shielded helion mag. mom. to Bohr magneton ratio",]
+symbols = []
+info = "CODATA 2018"
+
+[[units]]
+value = -2.127497719
+stddev = -2.5e-8
+dimension = []
+names = [ "shielded helion mag. mom. to nuclear magneton ratio",]
+symbols = []
+info = "CODATA 2018"
+
+[[units]]
+value = -0.7617665618
+stddev = -8.9e-9
+dimension = []
+names = [ "shielded helion to proton mag. mom. ratio",]
+symbols = []
+info = "CODATA 2018"
+
+[[units]]
+value = -0.7617861313
+stddev = -3.3000000000000006e-9
+dimension = []
+names = [ "shielded helion to shielded proton mag. mom. ratio",]
+symbols = []
+info = "CODATA 2018"
+
+[[units]]
+value = 267515315.1
+stddev = 2.9
+dimension = [ [ "current", 1.0,], [ "mass", -1.0,], [ "time", 1.0,],]
+names = [ "shielded proton gyromag. ratio",]
+symbols = []
+info = "CODATA 2018"
+
+[[units]]
+value = 1.41057056e-26
+stddev = 1.5e-34
+dimension = [ [ "current", 1.0,], [ "length", 2.0,],]
+names = [ "shielded proton mag. mom.",]
+symbols = []
+info = "CODATA 2018"
+
+[[units]]
+value = 0.001520993128
+stddev = 1.7e-11
+dimension = []
+names = [ "shielded proton mag. mom. to Bohr magneton ratio",]
+symbols = []
+info = "CODATA 2018"
+
+[[units]]
+value = 2.792775599
+stddev = 3e-8
+dimension = []
+names = [ "shielded proton mag. mom. to nuclear magneton ratio",]
+symbols = []
+info = "CODATA 2018"
+
+[[units]]
+value = 2.02e-8
+stddev = 2e-11
+dimension = []
+names = [ "shielding difference of d and p in HD",]
+symbols = []
+info = "CODATA 2018"
+
+[[units]]
+value = 2.414e-8
+stddev = 2e-11
+dimension = []
+names = [ "shielding difference of t and p in HT",]
+symbols = []
+info = "CODATA 2018"
+
+[[units]]
+value = 1
+dimension = [ [ "current", 2.0,], [ "length", -2.0,], [ "mass", -1.0,], [ "time", 3.0,],]
+names = [ "siemens",]
+symbols = [ "S",]
+prefixes = [ "SI_large", "SI_small", "SI_conventional",]
+
+[[units]]
+value = 0.0003183098861837907
+dimension = [ [ "length", -2.0,], [ "luminosity", 1.0,],]
+names = [ "skot",]
+symbols = [ "sk",]
+
+[[units]]
+value = 12.566370614359172
+dimension = [ [ "angle", 2.0,],]
+names = [ "spat",]
+symbols = [ "sp",]
+
+[[units]]
+value = 2589988.110336
+dimension = [ [ "length", 2.0,],]
+names = [ "square_mile",]
+symbols = [ "sq mi",]
+
+[[units]]
+value = 9.80665
+dimension = [ [ "length", 1.0,], [ "time", -2.0,],]
+names = [ "standard acceleration of gravity",]
+symbols = []
+info = "CODATA 2018"
+
+[[units]]
+value = 101325.0
+dimension = [ [ "length", -1.0,], [ "mass", 1.0,], [ "time", -2.0,],]
+names = [ "standard atmosphere",]
+symbols = []
+info = "CODATA 2018"
+
+[[units]]
+value = 100000.0
+dimension = [ [ "length", -1.0,], [ "mass", 1.0,], [ "time", -2.0,],]
+names = [ "standard-state pressure",]
+symbols = []
+info = "CODATA 2018"
+
+[[units]]
+value = 9.980665
+dimension = [ [ "length", 1.0,], [ "time", -2.0,],]
+names = [ "standard_gravity",]
+symbols = [ "g",]
+info = "defined by convention"
+
+[[units]]
+value = 1
+dimension = [ [ "angle", 2.0,],]
+names = [ "steradian",]
+symbols = [ "sr",]
+prefixes = [ "SI_large", "SI_small", "SI_conventional",]
+
+[[units]]
+value = 10000.0
+dimension = [ [ "length", -2.0,], [ "luminosity", 1.0,],]
+names = [ "stilb",]
+symbols = [ "sb",]
+
+[[units]]
+value = 0.0001
+dimension = [ [ "length", 2.0,], [ "time", -1.0,],]
+names = [ "stokes",]
+symbols = [ "St",]
+
+[[units]]
+value = 6.35029318
+dimension = [ [ "mass", 1.0,],]
+names = [ "stone",]
+symbols = [ "st",]
+
+[[units]]
+value = 1000000.0
+dimension = [ [ "length", 3.0,], [ "time", -1.0,],]
+names = [ "sverdrup",]
+symbols = [ "Sv",]
+
+[[units]]
+value = 6.97771e-16
+stddev = 4.7e-20
+dimension = [ [ "length", 1.0,],]
+names = [ "tau Compton wavelength",]
+symbols = []
+info = "CODATA 2018"
+
+[[units]]
+value = 2.8468435738892393e-10
+stddev = 1.9226119607999995e-14
+dimension = [ [ "length", 2.0,], [ "mass", 1.0,], [ "time", -2.0,],]
+names = [ "tau energy equivalent",]
+symbols = []
+info = "CODATA 2018"
+
+[[units]]
+value = 3.16754e-27
+stddev = 2.1e-31
+dimension = [ [ "mass", 1.0,],]
+names = [ "tau mass",]
+symbols = []
+info = "CODATA 2018"
+
+[[units]]
+value = 2.84684e-10
+stddev = 1.9e-14
+dimension = [ [ "length", 2.0,], [ "mass", 1.0,], [ "time", -2.0,],]
+names = [ "tau mass energy equivalent",]
+symbols = []
+info = "CODATA 2018"
+
+[[units]]
+value = 0.00190754
+stddev = 1.3e-7
+dimension = [ [ "mass", 1.0,], [ "substance", -1.0,],]
+names = [ "tau molar mass",]
+symbols = []
+info = "CODATA 2018"
+
+[[units]]
+value = 3477.23
+stddev = 0.23
+dimension = []
+names = [ "tau-electron mass ratio",]
+symbols = []
+info = "CODATA 2018"
+
+[[units]]
+value = 16.817
+stddev = 0.0011
+dimension = []
+names = [ "tau-muon mass ratio",]
+symbols = []
+info = "CODATA 2018"
+
+[[units]]
+value = 1.89115
+stddev = 0.00013
+dimension = []
+names = [ "tau-neutron mass ratio",]
+symbols = []
+info = "CODATA 2018"
+
+[[units]]
+value = 1.89376
+stddev = 0.00013
+dimension = []
+names = [ "tau-proton mass ratio",]
+symbols = []
+info = "CODATA 2018"
+
+[[units]]
+value = 99806.65
+dimension = [ [ "length", -1.0,], [ "mass", 1.0,], [ "time", -2.0,],]
+names = [ "technical_atmosphere",]
+symbols = [ "at",]
+
+[[units]]
+value = 1
+dimension = [ [ "current", -1.0,], [ "mass", 1.0,], [ "time", -2.0,],]
+names = [ "tesla",]
+symbols = [ "T",]
+prefixes = [ "SI_large", "SI_small", "SI_conventional",]
+
+[[units]]
+value = 0.001024
+dimension = [ [ "time", 1.0,],]
+names = [ "time_unit",]
+symbols = [ "TU",]
+
+[[units]]
+value = 0.1
+dimension = [ [ "mass", -1.0,], [ "temperature", 1.0,], [ "time", 3.0,],]
+names = [ "tog",]
+symbols = []
+
+[[units]]
+value = 1000
+dimension = [ [ "mass", 1.0,],]
+names = [ "ton", "tonne",]
+symbols = [ "t",]
+prefixes = [ "SI_large",]
+info = "metric"
+
+[[units]]
+value = 1016.0469088000001
+dimension = [ [ "mass", 1.0,],]
+names = [ "ton",]
+symbols = [ "t",]
+
+[[units]]
+value = 1.5849625007211563
+dimension = [ [ "data", 1.0,],]
+names = [ "trit",]
+symbols = []
+
+[[units]]
+value = 5.957924931
+stddev = 1.2e-8
+dimension = []
+names = [ "triton g factor",]
+symbols = []
+info = "CODATA 2018"
+
+[[units]]
+value = 1.5046095202e-26
+stddev = 3e-35
+dimension = [ [ "current", 1.0,], [ "length", 2.0,],]
+names = [ "triton mag. mom.",]
+symbols = []
+info = "CODATA 2018"
+
+[[units]]
+value = 0.0016223936651
+stddev = 3.2000000000000005e-12
+dimension = []
+names = [ "triton mag. mom. to Bohr magneton ratio",]
+symbols = []
+info = "CODATA 2018"
+
+[[units]]
+value = 2.9789624656
+stddev = 5.9e-9
+dimension = []
+names = [ "triton mag. mom. to nuclear magneton ratio",]
+symbols = []
+info = "CODATA 2018"
+
+[[units]]
+value = 5.0073567446e-27
+stddev = 1.5000000000000002e-36
+dimension = [ [ "mass", 1.0,],]
+names = [ "triton mass",]
+symbols = []
+info = "CODATA 2018"
+
+[[units]]
+value = 4.500387806e-10
+stddev = 1.4e-19
+dimension = [ [ "length", 2.0,], [ "mass", 1.0,], [ "time", -2.0,],]
+names = [ "triton mass energy equivalent",]
+symbols = []
+info = "CODATA 2018"
+
+[[units]]
+value = 0.00301550071517
+stddev = 9.2e-13
+dimension = [ [ "mass", 1.0,], [ "substance", -1.0,],]
+names = [ "triton molar mass",]
+symbols = []
+info = "CODATA 2018"
+
+[[units]]
+value = 3.01550071621
+stddev = 1.2e-10
+dimension = []
+names = [ "triton relative atomic mass",]
+symbols = []
+info = "CODATA 2018"
+
+[[units]]
+value = 1.0666399191
+stddev = 2.1e-9
+dimension = []
+names = [ "triton to proton mag. mom. ratio",]
+symbols = []
+info = "CODATA 2018"
+
+[[units]]
+value = 5496.92153573
+stddev = 2.7e-7
+dimension = []
+names = [ "triton-electron mass ratio",]
+symbols = []
+info = "CODATA 2018"
+
+[[units]]
+value = 2.99371703414
+stddev = 1.5e-10
+dimension = []
+names = [ "triton-proton mass ratio",]
+symbols = []
+info = "CODATA 2018"
+
+[[units]]
+value = 6.283185307179586
+dimension = [ [ "angle", 1.0,],]
+names = [ "turn",]
+symbols = [ "turn",]
+
+[[units]]
+value = 1.763888888888889e-5
+dimension = [ [ "length", 1.0,],]
+names = [ "twip",]
+symbols = []
+
+[[units]]
+value = 8.8541878128e-12
+stddev = 1.3e-21
+dimension = [ [ "current", 2.0,], [ "length", -3.0,], [ "mass", -1.0,], [ "time", 4.0,],]
+names = [ "vacuum electric permittivity",]
+symbols = []
+info = "CODATA 2018"
+
+[[units]]
+value = 1.25663706212e-6
+stddev = 1.8999999999999998e-16
+dimension = [ [ "current", -2.0,], [ "length", 1.0,], [ "mass", 1.0,], [ "time", -2.0,],]
+names = [ "vacuum mag. permeability",]
+symbols = []
+info = "CODATA 2018"
+
+[[units]]
+value = 1
+dimension = [ [ "current", -1.0,], [ "length", 2.0,], [ "mass", 1.0,], [ "time", -3.0,],]
+names = [ "volt",]
+symbols = [ "V",]
+prefixes = [ "SI_large", "SI_small", "SI_conventional",]
+
+[[units]]
+value = 25812.80745
+dimension = [ [ "current", -2.0,], [ "length", 2.0,], [ "mass", 1.0,], [ "time", -3.0,],]
+names = [ "von Klitzing constant",]
+symbols = []
+info = "CODATA 2018"
+
+[[units]]
+value = 1
+dimension = [ [ "length", 2.0,], [ "mass", 1.0,], [ "time", -3.0,],]
+names = [ "watt",]
+symbols = [ "W",]
+prefixes = [ "SI_large", "SI_small", "SI_conventional",]
+
+[[units]]
+value = 3600
+dimension = [ [ "length", 2.0,], [ "mass", 1.0,], [ "time", -2.0,],]
+names = [ "watt_hour",]
+symbols = [ "Wh",]
+prefixes = [ "SI_large", "SI_small", "SI_conventional",]
+
+[[units]]
+value = 0.2229
+stddev = 0.0003
+dimension = []
+names = [ "weak mixing angle",]
+symbols = []
+info = "CODATA 2018"
+
+[[units]]
+value = 1
+dimension = [ [ "current", -1.0,], [ "length", 2.0,], [ "mass", 1.0,], [ "time", -2.0,],]
+names = [ "weber",]
+symbols = [ "Wb",]
+prefixes = [ "SI_large", "SI_small", "SI_conventional",]
+
+[[units]]
+value = 604800
+dimension = [ [ "time", 1.0,],]
+names = [ "week",]
+symbols = [ "w",]
+
+[[units]]
+value = 0.9144000000000001
+dimension = [ [ "length", 1.0,],]
+names = [ "yard",]
+symbols = [ "yd",]
+
+[[units]]
+value = 31557600.0
+dimension = [ [ "time", 1.0,],]
+names = [ "year",]
+symbols = [ "yr", "ya",]
+prefixes = [ "SI_large",]
+info = "Julian calendar"
+
+[[units]]
+value = 31556952.0
+dimension = [ [ "time", 1.0,],]
+names = [ "year",]
+symbols = [ "yr", "ya",]
+prefixes = [ "SI_large",]
+info = "Gregorian calendar"
+
+[[units]]
+value = 376.73031346177066
+dimension = [ [ "current", -2.0,], [ "length", 2.0,], [ "mass", 1.0,], [ "time", -3.0,],]
+names = [ "z_0",]
+symbols = [ "z₀",]
+

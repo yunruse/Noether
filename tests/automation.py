@@ -1,27 +1,30 @@
 '''
-Not a test -- just a quick catalogue generator.
+Quick automation tools that are useful to have done during testing.
 '''
 import csv
 import json
+from pathlib import Path
 import toml
 from datetime import datetime
 from unittest import TestCase
 
-from matplotlib import pyplot
-import matplotlib.dates as mdates
+from noether import catalogue, Config
 
-from noether import catalogue
+TEST_PATH = Path(__file__).parent
 
 
-class auto_catalogue(TestCase):
-    def test_autocatalogue(self):
+class automation(TestCase):
+    def test_export_config(self):
+        Config().save(TEST_PATH / 'default.conf')
+
+    def test_export_catalogue(self):
         cat = catalogue.__json__()
         cat['$schema'] = './catalogue.schema.json'
-        with open('noether/catalogue/catalogue.json', 'w') as f:
+        with open(TEST_PATH / 'catalogue.json', 'w') as f:
             json.dump(cat, f, indent=1)
 
         del cat['$schema']
-        with open('noether/catalogue/catalogue.toml', 'w') as f:
+        with open(TEST_PATH / 'catalogue.toml', 'w') as f:
             toml.dump(cat, f)
 
     def test_count_units(self, graph=True):
@@ -42,9 +45,12 @@ class auto_catalogue(TestCase):
                 f.write(f'{date},{N}\n')
 
         if graph:
-            self.graph_plot(data)
+            self.graph_unit_count(data)
 
-    def graph_plot(self, data):
+    def graph_unit_count(self, data):
+        from matplotlib import pyplot
+        import matplotlib.dates as mdates
+
         pyplot.plot(*zip(*data))
         pyplot.title('Catalogue count')
 
@@ -57,4 +63,4 @@ class auto_catalogue(TestCase):
 
 
 if __name__ == '__main__':
-    auto_catalogue('test_count_units').test_count_units(graph=False)
+    automation('test_count_units').test_count_units(graph=False)
