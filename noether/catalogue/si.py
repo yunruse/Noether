@@ -1,3 +1,7 @@
+'''
+SI-derived units, and constants used in defining the SI units.
+'''
+
 from ..core import Unit
 from ..core.prefixes import SI, SI_small
 from ..core.DisplaySet import display as I

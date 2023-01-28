@@ -8,7 +8,9 @@ import os
 from pathlib import Path
 from typing import Any, Optional
 import tomllib
+import warnings
 
+from .errors import ConfigWarning
 from .helpers import get_dot_config
 
 CONF_FILE = get_dot_config() / 'noether.toml'
@@ -20,6 +22,14 @@ class ConfigOption:
     default: Any
     type: type
     help: str = ""
+
+    @property
+    def category(self):
+        return self.name.split('_', 1)[0]
+
+    @property
+    def at_import(self):
+        return self.category.isupper()
 
 
 def ConfigProperty(option: ConfigOption):
@@ -34,7 +44,13 @@ def ConfigProperty(option: ConfigOption):
             raise TypeError(
                 f"conf.{option.name} must be {option.type.__name__},"
                 f" not {type(value).__name__}")
-        self[option.name] = value
+        self._config[option.name] = value
+
+        if option.at_import:
+            warnings.warn(
+                'This change will only apply after doing conf.save() and reloading.',
+                ConfigWarning, stacklevel=2,
+            )
 
     def deleter(self):
         if option.name in self:
@@ -138,7 +154,8 @@ class Config(dict):
         for cat_name, cat in new.items():
             for name, value in cat.items():
                 fullname = f'{cat_name}_{name}'
-                self[fullname] = value
+                if fullname in self.info:
+                    self._config[fullname] = value
 
 
 conf = Config()

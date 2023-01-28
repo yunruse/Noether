@@ -102,7 +102,7 @@ class info_comparison(MeasureInfo):
     @classmethod
     def info(cls, measure: Measure):
         comparisons = cls.get_comparisons(
-            measure, conf.get('units_country')
+            measure, conf.get('UNITS_country')
         )
         best_score, name, unit = max(comparisons, key=lambda x: x[0])
         relative = float(measure / unit)

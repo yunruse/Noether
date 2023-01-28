@@ -10,10 +10,10 @@ from ..config import Config, conf
 from noether.core.fundamental import gram, kelvin, meter
 from .conventional import cm, liter, hour
 
-Config.register('units_country', 'us', '''\
+Config.register('UNITS_country', 'us', '''\
 The country to define imperial units (and other niceties) from. (Use the ISO 3166 code.)
 ''')
-_USE_US_UNITS = conf.get('units_country').lower() == 'us'
+_USE_US_UNITS = conf.get('UNITS_country').lower() == 'us'
 
 rankine = Unit(kelvin * 5/9, "rankine", "°R")
 fahrenheit = AffineUnit(rankine, rankine(459.67), "fahrenheit", "ºF")

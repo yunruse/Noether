@@ -73,13 +73,13 @@ amp_hour = ampere_hour = Ah = Unit(
 
 # % Display
 
-Config.register('conventional_time', True, '''\
+Config.register('UNITS_conventional_time', True, '''\
 Display time in year & day & hour & minute & second.''')
-if conf.get('conventional_time'):
+if conf.get('UNITS_conventional_time'):
     I(year & day & hour & minute & second)
 
 
-Config.register('conventional_angles', True, '''\
+Config.register('UNITS_conventional_angles', True, '''\
 Display angles in turn & degree & arcminute & arcsecond.''')
-if conf.get('conventional_angles'):
+if conf.get('UNITS_conventional_angles'):
     I(turn & degree & arcminute & arcsecond)

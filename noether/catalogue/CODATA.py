@@ -77,14 +77,14 @@ _CODATA_PATH = __file__.removesuffix('.py') + '.txt'
 CODATA = _codata(_CODATA_PATH)
 
 
-Config.register('catalogue_codata_all', True, '''\
+Config.register('CATALOGUE_codata_all', True, '''\
 Provide all CODATA constants in the Noether namespace,
 such as `electron_mag_mom_to_nuclear_magneton_ratio`
 ''')
 
 __all__ = ['CODATA']
 for name, unit in CODATA.items():
-    if not (conf.get('catalogue_codata_all') or unit.name in NAMED_CODATA_UNITS):
+    if not (conf.get('CATALOGUE_codata_all') or unit.name in NAMED_CODATA_UNITS):
         continue
     nice_name = (
         name.replace(' ', '_')

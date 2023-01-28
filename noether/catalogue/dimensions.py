@@ -27,10 +27,10 @@ absounce = I(abserk * time, 'absounce')
 
 # % Angle
 
-Config.register('dimension_angle', True, '''\
+Config.register('DIMENSION_angle', True, '''\
 Register angles as their own dimension, rather than dimensionless.''')
 
-if conf.get('dimension_angle'):
+if conf.get('DIMENSION_angle'):
     angle = Dimension.new("angle", "φ", 200)
 else:
     angle = dimensionless

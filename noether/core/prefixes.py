@@ -7,10 +7,10 @@ from decimal import Decimal
 
 from ..config import Config, conf
 
-Config.register("prefix_fun", False, """\
+Config.register("PREFIX_fun", False, """\
 Enable historical or other nonstandard SI prefixes""")
 
-Config.register("prefix_IEC", True, """\
+Config.register("PREFIX_iec", True, """\
 Enable binary data prefixes (eg mebibyte = 1024^2 byte)""")
 
 
@@ -109,8 +109,8 @@ IEC = PrefixSet('IEC', [
 ])
 
 SI = SI_large + SI_small + SI_conventional
-if conf.get('prefix_fun'):
+if conf.get('PREFIX_fun'):
     SI = SI + SI_fun
 
-if not conf.get('prefix_IEC'):
+if not conf.get('PREFIX_iec'):
     IEC.clear()
