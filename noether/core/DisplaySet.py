@@ -1,5 +1,7 @@
 '''
 List of units used for display purposes.
+
+Also handles dimension names.
 '''
 
 from .Dimension import Dimension
@@ -12,10 +14,16 @@ class DisplaySet:
 
     dimension_symbol = dict[str, str]
 
-    def __init__(self):
+    def __init__(self, *items: list[Unit]):
         self.units = dict()
         self.dimension_names = dict()
         self.dimension_symbol = dict(dimensionless='')
+        self.register(*items)
+
+    def __repr__(self):
+        return 'DisplaySet({})'.format(', '.join(
+            str(i[-1]) for i in self.units.values()
+        ))
 
     def add(self, value: Unit | Dimension, *names: list[str]):
         if isinstance(value, Dimension):

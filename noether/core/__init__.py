@@ -5,4 +5,4 @@ from .AffineUnit import AffineUnit
 
 from .fundamental import *
 
-from .DisplaySet import display
+from .DisplaySet import DisplaySet, display
