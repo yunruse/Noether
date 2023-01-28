@@ -1,4 +1,4 @@
-# Noether (in development: Alpha 0.1.3)
+# Noether (in development: Alpha 0.2.0)
 
 ## The problem: computers don't understand physical measurements
 
