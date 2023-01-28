@@ -81,13 +81,3 @@ Other Python unit packages include:
 
 - [units](https://pypi.org/project/units/), a simple package for defining your own units
 - [unyt](https://pypi.org/project/unyt/), which has numpy support
-
-## Legal
-
-Copyright (c) 2018–2022 Mia yun Ruse ([yunru.se]).
-
-With the exception of scientific data, which are cited, Noether is licensed under a [Creative Commons Attribution 4.0](cc) International license. In non-legal terms: do whatever you like, including science!
-But if you redistribute or fork Noether, you must credit me.
-
-[yunru.se]: https://yunru.se/
-[cc]: https://creativecommons.org/licenses/by/4.0/
