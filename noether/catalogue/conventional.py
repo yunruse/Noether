@@ -32,13 +32,6 @@ year_gregorian = Unit(day * 365.2425,
                       "year", ["yr", "ya"], SI_large, info="Gregorian calendar")
 year = year_gregorian
 
-human_time = year & day & hour & minute & second
-
-Config.register('units_human_time', True, '''\
-Display time by default in human_time (years, weeks, days, etc).''')
-if conf.get('units_human_time'):
-    I(human_time)
-
 # % Distance
 cm = centimeter = centimetre = Unit(
     meter * 0.01, ['centimeter', 'centimetre'], 'cm')
@@ -76,3 +69,17 @@ sphere = spat = Unit(steradian * 4*pi, "spat", "sp")
 watt_hour = Wh = Unit(watt * hour, 'watt_hour', 'Wh', SI)
 amp_hour = ampere_hour = Ah = Unit(
     ampere * hour, 'amp_hour', 'Ah')
+
+
+# % Display
+
+Config.register('conventional_time', True, '''\
+Display time in year & day & hour & minute & second.''')
+if conf.get('conventional_time'):
+    I(year & day & hour & minute & second)
+
+
+Config.register('conventional_angles', True, '''\
+Display angles in turn & degree & arcminute & arcsecond.''')
+if conf.get('conventional_angles'):
+    I(turn & degree & arcminute & arcsecond)
