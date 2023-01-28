@@ -1,5 +1,11 @@
 # Noether (in development: Alpha 0.2.0)
 
+> **Note**
+>
+> Version 1.0 is coming soon (February 2023), rewritten from scratch and way more capable!
+>
+> Check out the [`rewrite`](https://github.com/yunruse/Noether/tree/rewrite) branch for more.
+
 ## The problem: computers don't understand physical measurements
 
 A calculator does the little things. They weren't essential, at first, but it's rather nice to not have to do the conversion in your head when you can instead start worrying about the topic at hand. Why not extend this to units? This is far from a nicety: NASA famously lost *328 million dollars* because [feet and metres were mistaken](https://medium.com/predict/a-328-million-dollar-conversion-error-f6d525c85fd2). 
