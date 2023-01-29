@@ -1,10 +1,10 @@
-name: Automatic unit testing
+name: Test Python version compatibility
 
 on:
   push:
-    branches: [ "develop" ]
+    branches: [ "develop", "testing" ]
   pull_request:
-    branches: [ "develop" ]
+    branches: [ "release" ]
 
 jobs:
   build:
