@@ -31,13 +31,11 @@ meter = metre = m = I(Unit(
 second = s = I(Unit(
     Measure(dim=time), 'second', 's', SI))
 
-gram = Unit(kilogram / 1000, 'gram', 'g', SI)
-
 __all__ = [
     'luminosity', 'candela', 'cd',
     'current', 'ampere', 'A',
     'temperature', 'kelvin', 'K',
-    'mass', 'kilogram', 'kg', 'gram',
+    'mass', 'kilogram', 'kg',
     'substance', 'mole', 'mol',
     'length', 'meter', 'm', 'metre',
     'time', 'second', 's',

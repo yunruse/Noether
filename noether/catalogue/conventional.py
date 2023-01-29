@@ -50,6 +50,7 @@ milliliter = milliliter = ml = mL = Unit(
     liter / 1000, ['milliliter', 'millilitre'], 'mL')
 
 # % Mass
+gram = Unit(kilogram / 1000, 'gram', 'g', SI)
 ton = tonne = Unit(
     kilogram*1000, ["ton", "tonne"], "t", SI_large, info="metric")
 

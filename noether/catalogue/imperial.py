@@ -7,8 +7,8 @@ from fractions import Fraction
 from ..core import Unit, AffineUnit
 from ..config import Config, conf
 
-from noether.core.fundamental import gram, kelvin, meter
-from .conventional import cm, liter, hour
+from noether.core.fundamental import kelvin, meter
+from .conventional import cm, gram, liter, hour
 
 Config.register('UNITS_country', 'us', '''\
 The country to define imperial units (and other niceties) from. (Use the ISO 3166 code.)
