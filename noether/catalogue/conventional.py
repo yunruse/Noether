@@ -69,8 +69,8 @@ sphere = spat = Unit(steradian * 4*pi, "spat", "sp")
 
 # % Electricity
 watt_hour = Wh = Unit(watt * hour, 'watt_hour', 'Wh', SI)
-amp_hour = ampere_hour = Ah = Unit(
-    ampere * hour, 'amp_hour', 'Ah')
+amp_hour = ampere_hour = Ah = Unit(ampere * hour, 'amp_hour', 'Ah')
+ampere_turn = At = Unit(ampere * turn, "ampere_turn", "At")
 
 
 # % Display
