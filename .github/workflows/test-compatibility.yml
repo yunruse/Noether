@@ -2,9 +2,9 @@ name: Test Python version compatibility
 
 on:
   push:
-    branches: [ "develop", "testing" ]
+    branches: [ "testing" ]
   pull_request:
-    branches: [ "release" ]
+    branches: [ "develop", "release" ]
 
 jobs:
   build:

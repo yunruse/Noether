@@ -15,7 +15,7 @@ The following branch structure is is in use:
 
 ### Automatic unit testing
 
-The `tests` directory contains a few analysis tools (mostly for analysing the catalogue), and unit testing, which is ran automatically on commits to `develop` and `testing` and pull requests to `release`.
+The `tests` directory contains a few analysis tools (mostly for analysing the catalogue), and unit testing, which is ran automatically on commits to `testing` and pull requests to `release` or `develop`.
 
 ## Under the hood
 
