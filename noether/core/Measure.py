@@ -2,7 +2,8 @@
 from dataclasses import dataclass
 from functools import total_ordering
 import operator
-from typing import Optional, TypeVar, ClassVar, Generic, TYPE_CHECKING
+from sys import version_info
+from typing import Optional, TypeVar, ClassVar, Generic, TYPE_CHECKING, Union
 from numbers import Real
 
 from ..errors import DimensionError
@@ -37,21 +38,20 @@ T = TypeVar('T', int, float, Real)
 @dataclass(
     frozen=True,
     init=False,
-    slots=True,
+    **(dict(slots=True)if version_info.minor >= 10 else dict()),
 )
 @total_ordering
 class Measure(Generic[T]):
     '''
     A measurement, with Dimension and optional uncertainty.
     '''
-
     value: T
     stddev: Optional[T] = None
     dim: Dimension
 
     def __init__(
         self,
-        value: "Measure[T]" | T = 1,
+        value: "Union[Measure[T], T]" = 1,
         stddev: Optional[T] = None,
         dim: Optional[Dimension] = None,
     ):
@@ -217,7 +217,7 @@ class Measure(Generic[T]):
 
     def __geo(
         self,
-        other: 'Measure[T] | Dimension | Real',
+        other: 'Union[Measure[T], Dimension, Real]',
         op=operator.mul
     ) -> 'Measure':
         value = self.value
@@ -280,7 +280,7 @@ class Measure(Generic[T]):
                 "A measure may not linearly operate on a number."
                 " Enable conf.measure_barenumber to suppress this.")
 
-    def __lin(self, other: 'Measure[T] | Dimension | Real', op=operator.add):
+    def __lin(self, other: 'Union[Measure[T], Dimension, Real]', op=operator.add):
         self.__lin_cmp(other)
 
         value = self.value

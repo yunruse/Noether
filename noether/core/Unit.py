@@ -3,6 +3,7 @@ Unit - a subclass of Measure which has its own name(s) and symbol(s).
 
 Used in turn to display Measure.
 '''
+from typing import Optional, Union
 
 from ..config import conf
 from ..display import canonical_number
@@ -20,11 +21,11 @@ class Unit(Measure):
 
     def __init__(
         self,
-        measure: Measure | Dimension,
-        names: list[str] | str | None = None,
-        symbols: list[str] | str | None = None,
-        prefixes: list[Prefix] | None = None,
-        info: str | None = None,
+        measure: Union[Measure, Dimension],
+        names: Optional[Union[str, list[str]]] = None,
+        symbols: Optional[Union[str, list[str]]] = None,
+        prefixes: Optional[list[Prefix]] = None,
+        info: Optional[str] = None,
     ):
         if isinstance(measure, Dimension):
             measure = Measure(dim=measure)

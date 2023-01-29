@@ -94,13 +94,13 @@ class Config:
             if v != self.options[k].default
         ))
 
-    def get_defaults(self):
+    def _get_defaults(self):
         for k in self.options:
-            self.setdefault(k, self.options[k].default)
+            self._config.setdefault(k, self.options[k].default)
 
     def reset(self):
         for k in self.options:
-            self[k] = self.options[k].default
+            self._config[k] = self.options[k].default
 
     # % Attributes
 
@@ -123,7 +123,7 @@ class Config:
         return cats
 
     def __str__(self, help=True):
-        self.get_defaults()
+        self._get_defaults()
 
         string = ""
         for cat_name, names in self.categories().items():

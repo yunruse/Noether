@@ -4,6 +4,7 @@ List of units used for display purposes.
 Also handles dimension names.
 '''
 
+from typing import Union
 from .Dimension import Dimension
 from .Unit import Unit
 
@@ -25,7 +26,7 @@ class DisplaySet:
             str(i[-1]) for i in self.units.values()
         ))
 
-    def add(self, value: Unit | Dimension, *names: list[str]):
+    def add(self, value: Union[Unit, Dimension], *names: list[str]):
         if isinstance(value, Dimension):
             self.dimension_names.setdefault(value, [])
             for n in names:
@@ -42,7 +43,7 @@ class DisplaySet:
 
     __call__ = add
 
-    def remove(self, value: Unit | Dimension, names: list[str]):
+    def remove(self, value: Union[Unit, Dimension], names: list[str]):
         if isinstance(value, Dimension):
             self.dimension_names.setdefault(value, [])
             for n in names:

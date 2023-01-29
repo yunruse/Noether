@@ -2,8 +2,8 @@
 Prefixes a unit may take.
 '''
 
+from typing import Optional, Union
 from dataclasses import dataclass
-from decimal import Decimal
 
 from ..config import Config, conf
 
@@ -34,8 +34,7 @@ class PrefixSet(list[Prefix]):
     def __init__(
         self,
         name: str,
-        prefixes: (None | list[Prefix] |
-                   list[tuple[str, str, float]]) = None
+        prefixes: Optional[list[Union[Prefix, tuple[str, str, float]]]] = None
     ):
         self.name = name
         list.__init__(self)
