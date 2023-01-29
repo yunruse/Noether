@@ -16,6 +16,7 @@ from ..core.fundamental import meter, second, ampere, kilogram, kelvin
 percent = Unit(1/100, 'percent', '%')
 permille = Unit(1/1000, 'permille', '‰')
 ppm = parts_per_million = Unit(1/1_000_000, 'parts_per_million', 'ppm')
+proof = Unit(0.5, 'proof', '°', info='alcohol purity')
 
 # % Temperature
 celsius = AffineUnit(kelvin*1, kelvin*273.15, "celsius", "ºC")
@@ -72,7 +73,6 @@ amp_hour = ampere_hour = Ah = Unit(
 
 
 # % Display
-
 Config.register('UNITS_conventional_time', True, '''\
 Display time in year & day & hour & minute & second.''')
 if conf.get('UNITS_conventional_time'):
