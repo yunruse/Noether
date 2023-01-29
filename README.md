@@ -20,7 +20,7 @@ Whether you're a layman, a student, or a NASA programmer, Noether should make wo
 
 You can use Noether like a calculator or import it for projects. Noether is intended to compliment `numpy` and `matplotlib`; while it is yet in early stages, it will inevitably be integrated smoothly with these.
 
-## Usage 
+## Usage 
 
 Dig right in straight away:
 
@@ -71,13 +71,15 @@ H·T
 1.157×10⁻⁵a·s⁻¹
 ```
 
-## Updates and development
+## For more, see...
 
-Updates are released to the `release` branch (and PyPI) every so often. They are not guaranteed to have a sturdy, documented and tested API just yet, but each release should be pretty stable.
+Check out [CONTRIBUTING.md](CONTRIBUTING.md) and [LICENSE.txt](LICENSE.txt) for info of that sort.
 
-## Also check out...
+Other tools for working with units include:
+- [Wolfram Alpha](https://www.wolframalpha.com), a comprehensive online intelligence engine
+- [gnu units](https://www.gnu.org/software/units/), a command-line tool that you likely already have
+- [units](https://pypi.org/project/units/), a simple Python package for defining your own units
+- [unyt](https://pypi.org/project/unyt/), a Python package with numpy support
 
-Other Python unit packages include:
-
-- [units](https://pypi.org/project/units/), a simple package for defining your own units
-- [unyt](https://pypi.org/project/unyt/), which has numpy support
+### 📚 _**Did you know?**_
+Half of a `byte` is a `nibble`! The unit represents 4 bits of data.
