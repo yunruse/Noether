@@ -1,4 +1,4 @@
-from dataclasses import dataclass
+from collections import namedtuple
 from fractions import Fraction
 from numbers import Number
 from typing import Callable
@@ -8,10 +8,7 @@ from ..helpers import ImmutableDict, reorder_dict_by_values
 from ..errors import DimensionError
 
 
-@dataclass(slots=True, frozen=True, order=True)
-class DimInfo:
-    order: float
-    symbol: str
+DimInfo = namedtuple('DimInfo', ('order', 'symbol'))
 
 
 class Dimension(ImmutableDict):
