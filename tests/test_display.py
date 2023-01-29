@@ -65,8 +65,8 @@ class test_unit_display(TestCase):
 
     def test_value_code_repr_str(self):
         for cat in noether.conf.categories()['info']:
-            noether.conf[f'info_{cat}'] = False
-        noether.conf[f'info_dimension'] = True
+            noether.conf._config[f'info_{cat}'] = False
+        noether.info_dimension = True
         for k, c, n, s in self.value_code_noether_str:
             val = eval(k, {}, vars(noether))
             self.assertEqual(c, val.repr_code())
