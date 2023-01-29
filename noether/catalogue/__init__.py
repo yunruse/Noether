@@ -1,4 +1,4 @@
-from ..core.prefixes import *
+from ..core.Prefix import *
 from .dimensions import *
 
 from .si import *

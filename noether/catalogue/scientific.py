@@ -3,7 +3,7 @@ Essential scientific units.
 '''
 
 from ..core import Unit
-from ..core.prefixes import SI
+from ..core.Prefix import SI
 
 from ..core.fundamental import candela, kilogram, meter, second, kelvin
 from math import pi

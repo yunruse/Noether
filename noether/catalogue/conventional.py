@@ -3,7 +3,7 @@ Conventional SI-compatible units.
 '''
 
 from ..core import Unit, AffineUnit
-from ..core.prefixes import SI, SI_large, SI_small
+from ..core.Prefix import SI, SI_large, SI_small
 from ..core.DisplaySet import display as I
 
 from noether.config import Config, conf

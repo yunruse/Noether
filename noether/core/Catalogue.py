@@ -4,7 +4,7 @@ units with prefixes.
 '''
 
 from . import Dimension, Unit
-from .prefixes import PrefixSet, Prefix
+from .Prefix import PrefixSet, Prefix
 from ..config import Config, conf
 
 Config.register('UNITS_all_prefixes', False, help='''

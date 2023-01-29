@@ -5,7 +5,7 @@ Fundamental units.
 from .Dimension import Dimension
 from .Measure import Measure
 from .Unit import Unit
-from .prefixes import SI
+from .Prefix import SI
 from .DisplaySet import display as I
 
 luminosity = Dimension.new('luminosity', 'J', -7)

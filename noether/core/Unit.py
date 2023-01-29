@@ -6,7 +6,7 @@ Used in turn to display Measure.
 
 from ..config import conf
 from ..display import canonical_number
-from .prefixes import Prefix
+from .Prefix import Prefix
 from .Dimension import Dimension
 from .Measure import Measure, MeasureInfo
 
