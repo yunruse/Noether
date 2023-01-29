@@ -2,10 +2,11 @@
 Helpful standalone functions.
 '''
 
+from typing import List
 import os
 import pathlib
 
-# Compatibility methods
+# % String methods
 
 
 def removeprefix(string: str, prefix: str):
@@ -17,7 +18,17 @@ def removesuffix(string: str, suffix: str):
     if string.endswith(suffix):
         return string[:-len(suffix)]
 
-# Dictionary methods
+
+def scanline(string: str, lengths: List[int]) -> List[str]:
+    "Divide column-indented strings"
+    chunks = []
+    for N in lengths:
+        chunks.append(string[:N].strip())
+        string = string[N:]
+    return chunks + [string.strip()]
+
+
+# % Dictionary methods
 
 
 class ImmutableDict(dict):
@@ -38,7 +49,8 @@ def reorder_dict_by_values(dictionary: dict):
     for k, v in kv:
         dictionary[k] = v
 
-# Pathing
+
+# % Pathing
 
 
 def get_dot_config():

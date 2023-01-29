@@ -2,22 +2,15 @@
 Automatically-loaded CODATA fundamental physical constants.
 '''
 
-from typing import Dict, List
+from typing import Dict
+
+from ..helpers import scanline
 from ..core import Unit
 from ..config import Config, conf
-
 from ..core.Catalogue import Catalogue
 
 from . import si
 catalogue = Catalogue(vars(si))
-
-
-def scanline(string: str, lengths: List[int]) -> List[str]:
-    chunks = []
-    for N in lengths:
-        chunks.append(string[:N].strip())
-        string = string[N:]
-    return chunks + [string.strip()]
 
 
 LENGTHS = [60, 25, 25]
