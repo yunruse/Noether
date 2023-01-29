@@ -7,7 +7,7 @@ import json
 import os
 from pathlib import Path
 from typing import Any, Optional
-import tomllib
+import toml
 import warnings
 
 from .errors import ConfigWarning
@@ -148,8 +148,8 @@ class Config(dict):
             f.write(self.__str__(help))
 
     def _load(self, path: Path = CONF_FILE):
-        with open(path, 'rb') as f:
-            new = tomllib.load(f)
+        with open(path) as f:
+            new = toml.load(f)
 
         for cat_name, cat in new.items():
             for name, value in cat.items():
