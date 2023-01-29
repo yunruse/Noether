@@ -1,5 +1,5 @@
 from .Dimension import Dimension
-from .Measure import Measure
+from .Measure import Measure, MeasureInfo
 from .Unit import Unit
 from .AffineUnit import AffineUnit
 

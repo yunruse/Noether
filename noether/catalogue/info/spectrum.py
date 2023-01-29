@@ -1,5 +1,4 @@
-from ...core.Measure import Measure, MeasureInfo
-from ...core.fundamental import meter
+from ...core import Measure, MeasureInfo, meter
 
 from ..dimensions import length, frequency, energy
 from ..si import c, h
@@ -67,7 +66,7 @@ def spectrum_names(wavelength: float) -> list[str]:
 
 @Measure.Info
 class info_spectrum(MeasureInfo):
-    '''Show EM spectrum names (eg UV-B, Wifi) for wavelengths, frequencies and energies.'''
+    "Show EM spectrum names (eg UV-B, Wifi) for wavelengths, frequencies and energies."
     enabled_by_default = False
     style = 'underline blue'
 

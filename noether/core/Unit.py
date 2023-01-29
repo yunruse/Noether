@@ -8,7 +8,7 @@ from ..config import conf
 from ..display import canonical_number
 from .Prefix import Prefix
 from .Dimension import Dimension
-from .Measure import Measure, MeasureInfo
+from .Measure import Measure
 
 
 class Unit(Measure):
@@ -113,29 +113,3 @@ class Unit(Measure):
 
         v = canonical_number(val, stddev)
         return f'{v} {self.symbol}'
-
-
-@Measure.Info
-class info_unit_value(MeasureInfo):
-    '''Give unit values, rather than just the bare name.'''
-    style = 'italic blue'
-
-    @classmethod
-    def info(self, measure: 'Unit') -> str:
-        if isinstance(measure, Unit):
-            d = measure.display_unit()
-            if d != measure:
-                if d is None:
-                    d = measure * 1
-                yield d.repr_measure(measure)
-
-
-@Measure.Info
-class info_unit_context(MeasureInfo):
-    '''Give additional context for units from their .info attribute.'''
-    style = 'red underline'
-
-    @classmethod
-    def info(self, measure: 'Unit') -> str:
-        if isinstance(measure, Unit) and measure.info is not None:
-            yield measure.info

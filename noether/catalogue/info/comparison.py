@@ -72,7 +72,7 @@ COMPARISON_DIMENSIONS = set(
 
 @Measure.Info
 class info_comparison(MeasureInfo):
-    '''Compare measures to everyday or well-known items.'''
+    "Compare measures to everyday or well-known items."
     style = 'underline red'
     enabled_by_default = False  # per #17, needs some tweaks to be considered "good enough"
 
@@ -85,11 +85,11 @@ class info_comparison(MeasureInfo):
         measure: Measure,
         country: str = None
     ) -> Generator[tuple[float, str, Measure], None, None]:
-        '''
+        """
         Return comparisons with "scores".
         Scores are related to how close a comparison is to the measure,
         but boosted for those of the target country.
-        '''
+        """
         for name, (country, unit) in COMPARISON_MEASURES.items():
             if unit.dim != measure.dim:
                 continue

@@ -2,13 +2,14 @@
 from dataclasses import dataclass
 from functools import total_ordering
 import operator
-from typing import Optional, TypeVar, ClassVar, Generic, Generator, TYPE_CHECKING
+from typing import Optional, TypeVar, ClassVar, Generic, TYPE_CHECKING
 from numbers import Real
 
 from ..errors import DimensionError
 from ..config import Config, conf
 from ..display import canonical_number
 from .Dimension import Dimension, dimensionless
+from .MeasureInfo import MeasureInfo
 
 if TYPE_CHECKING:
     from .Unit import Unit
@@ -31,20 +32,6 @@ Config.register("uncertainty_display_shorthand", False, """\
 Display e.g. 0.15(2) instead of 0.15 ± 0.02.""")
 
 T = TypeVar('T', int, float, Real)
-
-
-class MeasureInfo:
-    '''Handler for display of Measures.'''
-    @classmethod
-    def info(cls, measure: 'Measure') -> Generator[str, None, None]:
-        return NotImplemented
-
-    @classmethod
-    def should_display(cls, measure: 'Measure') -> bool:
-        return True
-
-    enabled_by_default: ClassVar[bool] = True
-    style: ClassVar[str] = 'purple italic'
 
 
 @dataclass(
@@ -361,16 +348,6 @@ class Measure(Generic[T]):
     def __and__(self, unit: 'Unit'):
         from .ChainedUnit import ChainedUnit
         return ChainedUnit(self, unit)
-
-
-@Measure.Info
-class info_dimension(MeasureInfo):
-    '''Display the dimension of a measure.'''
-    style = 'green italic'
-
-    @classmethod
-    def info(self, measure: Measure):
-        yield measure.dim.canonical_name()
 
 
 # Avoid import loops
