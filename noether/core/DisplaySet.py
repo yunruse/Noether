@@ -26,7 +26,11 @@ class DisplaySet:
             str(i[-1]) for i in self.units.values()
         ))
 
-    def add(self, value: Union[Unit, Dimension], *names: list[str]):
+    def add(
+        self,
+        value: Union[Unit, Dimension, 'DisplaySet'],
+        *names: list[str]
+    ):
         if isinstance(value, Dimension):
             self.dimension_names.setdefault(value, [])
             for n in names:
@@ -38,12 +42,19 @@ class DisplaySet:
             if value.symbols:
                 for n in self.dimension_names.get(value.dim, []):
                     self.dimension_symbol[n] = value.symbol
+        elif isinstance(value, DisplaySet):
+            for units in value.units.values():
+                self.add(units[-1])
 
         return value
 
     __call__ = add
 
-    def remove(self, value: Union[Unit, Dimension], names: list[str]):
+    def remove(
+        self,
+        value: Union[Unit, Dimension, 'DisplaySet'],
+        *names: list[str]
+    ):
         if isinstance(value, Dimension):
             self.dimension_names.setdefault(value, [])
             for n in names:
@@ -53,6 +64,9 @@ class DisplaySet:
             self.units.setdefault(value.dim, [])
             if value in self.units[value.dim]:
                 self.units[value.dim].remove(value)
+        elif isinstance(value, DisplaySet):
+            for units in value.units.values():
+                self.unregister(*units)
 
     def register(self, *units: list[Unit]):
         for unit in units:
