@@ -4,7 +4,7 @@ from numbers import Number
 from typing import Callable
 
 from ..config import conf
-from ..helpers import ImmutableDict, reorder_dict_by_values
+from ..helpers import ImmutableDict, removeprefix, reorder_dict_by_values
 from ..errors import DimensionError
 
 
@@ -97,7 +97,7 @@ class Dimension(ImmutableDict):
             if exp != 1:
                 string += '**'
                 string += f'({exp})' if use_brackets else f'{exp}'
-        return string.removeprefix('1 * ')
+        return removeprefix(string, '1 * ')
 
     def canonical_name(self):
         names = display.dimension_names.get(self, [])

@@ -3,9 +3,10 @@ Catalogue of units, which may handle interpreting
 units with prefixes.
 '''
 
+from ..helpers import removeprefix
+from ..config import Config, conf
 from . import Dimension, Unit
 from .Prefix import PrefixSet, Prefix
-from ..config import Config, conf
 
 Config.register('UNITS_all_prefixes', False, help='''
 Allow fetching any unit with any prefix (e.g. gibimeter).''')
@@ -55,7 +56,7 @@ class Catalogue:
         for p, prefix in self._prefixes.items():
             if not name.startswith(p):
                 continue
-            unit_name = name.removeprefix(p)
+            unit_name = removeprefix(name, p)
             if unit_name not in self.units:
                 continue
             unit = self.units[unit_name]

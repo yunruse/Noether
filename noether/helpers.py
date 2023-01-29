@@ -5,6 +5,18 @@ Helpful standalone functions.
 import os
 import pathlib
 
+# Compatibility methods
+
+
+def removeprefix(string: str, prefix: str):
+    if string.startswith(prefix):
+        return string[len(prefix):]
+
+
+def removesuffix(string: str, suffix: str):
+    if string.endswith(suffix):
+        return string[:-len(suffix)]
+
 # Dictionary methods
 
 
