@@ -1,5 +1,4 @@
 from .historic import *
-from .cgs import *
 from .typographic import *
 
 from .regional import *

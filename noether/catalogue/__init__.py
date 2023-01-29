@@ -9,6 +9,7 @@ from .constants import *
 from .data import *
 
 from .conventional import *
+from .cgs import *
 from .imperial import *
 
 from ..config import Config, conf
