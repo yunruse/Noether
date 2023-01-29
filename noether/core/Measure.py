@@ -3,7 +3,7 @@ from dataclasses import dataclass
 from functools import total_ordering
 import operator
 from sys import version_info
-from typing import Optional, TypeVar, ClassVar, Generic, TYPE_CHECKING, Union
+from typing import List, Optional, Tuple, TypeVar, ClassVar, Generic, TYPE_CHECKING, Union
 from numbers import Real
 
 from ..errors import DimensionError
@@ -95,7 +95,7 @@ class Measure(Generic[T]):
         return self.stddev / self.value
 
     @property
-    def bounds(self) -> tuple[T, T]:
+    def bounds(self) -> Tuple[T, T]:
         if self.stddev is None:
             return self.value, self.value
         return self.value - self.stddev, self.value + self.stddev  # type: ignore
@@ -123,7 +123,7 @@ class Measure(Generic[T]):
     def as_integer_ratio(self):
         return self.value.as_integer_ratio()  # type: ignore
 
-    info_handlers: ClassVar[list[type[MeasureInfo]]] = list()
+    info_handlers: ClassVar[List[type[MeasureInfo]]] = list()
 
     @classmethod
     def Info(cls, handler: type[MeasureInfo]):

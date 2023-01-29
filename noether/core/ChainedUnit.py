@@ -1,12 +1,14 @@
+from typing import List, Tuple
+
 from ..config import conf
 from .Measure import Measure
 from .Unit import Unit
 
 
 class ChainedUnit(Unit):
-    units: list[Unit]
+    units: List[Unit]
 
-    def __init__(self, unit: Unit, *units: tuple[Unit]):
+    def __init__(self, unit: Unit, *units: Tuple[Unit]):
         object.__setattr__(self, 'units',
                            sorted(set((unit, ) + units), reverse=True))
         Unit.__init__(self, unit)

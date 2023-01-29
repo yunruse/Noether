@@ -2,7 +2,7 @@
 Prefixes a unit may take.
 '''
 
-from typing import Optional, Union
+from typing import List, Optional, Tuple, Union
 from dataclasses import dataclass
 
 from ..config import Config, conf
@@ -28,13 +28,13 @@ class Prefix:
         }
 
 
-class PrefixSet(list[Prefix]):
+class PrefixSet(List[Prefix]):
     __slots__ = ('name', )
 
     def __init__(
         self,
         name: str,
-        prefixes: Optional[list[Union[Prefix, tuple[str, str, float]]]] = None
+        prefixes: Optional[List[Union[Prefix, Tuple[str, str, float]]]] = None
     ):
         self.name = name
         list.__init__(self)

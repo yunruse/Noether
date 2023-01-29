@@ -3,6 +3,7 @@ Catalogue of units, which may handle interpreting
 units with prefixes.
 '''
 
+from typing import Dict
 from ..helpers import removeprefix
 from ..config import Config, conf
 from . import Dimension, Unit
@@ -13,11 +14,11 @@ Allow fetching any unit with any prefix (e.g. gibimeter).''')
 
 
 class Catalogue:
-    dimensions: dict[str, Dimension]
-    units: dict[str, Unit]
-    prefix_sets: dict[str, PrefixSet]
+    dimensions: Dict[str, Dimension]
+    units: Dict[str, Unit]
+    prefix_sets: Dict[str, PrefixSet]
 
-    _prefixes = dict[str, Prefix]
+    _prefixes = Dict[str, Prefix]
 
     def __init__(self, catalogue: dict):
         self.units = dict()
@@ -74,7 +75,7 @@ class Catalogue:
 
     @property
     def all_units(self):
-        units: dict[str, Unit] = {}
+        units: Dict[str, Unit] = {}
 
         for name, unit in self.units.items():
             units[name] = unit

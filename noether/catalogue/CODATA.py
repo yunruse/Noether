@@ -2,6 +2,7 @@
 Automatically-loaded CODATA fundamental physical constants.
 '''
 
+from typing import Dict, List
 from ..core import Unit
 from ..config import Config, conf
 
@@ -11,7 +12,7 @@ from . import si
 catalogue = Catalogue(vars(si))
 
 
-def scanline(string: str, lengths: list[int]) -> list[str]:
+def scanline(string: str, lengths: List[int]) -> List[str]:
     chunks = []
     for N in lengths:
         chunks.append(string[:N].strip())
@@ -40,7 +41,7 @@ def _fmt_value(string: str):
 
 
 def _codata(path: str):
-    units:  dict[str, Unit] = dict()
+    units: Dict[str, Unit] = dict()
 
     scanning = False
     with open(path) as f:

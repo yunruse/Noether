@@ -2,11 +2,11 @@
 TOML configuration.
 '''
 
+from typing import Any, Dict, List, Optional
 from dataclasses import dataclass
 import json
 import os
 from pathlib import Path
-from typing import Any, Optional
 import toml
 import warnings
 
@@ -60,7 +60,7 @@ def ConfigProperty(option: ConfigOption):
 
 class Config:
     _config: dict
-    options: dict[str, ConfigOption] = dict()
+    options: Dict[str, ConfigOption] = dict()
 
     @classmethod
     def register(
@@ -115,7 +115,7 @@ class Config:
     # % IO
 
     def categories(self):
-        cats: dict[str, list[str]] = dict()
+        cats: Dict[str, List[str]] = dict()
         for name in sorted(self.options.keys()):
             cat, name = name.split('_', 1)
             cats.setdefault(cat, [])
