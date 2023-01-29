@@ -58,7 +58,7 @@ def ConfigProperty(option: ConfigOption):
     return property(getter, setter, deleter)
 
 
-class Config(dict):
+class Config:
     _config: dict
     options: dict[str, ConfigOption] = dict()
 
