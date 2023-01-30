@@ -14,7 +14,7 @@ from .imperial import *
 
 from ..config import Config, conf
 
-Config.register('CATALOGUE_extended', True, help='''
+Config.register('CATALOGUE_extended', True, help='''\
 Provide historical, cgs, obscure and regional units. Disabling these may provide some speedup.''')
 
 if conf.get('CATALOGUE_extended'):
@@ -24,3 +24,9 @@ from ..core.Catalogue import Catalogue  # noqa
 from . import info  # noqa
 
 catalogue = Catalogue(locals())
+
+Config.register('CATALOGUE_all_prefixes_in_namespace', True, help='''\
+Put every prefixed unit (microohm, kibibyte &c) as measures in the Noether namespace.
+This may cause annoyance if you `from noether import *`!''')
+if conf.get('CATALOGUE_all_prefixes_in_namespace'):
+    vars().update(catalogue.all_units)

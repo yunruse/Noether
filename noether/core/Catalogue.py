@@ -9,7 +9,7 @@ from ..config import Config, conf
 from . import Dimension, Unit
 from .Prefix import PrefixSet, Prefix
 
-Config.register('UNITS_all_prefixes', False, help='''
+Config.register('UNITS_all_prefixes', False, help='''\
 Allow fetching any unit with any prefix (e.g. gibimeter).''')
 
 
