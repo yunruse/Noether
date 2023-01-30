@@ -22,7 +22,7 @@ if conf.get('CATALOGUE_extended'):
 Config.register('CATALOGUE_fun', True, help='''\
 Provide humorous and fictional units of measure.''')
 if conf.get('CATALOGUE_fun'):
-    from .humorous import *
+    from .humorous.unusual import *
 
 from ..core.Catalogue import Catalogue  # noqa
 from . import info  # noqa
