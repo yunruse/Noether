@@ -8,7 +8,7 @@ from ..core.Prefix import SI
 from ..core.fundamental import candela, kilogram, meter, second, kelvin
 from math import pi
 from .si import joule, watt, pascal, cumec, g, c
-from .conventional import cm, year
+from .conventional import cm, year, hour, minute
 
 # % Human
 
@@ -66,6 +66,9 @@ parsec = Unit(au * 180*60*60/pi, "parsec", "pc", SI)
 
 lightsecond = Unit(c * second, "lightsecond", "ls", SI)
 lightyear = ly = Unit(c * year, "lightyear", "ly", SI)
+
+sol = Unit(hour*24 + minute*39 + second*35.244, "sol",
+           info="Mars' average day length")
 
 # % Photometric
 nit = Unit(candela / meter**2, 'nit', 'nit')
