@@ -15,10 +15,14 @@ from .imperial import *
 from ..config import Config, conf
 
 Config.register('CATALOGUE_extended', True, help='''\
-Provide historical, cgs, obscure and regional units. Disabling these may provide some speedup.''')
-
+Provide historical, obscure and regional units.''')
 if conf.get('CATALOGUE_extended'):
     from .extension import *
+
+Config.register('CATALOGUE_fun', True, help='''\
+Provide humorous and fictional units of measure.''')
+if conf.get('CATALOGUE_fun'):
+    from .humorous import *
 
 from ..core.Catalogue import Catalogue  # noqa
 from . import info  # noqa
