@@ -28,8 +28,8 @@ The `tests` directory contains a few analysis tools (mostly for analysing the ca
 
 ### Class structure
 
-- `ConfigOption`, which is registered in various places in code
-- `Config`, which internally holds a `dict` of user settings
+The most relevant classes are those of measure:
+
 - `Dimension`, an `ImmutableDict` which holds dimension names and exponents (eg `speed = Dimension(length=1, time=-1)`)
 - `Prefix`, such as `milli` or `tera`
 - `MeasureInfo`, used for extra display "comments"
@@ -38,5 +38,5 @@ The `tests` directory contains a few analysis tools (mostly for analysing the ca
     - `AffineUnit`, with a zero-point (useful for °C)
     - `ChainedUnit`, which handles `unit & unit` (eg `foot & inch`)
   - `MeasureRelative`, which handles `measure @ unit` (stored as `.unit`)
-- `DisplaySet` (nominally `display`), which handles which unit should be used for display
-- `Catalogue` (nominally `catalogue`), which collates every unit
+
+Some additional standalone classes handle config and collation. 
