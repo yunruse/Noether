@@ -1,5 +1,5 @@
-from .historic import *
-from .typographic import *
+from ..historic.scientific import *
+from ..typographic import *
 
 from .regional import *
 

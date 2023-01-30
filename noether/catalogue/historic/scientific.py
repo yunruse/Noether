@@ -1,5 +1,5 @@
 '''
-Obscure or otherwise historic units.
+Obscure scientific units.
 '''
 
 from math import pi

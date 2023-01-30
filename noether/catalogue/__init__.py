@@ -14,15 +14,15 @@ from .imperial import *
 
 from ..config import Config, conf
 
-Config.register('CATALOGUE_extended', True, help='''\
-Provide historical, obscure and regional units.''')
-if conf.get('CATALOGUE_extended'):
+Config.register('CATALOGUE_historical', True, help='''\
+Provide historical units.''')
+if conf.get('CATALOGUE_historical'):
     from .extension import *
 
-Config.register('CATALOGUE_fun', True, help='''\
-Provide humorous and fictional units of measure.''')
-if conf.get('CATALOGUE_fun'):
-    from .humorous.unusual import *
+Config.register('CATALOGUE_humorous', True, help='''\
+Provide humorous and fictional units.''')
+if conf.get('CATALOGUE_humorous'):
+    from .humorous import *
 
 from ..core.Catalogue import Catalogue  # noqa
 from . import info  # noqa
