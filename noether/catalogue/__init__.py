@@ -29,6 +29,8 @@ from . import info  # noqa
 
 catalogue = Catalogue(locals())
 
+vars().update({p.prefix: p for p in catalogue.prefixes})
+
 Config.register('CATALOGUE_all_prefixes_in_namespace', True, help='''\
 Put every prefixed unit (microohm, kibibyte &c) as measures in the Noether namespace.
 This may cause annoyance if you `from noether import *`!''')

@@ -14,7 +14,7 @@ Config.register("PREFIX_iec", True, """\
 Enable binary data prefixes (eg mebibyte = 1024^2 byte)""")
 
 
-@dataclass
+@dataclass(frozen=True)
 class Prefix:
     prefix: str
     symbol: str
