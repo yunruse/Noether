@@ -49,15 +49,18 @@ litre = liter = L = Unit((meter/10) ** 3, ["liter", "litre"], "l", SI)
 milliliter = milliliter = ml = mL = Unit(
     liter / 1000, ['milliliter', 'millilitre'], 'mL')
 
-# % Mass
+# % Mass & density
 gram = Unit(kilogram / 1000, 'gram', 'g', SI)
 ton = tonne = Unit(
     kilogram*1000, ["ton", "tonne"], "t", SI_large, info="metric")
+gsm = Unit(
+    gram / meter**2, "gram per square meter", "gsm",
+    info="Used especially in paper-making as a proxy for thickness and pliability. "
+    " A standard sheet of printer paper is usually 100gsm.")
 
-# % Frequency
+# % Frequency & angle
 bpm = Unit(1 / minute, "beats per minute", "bpm")
 
-# % Angle
 deg = degree = Unit(radian * pi / 180, "degree", ["°", "deg"])
 arcminute = arcmin = Unit(degree / 60, "arcminute", ["′", "arcmin"])
 arcsecond = arcsec = Unit(
