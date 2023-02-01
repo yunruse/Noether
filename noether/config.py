@@ -76,6 +76,7 @@ class Config:
         )
         cls.options[key] = option
         setattr(cls, key, ConfigProperty(option))
+        return key
 
     def __init__(
         self,

@@ -5,7 +5,7 @@ from typing import Callable, Dict
 
 from ..config import conf
 from ..helpers import ImmutableDict, removeprefix, reorder_dict_by_values
-from ..errors import DimensionError
+from ..errors import NoetherError
 
 
 DimInfo = namedtuple('DimInfo', ('order', 'symbol'))
@@ -56,8 +56,7 @@ class Dimension(ImmutableDict):
             if not exp:
                 del value[name]
             if name not in self._names:
-                raise DimensionError(
-                    f'Unknown dimension {name}')
+                raise NoetherError(f'Unknown dimension {name}.')
         super().__init__(value)
 
     def __hash__(self):
@@ -192,8 +191,7 @@ class Dimension(ImmutableDict):
         if self == other:
             return self
         else:
-            raise DimensionError(
-                f'Dimensions {self} and {other} do not match')
+            raise DimensionError(self, other)
 
     __sub__ = __rsub__ = __add__ = __radd__ = _linear_operation
 

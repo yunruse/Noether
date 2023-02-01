@@ -17,9 +17,8 @@ class AffineUnit(Unit):
         symbols: Optional[Union[List[str], str]] = None,
     ):
         if unit.dim != zero_point.dim:
-            raise DimensionError(
-                f'Cannot use {zero_point.dim} as zero-point dimension'
-                f' when unit provided has dimension {zero_point.dim}')
+            raise DimensionError(zero_point.dim, unit.dim,
+                                 '(AffineUnit creation)')
         object.__setattr__(self, 'zero_point', zero_point)
         Unit.__init__(self, unit, names, symbols)
 
@@ -28,7 +27,7 @@ class AffineUnit(Unit):
 
     def __and__(self, _: Unit):
         raise IncompatibleUnitError(
-            'AffineUnit {self} cannot be chained with units.')
+            'AffineUnit {self} cannot be chained with other units.')
 
     __rand__ = __and__
 

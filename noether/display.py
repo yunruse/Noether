@@ -68,9 +68,9 @@ def uncertainty(number: Decimal, stddev: Decimal):
     return f'{ai}.{af}({bf})'
 
 
-def canonical_number(number, stddev):
+def canonical_number(number, stddev, display_shorthand: bool = False):
     if stddev is not None:
-        if conf.get('uncertainty_display_shorthand'):
+        if display_shorthand:
             return uncertainty(number, stddev)
         else:
             pm = plus_minus_symbol()

@@ -9,7 +9,7 @@ from ..config import conf
 from ..display import canonical_number
 from .Prefix import Prefix
 from .Dimension import Dimension
-from .Measure import Measure
+from .Measure import Measure, UNCERTAINTY_SHORTHAND
 
 
 class Unit(Measure):
@@ -112,5 +112,5 @@ class Unit(Measure):
         if measure.stddev is not None:
             stddev = measure.stddev / self.value
 
-        v = canonical_number(val, stddev)
+        v = canonical_number(val, stddev, conf.get(UNCERTAINTY_SHORTHAND))
         return f'{v} {self.symbol}'

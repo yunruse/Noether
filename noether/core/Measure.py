@@ -1,12 +1,13 @@
+__all__ = ('Measure', )
 
 from dataclasses import dataclass
 from functools import total_ordering
 import operator
 from sys import version_info
-from typing import List, Optional, Tuple, TypeVar, ClassVar, Generic, TYPE_CHECKING, Union
+from typing import Callable, List, Optional, Tuple, TypeVar, ClassVar, Generic, TYPE_CHECKING, Union
 from numbers import Real
 
-from ..errors import DimensionError
+from ..errors import NoetherError, DimensionError
 from ..config import Config, conf
 from ..display import canonical_number
 from .Dimension import Dimension, dimensionless
@@ -17,28 +18,28 @@ if TYPE_CHECKING:
     from .MeasureRelative import MeasureRelative
 
 
-Config.register("measure_openlinear", False, """\
+OPENLINEAR = Config.register("measure_ignore_dimension", False, """\
 Allow any addition, even between incompatible units
 (eg metre and second)""")
 
-Config.register("measure_barenumber", False, """\
+BARENUMBER = Config.register("measure_barenumber", False, """\
 Allow addition and subtraction of bare numbers to units""")
 
-Config.register("uncertainty_compare_range_overlap", False, """\
+UNCERTAINTY_OVERLAP = Config.register("uncertainty_compare_range_overlap", False, """\
 When comparing a Measure, compare on the uncertainty.
 For == this means 'do the ranges overlap';
 for < it means 'do the ranges not overlap'.""")
 
-Config.register("uncertainty_display_shorthand", False, """\
+UNCERTAINTY_SHORTHAND = Config.register("uncertainty_display_shorthand", False, """\
 Display e.g. 0.15(2) instead of 0.15 ± 0.02.""")
 
-T = TypeVar('T', int, float, Real)
+T = TypeVar('T', int, float, Real)  # typing of Measure
 
 
 @dataclass(
     frozen=True,
     init=False,
-    **(dict(slots=True)if version_info.minor >= 10 else dict()),
+    **(dict(slots=True) if version_info.minor >= 10 else dict()),
 )
 @total_ordering
 class Measure(Generic[T]):
@@ -182,7 +183,7 @@ class Measure(Generic[T]):
     @staticmethod
     def repr_measure(measure: 'Measure'):
         # Fallback if no unit found
-        n = canonical_number(measure.value, measure.stddev)
+        n = canonical_number(measure.value, measure.stddev, conf.get(UNCERTAINTY_SHORTHAND))
         s = measure.as_fundamental()
         return f'{n} {s}'
 
@@ -204,7 +205,7 @@ class Measure(Generic[T]):
     @staticmethod
     def str_measure(measure: 'Measure'):
         # Fallback if no unit found
-        n = canonical_number(measure.value, measure.stddev)
+        n = canonical_number(measure.value, measure.stddev, conf.get(UNCERTAINTY_SHORTHAND))
         s = measure.as_fundamental().replace(' * ', ' ')
         return f'{n} {s}'
 
@@ -264,24 +265,24 @@ class Measure(Generic[T]):
     def __pos__(self): return self
     def __abs__(self): return self if self.value > 0 else -self  # type: ignore
 
-    def __lin_cmp(self, other):
-        if conf.get('measure_openlinear'):
+    def __lin_cmp(self, other, operation: str):
+        if conf.get(OPENLINEAR):
             return
 
         if isinstance(other, Measure):
             if self.dim != other.dim:
                 raise DimensionError(
-                    f"{self.dim!r} and {other.dim!r}"
-                    " are incompatible dimensions."
-                    " Enable conf.measure_openlinear to suppress this.")
+                    self.dim, other.dim,
+                    f"To enable {operation} on mismatched dimensions enable conf.{OPENLINEAR}.")
 
-        elif not conf.get('measure_barenumber'):
-            raise DimensionError(
+        elif not conf.get(BARENUMBER):
+            raise NoetherError(
                 "A measure may not linearly operate on a number."
-                " Enable conf.measure_barenumber to suppress this.")
+                f" Enable conf.{BARENUMBER} to suppress this.")
 
-    def __lin(self, other: 'Union[Measure[T], Dimension, Real]', op=operator.add):
-        self.__lin_cmp(other)
+    def __lin(self, other: 'Union[Measure[T], Dimension, Real]', op):
+        self.__lin_cmp(
+            other, 'addition' if op == operator.add else 'subtraction')
 
         value = self.value
         stddev = self.stddev
@@ -308,9 +309,9 @@ class Measure(Generic[T]):
 
     def __eq__(self, other):
         if isinstance(other, Measure):
-            if other.dim != self.dim:
+            if other.dim != self.dim and not self.get(OPENLINEAR):
                 return False
-            if conf.get('uncertainty_compare_range_overlap'):
+            if conf.get(UNCERTAINTY_OVERLAP):
                 s_min, s_max = self.bounds
                 o_min, o_max = other.bounds
                 return ((s_min <= o_min <= s_max) or
@@ -320,9 +321,9 @@ class Measure(Generic[T]):
             return self.value == other.value
 
     def __lt__(self, other):
-        self.__lin_cmp(other)
+        self.__lin_cmp(other, 'comparison')
         if isinstance(other, Measure):
-            if conf.get('uncertainty_compare_range_overlap'):
+            if conf.get(UNCERTAINTY_OVERLAP):
                 s_min, s_max = self.bounds
                 o_min, o_max = other.bounds
                 return s_max < o_min
@@ -338,11 +339,10 @@ class Measure(Generic[T]):
 
         if not isinstance(unit, Unit):
             raise TypeError('Can only use @ (display relative to) on a Unit.')
-        if self.dim != unit.dim and not conf.get('measure_openlinear'):
+        if self.dim != unit.dim and not conf.get(OPENLINEAR):
             raise DimensionError(
-                f"{self.dim!r} and {unit.dim!r}"
-                " are incompatible dimensions."
-                " Enable conf.measure_openlinear to suppress this.")
+                self.dim, unit.dim,
+                f"To use @ on units with different dimensions, enable conf.{OPENLINEAR}.")
         return MeasureRelative(self, unit)
 
     def __and__(self, unit: 'Unit'):
