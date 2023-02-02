@@ -40,3 +40,24 @@ The most relevant classes are those of measure:
   - `MeasureRelative`, which handles `measure @ unit` (stored as `.unit`)
 
 Some additional standalone classes handle config and collation. 
+
+## Internal style guide
+
+- Use whichever of `'` and `"` is convenient.
+- Comments explain why, not what. Code should be written in a way that is clear and not confusing. Python is hardly the fastest language – slight inefficiency is not a problem.
+
+### Imports
+
+Imports are done in "paragraphs", with a single empty line between them. The ordering may go similar to as follows:
+
+- Python stdlib typing: `typing` and `dataclass`
+- Python stdlib
+- Internal imports: `..`
+- Internal imports: `.` 
+- For files in `catalogue/`, relative imports of units
+
+Unless doing namespace magicks, internal imports are done with `from .package import item` rather than on a package level.
+
+### File names
+With small exception, each class is in its own file, and the package is explicitly named the same as the class.
+Thus, for example, `noether.core.Unit.Unit`.
