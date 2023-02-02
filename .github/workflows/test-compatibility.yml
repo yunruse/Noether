@@ -12,8 +12,9 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        # TODO: 3.8, 3.7
-        python-version: ["3.9", "3.10", "3.11"]
+        # Per the closing comment on #22:
+        # Python 3.10, at least for now, is the minimum supported version.
+        python-version: ["3.10", "3.11"]
 
     steps:
     - uses: actions/checkout@v3

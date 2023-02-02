@@ -3,7 +3,8 @@ Unit - a subclass of Measure which has its own name(s) and symbol(s).
 
 Used in turn to display Measure.
 '''
-from typing import List, Optional, Tuple, Union
+
+from typing import Optional, Union
 
 from ..config import conf
 from ..display import canonical_number
@@ -15,16 +16,16 @@ from .Measure import Measure, UNCERTAINTY_SHORTHAND
 class Unit(Measure):
     __slots__ = 'value stddiv dim symbols names prefixes info'.split()
 
-    names: Tuple[str]
-    prefixes: List[Prefix]
+    names: tuple[str]
+    prefixes: list[Prefix]
     info: str
 
     def __init__(
         self,
-        measure: Union[Measure, Dimension],
-        names: Optional[Union[str, List[str]]] = None,
-        symbols: Optional[Union[str, List[str]]] = None,
-        prefixes: Optional[List[Prefix]] = None,
+        measure: Measure | Dimension,
+        names: str | list[str] | None = None,
+        symbols: str | list[str] | None = None,
+        prefixes: Optional[list[Prefix]] = None,
         info: Optional[str] = None,
     ):
         if isinstance(measure, Dimension):

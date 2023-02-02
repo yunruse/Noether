@@ -1,7 +1,7 @@
 from collections import namedtuple
 from fractions import Fraction
 from numbers import Number
-from typing import Callable, Dict
+from typing import Callable
 
 from ..config import conf
 from ..helpers import ImmutableDict, removeprefix, reorder_dict_by_values
@@ -21,7 +21,7 @@ class Dimension(ImmutableDict):
     '''
 
     # Class variable with display order
-    _names: Dict[str, DimInfo] = dict()
+    _names: dict[str, DimInfo] = dict()
 
     # Instantiation
 

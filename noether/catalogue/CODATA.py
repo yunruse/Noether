@@ -34,7 +34,7 @@ def _fmt_value(string: str):
 
 
 def _codata(path: str):
-    units: Dict[str, Unit] = dict()
+    units:  dict[str, Unit] = dict()
 
     scanning = False
     with open(path) as f:

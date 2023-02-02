@@ -1,9 +1,10 @@
-from typing import Dict, Generator, Tuple
+from typing import Generator
+
+from math import log
 
 from ...config import conf
 from ...core.Measure import Measure, MeasureInfo
 
-from math import log
 from .. import angstrom, km, cm, meter, foot
 from .. import year, day, hour, minute, second
 from .. import c
@@ -13,7 +14,7 @@ from .. import c
 
 kmq = km**2
 
-COMPARISON_MEASURES: Dict[str, Tuple[str, Measure]] = {
+COMPARISON_MEASURES: dict[str, tuple[str, Measure]] = {
 
     # % Time
     'year': ('', year),
@@ -84,7 +85,7 @@ class info_comparison(MeasureInfo):
     def get_comparisons(
         measure: Measure,
         country: str = None
-    ) -> Generator[Tuple[float, str, Measure], None, None]:
+    ) -> Generator[tuple[float, str, Measure], None, None]:
         """
         Return comparisons with "scores".
         Scores are related to how close a comparison is to the measure,
