@@ -1,4 +1,3 @@
-from typing import List, Optional, Union
 from numbers import Real
 
 from ..errors import DimensionError, IncompatibleUnitError
@@ -13,8 +12,8 @@ class AffineUnit(Unit):
         self,
         unit: Measure,
         zero_point: Measure,
-        names: Optional[Union[List[str], str]] = None,
-        symbols: Optional[Union[List[str], str]] = None,
+        names: list[str] | str | None = None,
+        symbols: list[str] | str | None = None,
     ):
         if unit.dim != zero_point.dim:
             raise DimensionError(zero_point.dim, unit.dim,
@@ -22,7 +21,7 @@ class AffineUnit(Unit):
         object.__setattr__(self, 'zero_point', zero_point)
         Unit.__init__(self, unit, names, symbols)
 
-    def __call__(self, value: Real, stddev: Optional[Real] = None):
+    def __call__(self, value: Real, stddev: Real | None = None):
         return Measure.__call__(self, value, stddev) + self.zero_point
 
     def __and__(self, _: Unit):

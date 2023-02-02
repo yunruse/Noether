@@ -1,4 +1,4 @@
-from typing import TYPE_CHECKING, Optional, Tuple
+from typing import TYPE_CHECKING
 if TYPE_CHECKING:
     from core.Dimension import Dimension
 
@@ -18,9 +18,9 @@ class NoetherError(Exception):
 class DimensionError(NoetherError):
     'Dimensions do not match.'
 
-    args: 'Tuple[Dimension, Dimension, str]'
+    args: 'tuple[Dimension, Dimension, str]'
 
-    def __init__(self, dim1: 'Dimension', dim2: 'Dimension', message: Optional[str] = None):
+    def __init__(self, dim1: 'Dimension', dim2: 'Dimension', message: str | None = None):
         super().__init__(dim1, dim2, message)
 
     def __str__(self):

@@ -2,8 +2,6 @@
 Automatically-loaded CODATA fundamental physical constants.
 '''
 
-from typing import Dict
-
 from ..helpers import scanline
 from ..core import Unit
 from ..config import Config, conf
@@ -34,7 +32,7 @@ def _fmt_value(string: str):
 
 
 def _codata(path: str):
-    units: Dict[str, Unit] = dict()
+    units:  dict[str, Unit] = dict()
 
     scanning = False
     with open(path) as f:

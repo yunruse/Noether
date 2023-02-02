@@ -52,7 +52,7 @@ class Measure(Generic[T]):
 
     def __init__(
         self,
-        value: "Union[Measure[T], T]" = 1,
+        value: "Measure[T] | T" = 1,
         stddev: Optional[T] = None,
         dim: Optional[Dimension] = None,
     ):
@@ -96,7 +96,7 @@ class Measure(Generic[T]):
         return self.stddev / self.value
 
     @property
-    def bounds(self) -> Tuple[T, T]:
+    def bounds(self) -> tuple[T, T]:
         if self.stddev is None:
             return self.value, self.value
         return self.value - self.stddev, self.value + self.stddev  # type: ignore
@@ -124,7 +124,7 @@ class Measure(Generic[T]):
     def as_integer_ratio(self):
         return self.value.as_integer_ratio()  # type: ignore
 
-    info_handlers: ClassVar[List[type[MeasureInfo]]] = list()
+    info_handlers: ClassVar[list[type[MeasureInfo]]] = list()
 
     @classmethod
     def Info(cls, handler: type[MeasureInfo]):
@@ -183,7 +183,8 @@ class Measure(Generic[T]):
     @staticmethod
     def repr_measure(measure: 'Measure'):
         # Fallback if no unit found
-        n = canonical_number(measure.value, measure.stddev, conf.get(UNCERTAINTY_SHORTHAND))
+        n = canonical_number(measure.value, measure.stddev,
+                             conf.get(UNCERTAINTY_SHORTHAND))
         s = measure.as_fundamental()
         return f'{n} {s}'
 
@@ -205,7 +206,8 @@ class Measure(Generic[T]):
     @staticmethod
     def str_measure(measure: 'Measure'):
         # Fallback if no unit found
-        n = canonical_number(measure.value, measure.stddev, conf.get(UNCERTAINTY_SHORTHAND))
+        n = canonical_number(measure.value, measure.stddev,
+                             conf.get(UNCERTAINTY_SHORTHAND))
         s = measure.as_fundamental().replace(' * ', ' ')
         return f'{n} {s}'
 
@@ -218,7 +220,7 @@ class Measure(Generic[T]):
 
     def __geo(
         self,
-        other: 'Union[Measure[T], Dimension, Real]',
+        other: 'Measure[T] | Dimension | Real',
         op=operator.mul
     ) -> 'Measure':
         value = self.value
@@ -280,7 +282,7 @@ class Measure(Generic[T]):
                 "A measure may not linearly operate on a number."
                 f" Enable conf.{BARENUMBER} to suppress this.")
 
-    def __lin(self, other: 'Union[Measure[T], Dimension, Real]', op):
+    def __lin(self, other: 'Measure[T] | Dimension | Real', op):
         self.__lin_cmp(
             other, 'addition' if op == operator.add else 'subtraction')
 

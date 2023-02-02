@@ -4,19 +4,17 @@ List of units used for display purposes.
 Also handles dimension names.
 '''
 
-from typing import Dict, List, Union
-
 from .Dimension import Dimension
 from .Unit import Unit
 
 
 class DisplaySet:
-    units: Dict[Dimension, List[Unit]]
-    dimension_names: Dict[Dimension, List[str]]
+    units: dict[Dimension, list[Unit]]
+    dimension_names: dict[Dimension, list[str]]
 
-    dimension_symbol = Dict[str, str]
+    dimension_symbol = dict[str, str]
 
-    def __init__(self, *items: List[Unit]):
+    def __init__(self, *items: list[Unit]):
         self.units = dict()
         self.dimension_names = dict()
         self.dimension_symbol = dict(dimensionless='')
@@ -29,8 +27,8 @@ class DisplaySet:
 
     def add(
         self,
-        value: Union[Unit, Dimension, 'DisplaySet'],
-        *names: List[str]
+        value: 'Unit | Dimension | DisplaySet',
+        *names: list[str]
     ):
         if isinstance(value, Dimension):
             self.dimension_names.setdefault(value, [])
@@ -53,8 +51,8 @@ class DisplaySet:
 
     def remove(
         self,
-        value: Union[Unit, Dimension, 'DisplaySet'],
-        *names: List[str]
+        value: 'Unit | Dimension | DisplaySet',
+        *names: list[str]
     ):
         if isinstance(value, Dimension):
             self.dimension_names.setdefault(value, [])
@@ -69,11 +67,11 @@ class DisplaySet:
             for units in value.units.values():
                 self.unregister(*units)
 
-    def register(self, *units: List[Unit]):
+    def register(self, *units: list[Unit]):
         for unit in units:
             self.add(unit)
 
-    def unregister(self, *units: List[Unit]):
+    def unregister(self, *units: list[Unit]):
         for unit in units:
             self.remove(unit)
 

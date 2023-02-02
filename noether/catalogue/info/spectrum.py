@@ -1,11 +1,9 @@
-from typing import Dict, List, Tuple
-
 from ...core import Measure, MeasureInfo, meter
 
 from ..dimensions import length, frequency, energy
 from ..si import c, h
 
-SPECTRUM: Dict[str, Tuple[float, float]] = {
+SPECTRUM: dict[str, tuple[float, float]] = {
     # ISO 21348. spacewx.com/pdf/SET_21348_2004.pdf
     # measured in nm
     "xray": (0.001, 0.1),
@@ -57,7 +55,7 @@ SPECTRUM: Dict[str, Tuple[float, float]] = {
 nanometer = meter(1e-9)
 
 
-def spectrum_names(wavelength: float) -> List[str]:
+def spectrum_names(wavelength: float) -> list[str]:
     names = []
     wavelength = float(wavelength / nanometer)
     for name, (a, b) in SPECTRUM.items():
