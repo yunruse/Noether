@@ -44,6 +44,8 @@ knot = Unit(nautical_mile / hour, "knot", ["kn", "kt"])
 
 # % Area
 
+acre = Unit(chain * furlong, "acre", "ac")
+
 # TODO: all of this nonsense
 
 # % Volume
