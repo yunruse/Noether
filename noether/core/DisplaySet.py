@@ -4,7 +4,6 @@ List of units used for display purposes.
 Also handles dimension names.
 '''
 
-from typing import Union
 from .Dimension import Dimension
 from .Unit import Unit
 

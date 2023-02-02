@@ -2,7 +2,6 @@
 Prefixes a unit may take.
 '''
 
-from typing import Optional, Union
 from dataclasses import dataclass
 
 from ..config import Config, conf

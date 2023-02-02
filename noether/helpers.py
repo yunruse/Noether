@@ -2,7 +2,6 @@
 Helpful standalone functions.
 '''
 
-from typing import List
 import os
 import pathlib
 
@@ -19,7 +18,7 @@ def removesuffix(string: str, suffix: str):
         return string[:-len(suffix)]
 
 
-def scanline(string: str, lengths: List[int]) -> List[str]:
+def scanline(string: str, lengths: list[int]) -> list[str]:
     "Divide column-indented strings"
     chunks = []
     for N in lengths:

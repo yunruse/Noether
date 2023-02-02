@@ -4,7 +4,7 @@ Unit - a subclass of Measure which has its own name(s) and symbol(s).
 Used in turn to display Measure.
 '''
 
-from typing import Optional, Union
+from typing import Optional
 
 from ..config import conf
 from ..display import canonical_number
@@ -25,8 +25,8 @@ class Unit(Measure):
         measure: Measure | Dimension,
         names: str | list[str] | None = None,
         symbols: str | list[str] | None = None,
-        prefixes: Optional[list[Prefix]] = None,
-        info: Optional[str] = None,
+        prefixes: list[Prefix] | None = None,
+        info: str | None = None,
     ):
         if isinstance(measure, Dimension):
             measure = Measure(dim=measure)

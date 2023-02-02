@@ -2,7 +2,7 @@
 TOML configuration.
 '''
 
-from typing import Any, Optional
+from typing import Generic, TypeVar
 from dataclasses import dataclass
 
 import json
@@ -16,11 +16,13 @@ from .helpers import get_dot_config
 
 CONF_FILE = get_dot_config() / 'noether.toml'
 
+ConfigType = TypeVar('ConfigType', bool, str, int)
+
 
 @dataclass
-class ConfigOption:
+class ConfigOption(Generic[ConfigType]):
     name: str
-    default: Any
+    default: ConfigType
     type: type
     help: str = ""
 
@@ -67,9 +69,9 @@ class Config:
     def register(
         cls,
         key: str,
-        default,
+        default: ConfigType,
         help="",
-        typ: Optional[type] = None,
+        typ: type | None = None,
     ):
         option = ConfigOption(
             key, default,
@@ -81,7 +83,7 @@ class Config:
 
     def __init__(
         self,
-        value: Optional[dict] = None,
+        value: dict | None = None,
         **kwargs,
     ):
         self._config = {

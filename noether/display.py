@@ -4,9 +4,9 @@ Functions for transforming various numbers into strings.
 Handles Unicode.
 '''
 
-from math import log10
 from decimal import Decimal
 from numbers import Real
+
 from .config import Config, conf
 
 Config.register("display_unicode_symbols", True, '''\

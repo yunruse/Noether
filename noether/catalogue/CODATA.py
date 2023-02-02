@@ -2,8 +2,6 @@
 Automatically-loaded CODATA fundamental physical constants.
 '''
 
-from typing import Dict
-
 from ..helpers import scanline
 from ..core import Unit
 from ..config import Config, conf
