@@ -35,4 +35,4 @@ Config.register('CATALOGUE_all_prefixes_in_namespace', True, help='''\
 Put every prefixed unit (microohm, kibibyte &c) as measures in the Noether namespace.
 This may cause annoyance if you `from noether import *`!''')
 if conf.get('CATALOGUE_all_prefixes_in_namespace'):
-    vars().update(catalogue.all_units)
+    vars().update(catalogue.all_prefixed_units)
