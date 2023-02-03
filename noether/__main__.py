@@ -5,7 +5,7 @@ from sys import argv
 
 print('''\
 >>> import noether
->>> from noether.import *''')
+>>> from noether import *''')
 
 if '--no-rich' not in argv:
     try:
