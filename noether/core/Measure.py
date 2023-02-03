@@ -311,7 +311,7 @@ class Measure(Generic[T]):
 
     def __eq__(self, other):
         if isinstance(other, Measure):
-            if other.dim != self.dim and not self.get(OPENLINEAR):
+            if other.dim != self.dim and not conf.get(OPENLINEAR):
                 return False
             if conf.get(UNCERTAINTY_OVERLAP):
                 s_min, s_max = self.bounds
