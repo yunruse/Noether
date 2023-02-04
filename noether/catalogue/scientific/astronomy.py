@@ -22,7 +22,7 @@ astronomical_unit = au = Unit(
 parsec = Unit(au * 180*60*60/pi, "parsec", "pc", SI)
 
 lightsecond = Unit(c * second, "lightsecond", "ls", SI)
-lightyear = ly = Unit(c * year_julian, "lightyear", "ly", SI)
+lightyear = ly = Unit(c * year, "lightyear", "ly", SI)
 
 sol = Unit(hour*24 + minute*39 + second*35.244, "sol",
            info="Mars' average day length")
