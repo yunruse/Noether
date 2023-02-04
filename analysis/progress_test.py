@@ -10,23 +10,19 @@ from noether import catalogue
 
 class progress(TestCase):
     def test_count_units(self, graph=True):
-        FMT = '%Y-%m-%d'
+        F = OUTPUT / 'catalogue_count.csv'
+        F.touch()
 
-        with open(OUTPUT / 'catalogue_count.csv') as f:
-            data = [(date, int(N)) for date, N in csv.reader(f)]
-
-        now = datetime.now().strftime(FMT)
         N = len(set(catalogue.units.values()))
-        if data[-1][0] == now:
-            data[-1] = [now, N]
-        else:
-            data.append([now, N])
+        today = format(datetime.today(), '%Y-%m-%d')
 
-        with open(OUTPUT / 'catalogue_count.csv', 'w') as f:
-            for date, N in data:
-                f.write(f'{date},{N}\n')
+        with open(F, 'a') as f:
+            f.write(f'{today},{N}\n')
 
         if graph:
+            with open(F) as f:
+                # one entry per date
+                data = {date: int(N) for date, N in csv.reader(f)}
             self.graph_unit_count(data)
 
     def graph_unit_count(self, data):
