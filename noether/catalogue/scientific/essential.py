@@ -63,19 +63,5 @@ micron = meter(1e-6)
 angstrom = Unit(meter(1e-10), "angstrom", "Å")
 barn = Unit(1e-28 * meter**2, "barn", "b", SI)
 
-# % Astronomical
-astronomical_unit = au = Unit(
-    meter(149_597_870_700),
-    "astronomical_unit", "au",
-    info="conventional unit defined by the IAU in 2012"
-)
-parsec = Unit(au * 180*60*60/pi, "parsec", "pc", SI)
-
-lightsecond = Unit(c * second, "lightsecond", "ls", SI)
-lightyear = ly = Unit(c * year_julian, "lightyear", "ly", SI)
-
-sol = Unit(hour*24 + minute*39 + second*35.244, "sol",
-           info="Mars' average day length")
-
 # % Photometric
 nit = Unit(candela / meter**2, 'nit', 'nit')
