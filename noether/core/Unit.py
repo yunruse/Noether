@@ -4,6 +4,7 @@ Unit - a subclass of Measure which has its own name(s) and symbol(s).
 Used in turn to display Measure.
 '''
 
+from datetime import timedelta
 from typing import Optional
 
 from ..config import conf
@@ -22,12 +23,17 @@ class Unit(Measure):
 
     def __init__(
         self,
-        measure: Measure | Dimension,
+        measure: Measure | Dimension | timedelta,
         names: str | list[str] | None = None,
         symbols: str | list[str] | None = None,
         prefixes: list[Prefix] | None = None,
         info: str | None = None,
     ):
+        # Useful!
+        if isinstance(measure, timedelta):
+            from .fundamental import second  # noqa
+            measure = second * measure.total_seconds()
+
         if isinstance(measure, Dimension):
             measure = Measure(dim=measure)
         super().__init__(measure)
