@@ -43,6 +43,11 @@ def _codata(path: str):
 
             name, value, uncertainty, unit = scanline(line, LENGTHS)
 
+            if name == 'Avogadro constant':
+                # TODO: #42 ComposedUnit
+                # HACK
+                unit = ''
+
             chunks = name.split()
             if 'in' in chunks and not name.startswith('shielding'):
                 continue  # already defined in another unit
