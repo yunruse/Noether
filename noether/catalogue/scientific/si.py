@@ -2,13 +2,23 @@
 SI-derived units, and constants used in defining the SI units.
 '''
 
-from ..core import Unit
-from ..core.Prefix import SI, SI_small
-from ..core.DisplaySet import display as I
+from ...core import Unit
+from ...core.Prefix import SI, SI_small, SI_large
+from ...core.DisplaySet import display as I
 
 from math import pi
-from ..core.fundamental import *
-from .dimensions import *
+from ...core.fundamental import *
+from ..dimensions import *
+
+# Time
+minute = Unit(second*60, 'minute', ['min'])
+hour = Unit(minute * 60, 'hour', ['hr', 'h'])
+day = Unit(hour * 24, "day", "d")
+year_julian = Unit(
+    day * 365.25,
+    "year", ["yr", "ya"], SI_large,
+    info="Julian calendar - assuming leap year every 400 years."
+    " Superseded by Gregorian year.")
 
 # Rotation
 becquerel = Bq = Unit(frequency, 'becquerel', "Bq", SI)
@@ -46,7 +56,7 @@ katal = kat = I(Unit(catalytic_activity, 'katal', "kat", SI))
 # % Constants defined as part of SI
 
 # GCWM 3
-standard_gravity = g = Unit(
+standard_gravity = Unit(
     9.980665 * meter / second**2,
     "standard_gravity", "g", info="defined by convention")
 
@@ -65,4 +75,4 @@ hbar = Unit(h / (pi*2), "hbar", "ħ")
 
 
 eV = electronvolt = Unit(electron_charge * volt, "electronvolt", "eV", SI)
-gee = g * kilogram
+gee = standard_gravity * kilogram

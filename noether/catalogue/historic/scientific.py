@@ -5,8 +5,8 @@ Obscure scientific units.
 from math import pi
 from ...core import Unit
 
-from ..si import hertz
-from ..scientific import nit
+from ..scientific.si import hertz
+from ..scientific.essential import nit
 
 
 # % Photometric units

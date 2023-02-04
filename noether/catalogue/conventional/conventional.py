@@ -2,15 +2,19 @@
 Conventional SI-compatible units.
 '''
 
-from ..core import Unit, AffineUnit
-from ..core.Prefix import SI, SI_large, SI_small
-from ..core.DisplaySet import display as I
+from noether.core import Unit, AffineUnit
+from noether.core.Prefix import SI, SI_large, SI_small
+from noether.core.DisplaySet import display as I
 
 from noether.config import Config, conf
 
 from math import pi
-from .si import radian, steradian, watt
-from ..core.fundamental import meter, second, ampere, kilogram, kelvin
+from ..scientific import meter, second, ampere, kilogram, kelvin
+from ..scientific import radian, steradian, turn
+from ..scientific import turn
+from ..scientific import watt
+from ..scientific import day, hour, minute
+from ..scientific import gram
 
 # % Ratio
 percent = Unit(1/100, 'percent', '%')
@@ -22,20 +26,13 @@ proof = Unit(0.5, 'proof', '°', info='alcohol purity')
 celsius = AffineUnit(kelvin*1, kelvin*273.15, "celsius", "ºC")
 
 # % Time
-minute = Unit(second*60, 'minute', ['min'])
-hour = Unit(minute * 60, 'hour', ['hr', 'h'])
-day = Unit(hour * 24, "day", "d")
 week = Unit(day * 7, "week", "w")
 fortnight = week * 2
-year_julian = Unit(day * 365.25,
-                   "year", ["yr", "ya"], SI_large, info="Julian calendar")
 year_gregorian = Unit(day * 365.2425,
                       "year", ["yr", "ya"], SI_large, info="Gregorian calendar")
 year = year_gregorian
 
 # % Distance
-cm = centimeter = centimetre = Unit(
-    meter * 0.01, ['centimeter', 'centimetre'], 'cm')
 km = kilometer = kilometre = Unit(
     meter * 1000, ['kilometer', 'kilometre'], 'km')
 kmph = Unit(km / hour, None, "kmph")
@@ -50,7 +47,6 @@ milliliter = milliliter = ml = mL = Unit(
     liter / 1000, ['milliliter', 'millilitre'], 'mL')
 
 # % Mass & density
-gram = Unit(kilogram / 1000, 'gram', 'g', SI)
 ton = tonne = Unit(
     kilogram*1000, ["ton", "tonne"], "t", SI_large, info="metric")
 gsm = Unit(
@@ -65,15 +61,6 @@ deg = degree = Unit(radian * pi / 180, "degree", ["°", "deg"])
 arcminute = arcmin = Unit(degree / 60, "arcminute", ["′", "arcmin"])
 arcsecond = arcsec = Unit(
     degree / 3600, "arcsecond", ["″", "arcsec"], SI_small)
-
-gradian = Unit(radian * pi / 200, "gon")
-circle = turn = Unit(radian * 2*pi, "turn", "turn")
-sphere = spat = Unit(steradian * 4*pi, "spat", "sp")
-
-# % Electricity
-watt_hour = Wh = Unit(watt * hour, 'watt_hour', 'Wh', SI)
-amp_hour = ampere_hour = Ah = Unit(ampere * hour, 'amp_hour', 'Ah')
-ampere_turn = At = Unit(ampere * turn, "ampere_turn", "At")
 
 
 # % Display

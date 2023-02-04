@@ -1,18 +1,13 @@
-from ..core.Prefix import *
+from noether.core.Prefix import *
+from noether.config import Config, conf
+
+# Dimensions
 from .dimensions import *
 
-from .si import *
-from .CODATA import *
-
+# Units are imported in this exact order
 from .scientific import *
-from .constants import *
-from .data import *
 
 from .conventional import *
-from .cgs import *
-from .imperial import *
-
-from ..config import Config, conf
 
 Config.register('CATALOGUE_historical', True, help='''\
 Provide historical units.''')
@@ -23,6 +18,8 @@ Config.register('CATALOGUE_humorous', True, help='''\
 Provide humorous and fictional units.''')
 if conf.get('CATALOGUE_humorous'):
     from .humorous import *
+
+# Catalogue export
 
 from ..core.Catalogue import Catalogue  # noqa
 from . import info  # noqa

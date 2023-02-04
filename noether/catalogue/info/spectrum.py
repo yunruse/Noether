@@ -1,7 +1,7 @@
 from ...core import Measure, MeasureInfo, meter
 
 from ..dimensions import length, frequency, energy
-from ..si import c, h
+from ..scientific.si import c, h
 
 SPECTRUM: dict[str, tuple[float, float]] = {
     # ISO 21348. spacewx.com/pdf/SET_21348_2004.pdf

@@ -2,7 +2,7 @@
 Typographic (imperial) units.
 '''
 
-from ..core import Unit
+from noether.core import Unit
 
 from .imperial import inch
 
@@ -18,5 +18,5 @@ agate = ruby = Unit(point * 5.5, "agate", "ruby")
 em = Unit(point, "em")
 en = Unit(em / 2, "en")
 
-# TODO: add an repr-info-hook thing which tells you point names
+#  TODO: add an repr-info-hook thing which tells you point names
 # https://en.wikipedia.org/wiki/Traditional_point-size_names#Comparison_table

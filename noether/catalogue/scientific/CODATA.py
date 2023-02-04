@@ -2,10 +2,10 @@
 Automatically-loaded CODATA fundamental physical constants.
 '''
 
-from ..helpers import scanline
-from ..core import Unit
-from ..config import Config, conf
-from ..core.Catalogue import Catalogue
+from ...helpers import scanline
+from ...core import Unit
+from ...config import Config, conf
+from ...core.Catalogue import Catalogue
 
 from . import si
 catalogue = Catalogue(vars(si))

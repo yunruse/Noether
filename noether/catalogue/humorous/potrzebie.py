@@ -5,8 +5,9 @@ https://webmadness.net/resources/The-Potrzebie-system-of-weights-and-measures.pd
 '''
 
 from ...core import Unit, DisplaySet
-from ..conventional import second, meter, minute, turn, gram
-from ..imperial import inch
+from ..scientific import second, minute
+from ..scientific import meter, turn, gram
+from ..conventional import inch
 from ..scientific import angstrom
 
 P = POTRZEBIE = DisplaySet()
