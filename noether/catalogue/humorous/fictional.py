@@ -5,7 +5,7 @@ Only distinctly defined units are provided.
 
 from ...core import Unit, DisplaySet
 from ..conventional import day
-from ..imperial import inch
+from ..conventional import inch
 
 # % Tolkien (taken from appendices)
 # LOTR: The Calendars

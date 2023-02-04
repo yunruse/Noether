@@ -44,14 +44,9 @@ class Catalogue:
                 self._prefixes[prefix.symbol] = prefix
 
     def get(self, name: str):
-        if name in self.dimensions:
-            return self.dimensions[name]
-
-        if name in self.prefix_sets:
-            return self.prefix_sets[name]
-
-        if name in self.units:
-            return self.units[name]
+        for col in (self.prefix_sets, self.dimensions, self.units):
+            if name in col:
+                return col[name]
 
         for p, prefix in self._prefixes.items():
             if not name.startswith(p):
@@ -73,7 +68,7 @@ class Catalogue:
         return self.get(name)
 
     @property
-    def all_units(self):
+    def all_prefixed_units(self):
         units: dict[str, Unit] = {}
 
         for name, unit in self.units.items():
@@ -95,12 +90,11 @@ class Catalogue:
     def __repr__(self):
         D = len(set(self.dimensions.values()))
         U = len(set(self.units.values()))
-        S = len(list(self.prefix_sets.values()))
         P = len(list(self.prefixes))
 
         return (
             f'<Catalogue: {D} dimensions,'
-            f' {U} units, {S} sets of {P} prefixes>')
+            f' {U} units, {P} prefixes>')
 
     def __json__(self):
         return {

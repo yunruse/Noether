@@ -14,7 +14,9 @@ venv/
 pypi_tokens.txt
 *.code-workspace
 tests/VERSION
-tests/analysis/*
+
+# Analysis
+analysis/output
 
 # Build
 

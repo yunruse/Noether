@@ -7,7 +7,7 @@ though
 
 from ...core import Unit
 from ...core.fundamental import meter
-from ..conventional import hectare
+from ..conventional.conventional import hectare
 
 
 # % Spanish customary units

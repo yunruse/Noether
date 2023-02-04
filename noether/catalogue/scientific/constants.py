@@ -2,9 +2,9 @@
 Mathematical and scientific constants not defined by SI or CODATA.
 '''
 
-from ..core import Unit
+from ...core import Unit
 
-from ..core.fundamental import ampere, kelvin, kilogram, meter
+from ...core.fundamental import ampere, kelvin, kilogram, meter
 from .si import joule, newton, e, hbar, c
 from .CODATA import CODATA
 

@@ -1,5 +1,4 @@
 from ..historic.scientific import *
-from ..typographic import *
 
 from .regional import *
 

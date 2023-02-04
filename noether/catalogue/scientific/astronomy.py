@@ -2,13 +2,15 @@
 Essential scientific units.
 '''
 
-from ..core import Unit
-from ..core.Prefix import SI
+from ...core import Unit
+from ...core.Prefix import SI
 
-from ..core.fundamental import candela, kilogram, meter, second, kelvin
+from ...core.fundamental import candela, kilogram, meter, second, kelvin
 from math import pi
-from .si import joule, watt, pascal, cumec, g, c
-from .conventional import cm, year, hour, minute
+from .si import joule, watt, pascal, cumec, standard_gravity as g, c
+from .cgs import cm
+from .si import minute, hour
+from .si import year_julian as year  # <- This is the convention
 
 # % Human
 

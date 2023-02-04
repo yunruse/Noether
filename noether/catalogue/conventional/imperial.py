@@ -4,11 +4,12 @@ Imperial units.
 
 from fractions import Fraction
 
-from ..core import Unit, AffineUnit
-from ..config import Config, conf
+from noether.core import Unit, AffineUnit
+from noether.config import Config, conf
 
-from noether.core.fundamental import kelvin, meter
-from .conventional import cm, gram, liter, hour
+from ..scientific import meter, kelvin
+from ..scientific import cm, gram, hour
+from .conventional import liter
 
 Config.register('UNITS_country', 'us', '''\
 The country to define imperial units (and other niceties) from. (Use the ISO 3166 code.)
