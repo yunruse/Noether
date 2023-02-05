@@ -1,9 +1,10 @@
-from ..config import conf
-from .Measure import Measure
-from .Unit import Unit
+from ...config import conf
+from ..Measure import Measure
+from ..Unit import Unit
 
 
 class ChainedUnit(Unit):
+    "Multiple units 'chained together', like feet & inches, for display."
     units: list[Unit]
 
     def __init__(self, unit: Unit, *units: tuple[Unit]):

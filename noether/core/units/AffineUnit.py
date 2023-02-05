@@ -1,11 +1,12 @@
 from numbers import Real
 
-from ..errors import DimensionError, IncompatibleUnitError
-from .Measure import Measure
-from .Unit import Unit
+from ...errors import DimensionError, IncompatibleUnitError
+from ..Measure import Measure
+from ..Unit import Unit
 
 
 class AffineUnit(Unit):
+    "Unit with a zero-point. Useful for e.g. temperature."
     zero_point: Measure
 
     def __init__(

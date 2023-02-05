@@ -2,9 +2,9 @@ from .Dimension import Dimension
 from .Prefix import Prefix
 from .MeasureInfo import MeasureInfo
 from .Measure import Measure
+
 from .Unit import Unit
-from .AffineUnit import AffineUnit
-from .ChainedUnit import ChainedUnit
+from .units import *
 
 from .fundamental import *
 

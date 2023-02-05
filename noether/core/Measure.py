@@ -4,7 +4,7 @@ from dataclasses import dataclass
 from functools import total_ordering
 import operator
 from sys import version_info
-from typing import Callable, List, Optional, Tuple, TypeVar, ClassVar, Generic, TYPE_CHECKING, Union
+from typing import Callable, List, Optional, TypeVar, ClassVar, Generic, TYPE_CHECKING
 from numbers import Real
 
 from ..errors import NoetherError, DimensionError
@@ -348,7 +348,7 @@ class Measure(Generic[T]):
         return MeasureRelative(self, unit)
 
     def __and__(self, unit: 'Unit'):
-        from .ChainedUnit import ChainedUnit
+        from .units.ChainedUnit import ChainedUnit
         return ChainedUnit(self, unit)
 
 
