@@ -46,7 +46,7 @@ energy = I(force * length, 'energy')
 power = I(energy / time, 'power')
 
 momentum = I(mass * speed, 'momentum')
-yank = I(force / second, 'yank')
+yank = I(force / time, 'yank')
 
 angular_momentum = I(length * momentum, 'angular_momentum')
 angular_velocity = I(angle / time, 'angular_velocity')
