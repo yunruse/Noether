@@ -7,7 +7,7 @@ from ...core.Prefix import IEC, SI, SI_large
 from ...core.DisplaySet import display as I
 
 from noether.core.fundamental import length, second, time
-from ..conventional import cm
+from .cgs import cm
 from ..conventional import inch
 
 from math import log

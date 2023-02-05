@@ -1,7 +1,7 @@
 
 from noether.core import Unit
 
-from .si import kilogram, g
+from .si import kilogram, standard_gravity as g
 from .cgs import cm
 from .essential import cal
 
