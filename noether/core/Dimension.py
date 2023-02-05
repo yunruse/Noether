@@ -3,15 +3,18 @@ from fractions import Fraction
 from numbers import Number
 from typing import Callable
 
+from noether.Multiplication import Multiplication
+
 from ..config import conf
 from ..helpers import ImmutableDict, removeprefix, reorder_dict_by_values
 from ..errors import NoetherError, DimensionError
 
 
+BaseDimension = str
 DimInfo = namedtuple('DimInfo', ('order', 'symbol'))
 
 
-class Dimension(ImmutableDict):
+class Dimension(Multiplication[BaseDimension]):
     '''
     Dimension of a unit.
 
@@ -21,7 +24,7 @@ class Dimension(ImmutableDict):
     '''
 
     # Class variable with display order
-    _names: dict[str, DimInfo] = dict()
+    _names: dict[BaseDimension, DimInfo] = dict()
 
     # Instantiation
 
@@ -41,33 +44,12 @@ class Dimension(ImmutableDict):
         display.add(self, name)
         return self
 
-    def __init__(self, value=None, **kw):
-        if value is None:
-            value = dict()
-        elif isinstance(value, Unit):
-            value = value.dim
-        if not isinstance(value, dict):
-            raise TypeError(
-                'Can only instantiate from a Dimension, Unit or Dict.')
-
-        value.update(kw)
-
-        for name, exp in value.copy().items():
-            if not exp:
-                del value[name]
-            if name not in self._names:
-                raise NoetherError(f'Unknown dimension {name}.')
-        super().__init__(value)
-
-    def __hash__(self):
-        return hash(tuple(sorted(self.items())))
-
     def is_base_dimension(self):
         '''True iff the dimension is a base dimension'''
         return list(self.values()) == [Fraction(1)]
 
     def items(self):
-        exponents = list(dict.items(self))
+        exponents = list(super().items())
         # positive first, then negative
         exponents.sort(key=lambda q: (q[1] < 0, self._names[q[0]].order))
         return exponents
@@ -106,13 +88,8 @@ class Dimension(ImmutableDict):
 
     def __repr__(self):
         if conf.get('display_repr_code'):
-            return self.repr_code()
+            return super().__repr__()
         return self.__noether__()
-
-    def repr_code(self):
-        return 'Dimension({})'.format(', '.join(
-            f'{k}={v}' for k, v in self.items()
-        ))
 
     def __noether__(self):
         string = self.as_fundamental()
@@ -144,56 +121,6 @@ class Dimension(ImmutableDict):
             'names': sorted(set(display.dimension_names.get(self, []))),
             'dimension': self._json_dim(),
         }
-
-    #  /~~\                   |     '
-    # |  __/~//~\|/~\ /~\ /~/~|~|/~\|/~~
-    #  \__/\/_\_/|   |   |\/_ | |   |\__
-
-    def __bool__(self):
-        return not all(i == 0 for i in self.values())
-
-    def __pow__(self, exp):
-        exp = Fraction(exp)
-        return Dimension({k: v*exp for k, v in self.items()})
-
-    def _extract_dimension(self, other):
-        if isinstance(other, Number):
-            return Dimension()
-        if isinstance(other, Dimension):
-            return other
-        elif isinstance(other, Unit):
-            return other.dim
-        else:
-            n = type(other).__name__
-            raise TypeError(f"Cannot operate on Dimension with {n}")
-
-    def __mul__(self, other, op=+1):
-        other = self._extract_dimension(other)
-        names = set(self.keys()) | set(other.keys())
-        return Dimension({
-            n: self.get(n, 0) + op * other.get(n, 0)
-            for n in names
-        })
-    __rmul__ = __mul__
-
-    def __truediv__(self, other):
-        return self.__mul__(other, -1)
-
-    def __rtruediv__(self, other):
-        return self._extract_dimension(other) / self
-
-    # |  '
-    # |  ||/~\ /~//~~||/~\
-    # |__||   |\/_\__||
-
-    def _linear_operation(self, other):
-        other = self._extract_dimension(other)
-        if self == other:
-            return self
-        else:
-            raise DimensionError(self, other)
-
-    __sub__ = __rsub__ = __add__ = __radd__ = _linear_operation
 
 
 dimensionless = Dimension()

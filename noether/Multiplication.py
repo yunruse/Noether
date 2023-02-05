@@ -32,6 +32,9 @@ class Multiplication(Generic[T], ImmutableDict[T, Rational]):
     def __bool__(self):
         return not any(x == 0 for x in self.values())
 
+    def __hash__(self):
+        return hash(tuple(sorted(self.items())))
+
     # % Geometric ops
 
     def _geo(self, value: T | 'Multiplication[T]', direction: int):
