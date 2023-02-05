@@ -4,6 +4,7 @@ Helpful standalone functions.
 
 import os
 import pathlib
+from typing import Generic, TypeVar
 
 # % String methods
 
@@ -30,8 +31,12 @@ def scanline(string: str, lengths: list[int]) -> list[str]:
 # % Dictionary methods
 
 
-class ImmutableDict(dict):
-    def __setitem__(self, _k, _v):
+KT = TypeVar('KT')
+VT = TypeVar('VT')
+
+
+class ImmutableDict(Generic[KT, VT], dict[KT, VT]):
+    def __setitem__(self, _k: KT, _v: VT):
         raise AttributeError(
             '{!r} object does not support item assignment'.format(type(self).__name__))
 

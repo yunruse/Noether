@@ -5,7 +5,7 @@ from typing import Callable
 
 from ..config import conf
 from ..helpers import ImmutableDict, removeprefix, reorder_dict_by_values
-from ..errors import NoetherError
+from ..errors import NoetherError, DimensionError
 
 
 DimInfo = namedtuple('DimInfo', ('order', 'symbol'))
