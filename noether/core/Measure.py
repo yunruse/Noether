@@ -220,7 +220,7 @@ class Measure(Generic[T]):
 
     def __geo(
         self,
-        other: 'Measure[T] | Dimension | Real',
+        other: 'Measure[T] | Real',
         op=operator.mul
     ) -> 'Measure':
         value = self.value
@@ -234,8 +234,6 @@ class Measure(Generic[T]):
                 se = self.epsilon or 0
                 oe = other.epsilon or 0
                 stddev = value * (se**2 + oe**2)**0.5
-        elif isinstance(other, Dimension):
-            dim = op(self.dim, other)
         else:
             value = op(self.value, other)
 
