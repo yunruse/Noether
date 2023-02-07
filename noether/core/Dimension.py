@@ -1,14 +1,12 @@
 from collections import namedtuple
 from fractions import Fraction
-from numbers import Number
+from numbers import Rational
 from functools import wraps
-from typing import Callable
 
 from noether.Multiplication import Multiplication
 
 from ..config import conf
-from ..helpers import ImmutableDict, removeprefix, reorder_dict_by_values
-from ..errors import NoetherError, DimensionError
+from ..helpers import reorder_dict_by_values
 
 
 BaseDimension = str
@@ -28,6 +26,24 @@ class Dimension(Multiplication[BaseDimension]):
     _names: dict[BaseDimension, DimInfo] = dict()
 
     # Instantiation
+
+    def __init__(
+        self,
+        dimensions: dict[BaseDimension, Rational] | None = None,
+    ):
+        dimensions = dimensions or {}
+        well_formed = all(
+            isinstance(d, BaseDimension)
+            and d in type(self)._names
+            for d, exp in dimensions.items()
+        )
+        if not well_formed:
+            raise TypeError(
+                "Malformed Dimension."
+                " Use e.g. `length = Dimension.new(...)`"
+                " and compose derived dimensions.")
+
+        super().__init__(dimensions)
 
     @classmethod
     def new(
@@ -118,5 +134,4 @@ class Dimension(Multiplication[BaseDimension]):
 dimensionless = Dimension()
 
 # Avoid import loops
-from .Unit import Unit  # noqa
 from .DisplaySet import display  # noqa
