@@ -7,6 +7,8 @@ from sys import version_info
 from typing import Callable, List, Optional, TypeVar, ClassVar, Generic, TYPE_CHECKING
 from numbers import Real
 
+from noether.helpers import removeprefix
+
 from ..errors import NoetherError, DimensionError
 from ..config import Config, conf
 from ..display import canonical_number
@@ -161,10 +163,15 @@ class Measure(Generic[T]):
         if units:
             return units[-1]
 
-    def display(self):
+    def unit_to_display(self):
         from .DisplaySet import display  # noqa
-        return self.dim.display(
-            display_function=lambda x: display.dimension_symbol[x])
+
+        unit = self.dim.display(
+            display_function=lambda x: display.dimension_symbol[x],
+            use_slashes=True,
+        )
+
+        return removeprefix(unit, '1 ')  # avoid "2  1 / m"
 
     def __repr__(self):
         if conf.get('display_repr_code'):
@@ -185,7 +192,7 @@ class Measure(Generic[T]):
         # Fallback if no unit found
         n = canonical_number(measure.value, measure.stddev,
                              conf.get(UNCERTAINTY_SHORTHAND))
-        s = measure.display()
+        s = measure.unit_to_display()
         return f'{n} {s}'
 
     def _display_element(self):
@@ -208,7 +215,7 @@ class Measure(Generic[T]):
         # Fallback if no unit found
         n = canonical_number(measure.value, measure.stddev,
                              conf.get(UNCERTAINTY_SHORTHAND))
-        s = measure.display().replace(' * ', ' ')
+        s = measure.unit_to_display().replace(' * ', ' ')
         return f'{n} {s}'
 
     def __str__(self):

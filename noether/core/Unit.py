@@ -54,7 +54,7 @@ class Unit(Measure):
             return self.symbols[0]
         if self.names:
             return self.names[0]
-        return self.display()
+        return self.unit_to_display()
 
     @property
     def name(self):
@@ -62,7 +62,7 @@ class Unit(Measure):
             return self.names[0]
         if self.symbols:
             return self.symbols[0]
-        return self.display()
+        return self.unit_to_display()
 
     # |~~\ '      |
     # |   ||(~|~~\|/~~|\  /
