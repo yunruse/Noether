@@ -169,6 +169,7 @@ class Measure(Generic[T]):
         unit = self.dim.display(
             display_function=lambda x: display.dimension_symbol[x],
             drop_multiplication_signs=True,
+            identity_string='',
         )
 
         return removeprefix(unit, '1 ')  # avoid "2  1 / m"
@@ -196,7 +197,7 @@ class Measure(Generic[T]):
         return f'{n} {s}'
 
     def _display_element(self):
-        return (self.display_unit() or self).repr_measure(self)
+        return (self.display_unit() or self).repr_measure(self).strip()
 
     def __noether__(self):
         info = ', '.join(i for i, _ in self._info())
@@ -216,7 +217,7 @@ class Measure(Generic[T]):
         n = canonical_number(measure.value, measure.stddev,
                              conf.get(UNCERTAINTY_SHORTHAND))
         s = measure.unit_to_display()
-        return f'{n} {s}'
+        return f'{n} {s}'.strip()
 
     def __str__(self):
         return (self.display_unit() or self).str_measure(self)

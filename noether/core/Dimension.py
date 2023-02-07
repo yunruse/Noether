@@ -1,6 +1,7 @@
 from collections import namedtuple
 from fractions import Fraction
 from numbers import Number
+from functools import wraps
 from typing import Callable
 
 from noether.Multiplication import Multiplication
@@ -59,10 +60,16 @@ class Dimension(Multiplication[BaseDimension]):
     # |__/ |_)|__/|\__| \/
     #         |        _/
 
+    @wraps(Multiplication.display)
+    def display(self, **kwargs):
+        kwargs.setdefault('identity_string', 'dimensionless')
+        return super().display(**kwargs)
+
     def as_symbols(self):
-        return self.display(
+        return super().display(
             display_function=lambda b: self._names[b].symbol,
             drop_multiplication_signs=True,
+            identity_string='1'
         )
 
     def canonical_name(self):

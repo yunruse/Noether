@@ -8,7 +8,8 @@ class info_unit_value(MeasureInfo):
 
     @classmethod
     def info(self, measure: 'Unit') -> str:
-        if isinstance(measure, Unit):
+        if isinstance(measure, Unit) and measure.dim:
+
             d = measure.display_unit()
             if d != measure:
                 if d is None:
