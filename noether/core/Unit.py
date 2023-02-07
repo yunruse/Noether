@@ -5,6 +5,7 @@ Used in turn to display Measure.
 '''
 
 from datetime import timedelta
+from numbers import Rational
 from typing import Optional
 
 from ..config import conf
@@ -47,6 +48,17 @@ class Unit(Measure):
 
         setattr('prefixes', prefixes or [])
         setattr('info', info or None)
+
+    # Nicer display units
+
+    def __mul__(self, value: 'Measure'):
+        return ComposedUnit(self) * value
+
+    def __truediv__(self, value: 'Measure'):
+        return ComposedUnit(self) / value
+
+    def __pow__(self, value: Rational):
+        return ComposedUnit(self) ** value
 
     @property
     def symbol(self):
@@ -121,3 +133,7 @@ class Unit(Measure):
 
         v = canonical_number(val, stddev, conf.get(UNCERTAINTY_SHORTHAND))
         return f'{v} {self.symbol}'
+
+
+# Avoid import loops
+from .units.ComposedUnit import ComposedUnit  # noqa
