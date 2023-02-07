@@ -59,32 +59,17 @@ class Dimension(Multiplication[BaseDimension]):
     # |__/ |_)|__/|\__| \/
     #         |        _/
 
-    def as_fundamental(
-        self, /,
-        display: Callable[[str], str] = lambda x: x
-    ):
-        if not self:
-            return display('dimensionless')
-
-        string = '1'
-        for name, exp in self.items():
-            symbol = '*'
-            use_brackets = exp.denominator != 1
-            if not use_brackets and exp < 0:
-                symbol = '/'
-                exp = -exp
-
-            string += f' {symbol} {display(name)}'
-            if exp != 1:
-                string += '**'
-                string += f'({exp})' if use_brackets else f'{exp}'
-        return removeprefix(string, '1 * ')
+    def as_symbols(self):
+        return self.display(
+            display_function=lambda b: self._names[b].symbol,
+            drop_multiplication_signs=True,
+        )
 
     def canonical_name(self):
         names = display.dimension_names.get(self, [])
         if names:
             return names[0]
-        return self.as_fundamental()
+        return self.display()
 
     def __repr__(self):
         if conf.get('display_repr_code'):
@@ -92,7 +77,7 @@ class Dimension(Multiplication[BaseDimension]):
         return self.__noether__()
 
     def __noether__(self):
-        string = self.as_fundamental()
+        string = self.display()
         names = display.dimension_names.get(self, [])
         if names:
             string += '  # {}'.format(', '.join(names))
@@ -102,7 +87,7 @@ class Dimension(Multiplication[BaseDimension]):
         if self.is_base_dimension():
             return f'[bold italic]{list(self.keys())[0]}[/]'
 
-        reprs = self.as_fundamental()
+        reprs = self.display()
 
         names = display.dimension_names.get(self, [])
         if names:

@@ -6,9 +6,9 @@ Internally used for such compostions as Dimension and ChainedUnit.
 
 from math import prod
 from numbers import Rational
-from typing import Generic, TypeVar
+from typing import Callable, Generic, TypeVar
 
-from noether.helpers import ImmutableDict
+from noether.helpers import ImmutableDict, removeprefix
 
 
 T = TypeVar('T')
@@ -28,6 +28,9 @@ class Multiplication(Generic[T], ImmutableDict[T, Rational]):
         if not isinstance(value, dict):
             value = {value: 1}
         super().__init__(value)
+
+    def items_positive_first(self):
+        return sorted(super().items(), key=lambda q: (-q[1], q[0]))
 
     def __bool__(self):
         return any(x != 0 for x in self.values())
@@ -70,6 +73,42 @@ class Multiplication(Generic[T], ImmutableDict[T, Rational]):
         })
 
     # % Display
+
+    def display(
+        self, /,
+        display_function: Callable[[T], str] = lambda x: x or 1,
+        use_slashes=False,
+        drop_multiplication_signs=False,
+        identity_string='1',
+    ):
+        '''
+        Display e.g. x**2 * y**3 or meter / second.
+        Returns identity_string if empty (multiplative identity, aka 1).
+        '''
+        if not self:
+            return identity_string
+
+        string = '1'
+        for name, exp in self.items():
+            if not exp:
+                continue
+            symbol = '*'
+            use_brackets = exp.denominator != 1
+            if use_slashes and not use_brackets and exp < 0:
+                symbol = '/'
+                exp = -exp
+
+            string += f' {symbol} {display_function(name)}'
+            if exp != 1:
+                # TODO: unicode exponents
+                string += '**'
+                string += f'({exp})' if use_brackets else f'{exp}'
+
+        string = removeprefix(string, '1 * ')
+        if drop_multiplication_signs:
+            string = string.replace(' * ', ' ')
+
+        return string
 
     def __repr__(self):
         return '{}({})'.format(type(self).__name__, dict.__repr__(self))

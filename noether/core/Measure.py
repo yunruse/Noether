@@ -161,10 +161,10 @@ class Measure(Generic[T]):
         if units:
             return units[-1]
 
-    def as_fundamental(self):
+    def display(self):
         from .DisplaySet import display  # noqa
-        return self.dim.as_fundamental(
-            display=lambda x: display.dimension_symbol[x])
+        return self.dim.display(
+            display_function=lambda x: display.dimension_symbol[x])
 
     def __repr__(self):
         if conf.get('display_repr_code'):
@@ -185,7 +185,7 @@ class Measure(Generic[T]):
         # Fallback if no unit found
         n = canonical_number(measure.value, measure.stddev,
                              conf.get(UNCERTAINTY_SHORTHAND))
-        s = measure.as_fundamental()
+        s = measure.display()
         return f'{n} {s}'
 
     def _display_element(self):
@@ -208,7 +208,7 @@ class Measure(Generic[T]):
         # Fallback if no unit found
         n = canonical_number(measure.value, measure.stddev,
                              conf.get(UNCERTAINTY_SHORTHAND))
-        s = measure.as_fundamental().replace(' * ', ' ')
+        s = measure.display().replace(' * ', ' ')
         return f'{n} {s}'
 
     def __str__(self):
