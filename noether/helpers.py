@@ -12,11 +12,13 @@ from typing import Generic, TypeVar
 def removeprefix(string: str, prefix: str):
     if string.startswith(prefix):
         return string[len(prefix):]
+    return string
 
 
 def removesuffix(string: str, suffix: str):
     if string.endswith(suffix):
         return string[:-len(suffix)]
+    return string
 
 
 def scanline(string: str, lengths: list[int]) -> list[str]:
