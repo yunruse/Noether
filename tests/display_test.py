@@ -41,7 +41,7 @@ class test_unit_display(TestCase):
     value_code_noether_str = (
         (
             'length',  # Dimension
-            'Dimension(length=1)',
+            "Dimension({'length': Fraction(1, 1)})",
             'length  # length, distance, height, width, breadth, depth',
             'length',
         ),

@@ -93,7 +93,7 @@ class Multiplication(Generic[T], ImmutableDict[T, Rational]):
             if not exp:
                 continue
             symbol = '*'
-            use_brackets = exp.denominator != 1
+            use_brackets = hasattr(exp, 'denominator') and exp.denominator != 1
             if use_slashes and not use_brackets and exp < 0:
                 symbol = '/'
                 exp = -exp
