@@ -4,7 +4,7 @@ from dataclasses import dataclass
 from functools import total_ordering
 import operator
 from sys import version_info
-from typing import Callable, List, Optional, TypeVar, ClassVar, Generic, TYPE_CHECKING
+from typing import Optional, TypeVar, ClassVar, Generic, TYPE_CHECKING
 from numbers import Real
 
 from noether.helpers import removeprefix
@@ -168,7 +168,7 @@ class Measure(Generic[T]):
 
         unit = self.dim.display(
             display_function=lambda x: display.dimension_symbol[x],
-            use_slashes=True,
+            drop_multiplication_signs=True,
         )
 
         return removeprefix(unit, '1 ')  # avoid "2  1 / m"
@@ -215,7 +215,7 @@ class Measure(Generic[T]):
         # Fallback if no unit found
         n = canonical_number(measure.value, measure.stddev,
                              conf.get(UNCERTAINTY_SHORTHAND))
-        s = measure.unit_to_display().replace(' * ', ' ')
+        s = measure.unit_to_display()
         return f'{n} {s}'
 
     def __str__(self):
@@ -346,10 +346,15 @@ class Measure(Generic[T]):
 
         if not isinstance(unit, Unit):
             raise TypeError('Can only use @ (display relative to) on a Unit.')
-        if self.dim != unit.dim and not conf.get(OPENLINEAR):
-            raise DimensionError(
-                self.dim, unit.dim,
-                f"To use @ on units with different dimensions, enable conf.{OPENLINEAR}.")
+
+        # HACK
+        # We are intentionally deferring dimension checks.
+        # This is because @ binds more tightly than &, * and /,
+        # and so therefore until displayed we will
+        # override these such that eg     a  @  b  /  c
+        #               which binds as   (a  @  b) /  c
+        # effortlessly becomes equiv to   a  @ (b  /  c)
+
         return MeasureRelative(self, unit)
 
     def __and__(self, unit: 'Unit'):

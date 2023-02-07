@@ -6,7 +6,6 @@ Used in turn to display Measure.
 
 from datetime import timedelta
 from numbers import Rational
-from typing import Optional
 
 from ..config import conf
 from ..display import canonical_number

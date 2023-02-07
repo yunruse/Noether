@@ -1,8 +1,6 @@
 from math import prod
 from numbers import Rational
-import operator
 
-from ...errors import DimensionError, IncompatibleUnitError
 from ...Multiplication import Multiplication
 from ..Measure import Measure
 from ..Unit import Unit
@@ -44,3 +42,6 @@ class ComposedUnit(Unit):
 
     def __str__(self):
         return self.units.display()
+
+    def unit_to_display(self):
+        return self.units.display(lambda x: x.symbol)

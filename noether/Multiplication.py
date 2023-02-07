@@ -77,7 +77,7 @@ class Multiplication(Generic[T], ImmutableDict[T, Rational]):
     def display(
         self, /,
         display_function: Callable[[T], str] = lambda x: x or 1,
-        use_slashes=False,
+        use_slashes=True,
         drop_multiplication_signs=False,
         identity_string='1',
     ):
