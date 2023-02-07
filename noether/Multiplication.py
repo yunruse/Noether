@@ -30,7 +30,7 @@ class Multiplication(Generic[T], ImmutableDict[T, Rational]):
         super().__init__(value)
 
     def __bool__(self):
-        return not any(x == 0 for x in self.values())
+        return any(x != 0 for x in self.values())
 
     def __hash__(self):
         return hash(tuple(sorted(self.items())))
