@@ -17,6 +17,7 @@ tests/VERSION
 
 # Analysis
 analysis/output
+analysis/catalogue.tar
 
 # Build
 

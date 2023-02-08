@@ -14,6 +14,7 @@ class export(TestCase):
         Config().save(OUTPUT / 'default.conf')
 
     def test_export_catalogue(self):
+        OUTPUT.mkdir(parents=True, exist_ok=True)
         with open(OUTPUT / 'catalogue.tsv', 'w') as f:
             units = set(catalogue.units.values())
             for u in sorted(units, key=lambda u: u.name.lower()):
