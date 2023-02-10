@@ -14,15 +14,16 @@ Allow fetching any unit with any prefix (e.g. gibimeter).''')
 
 class Catalogue:
     dimensions: dict[str, Dimension]
-    units_by_name: dict[str, Unit]
     prefix_sets: dict[str, PrefixSet]
-
+    units_by_name: dict[str, Unit]
+    units_by_dimension: dict[Dimension, list[Unit]]
     _prefixes = dict[str, Prefix]
 
     def __init__(self, catalogue: dict):
-        self.units_by_name = dict()
         self.dimensions = dict()
         self.prefix_sets = dict()
+        self.units_by_name = dict()
+        self.units_by_dimension = dict()
         self._prefixes = dict()
 
         for k, v in catalogue.items():
@@ -30,11 +31,17 @@ class Catalogue:
 
     def register(self, k: str, v):
         if isinstance(v, Unit):
+            ud = self.units_by_dimension
+            ud.setdefault(v.dim, [])
+            if v not in ud[v.dim]:
+                ud[v.dim].append(v)
+
             self.units_by_name[k] = v
             for n in v.names:
                 self.units_by_name[n] = v
             for n in v.symbols:
                 self.units_by_name[n] = v
+                
         elif isinstance(v, Dimension):
             self.dimensions[k] = v
         elif isinstance(v, PrefixSet):
