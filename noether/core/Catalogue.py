@@ -29,24 +29,24 @@ class Catalogue:
         for k, v in catalogue.items():
             self.register(k, v)
 
-    def register(self, k: str, v):
-        if isinstance(v, Unit):
+    def register(self, name: str, value: Unit | Dimension | PrefixSet):
+        if isinstance(value, Unit):
             ud = self.units_by_dimension
-            ud.setdefault(v.dim, [])
-            if v not in ud[v.dim]:
-                ud[v.dim].append(v)
+            ud.setdefault(value.dim, [])
+            if value not in ud[value.dim]:
+                ud[value.dim].append(value)
 
-            self.units_by_name[k] = v
-            for n in v.names:
-                self.units_by_name[n] = v
-            for n in v.symbols:
-                self.units_by_name[n] = v
-                
-        elif isinstance(v, Dimension):
-            self.dimensions[k] = v
-        elif isinstance(v, PrefixSet):
-            self.prefix_sets[k] = v
-            for prefix in v:
+            self.units_by_name[name] = value
+            for n in value.names:
+                self.units_by_name[n] = value
+            for n in value.symbols:
+                self.units_by_name[n] = value
+
+        elif isinstance(value, Dimension):
+            self.dimensions[name] = value
+        elif isinstance(value, PrefixSet):
+            self.prefix_sets[name] = value
+            for prefix in value:
                 self._prefixes[prefix.prefix] = prefix
                 self._prefixes[prefix.symbol] = prefix
 
