@@ -14,13 +14,13 @@ Allow fetching any unit with any prefix (e.g. gibimeter).''')
 
 class Catalogue:
     dimensions: dict[str, Dimension]
-    units: dict[str, Unit]
+    units_by_name: dict[str, Unit]
     prefix_sets: dict[str, PrefixSet]
 
     _prefixes = dict[str, Prefix]
 
     def __init__(self, catalogue: dict):
-        self.units = dict()
+        self.units_by_name = dict()
         self.dimensions = dict()
         self.prefix_sets = dict()
         self._prefixes = dict()
@@ -30,11 +30,11 @@ class Catalogue:
 
     def register(self, k: str, v):
         if isinstance(v, Unit):
-            self.units[k] = v
+            self.units_by_name[k] = v
             for n in v.names:
-                self.units[n] = v
+                self.units_by_name[n] = v
             for n in v.symbols:
-                self.units[n] = v
+                self.units_by_name[n] = v
         elif isinstance(v, Dimension):
             self.dimensions[k] = v
         elif isinstance(v, PrefixSet):
@@ -44,7 +44,7 @@ class Catalogue:
                 self._prefixes[prefix.symbol] = prefix
 
     def get(self, name: str):
-        for col in (self.prefix_sets, self.dimensions, self.units):
+        for col in (self.prefix_sets, self.dimensions, self.units_by_name):
             if name in col:
                 return col[name]
 
@@ -52,9 +52,9 @@ class Catalogue:
             if not name.startswith(p):
                 continue
             unit_name = removeprefix(name, p)
-            if unit_name not in self.units:
+            if unit_name not in self.units_by_name:
                 continue
-            unit = self.units[unit_name]
+            unit = self.units_by_name[unit_name]
             if not prefix in unit.prefixes:
                 if not conf.get('UNITS_all_prefixes'):
                     continue
@@ -71,7 +71,7 @@ class Catalogue:
     def all_prefixed_units(self):
         units: dict[str, Unit] = {}
 
-        for unit in self.units.values():
+        for unit in self.units_by_name.values():
             units.update(unit._namespace())
             for u in unit.prefixed_units():
                 units.update(u._namespace())
@@ -85,7 +85,7 @@ class Catalogue:
 
     def __repr__(self):
         D = len(set(self.dimensions.values()))
-        U = len(set(self.units.values()))
+        U = len(set(self.units_by_name.values()))
         P = len(list(self.prefixes))
 
         return (
@@ -111,7 +111,7 @@ class Catalogue:
             'units': [
                 unit.__json__() for unit in
                 sorted(
-                    set(self.units.values()),
+                    set(self.units_by_name.values()),
                     key=lambda u: u.name
                 )
             ]

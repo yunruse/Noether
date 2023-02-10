@@ -16,7 +16,7 @@ class export(TestCase):
     def test_export_catalogue(self):
         OUTPUT.mkdir(parents=True, exist_ok=True)
         with open(OUTPUT / 'catalogue.tsv', 'w') as f:
-            units = set(catalogue.units.values())
+            units = set(catalogue.units_by_name.values())
             for u in sorted(units, key=lambda u: u.name.lower()):
                 chunks = [u.name, *(a for a, c in u._info())]
                 print('\t'.join(chunks), file=f)

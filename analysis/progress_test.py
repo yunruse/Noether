@@ -13,7 +13,7 @@ class progress(TestCase):
         F = OUTPUT / 'catalogue_count.csv'
         F.touch()
 
-        N = len(set(catalogue.units.values()))
+        N = len(set(catalogue.units_by_name.values()))
         today = format(datetime.today(), '%Y-%m-%d')
 
         with open(F, 'a') as f:
