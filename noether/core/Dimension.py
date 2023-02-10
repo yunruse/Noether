@@ -94,7 +94,7 @@ class Dimension(Multiplication[BaseDimension]):
             return names[0]
         return self.display()
 
-    def repr_code(self):
+    def _repr_code(self):
         return super().__repr__()
 
     def __repr__(self):

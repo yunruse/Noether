@@ -97,11 +97,11 @@ class Unit(Measure):
 
     def __repr__(self):
         if conf.get('display_repr_code'):
-            return self.repr_code()
+            return self._repr_code()
         return self.__noether__()
 
-    def repr_code(self):
-        chunks = [Measure.repr_code(self)]
+    def _repr_code(self):
+        chunks = [Measure._repr_code(self)]
         for i in self.names, self.symbols:
             if len(i) == 0:
                 chunks.append('None')
@@ -139,7 +139,7 @@ class Unit(Measure):
             json['info'] = self.info
         return json
 
-    def repr_measure(self, measure: Measure):
+    def _repr_measure(self, measure: Measure):
         val = measure.value / self.value
         stddev = None
         if measure.stddev is not None:

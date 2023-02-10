@@ -68,6 +68,6 @@ class test_unit_display(TestCase):
     def test_value_code_repr_str(self):
         for k, c, n, s in self.value_code_noether_str:
             val = eval(k, {}, vars(noether))
-            self.assertEqual(c, val.repr_code())
+            self.assertEqual(c, val._repr_code())
             self.assertEqual(n, val.__noether__())
             self.assertEqual(s, str(val))

@@ -14,4 +14,4 @@ class info_unit_value(MeasureInfo):
             if d != measure:
                 if d is None:
                     d = measure * 1
-                yield d.repr_measure(measure)
+                yield d._repr_measure(measure)

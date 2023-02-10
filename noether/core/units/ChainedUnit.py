@@ -25,10 +25,10 @@ class ChainedUnit(Unit):
 
     def __repr__(self):
         if conf.get('display_repr_code'):
-            return self.repr_code()
+            return self._repr_code()
         return self.__noether__()
 
-    def repr_code(self):
+    def _repr_code(self):
         return 'ChainedUnit({})'.format(', '.join(
             x.name for x in self.units
         ))
@@ -46,7 +46,7 @@ class ChainedUnit(Unit):
     def __str__(self):
         return ' & '.join([x.name for x in self.units])
 
-    def repr_measure(self, measure: Measure):
+    def _repr_measure(self, measure: Measure):
         # TODO: handle stddev!
         value = measure.value
         chunks = []

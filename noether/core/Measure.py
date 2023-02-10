@@ -176,20 +176,20 @@ class Measure(Generic[T]):
 
     def __repr__(self):
         if conf.get('display_repr_code'):
-            return self.repr_code()
+            return self._repr_code()
         return self.__noether__()
 
-    def repr_code(self):
+    def _repr_code(self):
         chunks = [repr(self.value)]
         if self.stddev is not None:
             chunks.append(repr(self.stddev))
         if self.dim:
-            chunks.append('dim=' + self.dim.repr_code())
+            chunks.append('dim=' + self.dim._repr_code())
 
         return 'Measure({})'.format(', '.join(chunks))
 
     @staticmethod
-    def repr_measure(measure: 'Measure'):
+    def _repr_measure(measure: 'Measure'):
         # Fallback if no unit found
         n = canonical_number(measure.value, measure.stddev,
                              conf.get(UNCERTAINTY_SHORTHAND))
@@ -197,7 +197,7 @@ class Measure(Generic[T]):
         return f'{n} {s}'
 
     def _display_element(self):
-        return (self.display_unit() or self).repr_measure(self).strip()
+        return (self.display_unit() or self)._repr_measure(self).strip()
 
     def __noether__(self):
         info = ', '.join(i for i, _ in self._info())

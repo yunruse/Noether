@@ -31,8 +31,8 @@ class AffineUnit(Unit):
 
     __rand__ = __and__
 
-    def repr_measure(self, measure: Measure):
-        return Unit.repr_measure(self, measure - self.zero_point)
+    def _repr_measure(self, measure: Measure):
+        return Unit._repr_measure(self, measure - self.zero_point)
 
     def _json_extras(self):
         return {'zero_point': self.zero_point / self.value}
