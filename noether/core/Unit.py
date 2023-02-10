@@ -5,6 +5,7 @@ Used in turn to display Measure.
 '''
 
 from datetime import timedelta
+from itertools import chain
 from numbers import Rational
 
 from ..config import conf
@@ -17,7 +18,8 @@ from .Measure import Measure, UNCERTAINTY_SHORTHAND
 class Unit(Measure):
     __slots__ = 'value stddiv dim symbols names prefixes info'.split()
 
-    names: tuple[str]
+    names: list[str]
+    symbols: list[str]
     prefixes: list[Prefix]
     info: str
 
@@ -47,6 +49,19 @@ class Unit(Measure):
 
         setattr('prefixes', prefixes or [])
         setattr('info', info or None)
+
+    # Useful cataloguing tools
+
+    def prefixed_units(self):
+        for prefix in self.prefixes:
+            yield Unit(
+                self * prefix.value,
+                [f'{prefix.prefix}{n}' for n in self.names],
+                [f'{prefix.symbol}{s}' for s in self.symbols]
+            )
+
+    def _namespace(self):
+        return {x: self for x in chain(self.names, self.symbols)}
 
     # Nicer display units
 

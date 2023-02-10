@@ -71,15 +71,11 @@ class Catalogue:
     def all_prefixed_units(self):
         units: dict[str, Unit] = {}
 
-        for name, unit in self.units.items():
-            units[name] = unit
-            units[unit.name] = unit
-            units[unit.symbol] = unit
+        for unit in self.units.values():
+            units.update(unit._namespace())
+            for u in unit.prefixed_units():
+                units.update(u._namespace())
 
-            for prefix in unit.prefixes:
-                prefix: Prefix
-                units[prefix.prefix + unit.name] = unit * prefix.value
-                units[prefix.symbol + unit.symbol] = unit * prefix.value
         return units
 
     @property
