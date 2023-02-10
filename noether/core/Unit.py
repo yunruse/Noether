@@ -45,7 +45,7 @@ class Unit(Measure):
             object.__setattr__(self, x, v)
 
         for k, v in ('names', names), ('symbols', symbols):
-            setattr(k, (v, ) if isinstance(v, str) else v or [])
+            setattr(k, [v] if isinstance(v, str) else v or [])
 
         setattr('prefixes', prefixes or [])
         setattr('info', info or None)
