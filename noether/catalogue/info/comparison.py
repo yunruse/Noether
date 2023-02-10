@@ -2,8 +2,7 @@ from typing import Generator
 
 from math import log
 
-from ...config import conf
-from ...core.Measure import Measure, MeasureInfo
+from noether import Dimension, Measure, MeasureInfo
 
 from .. import angstrom, km, cm, meter, foot
 from .. import year, day, hour, minute, second
@@ -13,7 +12,7 @@ from .. import c
 # and then you can move some unusual units to a new `unusual.py`
 
 kmq = km**2
-COMPARISON_MEASURES: dict[str, tuple[str, Measure]] = {
+COMPARISON_MEASURES: dict[str, Measure] = {
     'average human height': cm(170),
 
     'a light-minute': c * minute,
@@ -50,8 +49,6 @@ COMPARISON_MEASURES: dict[str, tuple[str, Measure]] = {
     'the speed of sound in air': meter(343) / second,
     'average human walk speed': meter(1.42) / second,
 }
-COMPARISON_DIMENSIONS = set(
-    unit.dim for unit in COMPARISON_MEASURES.values())
 
 
 @Measure.Info
@@ -60,22 +57,26 @@ class info_comparison(MeasureInfo):
     style = 'underline red'
     enabled_by_default = False  # per #17, needs some tweaks to be considered "good enough"
 
-    @staticmethod
-    def should_display(measure: Measure):
-        return measure.value and measure.dim in COMPARISON_DIMENSIONS
+    @classmethod
+    def units(cls, dim: Dimension):
+        for k, v in COMPARISON_MEASURES.items():
+            if v.dim == dim:
+                yield k, v
 
-    @staticmethod
-    def get_comparisons(
-        measure: Measure,
-    ) -> Generator[tuple[float, str, Measure], None, None]:
+        from noether import catalogue
+
+        for unit in catalogue.units_by_dimension.get(dim, []):
+            yield unit.name, unit
+
+    @classmethod
+    def get_comparisons(cls, measure: Measure):
         """
         Return comparisons with "scores".
         Scores are related to how close a comparison is to the measure,
         but boosted for those of the target country.
         """
-        for name, unit in COMPARISON_MEASURES.items():
-            if unit.dim != measure.dim:
-                continue
+        for name, unit in cls.units(measure.dim):
+
             score = -abs(log(measure / unit))
             if score == 0:
                 continue  # ignore units that are identical
@@ -83,7 +84,9 @@ class info_comparison(MeasureInfo):
 
     @classmethod
     def info(cls, measure: Measure):
-        comparisons = cls.get_comparisons(measure)
+        comparisons = list(cls.get_comparisons(measure))
+        if not comparisons:
+            return
         best_score, name, unit = max(comparisons, key=lambda x: x[0])
         relative = float(measure / unit)
         yield f'{relative:.2f}× {name}'
