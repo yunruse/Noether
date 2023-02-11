@@ -55,9 +55,9 @@ SPECTRUM: dict[str, tuple[float, float]] = {
 nanometer = meter(1e-9)
 
 
-def spectrum_names(wavelength: float) -> list[str]:
+def spectrum_names(wavelength: Measure[float]) -> list[str]:
     names = []
-    wavelength = float(wavelength / nanometer)
+    wavelength = (wavelength / nanometer).value
     for name, (a, b) in SPECTRUM.items():
         if a <= wavelength < b:
             names.append((b-a, name))

@@ -7,7 +7,7 @@ class info_unit_value(MeasureInfo):
     style = 'italic blue'
 
     @classmethod
-    def info(self, measure: 'Unit') -> str:
+    def info(cls, measure: 'Unit'):
         if isinstance(measure, Unit) and measure.dim:
 
             d = measure.display_unit()

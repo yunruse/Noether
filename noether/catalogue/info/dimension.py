@@ -7,6 +7,6 @@ class info_dimension(MeasureInfo):
     style = 'green italic'
 
     @classmethod
-    def info(self, measure: Measure):
+    def info(cls, measure: Measure):
         if measure.dim:
             yield measure.dim.canonical_name()

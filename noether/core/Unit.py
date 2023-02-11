@@ -25,7 +25,7 @@ class Unit(Measure):
 
     def __init__(
         self,
-        measure: Measure | Dimension | timedelta,
+        measure: Real | Measure | Dimension | timedelta,
         names: str | list[str] | None = None,
         symbols: str | list[str] | None = None,
         prefixes: list[Prefix] | None = None,

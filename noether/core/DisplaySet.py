@@ -4,17 +4,20 @@ List of units used for display purposes.
 Also handles dimension names.
 '''
 
+from typing import TypeVar
 from .Dimension import Dimension
 from .Unit import Unit
+
+T = TypeVar('T', Unit, Dimension, 'DisplaySet')
 
 
 class DisplaySet:
     units: dict[Dimension, list[Unit]]
     dimension_names: dict[Dimension, list[str]]
 
-    dimension_symbol = dict[str, str]
+    dimension_symbol: dict[str, str]
 
-    def __init__(self, *items: list[Unit]):
+    def __init__(self, *items: Unit):
         self.units = dict()
         self.dimension_names = dict()
         self.dimension_symbol = dict(dimensionless='')
@@ -25,11 +28,7 @@ class DisplaySet:
             str(i[-1]) for i in self.units.values()
         ))
 
-    def add(
-        self,
-        value: 'Unit | Dimension | DisplaySet',
-        *names: list[str]
-    ):
+    def add(self, value: T, *names: str) -> T:
         if isinstance(value, Dimension):
             self.dimension_names.setdefault(value, [])
             for n in names:
@@ -52,13 +51,13 @@ class DisplaySet:
     def remove(
         self,
         value: 'Unit | Dimension | DisplaySet',
-        *names: list[str]
+        *names: str
     ):
         if isinstance(value, Dimension):
             self.dimension_names.setdefault(value, [])
             for n in names:
-                if n in self.dimension_names[value.dim]:
-                    self.dimension_names[value.dim].remove(n)
+                if n in self.dimension_names[value]:
+                    self.dimension_names[value].remove(n)
         elif isinstance(value, Unit):
             self.units.setdefault(value.dim, [])
             if value in self.units[value.dim]:
@@ -67,11 +66,11 @@ class DisplaySet:
             for units in value.units.values():
                 self.unregister(*units)
 
-    def register(self, *units: list[Unit]):
+    def register(self, *units: Unit):
         for unit in units:
             self.add(unit)
 
-    def unregister(self, *units: list[Unit]):
+    def unregister(self, *units: Unit):
         for unit in units:
             self.remove(unit)
 

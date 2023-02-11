@@ -1,6 +1,7 @@
 "Export various aspects of Noether, including its catalogue."
 
 
+from typing import Any
 from ._helpers import TestCase, OUTPUT
 
 import json
@@ -21,7 +22,7 @@ class export(TestCase):
                 chunks = [u.name, *(a for a, c in u._info())]
                 print('\t'.join(chunks), file=f)
 
-        cat = catalogue.__json__()
+        cat: dict[str, Any] = catalogue.__json__()
         cat['$schema'] = '../catalogue.schema.json'
         with open(OUTPUT / 'catalogue.json', 'w') as f:
             json.dump(cat, f, indent=1)
@@ -29,7 +30,3 @@ class export(TestCase):
         del cat['$schema']
         with open(OUTPUT / 'catalogue.toml', 'w') as f:
             toml.dump(cat, f)
-
-
-if __name__ == '__main__':
-    export('test_count_units').test_count_units(graph=False)

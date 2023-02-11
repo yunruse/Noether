@@ -13,8 +13,8 @@ class ComposedUnit(Unit):
     def __init__(self, unit_or_dict: Unit | dict[Unit, Rational]):
         if isinstance(unit_or_dict, dict):
             units = Multiplication(unit_or_dict)
-            unit = prod(Measure(item) ** exponent
-                        for item, exponent in units.items())
+            product = prod(Measure(x) ** e for x, e in units.items())
+            unit: Unit = product  # type: ignore
         else:
             unit = unit_or_dict
             units = Multiplication(unit)

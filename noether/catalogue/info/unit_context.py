@@ -7,6 +7,6 @@ class info_unit_context(MeasureInfo):
     style = 'red underline'
 
     @classmethod
-    def info(self, measure: 'Unit') -> str:
-        if isinstance(measure, Unit) and measure.dim and measure.info is not None:
-            yield measure.info
+    def info(cls, unit: 'Unit'):
+        if isinstance(unit, Unit) and unit.dim and unit.info is not None:
+            yield unit.info
