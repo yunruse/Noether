@@ -92,10 +92,15 @@ class Config:
         self._config.update(value or {})
         self._config.update(kwargs)
 
+    def _show_in_repr(self, k: str, v):
+        if k not in self.options:
+            return True
+        return bool(v != self.options[k].default)
+
     def __repr__(self):
         return 'Config({})'.format(', '.join(
             f'{k}={v}' for k, v in self._config.items()
-            if v != self.options[k].default
+            if self._show_in_repr(k, v)
         ))
 
     def _get_defaults(self):
