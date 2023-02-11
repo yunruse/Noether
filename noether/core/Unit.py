@@ -6,7 +6,7 @@ Used in turn to display Measure.
 
 from datetime import timedelta
 from itertools import chain
-from numbers import Rational, Real
+from noether.helpers import Rational, Real
 
 from ..config import conf
 from ..display import canonical_number

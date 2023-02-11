@@ -5,7 +5,7 @@ Handles Unicode.
 '''
 
 from decimal import Decimal
-from numbers import Real
+from noether.helpers import Real
 
 from .config import Config, conf
 

@@ -1,5 +1,5 @@
 from math import prod
-from numbers import Rational
+from noether.helpers import Rational
 
 from ...Multiplication import Multiplication
 from ..Measure import Measure

@@ -1,4 +1,4 @@
-from numbers import Real
+from noether.helpers import Real
 
 from ...errors import DimensionError, IncompatibleUnitError
 from ..Measure import Measure

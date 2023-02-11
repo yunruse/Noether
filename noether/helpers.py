@@ -2,9 +2,17 @@
 Helpful standalone functions.
 '''
 
+from fractions import Fraction
 import os
 import pathlib
 from typing import Generic, TypeVar
+
+
+# Typing does not currently support
+# numbers.Rational, numbers.Real.
+Rational = int | Fraction
+Real = Rational | float
+
 
 # % String methods
 

@@ -5,9 +5,9 @@ Internally used for such compostions as Dimension and ChainedUnit.
 '''
 
 from math import prod
-from numbers import Rational
 from typing import Callable, Generic, TypeVar
 
+from noether.helpers import Rational
 from noether.helpers import ImmutableDict, removeprefix
 
 

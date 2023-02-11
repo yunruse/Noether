@@ -5,7 +5,7 @@ from functools import total_ordering
 import operator
 from sys import version_info
 from typing import Optional, TypeVar, ClassVar, Generic, TYPE_CHECKING
-from numbers import Real
+from noether.helpers import Real
 
 from noether.helpers import removeprefix
 

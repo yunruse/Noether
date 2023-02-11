@@ -1,12 +1,12 @@
 from collections import namedtuple
 from fractions import Fraction
-from numbers import Rational
 from functools import wraps
 
+from noether.helpers import Rational
+from noether.helpers import reorder_dict_by_values
 from noether.Multiplication import Multiplication
 
 from ..config import conf
-from ..helpers import reorder_dict_by_values
 
 
 BaseDimension = str
