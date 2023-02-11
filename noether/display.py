@@ -40,7 +40,7 @@ def superscript(number):
     return f'**{number}'
 
 
-def _to_decimal(number: Real):
+def _to_decimal(number: float | int | str | Decimal):
     if isinstance(number, float):
         return Decimal(str(number))
     return Decimal(number)

@@ -70,12 +70,12 @@ class Config:
         cls,
         key: str,
         default: ConfigType,
-        help="",
+        help: str | None = None,
         typ: type | None = None,
     ):
         option = ConfigOption(
             key, default,
-            typ or type(default), help
+            typ or type(default), help or ""
         )
         cls.options[key] = option
         setattr(cls, key, ConfigProperty(option))

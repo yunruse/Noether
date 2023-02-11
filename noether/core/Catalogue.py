@@ -17,7 +17,7 @@ class Catalogue:
     prefix_sets: dict[str, PrefixSet]
     units_by_name: dict[str, Unit]
     units_by_dimension: dict[Dimension, list[Unit]]
-    _prefixes = dict[str, Prefix]
+    _prefixes: dict[str, Prefix]
 
     def __init__(self, catalogue: dict):
         self.dimensions = dict()

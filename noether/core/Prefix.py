@@ -33,14 +33,18 @@ class PrefixSet(list[Prefix]):
     def __init__(
         self,
         name: str,
-        prefixes: list[Prefix | tuple[str, str, float]] | None = None
+        prefixes: list[Prefix] | None = None
     ):
         self.name = name
-        list.__init__(self)
-        for prefix in prefixes or []:
-            if not isinstance(prefix, Prefix):
-                prefix = Prefix(*prefix)
-            self.append(prefix)
+        list.__init__(self, prefixes or [])
+
+    @classmethod
+    def from_list(
+        cls,
+        name: str,
+        prefixes: list[tuple[str, str, float]]
+    ):
+        return cls(name, [Prefix(p, s, v) for p, s, v in prefixes])
 
     def __add__(self, other: 'PrefixSet'):
         return PrefixSet(
@@ -54,7 +58,7 @@ class PrefixSet(list[Prefix]):
         return {'name': self.name, 'prefixes': [p.__json__() for p in self]}
 
 
-SI_small = PrefixSet('SI_small', [
+SI_small = PrefixSet.from_list('SI_small', [
     ("milli", "m", 1e-3),
     ("micro", "µ", 1e-6),  # GCWM 11
     ("nano",  "n", 1e-9),  # GCWM 11
@@ -66,7 +70,7 @@ SI_small = PrefixSet('SI_small', [
     ("ronto", "y", 1e-27),  # GCWM 26
     ("quecto", "y", 1e-30),  # GCWM 26
 ])
-SI_large = PrefixSet('SI_large', [
+SI_large = PrefixSet.from_list('SI_large', [
     ("kilo",  "k", 1e3),
     ("mega",  "M", 1e6),  # GCWM 11
     ("giga",  "G", 1e9),  # GCWM 11
@@ -78,13 +82,13 @@ SI_large = PrefixSet('SI_large', [
     ("ronna", "R", 1e27),  # GCWM 26
     ("quetta", "Q", 1e30),  # GCWM 26
 ])
-SI_conventional = PrefixSet('SI_conventional', [
+SI_conventional = PrefixSet.from_list('SI_conventional', [
     ("centi", "c", 1e-2),
     ("deci",  "d", 1e-1),
     ("deca",  "da", 1e1),
     ("hecto", "h", 1e2),
 ])
-SI_fun = PrefixSet('SI_fun', [
+SI_fun = PrefixSet.from_list('SI_fun', [
     ("micri", "mc", 1e-14),
     ("dimi", "dm", 1e-4),
     ("hebdo", "H", 1e7),
@@ -93,7 +97,7 @@ SI_fun = PrefixSet('SI_fun', [
     ("hella", "ha", 1e27),
 ])
 
-IEC = PrefixSet('IEC', [
+IEC = PrefixSet.from_list('IEC', [
     ("kibi", "Ki", 2**10),
     ("mebi", "Mi", 2**20),
     ("gibi", "Gi", 2**30),

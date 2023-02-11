@@ -6,11 +6,11 @@ Used in turn to display Measure.
 
 from datetime import timedelta
 from itertools import chain
-from numbers import Rational
+from numbers import Rational, Real
 
 from ..config import conf
 from ..display import canonical_number
-from .Prefix import Prefix
+from .Prefix import Prefix, PrefixSet
 from .Dimension import Dimension
 from .Measure import Measure, UNCERTAINTY_SHORTHAND
 
@@ -20,7 +20,7 @@ class Unit(Measure):
 
     names: list[str]
     symbols: list[str]
-    prefixes: list[Prefix]
+    prefixes: PrefixSet
     info: str
 
     def __init__(
@@ -65,13 +65,13 @@ class Unit(Measure):
 
     # Nicer display units
 
-    def __mul__(self, value: 'Measure'):
+    def __mul__(self, value: Measure | Real) -> Measure:
         return ComposedUnit(self) * value
 
-    def __truediv__(self, value: 'Measure'):
+    def __truediv__(self, value: Measure | Real) -> Measure:
         return ComposedUnit(self) / value
 
-    def __pow__(self, value: Rational):
+    def __pow__(self, value: Rational) -> Measure:
         return ComposedUnit(self) ** value
 
     @property

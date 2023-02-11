@@ -1,3 +1,4 @@
+from typing import Iterable
 from ...config import conf
 from ..Measure import Measure
 from ..Unit import Unit
@@ -7,16 +8,16 @@ class ChainedUnit(Unit):
     "Multiple units 'chained together', like feet & inches, for display."
     units: list[Unit]
 
-    def __init__(self, unit: Unit, *units: tuple[Unit]):
-        object.__setattr__(self, 'units',
-                           sorted(set((unit, ) + units), reverse=True))
-        Unit.__init__(self, unit)
+    def __init__(self, units: Iterable[Unit]):
+        units = sorted(units, reverse=True)
+        object.__setattr__(self, 'units', units)
+        Unit.__init__(self, units[0])
 
     def __and__(self, unit: 'Unit | ChainedUnit'):
         if isinstance(unit, ChainedUnit):
-            return ChainedUnit(*self.units, *unit.units)
+            return ChainedUnit(self.units + unit.units)
         else:
-            return ChainedUnit(*self.units, unit)
+            return ChainedUnit(self.units + [unit])
 
     # |~~\ '      |
     # |   ||(~|~~\|/~~|\  /
