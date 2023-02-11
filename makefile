@@ -1,10 +1,11 @@
-all: analysis/output/catalogue.tar
+all: type analyse
 
-analysis/output/catalogue.tar: analyse
-analyse: analysis/output/catalogue.json
+type:
+	python3 -m pyright --outputjson | jq '.generalDiagnostics[].file' -r | uniq | tee analysis/output/mistyped_files.txt
+
+analyse:
 	python3 -m unittest analysis/*.py
 	tar -c analysis/output/catalogue.* > analysis/catalogue.tar
-
 
 clean:
 	rm -r analysis/output

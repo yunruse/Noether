@@ -2,6 +2,10 @@ Thank you for reading this! Every pull request is certainly appreciated.
 
 Even if you're not a developer, information on how you use calculators like Noether is very interesting. Feel free to contact me `noether AT yunru.se`!
 
+## Packages used for development
+
+- `pyright`
+
 ## Git shenanigans
 
 ### Branches

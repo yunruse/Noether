@@ -13,13 +13,5 @@
 
 
     //// TYPE CHECKING
-    // Note that Pyright issue
-    // https://github.com/microsoft/pyright/issues/4616
-    // "Incorrect "incompatibility" when utilising `numbers` abstract base classes"
-    // is currently inhibiting some typing issues
-    "python.analysis.typeCheckingMode": "basic",
-    "python.analysis.ignore": ["noether/catalogue"],
-    "python.analysis.diagnosticSeverityOverrides": { 
-        // "reportGeneralTypeIssues" : "warning", 
-    } 
+    "python.analysis.typeCheckingMode": "basic"
 } 
