@@ -148,6 +148,10 @@ class Unit(Measure):
         v = canonical_number(val, stddev, conf.get(UNCERTAINTY_SHORTHAND))
         return f'{v} {self.symbol}'
 
+    def __and__(self, unit: 'Unit'):
+        from .units.ChainedUnit import ChainedUnit
+        return ChainedUnit([self, unit])
+
 
 # Avoid import loops
 from .units.ComposedUnit import ComposedUnit  # noqa

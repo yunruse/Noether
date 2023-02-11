@@ -358,10 +358,6 @@ class Measure(Generic[T]):
 
         return MeasureRelative(self, unit)
 
-    def __and__(self, unit: 'Unit'):
-        from .units.ChainedUnit import ChainedUnit
-        return ChainedUnit(self, unit)
-
 
 # Avoid import loops
 from .MeasureRelative import MeasureRelative  # noqa
