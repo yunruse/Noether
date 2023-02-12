@@ -21,7 +21,7 @@ if conf.get('CATALOGUE_humorous'):
 
 # Catalogue export
 
-from ..core.Catalogue import Catalogue  # noqa
+from noether.core.Catalogue import Catalogue  # noqa
 from . import info  # noqa
 
 catalogue = Catalogue(locals())

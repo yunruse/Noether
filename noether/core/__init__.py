@@ -8,5 +8,6 @@ from .units import *
 
 from .fundamental import *
 
+from .UnitSet import UnitSet
 from .Catalogue import Catalogue
-from .UnitSet import UnitSet, display
+from ._DisplayHandler import display

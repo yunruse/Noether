@@ -137,4 +137,4 @@ class Dimension(Multiplication[BaseDimension]):
 dimensionless = Dimension()
 
 # Avoid import loops
-from .UnitSet import display  # noqa
+from ._DisplayHandler import display  # noqa

@@ -1,4 +1,4 @@
-from ...core import Measure, MeasureInfo
+from noether.core import Measure, MeasureInfo
 
 
 @Measure.Info

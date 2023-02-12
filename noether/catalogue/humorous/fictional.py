@@ -3,7 +3,7 @@ Fictional units.
 Only distinctly defined units are provided.
 '''
 
-from ...core import Unit, UnitSet
+from noether.core import Unit, UnitSet
 from ..conventional import day
 from ..conventional import inch
 

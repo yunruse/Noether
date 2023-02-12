@@ -3,9 +3,9 @@ Various dimensions, for display purposes.
 '''
 
 from ..config import Config, conf
-from ..core.Dimension import dimensionless, Dimension
-from ..core.fundamental import *
-from ..core.UnitSet import display as I
+from noether.core.Dimension import dimensionless, Dimension
+from noether.core.fundamental import *
+from noether.core import display as I
 
 # % Spacetime
 

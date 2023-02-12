@@ -3,10 +3,10 @@ Essential scientific units.
 '''
 
 from datetime import timedelta
-from ...core import Unit
-from ...core.Prefix import SI
+from noether.core import Unit
+from noether.core.Prefix import SI
 
-from ...core.fundamental import candela, kilogram, meter, second, kelvin
+from noether.core.fundamental import candela, kilogram, meter, second, kelvin
 from math import pi
 from .si import joule, watt, pascal, cumec, standard_gravity as g, c
 from .cgs import cm

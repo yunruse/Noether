@@ -5,8 +5,8 @@ Sources:
 https://en.wikipedia.org/wiki/List_of_humorous_units_of_measurement
 '''
 
-from ...core import Unit, UnitSet
-from ...core.Prefix import SI
+from noether.core import Unit, UnitSet
+from noether.core.Prefix import SI
 from ..scientific import second, minute, watt_hour
 from ..scientific import sievert
 from ..scientific import angstrom, sol

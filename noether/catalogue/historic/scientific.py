@@ -3,7 +3,7 @@ Obscure scientific units.
 '''
 
 from math import pi
-from ...core import Unit
+from noether.core import Unit
 
 from ..scientific.si import hertz
 from ..scientific.essential import nit

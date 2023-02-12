@@ -74,6 +74,3 @@ class UnitSet(set[Unit]):
     def unregister(self, *units: Unit):
         for unit in units:
             self.remove(unit)
-
-
-display = UnitSet()

@@ -1,4 +1,4 @@
-from ...core import Measure, MeasureInfo, meter
+from noether.core import Measure, MeasureInfo, meter
 
 from ..dimensions import length, frequency, energy
 from ..scientific.si import c, h

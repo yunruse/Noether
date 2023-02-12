@@ -4,7 +4,7 @@ Conventional SI-compatible units.
 
 from noether.core import Unit, AffineUnit
 from noether.core.Prefix import SI, SI_large, SI_small
-from noether.core.UnitSet import display as I
+from noether.core import display as I
 
 from noether.config import Config, conf
 

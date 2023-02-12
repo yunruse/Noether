@@ -2,12 +2,12 @@
 SI-derived units, and constants used in defining the SI units.
 '''
 
-from ...core import Unit
-from ...core.Prefix import SI, SI_small, SI_large
-from ...core.UnitSet import display as I
+from noether.core import Unit
+from noether.core.Prefix import SI, SI_small, SI_large
+from noether.core import display as I
 
 from math import pi
-from ...core.fundamental import *
+from noether.core.fundamental import *
 from ..dimensions import *
 
 # Time
