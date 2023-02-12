@@ -5,48 +5,44 @@ from .UnitSet import UnitSet
 from .Dimension import Dimension
 
 
-class DisplayHandler(UnitSet):
+class DisplayHandler:
     '''
     Internal class used to provide names and units
     to various dimensions.
     '''
 
-    units: dict[Dimension, list[Unit]]
+    dimension_units: dict[Dimension, list[Unit]]
     dimension_names: dict[Dimension, list[str]]
-
     dimension_symbol: dict[str, str]
 
     def __init__(self, *items: Unit):
-
-        self.units = dict()
+        self.dimension_units = dict()
         self.dimension_names = dict()
         self.dimension_symbol = dict(dimensionless='')
-        
-        super().__init__()
-        self.register(*items)
+
+        self.displays(*items)
 
     T = TypeVar('T', Unit, Dimension, 'UnitSet')
 
-    def add(self, value: T, *names: str) -> T:
+    def display(self, value: T, *names: str) -> T:
         if isinstance(value, Dimension):
             self.dimension_names.setdefault(value, [])
             for n in names:
                 self.dimension_names[value].append(n)
         elif isinstance(value, Unit):
-            super().add(value)
-            self.units.setdefault(value.dim, [])
-            self.units[value.dim].append(value)
+            self.dimension_units.setdefault(value.dim, [])
+            self.dimension_units[value.dim].append(value)
 
             if value.symbols:
                 for n in self.dimension_names.get(value.dim, []):
                     self.dimension_symbol[n] = value.symbol
         elif isinstance(value, UnitSet):
-            for units in value.units.values():
-                self.add(units[-1])
+            for unit in value:
+                self.display(unit)
 
         return value
 
-    __call__ = add
+    __call__ = display
 
     def remove(
         self,
@@ -59,21 +55,20 @@ class DisplayHandler(UnitSet):
                 if n in self.dimension_names[value]:
                     self.dimension_names[value].remove(n)
         elif isinstance(value, Unit):
-            super().remove(value)
-            self.units.setdefault(value.dim, [])
-            if value in self.units[value.dim]:
-                self.units[value.dim].remove(value)
+            self.dimension_units.setdefault(value.dim, [])
+            if value in self.dimension_units[value.dim]:
+                self.dimension_units[value.dim].remove(value)
         elif isinstance(value, UnitSet):
-            for units in value.units.values():
-                self.unregister(*units)
+            for unit in value:
+                self.remove(unit)
 
     # helper functions
 
-    def register(self, *units: Unit):
+    def displays(self, *units: Unit):
         for unit in units:
-            self.add(unit)
+            self.display(unit)
 
-    def unregister(self, *units: Unit):
+    def removes(self, *units: Unit):
         for unit in units:
             self.remove(unit)
 

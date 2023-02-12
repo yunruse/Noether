@@ -58,7 +58,7 @@ class Dimension(Multiplication[BaseDimension]):
         cls._names[name] = DimInfo(order, symbol)
         reorder_dict_by_values(cls._names)
         self = cls({name: Fraction(1)})
-        display.add(self, name)
+        display.display(self, name)
         return self
 
     def is_base_dimension(self):

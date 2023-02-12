@@ -159,7 +159,7 @@ class Measure(Generic[T]):
 
     def display_unit(self):
         from ._DisplayHandler import display
-        units = display.units.get(self.dim, [])
+        units = display.dimension_units.get(self.dim, [])
         if units:
             return units[-1]
 
