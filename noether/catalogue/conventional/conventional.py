@@ -37,6 +37,11 @@ km = kilometer = kilometre = Unit(
     meter * 1000, ['kilometer', 'kilometre'], 'km')
 kmph = Unit(km / hour, None, "kmph")
 
+marathon = Unit(
+    km * 42.195, "marathon",
+    info="Race length based on Greek legend, set by convention from 1908 Summer Olympics"
+)
+
 # % Area
 are = Unit(100 * meter**2, "are", "a")
 hectare = Unit(100 * are, "hectare", "ha")
