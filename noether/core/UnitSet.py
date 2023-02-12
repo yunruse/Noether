@@ -8,8 +8,6 @@ from typing import TypeVar
 from .Dimension import Dimension
 from .Unit import Unit
 
-T = TypeVar('T', Unit, Dimension, 'UnitSet')
-
 
 class UnitSet(set[Unit]):
     units: dict[Dimension, list[Unit]]
@@ -24,6 +22,8 @@ class UnitSet(set[Unit]):
         self.dimension_names = dict()
         self.dimension_symbol = dict(dimensionless='')
         self.register(*items)
+
+    T = TypeVar('T', Unit, Dimension, 'UnitSet')
 
     def add(self, value: T, *names: str) -> T:
         if isinstance(value, Dimension):

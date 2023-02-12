@@ -66,10 +66,10 @@ class Unit(Measure):
     # Nicer display units
 
     def __mul__(self, value: Measure | Real) -> Measure:
-        return ComposedUnit(self) * value
+        return ComposedUnit(self) * value  # type: ignore
 
     def __truediv__(self, value: Measure | Real) -> Measure:
-        return ComposedUnit(self) / value
+        return ComposedUnit(self) / value  # type: ignore
 
     def __pow__(self, value: Rational) -> Measure:
         return ComposedUnit(self) ** value
