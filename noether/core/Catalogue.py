@@ -93,15 +93,20 @@ class Catalogue:
     def prefixes(self):
         for prefix_set in self.prefix_sets.values():
             yield from prefix_set
+    
+    def unit_count(self):
+        return len(set(self.units_by_name.values()))
+    
+    def dimension_count(self):
+        return len(set(self.dimensions.values()))
+    
+    def prefix_count(self):
+        return len(list(self.prefixes))
 
     def __repr__(self):
-        D = len(set(self.dimensions.values()))
-        U = len(set(self.units_by_name.values()))
-        P = len(list(self.prefixes))
-
         return (
-            f'<Catalogue: {D} dimensions,'
-            f' {U} units, {P} prefixes>')
+            f'<{self.name}: {self.dimension_count()} dimensions,'
+            f' {self.unit_count()} units, {self.prefix_count()} prefixes>')
 
     def __json__(self):
         return {
