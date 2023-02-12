@@ -13,13 +13,17 @@ Allow fetching any unit with any prefix (e.g. gibimeter).''')
 
 
 class Catalogue:
+    name: str
+
     dimensions: dict[str, Dimension]
     prefix_sets: dict[str, PrefixSet]
     units_by_name: dict[str, Unit]
     units_by_dimension: dict[Dimension, list[Unit]]
     _prefixes: dict[str, Prefix]
 
-    def __init__(self, catalogue: dict):
+    def __init__(self, catalogue: dict, name: str):
+        self.name = name
+
         self.dimensions = dict()
         self.prefix_sets = dict()
         self.units_by_name = dict()

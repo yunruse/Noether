@@ -24,7 +24,7 @@ if conf.get('CATALOGUE_humorous'):
 from noether.core.Catalogue import Catalogue  # noqa
 from . import info  # noqa
 
-catalogue = Catalogue(locals())
+catalogue = Catalogue(locals(), 'Noether catalogue')
 
 vars().update({p.prefix: p for p in catalogue.prefixes})
 

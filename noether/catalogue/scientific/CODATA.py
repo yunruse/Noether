@@ -8,7 +8,7 @@ from ...config import Config, conf
 from noether.core.Catalogue import Catalogue
 
 from . import si
-catalogue = Catalogue(vars(si))
+catalogue = Catalogue(vars(si), 'CODATA data-fetching catalogue')
 
 
 LENGTHS = [60, 25, 25]
