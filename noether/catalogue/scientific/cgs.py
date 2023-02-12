@@ -2,7 +2,7 @@
 CGS (centimeter-gram-second) unit system.
 '''
 
-from noether.core import Unit, DisplaySet
+from noether.core import Unit, UnitSet
 
 from math import pi
 from .si import SI, meter, kilogram, second as s
@@ -15,7 +15,7 @@ gram = g = Unit(kilogram / 1000, 'gram', 'g', SI)
 cm = centimeter = centimetre = Unit(
     meter * 0.01, ['centimeter', 'centimetre'], 'cm')
 
-CGS = DisplaySet(cm, g, s)
+CGS = UnitSet(cm, g, s)
 
 
 # Dynamics
@@ -51,5 +51,5 @@ gilbert = Gb = Unit(abampere * turn / (4*pi), "gilbert", "Gb")
 
 
 # % display sets
-CGS_EMU = DisplaySet(CGS, abA, abC, abH, abΩ, abS, abV, Gs, Mx, Oe, Gb)
+CGS_EMU = UnitSet(CGS, abA, abC, abH, abΩ, abS, abV, Gs, Mx, Oe, Gb)
 CGS = CGS_EMU

@@ -4,7 +4,7 @@ Data units, including the byte, shannon and pixel.
 
 from ...core import Unit, Dimension
 from ...core.Prefix import IEC, SI, SI_large
-from ...core.DisplaySet import display as I
+from ...core.UnitSet import display as I
 
 from noether.core.fundamental import length, second, time
 from .cgs import cm

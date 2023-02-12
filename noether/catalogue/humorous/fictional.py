@@ -3,7 +3,7 @@ Fictional units.
 Only distinctly defined units are provided.
 '''
 
-from ...core import Unit, DisplaySet
+from ...core import Unit, UnitSet
 from ..conventional import day
 from ..conventional import inch
 
@@ -34,4 +34,4 @@ lar = lár = daur = Unit(
     info="Númenórean 'pause' (Sindarin: daur, translated as 'league')"
     " said to be 5000 paces, after which marchers would briefly halt.")
 
-TOLKIEN = DisplaySet(yén & enquië & ré, lár & ranga)
+TOLKIEN = UnitSet(yén & enquië & ré, lár & ranga)

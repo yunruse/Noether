@@ -6,7 +6,7 @@ from .Dimension import Dimension
 from .Measure import Measure
 from .Unit import Unit
 from .Prefix import SI
-from .DisplaySet import display as I
+from .UnitSet import display as I
 
 luminosity = Dimension.new('luminosity', 'J', -7)
 current = Dimension.new('current', 'I', -6)

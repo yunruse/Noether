@@ -5,7 +5,7 @@ Various dimensions, for display purposes.
 from ..config import Config, conf
 from ..core.Dimension import dimensionless, Dimension
 from ..core.fundamental import *
-from ..core.DisplaySet import display as I
+from ..core.UnitSet import display as I
 
 # % Spacetime
 

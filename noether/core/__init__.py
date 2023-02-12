@@ -9,4 +9,4 @@ from .units import *
 from .fundamental import *
 
 from .Catalogue import Catalogue
-from .DisplaySet import DisplaySet, display
+from .UnitSet import UnitSet, display

@@ -5,14 +5,14 @@ Sources:
 https://en.wikipedia.org/wiki/List_of_humorous_units_of_measurement
 '''
 
-from ...core import Unit, DisplaySet
+from ...core import Unit, UnitSet
 from ...core.Prefix import SI
 from ..scientific import second, minute, watt_hour
 from ..scientific import sievert
 from ..scientific import angstrom, sol
 from ..conventional import inch
 
-U = UNUSUAL = DisplaySet()
+U = UNUSUAL = UnitSet()
 
 # % Length
 beard_second = Unit(

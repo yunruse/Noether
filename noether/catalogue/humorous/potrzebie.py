@@ -4,13 +4,13 @@ The Potrzebie System of Weights and Measures, as defined by Donald Knuth.
 https://webmadness.net/resources/The-Potrzebie-system-of-weights-and-measures.pdf
 '''
 
-from ...core import Unit, DisplaySet
+from ...core import Unit, UnitSet
 from ..scientific import second, minute
 from ..scientific import meter, turn, gram
 from ..conventional import inch
 from ..scientific import angstrom
 
-P = POTRZEBIE = DisplaySet()
+P = POTRZEBIE = UnitSet()
 # POTRZEBIE_PREFIXES =
 
 potrzebie = Unit(

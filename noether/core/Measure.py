@@ -158,13 +158,13 @@ class Measure(Generic[T]):
                     yield i, handler.style
 
     def display_unit(self):
-        from .DisplaySet import display
+        from .UnitSet import display
         units = display.units.get(self.dim, [])
         if units:
             return units[-1]
 
     def unit_to_display(self):
-        from .DisplaySet import display  # noqa
+        from .UnitSet import display  # noqa
 
         unit = self.dim.display(
             display_function=lambda x: display.dimension_symbol[x],

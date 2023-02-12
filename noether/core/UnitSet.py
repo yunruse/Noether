@@ -8,10 +8,10 @@ from typing import TypeVar
 from .Dimension import Dimension
 from .Unit import Unit
 
-T = TypeVar('T', Unit, Dimension, 'DisplaySet')
+T = TypeVar('T', Unit, Dimension, 'UnitSet')
 
 
-class DisplaySet:
+class UnitSet:
     units: dict[Dimension, list[Unit]]
     dimension_names: dict[Dimension, list[str]]
 
@@ -24,7 +24,7 @@ class DisplaySet:
         self.register(*items)
 
     def __repr__(self):
-        return 'DisplaySet({})'.format(', '.join(
+        return 'UnitSet({})'.format(', '.join(
             str(i[-1]) for i in self.units.values()
         ))
 
@@ -40,7 +40,7 @@ class DisplaySet:
             if value.symbols:
                 for n in self.dimension_names.get(value.dim, []):
                     self.dimension_symbol[n] = value.symbol
-        elif isinstance(value, DisplaySet):
+        elif isinstance(value, UnitSet):
             for units in value.units.values():
                 self.add(units[-1])
 
@@ -50,7 +50,7 @@ class DisplaySet:
 
     def remove(
         self,
-        value: 'Unit | Dimension | DisplaySet',
+        value: 'Unit | Dimension | UnitSet',
         *names: str
     ):
         if isinstance(value, Dimension):
@@ -62,7 +62,7 @@ class DisplaySet:
             self.units.setdefault(value.dim, [])
             if value in self.units[value.dim]:
                 self.units[value.dim].remove(value)
-        elif isinstance(value, DisplaySet):
+        elif isinstance(value, UnitSet):
             for units in value.units.values():
                 self.unregister(*units)
 
@@ -75,4 +75,4 @@ class DisplaySet:
             self.remove(unit)
 
 
-display = DisplaySet()
+display = UnitSet()

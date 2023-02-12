@@ -4,7 +4,7 @@ SI-derived units, and constants used in defining the SI units.
 
 from ...core import Unit
 from ...core.Prefix import SI, SI_small, SI_large
-from ...core.DisplaySet import display as I
+from ...core.UnitSet import display as I
 
 from math import pi
 from ...core.fundamental import *
