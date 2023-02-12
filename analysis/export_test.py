@@ -7,7 +7,7 @@ from ._helpers import TestCase, OUTPUT
 import json
 import toml
 
-from noether import catalogue, Config
+from noether import catalogue, Config, conf
 
 
 class export(TestCase):
@@ -15,6 +15,8 @@ class export(TestCase):
         Config().save(OUTPUT / 'default.conf')
 
     def test_export_catalogue(self):
+        conf.info_comparison = False
+
         OUTPUT.mkdir(parents=True, exist_ok=True)
         with open(OUTPUT / 'catalogue.tsv', 'w') as f:
             units = set(catalogue.units_by_name.values())
