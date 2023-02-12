@@ -53,12 +53,9 @@ class Unit(Measure):
     # Useful cataloguing tools
 
     def prefixed_units(self):
+        from .units.PrefixedUnit import PrefixedUnit
         for prefix in self.prefixes:
-            yield Unit(
-                self * prefix.value,
-                [f'{prefix.prefix}{n}' for n in self.names],
-                [f'{prefix.symbol}{s}' for s in self.symbols]
-            )
+            yield PrefixedUnit(self, prefix)
 
     def _namespace(self):
         return {x: self for x in chain(self.names, self.symbols)}
