@@ -17,6 +17,7 @@ from .MeasureInfo import MeasureInfo
 
 if TYPE_CHECKING:
     from .Unit import Unit
+    from .UnitSet import UnitSet
     from .MeasureRelative import MeasureRelative
 
 
@@ -342,10 +343,17 @@ class Measure(Generic[T]):
     #  \__\_/|_) | \_/|   |   |  |__/ |_)|__/|\__| \/
     #                                    |        _/
 
-    def __matmul__(self, unit: 'Unit'):
+    def __matmul__(self, unit_or_unitset: 'Unit | UnitSet'):
         from .Unit import Unit
+        from .UnitSet import UnitSet
 
-        if not isinstance(unit, Unit):
+        if isinstance(unit_or_unitset, UnitSet):
+            unit = unit_or_unitset.unit_for_dimension(self.dim)
+            if unit is None:
+                return self
+            return self @ unit
+
+        if not isinstance(unit_or_unitset, Unit):
             raise TypeError('Can only use @ (display relative to) on a Unit.')
 
         # HACK
@@ -356,7 +364,7 @@ class Measure(Generic[T]):
         #               which binds as   (a  @  b) /  c
         # effortlessly becomes equiv to   a  @ (b  /  c)
 
-        return MeasureRelative(self, unit)
+        return MeasureRelative(self, unit_or_unitset)
 
 
 # Avoid import loops
