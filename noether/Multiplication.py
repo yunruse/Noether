@@ -7,7 +7,7 @@ Internally used for such compostions as Dimension and ChainedUnit.
 from math import prod
 from typing import Callable, Generic, TypeVar
 
-from noether.helpers import Rational
+from noether.helpers import Rational, Real
 from noether.helpers import ImmutableDict, removeprefix
 
 
@@ -114,7 +114,10 @@ class Multiplication(Generic[T], ImmutableDict[T, Rational]):
         return '{}({})'.format(type(self).__name__, dict.__repr__(self))
 
 
-class MultiplicationWithValue(Generic[T], Multiplication[T]):
+T_mult = TypeVar('T_mult', Real, Rational)
+
+
+class MultiplicationWithValue(Generic[T_mult], Multiplication[T_mult]):
     '''
     Multiplication with a value.
     T must support multiplication and exponentiation.

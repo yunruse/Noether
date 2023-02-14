@@ -15,7 +15,7 @@ class export(TestCase):
         Config().save(OUTPUT / 'default.conf')
 
     def test_export_catalogue(self):
-        conf.info_comparison = False
+        conf.info_comparison = False  # type: ignore
 
         OUTPUT.mkdir(parents=True, exist_ok=True)
         with open(OUTPUT / 'catalogue.tsv', 'w') as f:
