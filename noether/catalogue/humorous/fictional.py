@@ -37,7 +37,7 @@ lar = lár = daur = Unit(
     info="Númenórean 'pause' (Sindarin: daur, translated as 'league')"
     " said to be 5000 paces, after which marchers would briefly halt.")
 
-TOLKIEN = UnitSet(yén & enquië & ré, lár & ranga)
+TOLKIEN = UnitSet({yén & enquië & ré, lár & ranga})
 
 
 # % Homestuck

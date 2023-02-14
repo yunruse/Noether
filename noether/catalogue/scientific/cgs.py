@@ -15,7 +15,7 @@ gram = g = Unit(kilogram / 1000, 'gram', 'g', SI)
 cm = centimeter = centimetre = Unit(
     meter * 0.01, ['centimeter', 'centimetre'], 'cm')
 
-CGS = UnitSet(cm, g, s)
+CGS = UnitSet({cm, g, s})
 
 
 # Dynamics
@@ -51,5 +51,5 @@ gilbert = Gb = Unit(abampere * turn / (4*pi), "gilbert", "Gb")
 
 
 # % display sets
-CGS_EMU = UnitSet(CGS, abA, abC, abH, abΩ, abS, abV, Gs, Mx, Oe, Gb)
+CGS_EMU = UnitSet({CGS, abA, abC, abH, abΩ, abS, abV, Gs, Mx, Oe, Gb})
 CGS = CGS_EMU
