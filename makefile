@@ -3,8 +3,10 @@ all: unit type test analyse build
 unit:
 	python3 noe_transformer.py
 
-type:
+analysis/output/:
 	@mkdir analysis/output/
+
+type: analysis/output/
 	python3 -m pyright --outputjson | jq '.generalDiagnostics[].file' -r | uniq | tee analysis/output/mistyped_files.txt
 
 test:
