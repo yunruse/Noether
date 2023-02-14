@@ -1,6 +1,10 @@
-all: type test analyse build
+all: unit type test analyse build
+
+unit:
+	python3 noe_transformer.py
 
 type:
+	@mkdir analysis/output/
 	python3 -m pyright --outputjson | jq '.generalDiagnostics[].file' -r | uniq | tee analysis/output/mistyped_files.txt
 
 test:
@@ -19,5 +23,7 @@ upload-test:
 upload:
 	# TODO #40
 
-clean:
+reset:
+	bash -c "rm -r **/__pycache__"
 	rm -r analysis/output
+	python3 noe_transformer.py --remove

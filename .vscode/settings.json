@@ -13,5 +13,10 @@
 
 
     //// TYPE CHECKING
-    "python.analysis.typeCheckingMode": "basic"
+    "python.analysis.typeCheckingMode": "basic",
+
+    // .noe.py files are used to generate .py files
+    // and while sharing a general sense of syntax,
+    // do not need typing
+    "python.analysis.ignore": ["*.noe.py"],
 } 
