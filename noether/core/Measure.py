@@ -12,6 +12,7 @@ from noether.helpers import removeprefix
 from ..errors import NoetherError, DimensionError
 from ..config import Config, conf
 from ..display import canonical_number
+from .Prefix import Prefix
 from .Dimension import Dimension, dimensionless
 from .MeasureInfo import MeasureInfo
 
@@ -235,6 +236,9 @@ class Measure(Generic[T]):
         value = self.value
         stddev = None
         dim = self.dim
+
+        if isinstance(other, Prefix):
+            other = other.value
 
         if isinstance(other, Measure):
             value = op(self.value, other.value)
