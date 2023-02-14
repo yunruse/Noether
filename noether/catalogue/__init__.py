@@ -12,7 +12,7 @@ from .conventional import *
 Config.register('CATALOGUE_historical', True, help='''\
 Provide historical units.''')
 if conf.get('CATALOGUE_historical'):
-    from .extension import *
+    from .historic import *
 
 Config.register('CATALOGUE_humorous', True, help='''\
 Provide humorous and fictional units.''')
