@@ -25,7 +25,7 @@ UNIT_MATCH = compile(r'''
 UNIT_FMT = """\
 {targets} = Unit(
     {expr},
-    [{names}],
+    [{names}]{symbols},
     info={info!r})
 """
 
@@ -45,10 +45,24 @@ def transmogrify_shorthand(text: str):
         new_text += text[last_index:match.start()]
 
         g = match.groupdict()
-        g['names'] = ', '.join(map(repr, g['targets'].split(' = ')))
+        names = []
+        symbols = []
+        for n in g['targets'].split(' = '):
+            if n.startswith("'") and n.endswith("'"):
+                symbols.append(n)
+            else:
+                names.append(n)
+
+        g['names'] = ', '.join(map(repr, names))
+        g['symbols'] = ''
+        if symbols:
+            g['symbols'] = ', ' + '[{}]'.format(', '.join([''] + symbols))
+        g['targets'] = ' = '.join(names)
         new_text += UNIT_FMT.format(**g)
 
         last_index = match.end()
+
+    new_text += text[last_index:]
 
     return new_text
     # MAIN_FIND matchall
