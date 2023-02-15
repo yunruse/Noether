@@ -4,19 +4,12 @@
     // makefile
     // .github/workflows/test-compatibility.yml
 
+    /// TYPE CHECKING
+    // See pyproject.toml [tool.pyright]
 
     //// FORMATTING
     "[python]": {
         "editor.defaultFormatter": "ms-python.autopep8",
         "editor.formatOnSave": true,
     },
-
-
-    //// TYPE CHECKING
-    "python.analysis.typeCheckingMode": "basic",
-
-    // .noe.py files are used to generate .py files
-    // and while sharing a general sense of syntax,
-    // do not need typing
-    "python.analysis.ignore": ["*.noe.py"],
 } 
