@@ -3,6 +3,7 @@ Catalogue of units, which may handle interpreting
 units with prefixes.
 '''
 
+from itertools import count
 from ..helpers import removeprefix
 from ..config import Config, conf
 from . import Dimension, Unit
@@ -78,7 +79,13 @@ class Catalogue:
     def __getitem__(self, name: str):
         return self.get(name)
 
-    @property
+    def units(self):
+        return set(self.units_by_name.values())
+
+    def prefixes(self):
+        for prefix_set in self.prefix_sets.values():
+            yield from prefix_set
+
     def all_prefixed_units(self):
         units: dict[str, Unit] = {}
 
@@ -89,24 +96,13 @@ class Catalogue:
 
         return units
 
-    @property
-    def prefixes(self):
-        for prefix_set in self.prefix_sets.values():
-            yield from prefix_set
-
-    def unit_count(self):
-        return len(set(self.units_by_name.values()))
-
-    def dimension_count(self):
-        return len(set(self.dimensions.values()))
-
-    def prefix_count(self):
-        return len(list(self.prefixes))
-
     def __repr__(self):
+        U = len(self.units())
+        D = len(self.dimensions.values())
+        P = len(list(self.prefixes()))
         return (
-            f'<{self.name}: {self.dimension_count()} dimensions,'
-            f' {self.unit_count()} units, {self.prefix_count()} prefixes>')
+            f'<{self.name}: {D} dimensions,'
+            f' {U} units, {P} prefixes>')
 
     def __json__(self):
         return {

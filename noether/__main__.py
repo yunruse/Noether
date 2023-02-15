@@ -3,7 +3,7 @@ from noether import *
 
 from sys import argv
 
-print(f'{catalogue.unit_count()} units, {catalogue.prefix_count()} prefixes')
+print(f'{len(catalogue.units())} units, {len(list(catalogue.prefixes()))} prefixes')
 print('''
 >>> import noether
 >>> from noether import *''')
