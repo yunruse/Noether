@@ -1,26 +1,15 @@
 **/.DS_Store
-
-# Byte-compiled / optimized / DLL files
 __pycache__/
-*.py[cod]
-*$py.class
 
-# Development
-
-test.bat
-todo.txt
-dev-info.py
-venv/
-pypi_tokens.txt
-*.code-workspace
+# Test & analysis
 tests/VERSION
-
-# Analysis
 analysis/output
 analysis/catalogue.tar
 
-# Build
+# Build: noe_transformer.py outputs
+*_.py
 
+# Packaging
 build/
 dist/
 noether.egg-info

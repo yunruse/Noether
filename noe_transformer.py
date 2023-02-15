@@ -1,14 +1,13 @@
 '''
+Internal tool for catalogue generation.
+Transforms `.noe.py` files to `_.py` files.
+
 Many unit definitions are slightly unwieldy,
 especially in the repetition of names.
-
-As such, this transformer takes .noe.py files and
-autogenerates equivalent .py files by transpiling a
-bit of shorthand syntax, so adding units to the
-catalogue is less of a nightmare.
+As such, this transpiles some shorthand syntax.
 
 While the regular expression has been tested,
-you should still run `python -m noether` just in case.
+you should still make sure to run unit tests.
 '''
 
 from pathlib import Path
@@ -85,7 +84,7 @@ parser.add_argument('--remove', action='store_true')
 if __name__ == '__main__':
     args = parser.parse_args()
     for noe_path in args.root.glob('**/*.noe.py'):
-        export_path = Path(str(noe_path).removesuffix('.noe.py') + '.py')
+        export_path = Path(str(noe_path).removesuffix('.noe.py') + '_.py')
         if args.remove:
             print('deleting', export_path)
             export_path.unlink(missing_ok=True)
