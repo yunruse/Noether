@@ -11,18 +11,18 @@ noether.conf.reset()
 
 
 class test_unit_display(TestCase):
-    dimension_display = (
-        (time, 'time  # time'),
-        (length / time, 'length / time  # speed'),
-        (length / time**2, 'length / time**2  # acceleration'),
-        (time / length**0.5, 'time * length**(-1/2)'),
-        ((time * length) ** 0.5, 'length**(1/2) * time**(1/2)'),
+    dim_mult_display = (
+        (time, 'time'),
+        (length / time, 'speed'),
+        (length / time**2, 'acceleration'),
+        (time / length**0.5, 'time / length**0.5'),
+        ((time * length) ** 0.5, 'length**0.5 * time**0.5'),
     )
 
     def test_dimension_display(self):
         '''Test for desired behaviour for numbers with uncertainties '''
-        for dim, string in self.dimension_display:
-            self.assertEqual(repr(dim), string)
+        for dim, string in self.dim_mult_display:
+            self.assertEqual(dim.name(), string)
 
     uncertainty_display = (
         ('1.00794', '0.00007', '1.00794(7)'),
@@ -38,36 +38,31 @@ class test_unit_display(TestCase):
             d = uncertainty(a, b)
             self.assertEqual(c, d)
 
-    value_code_noether_str = (
+    value_repr_str = (
         (
             'length',  # Dimension
-            "Dimension({'length': Fraction(1, 1)})",
             'length  # length, distance, height, width, breadth, depth',
             'length',
         ),
         (
-            'K * m',  # Measure
-            'Measure(1, dim=Dimension(temperature=1, length=1))',
-            '1 K * m  # temperature * length',
+            'kelvin * meter * 1',  # Measure
+            '1 K m  # temperature * length',
             '1 K m'
         ),
         (
             'meter',  # Unit
-            "Unit(Measure(1, dim=Dimension(length=1)), ['meter', 'metre'], 'm', SI_large + SI_small + SI_conventional)",
             'meter  # length',
             'meter'
         ),
         (
             'foot & inch',  # ChainedUnit
-            'ChainedUnit(foot, inch)',
             'foot & inch  # length',
             'foot & inch'
         ),
     )
 
-    def test_value_code_repr_str(self):
-        for k, c, n, s in self.value_code_noether_str:
+    def test_value_repr_str(self):
+        for k, n, s in self.value_repr_str:
             val = eval(k, {}, vars(noether))
-            self.assertEqual(c, val._repr_code())
             self.assertEqual(n, val.__noether__())
             self.assertEqual(s, str(val))
