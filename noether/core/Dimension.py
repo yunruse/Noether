@@ -1,6 +1,7 @@
 from collections import namedtuple
 from fractions import Fraction
 from functools import wraps
+from typing import ClassVar
 
 from noether.helpers import Rational
 from noether.helpers import reorder_dict_by_values
@@ -15,15 +16,11 @@ DimInfo = namedtuple('DimInfo', ('order', 'symbol'))
 
 class Dimension(Multiplication[BaseDimension]):
     '''
-    Dimension of a unit.
-
-    Internally, a dict of names to Fractions.
-    The dimension names are stored in _names,
-    alongside their display order.
+    Dimension of a unit, such as time, speed or temperature.
     '''
 
-    # Class variable with display order
-    _names: dict[BaseDimension, DimInfo] = dict()
+    # Known base dimension
+    _known_dimensions: ClassVar[dict[BaseDimension, DimInfo]] = dict()
 
     # Instantiation
 
@@ -34,7 +31,7 @@ class Dimension(Multiplication[BaseDimension]):
         dimensions = dimensions or {}
         well_formed = all(
             isinstance(d, BaseDimension)
-            and d in type(self)._names
+            and d in type(self)._known_dimensions
             for d, exp in dimensions.items()
         )
         if not well_formed:
@@ -48,15 +45,15 @@ class Dimension(Multiplication[BaseDimension]):
     @classmethod
     def new(
         cls,
-        name: str,
+        name: BaseDimension,
         symbol: str,
         order: float = 0,
     ):
         '''
         Register a new base dimension and return its unit.
         '''
-        cls._names[name] = DimInfo(order, symbol)
-        reorder_dict_by_values(cls._names)
+        cls._known_dimensions[name] = DimInfo(order, symbol)
+        reorder_dict_by_values(cls._known_dimensions)
         self = cls({name: Fraction(1)})
         display.display(self, name)
         return self
@@ -68,7 +65,8 @@ class Dimension(Multiplication[BaseDimension]):
     def items(self):
         exponents = list(super().items())
         # positive first, then negative
-        exponents.sort(key=lambda q: (q[1] < 0, self._names[q[0]].order))
+        exponents.sort(key=lambda q: (
+            q[1] < 0, self._known_dimensions[q[0]].order))
         return exponents
 
     # |~~\ '      |
@@ -83,7 +81,7 @@ class Dimension(Multiplication[BaseDimension]):
 
     def as_symbols(self):
         return super().display(
-            display_function=lambda b: self._names[b].symbol,
+            display_function=lambda b: self._known_dimensions[b].symbol,
             drop_multiplication_signs=True,
             identity_string='1'
         )
