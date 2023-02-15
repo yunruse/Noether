@@ -7,7 +7,7 @@ analysis/output/:
 	@mkdir analysis/output/
 
 type: analysis/output/
-	python3 -m pyright --outputjson | jq '.generalDiagnostics[].file' -r | uniq | tee analysis/output/mistyped_files.txt
+	python3 -m pyright --outputjson 2>/dev/null | jq '.generalDiagnostics[].file' -r | uniq | sed -e 's_.*Noether/__'| tee analysis/output/mistyped_files.txt
 
 test:
 	python3 -m unittest tests/*.py
