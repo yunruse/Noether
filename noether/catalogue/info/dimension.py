@@ -9,4 +9,4 @@ class info_dimension(MeasureInfo):
     @classmethod
     def info(cls, measure: Measure):
         if measure.dim:
-            yield measure.dim.canonical_name()
+            yield measure.dim.name()

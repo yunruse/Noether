@@ -13,17 +13,21 @@ from ..conventional import inch
 from math import log
 
 
+def D(d: Dimension, *n: str):
+    return display(Dimension(d, *n))
+
+
 time_unit = Unit(second(1024e-6), "time_unit", "TU")
 
 
 # % Data
 
 data = Dimension.new("data", "D")
-linear_density = display(data / length, 'linear_density')
-areal_density = display(data / length**2, 'areal_density')
-volumetric_density = display(data / length**3, 'volumetric_density')
-mutation_rate = display(1 / data, 'mutation_rate')
-data_rate = display(data / time, 'data_rate')
+linear_density = D(data / length, 'linear_density')
+areal_density = D(data / length**2, 'areal_density')
+volumetric_density = D(data / length**3, 'volumetric_density')
+mutation_rate = D(1 / data, 'mutation_rate')
+data_rate = D(data / time, 'data_rate')
 
 
 bit = shannon = Unit(data, "bit", "b", SI_large+IEC)
@@ -40,10 +44,10 @@ dit = Unit(nat * log(10), ['hartley', 'ban', 'dit'], 'dit')
 # % Pixels
 
 pixel_count = Dimension.new('pixel_count', 'P')
-pixel_fill_rate = display(pixel_count / time, 'pixel_fill_rate')
-image_quality = display(pixel_count / length, 'image_quality')
-resolution = display(pixel_count ** 2, 'resolution')
-image_density = display(resolution / data, 'image_density')
+pixel_fill_rate = D(pixel_count / time, 'pixel_fill_rate')
+image_quality = D(pixel_count / length, 'image_quality')
+resolution = D(pixel_count ** 2, 'resolution')
+image_density = D(resolution / data, 'image_density')
 
 pixel = dot = display(Unit(pixel_count, "pixel", "pix", SI_large))
 ppi = dpi = display(Unit(pixel / inch, "ppi"))

@@ -169,7 +169,7 @@ class Measure(Generic[T]):
         from ._DisplayHandler import display
 
         unit = self.dim.display(
-            display_function=lambda x: display.dimension_symbol[x],
+            display_function=lambda x: display._dimension_symbol[x],
             drop_multiplication_signs=True,
             identity_string='',
         )

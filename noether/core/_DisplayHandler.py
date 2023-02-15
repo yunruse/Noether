@@ -11,31 +11,29 @@ class DisplayHandler:
     to various dimensions.
     '''
 
+    dimensions: set[Dimension]
     dimension_units: dict[Dimension, list[Unit]]
-    dimension_names: dict[Dimension, list[str]]
-    dimension_symbol: dict[str, str]
+    _dimension_symbol: dict[str, str]  # HACK
 
     def __init__(self, *items: Unit):
+        self.dimensions = set()
         self.dimension_units = dict()
-        self.dimension_names = dict()
-        self.dimension_symbol = dict(dimensionless='')
+        self._dimension_symbol = dict(dimensionless='')
 
         self.displays(*items)
 
     T = TypeVar('T', Unit, Dimension, 'UnitSet')
 
-    def display(self, value: T, *names: str) -> T:
+    def display(self, value: T) -> T:
         if isinstance(value, Dimension):
-            self.dimension_names.setdefault(value, [])
-            for n in names:
-                self.dimension_names[value].append(n)
+            self.dimensions.add(value)
+
         elif isinstance(value, Unit):
             self.dimension_units.setdefault(value.dim, [])
             self.dimension_units[value.dim].append(value)
-
             if value.symbols:
-                for n in self.dimension_names.get(value.dim, []):
-                    self.dimension_symbol[n] = value.symbol
+                for n in value.dim.names:
+                    self._dimension_symbol[n] = value.symbol
         elif isinstance(value, UnitSet):
             for unit in value:
                 self.display(unit)
@@ -47,13 +45,9 @@ class DisplayHandler:
     def remove(
         self,
         value: 'Unit | Dimension | UnitSet',
-        *names: str
     ):
         if isinstance(value, Dimension):
-            self.dimension_names.setdefault(value, [])
-            for n in names:
-                if n in self.dimension_names[value]:
-                    self.dimension_names[value].remove(n)
+            self.dimensions.remove(value)
         elif isinstance(value, Unit):
             self.dimension_units.setdefault(value.dim, [])
             if value in self.dimension_units[value.dim]:

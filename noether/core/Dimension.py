@@ -19,14 +19,18 @@ class Dimension(Multiplication[BaseDimension]):
     Dimension of a unit, such as time, speed or temperature.
     '''
 
-    # Known base dimension
+    # Known base dimensions
     _known_dimensions: ClassVar[dict[BaseDimension, DimInfo]] = dict()
+
+    # Known composed dimension names
+    _names: ClassVar[dict['Dimension', list[str]]] = dict()
 
     # Instantiation
 
     def __init__(
         self,
         dimensions: dict[BaseDimension, Rational] | None = None,
+        *names: str
     ):
         dimensions = dimensions or {}
         well_formed = all(
@@ -41,6 +45,8 @@ class Dimension(Multiplication[BaseDimension]):
                 " and compose derived dimensions.")
 
         super().__init__(dimensions)
+        self._names.setdefault(self, [])
+        self._names[self].extend(names)
 
     @classmethod
     def new(
@@ -54,8 +60,8 @@ class Dimension(Multiplication[BaseDimension]):
         '''
         cls._known_dimensions[name] = DimInfo(order, symbol)
         reorder_dict_by_values(cls._known_dimensions)
-        self = cls({name: Fraction(1)})
-        display.display(self, name)
+        self = cls({name: Fraction(1)}, name)
+        display.display(self)
         return self
 
     def is_base_dimension(self):
@@ -86,10 +92,14 @@ class Dimension(Multiplication[BaseDimension]):
             identity_string='1'
         )
 
-    def canonical_name(self):
-        names = display.dimension_names.get(self, [])
-        if names:
-            return names[0]
+    @property
+    def names(self):
+        # TODO: Fetch for equality..?
+        return self._names[self]
+
+    def name(self):
+        if self.names:
+            return self.names[0]
         return self.display()
 
     def _repr_code(self):
@@ -102,9 +112,8 @@ class Dimension(Multiplication[BaseDimension]):
 
     def __noether__(self):
         string = self.display()
-        names = display.dimension_names.get(self, [])
-        if names:
-            string += '  # {}'.format(', '.join(names))
+        if self.names:
+            string += '  # {}'.format(', '.join(self.names))
         return string
 
     def __rich__(self):
@@ -113,21 +122,20 @@ class Dimension(Multiplication[BaseDimension]):
 
         reprs = self.display()
 
-        names = display.dimension_names.get(self, [])
-        if names:
-            return f'[bold italic]{names[0]}[/]  [green italic]# {reprs}'
+        if self.names:
+            return f'[bold italic]{self.names[0]}[/]  [green italic]# {reprs}'
 
         return reprs
 
     def __str__(self):
-        return self.canonical_name()
+        return self.name()
 
     def _json_dim(self):
         return sorted([name, float(exp)] for name, exp in self.items())
 
     def __json__(self):
         return {
-            'names': sorted(set(display.dimension_names.get(self, []))),
+            'names': sorted(self.names),
             'dimension': self._json_dim(),
         }
 

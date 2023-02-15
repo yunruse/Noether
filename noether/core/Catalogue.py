@@ -93,13 +93,13 @@ class Catalogue:
     def prefixes(self):
         for prefix_set in self.prefix_sets.values():
             yield from prefix_set
-    
+
     def unit_count(self):
         return len(set(self.units_by_name.values()))
-    
+
     def dimension_count(self):
         return len(set(self.dimensions.values()))
-    
+
     def prefix_count(self):
         return len(list(self.prefixes))
 
@@ -114,7 +114,7 @@ class Catalogue:
                 dim.__json__() for dim in
                 sorted(
                     set(self.dimensions.values()),
-                    key=lambda d: d.canonical_name()
+                    key=lambda d: d.name()
                 )
             ],
             'prefix_sets': [
