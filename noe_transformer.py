@@ -55,7 +55,7 @@ def transmogrify_shorthand(text: str):
         g['names'] = ', '.join(map(repr, names))
         g['symbols'] = ''
         if symbols:
-            g['symbols'] = ', ' + '[{}]'.format(', '.join([''] + symbols))
+            g['symbols'] = ', ' + '[{}]'.format(', '.join(symbols))
         g['targets'] = ' = '.join(names)
         new_text += UNIT_FMT.format(**g)
 
