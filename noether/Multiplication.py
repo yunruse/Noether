@@ -66,7 +66,7 @@ class Multiplication(Generic[T], ImmutableDict[T, Rational]):
 
         return NotImplemented
 
-    def __pow__(self, exponent: Rational):
+    def __pow__(self, exponent: Real):
         return type(self)({
             value: i * exponent
             for value, i in self.items()

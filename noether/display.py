@@ -5,6 +5,7 @@ Handles Unicode.
 '''
 
 from decimal import Decimal
+from fractions import Fraction
 from noether.helpers import Real
 
 from .config import Config, conf
@@ -40,13 +41,15 @@ def superscript(number):
     return f'**{number}'
 
 
-def _to_decimal(number: float | int | str | Decimal):
+def _to_decimal(number: Real | str):
+    if isinstance(number, Fraction):
+        number = float(number)
     if isinstance(number, float):
-        return Decimal(str(number))
+        number = str(number)
     return Decimal(number)
 
 
-def uncertainty(number: Decimal, stddev: Decimal):
+def uncertainty(number: Real | str, stddev: Real | str):
     '''Display'''
     a = _to_decimal(number)
     b = _to_decimal(stddev)
