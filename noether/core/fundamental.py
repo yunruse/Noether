@@ -5,7 +5,7 @@ Fundamental units.
 from .Dimension import Dimension
 from .Measure import Measure
 from .Unit import Unit
-from .Prefix import SI
+from .Prefix import SI_all
 from ._DisplayHandler import display as I
 
 luminosity = Dimension.new('luminosity', 'J', -7)
@@ -17,19 +17,19 @@ length = Dimension.new('length', 'L', -2)
 time = Dimension.new('time', 'T', -1)
 
 candela = cd = I(Unit(
-    Measure(dim=luminosity), 'candela', 'cd', SI))
+    Measure(dim=luminosity), 'candela', 'cd', SI_all))
 ampere = A = I(Unit(
-    Measure(dim=current), 'ampere', 'A', SI))
+    Measure(dim=current), 'ampere', 'A', SI_all))
 kelvin = K = I(Unit(
-    Measure(dim=temperature), 'kelvin', 'K', SI))
+    Measure(dim=temperature), 'kelvin', 'K', SI_all))
 kilogram = kg = I(Unit(
     Measure(dim=mass), 'kilogram', 'kg'))
 mole = mol = I(Unit(
-    Measure(dim=substance), 'mole', 'mol', SI))
+    Measure(dim=substance), 'mole', 'mol', SI_all))
 meter = metre = m = I(Unit(
-    Measure(dim=length), ['meter', 'metre'], 'm', SI))
+    Measure(dim=length), ['meter', 'metre'], 'm', SI_all))
 second = s = I(Unit(
-    Measure(dim=time), 'second', 's', SI))
+    Measure(dim=time), 'second', 's', SI_all))
 
 __all__ = [
     'luminosity', 'candela', 'cd',

@@ -4,7 +4,7 @@ Essential scientific units.
 
 from datetime import timedelta
 from noether.core import Unit
-from noether.core.Prefix import SI
+from noether.core.Prefix import SI_all
 
 from noether.core.fundamental import candela, kilogram, meter, second, kelvin
 from math import pi
@@ -20,10 +20,10 @@ astronomical_unit = au = Unit(
     "astronomical_unit", "au",
     info="conventional unit defined by the IAU in 2012"
 )
-parsec = Unit(au * 180*60*60/pi, "parsec", "pc", SI)
+parsec = Unit(au * 180*60*60/pi, "parsec", "pc", SI_all)
 
-lightsecond = Unit(c * second, "lightsecond", "ls", SI)
-lightyear = ly = Unit(c * year, "lightyear", "ly", SI)
+lightsecond = Unit(c * second, "lightsecond", "ls", SI_all)
+lightyear = ly = Unit(c * year, "lightyear", "ly", SI_all)
 
 
 # % Earth-sol system

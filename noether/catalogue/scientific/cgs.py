@@ -5,13 +5,13 @@ CGS (centimeter-gram-second) unit system.
 from noether.core import Unit, UnitSet
 
 from math import pi
-from .si import SI, meter, kilogram, second as s
+from .si import SI_all, meter, kilogram, second as s
 from .si import ampere, lux, coulomb, henry, ohm, volt, tesla
 from .essential import turn, nit
 
 
 # CGS units
-gram = g = Unit(kilogram / 1000, 'gram', 'g', SI)
+gram = g = Unit(kilogram / 1000, 'gram', 'g', SI_all)
 cm = centimeter = centimetre = Unit(
     meter * 0.01, ['centimeter', 'centimetre'], 'cm')
 

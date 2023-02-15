@@ -6,7 +6,7 @@ https://en.wikipedia.org/wiki/List_of_humorous_units_of_measurement
 '''
 
 from noether.core import Unit, UnitSet
-from noether.core.Prefix import SI
+from noether.core.Prefix import SI_all
 from ..scientific import second, minute, watt_hour
 from ..scientific import sievert
 from ..scientific import angstrom, sol
@@ -20,7 +20,7 @@ beard_second = Unit(
     info="According to popular convention, although the average figure is close to half of this.")
 
 # % Time
-warhol = Unit(minute * 15, "warhol", prefixes=SI,
+warhol = Unit(minute * 15, "warhol", prefixes=SI_all,
               info="Warhol's \"fifteen minutes of fame\"")
 beard_inch = Unit(inch / (beard_second/second), "beard_inch")
 

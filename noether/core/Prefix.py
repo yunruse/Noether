@@ -110,9 +110,9 @@ IEC = PrefixSet.from_list('IEC', [
     # ("quebi", "Qi", 2**100),
 ])
 
-SI = SI_large + SI_small + SI_conventional
+SI_all = SI_large + SI_small + SI_conventional
 if conf.get('PREFIX_fun'):
-    SI = SI + SI_fun
+    SI_all = SI_all + SI_fun
 
 if not conf.get('PREFIX_iec'):
     IEC.clear()

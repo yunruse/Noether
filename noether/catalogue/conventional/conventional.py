@@ -3,16 +3,15 @@ Conventional SI-compatible units.
 '''
 
 from noether.core import Unit, AffineUnit
-from noether.core.Prefix import SI, SI_large, SI_small
-from noether.core import display as I
+from noether.core.Prefix import SI_all, SI_large, SI_small
+from noether.core import display
 
 from noether.config import Config, conf
 
 from math import pi
-from ..scientific import meter, second, ampere, kilogram, kelvin
-from ..scientific import radian, steradian, turn
+from ..scientific import meter, second, kilogram, kelvin
+from ..scientific import radian, turn
 from ..scientific import turn
-from ..scientific import watt
 from ..scientific import day, hour, minute
 from ..scientific import gram
 
@@ -47,7 +46,7 @@ are = Unit(100 * meter**2, "are", "a")
 hectare = Unit(100 * are, "hectare", "ha")
 
 # % Volume
-litre = liter = L = Unit((meter/10) ** 3, ["liter", "litre"], "l", SI)
+litre = liter = L = Unit((meter/10) ** 3, ["liter", "litre"], "l", SI_all)
 milliliter = milliliter = ml = mL = Unit(
     liter / 1000, ['milliliter', 'millilitre'], 'mL')
 
@@ -72,10 +71,10 @@ arcsecond = arcsec = Unit(
 Config.register('UNITS_conventional_time', True, '''\
 Display time in year & day & hour & minute & second.''')
 if conf.get('UNITS_conventional_time'):
-    I(year & day & hour & minute & second)
+    display(year & day & hour & minute & second)
 
 
 Config.register('UNITS_conventional_angles', True, '''\
 Display angles in turn & degree & arcminute & arcsecond.''')
 if conf.get('UNITS_conventional_angles'):
-    I(turn & degree & arcminute & arcsecond)
+    display(turn & degree & arcminute & arcsecond)

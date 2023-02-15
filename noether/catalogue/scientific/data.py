@@ -3,8 +3,8 @@ Data units, including the byte, shannon and pixel.
 '''
 
 from noether.core import Unit, Dimension
-from noether.core.Prefix import IEC, SI, SI_large
-from noether.core import display as I
+from noether.core.Prefix import IEC, SI_all, SI_large
+from noether.core import display
 
 from noether.core.fundamental import length, second, time
 from .cgs import cm
@@ -19,19 +19,19 @@ time_unit = Unit(second(1024e-6), "time_unit", "TU")
 # % Data
 
 data = Dimension.new("data", "D")
-linear_density = I(data / length, 'linear_density')
-areal_density = I(data / length**2, 'areal_density')
-volumetric_density = I(data / length**3, 'volumetric_density')
-mutation_rate = I(1 / data, 'mutation_rate')
-data_rate = I(data / time, 'data_rate')
+linear_density = display(data / length, 'linear_density')
+areal_density = display(data / length**2, 'areal_density')
+volumetric_density = display(data / length**3, 'volumetric_density')
+mutation_rate = display(1 / data, 'mutation_rate')
+data_rate = display(data / time, 'data_rate')
 
 
 bit = shannon = Unit(data, "bit", "b", SI_large+IEC)
-byte = I(Unit(bit * 8, "byte", "B", SI_large+IEC))
+byte = display(Unit(bit * 8, "byte", "B", SI_large+IEC))
 
 crumb = bit * 2
 nibble = Unit(bit * 4, "nibble")
-base_pair = bp = Unit(bit * 2, "base_pair", "bp", SI)
+base_pair = bp = Unit(bit * 2, "base_pair", "bp", SI_all)
 
 nat = nepit = Unit(bit / log(2), 'nat')
 trit = Unit(nat * log(3), 'trit')
@@ -40,13 +40,13 @@ dit = Unit(nat * log(10), ['hartley', 'ban', 'dit'], 'dit')
 # % Pixels
 
 pixel_count = Dimension.new('pixel_count', 'P')
-pixel_fill_rate = I(pixel_count / time, 'pixel_fill_rate')
-image_quality = I(pixel_count / length, 'image_quality')
-resolution = I(pixel_count ** 2, 'resolution')
-image_density = I(resolution / data, 'image_density')
+pixel_fill_rate = display(pixel_count / time, 'pixel_fill_rate')
+image_quality = display(pixel_count / length, 'image_quality')
+resolution = display(pixel_count ** 2, 'resolution')
+image_density = display(resolution / data, 'image_density')
 
-pixel = dot = I(Unit(pixel_count, "pixel", "pix", SI_large))
-ppi = dpi = I(Unit(pixel / inch, "ppi"))
+pixel = dot = display(Unit(pixel_count, "pixel", "pix", SI_large))
+ppi = dpi = display(Unit(pixel / inch, "ppi"))
 dpcm = Unit(pixel / cm, 'dpcm')
 
 res_480p = pixel(720) * pixel(480)

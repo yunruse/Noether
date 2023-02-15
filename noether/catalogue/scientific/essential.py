@@ -3,13 +3,13 @@ Essential scientific units.
 '''
 
 from noether.core import Unit
-from noether.core.Prefix import SI
+from noether.core.Prefix import SI_all
 
-from noether.core.fundamental import candela, kilogram, meter, second, kelvin, ampere
+from noether.core.fundamental import candela, kilogram, meter, kelvin, ampere
 from math import pi
 from .si import radian, steradian
-from .si import joule, watt, pascal, cumec, c
-from .si import hour, minute, year_julian
+from .si import joule, watt, pascal, cumec
+from .si import hour
 
 # % Angle
 gradian = Unit(radian * pi / 200, "gon")
@@ -17,14 +17,24 @@ circle = turn = Unit(radian * 2*pi, "turn", "turn")
 sphere = spat = Unit(steradian * 4*pi, "spat", "sp")
 
 # % Electricity
-watt_hour = Wh = Unit(watt * hour, 'watt_hour', 'Wh', SI)
-amp_hour = ampere_hour = Ah = Unit(ampere * hour, 'amp_hour', 'Ah')
-ampere_turn = At = Unit(ampere * turn, "ampere_turn", "At")
+watt_hour = Wh = Unit(watt * hour, 'watt_hour', 'Wh', SI_all)
+amp_hour = ampere_hour = Ah = Unit(ampere * hour, 'amp_hour', 'Ah', SI_all)
+ampere_turn = At = Unit(ampere * turn, "ampere_turn", "At", SI_all)
 
 # % Human
-calorie = cal = Unit(4.814 * joule, "calorie", "cal",
-                     info="not to be confused with the kcal")
-kilocalorie = kcal = Unit(cal * 1000, "kilocalorie", "kcal")
+small_calorie = cal = Unit(
+    4.814 * joule, ["calorie", "large_calorie"], "cal",
+    info="Energy to heat 1g of water by 1°C."
+    " Defined by convention; now regarded as obsolete."
+    " Not to be confused with the large calorie (heats 1kg)."
+)
+large_calorie = kilocalorie = kcal = Unit(
+    cal * 1000, ["kilocalorie", "small_calorie"], "kcal",
+    info="Energy to heat 1kg of water by 1°C."
+    " Defined by convention; now regarded as obsolete."
+    " Not to be confused with the small calorie (heats 1g)."
+    " Often used in food as an alternative to the kilojoule."
+)
 bmi = Unit(kilogram / meter**2, "BMI", "BMI")
 
 # A unit of solar irradiation
@@ -39,11 +49,11 @@ clo = Unit(tog * 1.55, "clo")
 
 # % Pressure
 
-bar = Unit(1e5 * pascal, "bar", "bar", SI)
+bar = Unit(1e5 * pascal, "bar", "bar", SI_all)
 atmosphere = atm = Unit(101_325 * pascal, "atmosphere", ["atm", "ata"])
 metre_mercury = meter_mercury = Unit(
     pascal(133_322.387_415),
-    "meter_mercury", "mHg", SI,
+    "meter_mercury", "mHg", SI_all,
     info="defined by convention")
 sverdrup = Unit(cumec * 1e6, "sverdrup", "Sv")
 
@@ -61,7 +71,7 @@ bohr_radius = a_0 = Unit(
 
 micron = meter(1e-6)
 angstrom = Unit(meter(1e-10), "angstrom", "Å")
-barn = Unit(1e-28 * meter**2, "barn", "b", SI)
+barn = Unit(1e-28 * meter**2, "barn", "b", SI_all)
 
 # % Photometric
 nit = Unit(candela / meter**2, 'nit', 'nit')
