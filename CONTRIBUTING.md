@@ -8,8 +8,8 @@ You'll need `pip install pyright unittest` to run tooling.
 
 > **Warning**
 > Note that running Noether from source will raise errors on missing files.
-> This is intentional - you must `make unit` to transpile the catalogue.
-> For info on (optional) catalogue shorthand, see below.
+> This is intentional - you must `make catalogue` first.
+> For info on the (optional) catalogue shorthand being transpiled, see below.
 
 ## Catalogue shorthand
 
