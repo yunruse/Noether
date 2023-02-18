@@ -43,8 +43,8 @@ class Multiplication(Generic[T], ImmutableDict[T, Rational]):
     def _geo(self, value: T | 'Multiplication[T]', direction: int):
         if isinstance(value, Multiplication):
             return type(self)({
-                x: self.get(x, 0) + value.get(x, 0)*direction
-                for x in set(self) | set(value)
+                x: exp for x in set(self) | set(value)
+                if (exp := self.get(x, 0) + value.get(x, 0)*direction)
             })
 
         else:
