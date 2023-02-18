@@ -1,12 +1,12 @@
 from noether.core.Prefix import *
 from noether.config import Config, conf
 
-# Dimensions
+# Essentials
+from .prefixes import *
 from .dimensions import *
 
 # Units are imported in this exact order
 from .scientific import *
-
 from .conventional import *
 
 Config.register('CATALOGUE_historical', True, help='''\

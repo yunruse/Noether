@@ -5,8 +5,9 @@ https://webmadness.net/resources/The-Potrzebie-system-of-weights-and-measures.pd
 '''
 
 from noether.core import Unit, UnitSet
-from ..scientific import second, minute
-from ..scientific import meter, turn, gram
+
+from ..fundamental import second, meter
+from ..scientific import minute, turn, gram
 from ..conventional import inch
 from ..scientific import angstrom
 

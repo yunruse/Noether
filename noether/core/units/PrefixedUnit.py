@@ -7,7 +7,7 @@ class PrefixedUnit(Unit):
     unit: Unit
     prefix: Prefix
 
-    def __init__(self, unit: Unit, prefix: Prefix):
+    def __init__(self, prefix: Prefix, unit: Unit):
 
         object.__setattr__(self, 'unit', unit)
         object.__setattr__(self, 'prefix', prefix)

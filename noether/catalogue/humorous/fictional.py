@@ -6,7 +6,7 @@ Sourced from various fan wikis and TV Tropes.
 '''
 
 from noether.core import Unit, UnitSet
-from noether.core.fundamental import second
+from ..fundamental import second
 from ..conventional import day, year, minute
 from ..conventional import inch
 

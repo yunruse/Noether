@@ -8,7 +8,8 @@ https://en.wikipedia.org/wiki/MTS_units
 '''
 
 from noether.core import Unit, UnitSet
-from noether.core import meter as m, second as s
+
+from ..fundamental import meter as m, second as s
 from ..conventional import tonne as t
 
 stere = stère = 'st' = m**3

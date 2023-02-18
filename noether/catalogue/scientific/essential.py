@@ -3,16 +3,17 @@ Essential scientific units.
 '''
 
 from noether.core import Unit
-from noether.core.Prefix import SI_all
 
-from noether.core.fundamental import candela, kilogram, meter, kelvin, ampere
 from math import pi
+
+from ..prefixes import SI_all, micro
+from ..fundamental import candela, kilogram, meter, kelvin, ampere
 from .si import radian, steradian
 from .si import joule, watt, pascal, cumec
 from .si import hour
 
 # % Angle
-gradian = Unit(radian * pi / 200, "gon")
+gradian = Unit(radian * pi / 200, "gradian", "grad")
 circle = turn = Unit(radian * 2*pi, "turn", "turn")
 sphere = spat = Unit(steradian * 4*pi, "spat", "sp")
 
@@ -69,7 +70,7 @@ bohr_radius = a_0 = Unit(
 
 # % Small-scale
 
-micron = meter(1e-6)
+micron = micro * meter
 angstrom = Unit(meter(1e-10), "angstrom", "Å")
 barn = Unit(1e-28 * meter**2, "barn", "b", SI_all)
 

@@ -4,9 +4,9 @@ Essential scientific units.
 
 from datetime import timedelta
 from noether.core import Unit
-from noether.core.Prefix import SI_all
 
-from noether.core.fundamental import candela, kilogram, meter, second, kelvin
+from ..prefixes import SI_all
+from ..fundamental import candela, kilogram, meter, second, kelvin
 from math import pi
 from .si import joule, watt, pascal, cumec, standard_gravity as g, c
 from .cgs import cm

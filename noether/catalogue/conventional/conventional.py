@@ -3,12 +3,12 @@ Conventional SI-compatible units.
 '''
 
 from noether.core import Unit, AffineUnit
-from noether.core.Prefix import SI_all, SI_large, SI_small
 from noether.core import display
-
 from noether.config import Config, conf
 
 from math import pi
+
+from ..prefixes import SI_all, SI_large, SI_small
 from ..scientific import meter, second, kilogram, kelvin
 from ..scientific import radian, turn
 from ..scientific import turn

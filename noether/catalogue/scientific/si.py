@@ -3,11 +3,11 @@ SI-derived units, and constants used in defining the SI units.
 '''
 
 from noether.core import Unit, UnitSet
-from noether.core.Prefix import SI_all as SI_all, SI_small, SI_large
 from noether.core import display
-
 from math import pi
-from noether.core.fundamental import *
+
+from ..prefixes import SI_all as SI_all, SI_small, SI_large
+from ..fundamental import *
 from ..dimensions import *
 
 SI = UnitSet({candela, ampere, kelvin, kilogram, mole, meter, second})

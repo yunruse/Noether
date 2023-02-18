@@ -5,7 +5,9 @@ All units of length are based on an Attic
 measurement (pous = 296 mm).
 '''
 
-from noether.core import Unit, UnitSet, meter
+from noether.core import Unit, UnitSet
+
+from ..fundamental import meter
 
 pous = πούς = meter * 0.296
 # Ancient greek foot, as defined in Athens (though varying regionally).

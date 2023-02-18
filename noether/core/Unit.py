@@ -28,12 +28,12 @@ class Unit(Measure):
         measure: Real | Measure | Dimension | timedelta,
         names: str | list[str] | None = None,
         symbols: str | list[str] | None = None,
-        prefixes: list[Prefix] | None = None,
+        prefixes: PrefixSet | None = None,
         info: str | None = None,
     ):
         # Useful!
         if isinstance(measure, timedelta):
-            from .fundamental import second  # noqa
+            from ..catalogue.fundamental import second  # noqa
             measure = second * measure.total_seconds()
 
         if isinstance(measure, Dimension):
@@ -53,9 +53,8 @@ class Unit(Measure):
     # Useful cataloguing tools
 
     def prefixed_units(self):
-        from .units.PrefixedUnit import PrefixedUnit
         for prefix in self.prefixes:
-            yield PrefixedUnit(self, prefix)
+            yield prefix * self
 
     def _namespace(self):
         return {x: self for x in chain(self.names, self.symbols)}

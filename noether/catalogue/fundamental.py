@@ -1,12 +1,9 @@
 '''
-Fundamental units.
+Fundamental SI dimensions and their units.
 '''
 
-from .Dimension import Dimension
-from .Measure import Measure
-from .Unit import Unit
-from .Prefix import SI_all
-from ._DisplayHandler import display as I
+from noether.core import Dimension, Measure, Unit, display as I
+from .prefixes import SI_all
 
 luminosity = Dimension.new('luminosity', 'J', -7)
 current = Dimension.new('current', 'I', -6)

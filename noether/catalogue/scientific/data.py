@@ -3,10 +3,10 @@ Data units, including the byte, shannon and pixel.
 '''
 
 from noether.core import Unit, Dimension
-from noether.core.Prefix import IEC, SI_all, SI_large
 from noether.core import display
 
-from noether.core.fundamental import length, second, time
+from ..prefixes import IEC, SI_all, SI_large
+from ..fundamental import length, second, time
 from .cgs import cm
 from ..conventional import inch
 

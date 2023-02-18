@@ -1,11 +1,12 @@
 '''
-Various dimensions, for display purposes.
+Composed dimensions from the base 7 (SI) dimensions.
 '''
 
 from ..config import Config, conf
 from noether.core.Dimension import dimensionless, Dimension
-from noether.core.fundamental import *
 from noether.core import display
+
+from .fundamental import *
 
 
 def D(d: Dimension, *n: str):

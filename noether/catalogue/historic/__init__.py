@@ -1,6 +1,3 @@
-
-from .regional import *
-
 from .ancient_greek_ import *
 
 from .mts_ import *

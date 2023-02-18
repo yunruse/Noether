@@ -4,7 +4,7 @@ Mathematical and scientific constants not defined by SI or CODATA.
 
 from noether.core import Unit
 
-from noether.core.fundamental import ampere, kelvin, kilogram, meter
+from ..fundamental import ampere, kelvin, kilogram, meter
 from .si import joule, newton, e, hbar, c
 from .CODATA import CODATA
 

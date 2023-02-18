@@ -6,8 +6,6 @@ from .Measure import Measure
 from .Unit import Unit
 from .units import *
 
-from .fundamental import *
-
 from .UnitSet import UnitSet
 from .Catalogue import Catalogue
 from ._DisplayHandler import display
