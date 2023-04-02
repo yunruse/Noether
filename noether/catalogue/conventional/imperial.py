@@ -7,7 +7,7 @@ from fractions import Fraction
 from noether.core import Unit, AffineUnit
 from noether.config import Config, conf
 
-from ..scientific import meter, kelvin
+from ..scientific import meter, kelvin, mercury
 from ..scientific import cm, gram, hour
 from .conventional import liter
 
@@ -78,3 +78,9 @@ grain = Unit(pound / 7000, "grain", "gr")
 
 stone = st = Unit(pound * 14, "stone", "st")
 imperial_ton = Unit(pound * 2240, "ton", "t")
+
+
+# Derived
+
+inch_mercury = Unit(mercury * inch,
+                    "inch_mercury", "inHg")

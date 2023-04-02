@@ -56,6 +56,7 @@ metre_mercury = meter_mercury = Unit(
     pascal(133_322.387_415),
     "meter_mercury", "mHg", SI_all,
     info="defined by convention")
+mercury = meter_mercury / meter
 sverdrup = Unit(cumec * 1e6, "sverdrup", "Sv")
 
 # % Hartree atomic units

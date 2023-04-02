@@ -42,7 +42,7 @@ TOLKIEN = UnitSet({yén & enquië & ré, lár & ranga})
 
 # % Homestuck
 solar_sweep = alternian_year = Unit(
-    year * 13/6, info="i h8 that i felt obliged to add this unit ::(")
+    year * 13/6, ["solar_sweep", "alternian_year"], info="i h8 that i felt obliged to add this unit ::(")
 
 
 # % Dragonball
