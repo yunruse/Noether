@@ -61,6 +61,6 @@ IEC = PrefixSet(
     'IEC', {kibi, mebi, gibi, tebi, pebi, exbi, zebi, yobi})
 
 
-SI_all = SI_large + SI_small + SI_conventional
+SI_all = SI_large | SI_small | SI_conventional
 if conf.get('PREFIX_fun'):
-    SI_all = SI_all + SI_fun
+    SI_all = SI_all | SI_fun

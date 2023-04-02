@@ -30,8 +30,8 @@ mutation_rate = D(1 / data, 'mutation_rate')
 data_rate = D(data / time, 'data_rate')
 
 
-bit = shannon = Unit(data, "bit", "b", SI_large+IEC)
-byte = display(Unit(bit * 8, "byte", "B", SI_large+IEC))
+bit = shannon = Unit(data, "bit", "b", SI_large | IEC)
+byte = display(Unit(bit * 8, "byte", "B", SI_large | IEC))
 
 crumb = bit * 2
 nibble = Unit(bit * 4, "nibble")

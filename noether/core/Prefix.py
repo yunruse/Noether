@@ -52,13 +52,13 @@ class PrefixSet(set[Prefix]):
         self.name = name
         super().__init__(prefixes or [])
 
-    def __add__(self, other: 'PrefixSet'):
+    def __or__(self, other: 'PrefixSet'):
         return PrefixSet(
-            f'{self.name} + {other.name}',
+            f'{self.name} | {other.name}',
             set(self) | set(other))
 
     def __repr__(self):
-        return self.name
+        return f'PrefixSet({self.name!r}, {set(self)!r})'
 
     def __json__(self):
         return {'name': self.name, 'prefixes': [p.__json__() for p in self]}
