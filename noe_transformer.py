@@ -15,6 +15,7 @@ you should still make sure to run unit tests.
 # to be:
 # - used in the *entirety* of the catalogue
 # - formalised in format
+# - defer to the first definition on name collisions..? (eg to avoid Kayser overriding Kelvin on `K`)
 # - capable of rendering to JSON, including symbolic relationships AND actual values
 # - render an entire catalogue in one Python file
 # - based on configuration (how?) also generate all prefixed units, for better linting...???
