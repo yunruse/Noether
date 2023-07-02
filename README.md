@@ -7,6 +7,7 @@
 [![Python version compatibility](https://github.com/yunruse/Noether/actions/workflows/test-compatibility.yml/badge.svg?branch=release)](https://github.com/yunruse/Noether/actions/workflows/test-compatibility.yml)
 
 TODO: rewrite this to be less advertisey
+TODO: mention `alias noe='python -im noether'`
 
 ## The problem: computers don't understand physical measurements
 
