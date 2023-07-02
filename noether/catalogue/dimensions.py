@@ -160,7 +160,7 @@ thermal_resistivity = D(thermal_resistance * length /
 
 # % Miscellaneous
 
-# HACK: best done with .noe.py
+# HACK: best done with .units.py
 length.names.extend(['distance', 'height', 'width', 'breadth', 'depth'])
 distance = height = width = breadth = depth = length
 

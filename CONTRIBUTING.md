@@ -10,13 +10,13 @@ You'll need `pip install pyright unittest` to run tooling.
 
 ## Catalogue shorthand
 
-`make units` utilises `noe_transformer.py` to transpile `.noe.py` files into `._py` files.
-
-The custom `.noe.py` format is not formally specified (or complete) but its shorthand allows for niceties like e.g.
- `a = b = 'c' = foo` instead of `a = b = Unit(foo, ['a', 'b'], ['c']]`,
-which, when you have a lot of units, is really rather useful.
+`make units` utilises `noe_transformer.py` to transpile `.units.py` files into Python.
 
 Note that this is not Python – it is a strict subset of its syntax (namely imports and equalities only) that is transpiled.
+
+This is in alpha; it is only used in a few corners of the catalogue and has not yet been fully and formally defined.
+
+It is the intent to have the catalogue entirely use this system. Until then, for `.gitignore` purposes, the transpiled result is `_.py` rather than `.py`.
 
 ## Under the hood
 

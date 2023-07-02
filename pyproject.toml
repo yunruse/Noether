@@ -6,9 +6,9 @@ pythonVersion = "3.10"
 pythonPlatform = "all"
 
 include = ["noether"]
-# .noe.py files are used to generate .py files
+# .units.py files are used to generate .py files
 # and while sharing a general sense of syntax,
 # are not really typable
-ignore = ["**/*.noe.py"]
+ignore = ["**/*.units.py"]
 
 stubPath = ""
