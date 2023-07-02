@@ -31,13 +31,13 @@ class MeasureRelative(Measure):
 
         return self.unit
 
-    # Hacky syntactic sugar such that @ "binds looser"
+    # HACK: syntactic sugar such that @ "binds looser"
 
     def __and__(self, other: 'Unit'):
         return MeasureRelative(self, self.unit & other)
 
     def __mul__(self, other: 'Unit'):
-        return MeasureRelative(self, self.unit * other)
+        return MeasureRelative(self, self.unit * other)  # type: ignore
 
     def __truediv__(self, other: 'Unit'):
-        return MeasureRelative(self, self.unit / other)
+        return MeasureRelative(self, self.unit / other)  # type: ignore

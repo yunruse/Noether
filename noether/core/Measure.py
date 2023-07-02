@@ -196,7 +196,10 @@ class Measure(Generic[T]):
         n = canonical_number(measure.value, measure.stddev,
                              conf.get(UNCERTAINTY_SHORTHAND))
         s = measure.unit_to_display()
-        return f'{n} {s}'
+        return f'{n} {s}'.strip()
+
+    def __str__(self):
+        return (self.display_unit() or self)._repr_measure(self)
 
     def _display_element(self):
         return (self.display_unit() or self)._repr_measure(self).strip()
@@ -212,17 +215,6 @@ class Measure(Generic[T]):
         if info:
             info = '  [green italic]#[/] ' + info
         return self._display_element() + info
-
-    @staticmethod
-    def str_measure(measure: 'Measure'):
-        # Fallback if no unit found
-        n = canonical_number(measure.value, measure.stddev,
-                             conf.get(UNCERTAINTY_SHORTHAND))
-        s = measure.unit_to_display()
-        return f'{n} {s}'.strip()
-
-    def __str__(self):
-        return (self.display_unit() or self).str_measure(self)
 
     #  /~~\                   |     '
     # |  __/~//~\|/~\ /~\ /~/~|~|/~\|/~~
