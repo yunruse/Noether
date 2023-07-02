@@ -1,6 +1,6 @@
-all: catalogue type test analyse build
+all: units type test analyse build
 
-catalogue:
+units:
 	python3 noe_transformer.py
 
 analysis/output/:

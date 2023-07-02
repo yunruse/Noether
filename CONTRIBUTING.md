@@ -1,6 +1,4 @@
-Thank you for reading this! Pull requests are absolutely welcome and appreciated.
-
-Even if you're not a developer, information on how you use calculators like Noether is very interesting. Feel free to contact me `noether AT yunru.se`!
+Thank you for reading this! Pull requests are absolutely welcome and appreciated, especially to add new units.
 
 # Development environment
 
@@ -8,14 +6,17 @@ You'll need `pip install pyright unittest` to run tooling.
 
 > **Warning**
 > Note that running Noether from source will raise errors on missing files.
-> This is intentional - you must `make catalogue` first.
-> For info on the (optional) catalogue shorthand being transpiled, see below.
+> This is intentional - you must `make units` first.
 
 ## Catalogue shorthand
 
-As you may have seen, the `noe_transformer.py` tool transforms `.noe.py` files into `._py` files.
-This fixes a lot of annoying shenanigans, allowing you to do `a = b = 'c' = foo` instead of `a = b = Unit(foo, ['a', 'b'], ['c']]`.
-It is currently in development.
+`make units` utilises `noe_transformer.py` to transpile `.noe.py` files into `._py` files.
+
+The custom `.noe.py` format is not formally specified (or complete) but its shorthand allows for niceties like e.g.
+ `a = b = 'c' = foo` instead of `a = b = Unit(foo, ['a', 'b'], ['c']]`,
+which, when you have a lot of units, is really rather useful.
+
+Note that this is not Python – it is a strict subset of its syntax (namely imports and equalities only) that is transpiled.
 
 ## Under the hood
 

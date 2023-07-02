@@ -1,4 +1,4 @@
-# Noether (in development: Alpha 0.2.0)
+# Noether 1.0
 
 [![PyPI](https://img.shields.io/pypi/v/noether?color=blue)](https://pypi.org/packages/noether)
 [![PyPI - Python Version](https://img.shields.io/pypi/pyversions/noether)](https://pypi.org/packages/noether)
@@ -6,9 +6,7 @@
 [![License](https://img.shields.io/github/license/yunruse/noether?color=blue)](LICENSE.txt)
 [![Python version compatibility](https://github.com/yunruse/Noether/actions/workflows/test-compatibility.yml/badge.svg?branch=release)](https://github.com/yunruse/Noether/actions/workflows/test-compatibility.yml)
 
-> **Note** Version 1.0 is coming soon (March 1 2023), rewritten from scratch and way more capable!
->
-> Check out the [`rewrite`](https://github.com/yunruse/Noether/tree/rewrite) branch for more.
+TODO: rewrite this to be less advertisey
 
 ## The problem: computers don't understand physical measurements
 

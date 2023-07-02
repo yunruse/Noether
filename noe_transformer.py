@@ -10,6 +10,11 @@ While the regular expression has been tested,
 you should still make sure to run unit tests.
 '''
 
+# TODO: As a long term goal it would be wonderful
+# to leverage this format, a strict subset of Python syntax,
+# for all catalogues, making it able to be rendered into both
+# Python itself and a common portable format (eg JSON)!
+
 from pathlib import Path
 from re import compile, MULTILINE, IGNORECASE, VERBOSE
 from argparse import ArgumentParser
