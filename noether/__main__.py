@@ -44,7 +44,10 @@ if args.terms:
         del cli_dialect, transform
         value = eval(src)
         if args.value:
-            print(value)
+            if isinstance(value, Measure):
+                print(value.value)
+            else:
+                print(value)
         else:
             print(repr(value))
     except Exception as e:

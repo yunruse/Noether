@@ -120,7 +120,7 @@ class Unit(Measure):
 
     def __json__(self):
         json = {
-            'value': self.value,
+            'value': self._value,
             'stddev': self.stddev,
             'dimension': self.dim._json_dim(),
             'names': self.names,
@@ -136,10 +136,10 @@ class Unit(Measure):
         return json
 
     def _repr_measure(self, measure: Measure):
-        val = measure.value / self.value
+        val = measure._value / self._value
         stddev = None
         if measure.stddev is not None:
-            stddev = measure.stddev / self.value
+            stddev = measure.stddev / self._value
 
         v = canonical_number(val, stddev, conf.get(UNCERTAINTY_SHORTHAND))
         return f'{v} {self.symbol}'

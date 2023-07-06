@@ -50,9 +50,13 @@ class Measure(Generic[T]):
     '''
     A measurement, with Dimension and optional uncertainty.
     '''
-    value: T
+    _value: T
     stddev: Optional[T] = None
     dim: Dimension
+
+    @property
+    def value(self):
+        return self._value
 
     def __init__(
         self,
@@ -65,11 +69,11 @@ class Measure(Generic[T]):
             object.__setattr__(self, x, v)
 
         if isinstance(value, Measure):
-            set('value', value.value)
+            set('_value', value._value)
             set('stddev', value.stddev)
             set('dim', value.dim)
         else:
-            set('value', value)
+            set('_value', value)
             set('stddev', None)
             set('dim', dimensionless)
 
@@ -78,9 +82,9 @@ class Measure(Generic[T]):
         if dim is not None:
             set('dim', dim)
 
-        if not isinstance(self.value, Real):
+        if not isinstance(self._value, Real):
             raise TypeError('Value must be a real number, not a'
-                            f' {type(self.value).__name__}')
+                            f' {type(self._value).__name__}')
 
         if self.stddev is not None:
             if not isinstance(self.stddev, Real):
@@ -89,44 +93,44 @@ class Measure(Generic[T]):
 
     def cast(self, to: type):
         return Measure(
-            to(self.value),
+            to(self._value),
             to(self.stddev),
             self.dim)
 
     @property
     def epsilon(self):
-        if self.stddev is None or not self.value:
+        if self.stddev is None or not self._value:
             return None
-        return self.stddev / self.value
+        return self.stddev / self._value
 
     @property
     def bounds(self) -> tuple[T, T]:
         if self.stddev is None:
-            return self.value, self.value
-        return self.value - self.stddev, self.value + self.stddev  # type: ignore
+            return self._value, self._value
+        return self._value - self.stddev, self._value + self.stddev  # type: ignore
 
     # |\  |              |
     # | \ ||   ||/~\ /~\ |~~\/~/|/~\
     # |  \| \_/||   |   ||__/\/_|
 
-    def __float__(self): return float(self.value)
-    def __int__(self): return int(self.value)
-    def __bool__(self): return bool(self.value)
+    def __float__(self): return float(self._value)
+    def __int__(self): return int(self._value)
+    def __bool__(self): return bool(self._value)
 
     @property
-    def real(self): return self.value
+    def real(self): return self._value
     @property
     def imag(self): return 0
     @property
-    def numerator(self): return self.value.numerator  # type: ignore
+    def numerator(self): return self._value.numerator  # type: ignore
     @property
-    def denominator(self): return self.value.denominator  # type: ignore
+    def denominator(self): return self._value.denominator  # type: ignore
     @property
-    def conjugate(self): return self.value.conjugate()  # type: ignore
+    def conjugate(self): return self._value.conjugate()  # type: ignore
 
     @property
     def as_integer_ratio(self):
-        return self.value.as_integer_ratio()  # type: ignore
+        return self._value.as_integer_ratio()  # type: ignore
 
     info_handlers: ClassVar[list[type[MeasureInfo]]] = list()
 
@@ -182,7 +186,7 @@ class Measure(Generic[T]):
         return self.__noether__()
 
     def _repr_code(self):
-        chunks = [repr(self.value)]
+        chunks = [repr(self._value)]
         if self.stddev is not None:
             chunks.append(repr(self.stddev))
         if self.dim:
@@ -193,7 +197,7 @@ class Measure(Generic[T]):
     @staticmethod
     def _repr_measure(measure: 'Measure'):
         # Fallback if no unit found
-        n = canonical_number(measure.value, measure.stddev,
+        n = canonical_number(measure._value, measure.stddev,
                              conf.get(UNCERTAINTY_SHORTHAND))
         s = measure.unit_to_display()
         return f'{n} {s}'.strip()
@@ -225,22 +229,22 @@ class Measure(Generic[T]):
         other: 'Measure[T] | Real',
         op=operator.mul
     ) -> 'Measure':
-        value = self.value
+        value = self._value
         stddev = None
         dim = self.dim
 
         if isinstance(other, Prefix):
-            other = other.value
+            other = other._value
 
         if isinstance(other, Measure):
-            value = op(self.value, other.value)
+            value = op(self._value, other._value)
             dim = op(self.dim, other.dim)
             if self.epsilon is not None or other.epsilon is not None:
                 se = self.epsilon or 0
                 oe = other.epsilon or 0
                 stddev = value * (se**2 + oe**2)**0.5
         else:
-            value = op(self.value, other)
+            value = op(self._value, other)
 
         return Measure(value, stddev, dim)
 
@@ -256,9 +260,9 @@ class Measure(Generic[T]):
 
     def __pow__(self, exp):
         return Measure(
-            self.value ** exp,
+            self._value ** exp,
             (None if self.epsilon is None
-                else (self.value ** exp) * self.epsilon * exp),
+                else (self._value ** exp) * self.epsilon * exp),
             self.dim ** exp,
         )
 
@@ -268,7 +272,7 @@ class Measure(Generic[T]):
 
     def __neg__(self): return self * -1
     def __pos__(self): return self
-    def __abs__(self): return self if self.value > 0 else -self  # type: ignore
+    def __abs__(self): return self if self._value > 0 else -self  # type: ignore
 
     def __lin_cmp(self, other, operation: str):
         if conf.get(OPENLINEAR):
@@ -289,14 +293,14 @@ class Measure(Generic[T]):
         self.__lin_cmp(
             other, 'addition' if op == operator.add else 'subtraction')
 
-        value = self.value
+        value = self._value
         stddev = self.stddev
         dim = self.dim
 
         if isinstance(other, Dimension):
             pass
         elif isinstance(other, Measure):
-            value = op(self.value, other.value)
+            value = op(self._value, other._value)
             if self.stddev is None and other.stddev is None:
                 stddev = None
             else:
@@ -304,7 +308,7 @@ class Measure(Generic[T]):
                 so = 0 if other.stddev is None else other.stddev
                 stddev = (ss**2 + so**2) ** 0.5
         else:
-            value = op(self.value, other)
+            value = op(self._value, other)
 
         return Measure(value, stddev, dim)
 
@@ -323,7 +327,7 @@ class Measure(Generic[T]):
                         (s_min <= o_max <= s_max) or
                         (o_min <= s_min <= o_max) or
                         (o_min <= s_max <= o_max))
-            return self.value == other.value
+            return self._value == other._value
 
     def __lt__(self, other):
         self.__lin_cmp(other, 'comparison')
@@ -332,7 +336,7 @@ class Measure(Generic[T]):
                 s_min, s_max = self.bounds
                 o_min, o_max = other.bounds
                 return s_max < o_min
-            return self.value < other.value
+            return self._value < other._value
 
     #  /~~       |               |~~\ '      |
     # |  |   |(~~|~/~\|/~\ /~\   |   ||(~|~~\|/~~|\  /

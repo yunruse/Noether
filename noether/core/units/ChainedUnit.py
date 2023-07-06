@@ -49,13 +49,13 @@ class ChainedUnit(Unit):
 
     def _repr_measure(self, measure: Measure):
         # TODO: handle stddev!
-        value = measure.value
+        value = measure._value
         chunks = []
         for i, unit in enumerate(self.units):
             if i == len(self.units)-1:
-                dv = value / unit.value
+                dv = value / unit._value
             else:
-                dv, value = divmod(value, unit.value)
+                dv, value = divmod(value, unit._value)
             if dv:
                 chunks.append(f'{dv} {unit.symbol}')
 

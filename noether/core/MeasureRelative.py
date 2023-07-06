@@ -13,11 +13,15 @@ class MeasureRelative(Measure):
     '''
     A Measure with a custom Unit for display.
     >>> meter @ cm
-    100 cm <length>
+    100 cm  # length
     '''
 
-    __slots__ = ('value', 'stddev', 'dim', 'unit')
+    __slots__ = ('_value', 'stddev', 'dim', 'unit')
     unit: 'Unit'
+
+    @property
+    def value(self):
+        return self._value / self.unit._value
 
     def __init__(self, measure: Measure, unit: 'Unit'):
         Measure.__init__(self, measure)
