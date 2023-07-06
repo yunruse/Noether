@@ -1,4 +1,4 @@
-# Noether 1.0
+# Noether 2.0
 
 [![PyPI](https://img.shields.io/pypi/v/noether?color=blue)](https://pypi.org/packages/noether)
 [![PyPI - Python Version](https://img.shields.io/pypi/pyversions/noether)](https://pypi.org/packages/noether)
@@ -6,33 +6,25 @@
 [![License](https://img.shields.io/github/license/yunruse/noether?color=blue)](LICENSE.txt)
 [![Python version compatibility](https://github.com/yunruse/Noether/actions/workflows/test-compatibility.yml/badge.svg?branch=release)](https://github.com/yunruse/Noether/actions/workflows/test-compatibility.yml)
 
-TODO: rewrite this to be less advertisey
-TODO: mention `alias noe='python -im noether'`
+**Noether** is a unit-enriched Python package, akin to Wolfram Alpha or gnu `units`. It has a large (and expanding) catalogue of up-to-date units and constants, allowing code to be written directly in the units they are concerned with while also ensuring e.g. you don't mistakenly add an energy to a length.
 
-## The problem: computers don't understand physical measurements
+Noether can be used on the command-line (`alias noether='python -im noether'`) or as a package.
 
-A calculator does the little things. They weren't essential, at first, but it's rather nice to not have to do the conversion in your head when you can instead start worrying about the topic at hand. Why not extend this to units? This is far from a nicety: NASA famously lost *328 million dollars* because [feet and metres were mistaken](https://medium.com/predict/a-328-million-dollar-conversion-error-f6d525c85fd2). 
-
-Whether you're a layman, a student, or a NASA programmer, Noether should make working with numbers a lot more pleasant:
-
-- Work with measurements, not numbers: Noether automagically handles unit conversions and operations.
-- Work in whatever unit system you and your colleagues like – units naturally interoperate.
-- It propagates uncertainty – meaning you don't have to be so uncertain you propagated it right yourself.
-- Save your effort typing and trawling Wikipedia: physical constants, units and definitions are defined and kept up to date with ISO, SI, CODATA, and other authoritative sources, so you don't have to be.
-- Noether has a variety of useful addons that might also help out with general use as a calculator.
-
-You can use Noether like a calculator or import it for projects. Noether is intended to compliment `numpy` and `matplotlib`; while it is yet in early stages, it will inevitably be integrated smoothly with these.
+Development is ongoing, especially in unit display and cataloguing.
 
 ## Usage 
 
-Dig right in straight away:
+Grab Python 3.11 or later and dig in:
 
 ```bash
 pip install noether
-python3.7 -im noether
+alias noe='python -im noether'
+noe
 ```
 
-From here on out we'll assume you did `python -im noether`, which does a few extra niceties to make it calculator-ready.
+Work with units:
+
+// fix below \\
 
 ```
 >>> 0.5 * gibibyte / second
@@ -85,4 +77,9 @@ Other tools for working with units include:
 - [unyt](https://pypi.org/project/unyt/), a Python package with numpy support
 
 ### 📚 _**Did you know?**_
-Half of a `byte` is a `nibble`! The unit represents 4 bits of data.
+```
+$ noether 'saros @ year & day'
+18 yr + 10.95 d  # time
+```
+Exactly one *saros* after a solar eclipse occurs, another occurs in roughly the same place.
+It is one of the measurements made by the Antikythera mechanism - the world's oldest mechanical computer.

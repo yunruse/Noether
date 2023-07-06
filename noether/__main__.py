@@ -2,10 +2,14 @@
 TODO: write a description here...
 """
 
+# TODO: utilise lexer for the rules
+#    `1m` -> `1 * m`
+#    `in` -> `inch`
+# TODO: add --si
+
 import noether
 from noether import *
 
-#  TODO: parse e.g. `1m` -> `1 * m`?
 
 from argparse import ArgumentParser
 parser = ArgumentParser()
@@ -18,8 +22,6 @@ parser.add_argument(
     '--value', '-V',  # TODO: what is the gnu standard here?
     action='store_true',
     help='Display the value only (equivalent to str(statement))')
-
-# TODO: add --si
 
 parser.add_argument('terms', nargs='*')
 
