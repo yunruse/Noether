@@ -17,7 +17,7 @@ The country to define imperial units (and other niceties) from. (Use the ISO 316
 _USE_US_UNITS = conf.get('UNITS_country').lower() == 'us'
 
 rankine = Unit(kelvin * 5/9, "rankine", "°R")
-fahrenheit = AffineUnit(rankine, rankine(459.67), "fahrenheit", "ºF")
+fahrenheit = degF = AffineUnit(rankine, rankine(459.67), "fahrenheit", "°F")
 
 # % Length
 inch = Unit(cm * Fraction(127, 50), "inch", ["in", '"'])

@@ -22,7 +22,7 @@ ppm = parts_per_million = Unit(1/1_000_000, 'parts_per_million', 'ppm')
 proof = Unit(0.5, 'proof', '°', info='alcohol purity')
 
 # % Temperature
-celsius = AffineUnit(kelvin*1, kelvin*273.15, "celsius", "ºC")
+celsius = degC = AffineUnit(kelvin*1, kelvin*273.15, "celsius", "°C")
 
 # % Time
 week = Unit(day * 7, "week", "w")
