@@ -38,9 +38,11 @@ if args.color and not args.value:
 
 if args.terms:
     # this is very basic at the moment!
-    import os
+    from ._tokenizers import cli_dialect, transform
+    src = transform(" ".join(args.terms), cli_dialect)
     try:
-        value = eval(" ".join(args.terms))
+        del cli_dialect, transform
+        value = eval(src)
         if args.value:
             print(value)
         else:
