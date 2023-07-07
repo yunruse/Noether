@@ -20,6 +20,11 @@ percent = Unit(1/100, 'percent', '%')
 permille = Unit(1/1000, 'permille', '‰')
 ppm = parts_per_million = Unit(1/1_000_000, 'parts_per_million', 'ppm')
 proof = Unit(0.5, 'proof', '°', info='alcohol purity')
+karat = Unit(
+    1 / 24, 'karat', 'Kt',
+    info="Used in gold purity; 24Kt is pure or near-pure."
+    " Increasingly deprecated for millesimal fineness."
+    " Not to be confused with the carat.")
 
 # % Temperature
 celsius = degC = AffineUnit(kelvin*1, kelvin*273.15, "celsius", "°C")
@@ -27,8 +32,9 @@ celsius = degC = AffineUnit(kelvin*1, kelvin*273.15, "celsius", "°C")
 # % Time
 week = Unit(day * 7, "week", "w")
 fortnight = week * 2
-year_gregorian = Unit(day * 365.2425,
-                      "year", ["yr", "ya"], SI_large, info="Gregorian calendar")
+year_gregorian = Unit(
+    day * 365.2425, 'year', ["yr", "ya"], SI_large,
+    info="Gregorian definition")
 year = year_gregorian
 
 # % Distance
@@ -57,6 +63,10 @@ gsm = Unit(
     gram / meter**2, "gram per square meter", "gsm",
     info="Used especially in paper-making as a proxy for thickness and pliability. "
     " A standard sheet of printer paper is usually 100gsm.")
+carat = Unit(
+    gram * 0.2, "carat", "ct",
+    info="Used to measure the mass of gemstones and pearls."
+    " Not to be confused with the karat.")
 
 # % Frequency & angle
 bpm = Unit(1 / minute, "beats per minute", "bpm")
