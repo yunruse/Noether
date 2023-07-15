@@ -6,8 +6,13 @@ from ..Measure import Measure
 from ..Unit import Unit
 
 
-class ComposedUnit(Unit):
-    "Multiplication, division and exponentiation of other units. For example, meter / second."
+class GeometricUnit(Unit):
+    '''
+    A geometric composition of units, like `meter / second ** 2`.
+
+    Useful for display purposes.
+    '''
+
     units: Multiplication[Unit]
 
     def __init__(self, unit_or_dict: Unit | dict[Unit, Rational]):
@@ -24,13 +29,13 @@ class ComposedUnit(Unit):
 
     def __mul__(self, value: Unit):
         if isinstance(value, Unit):
-            value = value.units if isinstance(value, ComposedUnit) else value
+            value = value.units if isinstance(value, GeometricUnit) else value
             return type(self)(self.units * value)
         return Measure.__mul__(self, value)
 
     def __truediv__(self, value: Unit):
         if isinstance(value, Unit):
-            value = value.units if isinstance(value, ComposedUnit) else value
+            value = value.units if isinstance(value, GeometricUnit) else value
             return type(self)(self.units / value)
         return Measure.__truediv__(self, value)
 

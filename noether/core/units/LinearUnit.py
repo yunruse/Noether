@@ -4,8 +4,12 @@ from ..Measure import Measure
 from ..Unit import Unit
 
 
-class ChainedUnit(Unit):
-    "Multiple units 'chained together', like feet & inches, for display."
+class LinearUnit(Unit):
+    """
+    A linear combination of units, like `foot & inch`.
+
+    Useful for display purposes.
+    """
     units: list[Unit]
 
     def __init__(self, units: Iterable[Unit]):
@@ -13,11 +17,11 @@ class ChainedUnit(Unit):
         object.__setattr__(self, 'units', units)
         Unit.__init__(self, units[0])
 
-    def __and__(self, unit: 'Unit | ChainedUnit'):
-        if isinstance(unit, ChainedUnit):
-            return ChainedUnit(self.units + unit.units)
+    def __and__(self, unit: 'Unit | LinearUnit'):
+        if isinstance(unit, LinearUnit):
+            return LinearUnit(self.units + unit.units)
         else:
-            return ChainedUnit(self.units + [unit])
+            return LinearUnit(self.units + [unit])
 
     # |~~\ '      |
     # |   ||(~|~~\|/~~|\  /

@@ -62,13 +62,13 @@ class Unit(Measure):
     # Nicer display units
 
     def __mul__(self, value: Measure | Real) -> Measure:
-        return ComposedUnit(self) * value  # type: ignore
+        return GeometricUnit(self) * value  # type: ignore
 
     def __truediv__(self, value: Measure | Real) -> Measure:
-        return ComposedUnit(self) / value  # type: ignore
+        return GeometricUnit(self) / value  # type: ignore
 
     def __pow__(self, value: Rational) -> Measure:
-        return ComposedUnit(self) ** value
+        return GeometricUnit(self) ** value
 
     @property
     def symbol(self):
@@ -145,9 +145,9 @@ class Unit(Measure):
         return f'{v} {self.symbol}'
 
     def __and__(self, unit: 'Unit'):
-        from .units.ChainedUnit import ChainedUnit
-        return ChainedUnit([self, unit])
+        from .units.LinearUnit import LinearUnit
+        return LinearUnit([self, unit])
 
 
 # Avoid import loops
-from .units.ComposedUnit import ComposedUnit  # noqa
+from .units.GeometricUnit import GeometricUnit  # noqa

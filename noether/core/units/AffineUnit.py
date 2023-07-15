@@ -27,7 +27,9 @@ class AffineUnit(Unit):
 
     def __and__(self, _: Unit):
         raise IncompatibleUnitError(
-            'AffineUnit {self} cannot be chained with other units.')
+            'An affine unit {self} cannot be composed with other units!')
+
+    # TODO: what about * and / .....?
 
     __rand__ = __and__
 

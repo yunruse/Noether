@@ -13,7 +13,7 @@ Listing all the changes would be an effort itself! Here's the cliff notes:
 
 - Improved display mechanisms
   - You can use `measure @ unit` for quick display in that unit.
-  - You can chain units with `&`.
+  - You can compose units with `&` for display purposes.
     - By default, for example, time is displayed in `year & day & hour & minute & second`
   - Support for `rich` API (automatic in `python -im noether`)
 
