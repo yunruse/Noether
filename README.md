@@ -77,9 +77,9 @@ Other tools for working with units include:
 - [unyt](https://pypi.org/project/unyt/), a Python package with numpy support
 
 ### 📚 _**Did you know?**_
+
 ```
-$ noether 'saros @ year & day'
-18 yr + 10.95 d  # time
+>>> lunation / (year % lunation)
+2.7153489666011486
 ```
-Exactly one *saros* after a solar eclipse occurs, another occurs in roughly the same place.
-It is one of the measurements made by the Antikythera mechanism - the world's oldest mechanical computer.
+A [**lunation**](https://en.wikipedia.org/wiki/Lunar_month#Synodic_month) (about 29 days) separates one full moon from another. Every so often a thirteenth full moon occurs in a year - "a [blue moon](https://en.wikipedia.org/wiki/Blue_moon)". "Once in a blue moon" is actually only every 2.71 years or so - not as rare as you'd think. Don't tell Sinatra!
