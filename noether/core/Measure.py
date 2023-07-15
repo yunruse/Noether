@@ -4,7 +4,7 @@ from dataclasses import dataclass
 from functools import total_ordering
 import operator
 from sys import version_info
-from typing import Optional, TypeVar, ClassVar, Generic, TYPE_CHECKING
+from typing import Callable, Optional, TypeVar, ClassVar, Generic, TYPE_CHECKING
 from noether.helpers import Real
 
 from noether.helpers import removeprefix
@@ -272,26 +272,34 @@ class Measure(Generic[T]):
 
     def __neg__(self): return self * -1
     def __pos__(self): return self
-    def __abs__(self): return self if self._value > 0 else -self  # type: ignore
 
-    def __lin_cmp(self, other, operation: str):
+    def __abs__(self):
+        return self if self._value > 0 else -self  # type: ignore
+
+    def __lin_cmp(self, other, op: Callable):
         if conf.get(OPENLINEAR):
             return
 
         if isinstance(other, Measure):
             if self.dim != other.dim:
+                match op:
+                    case operator.add: oper = "Addition"
+                    case operator.sub: oper = "Subtraction"
+                    case operator.mod: oper = "Modulo"
+                    case operator.lt: oper = "Comparison"
+                    case _: oper = "A linear operation"
+
                 raise DimensionError(
                     self.dim, other.dim,
-                    f"To enable {operation} on mismatched dimensions enable conf.{OPENLINEAR}.")
+                    f"{oper} only works on units of the same dimension. Enable conf.{OPENLINEAR} to bypass this.")
 
         elif not conf.get(BARENUMBER):
             raise NoetherError(
                 "A measure may not linearly operate on a number."
-                f" Enable conf.{BARENUMBER} to suppress this.")
+                f" Enable conf.{BARENUMBER} to bypass this.")
 
-    def __lin(self, other: 'Measure[T] | Dimension | Real', op):
-        self.__lin_cmp(
-            other, 'addition' if op == operator.add else 'subtraction')
+    def __lin(self, other: 'Measure[T] | Dimension | Real', op: Callable):
+        self.__lin_cmp(other, op)
 
         value = self._value
         stddev = self.stddev
@@ -315,6 +323,9 @@ class Measure(Generic[T]):
     def __add__(self, other): return self.__lin(other, operator.add)
     def __radd__(self, other): return self.__lin(other, operator.add)
     def __sub__(self, other): return self.__lin(other, operator.sub)
+    def __mod__(self, other): return self.__lin(other, operator.mod)
+
+    # Equality and ordering
 
     def __eq__(self, other):
         if isinstance(other, Measure):
@@ -330,7 +341,7 @@ class Measure(Generic[T]):
             return self._value == other._value
 
     def __lt__(self, other):
-        self.__lin_cmp(other, 'comparison')
+        self.__lin_cmp(other, operator.lt)
         if isinstance(other, Measure):
             if conf.get(UNCERTAINTY_OVERLAP):
                 s_min, s_max = self.bounds
