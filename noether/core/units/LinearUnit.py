@@ -4,6 +4,10 @@ from ..Measure import Measure
 from ..Unit import Unit
 
 
+# TODO: should & be replaced with +?
+# It would slightly make things confusing in fairness.
+# Maybe a flag could handle it?
+
 class LinearUnit(Unit):
     """
     A linear combination of units, like `foot & inch`.
