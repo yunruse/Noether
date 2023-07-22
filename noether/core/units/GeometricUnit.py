@@ -29,24 +29,23 @@ class GeometricUnit(Unit):
 
     def __mul__(self, value: Unit):
         if isinstance(value, Unit):
-            value = value.units if isinstance(value, GeometricUnit) else value
-            return type(self)(self.units * value)
+            v = value.units if isinstance(value, GeometricUnit) else value
+            return type(self)(self.units * v)
         return Measure.__mul__(self, value)
 
     def __truediv__(self, value: Unit):
         if isinstance(value, Unit):
-            value = value.units if isinstance(value, GeometricUnit) else value
-            return type(self)(self.units / value)
+            v = value.units if isinstance(value, GeometricUnit) else value
+            return type(self)(self.units / v)
         return Measure.__truediv__(self, value)
 
     def __pow__(self, exponent: Rational):
         return type(self)(self.units ** exponent)
 
-    def _display_element(self):
+    @property
+    def name(self):
         return self.units.display()
 
-    def __str__(self):
-        return self.units.display()
-
-    def unit_to_display(self):
+    @property
+    def symbol(self):
         return self.units.display(lambda x: x.symbol)

@@ -55,14 +55,24 @@ class test_unit_display(TestCase):
             'meter'
         ),
         (
-            'foot & inch',  # ChainedUnit
+            'foot & inch',  # LinearUnit
             'foot & inch  # length',
             'foot & inch'
+        ),
+        (
+            'mile / hour',  # GeometricUnit
+            'mile / hour  # speed, 0.44704 m / s',
+            'mile / hour'
+        ),
+        (
+            'c @ mile / hour',  # GeometricUnit in use
+            '670616629.3843951 mi / hr  # speed',
+            '670616629.3843951 mi / hr'
         ),
     )
 
     def test_value_repr_str(self):
         for k, n, s in self.value_repr_str:
             val = eval(k, {}, vars(noether))
-            self.assertEqual(n, val.__noether__())
-            self.assertEqual(s, str(val))
+            self.assertEqual(n, val.__noether__(), msg=f'repr({k})')
+            self.assertEqual(s, str(val), msg=f'str({k})')

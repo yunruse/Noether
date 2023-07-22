@@ -163,13 +163,13 @@ class Measure(Generic[T]):
                 for i in handler.info(self):
                     yield i, handler.style
 
-    def display_unit(self):
+    def display_unit(self) -> 'Unit | None':
         from ._DisplayHandler import display
         units = display.dimension_units.get(self.dim, [])
         if units:
             return units[-1]
 
-    def unit_to_display(self):
+    def _as_composed_string(self) -> str:
         from ._DisplayHandler import display
 
         unit = self.dim.display(
@@ -199,26 +199,23 @@ class Measure(Generic[T]):
         # Fallback if no unit found
         n = canonical_number(measure._value, measure.stddev,
                              conf.get(UNCERTAINTY_SHORTHAND))
-        s = measure.unit_to_display()
+        s = measure._as_composed_string()
         return f'{n} {s}'.strip()
 
     def __str__(self):
         return (self.display_unit() or self)._repr_measure(self)
 
-    def _display_element(self):
-        return (self.display_unit() or self)._repr_measure(self).strip()
-
     def __noether__(self):
         info = ', '.join(i for i, _ in self._info())
         if info:
             info = '  # ' + info
-        return self._display_element() + info
+        return str(self).strip() + info
 
     def __rich__(self):
         info = ', '.join(f'[{style}]{i}[/]' for i, style in self._info())
         if info:
             info = '  [green italic]#[/] ' + info
-        return self._display_element() + info
+        return str(self).strip() + info
 
     #  /~~\                   |     '
     # |  __/~//~\|/~\ /~\ /~/~|~|/~\|/~~

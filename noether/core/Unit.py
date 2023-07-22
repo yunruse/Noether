@@ -76,7 +76,7 @@ class Unit(Measure):
             return self.symbols[0]
         if self.names:
             return self.names[0]
-        return self.unit_to_display()
+        return self._as_composed_string()
 
     @property
     def name(self):
@@ -84,7 +84,7 @@ class Unit(Measure):
             return self.names[0]
         if self.symbols:
             return self.symbols[0]
-        return self.unit_to_display()
+        return self._as_composed_string()
 
     # |~~\ '      |
     # |   ||(~|~~\|/~~|\  /
@@ -110,9 +110,6 @@ class Unit(Measure):
         return 'Unit({})'.format(', '.join(chunks))
 
     def __str__(self):
-        return self.name
-
-    def _display_element(self):
         return self.name
 
     def _json_extras(self):
