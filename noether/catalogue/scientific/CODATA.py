@@ -11,7 +11,7 @@ from . import si
 catalogue = Catalogue(vars(si), 'CODATA data-fetching catalogue')
 
 
-LENGTHS = [60, 25, 25]
+COLUMN_LENGTHS = [60, 25, 25]
 NAMED_CODATA_UNITS = {
     'atomic mass constant': 'u',
     'electron mass': 'm_e',
@@ -19,6 +19,19 @@ NAMED_CODATA_UNITS = {
 }
 
 one = Unit(1)
+
+
+def _fmt_name(string: str):
+    return (string
+            .replace(' ', '_')
+            .replace('-', '_')
+            .replace('._', '_')
+            .replace('.', '_')
+            .replace('_(', '_with_')
+            .replace(')', '')
+            .replace(',', '')
+            .replace('/', '_over_')
+            )
 
 
 def _fmt_value(string: str):
@@ -32,7 +45,7 @@ def _fmt_value(string: str):
 
 
 def _codata(path: str):
-    units:  dict[str, Unit] = dict()
+    units: dict[str, Unit] = dict()
 
     scanning = False
     with open(path) as f:
@@ -41,7 +54,7 @@ def _codata(path: str):
                 scanning = line.startswith('----')
                 continue
 
-            name, value, uncertainty, unit = scanline(line, LENGTHS)
+            name, value, uncertainty, unit = scanline(line, COLUMN_LENGTHS)
 
             if name == 'Avogadro constant':
                 # TODO: #42 ComposedUnit
@@ -55,6 +68,7 @@ def _codata(path: str):
                 continue  # unit does not need extra definition
 
             value = _fmt_value(value)
+            name = _fmt_name(name)
             uncertainty = _fmt_value(uncertainty) or None
             unit = unit.replace('^', '**').replace(' ', '*')
             unit = eval(unit, {}, catalogue) if unit else one
@@ -83,19 +97,8 @@ __all__ = ['CODATA']
 for name, unit in CODATA.items():
     if not (conf.get('CATALOGUE_codata_all') or unit.name in NAMED_CODATA_UNITS):
         continue
-    nice_name = (
-        name.replace(' ', '_')
-            .replace('-', ' ')
-            .replace('._', '_')
-            .replace('.', '_')
-            .replace('_(', '_with_')
-            .replace(')', '')
-            .replace(',', '')
-            .replace('/', '_over_')
-        # other stuff also?
-    )
-    locals()[nice_name] = unit
-    __all__.append(nice_name)
+    locals()[name] = unit
+    __all__.append(name)
 
     if unit.symbols:
         locals()[unit.symbol] = unit
