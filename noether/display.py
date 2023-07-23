@@ -6,7 +6,7 @@ Handles Unicode.
 
 from decimal import Decimal
 from fractions import Fraction
-from noether.helpers import Real
+from noether.helpers import Real, removesuffix
 
 from .config import Config, conf
 
@@ -71,13 +71,17 @@ def uncertainty(number: Real | str, stddev: Real | str):
     return f'{ai}.{af}({bf})'
 
 
+def _c(number: Real):
+    return removesuffix(str(round(number, 10)), '.0')
+
+
 def canonical_number(number: Real, stddev: Real | None = None, display_shorthand: bool = False):
     if stddev is not None:
         if display_shorthand:
             return uncertainty(number, stddev)
         else:
             pm = plus_minus_symbol()
-            return f'{number} {pm} {stddev}'
+            return f'{_c(number)} {pm} {_c(stddev)}'
     if isinstance(number, float) and number.is_integer():
-        return repr(int(number))
-    return repr(number)
+        return _c(int(number))
+    return _c(number)

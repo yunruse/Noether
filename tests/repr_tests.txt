@@ -23,7 +23,7 @@ joule / kilogram / kelvin  # specific_heat_capacity, 1 m**2 / K / s**2
 1 m ± 20 cm  # length
 
 >>> degree(30)  # Nice angles #18, #56
-29.0 ° + 59.0 ′ + 60 ″  # angle
+29 ° + 59 ′ + 60 ″  # angle
 
 >>> 16 * pixel / mm  # Truncate float error #56
 406.4 ppi  # image_quality
