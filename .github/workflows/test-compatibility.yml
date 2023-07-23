@@ -1,0 +1,32 @@
+name: Cross-version unit testing
+
+on:
+  push:
+    branches: [ "testing" ]
+  pull_request:
+    branches: [ "develop", "release" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        # Per the closing comment on #22:
+        # Python 3.10, at least for now, is the minimum supported version.
+        python-version: ["3.10", "3.11"]
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v3
+      with:
+        python-version: ${{ matrix.python-version }}
+    - name: Install pip dependencies
+      run: |
+        python -m pip install --upgrade pip
+        if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+    - name: Make unit catalogue
+      run: make units
+    - name: Run unit tests
+      run: make test

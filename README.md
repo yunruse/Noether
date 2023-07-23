@@ -1,83 +1,90 @@
-# Noether (in development: Alpha 0.1.3)
+# Noether 1.0
 
-> **Note**
->
-> Version 1.0 is coming soon (February 2023), rewritten from scratch and way more capable!
->
-> Check out the [`rewrite`](https://github.com/yunruse/Noether/tree/rewrite) branch for more.
+[![PyPI](https://img.shields.io/pypi/v/noether?color=blue)](https://pypi.org/packages/noether)
 
-## The problem: computers don't understand physical measurements
+**Noether** is a unit-enriched Python package, akin to Wolfram Alpha or gnu `units`. It has a large (and expanding) catalogue of up-to-date units and constants, allowing code to be written directly in the units they are concerned with while also ensuring e.g. you don't mistakenly add an energy to a length.
 
-A calculator does the little things. They weren't essential, at first, but it's rather nice to not have to do the conversion in your head when you can instead start worrying about the topic at hand. Why not extend this to units? This is far from a nicety: NASA famously lost *328 million dollars* because [feet and metres were mistaken](https://medium.com/predict/a-328-million-dollar-conversion-error-f6d525c85fd2). 
+Just grab Python 3.10 or later and `pip install noether` to run!
 
-Whether you're a layman, a student, or a NASA programmer, Noether should make working with numbers a lot more pleasant:
+Development is ongoing, especially in expanding the unit catalogue and improving unit display mechanisms.
 
-- Work with measurements, not numbers: Noether automagically handles unit conversions and operations.
-- Work in whatever unit system you and your colleagues like – units naturally interoperate.
-- It propagates uncertainty – meaning you don't have to be so uncertain you propagated it right yourself.
-- Save your effort typing and trawling Wikipedia: physical constants, units and definitions are defined and kept up to date with ISO, SI, CODATA, and other authoritative sources, so you don't have to be.
+## Usage 
 
-You can use Noether like a calculator or import it for projects. Noether is intended to compliment `numpy` and `matplotlib`; while it is yet in early stages, it will inevitably be integrated smoothly with these.
+Noether can be used as a Python package or as a CLI:
 
-Dig right in straight away:
-
-```bash
-pip install noether
-python3.7 -im noether
+```sh
+$ alias noe='python -im noether'
+$ noe marathon
+marathon  # length, 42195 m, Race length based on Greek legend, set by convention from 1908 Summer Olympics
+$ noether 23degC @ degF
+73.4 °F  # temperature
 ```
 
-## Units
+The CLI allows a few niceties such as slightly terser syntax, but otherwise behaves identically to Python:
 
-(From here on out we'll assume you did `python -im noether`, which does `import noether as noe` and provides a bundle of constants in the namespace.)
-
-Noether has almost every unit known: BMI, bushel and byte; eotvos, erg and electronvolt; parsec, plethron and potrzebie. It makes the bold assumption you know how to use it, so the REPL is a lot more informative:
-
-```
->>> 0.5 * gibibyte / second
-4.295×10⁹bps <data rate>
->>> a = 12 * pixel / mm
->>> a
-1.2×10⁴pix·m⁻¹ <image quality>
->>> display(ppi)
->>> a
-304.8ppi <image quality>
->>> (joule / kilogram / kelvin)(12, 2)
-12 ± 2K⁻¹·m²·s⁻² <specific heat capacity>
->>> e / electron.mass
-(2.187×10¹¹ ± 1649)A·kg⁻¹·s
+```sh
+$ noether 5cm @ in --value
+1.9685039370078738
+$ python
+>>> from noether import *
+>>> 5*cm @ inch
+1.9685039370078738 in  # length
 ```
 
-You may, of course, define your own units and dimensions on the fly:
+In addition to `@` for display, you can more permanently set display units:
 
+```py
+>>> display(inch)
+>>> 5 * cm
+>>> mile
+mile  # length, 63360 in
 ```
->>> FF = Unit(furlong / fortnight, 'ff')
->>> display(FF)
->>> c
-1.803×10¹²ff <velocity, speed>
 
->>> health = Dimension.new('health', dimsym='H', unitsym='a')
->>> apple = Unit(health)
+Units can propagate uncertainty automatically under most operations:
+
+```py
+>>> m(5, 0.1)**3
+125 ± 7.5 m**3  # volume
+```
+
+You can define your own units and dimensions:
+
+```py
+>>> foo = Unit(3e11 * furlong / fortnight, 'foo')
+>>> c @ foo
+6.008724999284181 foo  # speed
+
+>>> health = Dimension.new('health', 'H')
+>>> apple = Unit(health, 'apple', 'a')
 >>> apple / day
-1.157×10⁻⁵a·s⁻¹
+apple / day  # health / time, 1.1574074074074073e-05 a / s
 ```
 
-## Updates and development
+Various `conf` settings allow for customisation to behaviour:
 
-Updates are released to the `master` branch (and PyPI) every so often. They are not guaranteed to have a sturdy, documented and tested API just yet, but each release should be pretty stable.
+```py
+>>> conf.info_spectrum = True
+>>> nm(400)
+4e-07 m  # length, visible, purple
+```
 
-If running from source, Noether requires `pip install toml`.
+Use `conf.save()` to save to (by default) `~/.config/noether.toml`.
 
-Currently (as of September 2020) Noether is in a hiatus. It will be updated with scientific units and fixes as I discover them, but no major systematic changes will be made. I have ideas, but they will need a lot more refactoring than I can spare. Please feel free to raise issues or feature requests on GitHub, though, and I'll be more than happy to get working on them.
 
-## Legal
+## For more, see...
 
-Copyright (c) Mia yun Ruse ([yunru.se]) 2018–2021.
+Check out [CONTRIBUTING.md](CONTRIBUTING.md) and [LICENSE.txt](LICENSE.txt) for info of that sort.
 
-With the exception of scientific data, which is cited where relevant,
-Noether is licensed under a [Creative Commons Attribution 4.0](cc) International
-license. In non-legal terms: do whatever you like, including science! But if you
-want to redistribute this project (derived or not), please credit me, or shoot me a
-message and I'll see what I can do.
+Other tools for working with units include:
+- [Wolfram Alpha](https://www.wolframalpha.com), a comprehensive online intelligence engine
+- [gnu `units`](https://www.gnu.org/software/units/), a command-line tool you likely already have
+- [units](https://pypi.org/project/units/), a simple Python package for defining your own units
+- [unyt](https://pypi.org/project/unyt/), a Python package with numpy support
 
-[yunru.se]: https://yunru.se/
-[cc]: https://creativecommons.org/licenses/by/4.0/
+### 📚 _**Did you know?**_
+
+```
+>>> lunation / (year % lunation)
+2.7153489666011486
+```
+A [**lunation**](https://en.wikipedia.org/wiki/Lunar_month#Synodic_month) (about 29 days) separates one full moon from another. Every so often a thirteenth full moon occurs in a year - "a [blue moon](https://en.wikipedia.org/wiki/Blue_moon)". "Once in a blue moon" is actually only every 2.71 years or so - not as rare as you'd think. Don't tell Sinatra!

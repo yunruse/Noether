@@ -1,0 +1,14 @@
+[tool.pyright]
+typeCheckingMode = "basic"
+importFormat = "relative"
+
+pythonVersion = "3.10"
+pythonPlatform = "all"
+
+include = ["noether"]
+# .units.py files are used to generate .py files
+# and while sharing a general sense of syntax,
+# are not really typable
+ignore = ["**/*.units.py"]
+
+stubPath = ""

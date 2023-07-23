@@ -1,13 +1,15 @@
 {
-    "python.testing.unittestArgs": [
-        "-v",
-        "-s",
-        "./tests",
-        "-p",
-        "test_*.py"
-    ],
-    "python.testing.pytestEnabled": false,
-    "python.testing.nosetestsEnabled": false,
-    "python.testing.unittestEnabled": true,
-    "python.linting.pylintEnabled": false,
-}
+    //// TESTING
+    // Testing is handled by the following:
+    // makefile
+    // .github/workflows/test-compatibility.yml
+
+    /// TYPE CHECKING
+    // See pyproject.toml [tool.pyright]
+
+    //// FORMATTING
+    "[python]": {
+        "editor.defaultFormatter": "ms-python.autopep8",
+        "editor.formatOnSave": true,
+    },
+} 
