@@ -223,7 +223,7 @@ class Measure(Generic[T]):
 
     def __geo(
         self,
-        other: 'Measure[T] | Real',
+        other: 'Measure[T] | MeasureValue',
         op=operator.mul
     ) -> 'Measure':
         value = self._value
@@ -231,7 +231,7 @@ class Measure(Generic[T]):
         dim = self.dim
 
         if isinstance(other, Prefix):
-            other = other._value
+            other = other.value
 
         if isinstance(other, Measure):
             value = op(self._value, other._value)
