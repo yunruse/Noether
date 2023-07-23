@@ -1,4 +1,8 @@
-# 1.0
+# Noether changelog
+
+## 1.0
+***23 Jul 2023, [281 commits](https://github.com/yunruse/Noether/pull/53/commits), closing [23 issues](https://github.com/yunruse/Noether/milestone/3?closed=1)***
+
 A *complete* rewrite from scratch. The original was made some 5 years ago, so this is definitely a 1.0 now :)
 
 I wouldn't consider this yet to be amazing, feature-complete stable quality... but can that be said of any open source project?

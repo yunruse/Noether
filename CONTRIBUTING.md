@@ -8,7 +8,7 @@ Thank you for reading this!
 
 If you want to help out, the [units](analysis/units.md) article lists every Wikipedia article about units. Pull requests are welcomed for all units which have a credible source and are in roughly the right section.
 
-## `.units.py`` shorthand
+## `.units.py` shorthand
 
 `make units` utilises `noe_transformer.py` to transpile `.units.py` files into Python.
 
