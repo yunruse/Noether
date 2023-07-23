@@ -1,14 +1,10 @@
 # Noether 1.0
 
 [![PyPI](https://img.shields.io/pypi/v/noether?color=blue)](https://pypi.org/packages/noether)
-[![PyPI - Python Version](https://img.shields.io/pypi/pyversions/noether)](https://pypi.org/packages/noether)
-[![Support (Discord)](https://img.shields.io/discord/885908649342537810?label=support)](https://discord.gg/7DcwrA3c3y)
-[![License](https://img.shields.io/github/license/yunruse/noether?color=blue)](LICENSE.txt)
-[![Python version compatibility](https://github.com/yunruse/Noether/actions/workflows/test-compatibility.yml/badge.svg?branch=release)](https://github.com/yunruse/Noether/actions/workflows/test-compatibility.yml)
 
 **Noether** is a unit-enriched Python package, akin to Wolfram Alpha or gnu `units`. It has a large (and expanding) catalogue of up-to-date units and constants, allowing code to be written directly in the units they are concerned with while also ensuring e.g. you don't mistakenly add an energy to a length.
 
-Just grab Python 3.11 or later and `pip install noether` to run!
+Just grab Python 3.10 or later and `pip install noether` to run!
 
 Development is ongoing, especially in expanding the unit catalogue and improving unit display mechanisms.
 
@@ -81,7 +77,7 @@ Check out [CONTRIBUTING.md](CONTRIBUTING.md) and [LICENSE.txt](LICENSE.txt) for 
 
 Other tools for working with units include:
 - [Wolfram Alpha](https://www.wolframalpha.com), a comprehensive online intelligence engine
-- [gnu units](https://www.gnu.org/software/units/), a command-line tool that you likely already have
+- [gnu `units`](https://www.gnu.org/software/units/), a command-line tool you likely already have
 - [units](https://pypi.org/project/units/), a simple Python package for defining your own units
 - [unyt](https://pypi.org/project/unyt/), a Python package with numpy support
 

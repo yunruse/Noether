@@ -23,5 +23,5 @@ setuptools.setup(
         "Development Status :: 4 - Beta",
     ],
     keywords="physics unit measure constant measurement uncertainty",
-    python_requires='>=3.11'
+    python_requires='>=3.10'
 )

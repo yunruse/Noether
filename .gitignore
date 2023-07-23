@@ -10,6 +10,7 @@ analysis/catalogue.tar
 *_.py
 
 # Packaging
+token-*.txt
 build/
 dist/
 noether.egg-info

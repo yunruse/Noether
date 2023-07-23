@@ -9,22 +9,24 @@ analysis/output/:
 type: analysis/output/
 	python3 -m pyright --outputjson 2>/dev/null | jq '.generalDiagnostics[].file' -r | uniq | sed -e 's_.*Noether/__'| tee analysis/output/mistyped_files.txt
 
-test:
+test: units
 	python3 -m unittest tests/*.py
 
 analyse:
 	python3 -m unittest analysis/*.py
 
-build:
+build: analyse
 	cd analysis/output && tar -c catalogue.* > catalogue.tar && mv catalogue.tar ..
+	python3 -m build
 
-upload-test:
-	# TODO #40
+upload-test: test build
+	twine upload -u __token__ -p $$(cat token-test.txt) -r testpypi dist/*
 
-upload:
-	# TODO #40
+upload-pypi: test build
+	twine upload -u __token__ -p $$(cat token-pypi.txt) dist/*
 
-reset:
-	bash -c "rm -r **/__pycache__"
-	rm -r analysis/output
-	python3 noe_transformer.py --remove
+clean:
+	python3 make_units.py --remove
+	rmdir analysis/output
+	rmdir dist/
+	rmdir noether.egg-info
