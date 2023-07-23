@@ -30,7 +30,13 @@ class Multiplication(Generic[T], ImmutableDict[T, Rational]):
         super().__init__(value)
 
     def items_positive_first(self):
-        return sorted(super().items(), key=lambda q: (-q[1], q[0]))
+        negative: list[tuple[T, Rational]] = []
+        for val, exp in self.items():
+            if exp < 0:
+                negative.append((val, exp))
+            else:
+                yield val, exp
+        yield from negative
 
     def __bool__(self):
         return any(x != 0 for x in self.values())
@@ -87,9 +93,9 @@ class Multiplication(Generic[T], ImmutableDict[T, Rational]):
         '''
         if not self:
             return identity_string
-
+        
         string = '1'
-        for name, exp in self.items():
+        for name, exp in self.items_positive_first():
             if not exp:
                 continue
             symbol = '*'

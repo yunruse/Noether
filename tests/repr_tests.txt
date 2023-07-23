@@ -19,7 +19,7 @@ mile / hour  # speed, 0.44704 m / s
 >>> joule / (kilogram * kelvin)  # GeometricUnit ordering #55
 joule / kilogram / kelvin  # specific_heat_capacity, 1 m**2 / K / s**2
 
->>> meter(1, 0.2) @ meter  # Uncertainties on LinearUnit #8
+>>> meter(1, 0.2) @ meter & cm  # Uncertainties on LinearUnit #8
 1 m ± 20cm  # length
 
 >>> degree(30)  # Nice angles #18, #56
