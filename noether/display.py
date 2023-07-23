@@ -71,7 +71,7 @@ def uncertainty(number: Real | str, stddev: Real | str):
     return f'{ai}.{af}({bf})'
 
 
-def canonical_number(number, stddev, display_shorthand: bool = False):
+def canonical_number(number: Real, stddev: Real | None = None, display_shorthand: bool = False):
     if stddev is not None:
         if display_shorthand:
             return uncertainty(number, stddev)
