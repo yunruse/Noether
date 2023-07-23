@@ -1,6 +1,6 @@
 from typing import Iterable
 
-from noether.display import DISPLAY_REPR_CODE
+from noether.display import DISPLAY_REPR_CODE, canonical_number, plus_minus_symbol
 from ...config import conf
 from ..Measure import Measure
 from ..Unit import Unit
@@ -58,7 +58,6 @@ class LinearUnit(Unit):
         return ' & '.join([x.name for x in self.units])
 
     def _repr_measure(self, measure: Measure):
-        # TODO: handle stddev!
         value = measure._value
         chunks = []
         for i, unit in enumerate(self.units):
@@ -67,6 +66,16 @@ class LinearUnit(Unit):
             else:
                 dv, value = divmod(value, unit._value)
             if dv:
-                chunks.append(f'{dv} {unit.symbol}')
+                chunks.append(f'{canonical_number(dv)} {unit.symbol}')
 
-        return ' + '.join(chunks)
+        result = ' + '.join(chunks)
+
+        if measure.stddev is not None:
+            for su in self.units:
+                if measure.stddev > su._value:
+                    break
+            pm = plus_minus_symbol()
+            dv = measure.stddev / su._value
+            result += f' {pm} {canonical_number(dv)} {su.symbol}'
+
+        return result
