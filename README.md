@@ -1,4 +1,4 @@
-# Noether 2.0
+# Noether 1.0
 
 [![PyPI](https://img.shields.io/pypi/v/noether?color=blue)](https://pypi.org/packages/noether)
 [![PyPI - Python Version](https://img.shields.io/pypi/pyversions/noether)](https://pypi.org/packages/noether)
@@ -8,63 +8,72 @@
 
 **Noether** is a unit-enriched Python package, akin to Wolfram Alpha or gnu `units`. It has a large (and expanding) catalogue of up-to-date units and constants, allowing code to be written directly in the units they are concerned with while also ensuring e.g. you don't mistakenly add an energy to a length.
 
-Noether can be used on the command-line (`alias noether='python -im noether'`) or as a package.
+Just grab Python 3.11 or later and `pip install noether` to run!
 
-Development is ongoing, especially in unit display and cataloguing.
+Development is ongoing, especially in expanding the unit catalogue and improving unit display mechanisms.
 
 ## Usage 
 
-Grab Python 3.11 or later and dig in:
+Noether can be used as a Python package or as a CLI:
 
-```bash
-pip install noether
-alias noe='python -im noether'
-noe
+```sh
+$ alias noe='python -im noether'
+$ noe marathon
+marathon  # length, 42195 m, Race length based on Greek legend, set by convention from 1908 Summer Olympics
+$ noether 23degC @ degF
+73.4 °F  # temperature
 ```
 
-Work with units:
+The CLI allows a few niceties such as slightly terser syntax, but otherwise behaves identically to Python:
 
-// fix below \\
-
-```
->>> 0.5 * gibibyte / second
-4.295×10⁹bps <data rate>
->>> metre
-1m <wavelength: radio, VHF, P>
->>> (joule / kilogram / kelvin)(12, 2)
-12 ± 2K⁻¹·m²·s⁻² <specific heat capacity>
->>> e / electron.mass
-(2.187×10¹¹ ± 1649)A·kg⁻¹·s
->>> 12 * pixel / mm
-1.2×10⁴pix·m⁻¹ <image quality>
+```sh
+$ noether 5cm @ in --value
+1.9685039370078738
+$ python
+>>> from noether import *
+>>> 5*cm @ inch
+1.9685039370078738 in  # length
 ```
 
-When using Noether, you may use `display(unit)` to override what units are used for display. However, you can also use `@ unit` to quickly see what's going on. You can even chain units together with `&`!
+In addition to `@` for display, you can more permanently set display units:
 
-```
->>> 12 * pixel / mm
-1.2×10⁴pix·m⁻¹ <image quality>
->>> 12 * pixel / mm @ ppi
-304.8ppi <image quality>
-
->>> meter @ foot & inch
-3 ft + 3.3701 in <length>
+```py
+>>> display(inch)
+>>> 5 * cm
+>>> mile
+mile  # length, 63360 in
 ```
 
-You may, of course, define your own units and even dimensions on the fly:
+Units can propagate uncertainty automatically under most operations:
 
+```py
+>>> m(5, 0.1)**3
+125 ± 7.5 m**3  # volume
 ```
->>> FF = Unit(furlong / fortnight, 'ff')
->>> c @ FF
-1.803×10¹² FF <velocity, speed>
+
+You can define your own units and dimensions:
+
+```py
+>>> foo = Unit(3e11 * furlong / fortnight, 'foo')
+>>> c @ foo
+6.008724999284181 foo  # speed
 
 >>> health = Dimension.new('health', 'H')
->>> apple = Unit(health)
->>> print(health * time)
-H·T
+>>> apple = Unit(health, 'apple', 'a')
 >>> apple / day
-1.157×10⁻⁵a·s⁻¹
+apple / day  # health / time, 1.1574074074074073e-05 a / s
 ```
+
+Various `conf` settings allow for customisation to behaviour:
+
+```py
+>>> conf.info_spectrum = True
+>>> nm(400)
+4e-07 m  # length, visible, purple
+```
+
+Use `conf.save()` to save to (by default) `~/.config/noether.toml`.
+
 
 ## For more, see...
 
