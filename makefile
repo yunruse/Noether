@@ -1,7 +1,7 @@
 all: units type test analyse build
 
 units:
-	python3 noe_transformer.py
+	python3 make_units.py
 
 analysis/output/:
 	@mkdir analysis/output/
@@ -16,8 +16,7 @@ analyse:
 	python3 -m unittest analysis/*.py
 
 build:
-	tar -c analysis/output/catalogue.* > analysis/catalogue.tar
-	# TODO #40
+	cd analysis/output && tar -c catalogue.* > catalogue.tar && mv catalogue.tar ..
 
 upload-test:
 	# TODO #40
