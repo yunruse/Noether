@@ -17,7 +17,7 @@ from .Measure import Measure, UNCERTAINTY_SHORTHAND
 
 
 class Unit(Measure):
-    __slots__ = 'value stddiv dim symbols names prefixes info'.split()
+    __slots__ = '_value stddiv dim symbols names prefixes info'.split()
 
     names: list[str]
     symbols: list[str]
