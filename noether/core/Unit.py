@@ -8,6 +8,7 @@ from datetime import timedelta
 from itertools import chain
 from noether.helpers import Rational, Real
 
+from ..errors import NoetherError
 from ..config import conf
 from ..display import canonical_number
 from .Prefix import Prefix, PrefixSet
@@ -31,7 +32,7 @@ class Unit(Measure):
         prefixes: PrefixSet | None = None,
         info: str | None = None,
     ):
-        # Useful!
+        # TODO: this should be far more thoroughly supported
         if isinstance(measure, timedelta):
             from ..catalogue.fundamental import second  # noqa
             measure = second * measure.total_seconds()
@@ -49,6 +50,16 @@ class Unit(Measure):
 
         setattr('prefixes', prefixes or [])
         setattr('info', info or None)
+
+        from ..core import display
+        if self.dim.is_base_dimension() and not self.dim in display.dimension_units:
+            # ensure the first defined unit for a dimension is used for display
+            # to avoid catastrophic glitches
+            if not len(self.symbols):
+                raise NoetherError(
+                    f'Symbol required for first unit defined for {self.dim.name()}')
+
+            display(self)
 
     # Useful cataloguing tools
 

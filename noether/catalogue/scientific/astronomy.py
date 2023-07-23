@@ -8,8 +8,7 @@ from noether.core import Unit
 from ..prefixes import SI_all
 from ..fundamental import candela, kilogram, meter, second, kelvin
 from math import pi
-from .si import joule, watt, pascal, cumec, standard_gravity as g, c
-from .cgs import cm
+from .si import standard_gravity as g, c
 from .si import minute, hour
 from .si import year_julian as year  # <- This is the convention
 
