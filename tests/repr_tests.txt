@@ -1,0 +1,17 @@
+>>> length  # Dimension
+length  # length, distance, height, width, breadth, depth
+
+>>> kelvin * meter * 1  # Measure
+1 K m  # temperature * length
+
+>>> meter  # Unit
+meter  # length
+
+>>> foot & inch  # LinearUnit
+foot & inch  # length
+
+>>> mile / hour  # GeometricUnit
+mile / hour  # speed, 0.44704 m / s
+
+>>> c @ mile / hour  # GeometricUnit in use
+670616629.3843951 mi / hr  # speed
