@@ -10,21 +10,21 @@ from noether.helpers import Real
 
 from .config import Config, conf
 
-Config.register("display_unicode_symbols", True, '''\
+DISPLAY_UNICODE_SYMBOLS = Config.register("display_unicode_symbols", True, '''\
 Use Unicode symbols eg ± instead of +-.
 ''')
 
-Config.register("display_unicode_exponent", True, '''\
+DISPLAY_UNICODE_EXPONENT = Config.register("display_unicode_exponent", True, '''\
 Use Unicode superscripts eg xⁿ instead of x**n.
 ''')
 
-Config.register("display_repr_code", False, '''\
+DISPLAY_REPR_CODE = Config.register("display_repr_code", False, '''\
 Return code-like repr() instead of a more calculator-like representation.
 ''')
 
 
 def plus_minus_symbol() -> str:
-    if conf.get('display_unicode_symbols'):
+    if conf.get(DISPLAY_UNICODE_SYMBOLS):
         return '±'
     return '+-'
 
@@ -36,7 +36,7 @@ SUPERSCRIPT = str.maketrans(
 
 
 def superscript(number):
-    if conf.get('display_unicode_exponent'):
+    if conf.get(DISPLAY_UNICODE_EXPONENT):
         return str(number).translate(SUPERSCRIPT)
     return f'**{number}'
 

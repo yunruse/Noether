@@ -11,7 +11,7 @@ from noether.helpers import removeprefix
 
 from ..errors import NoetherError, DimensionError
 from ..config import Config, conf
-from ..display import canonical_number
+from ..display import DISPLAY_REPR_CODE, canonical_number
 from .Prefix import Prefix
 from .Dimension import Dimension, dimensionless
 from .MeasureInfo import MeasureInfo
@@ -181,7 +181,7 @@ class Measure(Generic[T]):
         return removeprefix(unit, '1 ')  # avoid "2  1 / m"
 
     def __repr__(self):
-        if conf.get('display_repr_code'):
+        if conf.get(DISPLAY_REPR_CODE):
             return self._repr_code()
         return self.__noether__()
 

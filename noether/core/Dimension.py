@@ -7,6 +7,8 @@ from noether.helpers import Rational
 from noether.helpers import reorder_dict_by_values
 from noether.Multiplication import Multiplication
 
+from noether.display import DISPLAY_REPR_CODE
+
 from ..config import conf
 
 
@@ -106,7 +108,7 @@ class Dimension(Multiplication[BaseDimension]):
         return super().__repr__()
 
     def __repr__(self):
-        if conf.get('display_repr_code'):
+        if conf.get(DISPLAY_REPR_CODE):
             return super().__repr__()
         return self.__noether__()
 

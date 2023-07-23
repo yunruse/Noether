@@ -10,7 +10,7 @@ from noether.helpers import Rational, Real
 
 from ..errors import NoetherError
 from ..config import conf
-from ..display import canonical_number
+from ..display import DISPLAY_REPR_CODE, canonical_number
 from .Prefix import Prefix, PrefixSet
 from .Dimension import Dimension
 from .Measure import Measure, UNCERTAINTY_SHORTHAND
@@ -103,7 +103,7 @@ class Unit(Measure):
     #         |        _/
 
     def __repr__(self):
-        if conf.get('display_repr_code'):
+        if conf.get(DISPLAY_REPR_CODE):
             return self._repr_code()
         return self.__noether__()
 

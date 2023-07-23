@@ -1,4 +1,6 @@
 from typing import Iterable
+
+from noether.display import DISPLAY_REPR_CODE
 from ...config import conf
 from ..Measure import Measure
 from ..Unit import Unit
@@ -33,7 +35,7 @@ class LinearUnit(Unit):
     #         |        _/
 
     def __repr__(self):
-        if conf.get('display_repr_code'):
+        if conf.get(DISPLAY_REPR_CODE):
             return self._repr_code()
         return self.__noether__()
 
