@@ -9,9 +9,10 @@ from typing import Generic, TypeVar
 
 
 # Typing does not currently support
-# numbers.Rational, numbers.Real.
+# numbers.Rational etc
 Rational = int | Fraction
 Real = Rational | float
+MeasureValue = Real
 
 
 # % String methods

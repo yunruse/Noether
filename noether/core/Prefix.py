@@ -2,20 +2,22 @@
 Prefixes a unit may take.
 '''
 
-from typing import TYPE_CHECKING, Iterable
+from typing import TYPE_CHECKING, Iterable, TypeVar, Generic
 from dataclasses import dataclass
 
-from ..helpers import Real
+from ..helpers import MeasureValue
 
 if TYPE_CHECKING:
     from . import Measure
 
+T = TypeVar('T', int, MeasureValue)
+
 
 @dataclass(frozen=True)
-class Prefix:
+class Prefix(Generic[T]):
     prefix: str
     symbol: str
-    value: float
+    value: T
 
     def __json__(self):
         return {
@@ -24,7 +26,7 @@ class Prefix:
             'value': self.value
         }
 
-    def _geo(self, measure: 'Measure | Prefix | Real', direction: int):
+    def _geo(self, measure: 'Measure | Prefix | T', direction: int):
         from . import Unit, PrefixedUnit
 
         if isinstance(measure, Prefix):

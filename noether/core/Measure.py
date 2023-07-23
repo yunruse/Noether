@@ -5,7 +5,7 @@ from functools import total_ordering
 import operator
 from sys import version_info
 from typing import Callable, Optional, TypeVar, ClassVar, Generic, TYPE_CHECKING
-from noether.helpers import Real
+from noether.helpers import MeasureValue
 
 from noether.helpers import removeprefix
 
@@ -37,7 +37,7 @@ for < it means 'do the ranges not overlap'.""")
 UNCERTAINTY_SHORTHAND = Config.register("uncertainty_display_shorthand", False, """\
 Display e.g. 0.15(2) instead of 0.15 ± 0.02.""")
 
-T = TypeVar('T', int, float, Real)  # typing of Measure
+T = TypeVar('T', int, MeasureValue)
 
 
 @dataclass(
@@ -82,12 +82,12 @@ class Measure(Generic[T]):
         if dim is not None:
             set('dim', dim)
 
-        if not isinstance(self._value, Real):
-            raise TypeError('Value must be a real number, not a'
+        if not isinstance(self._value, MeasureValue):
+            raise TypeError('value must be a real number, not a'
                             f' {type(self._value).__name__}')
 
         if self.stddev is not None:
-            if not isinstance(self.stddev, Real):
+            if not isinstance(self.stddev, MeasureValue):
                 raise TypeError('stddev must be a real number, not a'
                                 f' {type(self.stddev).__name__}')
 
@@ -252,7 +252,7 @@ class Measure(Generic[T]):
 
     def __rtruediv__(self, other): return other * self**-1
 
-    def __call__(self, value: Real, stddev: Optional[Real] = None):
+    def __call__(self, value: MeasureValue, stddev: Optional[MeasureValue] = None):
         return self * Measure(value, stddev)
 
     def __pow__(self, exp):
@@ -295,7 +295,7 @@ class Measure(Generic[T]):
                 "A measure may not linearly operate on a number."
                 f" Enable conf.{BARENUMBER} to bypass this.")
 
-    def __lin(self, other: 'Measure[T] | Dimension | Real', op: Callable):
+    def __lin(self, other: 'Measure[T] | Dimension | MeasureValue', op: Callable):
         self.__lin_cmp(other, op)
 
         value = self._value
