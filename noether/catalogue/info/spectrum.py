@@ -53,13 +53,12 @@ SPECTRUM: dict[str, tuple[float, float]] = {
     "HF": (1e10, 1e11)
 }
 
-nm = meter(1e-9)
-
 
 def spectrum_names(wavelength: Measure[float]) -> list[str]:
     names = []
     for name, (a, b) in SPECTRUM.items():
-        if a <= (wavelength @ nm).value < b:
+        v_nm = wavelength.value / 1e-9
+        if a <= v_nm < b:
             names.append((b-a, name))
     return [name for _, name in sorted(names, reverse=True)]
 
