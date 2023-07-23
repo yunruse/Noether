@@ -1,5 +1,11 @@
 # Noether changelog
 
+## 1.0.1
+***?? ??? 2023, [??? commits](https://github.com/yunruse/Noether/pull/57/commits), closing [?? issues](https://github.com/yunruse/Noether/milestone/5?closed=1)***
+
+Various bugfixes to unit display.
+
+
 ## 1.0
 ***23 Jul 2023, [281 commits](https://github.com/yunruse/Noether/pull/53/commits), closing [23 issues](https://github.com/yunruse/Noether/milestone/3?closed=1)***
 

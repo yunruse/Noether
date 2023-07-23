@@ -1,4 +1,4 @@
-# Noether 1.0
+# Noether 1.0.1 (in development)
 
 [![PyPI](https://img.shields.io/pypi/v/noether?color=blue)](https://pypi.org/packages/noether)
 
