@@ -51,17 +51,13 @@ class Measure(Generic[T]):
     A measurement, with Dimension and optional uncertainty.
     '''
     _value: T
-    stddev: Optional[T] = None
+    _stddev: T | None = None
     dim: Dimension
-
-    @property
-    def value(self):
-        return self._value
 
     def __init__(
         self,
         value: "Measure[T] | T" = 1,
-        stddev: Optional[T] = None,
+        stddev: T | None = None,
         dim: Optional[Dimension] = None,
     ):
         def set(x, v):
@@ -70,15 +66,15 @@ class Measure(Generic[T]):
 
         if isinstance(value, Measure):
             set('_value', value._value)
-            set('stddev', value.stddev)
+            set('_stddev', value._stddev)
             set('dim', value.dim)
         else:
             set('_value', value)
-            set('stddev', None)
+            set('_stddev', None)
             set('dim', dimensionless)
 
         if stddev is not None:
-            set('stddev', stddev)
+            set('_stddev', stddev)
         if dim is not None:
             set('dim', dim)
 
@@ -91,11 +87,18 @@ class Measure(Generic[T]):
                 raise TypeError('stddev must be a real number, not a'
                                 f' {type(self.stddev).__name__}')
 
+    @property
+    def value(self):
+        return self._value
+
+    @property
+    def stddev(self):
+        return self._stddev
+
     def cast(self, to: type):
-        return Measure(
-            to(self._value),
-            to(self.stddev),
-            self.dim)
+        result = Measure(self)
+        for k in '_value', '_stddev':
+            setattr(result, k, to(getattr(result, k)))
 
     @property
     def epsilon(self):
