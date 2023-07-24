@@ -269,22 +269,23 @@ class Measure(Generic[T]):
         if conf.get(OPENLINEAR):
             return
 
+        match op:
+            case operator.add: oper = "Addition"
+            case operator.sub: oper = "Subtraction"
+            case operator.mod: oper = "Modulo"
+            case operator.lt: oper = "Comparison"
+            case _: oper = "A linear operation"
+
         if isinstance(other, Measure):
             if self.dim != other.dim:
-                match op:
-                    case operator.add: oper = "Addition"
-                    case operator.sub: oper = "Subtraction"
-                    case operator.mod: oper = "Modulo"
-                    case operator.lt: oper = "Comparison"
-                    case _: oper = "A linear operation"
-
                 raise DimensionError(
                     self.dim, other.dim,
-                    f"{oper} only works on units of the same dimension. Enable conf.{OPENLINEAR} to bypass this.")
+                    f"{oper} only works on units of the same dimension."
+                    f" Enable conf.{OPENLINEAR} to bypass this.")
 
         elif not conf.get(BARENUMBER):
             raise NoetherError(
-                "A measure may not linearly operate on a number."
+                f"{oper} only works on Measures and Units."
                 f" Enable conf.{BARENUMBER} to bypass this.")
 
     def __lin(self, other: 'Measure[T] | Dimension | MeasureValue', op: Callable):
