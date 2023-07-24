@@ -29,11 +29,6 @@ Allow any addition, even between incompatible units
 BARENUMBER = Config.register("measure_barenumber", False, """\
 Allow addition and subtraction of bare numbers to units""")
 
-UNCERTAINTY_OVERLAP = Config.register("uncertainty_compare_range_overlap", False, """\
-When comparing a Measure, compare on the uncertainty.
-For == this means 'do the ranges overlap';
-for < it means 'do the ranges not overlap'.""")
-
 UNCERTAINTY_SHORTHAND = Config.register("uncertainty_display_shorthand", False, """\
 Display e.g. 0.15(2) instead of 0.15 ± 0.02.""")
 
@@ -105,12 +100,6 @@ class Measure(Generic[T]):
         if self.stddev is None or not self._value:
             return None
         return self.stddev / self._value
-
-    @property
-    def bounds(self) -> tuple[T, T]:
-        if self.stddev is None:
-            return self._value, self._value
-        return self._value - self.stddev, self._value + self.stddev  # type: ignore
 
     # |\  |              |
     # | \ ||   ||/~\ /~\ |~~\/~/|/~\
@@ -331,22 +320,11 @@ class Measure(Generic[T]):
         if isinstance(other, Measure):
             if other.dim != self.dim and not conf.get(OPENLINEAR):
                 return False
-            if conf.get(UNCERTAINTY_OVERLAP):
-                s_min, s_max = self.bounds
-                o_min, o_max = other.bounds
-                return ((s_min <= o_min <= s_max) or
-                        (s_min <= o_max <= s_max) or
-                        (o_min <= s_min <= o_max) or
-                        (o_min <= s_max <= o_max))
             return self._value == other._value
 
     def __lt__(self, other):
         self.__lin_cmp(other, operator.lt)
         if isinstance(other, Measure):
-            if conf.get(UNCERTAINTY_OVERLAP):
-                s_min, s_max = self.bounds
-                o_min, o_max = other.bounds
-                return s_max < o_min
             return self._value < other._value
 
     #  /~~       |               |~~\ '      |
