@@ -27,6 +27,11 @@ class GeometricUnit(Unit):
         super().__init__(unit)
         object.__setattr__(self, 'units', units)
 
+    # TODO: items() that provides some sort of ordering system
+    # probably first by exponent,
+    # and then by some sort of dimension ordering system
+    # (one of the test cases has some random z-fighting for some reason)
+
     @staticmethod
     def _resolve_unit(u: Unit):
         from .LinearUnit import LinearUnit
@@ -56,4 +61,4 @@ class GeometricUnit(Unit):
 
     @property
     def symbol(self):
-        return self.units.display(lambda x: x.symbol)
+        return self.units.display(lambda x: x.symbol, drop_multiplication_signs=True)

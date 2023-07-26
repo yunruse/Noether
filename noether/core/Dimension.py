@@ -14,6 +14,7 @@ from ..config import conf
 
 BaseDimension = str
 DimInfo = namedtuple('DimInfo', ('order', 'symbol'))
+BaseDimDict = dict[BaseDimension, Rational]
 
 
 class Dimension(Multiplication[BaseDimension]):
@@ -31,22 +32,26 @@ class Dimension(Multiplication[BaseDimension]):
 
     def __init__(
         self,
-        dimensions: dict[BaseDimension, Rational] | None = None,
+        dimensions: BaseDimension | BaseDimDict | None = None,
         *names: str
     ):
-        dimensions = dimensions or {}
-        well_formed = all(
-            isinstance(d, BaseDimension)
-            and d in type(self)._known_dimensions
-            for d, exp in dimensions.items()
-        )
-        if not well_formed:
-            raise TypeError(
-                "Malformed Dimension."
-                " Use e.g. `length = Dimension.new(...)`"
-                " and compose derived dimensions.")
+        dims: BaseDimDict = {}
+        if isinstance(dimensions, BaseDimension):
+            dims = {dimensions: 1}
+        elif isinstance(dimensions, dict):
+            dims = dimensions
+            well_formed = all(
+                isinstance(d, BaseDimension)
+                and d in type(self)._known_dimensions
+                for d, exp in dimensions.items()
+            )
+            if not well_formed:
+                raise TypeError(
+                    "Malformed Dimension."
+                    " Use e.g. `length = Dimension.new(...)`"
+                    " and compose derived dimensions.")
 
-        super().__init__(dimensions)
+        super().__init__(dims)
         self._names.setdefault(self, [])
         self._names[self].extend(names)
 

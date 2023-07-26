@@ -7,11 +7,9 @@ from sys import version_info
 from typing import Callable, Optional, TypeVar, ClassVar, Generic, TYPE_CHECKING
 from noether.helpers import MeasureValue
 
-from noether.helpers import removeprefix
-
 from ..errors import NoetherError, DimensionError
 from ..config import Config, conf
-from ..display import DISPLAY_REPR_CODE, canonical_number
+from ..display import DISPLAY_REPR_CODE
 from .Prefix import Prefix
 from .Dimension import Dimension, dimensionless
 from .MeasureInfo import MeasureInfo
@@ -152,22 +150,9 @@ class Measure(Generic[T]):
                 for i in handler.info(self):
                     yield i, handler.style
 
-    def display_unit(self) -> 'Unit | None':
+    def display_unit(self) -> 'Unit':
         from ._DisplayHandler import display
-        units = display.dimension_units.get(self.dim, [])
-        if units:
-            return units[-1]
-
-    def _as_composed_string(self) -> str:
-        from ._DisplayHandler import display
-
-        unit = self.dim.display(
-            display_function=lambda x: display._dimension_symbol[x],
-            drop_multiplication_signs=True,
-            identity_string='',
-        )
-
-        return removeprefix(unit, '1 ')  # avoid "2  1 / m"
+        return display.dimension_unit(self.dim)
 
     def __repr__(self):
         if conf.get(DISPLAY_REPR_CODE):
@@ -183,16 +168,8 @@ class Measure(Generic[T]):
 
         return 'Measure({})'.format(', '.join(chunks))
 
-    @staticmethod
-    def _repr_measure(measure: 'Measure'):
-        # Fallback if no unit found
-        n = canonical_number(measure._value, measure.stddev,
-                             conf.get(UNCERTAINTY_SHORTHAND))
-        s = measure._as_composed_string()
-        return f'{n} {s}'.strip()
-
     def __str__(self):
-        return (self.display_unit() or self)._repr_measure(self)
+        return self.display_unit()._repr_measure(self)
 
     def __noether__(self):
         info = ', '.join(i for i, _ in self._info())

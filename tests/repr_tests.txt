@@ -7,6 +7,9 @@ length  # length, distance, height, width, breadth, depth
 >>> meter  # Unit
 meter  # length
 
+>>> bit / second  # Non-unity base units
+bit / second  # data_rate, 0.125 B / s
+
 >>> foot & inch  # LinearUnit
 foot & inch  # length
 
@@ -17,7 +20,7 @@ mile / hour  # speed, 0.44704 m / s
 670616629.3843951 mi / hr  # speed
 
 >>> joule / (kilogram * kelvin)  # GeometricUnit ordering #55
-joule / kilogram / kelvin  # specific_heat_capacity, 1 m**2 / K / s**2
+joule / kilogram / kelvin  # specific_heat_capacity
 
 >>> meter(1, 0.2) @ meter & cm  # Uncertainties on LinearUnit #8
 1 m ± 20 cm  # length
@@ -33,6 +36,3 @@ joule / kilogram / kelvin  # specific_heat_capacity, 1 m**2 / K / s**2
 
 >>> gibibyte @ bit  # Scientific notation #56
 8.59e9 b  # data
-
->>> B / s  # Bitrates #54
-byte / second # data_rate, 8 b / s
