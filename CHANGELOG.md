@@ -3,7 +3,7 @@
 ## 1.0.1
 ***?? ??? 2023, [??? commits](https://github.com/yunruse/Noether/pull/57/commits), closing [?? issues](https://github.com/yunruse/Noether/milestone/5?closed=1)***
 
-- Various bugfixes and improved testing for display mechanisms.
+- Various bugfixes and improved testing for display mechanisms; units now display in scientific notation where otherwise would be unwieldy
 - Fixed incorrect value for `standard_gravity`.
 - New units:
   - `horsepower`

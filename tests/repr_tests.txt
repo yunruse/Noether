@@ -17,7 +17,7 @@ foot & inch  # length
 mile / hour  # speed, 0.44704 m / s
 
 >>> c @ mile / hour  # GeometricUnit in use
-670616629.3843951 mi / hr  # speed
+6.706166e8 mi / hr  # speed
 
 >>> joule / (kilogram * kelvin)  # GeometricUnit ordering #55
 joule / kelvin / kilogram  # specific_heat_capacity
@@ -35,4 +35,4 @@ joule / kelvin / kilogram  # specific_heat_capacity
 63360 in  # length
 
 >>> gibibyte @ bit  # Scientific notation #56
-8.59e9 b  # data
+8.589935e9 b  # data
