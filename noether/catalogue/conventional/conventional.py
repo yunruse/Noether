@@ -14,6 +14,7 @@ from ..scientific import radian, turn
 from ..scientific import turn
 from ..scientific import day, hour, minute
 from ..scientific import gram
+from ..scientific import standard_gravity
 
 # % Ratio
 percent = Unit(1/100, 'percent', '%')
@@ -75,6 +76,14 @@ deg = degree = Unit(radian * pi / 180, "degree", ["°", "deg"])
 arcminute = arcmin = Unit(degree / 60, "arcminute", ["′", "arcmin"])
 arcsecond = arcsec = Unit(
     degree / 3600, "arcsecond", ["″", "arcsec"], SI_small)
+
+# % Mechanical
+
+horsepower = Unit(
+    standard_gravity * kilogram*75 * meter / second,
+    'horsepower', 'hp',
+    info="Metric horsepower, not to be confused with the"
+    " imperial horsepower which is slightly larger")
 
 
 # % Display

@@ -2,13 +2,15 @@
 Imperial units.
 '''
 
+# TODO: #1 all of this nonsense
+
 from fractions import Fraction
 
 from noether.core import Unit, AffineUnit
 from noether.config import Config, conf
 
 from ..scientific import meter, kelvin, mercury
-from ..scientific import cm, gram, hour
+from ..scientific import cm, gram, hour, second
 from .conventional import liter
 
 Config.register('UNITS_country', 'us', '''\
@@ -72,6 +74,7 @@ butt = Unit(hogshead * 2, "butt")  # y'all nerds
 
 # % Mass
 pound = lb = Unit(453.59237 * gram, "pound", "lb")
+poundal = Unit(lb * foot / second**2, "poundal", "pdl")
 
 oz = ounce = Unit(pound / 16, "ounce", "oz")
 grain = Unit(pound / 7000, "grain", "gr")
@@ -80,7 +83,7 @@ stone = st = Unit(pound * 14, "stone", "st")
 imperial_ton = Unit(pound * 2240, "ton", "t")
 
 
-# Derived
+# % Derived
 
 inch_mercury = Unit(mercury * inch,
                     "inch_mercury", "inHg")

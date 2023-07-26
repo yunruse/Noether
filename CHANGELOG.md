@@ -5,6 +5,9 @@
 
 - Various bugfixes and improved testing for display mechanisms.
 - Fixed incorrect value for `standard_gravity`.
+- New units:
+  - `horsepower`
+  - `poundal`
 
 
 ## 1.0
