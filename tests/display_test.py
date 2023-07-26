@@ -4,23 +4,24 @@ Test various repr() and str() methods for objects.
 from unittest import TestCase
 
 import noether
-from noether import time, length
+from noether import time, length, Dimension
 from noether.display import uncertainty
 
 from pathlib import Path
+
 REPR_TESTS = Path(__file__).parent / 'repr_tests.txt'
 
 noether.conf.reset()
 
 
 class test_unit_display(TestCase):
-    dim_mult_display = (
+    dim_mult_display: list[tuple[Dimension, str]] = [
         (time, 'time'),
         (length / time, 'speed'),
         (length / time**2, 'acceleration'),
         (time / length**0.5, 'time / length**0.5'),
         ((time * length) ** 0.5, 'length**0.5 * time**0.5'),
-    )
+    ]
 
     def test_dimension_display(self):
         '''Test for desired behaviour for numbers with uncertainties '''
