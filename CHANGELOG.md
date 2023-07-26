@@ -8,6 +8,9 @@
 - New units:
   - `horsepower`
   - `poundal`
+- Deprecate unused internal features:
+  - `MultiplicationWithValue`
+  - "Ranged overlap" comparisons
 
 
 ## 1.0
