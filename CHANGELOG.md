@@ -3,7 +3,8 @@
 ## 1.0.1
 ***?? ??? 2023, [??? commits](https://github.com/yunruse/Noether/pull/57/commits), closing [?? issues](https://github.com/yunruse/Noether/milestone/5?closed=1)***
 
-Various bugfixes to unit display.
+- Various bugfixes and improved testing for display mechanisms.
+- Fixed incorrect value for `standard_gravity`.
 
 
 ## 1.0

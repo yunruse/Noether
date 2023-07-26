@@ -64,7 +64,7 @@ katal = kat = SI_d(Unit(catalytic_activity, 'katal', "kat", SI_all))
 
 # GCWM 3
 standard_gravity = Unit(
-    9.980665 * meter / second**2,
+    9.80665 * meter / second**2,
     "standard_gravity", "g", info="defined by convention")
 
 # GCWM 17
