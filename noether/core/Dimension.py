@@ -92,12 +92,21 @@ class Dimension(Multiplication[BaseDimension]):
         kwargs.setdefault('identity_string', 'dimensionless')
         return super().display(**kwargs)
 
-    def as_symbols(self):
+    @property
+    def symbol(self):
         return super().display(
             display_function=lambda b: self._known_dimensions[b].symbol,
             drop_multiplication_signs=True,
             identity_string='1'
         )
+
+    @property
+    def order(self):
+        if self.is_base_dimension():
+            k = list(self)[0]
+            return self._known_dimensions[k].order
+        # TODO: could this be more specific?
+        return 999
 
     @property
     def names(self):
