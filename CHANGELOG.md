@@ -1,4 +1,22 @@
-# 1.0
+# Noether changelog
+
+## 1.0.1
+***28 Jul 2023, [22 commits](https://github.com/yunruse/Noether/pull/57/commits), closing [8 issues](https://github.com/yunruse/Noether/milestone/5?closed=1)***
+
+- Various bugfixes and improved testing for display mechanisms; units now display in scientific notation where otherwise would be unwieldy.
+- Fixed incorrect value for `standard_gravity`.
+- Added a very rudimentary GNU `units`-like interface (`python -m noether.gnu`)
+- New units:
+  - `horsepower`
+  - `poundal`
+- Deprecate unused internal features:
+  - `MultiplicationWithValue`
+  - "Ranged overlap" comparisons
+
+
+## 1.0
+***23 Jul 2023, [281 commits](https://github.com/yunruse/Noether/pull/53/commits), closing [23 issues](https://github.com/yunruse/Noether/milestone/3?closed=1)***
+
 A *complete* rewrite from scratch. The original was made some 5 years ago, so this is definitely a 1.0 now :)
 
 I wouldn't consider this yet to be amazing, feature-complete stable quality... but can that be said of any open source project?

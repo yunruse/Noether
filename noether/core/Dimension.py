@@ -14,6 +14,7 @@ from ..config import conf
 
 BaseDimension = str
 DimInfo = namedtuple('DimInfo', ('order', 'symbol'))
+BaseDimDict = dict[BaseDimension, Rational]
 
 
 class Dimension(Multiplication[BaseDimension]):
@@ -31,22 +32,26 @@ class Dimension(Multiplication[BaseDimension]):
 
     def __init__(
         self,
-        dimensions: dict[BaseDimension, Rational] | None = None,
+        dimensions: BaseDimension | BaseDimDict | None = None,
         *names: str
     ):
-        dimensions = dimensions or {}
-        well_formed = all(
-            isinstance(d, BaseDimension)
-            and d in type(self)._known_dimensions
-            for d, exp in dimensions.items()
-        )
-        if not well_formed:
-            raise TypeError(
-                "Malformed Dimension."
-                " Use e.g. `length = Dimension.new(...)`"
-                " and compose derived dimensions.")
+        dims: BaseDimDict = {}
+        if isinstance(dimensions, BaseDimension):
+            dims = {dimensions: 1}
+        elif isinstance(dimensions, dict):
+            dims = dimensions
+            well_formed = all(
+                isinstance(d, BaseDimension)
+                and d in type(self)._known_dimensions
+                for d, exp in dimensions.items()
+            )
+            if not well_formed:
+                raise TypeError(
+                    "Malformed Dimension."
+                    " Use e.g. `length = Dimension.new(...)`"
+                    " and compose derived dimensions.")
 
-        super().__init__(dimensions)
+        super().__init__(dims)
         self._names.setdefault(self, [])
         self._names[self].extend(names)
 
@@ -87,12 +92,21 @@ class Dimension(Multiplication[BaseDimension]):
         kwargs.setdefault('identity_string', 'dimensionless')
         return super().display(**kwargs)
 
-    def as_symbols(self):
+    @property
+    def symbol(self):
         return super().display(
             display_function=lambda b: self._known_dimensions[b].symbol,
             drop_multiplication_signs=True,
             identity_string='1'
         )
+
+    @property
+    def order(self):
+        if self.is_base_dimension():
+            k = list(self)[0]
+            return self._known_dimensions[k].order
+        # TODO: could this be more specific?
+        return 999
 
     @property
     def names(self):

@@ -4,20 +4,24 @@ Test various repr() and str() methods for objects.
 from unittest import TestCase
 
 import noether
-from noether import time, length
+from noether import time, length, Dimension
 from noether.display import uncertainty
+
+from pathlib import Path
+
+REPR_TESTS = Path(__file__).parent / 'repr_tests.txt'
 
 noether.conf.reset()
 
 
 class test_unit_display(TestCase):
-    dim_mult_display = (
+    dim_mult_display: list[tuple[Dimension, str]] = [
         (time, 'time'),
         (length / time, 'speed'),
         (length / time**2, 'acceleration'),
         (time / length**0.5, 'time / length**0.5'),
         ((time * length) ** 0.5, 'length**0.5 * time**0.5'),
-    )
+    ]
 
     def test_dimension_display(self):
         '''Test for desired behaviour for numbers with uncertainties '''
@@ -38,41 +42,20 @@ class test_unit_display(TestCase):
             d = uncertainty(a, b)
             self.assertEqual(c, d)
 
-    value_repr_str = (
-        (
-            'length',  # Dimension
-            'length  # length, distance, height, width, breadth, depth',
-            'length',
-        ),
-        (
-            'kelvin * meter * 1',  # Measure
-            '1 K m  # temperature * length',
-            '1 K m'
-        ),
-        (
-            'meter',  # Unit
-            'meter  # length',
-            'meter'
-        ),
-        (
-            'foot & inch',  # LinearUnit
-            'foot & inch  # length',
-            'foot & inch'
-        ),
-        (
-            'mile / hour',  # GeometricUnit
-            'mile / hour  # speed, 0.44704 m / s',
-            'mile / hour'
-        ),
-        (
-            'c @ mile / hour',  # GeometricUnit in use
-            '670616629.3843951 mi / hr  # speed',
-            '670616629.3843951 mi / hr'
-        ),
-    )
+    def get_repr_tests(self):
+        with open(REPR_TESTS) as f:
+            text = f.read()
+        for test in text.split('>>> '):
+            test = test.strip()
+            if not test:
+                continue
+            value, repr_test = test.split('\n')
+            value, name = value.split('  # ')
+            yield value, name, repr_test
 
     def test_value_repr_str(self):
-        for k, n, s in self.value_repr_str:
-            val = eval(k, {}, vars(noether))
-            self.assertEqual(n, val.__noether__(), msg=f'repr({k})')
-            self.assertEqual(s, str(val), msg=f'str({k})')
+        for value, name, repr_test in self.get_repr_tests():
+            val = eval(value, {}, vars(noether))
+            self.assertEqual(
+                repr_test, val.__noether__(),
+                msg=f'repr : {value} : {name}')

@@ -7,11 +7,9 @@ from sys import version_info
 from typing import Callable, Optional, TypeVar, ClassVar, Generic, TYPE_CHECKING
 from noether.helpers import MeasureValue
 
-from noether.helpers import removeprefix
-
 from ..errors import NoetherError, DimensionError
 from ..config import Config, conf
-from ..display import DISPLAY_REPR_CODE, canonical_number
+from ..display import DISPLAY_REPR_CODE
 from .Prefix import Prefix
 from .Dimension import Dimension, dimensionless
 from .MeasureInfo import MeasureInfo
@@ -28,11 +26,6 @@ Allow any addition, even between incompatible units
 
 BARENUMBER = Config.register("measure_barenumber", False, """\
 Allow addition and subtraction of bare numbers to units""")
-
-UNCERTAINTY_OVERLAP = Config.register("uncertainty_compare_range_overlap", False, """\
-When comparing a Measure, compare on the uncertainty.
-For == this means 'do the ranges overlap';
-for < it means 'do the ranges not overlap'.""")
 
 UNCERTAINTY_SHORTHAND = Config.register("uncertainty_display_shorthand", False, """\
 Display e.g. 0.15(2) instead of 0.15 ± 0.02.""")
@@ -103,12 +96,6 @@ class Measure(Generic[T]):
             return None
         return self.stddev / self._value
 
-    @property
-    def bounds(self) -> tuple[T, T]:
-        if self.stddev is None:
-            return self._value, self._value
-        return self._value - self.stddev, self._value + self.stddev  # type: ignore
-
     # |\  |              |
     # | \ ||   ||/~\ /~\ |~~\/~/|/~\
     # |  \| \_/||   |   ||__/\/_|
@@ -163,22 +150,9 @@ class Measure(Generic[T]):
                 for i in handler.info(self):
                     yield i, handler.style
 
-    def display_unit(self) -> 'Unit | None':
+    def display_unit(self) -> 'Unit':
         from ._DisplayHandler import display
-        units = display.dimension_units.get(self.dim, [])
-        if units:
-            return units[-1]
-
-    def _as_composed_string(self) -> str:
-        from ._DisplayHandler import display
-
-        unit = self.dim.display(
-            display_function=lambda x: display._dimension_symbol[x],
-            drop_multiplication_signs=True,
-            identity_string='',
-        )
-
-        return removeprefix(unit, '1 ')  # avoid "2  1 / m"
+        return display.dimension_unit(self.dim)
 
     def __repr__(self):
         if conf.get(DISPLAY_REPR_CODE):
@@ -194,16 +168,8 @@ class Measure(Generic[T]):
 
         return 'Measure({})'.format(', '.join(chunks))
 
-    @staticmethod
-    def _repr_measure(measure: 'Measure'):
-        # Fallback if no unit found
-        n = canonical_number(measure._value, measure.stddev,
-                             conf.get(UNCERTAINTY_SHORTHAND))
-        s = measure._as_composed_string()
-        return f'{n} {s}'.strip()
-
     def __str__(self):
-        return (self.display_unit() or self)._repr_measure(self)
+        return self.display_unit()._repr_measure(self)
 
     def __noether__(self):
         info = ', '.join(i for i, _ in self._info())
@@ -277,22 +243,23 @@ class Measure(Generic[T]):
         if conf.get(OPENLINEAR):
             return
 
+        match op:
+            case operator.add: oper = "Addition"
+            case operator.sub: oper = "Subtraction"
+            case operator.mod: oper = "Modulo"
+            case operator.lt: oper = "Comparison"
+            case _: oper = "A linear operation"
+
         if isinstance(other, Measure):
             if self.dim != other.dim:
-                match op:
-                    case operator.add: oper = "Addition"
-                    case operator.sub: oper = "Subtraction"
-                    case operator.mod: oper = "Modulo"
-                    case operator.lt: oper = "Comparison"
-                    case _: oper = "A linear operation"
-
                 raise DimensionError(
                     self.dim, other.dim,
-                    f"{oper} only works on units of the same dimension. Enable conf.{OPENLINEAR} to bypass this.")
+                    f"{oper} only works on units of the same dimension."
+                    f" Enable conf.{OPENLINEAR} to bypass this.")
 
         elif not conf.get(BARENUMBER):
             raise NoetherError(
-                "A measure may not linearly operate on a number."
+                f"{oper} only works on Measures and Units."
                 f" Enable conf.{BARENUMBER} to bypass this.")
 
     def __lin(self, other: 'Measure[T] | Dimension | MeasureValue', op: Callable):
@@ -328,22 +295,11 @@ class Measure(Generic[T]):
         if isinstance(other, Measure):
             if other.dim != self.dim and not conf.get(OPENLINEAR):
                 return False
-            if conf.get(UNCERTAINTY_OVERLAP):
-                s_min, s_max = self.bounds
-                o_min, o_max = other.bounds
-                return ((s_min <= o_min <= s_max) or
-                        (s_min <= o_max <= s_max) or
-                        (o_min <= s_min <= o_max) or
-                        (o_min <= s_max <= o_max))
             return self._value == other._value
 
     def __lt__(self, other):
         self.__lin_cmp(other, operator.lt)
         if isinstance(other, Measure):
-            if conf.get(UNCERTAINTY_OVERLAP):
-                s_min, s_max = self.bounds
-                o_min, o_max = other.bounds
-                return s_max < o_min
             return self._value < other._value
 
     #  /~~       |               |~~\ '      |

@@ -55,7 +55,7 @@ class Catalogue:
                 self._prefixes[prefix.prefix] = prefix
                 self._prefixes[prefix.symbol] = prefix
 
-    def get(self, name: str):
+    def get_unit(self, name: str):
         for col in (self.prefix_sets, self.dimensions, self.units_by_name):
             if name in col:
                 return col[name]
@@ -76,8 +76,13 @@ class Catalogue:
             f'No unit (or prefixed unit)'
             f' with name {name!r} could be found.')
 
+    def get(self, name: str):
+        return self.get_unit(name)
+        # TODO: allow prefixes, numbers —
+        # anything `units` allows
+
     def __getitem__(self, name: str):
-        return self.get(name)
+        return self.get_unit(name)
 
     def units(self):
         return set(self.units_by_name.values())

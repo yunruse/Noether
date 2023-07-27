@@ -1,4 +1,4 @@
-# Noether 1.0
+# Noether 1.0.1 (in development)
 
 [![PyPI](https://img.shields.io/pypi/v/noether?color=blue)](https://pypi.org/packages/noether)
 
@@ -73,9 +73,12 @@ Use `conf.save()` to save to (by default) `~/.config/noether.toml`.
 
 ## For more, see...
 
-Check out [CONTRIBUTING.md](CONTRIBUTING.md) and [LICENSE.txt](LICENSE.txt) for info of that sort.
+- [CHANGELOG.md](https://github.com/yunruse/Noether/blob/release/CHANGELOG.md)
+- [CONTRIBUTING.md](https://github.com/yunruse/Noether/blob/release/CONTRIBUTING.md)
+- [LICENSE.txt](https://github.com/yunruse/Noether/blob/release/LICENSE.txt)
 
 Other tools for working with units include:
+
 - [Wolfram Alpha](https://www.wolframalpha.com), a comprehensive online intelligence engine
 - [gnu `units`](https://www.gnu.org/software/units/), a command-line tool you likely already have
 - [units](https://pypi.org/project/units/), a simple Python package for defining your own units

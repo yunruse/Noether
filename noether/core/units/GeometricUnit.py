@@ -27,16 +27,24 @@ class GeometricUnit(Unit):
         super().__init__(unit)
         object.__setattr__(self, 'units', units)
 
+    @staticmethod
+    def _resolve_unit(u: Unit):
+        from .LinearUnit import LinearUnit
+        if isinstance(u, LinearUnit):
+            u = u.units[-1]
+
+        if isinstance(u, GeometricUnit):
+            return u.units
+        return u
+
     def __mul__(self, value: Unit):
         if isinstance(value, Unit):
-            v = value.units if isinstance(value, GeometricUnit) else value
-            return type(self)(self.units * v)
+            return type(self)(self.units * self._resolve_unit(value))
         return Measure.__mul__(self, value)
 
     def __truediv__(self, value: Unit):
         if isinstance(value, Unit):
-            v = value.units if isinstance(value, GeometricUnit) else value
-            return type(self)(self.units / v)
+            return type(self)(self.units / self._resolve_unit(value))
         return Measure.__truediv__(self, value)
 
     def __pow__(self, exponent: Rational):
@@ -44,8 +52,11 @@ class GeometricUnit(Unit):
 
     @property
     def name(self):
-        return self.units.display()
+        return self.units.display(key=lambda q: (-q[1], q[0].dim.order))
 
     @property
     def symbol(self):
-        return self.units.display(lambda x: x.symbol)
+        return self.units.display(
+            lambda x: x.symbol,
+            key=lambda q: (-q[1], q[0].dim.order),
+            drop_multiplication_signs=True)

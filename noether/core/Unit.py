@@ -6,7 +6,7 @@ Used in turn to display Measure.
 
 from datetime import timedelta
 from itertools import chain
-from noether.helpers import Rational, Real
+from noether.helpers import Rational, Real, removeprefix
 
 from ..errors import NoetherError
 from ..config import conf
@@ -81,13 +81,24 @@ class Unit(Measure):
     def __pow__(self, value: Rational) -> Measure:
         return GeometricUnit(self) ** value
 
+    def _fallback_display(self) -> str:
+        from ._DisplayHandler import display
+
+        unit = self.dim.display(
+            display_function=lambda x: display._dimension_symbol[x],
+            drop_multiplication_signs=True,
+            identity_string='',
+        )
+
+        return removeprefix(unit, '1 ')  # avoid "2  1 / m"
+
     @property
     def symbol(self):
         if self.symbols:
             return self.symbols[0]
         if self.names:
             return self.names[0]
-        return self._as_composed_string()
+        return self._fallback_display()
 
     @property
     def name(self):
@@ -95,7 +106,7 @@ class Unit(Measure):
             return self.names[0]
         if self.symbols:
             return self.symbols[0]
-        return self._as_composed_string()
+        return self._fallback_display()
 
     # |~~\ '      |
     # |   ||(~|~~\|/~~|\  /

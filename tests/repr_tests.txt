@@ -1,0 +1,41 @@
+>>> length  # Dimension
+length  # length, distance, height, width, breadth, depth
+
+>>> kelvin * meter * 1  # Measure
+1 K m  # temperature * length
+
+>>> meter  # Unit
+meter  # length
+
+>>> bit / second  # Non-unity base units
+bit / second  # data_rate, 0.125 B / s
+
+>>> foot & inch  # LinearUnit
+foot & inch  # length
+
+>>> mile / hour  # GeometricUnit
+mile / hour  # speed, 0.44704 m / s
+
+>>> c @ mile / hour  # GeometricUnit in use
+6.706166e8 mi / hr  # speed
+
+>>> joule / (kilogram * kelvin)  # GeometricUnit ordering #55
+joule / kelvin / kilogram  # specific_heat_capacity
+
+>>> meter(1, 0.2) @ meter & cm  # Uncertainties on LinearUnit #8
+1 m ± 20 cm  # length
+
+>>> degree(30)  # Nice angles #18, #56
+29 ° + 59 ′ + 60 ″  # angle
+
+>>> 16 * pixel / mm  # Truncate float error #56
+406.4 ppi  # image_quality
+
+>>> mile @ inch  # Truncate float error #56
+63360 in  # length
+
+>>> gibibyte @ bit  # Scientific notation #56
+8.589935e9 b  # data
+
+>>> N_a  # Nicer inverse units #61
+6.022141e23 mol**-1  # substance**-1

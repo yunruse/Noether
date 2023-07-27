@@ -24,6 +24,25 @@ class DisplayHandler:
 
     T = TypeVar('T', Unit, Dimension, 'UnitSet')
 
+    def dimension_unit(self, dim: Dimension):
+        units = self.dimension_units.get(dim, [])
+        if units:
+            return units[-1]
+
+        from noether.core.units import GeometricUnit, LinearUnit
+        from .Dimension import BaseDimension
+
+        def resolve(d: BaseDimension):
+            d2 = display.dimension_units[Dimension(d)][-1]
+            if isinstance(d2, LinearUnit):
+                return d2.units[-1]
+            return d2
+
+        return GeometricUnit({
+            resolve(d): exp
+            for d, exp in dim.items()
+        })
+
     def display(self, value: T) -> T:
         if isinstance(value, Dimension):
             self.dimensions.add(value)

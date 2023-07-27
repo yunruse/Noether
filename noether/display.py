@@ -6,7 +6,7 @@ Handles Unicode.
 
 from decimal import Decimal
 from fractions import Fraction
-from noether.helpers import Real
+from noether.helpers import Real, removeprefix
 
 from .config import Config, conf
 
@@ -20,6 +20,17 @@ Use Unicode superscripts eg xⁿ instead of x**n.
 
 DISPLAY_REPR_CODE = Config.register("display_repr_code", False, '''\
 Return code-like repr() instead of a more calculator-like representation.
+''')
+
+DISPLAY_DIGITS = Config.register("display_digits", 9, '''\
+If a number is more than this many digits, display in scientific notation.
+Also, round to this many digits.
+''')
+
+# TODO: lakh
+DISPLAY_UNDERSCORE_AFTER = Config.register("display_underscore_after", 5, '''\
+If a whole number is more than this many digits, display thousands separators (underscores).
+Set to -1 to disable.
 ''')
 
 
@@ -71,13 +82,44 @@ def uncertainty(number: Real | str, stddev: Real | str):
     return f'{ai}.{af}({bf})'
 
 
+def scinot(number: Real, digits: int | None = None):
+    notation = format(number, f'.{digits}e' if digits is not None else 'e')
+    num, exp = notation.split('e')
+    sign = '' if exp.startswith('+') else '-'
+    exp = int(exp[1:])
+    return f'{num}e{sign}{exp}'
+
+
+def _fmt(number: Real):
+    DIGITS: int = conf.get(DISPLAY_DIGITS)
+    n = str(round(number, DIGITS))
+    if len(n) > DIGITS:
+        return scinot(number)
+
+    m = ''
+    if '.' in n:
+        n, m = n.split('.')
+        m = '' if m == '0' else '.'+m
+    UNDERSCORE_DIGITS = conf.get(DISPLAY_UNDERSCORE_AFTER)
+    if UNDERSCORE_DIGITS != -1 and len(n) > UNDERSCORE_DIGITS:
+        n_ = ''
+        for i, d in enumerate(reversed(n)):
+            n_ += d
+            if i % 3 == 2:
+                n_ += '_'
+        n = ''.join(reversed(n_))
+        n = removeprefix(n, '_')
+
+    return f'{n}{m}'
+
+
 def canonical_number(number: Real, stddev: Real | None = None, display_shorthand: bool = False):
     if stddev is not None:
         if display_shorthand:
             return uncertainty(number, stddev)
         else:
             pm = plus_minus_symbol()
-            return f'{number} {pm} {stddev}'
+            return f'{_fmt(number)} {pm} {_fmt(stddev)}'
     if isinstance(number, float) and number.is_integer():
-        return repr(int(number))
-    return repr(number)
+        return _fmt(int(number))
+    return _fmt(number)

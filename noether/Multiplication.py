@@ -30,7 +30,13 @@ class Multiplication(Generic[T], ImmutableDict[T, Rational]):
         super().__init__(value)
 
     def items_positive_first(self):
-        return sorted(super().items(), key=lambda q: (-q[1], q[0]))
+        negative: list[tuple[T, Rational]] = []
+        for val, exp in self.items():
+            if exp < 0:
+                negative.append((val, exp))
+            else:
+                yield val, exp
+        yield from negative
 
     def __bool__(self):
         return any(x != 0 for x in self.values())
@@ -77,6 +83,8 @@ class Multiplication(Generic[T], ImmutableDict[T, Rational]):
     def display(
         self, /,
         display_function: Callable[[T], str] = lambda x: str(x or 1),
+        *,
+        key: Callable[[tuple[T, Rational]], tuple] | None = None,
         use_slashes=True,
         drop_multiplication_signs=False,
         identity_string='1',
@@ -88,8 +96,18 @@ class Multiplication(Generic[T], ImmutableDict[T, Rational]):
         if not self:
             return identity_string
 
+        if key is not None:
+            items = list(self.items())
+            items.sort(key=key)
+        else:
+            items = list(self.items_positive_first())
+
+        all_negative = all(exp < 0 for _, exp in items)
+        if all_negative:
+            use_slashes = False
+
         string = '1'
-        for name, exp in self.items():
+        for name, exp in items:
             if not exp:
                 continue
             symbol = '*'
@@ -112,16 +130,3 @@ class Multiplication(Generic[T], ImmutableDict[T, Rational]):
 
     def __repr__(self):
         return '{}({})'.format(type(self).__name__, dict.__repr__(self))
-
-
-T_mult = TypeVar('T_mult', Real, Rational)
-
-
-class MultiplicationWithValue(Generic[T_mult], Multiplication[T_mult]):
-    '''
-    Multiplication with a value.
-    T must support multiplication and exponentiation.
-    '''
-
-    def value(self):
-        return prod(item ** exponent for item, exponent in self.items())
