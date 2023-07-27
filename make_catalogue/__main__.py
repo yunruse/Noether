@@ -5,28 +5,24 @@ Currently in development!
 
 from argparse import ArgumentParser
 from pathlib import Path
-from yaml import load
-try:
-    from yaml import CLoader as Loader
-except ImportError:
-    from yaml import Loader
 
-from .types import Definition
-
-
-def get_definitions(path: Path):
-    for noe_path in path.glob('**/*.yaml'):
-        with open(noe_path) as f:
-            for d in load(f, Loader):
-                yield Definition(d)
+from .catalogue import Catalogue
 
 
 parser = ArgumentParser()
-parser.add_argument('root', nargs='?', default='.', type=Path)
+parser.add_argument(
+    'root', nargs='?', type=Path,
+    default='.')
+parser.add_argument(
+    'export_path', nargs='?', type=Path,
+    default='./noether/catalogue.py')
 
 if __name__ == '__main__':
     args = parser.parse_args()
 
-    units = list(get_definitions(args.root))
-    for u in units:
+    units = Catalogue.from_path(args.root)
+    for u in units.definitions:
         print(u)
+
+    with open(args.export_path, 'w') as f:
+        f.write('# fooled ya!')

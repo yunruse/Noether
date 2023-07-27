@@ -1,7 +1,7 @@
 all: units type test analyse build
 
 units:
-	python3 make_units.py
+	python3 -m make_catalogue
 
 analysis/output/:
 	@mkdir analysis/output/

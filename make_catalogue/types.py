@@ -59,8 +59,8 @@ class PrefixSetDef(NoetherYamlDict):
     def __post_init__(self):
         super().__post_init__()
 
-        self.prefixes = [PrefixDef(**unmap(d))
-                         for d in self.prefixes]  # type: ignore
+        self.prefixes = [
+            PrefixDef(**unmap(d)) for d in self.prefixes]  # type: ignore
 
 
 @dataclass
