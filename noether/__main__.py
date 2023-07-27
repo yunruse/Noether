@@ -38,10 +38,10 @@ if args.color and not args.value:
 
 if args.terms:
     # this is very basic at the moment!
-    from ._tokenizers import cli_dialect, transform
-    src = transform(" ".join(args.terms), cli_dialect)
+    from ._tokenizers import units_dialect
+    src = units_dialect(" ".join(args.terms))
     try:
-        del cli_dialect, transform
+        del units_dialect
         value = eval(src)
         if args.value:
             if isinstance(value, Measure):
