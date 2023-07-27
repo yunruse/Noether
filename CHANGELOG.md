@@ -2,7 +2,8 @@
 
 ## 1.1
 
-- Updated catalogue system
+- New units:
+  - Various historical scientific units
 
 
 ## 1.0.1
