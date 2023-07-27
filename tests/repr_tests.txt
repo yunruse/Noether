@@ -36,3 +36,6 @@ joule / kelvin / kilogram  # specific_heat_capacity
 
 >>> gibibyte @ bit  # Scientific notation #56
 8.589935e9 b  # data
+
+>>> N_a  # Nicer inverse units #61
+6.022141e23 mol**-1  # substance**-1
