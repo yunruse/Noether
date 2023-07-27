@@ -21,57 +21,80 @@ class Catalogue(dict[type, list[CatalogueDef]]):
             with open(noe_path) as f:
                 for d in load(f, Loader):
                     d = Definition(d)
-                    t = type(d)
-                    self.setdefault(t, [])
-                    self[t].append(d)
+                    self.append(d)
         return self
+
+    def append(self, value):
+        t = type(value)
+        self.setdefault(t, [])
+        self[t].append(value)
 
     def get(self, t: type[T]) -> list[T]:
         return dict.get(self, t, [])
 
-    basedims: dict[str, BaseDimensionDef]
-    dims_by_name: dict[str, DimensionDef]
-    dimensions: list[DimensionDef]
+    _bd: dict[str, BaseDimensionDef]
+    _d: dict[str, DimensionDef]
 
     def _evaluate_dimensions(self):
         _BD = self.get(BaseDimensionDef)
-        self.basedims = {d.basedimension: d for d in _BD}
-
-        _D = self.get(DimensionDef)
-        self.dimensions = []
-        for d in _BD:
-            n = d.basedimension
-            self.dimensions.append(DimensionDef(n, [n]))
-        self.dimensions.extend(_D)
+        self._bd = {d.basedimension: d for d in _BD}
 
         # get names
 
-        self.dims_by_name = {}
-        dimnames = set()
-        for d in self.dimensions:
+        self._d = {}
+        for d in self.get(DimensionDef):
             for n in d.names:
-                self.dims_by_name[n] = d
-                dimnames.add(n)
+                self._d[n] = d
 
-        # evaluate Multiplication
-
-        for d in self.dims_by_name.values():
+            # evaluate Multiplication
             d.value = Multiplication.from_string(d.dimension)
             for name in d.value.keys():
-                if name not in dimnames:
+                if not (name in self._d or name in self._bd):
                     raise NameError('Unknown dimension name', name)
 
+    _p: dict[str, PrefixDef]
+    _ps: dict[str, PrefixSetDef]
+
+    def _evaluate_prefixes(self):
+        for ps in self.get(PrefixSetDef):
+            for p in ps.prefixes:
+                self.append(p)
+
+        self._p = {p.prefix: p for p in self.get(PrefixDef)}
+        self._ps = {p.prefixset: p for p in self.get(PrefixSetDef)}
+
+        for ps in self.get(PrefixSetDef):
+            ps.names = [p.prefix for p in ps.prefixes]
+
+        for ps in self.get(PrefixSetDef):
+            for inc in ps.includes:
+                ps.names += self._ps[inc].names
+
     def evaluate(self):
+        self._evaluate_prefixes()
         self._evaluate_dimensions()
 
     def _render_lines(self):
         yield '# Automatically generated from .yaml files'
-        yield 'from noether import Dimension'
-        for b in self.basedims.values():
+
+        yield 'from noether import Dimension, Prefix, PrefixSet'
+
+        for p in self.get(PrefixDef):
+            yield '{} = Prefix({!r}, {!r}, {})'.format(
+                p.prefix, p.prefix, p.symbol, p.value
+            )
+
+        for ps in self.get(PrefixSetDef):
+            yield '{} = PrefixSet({!r}, {{{}}})'.format(
+                ps.prefixset, ps.prefixset,
+                ', '.join(ps.names)
+            )
+
+        for b in self.get(BaseDimensionDef):
             n = b.basedimension
             yield f'{n} = Dimension.new({n!r}, {b.symbol!r})'
 
-        for d in self.dimensions:
+        for d in self.get(DimensionDef):
             yield '{} = Dimension({}, {})'.format(
                 ' = '.join(d.names),
                 d.dimension,

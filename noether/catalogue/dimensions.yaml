@@ -1,3 +1,6 @@
+- dimension: length
+  n: distance, height, width, breadth, depth, length
+
 - dimension: length**2
   n: area
 - dimension: length**3

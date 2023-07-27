@@ -20,6 +20,11 @@ def unmap(d: dict):
 
 
 class CatalogueDef:
+    '''
+    A catalogue definition.
+
+    Provides some string manipulation on dataclasses.
+    '''
     __dataclass_fields__: dict[str, Field]
 
     def __transform(self, key: str, typ: type):
@@ -51,7 +56,7 @@ class DimensionDef(CatalogueDef):
     names: list[str]
 
     # derived:
-    value: Multiplication[str] = field(init=False)
+    value: Multiplication[str] = field(init=False, repr=False)
 
 
 @dataclass
@@ -66,6 +71,9 @@ class PrefixSetDef(CatalogueDef):
     prefixset: str
     includes: list[str] = field(default_factory=list)
     prefixes: list[PrefixDef] = field(default_factory=list)
+
+    # derived:
+    names: list[str] = field(init=False, repr=False)
 
     def __post_init__(self):
         super().__post_init__()

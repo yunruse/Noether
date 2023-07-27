@@ -13,9 +13,6 @@
 - basedimension: luminosity
   symbol: J
 
-- dimension: length
-  n: distance, height, width, breadth, depth, length
-
 
 - unitset: SI base units
   info: Fundamental SI dimensions and their units.
