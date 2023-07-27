@@ -1,5 +1,10 @@
 # Noether changelog
 
+## 1.1
+
+- Updated catalogue system
+
+
 ## 1.0.1
 ***28 Jul 2023, [22 commits](https://github.com/yunruse/Noether/pull/57/commits), closing [8 issues](https://github.com/yunruse/Noether/milestone/5?closed=1)***
 
