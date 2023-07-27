@@ -1,10 +1,16 @@
 # Noether changelog
 
-## 1.0.1
-***?? ??? 2023, [??? commits](https://github.com/yunruse/Noether/pull/57/commits), closing [?? issues](https://github.com/yunruse/Noether/milestone/5?closed=1)***
+## 1.1
 
-- Various bugfixes and improved testing for display mechanisms; units now display in scientific notation where otherwise would be unwieldy
+- Updated catalogue system
+
+
+## 1.0.1
+***28 Jul 2023, [22 commits](https://github.com/yunruse/Noether/pull/57/commits), closing [8 issues](https://github.com/yunruse/Noether/milestone/5?closed=1)***
+
+- Various bugfixes and improved testing for display mechanisms; units now display in scientific notation where otherwise would be unwieldy.
 - Fixed incorrect value for `standard_gravity`.
+- Added a very rudimentary GNU `units`-like interface (`python -m noether.gnu`)
 - New units:
   - `horsepower`
   - `poundal`

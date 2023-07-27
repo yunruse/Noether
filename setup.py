@@ -7,7 +7,7 @@ packages = setuptools.find_packages()
 
 setuptools.setup(
     name="noether",
-    version="1.0.1",
+    version="1.1",
     author="Mia yun Ruse",
     author_email="mia@yunru.se",
     description="Work with physical measurements and constants",

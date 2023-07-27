@@ -100,7 +100,11 @@ class Multiplication(Generic[T], ImmutableDict[T, Rational]):
             items = list(self.items())
             items.sort(key=key)
         else:
-            items = self.items_positive_first()
+            items = list(self.items_positive_first())
+
+        all_negative = all(exp < 0 for _, exp in items)
+        if all_negative:
+            use_slashes = False
 
         string = '1'
         for name, exp in items:

@@ -19,10 +19,10 @@ build: analyse
 	cd analysis/output && tar -c catalogue.* > catalogue.tar && mv catalogue.tar ..
 	python3 -m build
 
-upload-test: test build
+upload-test: test
 	twine upload -u __token__ -p $$(cat token-test.txt) -r testpypi dist/*
 
-upload-pypi: test build
+upload-pypi: test
 	twine upload -u __token__ -p $$(cat token-pypi.txt) dist/*
 
 clean:
