@@ -38,9 +38,15 @@ class NoetherYamlDict:
 
 
 @dataclass
+class BaseDimensionDef(NoetherYamlDict):
+    basedimension: str
+    symbol: str
+
+
+@dataclass
 class DimensionDef(NoetherYamlDict):
     dimension: str
-    symbol: str
+    name: str
 
 
 @dataclass
@@ -101,7 +107,7 @@ class UnitSetDef(NoetherYamlDict):
         self.units = [UnitDef(**unmap(d)) for d in self.units]  # type: ignore
 
 
-Def = PrefixDef | PrefixSetDef | DimensionDef | UnitDef | UnitSetDef
+Def = PrefixDef | PrefixSetDef | BaseDimensionDef | UnitDef | UnitSetDef
 
 
 def Definition(d: dict) -> Def:
@@ -110,6 +116,8 @@ def Definition(d: dict) -> Def:
         return PrefixDef(**d)
     if 'prefixset' in d:
         return PrefixSetDef(**d)
+    if 'basedim' in d:
+        return BaseDimensionDef(**d)
     if 'dimension' in d:
         return DimensionDef(**d)
     if 'unit' in d:

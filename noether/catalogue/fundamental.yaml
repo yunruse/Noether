@@ -1,16 +1,16 @@
-- dimension: time
+- basedimension: time
   symbol: T
-- dimension: length
+- basedimension: length
   symbol: L
-- dimension: mass
+- basedimension: mass
   symbol: M
-- dimension: current
+- basedimension: current
   symbol: I
-- dimension: temperature
+- basedimension: temperature
   symbol: Θ
-- dimension: substance
+- basedimension: substance
   symbol: N
-- dimension: luminosity
+- basedimension: luminosity
   symbol: J
 
 
