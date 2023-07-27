@@ -20,7 +20,7 @@ $ noether 23degC @ degF
 73.4 °F  # temperature
 ```
 
-The CLI allows a few niceties such as slightly terser syntax, but otherwise behaves identically to Python:
+The CLI allows for a slightly terser syntax, with numbers before the unit name and `in` instead of `inch`:
 
 ```sh
 $ noether 5cm @ in --value

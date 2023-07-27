@@ -1,13 +1,14 @@
 from dataclasses import Field, dataclass, field
 
+from noether._tokenizers import units_dialect
+
 MAPPING = {
     'd': 'definition',
     'n': 'names',
     's': 'symbols',
-    'k': 'kind',
     'c': 'confused_with',
     'i': 'info',
-    'o': 'origin'
+    'o': 'origin',
 }
 
 
@@ -22,7 +23,7 @@ class NoetherYamlDict:
         v = getattr(self, key)
         if typ == str:
             assert isinstance(v, str)
-            v = v.replace('\n', ' ')
+            v = v.replace('\n', ' ').strip()
         elif typ == list[str]:
             if isinstance(v, str):
                 v = [e.strip() for e in v.split(',')]
@@ -31,9 +32,34 @@ class NoetherYamlDict:
         setattr(self, key, v)
 
     def __post_init__(self):
-        fs: dict[str, Field] = self.__dataclass_fields__
-        for f, fi in fs.items():
+        for f, fi in self.__dataclass_fields__.items():
             self.__transform(f, fi.type)
+
+
+@dataclass
+class DimensionDef(NoetherYamlDict):
+    dimension: str
+    symbol: str
+
+
+@dataclass
+class PrefixDef(NoetherYamlDict):
+    prefix: str
+    symbol: str
+    value: float | int
+
+
+@dataclass
+class PrefixSetDef(NoetherYamlDict):
+    prefixset: str
+    includes: list[str] = field(default_factory=list)
+    prefixes: list[PrefixDef] = field(default_factory=list)
+
+    def __post_init__(self):
+        super().__post_init__()
+
+        self.prefixes = [
+            PrefixDef(**unmap(d)) for d in self.prefixes]  # type: ignore
 
 
 @dataclass
@@ -41,7 +67,6 @@ class UnitDef(NoetherYamlDict):
     unit: str
     names: list[str]
     symbols: list[str] = field(default_factory=list)
-    kind: list[str] = field(default_factory=list)
     confused_with: list[str] = field(default_factory=list)
     info: str = ''
     origin: str = ''
@@ -49,6 +74,9 @@ class UnitDef(NoetherYamlDict):
 
     def __post_init__(self):
         super().__post_init__()
+
+        self.unit = units_dialect(self.unit)
+
         for name in list(self.names):
             if name.startswith("'") and name.endswith("'"):
                 self.names.remove(name)
@@ -76,10 +104,9 @@ def Definition(d: dict) -> Def:
     d = unmap(d)
     if 'unit' in d:
         return UnitDef(**d)
-    elif 'unitset' in d:
+    if 'unitset' in d:
         return UnitSetDef(**d)
-    else:
-        raise TypeError(
-            'Declaration type could not be gleaned'
-            ' from keys {}'.format(
-                repr(tuple(d.keys()))))
+    raise TypeError(
+        'Declaration type could not be gleaned'
+        ' from keys {}'.format(
+            repr(tuple(d.keys()))))
