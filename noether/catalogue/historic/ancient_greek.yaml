@@ -1,0 +1,82 @@
+- unitset: ancient greek
+  url: https://en.wikipedia.org/wiki/Ancient_Greek_units_of_measurement
+  info: |
+    All units of length are based on an Attic measurement
+    (pous = 296mm).
+  units:
+  - unit: 296mm
+    n: pous, πούς
+    info: Ancient greek foot, as defined in Athens (though varying regionally)
+
+  - unit: pous / 16
+    n: daktylos, δάκτυλος
+    o: finger
+  - unit: 2 daktylos
+    n: kondylos, κόνδυλος
+    o: knuckle
+  - unit: 4 daktylos
+    n: palaiste, palaistē, παλαιστή, doron, dōron, δῶρον
+    o: palm
+  - unit: 8 daktylos
+    n: dichas, διχάς, hemipodion, hēmipodion, ἡμιπόδιον
+    o: half-foot
+  - unit: 10 daktylos
+    n: lichas, λιχάς
+    o: distance from tip of thumb to tip of outstretched index finger
+  - unit: 11 daktylos
+    n: orthodoron, orthodōron, ὀρθόδωρον
+    o: width of a straight hand
+  - unit: 12 daktylos
+    n: spithame, spithamē, σπιθαμή
+    o: span of all fingers
+  - unit: 18 daktylos
+    n: pygme, pygmē, πυγμή
+    o: forearm
+  - unit: 20 daktylos
+    n: pygon, pygōn, πυγών
+    o: elbow to fist
+  - unit: 24 daktylos
+    n: pechys, pēchys, πῆχυς
+    o: cubit (elbow to tip of hand)
+
+  - unit: 2.5 pous
+    n: haploun_bema, haploun_bēma, ἁπλοῦν_βῆμα
+    o: step
+  - unit: 5 pous
+    n: diploun_bema, diploun_bēma, διπλοῦν_βῆμα, bema, bēma, βῆμα
+    o: pace
+  - unit: 6 pous
+    n: orgyia, ὄργυια
+    o: fathom
+  - unit: 10 pous
+    n: kalamos, κάλαμος, akaina, ἄκαινα, dekapous, δεκάπους
+  - unit: 60 pous
+    n: hamma, ἅμμα
+    o: knot
+  - unit: 100 pous
+    n: plethron, πλέθρον
+    info: typical length of an athletic running-track
+  - unit: 600 pous
+    n: stadion, στάδιον
+    info: one eighth of a Roman mile
+
+  - unit: 2 stadion
+    n: diaulos, δίαυλος
+    info: ancient Olympic racing distance
+  - unit: 4 stadion
+    n: hippikon, ἱππικόν
+    info: length of a hippodrome (horse racing stadium)
+  - unit: 8 stadion
+    n: milion, μίλιον
+    info: Ancient Greek equiv of a mile
+  - unit: 12 stadion
+    n: dolichos, δόλιχος
+    info: ancient Olympic "long race"
+  - unit: 30 stadion
+    n: parasanges, παρασάγγης
+    info: Ancient Greek equiv of a league; used to measure walking distance
+  - unit: 40 stadion
+    n: schoinos, σχοινός
+    info: Ancient Greek, adopted from an Egyptian unit of surveying with knotted cords
+  - unit: 160 stadion
+    n: stage

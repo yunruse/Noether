@@ -7,7 +7,7 @@ analysis/output
 analysis/catalogue.tar
 
 # Build: noe_transformer.py outputs
-*_.py
+noether/catalogue/**/*_.py
 
 # Packaging
 token-*.txt
