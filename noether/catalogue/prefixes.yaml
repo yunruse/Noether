@@ -1,0 +1,132 @@
+- prefixset: SI_small
+  prefixes:
+    - prefix: milli
+      symbol: m
+      value: 1e-3
+    - prefix: micro  # GCWM 11
+      symbol: µ
+      value: 1e-6
+    - prefix: nano  # GCWM 11
+      symbol: n
+      value: 1e-9
+    - prefix: pico  # GCWM 11
+      symbol: p
+      value: 1e-12
+    - prefix: femto  # GCWM 12
+      symbol: f
+      value: 1e-15
+    - prefix: atto  # GCWM 12
+      symbol: a
+      value: 1e-18
+    - prefix: zepto  # GCWM 19
+      symbol: z
+      value: 1e-21
+    - prefix: yocto  # GCWM 19
+      symbol: y
+      value: 1e-24
+    - prefix: ronto  # GCWM 26
+      symbol: y
+      value: 1e-27
+    - prefix: quecto  # GCWM 26
+      symbol: y
+      value: 1e-30
+
+- prefixset: SI_large
+  prefixes:
+  - prefix: kilo
+    symbol: k
+    value: 1e3
+  - prefix: mega  # GCWM 11
+    symbol: M
+    value: 1e6
+  - prefix: giga  # GCWM 11
+    symbol: G
+    value: 1e9
+  - prefix: tera  # GCWM 11
+    symbol: T
+    value: 1e12
+  - prefix: peta  # GCWM 15
+    symbol: P
+    value: 1e15
+  - prefix: exa  # GCWM 15
+    symbol: E
+    value: 1e18
+  - prefix: zetta  # GCWM 19
+    symbol: Z
+    value: 1e21
+  - prefix: yotta  # GCWM 19
+    symbol: Y
+    value: 1e24
+  - prefix: ronna  # GCWM 26
+    symbol: R
+    value: 1e27
+  - prefix: quetta  # GCWM 26
+    symbol: Q
+    value: 1e30
+
+- prefixset: SI_conventional
+  prefixes:
+  - prefix: centi
+    symbol: c
+    value: 1e-2
+  - prefix: deci
+    symbol: d
+    value: 1e-1
+  - prefix: deca
+    symbol: da
+    value: 1e1
+  - prefix: hecto
+    symbol: h
+    value: 1e2
+
+- prefixset: SI
+  includes: SI_large, SI_small, SI_conventional
+
+- prefixset: IEC
+  prefixes:
+  - prefix: kibi
+    symbol: Ki
+    value: 2**10
+  - prefix: mebi
+    symbol: Mi
+    value: 2**20
+  - prefix: gibi
+    symbol: Gi
+    value: 2**30
+  - prefix: tebi
+    symbol: Ti
+    value: 2**40
+  - prefix: pebi
+    symbol: Pi
+    value: 2**50
+  - prefix: exbi
+    symbol: Ei
+    value: 2**60
+  - prefix: zebi
+    symbol: Zi
+    value: 2**70
+  - prefix: yobi
+    symbol: Yi
+    value: 2**80
+  # these two are not official under the SI just yet
+  - prefix: robi
+    symbol: Ri
+    value: 2**90
+  - prefix: quebi
+    symbol: Qi
+    value: 2**100
+
+- prefixset: fun
+  prefixes:
+  - prefix: micri
+    symbol: mc
+    value: 1e-14
+  - prefix: dimi
+    symbol: dm
+    value: 1e-4
+  - prefix: hebdo
+    symbol: H
+    value: 1e7
+  - prefix: hella  # still in our hearts
+    symbol: ha
+    value: 1e27

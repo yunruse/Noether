@@ -21,15 +21,22 @@
   units:
     - unit: time
       n: second, 's'
+      p: SI
     - unit: length
       n: meter, metre, 'm'
+      p: SI
     - unit: mass
       n: kilogram, 'kg'
+      p: SI
     - unit: current
       n: ampere, 'A'
+      p: SI
     - unit: temperature
       n: kelvin, 'K'
+      p: SI
     - unit: substance
       n: mole, 'mol'
+      p: SI
     - unit: luminosity
       n: candela, 'cd'
+      p: SI

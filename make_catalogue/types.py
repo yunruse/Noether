@@ -6,6 +6,7 @@ MAPPING = {
     'd': 'definition',
     'n': 'names',
     's': 'symbols',
+    'p': 'prefixes',
     'c': 'confused_with',
     'i': 'info',
     'o': 'origin',
@@ -43,10 +44,32 @@ class DimensionDef(NoetherYamlDict):
 
 
 @dataclass
+class PrefixDef(NoetherYamlDict):
+    prefix: str
+    symbol: str
+    value: float | int
+
+
+@dataclass
+class PrefixSetDef(NoetherYamlDict):
+    prefixset: str
+    includes: list[str] = field(default_factory=list)
+    prefixes: list[PrefixDef] = field(default_factory=list)
+
+    def __post_init__(self):
+        super().__post_init__()
+
+        self.prefixes = [PrefixDef(**unmap(d))
+                         for d in self.prefixes]  # type: ignore
+
+
+@dataclass
 class UnitDef(NoetherYamlDict):
     unit: str
     names: list[str]
     symbols: list[str] = field(default_factory=list)
+    unit_sets: list[str] = field(default_factory=list)
+    prefixes: list[str] = field(default_factory=list)
     confused_with: list[str] = field(default_factory=list)
     info: str = ''
     origin: str = ''
@@ -78,11 +101,15 @@ class UnitSetDef(NoetherYamlDict):
         self.units = [UnitDef(**unmap(d)) for d in self.units]  # type: ignore
 
 
-Def = DimensionDef | UnitDef | UnitSetDef
+Def = PrefixDef | PrefixSetDef | DimensionDef | UnitDef | UnitSetDef
 
 
 def Definition(d: dict) -> Def:
     d = unmap(d)
+    if 'prefix' in d:
+        return PrefixDef(**d)
+    if 'prefixset' in d:
+        return PrefixSetDef(**d)
     if 'dimension' in d:
         return DimensionDef(**d)
     if 'unit' in d:
