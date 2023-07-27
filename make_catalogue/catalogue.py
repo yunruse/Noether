@@ -1,12 +1,4 @@
-from dataclasses import dataclass, field
-from pathlib import Path
-from typing import TypeVar
-
-from yaml import load
-try:
-    from yaml import CLoader as Loader
-except ImportError:
-    from yaml import Loader
+from typing import Iterable, TypeVar
 
 from .types import *
 
@@ -14,15 +6,9 @@ T = TypeVar('T')
 
 
 class Catalogue(dict[type, list[CatalogueDef]]):
-    @classmethod
-    def from_path(cls, path: Path):
-        self = cls()
-        for noe_path in path.glob('**/*.yaml'):
-            with open(noe_path) as f:
-                for d in load(f, Loader):
-                    d = Definition(d)
-                    self.append(d)
-        return self
+    def __init__(self, stream: Iterable[dict]):
+        for d in stream:
+            self.append(Definition(d))
 
     def append(self, value):
         t = type(value)

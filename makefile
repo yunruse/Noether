@@ -1,7 +1,7 @@
 all: units type test analyse build
 
 units:
-	python3 -m make_catalogue
+	python3 -m make_catalogue --python noether/catalogue.py
 
 analysis/output/:
 	@mkdir analysis/output/
