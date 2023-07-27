@@ -1,0 +1,35 @@
+- dimension: time
+  symbol: T
+- dimension: length
+  symbol: L
+- dimension: mass
+  symbol: M
+- dimension: current
+  symbol: I
+- dimension: temperature
+  symbol: Θ
+- dimension: substance
+  symbol: N
+- dimension: luminosity
+  symbol: J
+
+
+- unitset: SI base units
+  info: Fundamental SI dimensions and their units.
+  url: https://www.bipm.org/documents/20126/41483022/SI-Brochure-9.pdf/fcf090b2-04e6-88cc-1149-c3e029ad8232
+
+  units:
+    - unit: time
+      n: second, 's'
+    - unit: length
+      n: meter, metre, 'm'
+    - unit: mass
+      n: kilogram, 'kg'
+    - unit: current
+      n: ampere, 'A'
+    - unit: temperature
+      n: kelvin, 'K'
+    - unit: substance
+      n: mole, 'mol'
+    - unit: luminosity
+      n: candela, 'cd'

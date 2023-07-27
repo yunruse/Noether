@@ -4,7 +4,7 @@
     All units of length are based on an Attic measurement
     (pous = 296mm).
   units:
-  - unit: 296mm
+  - unit: 0.296m
     n: pous, πούς
     info: Ancient greek foot, as defined in Athens (though varying regionally)
 

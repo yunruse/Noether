@@ -43,26 +43,6 @@ class DimensionDef(NoetherYamlDict):
 
 
 @dataclass
-class PrefixDef(NoetherYamlDict):
-    prefix: str
-    symbol: str
-    value: float | int
-
-
-@dataclass
-class PrefixSetDef(NoetherYamlDict):
-    prefixset: str
-    includes: list[str] = field(default_factory=list)
-    prefixes: list[PrefixDef] = field(default_factory=list)
-
-    def __post_init__(self):
-        super().__post_init__()
-
-        self.prefixes = [
-            PrefixDef(**unmap(d)) for d in self.prefixes]  # type: ignore
-
-
-@dataclass
 class UnitDef(NoetherYamlDict):
     unit: str
     names: list[str]
@@ -98,10 +78,13 @@ class UnitSetDef(NoetherYamlDict):
         self.units = [UnitDef(**unmap(d)) for d in self.units]  # type: ignore
 
 
-Def = UnitDef | UnitSetDef
+Def = DimensionDef | UnitDef | UnitSetDef
+
 
 def Definition(d: dict) -> Def:
     d = unmap(d)
+    if 'dimension' in d:
+        return DimensionDef(**d)
     if 'unit' in d:
         return UnitDef(**d)
     if 'unitset' in d:
