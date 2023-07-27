@@ -2,6 +2,8 @@ from dataclasses import Field, dataclass, field
 
 from noether._tokenizers import units_dialect
 
+from noether.Multiplication import Multiplication
+
 MAPPING = {
     'd': 'definition',
     'n': 'names',
@@ -17,14 +19,13 @@ def unmap(d: dict):
     return {MAPPING.get(k, k): v for k, v in d.items()}
 
 
-class NoetherYamlDict:
+class CatalogueDef:
     __dataclass_fields__: dict[str, Field]
 
     def __transform(self, key: str, typ: type):
         v = getattr(self, key)
         if typ == str:
-            assert isinstance(v, str)
-            v = v.replace('\n', ' ').strip()
+            v = str(v).replace('\n', ' ').strip()
         elif typ == list[str]:
             if isinstance(v, str):
                 v = [e.strip() for e in v.split(',')]
@@ -34,30 +35,34 @@ class NoetherYamlDict:
 
     def __post_init__(self):
         for f, fi in self.__dataclass_fields__.items():
-            self.__transform(f, fi.type)
+            if fi.init:
+                self.__transform(f, fi.type)
 
 
 @dataclass
-class BaseDimensionDef(NoetherYamlDict):
-    basedimension: str
+class BaseDimensionDef(CatalogueDef):
+    basedimension: str  # name
     symbol: str
 
 
 @dataclass
-class DimensionDef(NoetherYamlDict):
-    dimension: str
-    name: str
+class DimensionDef(CatalogueDef):
+    dimension: str  # value
+    names: list[str]
+
+    # derived:
+    value: Multiplication[str] = field(init=False)
 
 
 @dataclass
-class PrefixDef(NoetherYamlDict):
+class PrefixDef(CatalogueDef):
     prefix: str
     symbol: str
     value: float | int
 
 
 @dataclass
-class PrefixSetDef(NoetherYamlDict):
+class PrefixSetDef(CatalogueDef):
     prefixset: str
     includes: list[str] = field(default_factory=list)
     prefixes: list[PrefixDef] = field(default_factory=list)
@@ -70,7 +75,7 @@ class PrefixSetDef(NoetherYamlDict):
 
 
 @dataclass
-class UnitDef(NoetherYamlDict):
+class UnitDef(CatalogueDef):
     unit: str
     names: list[str]
     symbols: list[str] = field(default_factory=list)
@@ -94,7 +99,7 @@ class UnitDef(NoetherYamlDict):
 
 
 @dataclass
-class UnitSetDef(NoetherYamlDict):
+class UnitSetDef(CatalogueDef):
     unitset: str
     info: str = ''
     url: str = ''
@@ -107,16 +112,13 @@ class UnitSetDef(NoetherYamlDict):
         self.units = [UnitDef(**unmap(d)) for d in self.units]  # type: ignore
 
 
-Def = PrefixDef | PrefixSetDef | BaseDimensionDef | UnitDef | UnitSetDef
-
-
-def Definition(d: dict) -> Def:
+def Definition(d: dict) -> CatalogueDef:
     d = unmap(d)
     if 'prefix' in d:
         return PrefixDef(**d)
     if 'prefixset' in d:
         return PrefixSetDef(**d)
-    if 'basedim' in d:
+    if 'basedimension' in d:
         return BaseDimensionDef(**d)
     if 'dimension' in d:
         return DimensionDef(**d)

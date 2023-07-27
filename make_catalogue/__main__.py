@@ -21,8 +21,6 @@ if __name__ == '__main__':
     args = parser.parse_args()
 
     units = Catalogue.from_path(args.root)
-    for u in units.definitions:
-        print(u)
 
     with open(args.export_path, 'w') as f:
-        f.write('# fooled ya!')
+        f.write(units.render())

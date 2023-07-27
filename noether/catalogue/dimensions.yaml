@@ -1,0 +1,220 @@
+- dimension: length**2
+  n: area
+- dimension: length**3
+  n: volume
+
+- dimension: length / time
+  n: speed, velocity
+- dimension: speed / time
+  n: acceleration
+- dimension: acceleration / time
+  n: jerk
+- dimension: jerk / time
+  n: jounce, snap
+- dimension: snap / time
+  n: crackle
+- dimension: crackle / time
+  n: pop
+
+- dimension: length * time
+  n: absement
+- dimension: absement * time
+  n: absity
+- dimension: absity * time
+  n: abseleration
+- dimension: abseleration * time
+  n: abserk
+- dimension: abserk * time
+  n: absounce
+
+# % Angle
+
+- basedimension: angle
+  symbol: φ
+
+- dimension: angle**2
+  n: solid_angle
+
+- dimension: time**-1
+  n: frequency
+
+# % Dynamics
+
+- dimension: mass * acceleration
+  n: force, weight
+- dimension: force / area
+  n: pressure
+- dimension: force * length
+  n: energy
+- dimension: energy / time
+  n: power
+
+- dimension: mass * speed
+  n: momentum
+- dimension: force / time
+  n: yank
+
+- dimension: length * momentum
+  n: angular_momentum
+- dimension: angle / time
+  n: angular_velocity
+- dimension: angular_velocity / time
+  n: angular_acceleration
+- dimension: angular_acceleration / time
+  n: angular_jerk
+
+- dimension: mass * angular_velocity
+  n: inertia
+- dimension: inertia * angular_acceleration
+  n: torque
+
+- dimension: 1 / length
+  n: wavenumber
+- dimension: acceleration / length
+  n: frequency_drift, gravitational_gradient
+
+# % Electromagnetism
+
+- dimension: current * time
+  n: charge
+- dimension: power / current
+  n: voltage
+- dimension: charge / voltage
+  n: capacitance
+- dimension: voltage / current
+  n: resistance
+- dimension: resistance * time
+  n: inductance
+- dimension: energy / current
+  n: magnetic_flux
+- dimension: magnetic_flux / area
+  n: magnetic_flux_density
+
+- dimension: resistance**-1
+  n: conductance
+- dimension: resistance * length
+  n: resistivity
+- dimension: 1 / inductance
+  n: reluctance
+
+- dimension: capacitance * angular_velocity
+  n: capicitive_reactance
+- dimension: inductance * angular_velocity
+  n: inductive_reactance
+
+- dimension: inductance * length / area
+  n: permeability
+- dimension: capacitance * length / area
+  n: permittivity
+- dimension: permeability * speed
+  n: impedance
+- dimension: current * area
+  n: magnetic_moment
+- dimension: magnetic_moment / volume
+  n: magnetisation
+
+# % Photometry
+
+- dimension: luminosity
+  n: luminous_intensity
+- dimension: luminosity * angle**2
+  n: luminous_flux, luminous_power
+
+- dimension: luminous_flux * time
+  n: luminous_energy
+- dimension: luminosity / area
+  n: luminance
+- dimension: luminous_flux / area
+  n: illuminance, luminous_exitance, luminous_emittance
+
+- dimension: illuminance * time
+  n: luminous_exposure
+- dimension: luminous_energy / volume
+  n: luminous_energy_density
+- dimension: luminosity / power
+  n: luminous_efficiacy
+
+- dimension: power / area
+  n: irradiance, intensity, heat_flux
+
+- dimension: length / time**3 * solid_angle
+  n: emission_coefficient
+
+# % Material properties
+
+- dimension: volume / time
+  n: fluid_velocity, flow
+- dimension: substance / time
+  n: catalytic_activity
+
+- dimension: mass / length
+  n: linear_density
+- dimension: mass / area
+  n: area_density
+- dimension: mass / volume
+  n: density
+- dimension: volume / mass
+  n: specific_volume
+
+- dimension: 1 / volume
+  n: number_density
+- dimension: 1 / volume
+  n: probability_density
+- dimension: substance / (volume * time)
+  n: reaction_rate
+
+- dimension: energy / mass
+  n: specific_energy, dose
+- dimension: energy / volume
+  n: energy_density
+- dimension: energy / substance
+  n: molar_energy
+
+- dimension: energy / temperature
+  n: heat_capacity, entropy
+- dimension: heat_capacity / mass
+  n: specific_heat_capacity
+- dimension: heat_capacity / substance
+  n: molar_heat_capacity
+
+- dimension: force / length
+  n: surface_tension
+- dimension: pressure * time
+  n: viscosity
+- dimension: viscosity / density
+  n: kinematic_viscosity
+
+# TODO: clear up moduli
+- dimension: volume * pressure / volume
+  n: bulk_modulus
+
+- dimension: length / length
+  n: dimensionless, proportion, strain, reynolds_number
+
+# % Thermal properties
+
+- dimension: acceleration * area / mass
+  n: gravity
+- dimension: gravity * mass
+  n: gravitational_parameter
+
+- dimension: power / temperature
+  n: thermal_conductance
+- dimension: thermal_conductance * length / area
+  n: thermal_conductivity
+- dimension: temperature / power
+  n: thermal_resistance
+- dimension: thermal_resistance * area
+  n: r_value
+- dimension: thermal_resistance * length / area
+  n: thermal_resistivity
+
+# % Miscellaneous
+
+- dimension: mass / height**2
+  n: body_mass_index
+
+- dimension: distance / volume
+  n: vehicle_efficiency
+- dimension: volume / energy / time
+  n: einstein_coefficient_b

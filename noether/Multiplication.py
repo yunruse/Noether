@@ -4,11 +4,12 @@ Generic (Noether-nonspecific) expression for multiplication, division and expone
 Internally used for such compostions as Dimension and ChainedUnit.
 '''
 
-from math import prod
 from typing import Callable, Generic, TypeVar
 
 from noether.helpers import Rational, Real
 from noether.helpers import ImmutableDict, removeprefix
+
+import re
 
 
 T = TypeVar('T')
@@ -130,3 +131,13 @@ class Multiplication(Generic[T], ImmutableDict[T, Rational]):
 
     def __repr__(self):
         return '{}({})'.format(type(self).__name__, dict.__repr__(self))
+
+    @classmethod
+    def from_string(cls, string: str) -> 'Multiplication[str]':
+
+        string = re.sub(
+            '([a-z_]+)',
+            r'Multiplication("\1")',
+            string)
+
+        return eval(string, {'Multiplication': Multiplication})
