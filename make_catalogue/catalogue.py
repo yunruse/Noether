@@ -70,14 +70,33 @@ class Catalogue(dict[type, list[CatalogueDef]]):
             for inc in ps.includes:
                 ps.names += self._ps[inc].names
 
+    _u = dict[str, UnitDef]
+    _us = dict[str, UnitSetDef]
+
+    def _evaluate_units(self):
+        for us in self.get(UnitSetDef):
+            for u in us.units:
+                self.append(u)
+
+        self._u = {}
+        for u in self.get(UnitDef):
+            for n in u.names:
+                self._u[n] = u
+
+        # TODO: unitset 'import' names, somehow?
+
+        for us in self.get(UnitSetDef):
+            us.names = [u.names[0] for u in us.units]
+
     def evaluate(self):
         self._evaluate_prefixes()
         self._evaluate_dimensions()
+        self._evaluate_units()
 
     def _render_lines(self):
         yield '# Automatically generated from .yaml files'
 
-        yield 'from noether import Dimension, Prefix, PrefixSet'
+        yield 'from noether import Dimension, Prefix, PrefixSet, Unit, UnitSet'
 
         for p in self.get(PrefixDef):
             yield '{} = Prefix({!r}, {!r}, {})'.format(
@@ -96,25 +115,41 @@ class Catalogue(dict[type, list[CatalogueDef]]):
 
         for d in self.get(DimensionDef):
             yield '{} = Dimension({}, {})'.format(
-                ' = '.join(d.names),
-                d.dimension,
+                ' = '.join(d.names), d.dimension,
                 ', '.join(map(repr, d.names))
+            )
+
+        for u in self.get(UnitDef):
+            kind = 'Unit'
+
+            names = u.names + u.symbols
+            items = [u.unit]
+            # TODO: AffineUnit
+
+            items.append('[{}]'.format(', '.join(map(repr, u.names))))
+            if u.symbols:
+                items.append('[{}]'.format(', '.join(map(repr, u.symbols))))
+            if u.prefixes:
+                items.append(f'prefixes={u.prefixes}')
+            if u.info:
+                items.append(f'info={u.info!r}')
+            # if u.origin:
+            #     items.append(f'origin={u.origin!r}')
+            # if u.url:
+            #     items.append(f'url={u.url!r}')
+
+            yield '{} = {}({})'.format(
+                ' = '.join(names),
+                kind,
+                ', '.join(items),
+            )
+
+        for us in self.get(UnitSetDef):
+            yield '{} = UnitSet({{{}}})'.format(
+                us.unitset,
+                ', '.join(us.names),
             )
 
     def render(self):
         self.evaluate()
         return '\n'.join(self._render_lines())
-
-
-# render procedure:
-
-# - [x] store basedimensions
-# - [x] store dimensions
-# - [x] evaluate dimensions (Multiplication)
-
-# - [ ] store prefixes
-# - [ ] collect prefixsets
-
-# - [ ] store units
-# - [ ] collect units
-# - [ ] evaluate units (value + dimension)

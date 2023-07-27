@@ -88,7 +88,7 @@ class UnitDef(CatalogueDef):
     names: list[str]
     symbols: list[str] = field(default_factory=list)
     unit_sets: list[str] = field(default_factory=list)
-    prefixes: list[str] = field(default_factory=list)
+    prefixes: str = ''
     confused_with: list[str] = field(default_factory=list)
     info: str = ''
     origin: str = ''
@@ -112,6 +112,9 @@ class UnitSetDef(CatalogueDef):
     info: str = ''
     url: str = ''
     units: list[UnitDef] = field(default_factory=list)
+
+    # derived:
+    names: list[str] = field(init=False, repr=False)
 
     def __post_init__(self):
         super().__post_init__()
