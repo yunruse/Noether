@@ -32,11 +32,6 @@ class Unit(Measure):
         prefixes: PrefixSet | None = None,
         info: str | None = None,
     ):
-        # TODO: this should be far more thoroughly supported
-        if isinstance(measure, timedelta):
-            from ..catalogue.fundamental import second  # noqa
-            measure = second * measure.total_seconds()
-
         if isinstance(measure, Dimension):
             measure = Measure(dim=measure)
         super().__init__(measure)

@@ -2,6 +2,7 @@
 
 ## 1.1
 
+- Time-based measures and units now interoperable with `datetime.timedelta`
 - New units:
   - Various historical scientific units
 

@@ -1,15 +1,17 @@
 __all__ = ('Measure', )
 
+from typing import Callable, Optional, TypeVar, ClassVar, Generic, TYPE_CHECKING
 from dataclasses import dataclass
 from functools import total_ordering
 import operator
 from sys import version_info
-from typing import Callable, Optional, TypeVar, ClassVar, Generic, TYPE_CHECKING
-from noether.helpers import MeasureValue
+from datetime import date, time, datetime, timedelta
 
+from ..helpers import MeasureValue
 from ..errors import NoetherError, DimensionError
 from ..config import Config, conf
 from ..display import DISPLAY_REPR_CODE
+
 from .Prefix import Prefix
 from .Dimension import Dimension, dimensionless
 from .MeasureInfo import MeasureInfo
@@ -18,6 +20,10 @@ if TYPE_CHECKING:
     from .Unit import Unit
     from .UnitSet import UnitSet
     from .MeasureRelative import MeasureRelative
+
+Time = date | time | datetime
+
+T = TypeVar('T', int, MeasureValue)
 
 
 OPENLINEAR = Config.register("measure_ignore_dimension", False, """\
@@ -29,8 +35,6 @@ Allow addition and subtraction of bare numbers to units""")
 
 UNCERTAINTY_SHORTHAND = Config.register("uncertainty_display_shorthand", False, """\
 Display e.g. 0.15(2) instead of 0.15 ± 0.02.""")
-
-T = TypeVar('T', int, MeasureValue)
 
 
 @dataclass(
@@ -53,10 +57,13 @@ class Measure(Generic[T]):
 
     def __init__(
         self,
-        value: "Measure[T] | T" = 1,
+        value: "Measure[T] | T | timedelta" = 1,
         stddev: Optional[T] = None,
         dim: Optional[Dimension] = None,
     ):
+        if isinstance(value, timedelta):
+            value = self.from_timedelta(value)
+
         def set(x, v):
             # bypass Frozen
             object.__setattr__(self, x, v)
@@ -138,6 +145,20 @@ class Measure(Generic[T]):
                         handler.__doc__)
 
         return handler
+
+    @classmethod
+    def from_timedelta(cls, dt: timedelta):
+        from ..catalogue.fundamental import second  # type: ignore
+        return second * dt.total_seconds()
+
+    def to_timedelta(self):
+        from ..catalogue.fundamental import second  # type: ignore
+        if self.dim != second.dim and not conf.get(OPENLINEAR):
+            raise DimensionError(
+                self.dim, second.dim,
+                f"Cannot convert to a timedelta."
+                f" Enable conf.{OPENLINEAR} to bypass this.")
+        return timedelta(seconds=float(self/second))
 
     # |~~\ '      |
     # |   ||(~|~~\|/~~|\  /
@@ -262,7 +283,10 @@ class Measure(Generic[T]):
                 f"{oper} only works on Measures and Units."
                 f" Enable conf.{BARENUMBER} to bypass this.")
 
-    def __lin(self, other: 'Measure[T] | Dimension | MeasureValue', op: Callable):
+    def __lin(self, other: 'Measure[T] | Dimension | MeasureValue | Time', op: Callable):
+        if isinstance(other, Time):
+            return op(other, self.to_timedelta())
+
         self.__lin_cmp(other, op)
 
         value = self._value
