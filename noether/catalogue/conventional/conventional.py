@@ -57,6 +57,15 @@ litre = liter = L = Unit((meter/10) ** 3, ["liter", "litre"], "l", SI_all)
 milliliter = milliliter = ml = mL = Unit(
     liter / 1000, ['milliliter', 'millilitre'], 'mL')
 
+# TODO: #44 Handle country ambiguities
+tablespoon = tbsp = Unit(
+    15 * ml, 'tablespoon', 'tbsp',
+    info="A cooking volume used in the UK and Canada. Not to be confused with the AU or US tablespoon.")
+teaspoon = tsp = Unit(
+    tbsp / 3, 'teaspoon', 'tsp', info='A cooking volume.')
+dessertspoon = dstspn = Unit(
+    10 * ml, 'dessertspoon', 'dstspn', info='A cooking volume.')
+
 # % Mass & density
 ton = tonne = Unit(
     kilogram*1000, ["ton", "tonne"], "t", SI_large, info="metric")

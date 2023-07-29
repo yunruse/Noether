@@ -3,8 +3,9 @@
 ## 1.1
 
 - Time-based measures and units now interoperable with `datetime.timedelta`
-- New units:
-  - Various historical scientific units
+- Various new units:
+  - Cooking
+  - Historical scientific
 
 
 ## 1.0.1
