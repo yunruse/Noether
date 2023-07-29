@@ -156,7 +156,9 @@ class Unit(Measure):
             stddev = measure.stddev / self._value
 
         v = canonical_number(val, stddev, conf.get(UNCERTAINTY_SHORTHAND))
-        return f'{v} {self.symbol}'
+        if self.dim:
+            v += ' ' + self.symbol
+        return v
 
     def __and__(self, unit: 'Unit'):
         from .units.LinearUnit import LinearUnit

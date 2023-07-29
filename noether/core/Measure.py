@@ -22,7 +22,6 @@ if TYPE_CHECKING:
     from .MeasureRelative import MeasureRelative
 
 Time = date | time | datetime
-
 T = TypeVar('T', int, MeasureValue)
 
 
@@ -278,7 +277,7 @@ class Measure(Generic[T]):
                     f"{oper} only works on units of the same dimension."
                     f" Enable conf.{OPENLINEAR} to bypass this.")
 
-        elif not conf.get(BARENUMBER):
+        elif self.dim and not conf.get(BARENUMBER):
             raise NoetherError(
                 f"{oper} only works on Measures and Units."
                 f" Enable conf.{BARENUMBER} to bypass this.")
