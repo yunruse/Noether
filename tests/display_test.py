@@ -68,3 +68,11 @@ class test_unit_display(TestCase):
 
     def test_value_repr(self):
         self.evaluate('repr_tests', repr)
+
+    def test_dates(self):
+        from datetime import datetime, date, timedelta
+        self.evaluate('date_tests', repr, {
+            'valentines': date(2023, 2, 14),
+            'christmas_midnight': datetime(2023, 12, 25),
+            'ten_mins': timedelta(seconds=600)
+        })

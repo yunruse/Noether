@@ -5,7 +5,7 @@ from dataclasses import dataclass
 from functools import total_ordering
 import operator
 from sys import version_info
-from datetime import date, time, datetime, timedelta
+from datetime import date, datetime, timedelta
 
 from ..helpers import MeasureValue
 from ..errors import NoetherError, DimensionError
@@ -21,7 +21,7 @@ if TYPE_CHECKING:
     from .UnitSet import UnitSet
     from .MeasureRelative import MeasureRelative
 
-Time = date | time | datetime
+Time = date | datetime | timedelta
 T = TypeVar('T', int, MeasureValue)
 
 
@@ -209,9 +209,12 @@ class Measure(Generic[T]):
 
     def __geo(
         self,
-        other: 'Measure[T] | MeasureValue',
+        other: 'Measure[T] | MeasureValue | timedelta',
         op=operator.mul
     ) -> 'Measure':
+        if isinstance(other, timedelta):
+            return op(self, self.from_timedelta(other))
+
         value = self._value
         stddev = None
         dim = self.dim
@@ -282,9 +285,12 @@ class Measure(Generic[T]):
                 f"{oper} only works on Measures and Units."
                 f" Enable conf.{BARENUMBER} to bypass this.")
 
-    def __lin(self, other: 'Measure[T] | Dimension | MeasureValue | Time', op: Callable):
+    def __lin(self, other: 'Measure[T] | Dimension | MeasureValue | Time', op: Callable, reverse=False):
         if isinstance(other, Time):
-            return op(other, self.to_timedelta())
+            if reverse:
+                return op(other, self.to_timedelta())
+            else:
+                return op(self.to_timedelta(), other)
 
         self.__lin_cmp(other, op)
 
@@ -303,13 +309,20 @@ class Measure(Generic[T]):
                 so = 0 if other.stddev is None else other.stddev
                 stddev = (ss**2 + so**2) ** 0.5
         else:
-            value = op(self._value, other)
+            if reverse:
+                value = op(other, self._value)
+            else:
+                value = op(self._value, other)
 
         return Measure(value, stddev, dim)
 
     def __add__(self, other): return self.__lin(other, operator.add)
     def __radd__(self, other): return self.__lin(other, operator.add)
     def __sub__(self, other): return self.__lin(other, operator.sub)
+
+    def __rsub__(self, other):
+        return self.__lin(other, operator.sub, reverse=True)
+
     def __mod__(self, other): return self.__lin(other, operator.mod)
 
     # Equality and ordering
@@ -330,17 +343,17 @@ class Measure(Generic[T]):
     #  \__\_/|_) | \_/|   |   |  |__/ |_)|__/|\__| \/
     #                                    |        _/
 
-    def __matmul__(self, unit_or_unitset: 'Unit | UnitSet'):
+    def __matmul__(self, display_with: 'Unit | UnitSet'):
         from .Unit import Unit
         from .UnitSet import UnitSet
 
-        if isinstance(unit_or_unitset, UnitSet):
-            unit = unit_or_unitset.unit_for_dimension(self.dim)
+        if isinstance(display_with, UnitSet):
+            unit = display_with.unit_for_dimension(self.dim)
             if unit is None:
                 return self
             return self @ unit
 
-        if not isinstance(unit_or_unitset, Unit):
+        if not isinstance(display_with, Unit):
             raise TypeError('Can only use @ (display relative to) on a Unit.')
 
         # HACK
@@ -351,7 +364,16 @@ class Measure(Generic[T]):
         #               which binds as   (a  @  b) /  c
         # effortlessly becomes equiv to   a  @ (b  /  c)
 
-        return MeasureRelative(self, unit_or_unitset)
+        return MeasureRelative(self, display_with)
+
+    def __rmatmul__(self, display_this: 'Measure | timedelta'):
+        if isinstance(display_this, timedelta):
+            display_this = self.from_timedelta(display_this)
+        if not isinstance(display_this, Measure):
+            raise TypeError(
+                'Cannot use {}'.format(
+                    type(display_this).__name__))
+        return display_this @ self
 
 
 # Avoid import loops
