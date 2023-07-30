@@ -1,6 +1,7 @@
 '''
 Test various repr() and str() methods for objects.
 '''
+from typing import Any, Callable
 from unittest import TestCase
 
 import noether
@@ -9,7 +10,7 @@ from noether.display import uncertainty
 
 from pathlib import Path
 
-REPR_TESTS = Path(__file__).parent / 'repr_tests.txt'
+DIR = Path(__file__).parent
 
 noether.conf.reset()
 
@@ -42,8 +43,8 @@ class test_unit_display(TestCase):
             d = uncertainty(a, b)
             self.assertEqual(c, d)
 
-    def get_repr_tests(self):
-        with open(REPR_TESTS) as f:
+    def get_tests(self, name: str):
+        with open(DIR / f'{name}.txt') as f:
             text = f.read()
         for test in text.split('>>> '):
             test = test.strip()
@@ -53,9 +54,17 @@ class test_unit_display(TestCase):
             value, name = value.split('  # ')
             yield value, name, repr_test
 
-    def test_value_repr_str(self):
-        for value, name, repr_test in self.get_repr_tests():
-            val = eval(value, {}, vars(noether))
+    def evaluate(
+        self,
+        name: str,
+        func: Callable[[Any], str],
+        namespace: dict[str, Any] | None = None
+    ):
+        for value, name, repr_test in self.get_tests(name):
+            val = eval(value, noether.__dict__, namespace or {})
             self.assertEqual(
-                repr_test, val.__noether__(),
+                repr_test, func(val),
                 msg=f'repr : {value} : {name}')
+
+    def test_value_repr(self):
+        self.evaluate('repr_tests', repr)
