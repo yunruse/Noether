@@ -13,10 +13,11 @@ from ..scientific import meter, kelvin, mercury
 from ..scientific import cm, gram, hour, second
 from .conventional import liter
 
-Config.register('UNITS_country', 'us', '''\
-The country to define imperial units (and other niceties) from. (Use the ISO 3166 code.)
+USE_CUSTOMARY = Config.register('UNITS_customary', True, '''\
+Define ambiguous imperial units (gallon, etc) using US Customary units instead of UK imperial units.
 ''')
-_USE_US_UNITS = conf.get('UNITS_country').lower() == 'us'
+
+_US = conf.get(USE_CUSTOMARY)
 
 rankine = Unit(kelvin * 5/9, "rankine", "°R")
 fahrenheit = degF = AffineUnit(rankine, rankine(459.67), "fahrenheit", "°F")
@@ -52,23 +53,23 @@ acre = Unit(chain * furlong, "acre", "ac")
 # TODO: all of this nonsense
 
 # % Volume
-gallon_uk = Unit(liter(4.546_09), "gallon_uk", "gal")
-gallon_us = Unit(inch**3 * 231, "gallon_us", "gal")
-# gallon_us_dry = usdrygal = Unit(bushel_us / 8, "gallon_us_dry", "usdrygal"))
-
+gallon_uk = gal_uk = Unit(liter(4.546_09), "gallon_uk", "gal")
 pint_uk = Unit(gallon_uk / 8, "pint_uk", "pt")
-pint_us = Unit(gallon_us / 8, "pint_us", "pt")
-pint = pint_us if _USE_US_UNITS else pint_uk
-
 fluid_ounce_uk = floz_uk = Unit(pint_uk / 12, "fluid_ounce_uk", "fl oz")
+dram_uk = Unit(floz_uk / 8, "dram_uk", "dr")
+
+gallon_us = gal_us = Unit(inch**3 * 231, "gallon_us", "gal")
+# gallon_us_dry = usdrygal = Unit(bushel_us / 8, "gallon_us_dry", "usdrygal"))
+pint_us = Unit(gallon_us / 8, "pint_us", "pt")
 fluid_ounce_us = floz_us = Unit(pint_us / 16, "fluid_ounce_us", "fl oz")
-fluid_ounce = floz = floz_us if _USE_US_UNITS else floz_uk
+dram_us = Unit(floz_us / 8, "dram_us", "dr")
 
+gallon = gal = gallon_us if _US else gallon_uk
+pint = pint_us if _US else pint_uk
+fluid_ounce = floz = floz_us if _US else floz_uk
+dram = dram_us if _US else dram_uk
 
-dram = Unit(fluid_ounce / 8, "dram", "dr")
-
-
-hogshead = Unit(0, "hogshead", "hhd")  # TODO
+hogshead = Unit(66 * gallon_uk, "hogshead", "hhd")  # TODO
 butt = Unit(hogshead * 2, "butt")  # y'all nerds
 
 
