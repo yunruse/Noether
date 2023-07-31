@@ -25,7 +25,8 @@ parser.add_argument(
 
 parser.add_argument('terms', nargs='*')
 
-args = parser.parse_args()
+args, unknown = parser.parse_known_args()
+args.terms += unknown
 
 pretty = None
 if args.color and not args.value:
@@ -37,7 +38,6 @@ if args.color and not args.value:
         pretty.install()
 
 if args.terms:
-    # this is very basic at the moment!
     from ._tokenizers import cli_dialect, transform
     src = transform(" ".join(args.terms), cli_dialect)
     try:
