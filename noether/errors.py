@@ -18,7 +18,7 @@ class NoetherError(Exception):
 class DimensionError(NoetherError):
     'Dimensions do not match.'
 
-    args: 'tuple[Dimension, Dimension, str]'
+    args: 'tuple[Dimension, Dimension, str | None]'
 
     def __init__(self, dim1: 'Dimension', dim2: 'Dimension', message: str | None = None):
         super().__init__(dim1, dim2, message)
@@ -26,7 +26,7 @@ class DimensionError(NoetherError):
     def __str__(self):
         dim1, dim2, msg = self.args
         message = f'Dimensions {dim1} and {dim2} do not match.'
-        if message is not None:
+        if msg is not None:
             message += ' ' + msg
         return message
 
