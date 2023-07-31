@@ -39,3 +39,6 @@ joule / kelvin / kilogram  # specific_heat_capacity
 
 >>> N_a  # Nicer inverse units #61
 6.022141e23 mol**-1  # substance**-1
+
+>>> dalton  # Small units should show value
+atomic_mass_unit  # mass, 1.660539e-27 kg

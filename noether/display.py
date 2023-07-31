@@ -6,7 +6,7 @@ Handles Unicode.
 
 from decimal import Decimal
 from fractions import Fraction
-from math import log10
+from math import ceil, floor, log10
 from noether.helpers import Real, removeprefix
 
 from .config import Config, conf
@@ -92,9 +92,12 @@ def scinot(number: Real, digits: int | None = None):
 
 
 def _fmt(number: Real):
+    if number == 0:
+        return '0'
+    mag = log10(abs(number))
     DIGITS: int = conf.get(DISPLAY_DIGITS)
-    n = str(round(number, DIGITS))
-    if len(n) > DIGITS and not -3 < log10(abs(number)) < 4:
+    n = str(round(number, DIGITS - ceil(mag)))
+    if 'e' in n or (len(n) > DIGITS and not -3 < mag < 4):
         return scinot(number)
 
     m = ''
