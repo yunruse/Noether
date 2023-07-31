@@ -13,7 +13,7 @@ from ..scientific import meter, second, kilogram, kelvin
 from ..scientific import radian, turn
 from ..scientific import turn
 from ..scientific import day, hour, minute
-from ..scientific import gram
+from ..scientific import gram, bar
 from ..scientific import standard_gravity
 
 # % Ratio
@@ -93,6 +93,8 @@ horsepower = Unit(
     'horsepower', 'hp',
     info="Metric horsepower, not to be confused with the"
     " imperial horsepower which is slightly larger")
+
+msw = Unit(bar/10, "meter_sea_water", "msw")
 
 
 # % Display

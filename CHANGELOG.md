@@ -2,10 +2,13 @@
 
 ## 1.1
 
+- Various further bugfixes and improvements for display mechanisms
 - Time-based measures and units now interoperable with `datetime.timedelta`
-- Various new units:
-  - Cooking
-  - Historical scientific
+- Added 17 new units:
+  - **Cooking**: `tablespoon`, `teaspoon`, `dessertspoon`
+  - **Scientific**: `dalton`, `torr`, `bubnoff`
+  - **Historical scientific**: `degN`, `degRe`, `degDe`, `degRo`, `curie`, `rutherford`, `thomson`
+  - **Conventional**: `msw`, `fsw`, `lbf`, `slug`, `psi`
 
 
 ## 1.0.1
@@ -14,9 +17,8 @@
 - Various bugfixes and improved testing for display mechanisms; units now display in scientific notation where otherwise would be unwieldy.
 - Fixed incorrect value for `standard_gravity`.
 - Added a very rudimentary GNU `units`-like interface (`python -m noether.gnu`)
-- New units:
-  - `horsepower`
-  - `poundal`
+- Added 2 new units:
+  - `horsepower`, `poundal`
 - Deprecate unused internal features:
   - `MultiplicationWithValue`
   - "Ranged overlap" comparisons

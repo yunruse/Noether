@@ -10,4 +10,4 @@ from .constants import *
 from .essential import *
 from .data import *
 from .astronomy import *
-from .climate import *
+from .earth import *

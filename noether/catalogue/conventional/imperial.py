@@ -9,9 +9,9 @@ from fractions import Fraction
 from noether.core import Unit, AffineUnit
 from noether.config import Config, conf
 
-from ..scientific import meter, kelvin, mercury
+from ..scientific import meter, kelvin, mercury, standard_gravity
 from ..scientific import cm, gram, hour, second
-from .conventional import liter
+from .conventional import liter, msw
 
 USE_CUSTOMARY = Config.register('UNITS_customary', True, '''\
 Define ambiguous imperial units (gallon, etc) using US Customary units instead of UK imperial units.
@@ -26,7 +26,7 @@ fahrenheit = degF = AffineUnit(rankine, rankine(459.67), "fahrenheit", "°F")
 inch = Unit(cm * Fraction(127, 50), "inch", ["in", '"'])
 
 barleycorn = Unit(inch / 3, "barleycorn")
-thou = Unit(inch / 1000, "barleycorn")
+thou = Unit(inch / 1000, "thou")
 twip = Unit(inch / 1440, "twip")  # twentieth of a point
 
 # twip =
@@ -64,7 +64,7 @@ pint_us = Unit(gallon_us / 8, "pint_us", "pt")
 fluid_ounce_us = floz_us = Unit(pint_us / 16, "fluid_ounce_us", "fl oz")
 dram_us = Unit(floz_us / 8, "dram_us", "dr")
 
-gallon = gal = gallon_us if _US else gallon_uk
+gallon = gallon_us if _US else gallon_uk
 pint = pint_us if _US else pint_uk
 fluid_ounce = floz = floz_us if _US else floz_uk
 dram = dram_us if _US else dram_uk
@@ -75,16 +75,23 @@ butt = Unit(hogshead * 2, "butt")  # y'all nerds
 
 # % Mass
 pound = lb = Unit(453.59237 * gram, "pound", "lb")
+poundforce = lbf = pound * standard_gravity
 poundal = Unit(lb * foot / second**2, "poundal", "pdl")
+
+slug = Unit(lbf / (foot / second**2), "slug", "slug")
 
 oz = ounce = Unit(pound / 16, "ounce", "oz")
 grain = Unit(pound / 7000, "grain", "gr")
 
 stone = st = Unit(pound * 14, "stone", "st")
-imperial_ton = Unit(pound * 2240, "ton", "t")
+imperial_ton = Unit(pound * 2240, "imperial_ton", "t", info="imperial")
 
 
 # % Derived
+
+pound_per_square_inch = psi = Unit(
+    lbf / inch**2, "pound_per_square_inch", "psi")
+fsw = Unit(msw * foot/meter, "foot_sea_water", "fsw")
 
 inch_mercury = Unit(mercury * inch,
                     "inch_mercury", "inHg")

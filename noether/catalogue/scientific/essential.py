@@ -6,7 +6,7 @@ from noether.core import Unit
 
 from math import pi
 
-from ..prefixes import SI_all, micro
+from ..prefixes import SI_all, SI_large, micro
 from ..fundamental import candela, kilogram, meter, kelvin, ampere
 from .si import radian, steradian
 from .si import joule, watt, pascal, cumec
@@ -52,6 +52,7 @@ clo = Unit(tog * 1.55, "clo")
 
 bar = Unit(1e5 * pascal, "bar", "bar", SI_all)
 atmosphere = atm = Unit(101_325 * pascal, "atmosphere", ["atm", "ata"])
+torr = Unit(atm / 760, "torr", "Torr")
 metre_mercury = meter_mercury = Unit(
     pascal(133_322.387_415),
     "meter_mercury", "mHg", SI_all,
@@ -70,6 +71,10 @@ bohr_radius = a_0 = Unit(
     "bohr_radius", "a_0")
 
 # % Small-scale
+
+atomic_mass_unit = amu = dalton = Unit(
+    1.660_539_066_60e-27 * kilogram,  # CODATA 2018
+    ['atomic_mass_unit', 'dalton'], ['amu', 'Da'], SI_large)
 
 micron = micro * meter
 angstrom = Unit(meter(1e-10), "angstrom", "Å")

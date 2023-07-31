@@ -7,8 +7,8 @@ from noether.core import Unit
 
 from noether.core.units import AffineUnit
 
-from ..scientific.si import hertz, kelvin
-from ..scientific.essential import nit
+from ..scientific import hertz, kelvin, becquerel, nit
+from ..scientific import dalton, electron_charge
 
 
 # % Photometric units
@@ -31,3 +31,12 @@ degDe = Delisle = AffineUnit(
     kelvin*-2/3, kelvin*373.15, "Delisle", "°De")
 degRo = Romer = AffineUnit(
     kelvin * 40/21, kelvin * (273.15-7.5 * 40/21), "Rømer", "°Rø")
+
+# % Radiation
+
+curie = Unit(3.7e10 * becquerel, "curie", "Ci")
+rutherford = Unit(1e6 * becquerel, "rutherford", "Rd")
+
+# % Atomic
+
+thomson = Unit(dalton / electron_charge, "thomson", "Th")
