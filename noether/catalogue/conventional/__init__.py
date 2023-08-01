@@ -2,7 +2,7 @@
 from .conventional import *
 
 # Unit systems
-from .imperial import *
+from .avourdupois import *
 # TODO: US customary
 
 # Specific fields

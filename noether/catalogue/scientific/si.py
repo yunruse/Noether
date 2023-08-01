@@ -26,6 +26,9 @@ year_julian = Unit(
     "year", ["yr", "ya"], SI_large,
     info="Julian calendar - assuming leap year every 400 years."
     " Superseded by Gregorian year.")
+julian_month = month = Unit(
+    year_julian / 12, "month", "mo",
+    info="1/12 of a Julian year")
 
 # Rotation
 becquerel = Bq = SI(Unit(frequency, 'becquerel', "Bq", SI_all))

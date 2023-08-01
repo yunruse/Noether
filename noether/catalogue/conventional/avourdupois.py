@@ -1,5 +1,5 @@
 '''
-Imperial units.
+Avourdupois, US customary and British imperial units.
 '''
 
 # TODO: #1 all of this nonsense
@@ -13,6 +13,8 @@ from ..scientific import meter, kelvin, second, lumen
 from ..scientific import cm, gram, hour
 from ..scientific import standard_gravity, mercury
 from .conventional import liter, msw
+
+# TODO: change this system for gnu's br- prefix for british units?
 
 USE_CUSTOMARY = Config.register('UNITS_customary', True, '''\
 Define ambiguous imperial units (gallon, etc) using US Customary units instead of UK imperial units.
@@ -52,23 +54,35 @@ knot = Unit(nautical_mile / hour, "knot", ["kn", "kt"])
 acre = Unit(chain * furlong, "acre", "ac")
 
 # TODO: all of this nonsense
+# TODO: convert to new .yaml system
+# and include:
+# - https://en.wikipedia.org/wiki/Hundredweight
+# - `quarter` thereof
+# - poncelet
 
 # % Volume
 gallon_uk = gal_uk = Unit(liter(4.546_09), "gallon_uk", "gal")
+quart_uk = Unit(gallon_uk / 4, "quart_uk", "qt")
 pint_uk = Unit(gallon_uk / 8, "pint_uk", "pt")
-fluid_ounce_uk = floz_uk = Unit(pint_uk / 12, "fluid_ounce_uk", "fl oz")
+fluid_ounce_uk = floz_uk = Unit(pint_uk / 20, "fluid_ounce_uk", "fl oz")
 dram_uk = Unit(floz_uk / 8, "dram_uk", "dr")
+gill_uk = Unit(floz_uk * 5, "gill_uk")
 
 gallon_us = gal_us = Unit(inch**3 * 231, "gallon_us", "gal")
-# gallon_us_dry = usdrygal = Unit(bushel_us / 8, "gallon_us_dry", "usdrygal"))
+quart_us = Unit(gallon_us / 4, "quart_us", "qt")
 pint_us = Unit(gallon_us / 8, "pint_us", "pt")
 fluid_ounce_us = floz_us = Unit(pint_us / 16, "fluid_ounce_us", "fl oz")
 dram_us = Unit(floz_us / 8, "dram_us", "dr")
+gill_us = Unit(floz_us * 4, "gill_us")
 
 gallon = gallon_us if _US else gallon_uk
 pint = pint_us if _US else pint_uk
 fluid_ounce = floz = floz_us if _US else floz_uk
 dram = dram_us if _US else dram_uk
+quart = quart_us if _US else quart_uk
+gill = gill_us if _US else gill_uk
+
+# gallon_us_dry = usdrygal = Unit(bushel_us / 8, "gallon_us_dry", "usdrygal"))
 
 hogshead = Unit(66 * gallon_uk, "hogshead", "hhd")  # TODO
 butt = Unit(hogshead * 2, "butt")  # y'all nerds
@@ -76,16 +90,17 @@ butt = Unit(hogshead * 2, "butt")  # y'all nerds
 
 # % Mass
 pound = lb = Unit(453.59237 * gram, "pound", "lb")
-poundforce = lbf = Unit(pound * standard_gravity, "poundforce", "lbf")
+stone = st = Unit(pound * 14, "stone", "st")
+ounce = oz = Unit(pound / 16, "ounce", "oz")
+dram = drachm = dr = Unit(ounce / 16, ["dram", "drachm"], ["dr", "ʒ"])
 
+poundforce = lbf = Unit(pound * standard_gravity, "poundforce", "lbf")
 poundal = Unit(lb * foot / second**2, "poundal", "pdl")
 pound_foot = foot_pound = Unit(lbf * foot, "pound_foot", "lbft")
 slug = Unit(lbf / (foot / second**2), "slug", "slug")
 
-oz = ounce = Unit(pound / 16, "ounce", "oz")
 grain = Unit(pound / 7000, "grain", "gr")
 
-stone = st = Unit(pound * 14, "stone", "st")
 imperial_ton = Unit(pound * 2240, "imperial_ton", "t", info="imperial")
 
 
