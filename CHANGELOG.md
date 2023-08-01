@@ -4,8 +4,9 @@
 
 - Various further bugfixes and improvements for display mechanisms
 - Time-based measures and units now interoperable with `datetime.timedelta`
-- Added 17 new units:
+- Added 32 new units:
   - **Cooking**: `tablespoon`, `teaspoon`, `dessertspoon`
+  - **Astronomy**: `solar_mass`, `solar_radius`, `solar_irradiance`, `solar_luminosity`, `solar_temperature`, `solar_mass_parameter`, `earth_radius_equatorial`, `earth_radius_polar`, `jupiter_radius_equatorial`, `jupiter_radius_polar`, `earth_mass_parameter`, `jupiter_mass_parameter`
   - **Scientific**: `dalton`, `torr`, `bubnoff`
   - **Historical scientific**: `degN`, `degRe`, `degDe`, `degRo`, `curie`, `rutherford`, `thomson`, `spat_length`, `Mache`
   - **Conventional**: `msw`, `fsw`, `lbf`, `slug`, `psi`
