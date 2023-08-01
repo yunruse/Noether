@@ -10,7 +10,6 @@ class info_unit_value(MeasureInfo):
     def info(cls, measure: 'Unit'):
         if isinstance(measure, Unit):
             d = measure.display_unit()
-            if d != measure:
-                if d is None:
-                    d = measure * 1
-                yield d._repr_measure(measure)
+            if d is None:
+                d = measure * 1
+            yield d._repr_measure(measure)
