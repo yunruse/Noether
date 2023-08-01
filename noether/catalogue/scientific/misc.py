@@ -24,13 +24,12 @@ ampere_turn = At = Unit(ampere * turn, "ampere_turn", "At", SI_all)
 
 # % Human
 small_calorie = cal = Unit(
-    4.814 * joule, ["calorie", "large_calorie"], "cal",
+    4.814 * joule, ["calorie", "small_calorie"], "cal",
     info="Energy to heat 1g of water by 1°C."
     " Defined by convention; now regarded as obsolete."
-    " Not to be confused with the large calorie (heats 1kg)."
-)
+    " Not to be confused with the large calorie (heats 1kg).")
 large_calorie = kilocalorie = kcal = Unit(
-    cal * 1000, ["kilocalorie", "small_calorie"], "kcal",
+    cal * 1000, ["kilocalorie", "large_calorie"], "kcal",
     info="Energy to heat 1kg of water by 1°C."
     " Defined by convention; now regarded as obsolete."
     " Not to be confused with the small calorie (heats 1g)."
