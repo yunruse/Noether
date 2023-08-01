@@ -91,14 +91,16 @@ class Catalogue:
         for prefix_set in self.prefix_sets.values():
             yield from prefix_set
 
+    def _all_prefixed_units(self):
+        for unit in self.units_by_name.values():
+            yield unit
+            yield from unit.prefixed_units()
+
     def all_prefixed_units(self):
         units: dict[str, Unit] = {}
-
-        for unit in self.units_by_name.values():
-            units.update(unit._namespace())
-            for u in unit.prefixed_units():
-                units.update(u._namespace())
-
+        for unit in self._all_prefixed_units():
+            for n, u in unit._namespace().items():
+                units.setdefault(n, u)
         return units
 
     def __repr__(self):

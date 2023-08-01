@@ -53,18 +53,17 @@ are = Unit(100 * meter**2, "are", "a")
 hectare = Unit(100 * are, "hectare", "ha")
 
 # % Volume
-litre = liter = L = Unit((meter/10) ** 3, ["liter", "litre"], "l", SI_all)
-milliliter = milliliter = ml = mL = Unit(
-    liter / 1000, ['milliliter', 'millilitre'], 'mL')
+litre = liter = L = Unit((meter/10) ** 3, ["liter", "litre"], "L", SI_all)
+_ml = L / 1000
 
 # TODO: #44 Handle country ambiguities
 tablespoon = tbsp = Unit(
-    15 * ml, 'tablespoon', 'tbsp',
+    15 * _ml, 'tablespoon', 'tbsp',
     info="A cooking volume used in the UK and Canada. Not to be confused with the AU or US tablespoon.")
 teaspoon = tsp = Unit(
     tbsp / 3, 'teaspoon', 'tsp', info='A cooking volume.')
 dessertspoon = dstspn = Unit(
-    10 * ml, 'dessertspoon', 'dstspn', info='A cooking volume.')
+    10 * _ml, 'dessertspoon', 'dstspn', info='A cooking volume.')
 
 # % Mass & density
 ton = tonne = Unit(
