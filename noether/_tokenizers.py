@@ -1,3 +1,4 @@
+from collections import deque
 from io import BytesIO
 from typing import Any, Callable, Generator, Iterable, Iterator, Mapping
 from tokenize import tokenize, TokenInfo, NUMBER, NAME, OP, ENCODING
@@ -14,27 +15,33 @@ StreamProcessor = Callable[[TokenStream], TokenStream]
 
 def cli_dialect(stream: TokenStream):
     '''
-    Process tokens for __main__ dialect, replacing `3u` -> `u(3)` and `in` -> `inch`.
+    Process tokens for __main__ dialect, replacing:
+    - `in` -> `inch`
+    - `-3unit` -> `unit(-3)`
     '''
-    num: TokenInfo | None = None
+    queue: deque[TokenInfo] = deque()
+
     for token in stream:
         if token.type == NAME and token.string == 'in':
             token = token._replace(string='inch')
 
-        if token.type == NUMBER:
-            num = token
-        elif num is not None:
-            if token.type == NAME:
-                yield token
+        queue.append(token)
+        if len(queue) == 3:
+            tt = [t.type for t in queue]
+            if tt[-2:] == [NUMBER, NAME]:
+                maybe_minus, number, unit_name = queue
+                is_minus = maybe_minus.type == OP and maybe_minus.string == '-'
+                if not is_minus:
+                    yield maybe_minus
+                yield unit_name
                 yield _t(OP, '(')
-                yield num
+                if is_minus:
+                    yield maybe_minus
+                yield number
                 yield _t(OP, ')')
+                queue.clear()
             else:
-                yield num
-                yield token
-            num = None
-        else:
-            yield token
+                yield queue.popleft()
 
 
 def untokenize(stream: TokenStream):
