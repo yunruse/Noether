@@ -25,7 +25,7 @@ lambert = Unit(apostlib(1e4), "lambert", "L")
 
 degN = degNewton = AffineUnit(
     kelvin * 100/33, kelvin*273.15, "degNewton", "°N")
-degRe = Reaumur = AffineUnit(
+degRe = Reamur = AffineUnit(
     kelvin*0.8, kelvin*273.15, "Réamur", "°Ré")
 degDe = Delisle = AffineUnit(
     kelvin*-2/3, kelvin*373.15, "Delisle", "°De")
