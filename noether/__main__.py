@@ -33,17 +33,21 @@ parser.add_argument(
 args, unknown = parser.parse_known_args()
 args.terms = unknown
 
+# % Color
+
 if environ.get('NO_COLOR', ''):
     args.color = False
 
 pretty = None
 if args.color and not args.value:
     try:
-        from rich import pretty, print
+        from rich import pretty
     except ImportError:
         pass
     else:
         pretty.install()
+
+# % Eval and print terms
 
 if args.terms:
     from ._tokenizers import cli_dialect, transform
@@ -57,11 +61,15 @@ if args.terms:
             else:
                 print(value)
         else:
-            print(value)
+            if isinstance(value, Measure) and pretty:
+                from rich import print as _print
+                _print(value)
+            else:
+                print(repr(value))
     except Exception as e:
         import traceback
-        traceback.print_exception(e, limit=0)
         import os
+        traceback.print_exception(e, limit=0)
         os._exit(2)
     else:
         import os
@@ -73,7 +81,9 @@ if args.terms:
     # and we can't assign variables in eval(), so we shouldn't feasibly be able to, for example,
     # have `open()` leave a file handle open or something.
 
-# TODO: allow cli dialect in the repl?
+# % REPL
+
+# TODO: allow cli dialect?
 
 print(f'{len(catalogue.units())} units, {len(list(catalogue.prefixes()))} prefixes')
 print('''
@@ -82,8 +92,8 @@ print('''
 
 if pretty is not None:
     print('''\
->>> from rich import pretty, print
+>>> from rich import pretty
 >>> pretty.install()''')
 print()
 
-del args, parser, ArgumentParser
+del ArgumentParser, parser, args, unknown
