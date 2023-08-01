@@ -13,9 +13,9 @@
     - radioactive: `curie`, `rutherford`, `thomson`, `roentgen`, `Mache`
     - misc: `spat_length`, `foot_lambert`,
   - **Conventional**:
-    - volume: `gill`, `quart`,
+    - volume: `gill`, `quart`
     - mass: `scruple`, `apdram`, `apounce`, `appound`, `pennyweight`
-    - mechanical: `lbf`, `slug`, `psi`, `foot_pound`, `pound_foot`, `kip`
+    - mechanical: `mach`, `lbf`, `slug`, `psi`, `foot_pound`, `pound_foot`, `kip`
     - misc: `msw`, `fsw`, `mired`, `julian_month`, `rpm`, `rps`, `mpg`
   - **Unusual**: `flight_dose_rate`, `dog_year`
 

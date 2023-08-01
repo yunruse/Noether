@@ -92,6 +92,10 @@ horsepower = Unit(
     info="Metric horsepower, not to be confused with the"
     " imperial horsepower which is slightly larger")
 
+mach = Unit(
+    331.46 * meter/second, "mach", "Ma",
+    info="Conventional measure for air at 0°C; a mach number is defined locally relative to the air.")
+
 msw = Unit(bar/10, "meter_sea_water", "msw")
 
 mired = Unit(1 / kelvin(1e6), "mired")
