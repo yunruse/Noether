@@ -7,6 +7,7 @@ Best ran as `python -im noether`, as if no terms are provided,
 a convenient interactive prompt is summoned.
 """
 
+from os import environ
 import noether
 from noether import *
 
@@ -19,7 +20,7 @@ parser = ArgumentParser(
 parser.add_argument(
     '--no-color',
     action='store_false',
-    help='Suppress colour output',
+    help='Suppress colour output (NO_COLOR=1 is also supported)',
     dest='color')
 parser.add_argument(
     '--value', '-V',
@@ -31,6 +32,9 @@ parser.add_argument(
 # therefore, we'll just fetch every unknown argument
 args, unknown = parser.parse_known_args()
 args.terms = unknown
+
+if environ.get('NO_COLOR', ''):
+    args.color = False
 
 pretty = None
 if args.color and not args.value:
