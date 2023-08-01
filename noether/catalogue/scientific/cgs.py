@@ -9,7 +9,7 @@ from math import pi
 from ..prefixes import SI_all, centi
 from .si import SI_all, meter, kilogram, second as s
 from .si import ampere, lux, coulomb, henry, ohm, volt, tesla
-from .essential import turn, nit
+from .misc import turn, nit
 
 
 # CGS units

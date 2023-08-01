@@ -7,11 +7,14 @@ from noether.core import Unit
 
 from noether.core.units import AffineUnit
 
-from ..scientific import hertz, kelvin, becquerel, nit
+from ..scientific import kilogram, hertz, kelvin, meter
+from ..scientific import becquerel, nit
 from ..scientific import dalton, electron_charge
+from ..scientific import cm, gram
+from ..conventional import liter
 
 
-# % Photometric units
+# % Photometry
 fresnel = Unit(hertz(1e12), "fresnel")
 
 apostlib = blondel = Unit(nit / pi, "apostlib", "asb")
@@ -21,7 +24,7 @@ lambert = Unit(apostlib(1e4), "lambert", "L")
 
 # TODO: foot-lambert
 
-# % Temperature units
+# % Temperature
 
 degN = degNewton = AffineUnit(
     kelvin * 100/33, kelvin*273.15, "degNewton", "°N")
@@ -34,9 +37,29 @@ degRo = Romer = AffineUnit(
 
 # % Radiation
 
-curie = Unit(3.7e10 * becquerel, "curie", "Ci")
-rutherford = Unit(1e6 * becquerel, "rutherford", "Rd")
+curie = Unit(
+    3.7e10 * becquerel, "curie", "Ci",
+    info="Introduced in 1910. Discouraged for the becquerel")
+rutherford = Unit(
+    1e6 * becquerel, "rutherford", "Rd",
+    info="Introduced in 1946. Discouraged for the becquerel since 1975")
+
+mache = Unit(
+    3.64e-10 * curie / liter, "Mache", "ME",
+    info="Deprecated")
 
 # % Atomic
 
-thomson = Unit(dalton / electron_charge, "thomson", "Th")
+thomson = Unit(
+    dalton / electron_charge, "thomson", "Th",
+    info="Deprecated since 2013")
+
+# % Astronomy
+
+spat_length = Unit(meter * 1e12, "spat_length", "S")
+
+# % Earth
+
+technical_atmosphere = Unit(
+    kilogram * gram / cm**2, "technical_atmosphere", "at",
+    info="Deprecated")

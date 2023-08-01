@@ -7,7 +7,7 @@ from .CODATA import *
 from .constants import *
 
 # Units
-from .essential import *
-from .data import *
-from .astronomy import *
+from .misc import *
+from .micro import *
 from .earth import *
+from .astronomy import *

@@ -6,6 +6,7 @@ from .prefixes import *
 from .dimensions import *
 
 # Units are imported in this exact order
+from .data import *
 from .scientific import *
 from .conventional import *
 

@@ -33,4 +33,4 @@ BED = banana_equivalent_dose = Unit(
 
 pirate_ninja = Unit(
     watt_hour * 1000 / sol, "pirate_ninja", "pn",
-    info="from the book The Martian")
+    info="1 kWh per Martian day, from Andy Weir's The Martian")

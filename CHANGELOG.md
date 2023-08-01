@@ -7,7 +7,7 @@
 - Added 17 new units:
   - **Cooking**: `tablespoon`, `teaspoon`, `dessertspoon`
   - **Scientific**: `dalton`, `torr`, `bubnoff`
-  - **Historical scientific**: `degN`, `degRe`, `degDe`, `degRo`, `curie`, `rutherford`, `thomson`
+  - **Historical scientific**: `degN`, `degRe`, `degDe`, `degRo`, `curie`, `rutherford`, `thomson`, `spat_length`, `Mache`
   - **Conventional**: `msw`, `fsw`, `lbf`, `slug`, `psi`
 
 

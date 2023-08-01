@@ -10,8 +10,10 @@ from .CODATA import CODATA
 
 from math import pi
 
-mu_0 = Unit(4 * pi * 1e-7 * newton / ampere ** 2, "mu_0", "μ₀")
-e_0 = Unit(1 / (mu_0 * c ** 2), "e_0", "e₀")
+vacuum_permeability = mu_0 = Unit(
+    4 * pi * 1e-7 * newton / ampere ** 2, "vacuum_permeability", ["mu_0", "μ₀"])
+vacuum_permittivity = e_0 = Unit(
+    1 / (mu_0 * c ** 2), "vacuum_permittivity", ["e_0", "ε₀"])
 z_0 = Unit(mu_0 * c, "z_0", "z₀")
 
 k_e = Unit(1 / (4*pi*e_0), "k_e", "kₑ")

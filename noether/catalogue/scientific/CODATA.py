@@ -13,9 +13,9 @@ catalogue = Catalogue(vars(si), 'CODATA data-fetching catalogue')
 
 COLUMN_LENGTHS = [60, 25, 25]
 NAMED_CODATA_UNITS = {
-    'atomic mass constant': 'u',
-    'electron mass': 'm_e',
-    'Newtonian constant of gravitation': 'G'
+    'atomic_mass_constant': 'u',
+    'electron_mass': 'm_e',
+    'Newtonian_constant_of_gravitation': 'G'
 }
 
 one = Unit(1)

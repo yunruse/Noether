@@ -6,7 +6,7 @@ from noether import Dimension, Measure, MeasureInfo
 
 from .. import angstrom, km, cm, meter, foot
 from .. import year, day, hour, minute, second
-from .. import c
+from .. import c, liter
 
 # TODO: incorporate all catalogue units to save effort
 # and then you can move some unusual units to a new `unusual.py`
@@ -48,6 +48,9 @@ COMPARISON_MEASURES: dict[str, Measure] = {
     # % Speed
     'the speed of sound in air': meter(343) / second,
     'average human walk speed': meter(1.42) / second,
+
+    # % volume
+    'olympic swimming pool': liter(2_500_000)
 }
 
 
