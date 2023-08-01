@@ -27,9 +27,9 @@ lightyear = ly = Unit(c * year, "lightyear", "ly", SI_all)
 
 # % Earth-sol system
 
-lunation = synodic_month = Unit(
+lunation = lunar_month = synodic_month = Unit(
     timedelta(days=29, hours=12, minutes=44, seconds=2.9),
-    ["lunation", "synodic_month"],
+    ["lunation", "lunar_month", "synodic_month"],
     info="Moon's average orbit with respect to the sol-earth line."
     " Moon phases are separated by a period close to this."
 )

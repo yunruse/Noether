@@ -22,7 +22,7 @@ fresnel = Unit(hertz(1e12), "fresnel")
 apostilb = blondel = Unit(nit / pi, "apostilb", "asb")
 skot = Unit(apostilb(1e-3), "skot", "sk")
 bril = Unit(apostilb(1e-7), "bril")
-lambert = Unit(apostilb(1e4), "lambert", "L", SI_all)
+lambert = Unit(apostilb(1e4), "lambert", ["Lb", "L"], SI_all)
 foot_lambert = Unit(candela / pi / foot**2, "foot_lambert", "fL")
 
 # TODO: foot-lambert

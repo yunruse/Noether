@@ -18,9 +18,9 @@ def SI_d(unit: Unit):
 
 
 # Time
-minute = Unit(second*60, 'minute', ['min'])
-hour = Unit(minute * 60, 'hour', ['hr', 'h'])
-day = Unit(hour * 24, "day", "d")
+minute = min = Unit(second*60, 'minute', ['min'])
+hour = hr = Unit(minute * 60, 'hour', ['hr', 'h'])
+day = da = Unit(hour * 24, "day", "d")
 year_julian = Unit(
     day * 365.25,
     "year", ["yr", "ya"], SI_large,

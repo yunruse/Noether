@@ -13,7 +13,8 @@ from .misc import turn, nit
 
 
 # CGS units
-gram = g = Unit(kilogram / 1000, 'gram', 'g', SI_all)
+gram = g = Unit(
+    kilogram / 1000, ['gram', 'gramme'], ['g', 'gm'], SI_all)
 cm = centi * meter
 
 CGS = UnitSet({cm, g, s})

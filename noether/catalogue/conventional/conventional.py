@@ -66,7 +66,7 @@ dessertspoon = dstspn = Unit(
     10 * _ml, 'dessertspoon', 'dstspn', info='A cooking volume.')
 
 # % Mass & density
-ton = tonne = Unit(
+ton = tonne = metricton = Unit(
     kilogram*1000, ["ton", "tonne"], "t", SI_large, info="metric")
 gsm = Unit(
     gram / meter**2, "gram per square meter", "gsm",

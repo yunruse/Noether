@@ -10,12 +10,17 @@ from ..prefixes import SI_all
 from ..fundamental import candela, kilogram, meter, kelvin, ampere
 from .si import radian, steradian
 from .si import joule, watt, pascal, cumec
-from .si import hour
+from .si import hour, minute, second
 
 # % Angle
-gradian = Unit(radian * pi / 200, "gradian", "grad")
-circle = turn = Unit(radian * 2*pi, "turn", "turn")
+gradian = grade = Unit(radian * pi / 200, "gradian", "grad")
+turn = Unit(
+    radian * 2*pi,
+    ["circle", "turn", "revolution", "rev"], "turn")
 sphere = spat = Unit(steradian * 4*pi, "spat", "sp")
+
+rpm = Unit(turn / minute, "revolutions_per_minute", "rpm")
+rps = Unit(turn / second, "revolutions_per_second", "rps")
 
 # % Electricity
 watt_hour = Wh = Unit(watt * hour, 'watt_hour', 'Wh', SI_all)
@@ -33,8 +38,7 @@ large_calorie = kilocalorie = kcal = Unit(
     info="Energy to heat 1kg of water by 1°C."
     " Defined by convention; now regarded as obsolete."
     " Not to be confused with the small calorie (heats 1g)."
-    " Often used in food as an alternative to the kilojoule."
-)
+    " Often used in food as an alternative to the kilojoule.")
 bmi = Unit(kilogram / meter**2, "BMI", "BMI")
 
 # A unit of solar irradiation
@@ -56,7 +60,7 @@ metre_mercury = meter_mercury = Unit(
     pascal(133_322.387_415),
     "meter_mercury", "mHg", SI_all,
     info="defined by convention")
-mercury = meter_mercury / meter
+mercury = hg = meter_mercury / meter
 sverdrup = Unit(cumec * 1e6, "sverdrup", "Sv")
 
 # % Photometric

@@ -34,8 +34,9 @@ twip = Unit(inch / 1440, "twip")  # twentieth of a point
 
 # twip =
 hand = Unit(inch * 4, "hand", "hh")
-foot = Unit(inch * 12, "foot", ["ft", "'"])
+foot = Unit(inch * 12, ["foot", "feet"], ["ft", "'"])
 yard = Unit(foot * 3, "yard", "yd")
+rod = Unit(yard * 5.5, "rod", "yd")
 chain = Unit(yard * 22, "chain", "ch")
 furlong = Unit(chain * 10, "furlong", "fur")
 mile = Unit(furlong * 8, "mile", "mi")
@@ -43,7 +44,7 @@ league = Unit(mile * 3, "league", "lea")
 # TODO: maritime units, Gunter's survey units
 
 # % Speed
-nautical_mile = Unit(meter * 1852, "nautical_mile", "nmi")
+nautical_mile = Unit(meter * 1852, ["nautical_mile", "nmile]"], "nmi")
 
 mph = miles_per_hour = Unit(mile / hour, "miles_per_hour", "mph")
 knot = Unit(nautical_mile / hour, "knot", ["kn", "kt"])
@@ -84,7 +85,7 @@ gill = gill_us if _US else gill_uk
 
 # gallon_us_dry = usdrygal = Unit(bushel_us / 8, "gallon_us_dry", "usdrygal"))
 
-hogshead = Unit(66 * gallon_uk, "hogshead", "hhd")  # TODO
+hogshead = Unit(66 * gallon_uk, "hogshead", ["hhd", "hd"])
 butt = Unit(hogshead * 2, "butt")  # y'all nerds
 
 
@@ -94,17 +95,35 @@ stone = st = Unit(pound * 14, "stone", "st")
 ounce = oz = Unit(pound / 16, "ounce", "oz")
 dram = drachm = dr = Unit(ounce / 16, ["dram", "drachm"], ["dr", "ʒ"])
 
-poundforce = lbf = Unit(pound * standard_gravity, "poundforce", "lbf")
-poundal = Unit(lb * foot / second**2, "poundal", "pdl")
-pound_foot = foot_pound = Unit(lbf * foot, "pound_foot", "lbft")
-slug = Unit(lbf / (foot / second**2), "slug", "slug")
-
-grain = Unit(pound / 7000, "grain", "gr")
-
 imperial_ton = Unit(pound * 2240, "imperial_ton", "t", info="imperial")
+
+# Apocethary
+grain = Unit(pound / 7000, "grain", ["gr", "gr."])
+scruple = Unit(
+    grain * 20, "scruple", "℈")
+apdram = Unit(
+    scruple * 3,
+    ["apothecary_dram", "apdram"], "ʒ")
+apounce = Unit(
+    apdram * 8,
+    ["apothecary_ounce", "troy_ounce", "apounce"],
+    ["℥", "oz t"])
+appound = Unit(
+    apounce * 12,
+    ["apothecary_pound", "troy_pound", "appound"],
+    ["℔", "lb t"])
+
+pennyweight = Unit(grain * 24, "pennyweight", ["dwt", "pwt"])
 
 
 # % Derived
+
+poundforce = lbf = Unit(pound * standard_gravity, "poundforce", "lbf")
+kip = Unit(1000 * lbf, "kip", "kip")
+
+poundal = Unit(lb * foot / second**2, "poundal", "pdl")
+pound_foot = foot_pound = Unit(lbf * foot, "pound_foot", "lbft")
+slug = Unit(lbf / (foot / second**2), "slug", "slug")
 
 pound_per_square_inch = psi = Unit(
     lbf / inch**2, "pound_per_square_inch", "psi")
@@ -114,3 +133,5 @@ inch_mercury = Unit(mercury * inch,
                     "inch_mercury", "inHg")
 
 foot_candle = Unit(lumen / foot**2, "foot_candle", "fc")
+
+mpg = Unit(mile / gallon, "miles_per_gallon", "mpg")
