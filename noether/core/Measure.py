@@ -369,11 +369,7 @@ class Measure(Generic[T]):
     def __rmatmul__(self, display_this: 'Measure | timedelta'):
         if isinstance(display_this, timedelta):
             display_this = self.from_timedelta(display_this)
-        if not isinstance(display_this, Measure):
-            raise TypeError(
-                'Cannot use {}'.format(
-                    type(display_this).__name__))
-        return display_this @ self
+        return Measure(display_this) @ self
 
 
 # Avoid import loops
