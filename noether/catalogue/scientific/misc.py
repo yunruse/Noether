@@ -61,4 +61,4 @@ mercury = meter_mercury / meter
 sverdrup = Unit(cumec * 1e6, "sverdrup", "Sv")
 
 # % Photometric
-nit = Unit(candela / meter**2, 'nit', 'nit')
+nit = Unit(candela / meter**2, 'nit', 'nt', SI_all)

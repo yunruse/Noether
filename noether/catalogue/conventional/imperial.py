@@ -9,8 +9,9 @@ from fractions import Fraction
 from noether.core import Unit, AffineUnit
 from noether.config import Config, conf
 
-from ..scientific import meter, kelvin, mercury, standard_gravity
-from ..scientific import cm, gram, hour, second
+from ..scientific import meter, kelvin, second, lumen
+from ..scientific import cm, gram, hour
+from ..scientific import standard_gravity, mercury
 from .conventional import liter, msw
 
 USE_CUSTOMARY = Config.register('UNITS_customary', True, '''\
@@ -75,9 +76,10 @@ butt = Unit(hogshead * 2, "butt")  # y'all nerds
 
 # % Mass
 pound = lb = Unit(453.59237 * gram, "pound", "lb")
-poundforce = lbf = pound * standard_gravity
-poundal = Unit(lb * foot / second**2, "poundal", "pdl")
+poundforce = lbf = Unit(pound * standard_gravity, "poundforce", "lbf")
 
+poundal = Unit(lb * foot / second**2, "poundal", "pdl")
+pound_foot = foot_pound = Unit(lbf * foot, "pound_foot", "lbft")
 slug = Unit(lbf / (foot / second**2), "slug", "slug")
 
 oz = ounce = Unit(pound / 16, "ounce", "oz")
@@ -95,3 +97,5 @@ fsw = Unit(msw * foot/meter, "foot_sea_water", "fsw")
 
 inch_mercury = Unit(mercury * inch,
                     "inch_mercury", "inHg")
+
+foot_candle = Unit(lumen / foot**2, "foot_candle", "fc")

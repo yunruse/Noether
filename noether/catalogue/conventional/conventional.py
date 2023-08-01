@@ -56,7 +56,7 @@ hectare = Unit(100 * are, "hectare", "ha")
 litre = liter = L = Unit((meter/10) ** 3, ["liter", "litre"], "L", SI_all)
 _ml = L / 1000
 
-# TODO: #44 Handle country ambiguities
+# % cooking
 tablespoon = tbsp = Unit(
     15 * _ml, 'tablespoon', 'tbsp',
     info="A cooking volume used in the UK and Canada. Not to be confused with the AU or US tablespoon.")
@@ -86,7 +86,6 @@ arcsecond = arcsec = Unit(
     degree / 3600, "arcsecond", ["″", "arcsec"], SI_small)
 
 # % Mechanical
-
 horsepower = Unit(
     standard_gravity * kilogram*75 * meter / second,
     'horsepower', 'hp',
@@ -94,6 +93,8 @@ horsepower = Unit(
     " imperial horsepower which is slightly larger")
 
 msw = Unit(bar/10, "meter_sea_water", "msw")
+
+mired = Unit(1 / kelvin(1e6), "mired")
 
 
 # % Display

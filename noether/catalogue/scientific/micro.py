@@ -5,9 +5,15 @@ Small-scale, atomic and nuclear units
 from noether.core import Unit
 
 from ..prefixes import SI_all, SI_large, micro
-from ..fundamental import kilogram, meter
+from ..fundamental import kilogram, meter, mole
 from .si import joule
 from ..conventional.conventional import hour
+from .CODATA import n_0, N_a  # type: ignore
+
+# % Chemical
+
+amagat = Unit(
+    n_0 / N_a, "amagat", "amg")
 
 # % Hartree atomic units
 # where hbar = a_0 = m_e = e = 1
