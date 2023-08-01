@@ -38,7 +38,8 @@ class Catalogue:
         if isinstance(value, Unit):
             ud = self.units_by_dimension
             ud.setdefault(value.dim, [])
-            if value not in ud[value.dim]:
+            # celsius == kelvin, therefore we check via `is` #71
+            if any(value is v for v in ud[value.dim]):
                 ud[value.dim].append(value)
 
             self.units_by_name[name] = value
