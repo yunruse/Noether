@@ -30,7 +30,6 @@ cat = ww.page('Category:Units of measurement')
 exclude = {
     'Years', 'Decades', 'Centuries',  # just lists of years
     'Category:Dimensional analysis',  # some 7,000 articles of nonunits
-
 }
 
 for d, page in fetch_members(cat, 5, exclude, True):
