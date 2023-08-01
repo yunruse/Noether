@@ -73,10 +73,6 @@ speed_of_light = c = Unit(299_792_458 * meter / second, "c", "c")
 # GCWM 26 (2019 redefinition of the SI base units)
 electron_charge = e = Unit(
     coulomb(1.602_176_634e-19), "electron_charge", "e")
-N_a = 6.022_140_76e23 / mole
-boltzmann_constant = k_B = Unit(
-    1.380649e-23 * joule / kelvin,
-    "boltzmann_constant", 'k_b')
 h = Unit(6.626_070_15e-34 * joule * second, "h", "h")
 hbar = Unit(h / (pi*2), "hbar", "ħ")
 
