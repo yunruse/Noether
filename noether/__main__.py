@@ -1,32 +1,36 @@
 """
-TODO: write a description here...
-"""
+Command-line interface to Noether.
 
-# TODO: utilise lexer for the rules
-#    `1m` -> `1 * m`
-#    `in` -> `inch`
-# TODO: add --si
+Provide terms (eg `-10degC @ degF` or `30dalton`) to see their value.
+
+Best ran as `python -im noether`, as if no terms are provided,
+a convenient interactive prompt is summoned.
+"""
 
 import noether
 from noether import *
 
 
 from argparse import ArgumentParser
-parser = ArgumentParser()
+parser = ArgumentParser(
+    description=__doc__,
+    usage='python -[i]m noether [-h] [--no-color] [--value] [terms ...]'
+)
 parser.add_argument(
-    '--no-color',  # TODO: what is the gnu standard here?
+    '--no-color',
     action='store_false',
     help='Suppress colour output',
     dest='color')
 parser.add_argument(
-    '--value', '-V',  # TODO: what is the gnu standard here?
+    '--value', '-V',
     action='store_true',
-    help='Display the value only (equivalent to str(statement))')
+    help='If terms are present, display only their numeric value')
 
-parser.add_argument('terms', nargs='*')
-
+# weird args like `-10degC` are thrown to `unknown`,
+# but if we get args with a nargs='*', they may be in the wrong order
+# therefore, we'll just fetch every unknown argument
 args, unknown = parser.parse_known_args()
-args.terms += unknown
+args.terms = unknown
 
 pretty = None
 if args.color and not args.value:
@@ -49,7 +53,7 @@ if args.terms:
             else:
                 print(value)
         else:
-            print(repr(value))
+            print(value)
     except Exception as e:
         import traceback
         traceback.print_exception(e, limit=0)
@@ -64,6 +68,8 @@ if args.terms:
     # but this is considered not a major problem – bare evals automatically self-delete this way,
     # and we can't assign variables in eval(), so we shouldn't feasibly be able to, for example,
     # have `open()` leave a file handle open or something.
+
+# TODO: allow cli dialect in the repl?
 
 print(f'{len(catalogue.units())} units, {len(list(catalogue.prefixes()))} prefixes')
 print('''
