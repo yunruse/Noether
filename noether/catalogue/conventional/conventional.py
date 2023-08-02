@@ -6,7 +6,7 @@ from noether.core import Unit, AffineUnit, LogarithmicUnit
 from noether.core import display
 from noether.config import Config, conf
 
-from math import pi
+from math import pi, log as _log, e as _e
 
 from ..prefixes import SI_all, SI_large, SI_small
 from ..scientific import meter, second, kilogram, kelvin
@@ -27,8 +27,11 @@ karat = Unit(
     " Increasingly deprecated for millesimal fineness."
     " Not to be confused with the carat.")
 
-decibel = dB = LogarithmicUnit(
-    1, 10, "decibel", "dB")
+# % Logarithmic ratio
+
+bel = LogarithmicUnit(1, 1, "bel", "B")
+decibel = dB = LogarithmicUnit(1, 10, "decibel", "dB")
+neper = Np = LogarithmicUnit(1/_e, _log(10), "neper", "Np")
 
 # % Temperature
 celsius = degC = AffineUnit(kelvin*1, kelvin*273.15, "celsius", "°C")
