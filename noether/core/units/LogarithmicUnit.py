@@ -43,16 +43,15 @@ class LogarithmicUnit(Unit):
 
     __rand__ = __and__
 
-    @staticmethod
-    def __extract_real(v: Real | Measure) -> Real:
-        return v._value if isinstance(v, Measure) else v  # type: ignore
-
     def _repr_measure(self, measure: Real | Measure):
-        m = self.__extract_real(measure)
+        V = Measure._extract_value
+        m = V(measure)
         if m <= 0:
             raise ValueError(
                 'LogarithmicUnits can only be used on positive units')
-        return Unit._repr_measure(self, log10(m / self.__extract_real(self.unit)) * self.units_per_ten)
+        return Unit._repr_measure(
+            self, log10(m / V(self.unit)) * self.units_per_ten)
 
     def _json_extras(self):
-        return {'units_per_ten': self.units_per_ten}
+        V = Measure._extract_value
+        return {'value': V(self.unit), 'units_per_ten': self.units_per_ten}
