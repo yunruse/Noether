@@ -152,8 +152,8 @@ class Measure(Generic[T]):
 
     def to_timedelta(self):
         from ..catalogue.fundamental import second  # type: ignore
-        if self.dim != second.dim and not conf.get(OPENLINEAR):
-            raise DimensionError(
+        if not conf.get(OPENLINEAR):
+            DimensionError.check(
                 self.dim, second.dim,
                 f"Cannot convert to a timedelta."
                 f" Enable conf.{OPENLINEAR} to bypass this.")
@@ -274,11 +274,10 @@ class Measure(Generic[T]):
             case _: oper = "A linear operation"
 
         if isinstance(other, Measure):
-            if self.dim != other.dim:
-                raise DimensionError(
-                    self.dim, other.dim,
-                    f"{oper} only works on units of the same dimension."
-                    f" Enable conf.{OPENLINEAR} to bypass this.")
+            DimensionError.check(
+                self.dim, other.dim,
+                f"{oper} only works on units of the same dimension."
+                f" Enable conf.{OPENLINEAR} to bypass this.")
 
         elif self.dim and not conf.get(BARENUMBER):
             raise NoetherError(

@@ -23,6 +23,12 @@ class DimensionError(NoetherError):
     def __init__(self, dim1: 'Dimension', dim2: 'Dimension', message: str | None = None):
         super().__init__(dim1, dim2, message)
 
+    @classmethod
+    def check(cls, dim1: 'Dimension', dim2: 'Dimension', message: str | None = None):
+        # ensure not dimensionless - those are usually okay
+        if dim1 != dim2:
+            raise cls(dim1, dim2, message)
+
     def __str__(self):
         dim1, dim2, msg = self.args
         message = f'Dimensions {dim1} and {dim2} do not match.'

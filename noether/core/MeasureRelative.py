@@ -33,8 +33,8 @@ class MeasureRelative(Measure):
         object.__setattr__(self, 'unit', unit)
 
     def display_unit(self):
-        if self.dim != self.unit.dim and not conf.get(OPENLINEAR):
-            raise DimensionError(
+        if not conf.get(OPENLINEAR):
+            DimensionError.check(
                 self.dim, self.unit.dim,
                 f"To use @ on units with different dimensions, enable conf.{OPENLINEAR}.")
 
