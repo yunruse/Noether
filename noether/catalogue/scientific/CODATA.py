@@ -13,9 +13,13 @@ catalogue = Catalogue(vars(si), 'CODATA data-fetching catalogue')
 
 COLUMN_LENGTHS = [60, 25, 25]
 NAMED_CODATA_UNITS = {
-    'atomic mass constant': 'u',
-    'electron mass': 'm_e',
-    'Newtonian constant of gravitation': 'G'
+    'atomic_mass_constant': 'u',
+    'electron_mass': 'm_e',
+    'Newtonian_constant_of_gravitation': 'G',
+    'Loschmidt_constant_at_101_325_Pa': 'n_0',
+    'Avogadro_constant': 'N_a',
+    'Boltzmann_constant': 'k_B',
+    'fine_structure_constant': 'α',
 }
 
 one = Unit(1)
@@ -31,6 +35,8 @@ def _fmt_name(string: str):
             .replace(')', '')
             .replace(',', '')
             .replace('/', '_over_')
+            .replace('_with_273_15_K_', '_at_')
+            .replace('101_325_kPa', '101_325_Pa')
             )
 
 
@@ -54,21 +60,22 @@ def _codata(path: str):
                 scanning = line.startswith('----')
                 continue
 
-            name, value, uncertainty, unit = scanline(line, COLUMN_LENGTHS)
+            full_name, value, uncertainty, unit = scanline(
+                line, COLUMN_LENGTHS)
 
-            if name == 'Avogadro constant':
-                # TODO: #42 ComposedUnit
-                # HACK
-                unit = ''
+            # if full_name == 'Avogadro constant':
+            #     # TODO: #42 ComposedUnit
+            #     # HACK
+            #     unit = ''
 
-            chunks = name.split()
-            if 'in' in chunks and not name.startswith('shielding'):
+            chunks = full_name.split()
+            if 'in' in chunks and not full_name.startswith('shielding'):
                 continue  # already defined in another unit
             if chunks[-1] == 'relationship':
                 continue  # unit does not need extra definition
 
             value = _fmt_value(value)
-            name = _fmt_name(name)
+            name = _fmt_name(full_name)
             uncertainty = _fmt_value(uncertainty) or None
             unit = unit.replace('^', '**').replace(' ', '*')
             unit = eval(unit, {}, catalogue) if unit else one
@@ -78,7 +85,7 @@ def _codata(path: str):
                 unit(value, uncertainty),
                 name,
                 symbol,
-                info='CODATA 2018',
+                info=f'{full_name}, CODATA 2018',
             )
 
     return units

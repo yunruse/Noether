@@ -1,8 +1,8 @@
 
 from typing import TYPE_CHECKING
 
-from noether.errors import DimensionError
-from noether.config import conf
+from ..errors import DimensionError
+from ..config import conf
 from .Measure import OPENLINEAR, Measure
 
 if TYPE_CHECKING:
@@ -21,15 +21,20 @@ class MeasureRelative(Measure):
 
     @property
     def value(self):
-        return self._value / self.unit._value
+        from .units import AffineUnit
+        value = self._value
+        if isinstance(self.unit, AffineUnit):
+            value -= self.unit.zero_point._value
+
+        return value / self.unit._value
 
     def __init__(self, measure: Measure, unit: 'Unit'):
         Measure.__init__(self, measure)
         object.__setattr__(self, 'unit', unit)
 
     def display_unit(self):
-        if self.dim != self.unit.dim and not conf.get(OPENLINEAR):
-            raise DimensionError(
+        if not conf.get(OPENLINEAR):
+            DimensionError.check(
                 self.dim, self.unit.dim,
                 f"To use @ on units with different dimensions, enable conf.{OPENLINEAR}.")
 

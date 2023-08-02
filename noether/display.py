@@ -6,7 +6,8 @@ Handles Unicode.
 
 from decimal import Decimal
 from fractions import Fraction
-from noether.helpers import Real, removeprefix
+from math import ceil, log10
+from noether.helpers import Real, removeprefix, removesuffix
 
 from .config import Config, conf
 
@@ -85,15 +86,23 @@ def uncertainty(number: Real | str, stddev: Real | str):
 def scinot(number: Real, digits: int | None = None):
     notation = format(number, f'.{digits}e' if digits is not None else 'e')
     num, exp = notation.split('e')
+
+    while num.endswith('0'):
+        num = num[:-1]
+    num = removesuffix(num, '.')
+
     sign = '' if exp.startswith('+') else '-'
     exp = int(exp[1:])
     return f'{num}e{sign}{exp}'
 
 
 def _fmt(number: Real):
+    if number == 0:
+        return '0'
+    mag = log10(abs(number))
     DIGITS: int = conf.get(DISPLAY_DIGITS)
-    n = str(round(number, DIGITS))
-    if len(n) > DIGITS:
+    n = str(round(number, DIGITS - ceil(mag)))
+    if 'e' in n or (len(n) > DIGITS and not -3 < mag < 4):
         return scinot(number)
 
     m = ''

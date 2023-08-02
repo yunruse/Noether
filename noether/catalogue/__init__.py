@@ -6,6 +6,7 @@ from .prefixes import *
 from .dimensions import *
 
 # Units are imported in this exact order
+from .data import *
 from .scientific import *
 from .conventional import *
 
@@ -33,6 +34,3 @@ Put every prefixed unit (microohm, kibibyte &c) as measures in the Noether names
 This may cause annoyance if you `from noether import *`!''')
 if conf.get('CATALOGUE_all_prefixes_in_namespace'):
     vars().update(catalogue.all_prefixed_units())
-
-# HACK: some name collisions are not the best
-K = kelvin

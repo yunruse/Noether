@@ -1,43 +1,55 @@
 """
-TODO: write a description here...
+Command-line interface to Noether.
+
+Provide terms (eg `-10degC @ degF` or `30dalton`) to see their value.
+
+Best ran as `python -im noether`, as if no terms are provided,
+a convenient interactive prompt is summoned.
 """
 
-# TODO: utilise lexer for the rules
-#    `1m` -> `1 * m`
-#    `in` -> `inch`
-# TODO: add --si
-
+from os import environ
 import noether
 from noether import *
 
 
 from argparse import ArgumentParser
-parser = ArgumentParser()
+parser = ArgumentParser(
+    description=__doc__,
+    usage='python -[i]m noether [-h] [--no-color] [--value] [terms ...]'
+)
 parser.add_argument(
-    '--no-color',  # TODO: what is the gnu standard here?
+    '--no-color',
     action='store_false',
-    help='Suppress colour output',
+    help='Suppress colour output (NO_COLOR=1 is also supported)',
     dest='color')
 parser.add_argument(
-    '--value', '-V',  # TODO: what is the gnu standard here?
+    '--value', '-V',
     action='store_true',
-    help='Display the value only (equivalent to str(statement))')
+    help='If terms are present, display only their numeric value')
 
-parser.add_argument('terms', nargs='*')
+# weird args like `-10degC` are thrown to `unknown`,
+# but if we get args with a nargs='*', they may be in the wrong order
+# therefore, we'll just fetch every unknown argument
+args, unknown = parser.parse_known_args()
+args.terms = unknown
 
-args = parser.parse_args()
+# % Color
+
+if environ.get('NO_COLOR', ''):
+    args.color = False
 
 pretty = None
 if args.color and not args.value:
     try:
-        from rich import pretty, print
+        from rich import pretty
     except ImportError:
         pass
     else:
         pretty.install()
 
+# % Eval and print terms
+
 if args.terms:
-    # this is very basic at the moment!
     from ._tokenizers import cli_dialect, transform
     src = transform(" ".join(args.terms), cli_dialect)
     try:
@@ -49,11 +61,15 @@ if args.terms:
             else:
                 print(value)
         else:
-            print(repr(value))
+            if isinstance(value, Measure) and pretty:
+                from rich import print as _print
+                _print(value)
+            else:
+                print(repr(value))
     except Exception as e:
         import traceback
-        traceback.print_exception(e, limit=0)
         import os
+        traceback.print_exception(e, limit=0)
         os._exit(2)
     else:
         import os
@@ -65,6 +81,10 @@ if args.terms:
     # and we can't assign variables in eval(), so we shouldn't feasibly be able to, for example,
     # have `open()` leave a file handle open or something.
 
+# % REPL
+
+# TODO: allow cli dialect?
+
 print(f'{len(catalogue.units())} units, {len(list(catalogue.prefixes()))} prefixes')
 print('''
 >>> import noether
@@ -72,8 +92,8 @@ print('''
 
 if pretty is not None:
     print('''\
->>> from rich import pretty, print
+>>> from rich import pretty
 >>> pretty.install()''')
 print()
 
-del args, parser, ArgumentParser
+del ArgumentParser, parser, args, unknown

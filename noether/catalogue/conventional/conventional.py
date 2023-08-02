@@ -2,18 +2,18 @@
 Conventional SI-compatible units.
 '''
 
-from noether.core import Unit, AffineUnit
+from noether.core import Unit, AffineUnit, LogarithmicUnit
 from noether.core import display
 from noether.config import Config, conf
 
-from math import pi
+from math import pi, log as _log, e as _e
 
 from ..prefixes import SI_all, SI_large, SI_small
 from ..scientific import meter, second, kilogram, kelvin
 from ..scientific import radian, turn
 from ..scientific import turn
 from ..scientific import day, hour, minute
-from ..scientific import gram
+from ..scientific import gram, bar
 from ..scientific import standard_gravity
 
 # % Ratio
@@ -26,6 +26,12 @@ karat = Unit(
     info="Used in gold purity; 24Kt is pure or near-pure."
     " Increasingly deprecated for millesimal fineness."
     " Not to be confused with the carat.")
+
+# % Logarithmic ratio
+
+bel = LogarithmicUnit(1, 1, "bel", "B")
+decibel = dB = LogarithmicUnit(1, 10, "decibel", "dB")
+neper = Np = LogarithmicUnit(1/_e, _log(10), "neper", "Np")
 
 # % Temperature
 celsius = degC = AffineUnit(kelvin*1, kelvin*273.15, "celsius", "°C")
@@ -53,12 +59,20 @@ are = Unit(100 * meter**2, "are", "a")
 hectare = Unit(100 * are, "hectare", "ha")
 
 # % Volume
-litre = liter = L = Unit((meter/10) ** 3, ["liter", "litre"], "l", SI_all)
-milliliter = milliliter = ml = mL = Unit(
-    liter / 1000, ['milliliter', 'millilitre'], 'mL')
+litre = liter = L = Unit((meter/10) ** 3, ["liter", "litre"], "L", SI_all)
+_ml = L / 1000
+
+# % cooking
+tablespoon = tbsp = Unit(
+    15 * _ml, 'tablespoon', 'tbsp',
+    info="A cooking volume used in the UK and Canada. Not to be confused with the AU or US tablespoon.")
+teaspoon = tsp = Unit(
+    tbsp / 3, 'teaspoon', 'tsp', info='A cooking volume.')
+dessertspoon = dstspn = Unit(
+    10 * _ml, 'dessertspoon', 'dstspn', info='A cooking volume.')
 
 # % Mass & density
-ton = tonne = Unit(
+ton = tonne = metricton = Unit(
     kilogram*1000, ["ton", "tonne"], "t", SI_large, info="metric")
 gsm = Unit(
     gram / meter**2, "gram per square meter", "gsm",
@@ -78,12 +92,19 @@ arcsecond = arcsec = Unit(
     degree / 3600, "arcsecond", ["″", "arcsec"], SI_small)
 
 # % Mechanical
-
 horsepower = Unit(
     standard_gravity * kilogram*75 * meter / second,
     'horsepower', 'hp',
     info="Metric horsepower, not to be confused with the"
     " imperial horsepower which is slightly larger")
+
+mach = Unit(
+    331.46 * meter/second, "mach", "Ma",
+    info="Conventional measure for air at 0°C; a mach number is defined locally relative to the air.")
+
+msw = Unit(bar/10, "meter_sea_water", "msw")
+
+mired = Unit(1 / kelvin(1e6), "mired")
 
 
 # % Display

@@ -42,7 +42,7 @@ else:
     angle = dimensionless
 solid_angle = D(angle**2, 'solid_angle')
 
-frequency = D(time**-1, 'frequency')
+frequency = radioactivity = D(time**-1, 'frequency', 'radioactivity')
 
 # % Dynamics
 
@@ -103,7 +103,7 @@ illuminance = luminous_exitance = luminous_emittance = D(
 luminous_exposure = D(illuminance * time, 'luminous_exposure')
 luminous_energy_density = D(
     luminous_energy / volume, 'luminous_energy_density')
-luminous_efficiacy = D(luminosity / power, 'luminous_efficiacy')
+luminous_efficacy = D(luminous_energy / power, 'luminous_efficiacy')
 
 irradiance = intensity = heat_flux = D(
     power / area, 'irradiance', 'intensity', 'heat_flux')
@@ -124,6 +124,9 @@ specific_volume = D(volume / mass, 'specific_volume')
 number_density = D(1 / volume, 'number_density')
 probability_density = D(1 / volume, 'probability_density')
 reaction_rate = D(substance / (volume * time), 'reaction_rate')
+
+volumetric_radioactivity = D(
+    radioactivity / volume, 'volumetric_radioactivity')
 
 specific_energy = dose = D(energy / mass, 'specific_energy', 'dose')
 energy_density = D(energy / volume, 'energy_density')

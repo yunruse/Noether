@@ -16,10 +16,11 @@ time = Dimension.new('time', 'T', -1)
 candela = cd = Unit(luminosity, 'candela', 'cd', SI_all)
 ampere = A = Unit(current, 'ampere', 'A', SI_all)
 kelvin = K = Unit(temperature, 'kelvin', 'K', SI_all)
-kilogram = kg = Unit(mass, 'kilogram', 'kg')
+kilogram = kg = Unit(mass, ['kilogram', 'key'], 'kg')
+# prefixes are assigned to gram in scientific/cgs.py
 mole = mol = Unit(substance, 'mole', 'mol', SI_all)
 meter = metre = m = Unit(length, ['meter', 'metre'], 'm', SI_all)
-second = s = Unit(time, 'second', 's', SI_all)
+second = s = sec = Unit(time, ['second', 'sec'], 's', SI_all)
 
 __all__ = [
     'luminosity', 'candela', 'cd',

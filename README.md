@@ -1,4 +1,5 @@
-# Noether 1.0.1 (in development)
+# Noether
+`523 units, 60 prefixes`
 
 [![PyPI](https://img.shields.io/pypi/v/noether?color=blue)](https://pypi.org/packages/noether)
 
@@ -18,6 +19,8 @@ $ noe marathon
 marathon  # length, 42195 m, Race length based on Greek legend, set by convention from 1908 Summer Olympics
 $ noether 23degC @ degF
 73.4 °F  # temperature
+$ noether 'horsepower @ dB(kW)'
+-1.33418061 dB(kW)  # power, 0.73549875 kW
 ```
 
 The CLI allows a few niceties such as slightly terser syntax, but otherwise behaves identically to Python:
@@ -40,7 +43,7 @@ In addition to `@` for display, you can more permanently set display units:
 mile  # length, 63360 in
 ```
 
-Units can propagate uncertainty automatically under most operations:
+Units propagate uncertainty automatically under most operations:
 
 ```py
 >>> m(5, 0.1)**3
