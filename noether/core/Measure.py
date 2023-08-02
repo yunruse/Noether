@@ -1,15 +1,17 @@
 __all__ = ('Measure', )
 
+from typing import Callable, Optional, TypeVar, ClassVar, Generic, TYPE_CHECKING
 from dataclasses import dataclass
 from functools import total_ordering
 import operator
 from sys import version_info
-from typing import Callable, Optional, TypeVar, ClassVar, Generic, TYPE_CHECKING
-from noether.helpers import MeasureValue
+from datetime import date, datetime, timedelta
 
+from ..helpers import MeasureValue
 from ..errors import NoetherError, DimensionError
 from ..config import Config, conf
 from ..display import DISPLAY_REPR_CODE
+
 from .Prefix import Prefix
 from .Dimension import Dimension, dimensionless
 from .MeasureInfo import MeasureInfo
@@ -18,6 +20,9 @@ if TYPE_CHECKING:
     from .Unit import Unit
     from .UnitSet import UnitSet
     from .MeasureRelative import MeasureRelative
+
+Time = date | datetime | timedelta
+T = TypeVar('T', int, MeasureValue)
 
 
 OPENLINEAR = Config.register("measure_ignore_dimension", False, """\
@@ -29,8 +34,6 @@ Allow addition and subtraction of bare numbers to units""")
 
 UNCERTAINTY_SHORTHAND = Config.register("uncertainty_display_shorthand", False, """\
 Display e.g. 0.15(2) instead of 0.15 ± 0.02.""")
-
-T = TypeVar('T', int, MeasureValue)
 
 
 @dataclass(
@@ -53,10 +56,13 @@ class Measure(Generic[T]):
 
     def __init__(
         self,
-        value: "Measure[T] | T" = 1,
+        value: "Measure[T] | T | timedelta" = 1,
         stddev: Optional[T] = None,
         dim: Optional[Dimension] = None,
     ):
+        if isinstance(value, timedelta):
+            value = self.from_timedelta(value)
+
         def set(x, v):
             # bypass Frozen
             object.__setattr__(self, x, v)
@@ -139,6 +145,20 @@ class Measure(Generic[T]):
 
         return handler
 
+    @classmethod
+    def from_timedelta(cls, dt: timedelta):
+        from ..catalogue.fundamental import second  # type: ignore
+        return second * dt.total_seconds()
+
+    def to_timedelta(self):
+        from ..catalogue.fundamental import second  # type: ignore
+        if not conf.get(OPENLINEAR):
+            DimensionError.check(
+                self.dim, second.dim,
+                f"Cannot convert to a timedelta."
+                f" Enable conf.{OPENLINEAR} to bypass this.")
+        return timedelta(seconds=float(self/second))
+
     # |~~\ '      |
     # |   ||(~|~~\|/~~|\  /
     # |__/ |_)|__/|\__| \/
@@ -189,9 +209,12 @@ class Measure(Generic[T]):
 
     def __geo(
         self,
-        other: 'Measure[T] | MeasureValue',
+        other: 'Measure[T] | MeasureValue | timedelta',
         op=operator.mul
     ) -> 'Measure':
+        if isinstance(other, timedelta):
+            return op(self, self.from_timedelta(other))
+
         value = self._value
         stddev = None
         dim = self.dim
@@ -247,22 +270,28 @@ class Measure(Generic[T]):
             case operator.add: oper = "Addition"
             case operator.sub: oper = "Subtraction"
             case operator.mod: oper = "Modulo"
+            case operator.eq: oper = "Comparison"
             case operator.lt: oper = "Comparison"
             case _: oper = "A linear operation"
 
         if isinstance(other, Measure):
-            if self.dim != other.dim:
-                raise DimensionError(
-                    self.dim, other.dim,
-                    f"{oper} only works on units of the same dimension."
-                    f" Enable conf.{OPENLINEAR} to bypass this.")
+            DimensionError.check(
+                self.dim, other.dim,
+                f"{oper} only works on units of the same dimension."
+                f" Enable conf.{OPENLINEAR} to bypass this.")
 
-        elif not conf.get(BARENUMBER):
+        elif self.dim and not conf.get(BARENUMBER):
             raise NoetherError(
                 f"{oper} only works on Measures and Units."
                 f" Enable conf.{BARENUMBER} to bypass this.")
 
-    def __lin(self, other: 'Measure[T] | Dimension | MeasureValue', op: Callable):
+    def __lin(self, other: 'Measure[T] | Dimension | MeasureValue | Time', op: Callable, reverse=False):
+        if isinstance(other, Time):
+            if reverse:
+                return op(other, self.to_timedelta())
+            else:
+                return op(self.to_timedelta(), other)
+
         self.__lin_cmp(other, op)
 
         value = self._value
@@ -280,44 +309,57 @@ class Measure(Generic[T]):
                 so = 0 if other.stddev is None else other.stddev
                 stddev = (ss**2 + so**2) ** 0.5
         else:
-            value = op(self._value, other)
+            if reverse:
+                value = op(other, self._value)
+            else:
+                value = op(self._value, other)
 
         return Measure(value, stddev, dim)
 
     def __add__(self, other): return self.__lin(other, operator.add)
     def __radd__(self, other): return self.__lin(other, operator.add)
     def __sub__(self, other): return self.__lin(other, operator.sub)
+
+    def __rsub__(self, other):
+        return self.__lin(other, operator.sub, reverse=True)
+
     def __mod__(self, other): return self.__lin(other, operator.mod)
 
     # Equality and ordering
 
+    @staticmethod
+    def _extract_dim(v: 'Measure | MeasureValue') -> Dimension:
+        return v.dim if isinstance(v, Measure) else Dimension()  # type: ignore
+
+    @staticmethod
+    def _extract_value(v: 'Measure | MeasureValue') -> MeasureValue:
+        return v._value if isinstance(v, Measure) else v  # type: ignore
+
     def __eq__(self, other):
-        if isinstance(other, Measure):
-            if other.dim != self.dim and not conf.get(OPENLINEAR):
-                return False
-            return self._value == other._value
+        if self._extract_dim(other) != self.dim and not conf.get(OPENLINEAR):
+            return False
+        return self._value == self._extract_value(other)
 
     def __lt__(self, other):
         self.__lin_cmp(other, operator.lt)
-        if isinstance(other, Measure):
-            return self._value < other._value
+        return self._value < self._extract_value(other)
 
     #  /~~       |               |~~\ '      |
     # |  |   |(~~|~/~\|/~\ /~\   |   ||(~|~~\|/~~|\  /
     #  \__\_/|_) | \_/|   |   |  |__/ |_)|__/|\__| \/
     #                                    |        _/
 
-    def __matmul__(self, unit_or_unitset: 'Unit | UnitSet'):
+    def __matmul__(self, display_with: 'Unit | UnitSet'):
         from .Unit import Unit
         from .UnitSet import UnitSet
 
-        if isinstance(unit_or_unitset, UnitSet):
-            unit = unit_or_unitset.unit_for_dimension(self.dim)
+        if isinstance(display_with, UnitSet):
+            unit = display_with.unit_for_dimension(self.dim)
             if unit is None:
                 return self
             return self @ unit
 
-        if not isinstance(unit_or_unitset, Unit):
+        if not isinstance(display_with, Unit):
             raise TypeError('Can only use @ (display relative to) on a Unit.')
 
         # HACK
@@ -328,7 +370,12 @@ class Measure(Generic[T]):
         #               which binds as   (a  @  b) /  c
         # effortlessly becomes equiv to   a  @ (b  /  c)
 
-        return MeasureRelative(self, unit_or_unitset)
+        return MeasureRelative(self, display_with)
+
+    def __rmatmul__(self, display_this: 'Measure | timedelta'):
+        if isinstance(display_this, timedelta):
+            display_this = self.from_timedelta(display_this)
+        return Measure(display_this) @ self
 
 
 # Avoid import loops

@@ -9,11 +9,12 @@ from math import pi
 from ..prefixes import SI_all, centi
 from .si import SI_all, meter, kilogram, second as s
 from .si import ampere, lux, coulomb, henry, ohm, volt, tesla
-from .essential import turn, nit
+from .misc import turn, nit
 
 
 # CGS units
-gram = g = Unit(kilogram / 1000, 'gram', 'g', SI_all)
+gram = g = Unit(
+    kilogram / 1000, ['gram', 'gramme'], ['g', 'gm'], SI_all)
 cm = centi * meter
 
 CGS = UnitSet({cm, g, s})
@@ -29,7 +30,7 @@ stokes = CGS(Unit(cm**2/s, "stokes", "St"))
 kayser = CGS(Unit(1/cm, "kayser", "K"))
 
 # Luminance
-phot = CGS(Unit(lux / 10_000, 'phot', 'ph'))
+phot = CGS(Unit(10_000 * lux, 'phot', 'ph'))
 stilb = CGS(Unit(nit * 1e4, 'stilb', 'sb'))
 
 # EMU

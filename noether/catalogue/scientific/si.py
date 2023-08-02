@@ -18,14 +18,17 @@ def SI_d(unit: Unit):
 
 
 # Time
-minute = Unit(second*60, 'minute', ['min'])
-hour = Unit(minute * 60, 'hour', ['hr', 'h'])
-day = Unit(hour * 24, "day", "d")
+minute = min = Unit(second*60, 'minute', ['min'])
+hour = hr = Unit(minute * 60, 'hour', ['hr', 'h'])
+day = da = Unit(hour * 24, "day", "d")
 year_julian = Unit(
     day * 365.25,
     "year", ["yr", "ya"], SI_large,
     info="Julian calendar - assuming leap year every 400 years."
     " Superseded by Gregorian year.")
+julian_month = month = Unit(
+    year_julian / 12, "month", "mo",
+    info="1/12 of a Julian year")
 
 # Rotation
 becquerel = Bq = SI(Unit(frequency, 'becquerel', "Bq", SI_all))
@@ -73,10 +76,6 @@ speed_of_light = c = Unit(299_792_458 * meter / second, "c", "c")
 # GCWM 26 (2019 redefinition of the SI base units)
 electron_charge = e = Unit(
     coulomb(1.602_176_634e-19), "electron_charge", "e")
-N_a = 6.022_140_76e23 / mole
-boltzmann_constant = k_B = Unit(
-    1.380649e-23 * joule / kelvin,
-    "boltzmann_constant", 'k_b')
 h = Unit(6.626_070_15e-34 * joule * second, "h", "h")
 hbar = Unit(h / (pi*2), "hbar", "ħ")
 

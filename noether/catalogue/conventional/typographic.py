@@ -4,7 +4,7 @@ Typographic (imperial) units.
 
 from noether.core import Unit
 
-from .imperial import inch
+from .avourdupois import inch
 
 pica = Unit(inch / 6, "pica")  # as defined by PostScript
 cicero = Unit(inch / 6, "cicero")

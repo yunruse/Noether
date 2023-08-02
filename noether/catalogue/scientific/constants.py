@@ -10,15 +10,14 @@ from .CODATA import CODATA
 
 from math import pi
 
-mu_0 = Unit(4 * pi * 1e-7 * newton / ampere ** 2, "mu_0", "μ₀")
-e_0 = Unit(1 / (mu_0 * c ** 2), "e_0", "e₀")
+vacuum_permeability = mu_0 = Unit(
+    4 * pi * 1e-7 * newton / ampere ** 2, "vacuum_permeability", ["mu_0", "μ₀"])
+vacuum_permittivity = e_0 = Unit(
+    1 / (mu_0 * c ** 2), "vacuum_permittivity", ["e_0", "ε₀"])
 z_0 = Unit(mu_0 * c, "z_0", "z₀")
 
 k_e = Unit(1 / (4*pi*e_0), "k_e", "kₑ")
 
-fine_structure_constant = alpha = Unit(
-    k_e * e**2 / (hbar*c),
-    ["fine_structure_constant", "alpha"], "α")
 rydberg = Ry = Unit(
     joule(2.179_872_361_1035, 4.2e-15),
     "rydberg", "Ry", info="CODATA 2018")

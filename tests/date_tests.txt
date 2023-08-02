@@ -1,0 +1,26 @@
+>>> ten_mins @ minute  # timedelta @ Unit
+10 min  # time
+>>> ten_mins / second  # timedelta / Unit
+600
+>>> ten_mins * newton  # timedelta * Unit
+600 kg m / s  # momentum
+>>> mile / ten_mins  # Unit / timedelta
+2.68224 m / s  # speed
+
+>>> ten_mins + minute  # timedelta + Measure
+datetime.timedelta(seconds=660)
+>>> minute + ten_mins  # Measure - timedelta
+datetime.timedelta(seconds=660)
+>>> ten_mins - minute  # timedelta - Measure
+datetime.timedelta(seconds=540)
+>>> minute - ten_mins  # Measure - timedelta
+datetime.timedelta(days=-1, seconds=85860)
+
+>>> valentines + day  # date + Measure
+datetime.date(2023, 2, 15)
+>>> valentines - day  # date - Measure
+datetime.date(2023, 2, 13)
+>>> christmas_midnight + hour  # datetime + Measure
+datetime.datetime(2023, 12, 25, 1, 0)
+>>> christmas_midnight - hour  # datetime - Measure
+datetime.datetime(2023, 12, 24, 23, 0)

@@ -1,4 +1,5 @@
-# Noether: units for Python
+# Noether
+`523 units, 60 prefixes`
 
 [![PyPI](https://img.shields.io/pypi/v/noether?color=blue)](https://pypi.org/packages/noether)
 
@@ -16,17 +17,18 @@ Noether can be used as a Python package or as a CLI:
 $ alias noe='python -im noether'
 $ noe marathon
 marathon  # length, 42195 m, Race length based on Greek legend, set by convention from 1908 Summer Olympics
-$ noether 23degC @ degF
+$ noe 23degC @ degF
 73.4 °F  # temperature
+$ noe 'horsepower @ dB(kW)'
+-1.33418061 dB(kW)  # power, 0.73549875 kW
 ```
 
 The CLI allows for a slightly terser syntax, with numbers before the unit name and `in` instead of `inch`:
 
 ```sh
-$ noether 5cm @ in --value
+$ noe 5cm @ in --value
 1.9685039370078738
-$ python
->>> from noether import *
+$ noe
 >>> 5*cm @ inch
 1.9685039370078738 in  # length
 ```
@@ -40,7 +42,7 @@ In addition to `@` for display, you can more permanently set display units:
 mile  # length, 63360 in
 ```
 
-Units can propagate uncertainty automatically under most operations:
+Units propagate uncertainty automatically under most operations:
 
 ```py
 >>> m(5, 0.1)**3

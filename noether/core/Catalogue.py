@@ -38,7 +38,8 @@ class Catalogue:
         if isinstance(value, Unit):
             ud = self.units_by_dimension
             ud.setdefault(value.dim, [])
-            if value not in ud[value.dim]:
+            # celsius == kelvin, therefore we check via `is` #71
+            if any(value is v for v in ud[value.dim]):
                 ud[value.dim].append(value)
 
             self.units_by_name[name] = value
@@ -91,14 +92,16 @@ class Catalogue:
         for prefix_set in self.prefix_sets.values():
             yield from prefix_set
 
+    def _all_prefixed_units(self):
+        for unit in self.units_by_name.values():
+            yield unit
+            yield from unit.prefixed_units()
+
     def all_prefixed_units(self):
         units: dict[str, Unit] = {}
-
-        for unit in self.units_by_name.values():
-            units.update(unit._namespace())
-            for u in unit.prefixed_units():
-                units.update(u._namespace())
-
+        for unit in self._all_prefixed_units():
+            for n, u in unit._namespace().items():
+                units.setdefault(n, u)
         return units
 
     def __repr__(self):
