@@ -42,3 +42,15 @@ Avogadro_constant  # substance**-1, 6.022141e23 mol**-1, Avogadro constant, CODA
 
 >>> dalton  # Small units should show value
 atomic_mass_unit  # mass, 1.660539e-27 kg
+
+>>> dB(3)  # LogarithmicUnit: 10^0.3
+3 dB  # 1.99526231
+
+>>> 2 @ dB  # LogarithmicUnit display
+3.01029996 dB  # 2
+
+>>> mile @ dB(inch)  # LogarithmicUnit MeasureRelative
+48.0181517 dB(in)  # length, 63360 in
+
+>>> watt @ dB(kW)  # LogarithmicUnit MeasureRelative
+-30 dB(kW)  # power, 0.001 kW

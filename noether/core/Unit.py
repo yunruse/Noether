@@ -11,7 +11,7 @@ from noether.helpers import Rational, Real, removeprefix
 from ..errors import NoetherError
 from ..config import conf
 from ..display import DISPLAY_REPR_CODE, canonical_number
-from .Prefix import Prefix, PrefixSet
+from .Prefix import PrefixSet
 from .Dimension import Dimension
 from .Measure import Measure, UNCERTAINTY_SHORTHAND
 
@@ -149,14 +149,18 @@ class Unit(Measure):
             json['info'] = self.info
         return json
 
-    def _repr_measure(self, measure: Measure):
-        val = measure._value / self._value
-        stddev = None
-        if measure.stddev is not None:
-            stddev = measure.stddev / self._value
+    def _repr_measure(self, measure: Real | Measure):
+        if isinstance(measure, Measure):
+            val = measure._value / self._value
+            stddev = None
+            if measure.stddev is not None:
+                stddev = measure.stddev / self._value
+        else:
+            val: Real = measure  # type: ignore
+            stddev = None
 
         v = canonical_number(val, stddev, conf.get(UNCERTAINTY_SHORTHAND))
-        if self.dim:
+        if self.dim or self.symbols:
             v += ' ' + self.symbol
         return v
 

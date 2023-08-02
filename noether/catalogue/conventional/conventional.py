@@ -2,7 +2,7 @@
 Conventional SI-compatible units.
 '''
 
-from noether.core import Unit, AffineUnit
+from noether.core import Unit, AffineUnit, LogarithmicUnit
 from noether.core import display
 from noether.config import Config, conf
 
@@ -26,6 +26,9 @@ karat = Unit(
     info="Used in gold purity; 24Kt is pure or near-pure."
     " Increasingly deprecated for millesimal fineness."
     " Not to be confused with the carat.")
+
+decibel = dB = LogarithmicUnit(
+    1, 10, "decibel", "dB")
 
 # % Temperature
 celsius = degC = AffineUnit(kelvin*1, kelvin*273.15, "celsius", "°C")
