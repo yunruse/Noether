@@ -17,11 +17,14 @@ class LogarithmicUnit(Unit):
         units_per_ten: Real,
         names: list[str] | str | None = None,
         symbols: list[str] | str | None = None,
+        info: str | None = None,
     ):
         object.__setattr__(self, 'unit', unit)
         object.__setattr__(self, 'units_per_ten', units_per_ten)
         # ensure unit == unit
-        Unit.__init__(self, unit * 10 ** (1/units_per_ten), names, symbols)
+        Unit.__init__(
+            self, unit * 10 ** (1/units_per_ten),
+            names=names, symbols=symbols, info=info)
 
     def __call__(self, value: Real | Unit):
         if isinstance(value, Unit):
