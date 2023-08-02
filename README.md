@@ -1,5 +1,5 @@
 # Noether
-*520 units, 60 prefixes*
+`523 units, 60 prefixes`
 
 [![PyPI](https://img.shields.io/pypi/v/noether?color=blue)](https://pypi.org/packages/noether)
 
@@ -19,7 +19,7 @@ $ noe marathon
 marathon  # length, 42195 m, Race length based on Greek legend, set by convention from 1908 Summer Olympics
 $ noether 23degC @ degF
 73.4 °F  # temperature
-$ noether horsepower @ dB(kW)
+$ noether 'horsepower @ dB(kW)'
 -1.33418061 dB(kW)  # power, 0.73549875 kW
 ```
 

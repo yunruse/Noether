@@ -1,6 +1,7 @@
 # Noether changelog
 
 ## 1.1
+***28 Jul 2023, [44 commits](https://github.com/yunruse/Noether/pull/73/commits), closing [17 issues](https://github.com/yunruse/Noether/milestone/1?closed=1)***
 
 - Various further bugfixes and improvements for display mechanisms
 - Support for logarithmic units, such as `decibel`
@@ -14,7 +15,7 @@
   - **Historical scientific**:
     - temperature: `degN`, `degRe`, `degDe`, `degRo`,
     - radioactive: `curie`, `rutherford`, `thomson`, `roentgen`, `Mache`
-    - misc: `spat_length`, `foot_lambert`,
+    - misc: `spat_length`, `foot_lambert`
   - **Conventional**:
     - logarithmic: `bel`, `decibel`, `neper`
     - volume: `gill`, `quart`
