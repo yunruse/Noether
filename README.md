@@ -73,6 +73,13 @@ Various `conf` settings allow for customisation to behaviour:
 Use `conf.save()` to save to (by default) `~/.config/noether.toml`.
 
 
+## Roadmap
+
+The approximate roadmap for future releases is:
+- Support for GNU `units`, including exporting a file to work directly in `units`
+- A custom format (likely YAML) for defining the catalogue far more quickly
+- Support for numpy, matplotlib
+
 ## For more, see...
 
 - [CHANGELOG.md](https://github.com/yunruse/Noether/blob/release/CHANGELOG.md)
