@@ -270,6 +270,7 @@ class Measure(Generic[T]):
             case operator.add: oper = "Addition"
             case operator.sub: oper = "Subtraction"
             case operator.mod: oper = "Modulo"
+            case operator.eq: oper = "Comparison"
             case operator.lt: oper = "Comparison"
             case _: oper = "A linear operation"
 
@@ -326,16 +327,22 @@ class Measure(Generic[T]):
 
     # Equality and ordering
 
+    @staticmethod
+    def _extract_dim(v: 'Measure | MeasureValue') -> Dimension:
+        return v.dim if isinstance(v, Measure) else Dimension()  # type: ignore
+
+    @staticmethod
+    def _extract_value(v: 'Measure | MeasureValue') -> MeasureValue:
+        return v._value if isinstance(v, Measure) else v  # type: ignore
+
     def __eq__(self, other):
-        if isinstance(other, Measure):
-            if other.dim != self.dim and not conf.get(OPENLINEAR):
-                return False
-            return self._value == other._value
+        if self._extract_dim(other) != self.dim and not conf.get(OPENLINEAR):
+            return False
+        return self._value == self._extract_value(other)
 
     def __lt__(self, other):
         self.__lin_cmp(other, operator.lt)
-        if isinstance(other, Measure):
-            return self._value < other._value
+        return self._value < self._extract_value(other)
 
     #  /~~       |               |~~\ '      |
     # |  |   |(~~|~/~\|/~\ /~\   |   ||(~|~~\|/~~|\  /
