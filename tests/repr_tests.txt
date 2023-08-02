@@ -5,7 +5,7 @@ length  # length, distance, height, width, breadth, depth
 1 K m  # temperature * length
 
 >>> meter  # Unit
-meter  # length
+meter  # length, 1 m
 
 >>> bit / second  # Non-unity base units
 bit / second  # data_rate, 0.125 B / s
@@ -20,7 +20,7 @@ mile / hour  # speed, 0.44704 m / s
 6.706166e8 mi / hr  # speed
 
 >>> joule / (kilogram * kelvin)  # GeometricUnit ordering #55
-joule / kelvin / kilogram  # specific_heat_capacity
+joule / kelvin / kilogram  # specific_heat_capacity, 1 m**2 / K / s**2
 
 >>> meter(1, 0.2) @ meter & cm  # Uncertainties on LinearUnit #8
 1 m ± 20 cm  # length
@@ -38,7 +38,7 @@ joule / kelvin / kilogram  # specific_heat_capacity
 8.589935e9 b  # data
 
 >>> N_a  # Nicer inverse units #61
-6.022141e23 mol**-1  # substance**-1
+Avogadro_constant  # substance**-1, 6.022141e23 mol**-1, Avogadro constant, CODATA 2018
 
 >>> dalton  # Small units should show value
 atomic_mass_unit  # mass, 1.660539e-27 kg
