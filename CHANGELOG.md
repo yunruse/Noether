@@ -1,7 +1,7 @@
 # Noether changelog
 
 ## 1.1
-***28 Jul 2023, [44 commits](https://github.com/yunruse/Noether/pull/73/commits), closing [17 issues](https://github.com/yunruse/Noether/milestone/1?closed=1)***
+***2 Aug 2023, [44 commits](https://github.com/yunruse/Noether/pull/73/commits), closing [17 issues](https://github.com/yunruse/Noether/milestone/1?closed=1)***
 
 - Various further bugfixes and improvements for display mechanisms
 - Support for logarithmic units, such as `decibel`
