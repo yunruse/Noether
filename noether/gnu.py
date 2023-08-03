@@ -75,9 +75,7 @@ if __name__ == '__main__':
         exit(0)
 
     if args.loud:
-        U = len(catalogue.units())
-        P = len(list(catalogue.prefixes()))
-        print(f'{U} units, {P} prefixes')
+        print(catalogue.info())
 
     have = 'You have: ' * args.loud
     want = 'You want: ' * args.loud
