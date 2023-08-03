@@ -1,5 +1,7 @@
 all: units type test analyse build
 
+.PHONY: units type test analyse build upload-test upload-pypi clean
+
 units:
 	python3 make_units.py
 
@@ -15,7 +17,7 @@ test: units
 analyse:
 	python3 -m unittest analysis/*.py
 
-build: analyse
+build: units analyse
 	cd analysis/output && tar -c catalogue.* > catalogue.tar && mv catalogue.tar ..
 	python3 -m build
 
