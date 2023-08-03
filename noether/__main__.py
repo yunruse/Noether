@@ -7,7 +7,7 @@ Best ran as `python -im noether`, as if no terms are provided,
 a convenient interactive prompt is summoned.
 """
 
-from os import environ
+from os import environ, _exit as exit
 import noether
 from noether import *
 
@@ -22,6 +22,10 @@ parser.add_argument(
     action='store_false',
     help='Suppress colour output (NO_COLOR=1 is also supported)',
     dest='color')
+parser.add_argument(
+    '--info',
+    action='store_true',
+    help='Print number of catalogue items and exit')
 parser.add_argument(
     '--value', '-V',
     action='store_true',
@@ -49,6 +53,10 @@ if args.color and not args.value:
 
 # % Eval and print terms
 
+if args.info:
+    print(catalogue.info())
+    exit(0)
+
 if args.terms:
     from ._tokenizers import cli_dialect, transform
     src = transform(" ".join(args.terms), cli_dialect)
@@ -68,12 +76,10 @@ if args.terms:
                 print(repr(value))
     except Exception as e:
         import traceback
-        import os
         traceback.print_exception(e, limit=0)
-        os._exit(2)
+        exit(2)
     else:
-        import os
-        os._exit(0)
+        exit(0)
     # regular exit(0) does not work with `python -im noether` - it displays an exception and continues.
     # _exit, meanwhile, forces an exit.
     # Note that this will NOT process any __del__ cleanups,
@@ -85,7 +91,7 @@ if args.terms:
 
 # TODO: allow cli dialect?
 
-print(f'{len(catalogue.units())} units, {len(list(catalogue.prefixes()))} prefixes')
+print(catalogue.info())
 print('''
 >>> import noether
 >>> from noether import *''')

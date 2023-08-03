@@ -104,13 +104,15 @@ class Catalogue:
                 units.setdefault(n, u)
         return units
 
-    def __repr__(self):
+    def info(self):
+        "GNU units-style count of objects"
         U = len(self.units())
         D = len(self.dimensions.values())
         P = len(list(self.prefixes()))
-        return (
-            f'<{self.name}: {D} dimensions,'
-            f' {U} units, {P} prefixes>')
+        return f'{D} dimensions, {U} units, {P} prefixes'
+
+    def __repr__(self):
+        return f'<{self.name}: {self.info()}>'
 
     def __json__(self):
         return {
