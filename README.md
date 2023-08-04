@@ -86,12 +86,13 @@ The approximate roadmap for future releases is:
 - [CONTRIBUTING.md](https://github.com/yunruse/Noether/blob/release/CONTRIBUTING.md)
 - [LICENSE.txt](https://github.com/yunruse/Noether/blob/release/LICENSE.txt)
 
-Other tools for working with units include:
+Other unit packages include::
 
-- [Wolfram Alpha](https://www.wolframalpha.com), a comprehensive online intelligence engine
 - [gnu `units`](https://www.gnu.org/software/units/), a command-line tool you likely already have
+- [pint](https://github.com/hgrecco/pint), a Python package with numpy support
 - [units](https://pypi.org/project/units/), a simple Python package for defining your own units
 - [unyt](https://pypi.org/project/unyt/), a Python package with numpy support
+- [Wolfram Alpha](https://www.wolframalpha.com), a comprehensive online intelligence engine
 
 ### 📚 _**Did you know?**_
 
