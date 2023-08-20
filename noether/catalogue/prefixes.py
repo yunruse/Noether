@@ -1,4 +1,4 @@
-from noether.core.Prefix import Prefix, PrefixSet
+from noether.core import Prefix, PrefixSet
 
 from ..config import Config, conf
 

@@ -5,7 +5,7 @@ if TYPE_CHECKING:
 
 
 class MeasureInfo:
-    '''Handler for display of Measures.'''
+    '''Handler for extra informational display on Measures.'''
     @classmethod
     def info(cls, measure: 'Measure') -> Generator[str, None, None]:
         return NotImplemented
