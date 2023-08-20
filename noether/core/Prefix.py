@@ -18,12 +18,18 @@ class Prefix(Generic[T]):
     prefix: str
     symbol: str
     value: T
+    display: bool = True
+
+    def __post_init__(self):
+        if self.value <= 0:
+            raise ValueError('Prefixes must be positive!')
 
     def __json__(self):
         return {
             'prefix': self.prefix,
             'symbol': self.symbol,
-            'value': self.value
+            'value': self.value,
+            'display': self.display
         }
 
     def _geo(self, measure: 'Measure | Prefix | T', direction: int):
