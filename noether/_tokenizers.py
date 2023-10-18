@@ -15,13 +15,19 @@ StreamProcessor = Callable[[TokenStream], TokenStream]
 
 def cli_dialect(stream: TokenStream):
     '''
-    Process tokens for __main__ dialect, replacing:
-    - `in` -> `inch`
-    - `-3unit` -> `unit(-3)`
+    Process tokens for __main__ dialect, used on the
+    command-line interface (CLI). Useful for quick
+    calculations.
+    Replacement rules are:
+    - `in` -> `inch` (avoid Python keyword)
+    - `x` -> `*` (* is annoying on terminal)
+    - `Xunit` -> `unit(X)` where X is some number eg -3, 4.2
     '''
     queue: deque[TokenInfo] = deque()
 
     for token in stream:
+        if token.type == NAME and token.string == 'x':
+            token = TokenInfo(OP, '*', token.start, token.end, token.line)
         if token.type == NAME and token.string == 'in':
             token = token._replace(string='inch')
 
