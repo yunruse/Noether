@@ -19,32 +19,29 @@ def cli_dialect(stream: TokenStream):
     command-line interface (CLI). Useful for quick
     calculations.
     Replacement rules are:
-    - `in` -> `inch` (avoid Python keyword)
-    - `x` -> `*` (* is annoying on terminal)
-    - `Xunit` -> `unit(X)` where X is some number eg -3, 4.2
+    - `x` -> `*`
+    - `^` -> `**`
+    - `in` -> `inch`
+    - `Xunit` -> `X * unit` where X is some number eg -3, 4.2
     '''
     queue: deque[TokenInfo] = deque()
 
     for token in stream:
+        if token.type == OP and token.string == '^':
+            token = token._replace(string='**')
         if token.type == NAME and token.string == 'x':
             token = TokenInfo(OP, '*', token.start, token.end, token.line)
         if token.type == NAME and token.string == 'in':
             token = token._replace(string='inch')
 
         queue.append(token)
-        if len(queue) == 3:
+        if len(queue) == 2:
             tt = [t.type for t in queue]
             if tt[-2:] == [NUMBER, NAME]:
-                maybe_minus, number, unit_name = queue
-                is_minus = maybe_minus.type == OP and maybe_minus.string == '-'
-                if not is_minus:
-                    yield maybe_minus
-                yield unit_name
-                yield _t(OP, '(')
-                if is_minus:
-                    yield maybe_minus
+                number, unit_name = queue
                 yield number
-                yield _t(OP, ')')
+                yield _t(OP, '*')
+                yield unit_name
                 queue.clear()
             else:
                 yield queue.popleft()
