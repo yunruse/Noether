@@ -59,6 +59,8 @@ if args.info:
 
 if args.terms:
     from ._tokenizers import cli_dialect, transform
+    # ensure e.g. `5degC` -> `degC(5)` to avoid confusion
+    # unitsCall = {k for k, v in vars(noether).items() if isinstance(v, AffineUnit)}
     src = transform(" ".join(args.terms), cli_dialect)
     try:
         del cli_dialect, transform

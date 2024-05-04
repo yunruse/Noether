@@ -1,7 +1,7 @@
 from collections import deque
 from io import BytesIO
 from typing import Any, Callable, Generator, Iterable, Iterator, Mapping
-from tokenize import tokenize, TokenInfo, NUMBER, NAME, OP, ENCODING
+from tokenize import tokenize as _tokenize, TokenInfo, NUMBER, NAME, OP, ENCODING
 
 
 def _t(type: int, string: str):
@@ -23,6 +23,7 @@ def cli_dialect(stream: TokenStream):
     - `^` -> `**`
     - `in` -> `inch`
     - `Xunit` -> `X * unit` where X is some number eg -3, 4.2
+      Using multiply ensures eg `5m^2` is not misinterpreted as `(5m)^2`.
     '''
     queue: deque[TokenInfo] = deque()
 
@@ -33,6 +34,10 @@ def cli_dialect(stream: TokenStream):
             token = TokenInfo(OP, '*', token.start, token.end, token.line)
         if token.type == NAME and token.string == 'in':
             token = token._replace(string='inch')
+
+        # TODO: calling eg `10degC` now gets a wrong result because of *
+        # can we fix that?
+        # sadly it will have to involve grabbing the minus sign again
 
         queue.append(token)
         if len(queue) == 2:
@@ -46,6 +51,8 @@ def cli_dialect(stream: TokenStream):
             else:
                 yield queue.popleft()
 
+def tokenize(text: str):
+    return _tokenize(BytesIO(text.encode()).readline)
 
 def untokenize(stream: TokenStream):
     s = iter(stream)
@@ -53,8 +60,8 @@ def untokenize(stream: TokenStream):
     return ''.join(token.string for token in s)
 
 
-def transform(text: str, processor: StreamProcessor):
-    return untokenize(processor(tokenize(BytesIO(text.encode()).readline)))
+def transform(text: str, processor: StreamProcessor, **args):
+    return untokenize(processor(tokenize(text), **args))
 
 
 if __name__ == '__main__':
