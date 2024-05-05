@@ -1,5 +1,6 @@
 from .Dimension import Dimension
 from .Prefix import Prefix
+from .PrefixSet import PrefixSet
 from .MeasureInfo import MeasureInfo
 from .MeasureRelative import MeasureRelative
 from .Measure import Measure

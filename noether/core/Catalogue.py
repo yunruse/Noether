@@ -3,11 +3,9 @@ Catalogue of units, which may handle interpreting
 units with prefixes.
 '''
 
-from itertools import count
 from ..helpers import removeprefix
 from ..config import Config, conf
-from . import Dimension, Unit
-from .Prefix import PrefixSet, Prefix
+from . import Dimension, Unit, Prefix, PrefixSet
 
 Config.register('UNITS_all_prefixes', False, help='''\
 Allow fetching any unit with any prefix (e.g. gibimeter).''')

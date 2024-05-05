@@ -1,4 +1,4 @@
-from noether.core.Prefix import Prefix, PrefixSet
+from noether.core import Prefix, PrefixSet
 
 from ..config import Config, conf
 
@@ -61,6 +61,6 @@ IEC = PrefixSet(
     'IEC', {kibi, mebi, gibi, tebi, pebi, exbi, zebi, yobi})
 
 
-SI_all = SI_large | SI_small | SI_conventional
+SI_all = SI_large | SI_small | SI_conventional.hidden()
 if conf.get('PREFIX_fun'):
-    SI_all = SI_all | SI_fun
+    SI_all |= SI_fun.hidden()

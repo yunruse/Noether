@@ -66,12 +66,15 @@ class test_unit_display(TestCase):
                 repr_test, func(val),
                 msg=f'repr : {value} : {name}')
 
-    def test_value_repr(self):
-        self.evaluate('repr_tests', repr)
+    def test_repr(self):
+        self.evaluate('test_repr', repr)
 
-    def test_dates(self):
+    def test_conversion(self):
+        self.evaluate('test_conversion', repr)
+
+    def test_date(self):
         from datetime import datetime, date, timedelta
-        self.evaluate('date_tests', repr, {
+        self.evaluate('test_date', repr, {
             'valentines': date(2023, 2, 14),
             'christmas_midnight': datetime(2023, 12, 25),
             'ten_mins': timedelta(seconds=600)

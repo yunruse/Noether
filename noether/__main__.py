@@ -59,10 +59,10 @@ if args.info:
 
 if args.terms:
     # this is very basic at the moment!
-    from ._tokenizers import units_dialect
-    src = units_dialect(" ".join(args.terms))
+    from ._tokenizers import cli_dialect
+    src = cli_dialect(" ".join(args.terms))
     try:
-        del units_dialect
+        del cli_dialect
         value = eval(src)
         if args.value:
             if isinstance(value, Measure):

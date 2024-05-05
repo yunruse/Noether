@@ -11,7 +11,8 @@ from noether.helpers import Rational, Real, removeprefix
 from ..errors import NoetherError
 from ..config import conf
 from ..display import DISPLAY_REPR_CODE, canonical_number
-from .Prefix import PrefixSet
+
+from .PrefixSet import PrefixSet
 from .Dimension import Dimension
 from .Measure import Measure, UNCERTAINTY_SHORTHAND
 

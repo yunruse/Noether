@@ -19,6 +19,10 @@ def D(d: Dimension, *n: str):
 
 time_unit = Unit(second(1024e-6), "time_unit", "TU")
 
+# TODO: config to pick whether IEC or SI_large
+#       (set the other to .hidden())
+
+_Data = SI_large | IEC
 
 # % Data
 
@@ -29,9 +33,8 @@ volumetric_density = D(data / length**3, 'volumetric_density')
 mutation_rate = D(1 / data, 'mutation_rate')
 data_rate = D(data / time, 'data_rate')
 
-
-bit = shannon = Unit(data, "bit", "b", SI_large | IEC)
-byte = display(Unit(bit * 8, "byte", "B", SI_large | IEC))
+bit = shannon = Unit(data, "bit", "b", _Data)
+byte = display(Unit(bit * 8, "byte", "B", _Data))
 
 crumb = bit * 2
 nibble = Unit(bit * 4, "nibble")
