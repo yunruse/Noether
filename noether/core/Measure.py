@@ -25,15 +25,21 @@ Time = date | datetime | timedelta
 T = TypeVar('T', int, MeasureValue)
 
 
-OPENLINEAR = Config.register("measure_ignore_dimension", False, """\
-Allow any addition, even between incompatible units
-(eg metre and second)""")
+OPENLINEAR = Config.register(
+    "measure_ignore_dimension", False,
+    "Allow any addition, even between incompatible units (eg metre and second)."
+)
 
-BARENUMBER = Config.register("measure_barenumber", False, """\
-Allow addition and subtraction of bare numbers to units""")
+USE_DISPLAY_UNIT = Config.register(
+    "measure_calc_with_display_unit", False,
+    "In situations where a unit is not explicitly provided, such as"
+    " adding a float, casting to int, or rounding,"
+    " make use of the current display unit rather than returning an error.")
 
-UNCERTAINTY_SHORTHAND = Config.register("uncertainty_display_shorthand", False, """\
-Display e.g. 0.15(2) instead of 0.15 ± 0.02.""")
+UNCERTAINTY_SHORTHAND = Config.register(
+    "uncertainty_display_shorthand", False,
+    "Use shorthand for uncertainty, for example 0.15(2) rather than 0.15 ± 0.02"
+)
 
 
 @dataclass(
@@ -49,10 +55,6 @@ class Measure(Generic[T]):
     _value: T
     stddev: Optional[T] = None
     dim: Dimension
-
-    @property
-    def value(self):
-        return self._value
 
     def __init__(
         self,
@@ -106,44 +108,70 @@ class Measure(Generic[T]):
     # | \ ||   ||/~\ /~\ |~~\/~/|/~\
     # |  \| \_/||   |   ||__/\/_|
 
-    def __float__(self): return float(self._value)
-    def __int__(self): return int(self._value)
-    def __bool__(self): return bool(self._value)
+    @property
+    def value(self):
+        # TODO: this is used in a whole bunch of places
+        # but because it relies on the underlying SI value it is rather hacky.
+        # Per #84 this should be tightened up
+        return self._value
+
+    def __bool__(self):
+        return bool(self._value)
+
+    def _casting_value(self) -> T:
+        """
+        Value to use for `int`, `float`, `round`, `self.real`, `self + 5` and so on.
+        
+        Raises an error if unit ambiguity is not explicitly acknowledged by user.
+        """
+        if not self.dim:
+            return self._value
+        
+        du = self.display_unit()
+
+        if conf.get(USE_DISPLAY_UNIT):
+            from .units.LinearUnit import LinearUnit
+            # e.g. 'lb & st' - which one do we use?
+            if isinstance(du, LinearUnit):
+                raise NoetherError(
+                    f"Even with {USE_DISPLAY_UNIT}, {du} is ambiguous for this kind of operation."
+                    " Try using `measure @ unit` or `measure / unit`."
+                )
+            return self._value / du._value
+        
+        raise NoetherError(
+            f"Without a unit this operation is ambiguous. Try using `measure @ unit`, `measure / unit`"
+            f" or enabling {USE_DISPLAY_UNIT} if you are ok with a little ambiguity.")
+
+    def __float__(self):
+        return float(self._casting_value())
+
+    def __int__(self):
+        return int(self._casting_value())
+
+    def __round__(self, ndigits: Optional[int] = None):
+        return round(self._casting_value(), ndigits)
 
     @property
-    def real(self): return self._value
+    def real(self):
+        return self._casting_value()
     @property
-    def imag(self): return 0
+    def imag(self):
+        return 0
     @property
-    def numerator(self): return self._value.numerator  # type: ignore
+    def numerator(self):
+        return self._casting_value().numerator
     @property
-    def denominator(self): return self._value.denominator  # type: ignore
+    def denominator(self):
+        return self._casting_value().denominator
     @property
-    def conjugate(self): return self._value.conjugate()  # type: ignore
-
+    def conjugate(self):
+        return self._casting_value().conjugate()
     @property
     def as_integer_ratio(self):
-        return self._value.as_integer_ratio()  # type: ignore
+        return self._casting_value().as_integer_ratio()
 
     info_handlers: ClassVar[list[type[MeasureInfo]]] = list()
-
-    @classmethod
-    def Info(cls, handler: type[MeasureInfo]):
-        '''Wrapper for classes which implement MeasureInfo interface.'''
-        if not issubclass(handler, MeasureInfo):
-            raise TypeError(
-                'Measure information handlers should derive from MeasureInfo.')
-        if not handler.__name__.startswith('info_'):
-            raise TypeError(
-                'MeasureInfo classes must be prefixed with `info_`.')
-
-        cls.info_handlers.append(handler)
-
-        Config.register(handler.__name__,
-                        handler.enabled_by_default,
-                        handler.__doc__)
-
-        return handler
 
     @classmethod
     def from_timedelta(cls, dt: timedelta):
@@ -164,6 +192,24 @@ class Measure(Generic[T]):
     # |__/ |_)|__/|\__| \/
     #         |        _/
 
+    @classmethod
+    def Info(cls, handler: type[MeasureInfo]):
+        '''Wrapper for classes which implement MeasureInfo interface.'''
+        if not issubclass(handler, MeasureInfo):
+            raise TypeError(
+                'Measure information handlers should derive from MeasureInfo.')
+        if not handler.__name__.startswith('info_'):
+            raise TypeError(
+                'MeasureInfo classes must be prefixed with `info_`.')
+
+        cls.info_handlers.append(handler)
+
+        Config.register(handler.__name__,
+                        handler.enabled_by_default,
+                        handler.__doc__)
+
+        return handler
+
     def _info(self):
         for handler in self.info_handlers:
             if conf.get(handler.__name__) and handler.should_display(self):
@@ -171,10 +217,13 @@ class Measure(Generic[T]):
                     yield i, handler.style
 
     def display_unit(self) -> 'Unit':
+        "The unit that should be used to display this object."
         from ._DisplayHandler import display
         return display.dimension_unit(self.dim)
 
     def __repr__(self):
+        # TODO: this really should actually be code a user could make use of
+        # with any niceties shoved into the 'comment' ...
         if conf.get(DISPLAY_REPR_CODE):
             return self._repr_code()
         return self.__noether__()
@@ -277,13 +326,13 @@ class Measure(Generic[T]):
         if isinstance(other, Measure):
             DimensionError.check(
                 self.dim, other.dim,
-                f"{oper} only works on units of the same dimension."
+                f"{oper} only works with units of the same dimension."
                 f" Enable conf.{OPENLINEAR} to bypass this.")
 
-        elif self.dim and not conf.get(BARENUMBER):
+        elif self.dim and not conf.get(USE_DISPLAY_UNIT):
             raise NoetherError(
-                f"{oper} only works on Measures and Units."
-                f" Enable conf.{BARENUMBER} to bypass this.")
+                f"{oper} only works with Measures and Units."
+                f" Enable conf.{USE_DISPLAY_UNIT} to bypass this.")
 
     def __lin(self, other: 'Measure[T] | Dimension | MeasureValue | Time', op: Callable, reverse=False):
         if isinstance(other, Time):

@@ -1,0 +1,11 @@
+>>> round(month(2) @ year, 3)  # __round__ functionality #84
+60 d + 23 hr + 55 min + 19.2 s  # time
+
+>>> round(month(2) / year, 3)  # __round__ functionality #84
+0.167
+
+>>> int(c @ meter/second)  # int functionality #84
+299792458
+
+>>> (mph @ m/s).real  # float functionality #84
+0.44704
