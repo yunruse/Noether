@@ -31,17 +31,21 @@ def transformer(
 
 
 @transformer
-def cli_dialect(stream: TokenStream) -> TokenStream:
+def noether_dialect(stream: TokenStream) -> TokenStream:
     '''
-    Process tokens for __main__ dialect, used on the
-    command-line interface (CLI). Useful for quick
-    calculations.
+    Process tokens using a slightly modified dialect
+    of Python that is used in the command-line interface
+    and the automatic cataloguing (.yaml -> .py) system.
+
     Replacement rules are:
-    - `x` -> `*`
-    - `^` -> `**`
-    - `in` -> `inch`
-    - `Xunit` -> `X * unit` where X is some number eg -3, 4.2
-      Using multiply ensures eg `5m^2` is not misinterpreted as `(5m)^2`.
+    - name `x`                -> operator `*`
+    - operator `^`            -> operator `**`
+    - name `in`               -> name `inch`
+    - number-and-name `Xunit` -> `X * unit`
+
+    Take note: currently affine units such as degC or degF
+    should be called e.g. `degC(10)` or they will function
+    relatively (i.e. `10degC` is equivalent to `10K`)
     '''
     queue: deque[TokenInfo] = deque()
 
@@ -53,9 +57,9 @@ def cli_dialect(stream: TokenStream) -> TokenStream:
         if token.type == NAME and token.string == 'in':
             token = token._replace(string='inch')
 
-        # TODO: calling eg `10degC` now gets a wrong result because of *
-        # can we fix that?
-        # sadly it will have to involve grabbing the minus sign again
+        # TODO: can we do a workaround for
+        # affine units like degC?
+        # would have to capture the minus sign again :<
 
         queue.append(token)
         if len(queue) == 2:
@@ -75,4 +79,4 @@ def transform(text: str, processor: StreamProcessor, **args):
 if __name__ == '__main__':
     from sys import argv
     text = ' '.join(argv[1:])
-    print(cli_dialect(text))
+    print(noether_dialect(text))

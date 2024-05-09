@@ -1,10 +1,10 @@
 from dataclasses import Field, dataclass, field
 
-from noether._tokenizers import units_dialect
+from noether._tokenizers import noether_dialect
 
 from noether.Multiplication import Multiplication
 
-MAPPING = {
+SHORTHAND = {
     'd': 'definition',
     'n': 'names',
     's': 'symbols',
@@ -16,7 +16,7 @@ MAPPING = {
 
 
 def unmap(d: dict):
-    return {MAPPING.get(k, k): v for k, v in d.items()}
+    return {SHORTHAND.get(k, k): v for k, v in d.items()}
 
 
 class CatalogueDef:
@@ -97,7 +97,7 @@ class UnitDef(CatalogueDef):
     def __post_init__(self):
         super().__post_init__()
 
-        self.unit = units_dialect(self.unit)
+        self.unit = noether_dialect(self.unit)
 
         for name in list(self.names):
             if name.startswith("'") and name.endswith("'"):

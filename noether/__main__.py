@@ -59,10 +59,10 @@ if args.info:
 
 if args.terms:
     # this is very basic at the moment!
-    from ._tokenizers import cli_dialect
-    src = cli_dialect(" ".join(args.terms))
+    from ._tokenizers import noether_dialect
+    src = noether_dialect(" ".join(args.terms))
     try:
-        del cli_dialect
+        del noether_dialect
         value = eval(src)
         if args.value:
             if isinstance(value, Measure):
