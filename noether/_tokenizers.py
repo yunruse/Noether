@@ -26,8 +26,7 @@ def transformer(
 ):
     @wraps(dialect)
     def my_func(text: str):
-        tokens = tokenize(BytesIO(text.encode()).readline)
-        return untokenize(dialect(tokens))
+        return untokenize(dialect(tokenize(text)))
     return my_func
 
 
