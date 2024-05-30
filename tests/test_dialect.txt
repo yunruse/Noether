@@ -1,0 +1,11 @@
+$ 0.2c  # typical speed
+5.995849e7 m / s  # speed
+
+$ mile/min  # standard division
+mile / minute  # speed, 26.8224 m / s
+
+$ mile/2min  # denominator works
+13.4112 m / s  # speed
+
+$ 0.5m^2  # area
+0.5 m**2  # area
