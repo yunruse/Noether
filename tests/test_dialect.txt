@@ -9,3 +9,6 @@ $ mile/2min  # denominator works
 
 $ 0.5m^2  # area
 0.5 m**2  # area
+
+$ 5m^-2  # negative exponents
+5 m**-2  # vehicle_efficiency
