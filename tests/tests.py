@@ -8,7 +8,7 @@ import noether
 from noether import time, length, Dimension
 from noether.display import uncertainty
 
-from noether._tokenizers import cli_dialect, transform
+from noether._tokenizers import noether_dialect, transform
 
 from pathlib import Path
 
@@ -88,8 +88,7 @@ class test_unit_display(TestCase):
     def test_dialect(self):
         tests = self.get_tests('test_dialect', '$ ')
         for inp, name, out in tests:
-            in_dialect = transform(inp, cli_dialect)
-            val = eval(in_dialect, noether.__dict__)
+            val = eval(noether_dialect(inp), noether.__dict__)
             self.assertEqual(
                 out, repr(val),
                 msg=f'cli_dialect : {inp} : {name}')
