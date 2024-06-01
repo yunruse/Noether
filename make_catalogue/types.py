@@ -11,7 +11,6 @@ SHORTHAND = {
     'p': 'prefixes',
     'c': 'confused_with',
     'i': 'info',
-    'o': 'origin',
 }
 
 
@@ -91,7 +90,6 @@ class UnitDef(CatalogueDef):
     prefixes: str = ''
     confused_with: list[str] = field(default_factory=list)
     info: str = ''
-    origin: str = ''
     url: str = ''
 
     def __post_init__(self):
