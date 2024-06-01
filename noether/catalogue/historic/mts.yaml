@@ -5,12 +5,15 @@
     Similar in nature to SI and CGS.
     Once used in France and the Soviet Union.
   units:
+
   - unit: m**3
-    n: stere, stère, 'st'
+    names: stere, stère, 'st'
     i: Used in firewood measurement
-    o: Greek stereós, 'solid'
+    origin: Greek stereós, 'solid'
+
   - unit: t*m/s**2
-    n: sthene, sthène, sthéne, 'sn'
-    o: Greek sthénos, 'force'
+    names: sthene, sthène, sthéne, 'sn'
+    origin: Greek sthénos, 'force'
+
   - unit: sthene / m**2
-    n: pieze, pièze, 'pz'
+    names: pieze, pièze, 'pz'

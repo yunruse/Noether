@@ -5,78 +5,105 @@
     (pous = 296mm).
   units:
   - unit: 0.296m
-    n: pous, πούς
+    names: pous, πούς
     info: Ancient greek foot, as defined in Athens (though varying regionally)
 
+# daktylos
+
   - unit: pous / 16
-    n: daktylos, δάκτυλος
-    o: finger
+    names: daktylos, δάκτυλος
+    origin: finger
+
   - unit: 2 daktylos
-    n: kondylos, κόνδυλος
-    o: knuckle
+    names: kondylos, κόνδυλος
+    origin: knuckle
+
   - unit: 4 daktylos
-    n: palaiste, palaistē, παλαιστή, doron, dōron, δῶρον
-    o: palm
+    names: palaiste, palaistē, παλαιστή, doron, dōron, δῶρον
+    origin: palm
+
   - unit: 8 daktylos
-    n: dichas, διχάς, hemipodion, hēmipodion, ἡμιπόδιον
-    o: half-foot
+    names: dichas, διχάς, hemipodion, hēmipodion, ἡμιπόδιον
+    origin: half-foot
+
   - unit: 10 daktylos
-    n: lichas, λιχάς
-    o: distance from tip of thumb to tip of outstretched index finger
+    names: lichas, λιχάς
+    origin: distance from tip of thumb to tip of outstretched index finger
+
   - unit: 11 daktylos
-    n: orthodoron, orthodōron, ὀρθόδωρον
-    o: width of a straight hand
+    names: orthodoron, orthodōron, ὀρθόδωρον
+    origin: width of a straight hand
+
   - unit: 12 daktylos
-    n: spithame, spithamē, σπιθαμή
-    o: span of all fingers
+    names: spithame, spithamē, σπιθαμή
+    origin: span of all fingers
+
   - unit: 18 daktylos
-    n: pygme, pygmē, πυγμή
-    o: forearm
+    names: pygme, pygmē, πυγμή
+    origin: forearm
+
   - unit: 20 daktylos
-    n: pygon, pygōn, πυγών
-    o: elbow to fist
+    names: pygon, pygōn, πυγών
+    origin: elbow to fist
+
   - unit: 24 daktylos
-    n: pechys, pēchys, πῆχυς
-    o: cubit (elbow to tip of hand)
+    names: pechys, pēchys, πῆχυς
+    origin: cubit (elbow to tip of hand)
+
+# pous
 
   - unit: 2.5 pous
-    n: haploun_bema, haploun_bēma, ἁπλοῦν_βῆμα
-    o: step
+    names: haploun_bema, haploun_bēma, ἁπλοῦν_βῆμα
+    origin: step
+
   - unit: 5 pous
-    n: diploun_bema, diploun_bēma, διπλοῦν_βῆμα, bema, bēma, βῆμα
-    o: pace
+    names: diploun_bema, diploun_bēma, διπλοῦν_βῆμα, bema, bēma, βῆμα
+    origin: pace
+
   - unit: 6 pous
-    n: orgyia, ὄργυια
-    o: fathom
+    names: orgyia, ὄργυια
+    origin: fathom
+
   - unit: 10 pous
-    n: kalamos, κάλαμος, akaina, ἄκαινα, dekapous, δεκάπους
+    names: kalamos, κάλαμος, akaina, ἄκαινα, dekapous, δεκάπους
+
   - unit: 60 pous
-    n: hamma, ἅμμα
-    o: knot
+    names: hamma, ἅμμα
+    origin: knot
+
   - unit: 100 pous
-    n: plethron, πλέθρον
+    names: plethron, πλέθρον
     info: typical length of an athletic running-track
+
   - unit: 600 pous
-    n: stadion, στάδιον
+    names: stadion, στάδιον
     info: one eighth of a Roman mile
 
+# stadion
+
   - unit: 2 stadion
-    n: diaulos, δίαυλος
+    names: diaulos, δίαυλος
     info: ancient Olympic racing distance
+
   - unit: 4 stadion
-    n: hippikon, ἱππικόν
+    names: hippikon, ἱππικόν
     info: length of a hippodrome (horse racing stadium)
+
   - unit: 8 stadion
-    n: milion, μίλιον
-    info: Ancient Greek equiv of a mile
+    names: milion, μίλιον
+    info: equivalent of a modern mile
+
   - unit: 12 stadion
-    n: dolichos, δόλιχος
+    names: dolichos, δόλιχος
     info: ancient Olympic "long race"
+
   - unit: 30 stadion
-    n: parasanges, παρασάγγης
-    info: Ancient Greek equiv of a league; used to measure walking distance
+    names: parasanges, παρασάγγης
+    info: Equivalent of a modern eague; used to measure walking distance
+
   - unit: 40 stadion
-    n: schoinos, σχοινός
-    info: Ancient Greek, adopted from an Egyptian unit of surveying with knotted cords
+    names: schoinos, σχοινός
+    origin: Adopted from an Egyptian unit of surveying with knotted cords
+
   - unit: 160 stadion
-    n: stage
+    names: stage
