@@ -8,6 +8,8 @@ import noether
 from noether import time, length, Dimension
 from noether.display import uncertainty
 
+from noether._tokenizers import cli_dialect, transform
+
 from pathlib import Path
 
 DIR = Path(__file__).parent
@@ -43,10 +45,14 @@ class test_unit_display(TestCase):
             d = uncertainty(a, b)
             self.assertEqual(c, d)
 
-    def get_tests(self, name: str):
+    def get_tests(
+        self,
+        name: str,
+        prefix: str = '>>> '
+    ):
         with open(DIR / f'{name}.txt') as f:
             text = f.read()
-        for test in text.split('>>> '):
+        for test in text.split(prefix):
             test = test.strip()
             if not test:
                 continue
@@ -57,25 +63,33 @@ class test_unit_display(TestCase):
     def evaluate(
         self,
         name: str,
-        func: Callable[[Any], str],
-        namespace: dict[str, Any] | None = None
+        namespace: dict[str, Any] | None = None,
     ):
-        for value, name, repr_test in self.get_tests(name):
+        for value, name, out in self.get_tests(name):
             val = eval(value, noether.__dict__, namespace or {})
             self.assertEqual(
-                repr_test, func(val),
+                out, repr(val),
                 msg=f'repr : {value} : {name}')
 
     def test_repr(self):
-        self.evaluate('test_repr', repr)
+        self.evaluate('test_repr')
 
     def test_conversion(self):
-        self.evaluate('test_conversion', repr)
+        self.evaluate('test_conversion')
 
     def test_date(self):
         from datetime import datetime, date, timedelta
-        self.evaluate('test_date', repr, {
+        self.evaluate('test_date', {
             'valentines': date(2023, 2, 14),
             'christmas_midnight': datetime(2023, 12, 25),
             'ten_mins': timedelta(seconds=600)
         })
+
+    def test_dialect(self):
+        tests = self.get_tests('test_dialect', '$ ')
+        for inp, name, out in tests:
+            in_dialect = transform(inp, cli_dialect)
+            val = eval(in_dialect, noether.__dict__)
+            self.assertEqual(
+                out, repr(val),
+                msg=f'cli_dialect : {inp} : {name}')
