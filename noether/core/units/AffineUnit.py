@@ -17,7 +17,7 @@ class AffineUnit(Unit):
         symbols: list[str] | str | None = None,
         info: str | None = None,
     ):
-        DimensionError.check(zero_point.dim, unit.dim, '(AffineUnit creation)')
+        DimensionError.check(zero_point.dim, unit.dim)
         object.__setattr__(self, 'zero_point', zero_point)
         Unit.__init__(
             self, unit,

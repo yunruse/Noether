@@ -1,11 +1,10 @@
 from typing import TYPE_CHECKING
-if TYPE_CHECKING:
-    from core.Dimension import Dimension
 
+if TYPE_CHECKING:
+    from .core import Dimension
 
 class NoetherWarning(UserWarning):
     'Common warning used in Noether.'
-
 
 class ConfigWarning(NoetherWarning):
     'Warning when changing configuration.'
@@ -15,26 +14,45 @@ class NoetherError(Exception):
     'Common error used in Noether.'
 
 
+
+if True:
+    from noether.config import Config, conf
+OPENLINEAR = Config.register(
+    "measure_open_linear", False,
+    "Allow linear or display operation even between incompatible units (eg metre and kilogram). Cf .si_equality"
+)
 class DimensionError(NoetherError):
     'Dimensions do not match.'
 
-    args: 'tuple[Dimension, Dimension, str | None]'
+    args: 'tuple[Dimension, Dimension]'
 
-    def __init__(self, dim1: 'Dimension', dim2: 'Dimension', message: str | None = None):
-        super().__init__(dim1, dim2, message)
+    def __init__(self, dim1: 'Dimension', dim2: 'Dimension'):
+        super().__init__(dim1, dim2)
+    
+    @classmethod
+    def get_dim(cls, obj) -> 'Dimension':
+        if type(obj).__name__ == 'Dimension':
+            return obj
+        if hasattr(obj, 'dim'):
+            return cls.get_dim(obj.dim)
+        raise TypeError('no Dimension found')
 
     @classmethod
-    def check(cls, dim1: 'Dimension', dim2: 'Dimension', message: str | None = None):
-        # ensure not dimensionless - those are usually okay
-        if dim1 != dim2:
-            raise cls(dim1, dim2, message)
+    def check(cls, dim1: 'Dimension', dim2: 'Dimension'):
+        if conf.get(OPENLINEAR):
+            return
+        
+        d1 = cls.get_dim(dim1)
+        d2 = cls.get_dim(dim2)
+        if d1 != d2:
+            raise cls(d1, d2)
 
     def __str__(self):
-        dim1, dim2, msg = self.args
-        message = f'Dimensions {dim1} and {dim2} do not match.'
-        if msg is not None:
-            message += ' ' + msg
-        return message
+        d1, d2 = self.args
+        return (
+            f'Dimensions {d1} and {d2} do not match.'
+            f" To do this in spite of ambiguity, enable {OPENLINEAR}."
+        )
 
 
 class UnitError(NoetherError):
