@@ -36,11 +36,23 @@ lunation = lunation = lunar_month = synodic_month = \
 # mean orbital period wrt sol-earth line.
 
 saros = lunation * 223
-# One saros after an eclipse, another occurs with similar geometry.
+# One saros after an eclipse, another occurs
+# with similar geometry. There are m
+# wikipedia: Saros (astronomy)
 
 sar = saros / 2
-# One sar after a lunar eclipse, a solar eclipse occurs,
+# Exactly one sar after a lunar eclipse, a solar eclipse occurs,
 # and vice versa.
+# wikipedia: Sar (astronomy)
+
+exeligmos = saros * 3
+# One exeligmos after an eclipse, another occurs
+# with similar geometry. Due to sidereal motion,
+# this occurs at nearly the exact same time of day.
+# wikipedia: Exeligmos
+
+
+# TODO: eclipse years, eclipse seasons
 
 _gm = meter**3 / second**2
 
