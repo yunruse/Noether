@@ -18,12 +18,13 @@ from .Measure import Measure, UNCERTAINTY_SHORTHAND
 
 
 class Unit(Measure):
-    __slots__ = '_value stddiv dim symbols names prefixes info'.split()
+    __slots__ = '_value stddiv dim symbols names prefixes info tags'.split()
 
     names: list[str]
     symbols: list[str]
     prefixes: PrefixSet
     info: str
+    tags: dict[str, str | list[str]] | None
 
     def __init__(
         self,
@@ -32,6 +33,7 @@ class Unit(Measure):
         symbols: str | list[str] | None = None,
         prefixes: PrefixSet | None = None,
         info: str | None = None,
+        tags: dict | None = None,
     ):
         if isinstance(measure, Dimension):
             measure = Measure(dim=measure)
@@ -46,6 +48,7 @@ class Unit(Measure):
 
         setattr('prefixes', prefixes or [])
         setattr('info', info or None)
+        setattr('tags', tags or None)
 
         from ..core import display
         if self.dim.is_base_dimension() and not self.dim in display.dimension_units:

@@ -1,50 +1,52 @@
-'''
-Essential scientific units.
-'''
+from noether.core import Unit, UnitSet
 
-from datetime import timedelta
-from noether.core import Unit
+from ..fundamental import meter
+from .si import watt, hertz, kilogram, kelvin
+from .si import second, minute, hour, day, year_julian as y
+from .si import c, pi
 
-from ..prefixes import SI_all
-from ..fundamental import candela, kilogram, meter, second, kelvin
-from math import pi
-from .si import standard_gravity as g, c, watt
-from .si import minute, hour
-from .si import year_julian as year  # <- This is convention
+#% astronomical "Astronomical"
+# Units used in space science.
 
+astronomical_unit = "au" = meter * 149_597_870_700
+# mean distance from Earth to Sun
+# defined by: IAU in 2012
 
-# % Units of length
-astronomical_unit = au = Unit(
-    meter(149_597_870_700),
-    "astronomical_unit", "au",
-    info="conventional unit defined by the IAU in 2012"
-)
-parsec = Unit(au * 180*60*60/pi, "parsec", "pc", SI_all)
+parsec = "pc" = au * 180 * 60 * 60 / pi
+# member of: si
 
-lightsecond = Unit(c * second, "lightsecond", "ls", SI_all)
-lightyear = ly = Unit(c * year, "lightyear", "ly", SI_all)
+lightsecond = 'ls' = c * second
+# member of: si
+
+lightyear = 'ly' = c * y
+# member of: si
 
 
-# % Earth-sol system
-
-lunation = lunar_month = synodic_month = Unit(
-    timedelta(days=29, hours=12, minutes=44, seconds=2.9),
-    ["lunation", "lunar_month", "synodic_month"],
-    info="Moon's average orbit with respect to the sol-earth line."
-    " Moon phases are separated by a period close to this."
-)
-saros = Unit(
-    lunation * 223, "saros",
-    info="One saros after an eclipse, another occurs with similar geometry.")
-sar = Unit(
-    saros / 2, "sar",
-    info="Half of a saros. One sar after a lunar eclipse, a solar eclipse occurs, and vice versa."
-)
+jansky = 'Jy' = 1e-26 * watt / meter**2 / hertz
+# used in radio astronomy
+# dimension: spectral_flux_density, spectral_irradiance
 
 
-# % Solar system
+#% earth_sol "Earth-sol system"
+# part of: astronomical
+
+lunation = lunation = lunar_month = synodic_month = \
+    day*29 + hour*12 + minute*44 + second*2.9
+# Average time between moon phases;
+# mean orbital period wrt sol-earth line.
+
+saros = lunation * 223
+# One saros after an eclipse, another occurs with similar geometry.
+
+sar = saros / 2
+# One sar after a lunar eclipse, a solar eclipse occurs,
+# and vice versa.
 
 _gm = meter**3 / second**2
+
+#% iau "International Astronomical Union"
+# https://arxiv.org/abs/1510.07674
+
 
 solar_mass = Unit(
     (kilogram * 1e30)(1.988_47, 0.00007), "solar_mass", "M☉")
