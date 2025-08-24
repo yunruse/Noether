@@ -1,7 +1,7 @@
 from noether.core import Unit, UnitSet
 
-from ..fundamental import meter as m, second as s
-from ..conventional import tonne as t
+from .. import meter as m, second as s
+from .. import tonne as t
 
 #% mts "Meter-tonne-second system"
 # Similar in nature to SI and CGS,
