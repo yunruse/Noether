@@ -48,6 +48,7 @@ SI_EQUALITY = Config.register(
     "If enabled, equality is true even between incompatible units (eg meter and kilogram) based on their SI value. Cf .openlinear"
 )
 
+
 @dataclass(
     frozen=True,
     init=False,
@@ -128,7 +129,7 @@ class Measure(Generic[T]):
         "Value to use for `int`, `float`, `round`, `self.real`, and so on."
         if not self.dim:
             return self._value
-        
+
         du = self.display_unit()
 
         if conf.get(USE_DISPLAY_UNIT):
@@ -140,7 +141,7 @@ class Measure(Generic[T]):
                     " Try using `measure @ unit` or `measure / unit`."
                 )
             return self._value / du._value
-        
+
         raise NoetherError(
             f"Without a unit this operation is ambiguous. Try using `measure @ unit`, `measure / unit`"
             f" or enabling {USE_DISPLAY_UNIT} if you are ok with a little ambiguity.")
@@ -157,18 +158,23 @@ class Measure(Generic[T]):
     @property
     def real(self):
         return self._casting_value()
+
     @property
     def imag(self):
         return 0
+
     @property
     def numerator(self):
         return self._casting_value().numerator
+
     @property
     def denominator(self):
         return self._casting_value().denominator
+
     @property
     def conjugate(self):
         return self._casting_value().conjugate()
+
     @property
     def as_integer_ratio(self):
         return self._casting_value().as_integer_ratio()
@@ -361,7 +367,11 @@ class Measure(Generic[T]):
 
     @staticmethod
     def _extract_dim(v: 'Measure | MeasureValue') -> Dimension:
-        return v.dim if isinstance(v, Measure) else Dimension()  # type: ignoree
+        return v.dim if isinstance(v, Measure) else Dimension()
+
+    @staticmethod
+    def _extract_value(v: 'Measure[T] | T') -> T:
+        return v._value if isinstance(v, Measure) else v
 
     def __eq__(self, other):
         if self._extract_dim(other) != self.dim and not conf.get(SI_EQUALITY):
