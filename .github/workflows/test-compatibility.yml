@@ -2,7 +2,7 @@ name: Cross-version unit testing
 
 on:
   push:
-    branches: [ "testing" ]
+    branches: [ "develop", "testing"]
   pull_request:
     branches: [ "develop", "release" ]
 
