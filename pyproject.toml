@@ -1,3 +1,39 @@
+[project]
+name = "noether"
+description = "Physical measurements and constants"
+authors = [
+    {name = "Mia yun Ruse",email = "mia@yunru.se"}
+]
+license = "MIT"
+readme = "README.md"
+keywords=[
+    "physics", "science",
+    "unit", "units",
+    "measure", "measurement",
+    "constant", "uncertainty",
+    "metric", "imperial",
+]
+
+version = "1.1.0"
+requires-python = ">=3.10"
+dependencies = [
+    "toml (>=0.10.2,<0.11.0)"
+]
+
+[project.urls]
+source = "https://github.com/yunruse/noether"
+issues = "https://github.com/yunruse/Noether/issues"
+changelog = "https://github.com/yunruse/Noether/releases"
+
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry.build]
+script = "make_units.py"
+
+
 [tool.pyright]
 typeCheckingMode = "basic"
 importFormat = "relative"
