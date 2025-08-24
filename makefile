@@ -1,23 +1,23 @@
-all: units type test analyse build
+all: install type test analyse build
 
-.PHONY: units type test analyse build upload-test upload-pypi clean
+.PHONY: install type test analyse build upload-test upload-pypi clean
 
-units:
-	poetry run python make_units.py
+install:
+	poetry install
 
 analysis/output/:
 	@mkdir analysis/output/
 
-type: analysis/output/
+type: install analysis/output/
 	poetry run python -m pyright --outputjson 2>/dev/null | jq '.generalDiagnostics[].file' -r | uniq | sed -e 's_.*Noether/__'| tee analysis/output/mistyped_files.txt
 
-test: units
+test: install
 	poetry run python -m unittest tests/*.py
 
 analyse:
 	poetry run python -m unittest analysis/*.py
 
-build: units analyse
+build: install analyse
 	cd analysis/output && tar -c catalogue.* > catalogue.tar && mv catalogue.tar ..
 	poetry run python -m build
 
@@ -28,7 +28,7 @@ upload-pypi: test
 	twine upload -u __token__ -p $$(cat token-pypi.txt) dist/*
 
 clean:
-	python3 make_units.py --remove
+	poetry run python make_units.py --remove
 	rmdir analysis/output
 	rmdir dist/
 	rmdir noether.egg-info
