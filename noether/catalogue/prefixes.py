@@ -42,7 +42,7 @@ SI_conventional = PrefixSet(
 micri = Prefix("micri", "mc", 1e-14)
 dimi = Prefix("dimi", "dm", 1e-4)
 hebdo = Prefix("hebdo", "H", 1e7)
-hella = Prefix("hella", "ha", 1e27)  # still in our hearts
+hella = Prefix("hella", "ha", 1e27)
 SI_fun = PrefixSet(
     'SI_fun', {micri, dimi, hebdo, hella})
 
@@ -54,11 +54,10 @@ pebi = Prefix("pebi", "Pi", 2**50)
 exbi = Prefix("exbi", "Ei", 2**60)
 zebi = Prefix("zebi", "Zi", 2**70)
 yobi = Prefix("yobi", "Yi", 2**80)
-# these two are not yet official:
-# robi = Prefix("robi", "Ri", 2**90)
-# quebi = Prefix("quebi", "Qi", 2**100)
+robi = Prefix("robi", "Ri", 2**90)
+quebi = Prefix("quebi", "Qi", 2**100)
 IEC = PrefixSet(
-    'IEC', {kibi, mebi, gibi, tebi, pebi, exbi, zebi, yobi})
+    'IEC', {kibi, mebi, gibi, tebi, pebi, exbi, zebi, yobi, robi, quebi})
 
 
 SI_all = SI_large | SI_small | SI_conventional.hidden()
