@@ -7,7 +7,7 @@ Best ran as `python -im noether`, as if no terms are provided,
 a convenient interactive prompt is summoned.
 """
 
-from os import environ, _exit as exit
+from os import environ
 import noether
 from noether import *
 
