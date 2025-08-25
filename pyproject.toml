@@ -14,7 +14,7 @@ keywords=[
     "metric", "imperial",
 ]
 
-version = "1.1.0"
+version = "1.2.0"
 requires-python = ">=3.10"
 dependencies = [
     "toml (>=0.10.2,<0.11.0)"
@@ -39,7 +39,7 @@ typeCheckingMode = "basic"
 importFormat = "relative"
 
 pythonVersion = "3.10"
-pythonPlatform = "all"
+pythonPlatform = "All"
 
 include = ["noether"]
 # .units.py files are used to generate .py files

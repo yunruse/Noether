@@ -1,5 +1,19 @@
 # Noether changelog
 
+## 1.2
+***XX Xxx 2025, [XX commits](https://github.com/yunruse/Noether/pull/XX/commits), closing [XX issues](https://github.com/yunruse/Noether/milestone/8?closed=1)***
+
+- Support for `round`, `float` and `int` on units
+- Improved support for logarithmic units
+- Improved CLI support
+  - `x` may be used if `*` causes issues (eg `$ noether 5ft x 5ft`)
+  - Correct exponentiation for eg `$ noether 3m^2`
+  - Improved bootup display; fix issue with `exit()`
+- Added 1 new unit:
+  - **Scientific**: `exeligmos`, `jansky`
+  - **Unusual**: `smoot`
+
+
 ## 1.1
 ***2 Aug 2023, [44 commits](https://github.com/yunruse/Noether/pull/73/commits), closing [17 issues](https://github.com/yunruse/Noether/milestone/1?closed=1)***
 
