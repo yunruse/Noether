@@ -101,7 +101,7 @@ class Dimension(Multiplication[BaseDimension]):
         )
 
     @property
-    def order(self):
+    def display_order(self):
         if self.is_base_dimension():
             k = list(self)[0]
             return self._known_dimensions[k].order

@@ -52,11 +52,11 @@ class GeometricUnit(Unit):
 
     @property
     def name(self):
-        return self.units.display(key=lambda q: (-q[1], q[0].dim.order))
+        return self.units.display(key=lambda q: (-q[1], q[0].dim.display_order))
 
     @property
     def symbol(self):
         return self.units.display(
             lambda x: x.symbol,
-            key=lambda q: (-q[1], q[0].dim.order),
+            key=lambda q: (-q[1], q[0].dim.display_order),
             drop_multiplication_signs=True)
