@@ -30,7 +30,7 @@ class MeasureRelative(Measure[T]):
 
     @property
     def value(self) -> T:
-        DimensionError.check(self, self.unit)
+        DimensionError.check(self.dim, self.unit.dim)
         from .units import AffineUnit
         value = self._value
         if isinstance(self.unit, AffineUnit):
@@ -42,7 +42,7 @@ class MeasureRelative(Measure[T]):
         return self.value
 
     def display_unit(self):
-        DimensionError.check(self, self.unit)
+        DimensionError.check(self.dim, self.unit.dim)
         return self.unit
 
     def __round__(self, ndigits: Optional[int] = None):
