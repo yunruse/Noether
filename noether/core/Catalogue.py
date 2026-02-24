@@ -34,11 +34,7 @@ class Catalogue:
 
     def register(self, name: str, value: Unit | Dimension | PrefixSet):
         if isinstance(value, Unit):
-            ud = self.units_by_dimension
-            ud.setdefault(value.dim, [])
-            # celsius == kelvin, therefore we check via `is` #71
-            if any(value is v for v in ud[value.dim]):
-                ud[value.dim].append(value)
+            self.units_by_dimension.setdefault(value.dim, []).append(value)
 
             self.units_by_name[name] = value
             for n in value.names:
