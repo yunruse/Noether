@@ -60,6 +60,8 @@ def ConfigProperty(option: ConfigOption):
             del self._config[option.name]
     return property(getter, setter, deleter)
 
+# TODO: handle dots
+# (not with a class though! it would make weird import structures)
 
 class Config:
     _config: dict

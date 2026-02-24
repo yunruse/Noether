@@ -3,8 +3,7 @@ from typing import TYPE_CHECKING, Optional, TypeVar
 
 from ..helpers import MeasureValue
 from ..errors import DimensionError
-from ..config import conf
-from .Measure import OPENLINEAR, Measure
+from .Measure import Measure
 
 if TYPE_CHECKING:
     from .Unit import Unit
@@ -25,21 +24,13 @@ class MeasureRelative(Measure[T]):
         object.__setattr__(self, 'unit', unit)
         # HACK: see below
         # self.__verify_dim('compose')
-    
-    def __verify_dim(self, verb: str):
-        if not conf.get(OPENLINEAR):
-            DimensionError.check(
-                self.dim, self.unit.dim,
-                f"Cannot {verb} MeasureRelative (measure @ unit) in this way; it is ambiguous."
-                f" To enable this anyway, enable setting conf.{OPENLINEAR}.")
-
 
     __slots__ = ('_value', 'stddev', 'dim', 'unit')
     unit: 'Unit'
 
     @property
     def value(self) -> T:
-        self.__verify_dim('utilise')
+        DimensionError.check(self, self.unit)
         from .units import AffineUnit
         value = self._value
         if isinstance(self.unit, AffineUnit):
@@ -51,7 +42,7 @@ class MeasureRelative(Measure[T]):
         return self.value
 
     def display_unit(self):
-        self.__verify_dim('display')
+        DimensionError.check(self, self.unit)
         return self.unit
 
     def __round__(self, ndigits: Optional[int] = None):

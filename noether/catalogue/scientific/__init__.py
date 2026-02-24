@@ -10,4 +10,4 @@ from .constants import *
 from .misc import *
 from .micro import *
 from .earth import *
-from .astronomy import *
+from .astronomy_ import *

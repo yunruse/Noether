@@ -1,27 +1,25 @@
-all: units type test analyse build
+all: install type test analyse build
 
-PYTHON := python3.12
+.PHONY: install type test analyse build upload-test upload-pypi clean
 
-.PHONY: units type test analyse build upload-test upload-pypi clean
-
-units:
-	$(PYTHON) -m make_catalogue --python noether/catalogue.py
+install:
+	poetry install
 
 analysis/output/:
 	@mkdir analysis/output/
 
-type: analysis/output/
-	$(PYTHON) -m pyright --outputjson 2>/dev/null | jq '.generalDiagnostics[].file' -r | uniq | sed -e 's_.*Noether/__'| tee analysis/output/mistyped_files.txt
+type: install analysis/output/
+	poetry run python -m pyright --outputjson 2>/dev/null | jq '.generalDiagnostics[].file' -r | uniq | sed -e 's_.*Noether/__'| tee analysis/output/mistyped_files.txt
 
-test: units
-	$(PYTHON) -m unittest tests/*.py
+test: install
+	poetry run python -m unittest tests/*.py
 
 analyse:
-	$(PYTHON) -m unittest analysis/*.py
+	poetry run python -m unittest analysis/*.py
 
-build: units analyse
+build: install analyse
 	cd analysis/output && tar -c catalogue.* > catalogue.tar && mv catalogue.tar ..
-	$(PYTHON) -m build
+	poetry run python -m build
 
 upload-test: test
 	twine upload -u __token__ -p $$(cat token-test.txt) -r testpypi dist/*
@@ -30,7 +28,7 @@ upload-pypi: test
 	twine upload -u __token__ -p $$(cat token-pypi.txt) dist/*
 
 clean:
-	$(PYTHON) make_units.py --remove
+	poetry run python make_units.py --remove
 	rmdir analysis/output
 	rmdir dist/
 	rmdir noether.egg-info

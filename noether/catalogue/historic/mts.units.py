@@ -1,30 +1,22 @@
-'''
-Metre-tonne-second units.
-
-Similar in nature to SI and CGS,
-used in France and the Soviet Union.
-
-https://en.wikipedia.org/wiki/MTS_units
-'''
-
 from noether.core import Unit, UnitSet
 
-from ..fundamental import meter as m, second as s
-from ..conventional import tonne as t
+from .. import meter as m, second as s
+from .. import tonne as t
+
+#% mts "Meter-tonne-second system"
+# Similar in nature to SI and CGS,
+# used historically in France and the Soviet Union.
+# wikipedia: https://en.wikipedia.org/wiki/MTS_units
+
+m
+t
+s
 
 stere = stère = 'st' = m**3
-# MTS unit used in firewood measurement (Greek stereós, "solid")
+# used in firewood measurement
+# etymology: Greek stereós, "solid"
 
 sthene = sthène = sthéne = 'sn' = t*m/s**2
-# MTS unit (Greek sthénos, "force")
+# etymology: Greek sthénos, "force"
 
 pieze = pièze = 'pz' = sthene / m**2
-# MTS unit
-
-MTS = UnitSet({
-    m,
-    t,
-    s,
-    stere,
-    sthene
-})

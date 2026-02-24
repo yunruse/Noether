@@ -5,12 +5,12 @@ Sources:
 https://en.wikipedia.org/wiki/List_of_humorous_units_of_measurement
 '''
 
-from noether.core import Unit, UnitSet
+from noether.core import Unit
 
 from ..prefixes import SI_all
 from ..fundamental import second
 from ..scientific import minute, watt_hour, sievert, angstrom, sol
-from ..conventional import inch, hour, year
+from ..conventional import foot, inch, hour, year
 
 # % Length
 beard_second = Unit(
@@ -38,3 +38,10 @@ flight_dose_rate = Unit(
 pirate_ninja = Unit(
     watt_hour * 1000 / sol, "pirate_ninja", "pn",
     info="1 kWh per Martian day, from Andy Weir's The Martian")
+
+smoot = Unit(
+    foot(5) + inch(7), "smoot",
+    info="The height of Oliver Reed Smoot, a standardisation head, whose own body was used as a unit of measurement in a fraternity pledge activity",
+)
+
+# TODO: convert this to units.py :)

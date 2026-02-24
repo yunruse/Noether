@@ -87,7 +87,7 @@ class Dimension(Multiplication[BaseDimension]):
     # |__/ |_)|__/|\__| \/
     #         |        _/
 
-    @wraps(Multiplication.display)
+    # @wraps(Multiplication.display)
     def display(self, **kwargs):
         kwargs.setdefault('identity_string', 'dimensionless')
         return super().display(**kwargs)

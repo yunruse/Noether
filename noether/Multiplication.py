@@ -75,8 +75,15 @@ class Multiplication(Generic[T], ImmutableDict[T, Rational]):
 
     def __pow__(self, exponent: Real):
         return type(self)({
-            value: i * exponent
-            for value, i in self.items()
+            value: e * exponent
+            for value, e in self.items()
+        })  # type: ignore
+            # type: girl what
+    
+    def inverse(self):
+        return type(self)({
+            value: -e
+            for value, e in self.items()
         })
 
     # % Display

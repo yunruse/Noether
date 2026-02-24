@@ -25,20 +25,27 @@ Time = date | datetime | timedelta
 T = TypeVar('T', int, MeasureValue)
 
 
-OPENLINEAR = Config.register(
-    "measure_ignore_dimension", False,
-    "Allow any addition, even between incompatible units (eg metre and second)."
-)
-
 USE_DISPLAY_UNIT = Config.register(
-    "measure_calc_with_display_unit", False,
+    "measure_use_display_unit", False,
     "In situations where a unit is not explicitly provided, such as"
-    " adding a float, casting to int, or rounding,"
+    " adding a float, converting to int, or rounding,"
     " make use of the current display unit rather than returning an error.")
 
+# USE_OTHER_UNIT = Config.register(
+#     "measure_use_other_unit", False,
+#     "In situations where a unit is not explicitly provided, such as"
+#     " meter + 5, use the other unit provided in the calculation"
+# )
+# TODO: is the above actually technically feasible?
+
 UNCERTAINTY_SHORTHAND = Config.register(
-    "uncertainty_display_shorthand", False,
+    "measure_uncertainty_shorthand", False,
     "Use shorthand for uncertainty, for example 0.15(2) rather than 0.15 ± 0.02"
+)
+
+SI_EQUALITY = Config.register(
+    "measure_si_equality", False,
+    "If enabled, equality is true even between incompatible units (eg meter and kilogram) based on their SI value. Cf .openlinear"
 )
 
 
@@ -119,14 +126,10 @@ class Measure(Generic[T]):
         return bool(self._value)
 
     def _casting_value(self) -> T:
-        """
-        Value to use for `int`, `float`, `round`, `self.real`, `self + 5` and so on.
-        
-        Raises an error if unit ambiguity is not explicitly acknowledged by user.
-        """
+        "Value to use for `int`, `float`, `round`, `self.real`, and so on."
         if not self.dim:
             return self._value
-        
+
         du = self.display_unit()
 
         if conf.get(USE_DISPLAY_UNIT):
@@ -138,7 +141,7 @@ class Measure(Generic[T]):
                     " Try using `measure @ unit` or `measure / unit`."
                 )
             return self._value / du._value
-        
+
         raise NoetherError(
             f"Without a unit this operation is ambiguous. Try using `measure @ unit`, `measure / unit`"
             f" or enabling {USE_DISPLAY_UNIT} if you are ok with a little ambiguity.")
@@ -155,18 +158,23 @@ class Measure(Generic[T]):
     @property
     def real(self):
         return self._casting_value()
+
     @property
     def imag(self):
         return 0
+
     @property
     def numerator(self):
         return self._casting_value().numerator
+
     @property
     def denominator(self):
         return self._casting_value().denominator
+
     @property
     def conjugate(self):
         return self._casting_value().conjugate()
+
     @property
     def as_integer_ratio(self):
         return self._casting_value().as_integer_ratio()
@@ -175,16 +183,12 @@ class Measure(Generic[T]):
 
     @classmethod
     def from_timedelta(cls, dt: timedelta):
-        from ..catalogue.fundamental import second  # type: ignore
+        from ..catalogue import second
         return second * dt.total_seconds()
 
     def to_timedelta(self):
-        from ..catalogue.fundamental import second  # type: ignore
-        if not conf.get(OPENLINEAR):
-            DimensionError.check(
-                self.dim, second.dim,
-                f"Cannot convert to a timedelta."
-                f" Enable conf.{OPENLINEAR} to bypass this.")
+        from ..catalogue import second, time
+        DimensionError.check(self.dim, time)
         return timedelta(seconds=float(self/second))
 
     # |~~\ '      |
@@ -311,28 +315,21 @@ class Measure(Generic[T]):
     def __abs__(self):
         return self if self._value > 0 else -self  # type: ignore
 
-    def __lin_cmp(self, other, op: Callable):
-        if conf.get(OPENLINEAR):
-            return
-
-        match op:
-            case operator.add: oper = "Addition"
-            case operator.sub: oper = "Subtraction"
-            case operator.mod: oper = "Modulo"
-            case operator.eq: oper = "Comparison"
-            case operator.lt: oper = "Comparison"
-            case _: oper = "A linear operation"
-
+    def __linear_value(self, other) -> 'MeasureValue':
         if isinstance(other, Measure):
-            DimensionError.check(
-                self.dim, other.dim,
-                f"{oper} only works with units of the same dimension."
-                f" Enable conf.{OPENLINEAR} to bypass this.")
+            DimensionError.check(self.dim, other.dim)
+            return other._value
 
-        elif self.dim and not conf.get(USE_DISPLAY_UNIT):
+        if conf.get(USE_DISPLAY_UNIT):
+            return other * self.display_unit()
+
+        if self.dim and not conf.get(USE_DISPLAY_UNIT):
             raise NoetherError(
-                f"{oper} only works with Measures and Units."
-                f" Enable conf.{USE_DISPLAY_UNIT} to bypass this.")
+                f"{other} of what? No unit was provided."
+                f" Consider enabling conf.{USE_DISPLAY_UNIT}"
+                # f" or conf.{USE_OTHER_UNIT}"
+            )
+        return other
 
     def __lin(self, other: 'Measure[T] | Dimension | MeasureValue | Time', op: Callable, reverse=False):
         if isinstance(other, Time):
@@ -341,27 +338,19 @@ class Measure(Generic[T]):
             else:
                 return op(self.to_timedelta(), other)
 
-        self.__lin_cmp(other, op)
-
         value = self._value
         stddev = self.stddev
         dim = self.dim
 
-        if isinstance(other, Dimension):
-            pass
-        elif isinstance(other, Measure):
-            value = op(self._value, other._value)
-            if self.stddev is None and other.stddev is None:
-                stddev = None
-            else:
-                ss = 0 if stddev is None else stddev
-                so = 0 if other.stddev is None else other.stddev
-                stddev = (ss**2 + so**2) ** 0.5
+        if reverse:
+            value = op(self.__linear_value(other), self._value)
         else:
-            if reverse:
-                value = op(other, self._value)
-            else:
-                value = op(self._value, other)
+            value = op(self._value, self.__linear_value(other))
+
+        if isinstance(other, Measure) and self.stddev and other.stddev:
+            ss = 0 if stddev is None else stddev
+            so = 0 if other.stddev is None else other.stddev
+            stddev = (ss**2 + so**2) ** 0.5
 
         return Measure(value, stddev, dim)
 
@@ -378,20 +367,19 @@ class Measure(Generic[T]):
 
     @staticmethod
     def _extract_dim(v: 'Measure | MeasureValue') -> Dimension:
-        return v.dim if isinstance(v, Measure) else Dimension()  # type: ignore
+        return v.dim if isinstance(v, Measure) else Dimension()
 
     @staticmethod
-    def _extract_value(v: 'Measure | MeasureValue') -> MeasureValue:
-        return v._value if isinstance(v, Measure) else v  # type: ignore
+    def _extract_value(v: 'Measure[T] | T') -> T:
+        return v._value if isinstance(v, Measure) else v
 
     def __eq__(self, other):
-        if self._extract_dim(other) != self.dim and not conf.get(OPENLINEAR):
+        if self._extract_dim(other) != self.dim and not conf.get(SI_EQUALITY):
             return False
-        return self._value == self._extract_value(other)
+        return self._value == self.__linear_value(other)
 
     def __lt__(self, other):
-        self.__lin_cmp(other, operator.lt)
-        return self._value < self._extract_value(other)
+        return self._value < self.__linear_value(other)
 
     #  /~~       |               |~~\ '      |
     # |  |   |(~~|~/~\|/~\ /~\   |   ||(~|~~\|/~~|\  /

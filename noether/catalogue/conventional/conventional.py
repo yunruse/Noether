@@ -60,6 +60,7 @@ hectare = Unit(100 * are, "hectare", "ha")
 
 # % Volume
 litre = liter = L = Unit((meter/10) ** 3, ["liter", "litre"], "L", SI_all)
+display(liter)  # Cubic meters tend to be unwieldy in common use
 _ml = L / 1000
 
 # % cooking
