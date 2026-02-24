@@ -105,9 +105,8 @@ class Catalogue:
     def info(self):
         "GNU units-style count of objects"
         U = len(self.units())
-        D = len(self.dimensions.values())
         P = len(list(self.prefixes()))
-        return f'{D} dimensions, {U} units, {P} prefixes'
+        return f'{U} units, {P} prefixes'
 
     def __repr__(self):
         return f'<{self.name}: {self.info()}>'

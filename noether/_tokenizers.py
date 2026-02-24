@@ -17,29 +17,31 @@ TokenStream = Iterator[TokenInfo]
 StreamProcessor = Callable[[TokenStream], TokenStream]
 
 
-def cli_dialect(stream: TokenStream):
+def cli_dialect(stream: TokenStream, pythonesque=False):
     '''
     Process tokens for __main__ dialect, used on the
     command-line interface (CLI). Useful for quick
     calculations.
     Replacement rules are:
+    - `Xunit` -> `X * unit` where X is some number eg -3, 4.2
+
+    Additional rules if PYTHONESQUE is false:
+    - `in` -> `inch`
     - `x` -> `*`
     - `^` -> `**`
-    - `in` -> `inch`
-    - `Xunit` -> `X * unit` where X is some number eg -3, 4.2
-      Using multiply ensures eg `5m^2` is not misinterpreted as `(5m)^2`.
     '''
     queue: deque[TokenInfo] = deque()
 
     # Because the queue may optionally process 3 extra tokens:
     dummy_stream = [_t(ENDMARKER, '')] * 3
     for token in chain(stream, dummy_stream):
-        if token.type == OP and token.string == '^':
-            token = token._replace(string='**')
-        if token.type == NAME and token.string == 'x':
-            token = TokenInfo(OP, '*', token.start, token.end, token.line)
-        if token.type == NAME and token.string == 'in':
-            token = token._replace(string='inch')
+        if not pythonesque:
+            if token.type == OP and token.string == '^':
+                token = token._replace(string='**')
+            if token.type == NAME and token.string == 'x':
+                token = TokenInfo(OP, '*', token.start, token.end, token.line)
+            if token.type == NAME and token.string == 'in':
+                token = token._replace(string='inch')
 
         # in the following queue, we might match `-5m**-2`:
         #  OP       -
