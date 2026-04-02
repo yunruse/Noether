@@ -28,15 +28,13 @@ amp_hour = ampere_hour = Ah = Unit(ampere * hour, 'amp_hour', 'Ah', SI_all)
 ampere_turn = At = Unit(ampere * turn, "ampere_turn", "At", SI_all)
 
 # % Human
-small_calorie = cal = Unit(
+small_calorie = calorie = cal = Unit(
     4.814 * joule, ["calorie", "small_calorie"], "cal",
-    info="Energy to heat 1g of water by 1°C."
-    " Defined by convention; now regarded as obsolete."
+    info="'Small calorie': Energy to heat 1g of water by 1°C."
     " Not to be confused with the large calorie (heats 1kg).")
-large_calorie = kilocalorie = kcal = Unit(
-    cal * 1000, ["kilocalorie", "large_calorie"], "kcal",
-    info="Energy to heat 1kg of water by 1°C."
-    " Defined by convention; now regarded as obsolete."
+large_calorie = Calorie = kilocalorie = kcal = Unit(
+    cal * 1000, ["Calorie", "kilocalorie", "large_calorie"], "kcal",
+    info="'Food calorie': energy to heat 1kg of water by 1°C."
     " Not to be confused with the small calorie (heats 1g)."
     " Often used in food as an alternative to the kilojoule.")
 bmi = Unit(kilogram / meter**2, "BMI", "BMI")
