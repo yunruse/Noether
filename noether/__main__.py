@@ -86,7 +86,11 @@ def repl():
 
     import readline  # necessary for arrow-key functionality
     def readfunc(prompt: str):
-        text = input(prompt)
+        try:
+            text = input(prompt)
+        except KeyboardInterrupt:
+            print("\nKeyboardInterrupt")
+            return ""
         try:
             return transform(text, cli_dialect, pythonesque=True)
         except TokenError as te:
