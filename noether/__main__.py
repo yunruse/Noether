@@ -1,7 +1,7 @@
 """
 Conversion calculator with multilicative and affine scales.
 
-If provided with a term ('oneline' mode), outputs its value.
+If provided with a term ('terminal mode'), outputs its value.
 Otherwise launches an interactive REPL for working with units, near-identical to Python.
 
 Terms might be provided in such a way as:
@@ -12,12 +12,6 @@ lunation  # time, 29 d + 12 hr + 44 min + 2.9 s, Average time between moon phase
 $ uvx noether -V 30dalton @ picogram
 4.981617e-11
 
-$ 
-
-    30dalton @ picogram
-    -10degC
-
-
 This command is equivalent to running Python's REPL with the header
 
 >>> import noether as noe
@@ -26,8 +20,16 @@ This command is equivalent to running Python's REPL with the header
 In addition a syntax dialect is enabled allowing function postfixes to numbers.
 For example, `-10degC` is interpreted as `degC(-10)`.
 
-In oneline mode, for convenience,
+In terminal mode, for convenience,
  `x`, `^` and `in` are allowable substitutes for `*`, `**` and `inch`.
+"""
+
+SHORTHAND_HELP = """
+terms may be provided like
+    30pg @ dalton
+    80in / year^2
+    solar_mass @ Yg
+    8cm x 40cm
 """
 
 from os import environ
@@ -50,8 +52,17 @@ def namespace():
 parser = ArgumentParser(
     description=__doc__,
     formatter_class=RawDescriptionHelpFormatter,
-    usage='python -[i]m noether [-h] [--no-color] [--value] [terms ...]'
+    usage='python -[i]m noether [-h|--help] [--no-color] [--value] [terms ...]',
+    add_help=False,
 )
+parser.add_argument(
+    '-h', dest="short_help",
+    action='store_true',
+    help='show short help message')
+parser.add_argument(
+    '--help', dest="long_help",
+    action='store_true',
+    help='show long help message')
 parser.add_argument(
     '--no-color',
     action='store_false',
@@ -93,6 +104,14 @@ def main():
     # therefore, we'll just fetch every unknown argument
     args, unknown = parser.parse_known_args()
     args.terms = unknown
+
+    if args.long_help:
+        parser.print_help()
+        exit(0)
+    if args.short_help:
+        parser.print_usage()
+        print(SHORTHAND_HELP)
+        exit(0)
 
     # % Color
 
