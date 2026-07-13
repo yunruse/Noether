@@ -60,7 +60,7 @@ def cli_dialect(stream: TokenStream, pythonesque=False):
             tt = [t.type for t in queue]
             if tt[1:3] == [NUMBER, NAME]:
                 # here '_' indicates 'maybe'
-                _m1, num, unit_name, _asts, _e1, _e2 = queue
+                _m1, num, unit_name, _exp, _e1, _e2 = queue
 
                 if is_op(_m1, '-'):
                     number = [_m1, num]
@@ -69,16 +69,17 @@ def cli_dialect(stream: TokenStream, pythonesque=False):
                     yield _m1
 
                 unit = [unit_name]
-                excess = [_asts, _e1, _e2]
+                excess = [_exp, _e1, _e2]
 
-                if is_op(_asts, '**'):
+                # handle `** (-)NUM`
+                if is_op(_exp, '**'):
                     if is_op(_e1, '-') and _e2.type == NUMBER:
                         # unit ** -x
-                        unit = [unit_name, _asts, _e1, _e2]
+                        unit = [unit_name, _exp, _e1, _e2]
                         excess = []
                     elif _e1.type == NUMBER:
                         # unit ** x
-                        unit = [unit_name, _asts, _e1]
+                        unit = [unit_name, _exp, _e1]
                         excess = [_e2]
 
                 yield _t(OP, '(')
@@ -87,8 +88,9 @@ def cli_dialect(stream: TokenStream, pythonesque=False):
                 yield _t(OP, '(')
                 yield from number
                 yield _t(OP, ')')
-                yield from excess
+
                 queue.clear()
+                queue.extend(excess)
             else:
                 yield queue.popleft()
     yield from queue
