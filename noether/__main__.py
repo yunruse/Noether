@@ -84,16 +84,17 @@ def repl():
     from code import interact as _pyrepl
     banner = noe.catalogue.info()
 
-
     import readline  # necessary for arrow-key functionality
     def readfunc(prompt: str):
         text = input(prompt)
         try:
             return transform(text, cli_dialect, pythonesque=True)
         except TokenError as te:
-            raise
             if te.args[0] != 'EOF in multi-line statement':
-                # TODO: somehow handle this..? a custom interpreter?
+                print("TokenError: EOF in multi-line statement (currently not supported)")
+                return ""
+                # TODO: support multi-line statements custom interpreter?
+            else:
                 raise
     
     _pyrepl(banner, readfunc, namespace(), exitmsg="")
